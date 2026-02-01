@@ -64,44 +64,44 @@ export default function Testimonials() {
   const currentTestimonial = testimonials[activeIndex];
 
   return (
-    <section ref={sectionRef} className="py-36 lg:py-48 bg-white">
+    <section ref={sectionRef} className="py-20 sm:py-28 lg:py-48 bg-white">
       <div
         ref={contentRef}
-        className="max-w-5xl mx-auto px-8 lg:px-12 text-center"
+        className="max-w-5xl mx-auto px-4 sm:px-8 lg:px-12 text-center"
       >
         {/* Header */}
-        <p className="text-[11px] text-brand-accent uppercase tracking-[0.4em] mb-12 font-light">
+        <p className="text-[10px] sm:text-[11px] text-brand-accent uppercase tracking-[0.3em] sm:tracking-[0.4em] mb-8 sm:mb-12 font-light">
           Guest Voices
         </p>
 
         {/* Quote */}
-        <div ref={quoteRef} className="min-h-[280px] flex flex-col items-center justify-center">
+        <div ref={quoteRef} className="min-h-[220px] sm:min-h-[280px] flex flex-col items-center justify-center">
           {/* Quote mark */}
-          <div className="text-brand-border/30 text-[120px] lg:text-[150px] font-display leading-none mb-4 select-none">
+          <div className="text-brand-border/30 text-[80px] sm:text-[100px] lg:text-[150px] font-display leading-none mb-2 sm:mb-4 select-none">
             &ldquo;
           </div>
 
           {/* Quote text */}
-          <blockquote className="font-display text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light italic text-brand-ink mb-12 text-balance leading-[1.3] max-w-4xl">
+          <blockquote className="font-display text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light italic text-brand-ink mb-8 sm:mb-12 text-balance leading-[1.3] max-w-4xl px-2">
             {currentTestimonial.quote}
           </blockquote>
 
           {/* Divider */}
-          <div className="w-12 h-[1px] bg-brand-accent mb-10" />
+          <div className="w-10 sm:w-12 h-[1px] bg-brand-accent mb-6 sm:mb-10" />
 
           {/* Attribution */}
           <div>
-            <p className="text-lg font-display text-brand-ink mb-2 font-light">
+            <p className="text-base sm:text-lg font-display text-brand-ink mb-1 sm:mb-2 font-light">
               {currentTestimonial.name}
             </p>
-            <p className="text-[10px] text-brand-muted uppercase tracking-[0.3em]">
+            <p className="text-[9px] sm:text-[10px] text-brand-muted uppercase tracking-[0.25em] sm:tracking-[0.3em]">
               {currentTestimonial.source}
             </p>
           </div>
         </div>
 
         {/* Navigation Dots - refined */}
-        <div className="flex justify-center gap-5 mt-16">
+        <div className="flex justify-center gap-3 sm:gap-5 mt-10 sm:mt-16">
           {testimonials.map((_, i) => (
             <button
               key={i}
@@ -109,8 +109,8 @@ export default function Testimonials() {
               className={cn(
                 "relative h-[2px] transition-all duration-700 ease-out",
                 i === activeIndex
-                  ? "w-16 bg-brand-ink"
-                  : "w-8 bg-brand-border hover:bg-brand-muted"
+                  ? "w-12 sm:w-16 bg-brand-ink"
+                  : "w-6 sm:w-8 bg-brand-border hover:bg-brand-muted"
               )}
               aria-label={`View testimonial ${i + 1}`}
             />

@@ -172,26 +172,26 @@ export default function Gallery() {
   }, [lightbox, closeLightbox, navigateLightbox]);
 
   return (
-    <section ref={sectionRef} id="gallery" className="py-32 lg:py-44 bg-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+    <section ref={sectionRef} id="gallery" className="py-16 sm:py-24 lg:py-44 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         {/* Header - Four Seasons minimal style */}
-        <div className="gallery-header text-center mb-16 lg:mb-24">
-          <p className="text-[11px] uppercase tracking-[0.35em] text-brand-accent mb-6">
+        <div className="gallery-header text-center mb-10 sm:mb-16 lg:mb-24">
+          <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] sm:tracking-[0.35em] text-brand-accent mb-4 sm:mb-6">
             Visual Journey
           </p>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light">
             A Glimpse <em className="italic font-normal">Inside</em>
           </h2>
         </div>
 
-        {/* Filter Tabs - Four Seasons text underline style */}
-        <div className="flex justify-center gap-10 lg:gap-14 mb-16 lg:mb-20">
+        {/* Filter Tabs - Four Seasons text underline style - horizontal scroll on mobile */}
+        <div className="flex justify-start sm:justify-center gap-6 sm:gap-10 lg:gap-14 mb-10 sm:mb-16 lg:mb-20 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide">
           {galleryCategories.map((cat) => (
             <button
               key={cat}
               onClick={() => setFilter(cat)}
               className={cn(
-                "relative text-[11px] uppercase tracking-[0.15em] pb-3 transition-all duration-500",
+                "relative text-[10px] sm:text-[11px] uppercase tracking-[0.15em] pb-2 sm:pb-3 transition-all duration-500 whitespace-nowrap flex-shrink-0",
                 filter === cat
                   ? "text-brand-ink"
                   : "text-brand-muted hover:text-brand-ink"
@@ -211,7 +211,7 @@ export default function Gallery() {
         {/* Gallery Grid - Four Seasons clean grid */}
         <div
           ref={gridRef}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6"
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4 lg:gap-6"
         >
           {filteredGallery.map((item, i) => (
             <button
@@ -219,8 +219,8 @@ export default function Gallery() {
               onClick={() => setLightbox(item)}
               className={cn(
                 "relative group overflow-hidden",
-                // Featured items span 2 columns
-                i === 0 || i === 5 ? "lg:col-span-2 lg:row-span-2 aspect-square" : "aspect-[4/3]"
+                // Featured items span 2 columns on larger screens
+                i === 0 || i === 5 ? "sm:col-span-2 sm:row-span-2 aspect-square" : "aspect-[4/3]"
               )}
             >
               <Image
@@ -228,15 +228,15 @@ export default function Gallery() {
                 alt={item.title}
                 fill
                 className="object-cover transition-transform duration-1000 group-hover:scale-110"
-                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
               />
               {/* Hover overlay - Four Seasons style */}
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-500 flex items-end">
-                <div className="p-6 lg:p-8 translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                  <p className="text-white font-display text-lg lg:text-xl font-light mb-1">
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 sm:group-hover:bg-black/40 transition-colors duration-500 flex items-end">
+                <div className="p-3 sm:p-6 lg:p-8 translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 hidden sm:block">
+                  <p className="text-white font-display text-base sm:text-lg lg:text-xl font-light mb-1">
                     {item.title}
                   </p>
-                  <p className="text-white/60 text-[10px] uppercase tracking-[0.15em]">
+                  <p className="text-white/60 text-[9px] sm:text-[10px] uppercase tracking-[0.15em]">
                     {item.category}
                   </p>
                 </div>
@@ -255,46 +255,46 @@ export default function Gallery() {
         >
           {/* Close button */}
           <button
-            className="absolute top-8 right-8 flex items-center gap-4 text-white/50 hover:text-white transition-colors duration-300 z-10 group"
+            className="absolute top-4 sm:top-8 right-4 sm:right-8 flex items-center gap-4 text-white/50 hover:text-white transition-colors duration-300 z-10 group"
             onClick={closeLightbox}
             aria-label="Close lightbox"
           >
             <span className="text-[11px] uppercase tracking-[0.15em] hidden sm:inline">
               Close
             </span>
-            <div className="w-12 h-12 border border-white/20 flex items-center justify-center hover:border-white/50 transition-colors">
+            <div className="w-10 sm:w-12 h-10 sm:h-12 border border-white/20 flex items-center justify-center hover:border-white/50 transition-colors">
               <X className="w-5 h-5" strokeWidth={1.5} />
             </div>
           </button>
 
           {/* Navigation - Previous */}
           <button
-            className="absolute left-6 lg:left-12 top-1/2 -translate-y-1/2 w-14 h-14 border border-white/20 flex items-center justify-center hover:border-white/50 hover:bg-white/5 transition-all duration-300 z-10"
+            className="absolute left-2 sm:left-6 lg:left-12 top-1/2 -translate-y-1/2 w-10 sm:w-14 h-10 sm:h-14 border border-white/20 flex items-center justify-center hover:border-white/50 hover:bg-white/5 transition-all duration-300 z-10"
             onClick={(e) => {
               e.stopPropagation();
               navigateLightbox("prev");
             }}
             aria-label="Previous image"
           >
-            <ChevronLeft className="w-6 h-6 text-white" strokeWidth={1} />
+            <ChevronLeft className="w-5 sm:w-6 h-5 sm:h-6 text-white" strokeWidth={1} />
           </button>
 
           {/* Navigation - Next */}
           <button
-            className="absolute right-6 lg:right-12 top-1/2 -translate-y-1/2 w-14 h-14 border border-white/20 flex items-center justify-center hover:border-white/50 hover:bg-white/5 transition-all duration-300 z-10"
+            className="absolute right-2 sm:right-6 lg:right-12 top-1/2 -translate-y-1/2 w-10 sm:w-14 h-10 sm:h-14 border border-white/20 flex items-center justify-center hover:border-white/50 hover:bg-white/5 transition-all duration-300 z-10"
             onClick={(e) => {
               e.stopPropagation();
               navigateLightbox("next");
             }}
             aria-label="Next image"
           >
-            <ChevronRight className="w-6 h-6 text-white" strokeWidth={1} />
+            <ChevronRight className="w-5 sm:w-6 h-5 sm:h-6 text-white" strokeWidth={1} />
           </button>
 
           {/* Image Container */}
           <div
             ref={imageRef}
-            className="max-w-5xl max-h-[85vh] relative px-20"
+            className="max-w-5xl max-h-[85vh] relative px-12 sm:px-20"
             onClick={(e) => e.stopPropagation()}
           >
             <Image
@@ -302,23 +302,23 @@ export default function Gallery() {
               alt={lightbox.title}
               width={1400}
               height={900}
-              className="object-contain max-h-[85vh] w-auto"
+              className="object-contain max-h-[80vh] sm:max-h-[85vh] w-auto"
               priority
             />
           </div>
 
           {/* Caption */}
-          <div className="absolute bottom-12 left-1/2 -translate-x-1/2 text-center text-white">
-            <p className="font-display text-xl lg:text-2xl font-light mb-2">
+          <div className="absolute bottom-16 sm:bottom-12 left-1/2 -translate-x-1/2 text-center text-white px-4 w-full">
+            <p className="font-display text-lg sm:text-xl lg:text-2xl font-light mb-1 sm:mb-2">
               {lightbox.title}
             </p>
-            <p className="text-[10px] text-white/40 uppercase tracking-[0.2em]">
+            <p className="text-[9px] sm:text-[10px] text-white/40 uppercase tracking-[0.2em]">
               {lightbox.category}
             </p>
           </div>
 
-          {/* Counter */}
-          <div className="absolute bottom-12 right-12 text-white/30 text-[11px] tracking-widest font-light">
+          {/* Counter - hidden on mobile */}
+          <div className="absolute bottom-16 sm:bottom-12 right-4 sm:right-12 text-white/30 text-[10px] sm:text-[11px] tracking-widest font-light hidden sm:block">
             <span className="text-white/60">{String(currentIndex + 1).padStart(2, "0")}</span>
             <span className="mx-2">/</span>
             <span>{String(filteredGallery.length).padStart(2, "0")}</span>

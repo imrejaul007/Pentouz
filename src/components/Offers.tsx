@@ -93,16 +93,16 @@ export default function Offers() {
     <section
       ref={sectionRef}
       id="offers"
-      className="py-32 lg:py-44 bg-[#f8f7f5]"
+      className="py-16 sm:py-24 lg:py-44 bg-[#f8f7f5]"
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         {/* Header - Four Seasons style */}
-        <div ref={headerRef} className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16 lg:mb-24">
+        <div ref={headerRef} className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-10 sm:mb-16 lg:mb-24">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.35em] text-brand-accent mb-6">
+            <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] sm:tracking-[0.35em] text-brand-accent mb-4 sm:mb-6">
               Exclusive Offers
             </p>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light leading-[1.1]">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light leading-[1.15]">
               Signature <em className="italic font-normal">Benefits</em>
             </h2>
           </div>
@@ -115,8 +115,8 @@ export default function Offers() {
           </Link>
         </div>
 
-        {/* Offer Cards - Four Seasons horizontal layout */}
-        <div ref={cardsRef} className="grid lg:grid-cols-3 gap-8 lg:gap-10">
+        {/* Offer Cards - Stack on mobile, horizontal on desktop */}
+        <div ref={cardsRef} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
           {offers.map((offer) => (
             <div
               key={offer.title}
@@ -129,33 +129,33 @@ export default function Offers() {
                   alt={offer.title}
                   fill
                   className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
                 {/* Badge */}
-                <div className="absolute top-6 left-6">
-                  <span className="bg-white px-4 py-2 text-[10px] uppercase tracking-[0.2em] text-brand-ink">
+                <div className="absolute top-4 sm:top-6 left-4 sm:left-6">
+                  <span className="bg-white px-3 sm:px-4 py-1.5 sm:py-2 text-[9px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-brand-ink">
                     {offer.badge}
                   </span>
                 </div>
               </div>
 
               {/* Content */}
-              <div className="p-8 lg:p-10">
-                <h3 className="font-display text-2xl font-light mb-4 group-hover:text-brand-accent transition-colors duration-500">
+              <div className="p-5 sm:p-8 lg:p-10">
+                <h3 className="font-display text-xl sm:text-2xl font-light mb-3 sm:mb-4 group-hover:text-brand-accent transition-colors duration-500">
                   {offer.title}
                 </h3>
-                <p className="text-sm text-brand-body leading-relaxed font-light mb-6">
+                <p className="text-xs sm:text-sm text-brand-body leading-relaxed font-light mb-4 sm:mb-6">
                   {offer.description}
                 </p>
-                <p className="text-[10px] uppercase tracking-[0.15em] text-brand-muted mb-8">
+                <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.15em] text-brand-muted mb-5 sm:mb-8">
                   {offer.terms}
                 </p>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:text-brand-accent transition-colors duration-500 group/link"
+                  className="inline-flex items-center gap-2 sm:gap-3 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:text-brand-accent transition-colors duration-500 group/link"
                 >
                   <span>Book This Offer</span>
-                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/link:translate-x-1" />
+                  <ArrowRight className="w-3.5 sm:w-4 h-3.5 sm:h-4 transition-transform duration-300 group-hover/link:translate-x-1" />
                 </Link>
               </div>
             </div>
@@ -163,13 +163,13 @@ export default function Offers() {
         </div>
 
         {/* Mobile View All */}
-        <div className="lg:hidden text-center mt-12">
+        <div className="lg:hidden text-center mt-8 sm:mt-12">
           <Link
             href="/contact"
-            className="inline-flex items-center gap-4 border border-brand-ink px-10 py-4 text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:bg-brand-ink hover:text-white transition-all duration-500 group"
+            className="inline-flex items-center gap-3 border border-brand-ink px-6 sm:px-10 py-3 sm:py-4 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:bg-brand-ink hover:text-white transition-all duration-500 group active:scale-95"
           >
             <span>View All Offers</span>
-            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            <ArrowRight className="w-3.5 sm:w-4 h-3.5 sm:h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </div>
       </div>

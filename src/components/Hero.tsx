@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Search, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { destinations, heroImage } from "@/data/content";
 
 if (typeof window !== "undefined") {
@@ -54,27 +54,31 @@ export default function Hero() {
       "-=1.4"
     );
 
-    // Parallax on scroll
-    gsap.to(imageRef.current, {
-      yPercent: 15,
-      ease: "none",
-      scrollTrigger: {
-        trigger: heroRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      },
+    // Parallax on scroll - disable on mobile for performance
+    const mm = gsap.matchMedia();
+    mm.add("(min-width: 768px)", () => {
+      gsap.to(imageRef.current, {
+        yPercent: 15,
+        ease: "none",
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
     });
 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      mm.revert();
     };
   }, []);
 
   return (
     <>
       {/* Hero Section - Four Seasons Style */}
-      <section ref={heroRef} className="relative h-screen min-h-[800px] overflow-hidden">
+      <section ref={heroRef} className="relative h-[100svh] min-h-[600px] sm:min-h-[700px] lg:min-h-[800px] overflow-hidden">
         {/* Background Image */}
         <div ref={imageRef} className="absolute inset-0">
           <Image
@@ -87,40 +91,41 @@ export default function Hero() {
             quality={90}
           />
           {/* Gradient overlay - subtle like Four Seasons */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/50" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
         </div>
 
         {/* Content - Centered like Four Seasons */}
         <div
           ref={contentRef}
-          className="relative h-full flex flex-col justify-center items-center text-center text-white px-6"
+          className="relative h-full flex flex-col justify-center items-center text-center text-white px-4 sm:px-6 pt-16 sm:pt-20"
         >
           {/* Overline */}
-          <p className="text-[11px] uppercase tracking-[0.35em] text-white/70 mb-6 font-normal">
+          <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] sm:tracking-[0.35em] text-white/70 mb-4 sm:mb-6 font-normal">
             Luxury Residences & Suites
           </p>
 
           {/* Main headline - Four Seasons style with italics */}
-          <h1 className="font-display text-[2.75rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5.5rem] xl:text-[6.5rem] font-light max-w-5xl leading-[1.05] tracking-[-0.02em]">
+          <h1 className="font-display text-[2rem] sm:text-[2.75rem] md:text-[3.5rem] lg:text-[4.5rem] xl:text-[5.5rem] font-light max-w-5xl leading-[1.1] tracking-[-0.02em]">
             Experience{" "}
             <em className="italic font-normal">Exceptional</em>
-            <br />
+            <br className="hidden sm:block" />
+            <span className="sm:hidden"> </span>
             Living
           </h1>
 
           {/* CTA Button - Four Seasons style */}
           <Link
             href="#properties"
-            className="mt-12 inline-flex items-center gap-3 bg-white text-brand-ink px-10 py-4 text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-white/90 transition-colors duration-300"
+            className="mt-8 sm:mt-12 inline-flex items-center gap-3 bg-white text-brand-ink px-6 sm:px-10 py-3 sm:py-4 text-[11px] sm:text-[12px] uppercase tracking-[0.15em] sm:tracking-[0.2em] font-medium hover:bg-white/90 transition-colors duration-300 active:scale-95"
           >
             Explore Properties
           </Link>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-          <div className="w-[1px] h-16 bg-white/30 overflow-hidden">
-            <div className="w-full h-8 bg-white animate-scroll-down" />
+        {/* Scroll indicator - hidden on very small screens */}
+        <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 hidden sm:block">
+          <div className="w-[1px] h-12 sm:h-16 bg-white/30 overflow-hidden">
+            <div className="w-full h-6 sm:h-8 bg-white animate-scroll-down" />
           </div>
         </div>
       </section>
@@ -166,23 +171,23 @@ function DiscoverySection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative py-24 lg:py-32 bg-[#f8f7f5]">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="text-center mb-16">
-          <h2 data-reveal className="font-display text-3xl md:text-4xl lg:text-5xl font-light mb-6">
+    <section ref={sectionRef} className="relative py-16 sm:py-20 lg:py-32 bg-[#f8f7f5]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="text-center mb-10 sm:mb-16">
+          <h2 data-reveal className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light mb-4 sm:mb-6">
             Discover <em className="italic">The Pentouz</em>
           </h2>
-          <p data-reveal className="text-base text-brand-body max-w-2xl mx-auto">
+          <p data-reveal className="text-sm sm:text-base text-brand-body max-w-2xl mx-auto px-4">
             Find your perfect stay across our curated collection of luxury residences
           </p>
         </div>
 
-        {/* Category Pills - Four Seasons style */}
-        <div data-reveal className="flex flex-wrap justify-center gap-4 mb-12">
+        {/* Category Pills - Four Seasons style - horizontal scroll on mobile */}
+        <div data-reveal className="flex justify-start sm:justify-center gap-3 sm:gap-4 mb-10 sm:mb-12 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap scrollbar-hide">
           {categories.map((cat) => (
             <button
               key={cat.name}
-              className="flex items-center gap-2 px-6 py-3 bg-white border border-brand-border/50 text-sm text-brand-body hover:border-brand-ink hover:text-brand-ink transition-all duration-300"
+              className="flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-white border border-brand-border/50 text-sm text-brand-body hover:border-brand-ink hover:text-brand-ink transition-all duration-300 whitespace-nowrap flex-shrink-0"
             >
               <span>{cat.icon}</span>
               <span>{cat.name}</span>
@@ -190,32 +195,32 @@ function DiscoverySection() {
           ))}
         </div>
 
-        {/* Destination Quick Links */}
-        <div data-reveal className="grid md:grid-cols-3 gap-6">
+        {/* Destination Quick Links - stack on mobile */}
+        <div data-reveal className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
           {destinations.map((dest) => (
             <Link
               key={dest.slug}
               href={`/destinations/${dest.slug}`}
-              className="group relative aspect-[4/3] overflow-hidden"
+              className="group relative aspect-[4/3] sm:aspect-[4/3] overflow-hidden"
             >
               <Image
                 src={dest.image}
                 alt={dest.title}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 33vw"
+                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-8">
-                <p className="text-[10px] uppercase tracking-[0.25em] text-white/60 mb-2">
+              <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 lg:p-8">
+                <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white/60 mb-1 sm:mb-2">
                   {dest.subtitle}
                 </p>
-                <h3 className="text-xl lg:text-2xl font-display font-light text-white">
+                <h3 className="text-lg sm:text-xl lg:text-2xl font-display font-light text-white">
                   {dest.shortTitle}
                 </h3>
               </div>
-              <div className="absolute top-6 right-6 w-10 h-10 bg-white/0 group-hover:bg-white flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100">
-                <ChevronRight className="w-5 h-5 text-brand-ink" />
+              <div className="absolute top-4 sm:top-6 right-4 sm:right-6 w-8 sm:w-10 h-8 sm:h-10 bg-white/0 group-hover:bg-white flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100">
+                <ChevronRight className="w-4 sm:w-5 h-4 sm:h-5 text-brand-ink" />
               </div>
             </Link>
           ))}
@@ -260,33 +265,33 @@ function BookingWidget() {
     <section
       ref={sectionRef}
       id="booking"
-      className="py-20 lg:py-28 bg-white border-t border-brand-border/30"
+      className="py-12 sm:py-16 lg:py-28 bg-white border-t border-brand-border/30"
     >
-      <div className="max-w-6xl mx-auto px-6 lg:px-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
         {/* Header */}
-        <div className="text-center mb-14">
-          <p className="text-[11px] uppercase tracking-[0.3em] text-brand-accent mb-4 font-normal">
+        <div className="text-center mb-8 sm:mb-14">
+          <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-brand-accent mb-3 sm:mb-4 font-normal">
             Plan Your Stay
           </p>
-          <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-light">
+          <h2 className="font-display text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light">
             Check <em className="italic">Availability</em>
           </h2>
         </div>
 
-        {/* Booking Form - Four Seasons inline style */}
-        <div className="bg-[#f8f7f5] p-8 lg:p-12">
-          <div className="grid md:grid-cols-5 gap-6 items-end">
-            {/* Property */}
-            <div className="md:col-span-1">
-              <label className="text-[10px] uppercase tracking-[0.2em] text-brand-muted block mb-3">
+        {/* Booking Form - Stack on mobile, inline on desktop */}
+        <div className="bg-[#f8f7f5] p-4 sm:p-6 lg:p-12">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 gap-4 sm:gap-6 items-end">
+            {/* Property - full width on mobile */}
+            <div className="col-span-2 sm:col-span-2 md:col-span-1">
+              <label className="text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-brand-muted block mb-2 sm:mb-3">
                 Property
               </label>
               <select
                 value={property}
                 onChange={(e) => setProperty(e.target.value)}
-                className="w-full bg-white border border-brand-border px-4 py-3 text-sm outline-none focus:border-brand-ink transition-colors"
+                className="w-full bg-white border border-brand-border px-3 sm:px-4 py-3 text-sm outline-none focus:border-brand-ink transition-colors rounded-none appearance-none"
               >
-                <option value="">Select</option>
+                <option value="">Select Property</option>
                 {destinations.map((dest) => (
                   <option key={dest.slug} value={dest.slug}>
                     {dest.shortTitle}
@@ -296,40 +301,40 @@ function BookingWidget() {
             </div>
 
             {/* Check In */}
-            <div className="md:col-span-1">
-              <label className="text-[10px] uppercase tracking-[0.2em] text-brand-muted block mb-3">
+            <div className="col-span-1">
+              <label className="text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-brand-muted block mb-2 sm:mb-3">
                 Check In
               </label>
               <input
                 type="date"
                 value={checkIn}
                 onChange={(e) => setCheckIn(e.target.value)}
-                className="w-full bg-white border border-brand-border px-4 py-3 text-sm outline-none focus:border-brand-ink transition-colors"
+                className="w-full bg-white border border-brand-border px-3 sm:px-4 py-3 text-sm outline-none focus:border-brand-ink transition-colors rounded-none"
               />
             </div>
 
             {/* Check Out */}
-            <div className="md:col-span-1">
-              <label className="text-[10px] uppercase tracking-[0.2em] text-brand-muted block mb-3">
+            <div className="col-span-1">
+              <label className="text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-brand-muted block mb-2 sm:mb-3">
                 Check Out
               </label>
               <input
                 type="date"
                 value={checkOut}
                 onChange={(e) => setCheckOut(e.target.value)}
-                className="w-full bg-white border border-brand-border px-4 py-3 text-sm outline-none focus:border-brand-ink transition-colors"
+                className="w-full bg-white border border-brand-border px-3 sm:px-4 py-3 text-sm outline-none focus:border-brand-ink transition-colors rounded-none"
               />
             </div>
 
             {/* Guests */}
-            <div className="md:col-span-1">
-              <label className="text-[10px] uppercase tracking-[0.2em] text-brand-muted block mb-3">
+            <div className="col-span-1">
+              <label className="text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-brand-muted block mb-2 sm:mb-3">
                 Guests
               </label>
               <select
                 value={guests}
                 onChange={(e) => setGuests(e.target.value)}
-                className="w-full bg-white border border-brand-border px-4 py-3 text-sm outline-none focus:border-brand-ink transition-colors"
+                className="w-full bg-white border border-brand-border px-3 sm:px-4 py-3 text-sm outline-none focus:border-brand-ink transition-colors rounded-none appearance-none"
               >
                 {[1, 2, 3, 4, 5, 6].map((num) => (
                   <option key={num} value={num}>
@@ -340,8 +345,8 @@ function BookingWidget() {
             </div>
 
             {/* Submit Button */}
-            <div className="md:col-span-1">
-              <button className="w-full bg-brand-ink text-white py-3 px-6 text-[11px] uppercase tracking-[0.2em] font-medium hover:bg-black transition-colors duration-300">
+            <div className="col-span-1 md:col-span-1">
+              <button className="w-full bg-brand-ink text-white py-3 px-4 sm:px-6 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] sm:tracking-[0.2em] font-medium hover:bg-black transition-colors duration-300 active:scale-95">
                 Check Rates
               </button>
             </div>

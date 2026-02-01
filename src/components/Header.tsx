@@ -41,8 +41,8 @@ export default function Header() {
             : "bg-transparent"
         )}
       >
-        <div className="max-w-container-2xl mx-auto px-8 lg:px-20">
-          <div className="flex items-center justify-between h-24 lg:h-32">
+        <div className="max-w-container-2xl mx-auto px-4 sm:px-6 lg:px-20">
+          <div className="flex items-center justify-between h-16 sm:h-20 lg:h-32">
             {/* Logo */}
             <Link href="/" className="relative block">
               <Image
@@ -113,7 +113,7 @@ export default function Header() {
       >
         <div className="h-full flex flex-col">
           {/* Menu Header */}
-          <div className="flex justify-between items-center px-8 lg:px-20 h-24 lg:h-32">
+          <div className="flex justify-between items-center px-4 sm:px-6 lg:px-20 h-16 sm:h-20 lg:h-32">
             <Image
               src="/logo-white.png"
               alt="The Pentouz"
@@ -134,23 +134,23 @@ export default function Header() {
           {/* Menu Content */}
           <div className="flex-1 flex flex-col lg:flex-row overflow-auto">
             {/* Navigation Links */}
-            <nav className="flex-1 flex flex-col justify-center px-8 lg:px-24 py-12 lg:py-20">
+            <nav className="flex-1 flex flex-col justify-center px-4 sm:px-6 lg:px-24 py-8 lg:py-20">
               {navLinks.map((link, i) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="group flex items-baseline gap-8 py-5 lg:py-7 border-b border-white/5 last:border-b-0"
+                  className="group flex items-baseline gap-4 sm:gap-8 py-4 sm:py-5 lg:py-7 border-b border-white/5 last:border-b-0"
                   style={{
                     opacity: isMenuOpen ? 1 : 0,
                     transform: isMenuOpen ? "translateY(0)" : "translateY(30px)",
                     transition: `all 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.1 + 0.2}s`,
                   }}
                 >
-                  <span className="text-[10px] tracking-[0.2em] text-white/20 w-8 font-light">
+                  <span className="text-[10px] tracking-[0.2em] text-white/20 w-6 sm:w-8 font-light">
                     0{i + 1}
                   </span>
-                  <span className="text-3xl lg:text-5xl font-display font-light text-white group-hover:opacity-40 transition-opacity duration-500">
+                  <span className="text-2xl sm:text-3xl lg:text-5xl font-display font-light text-white group-hover:opacity-40 transition-opacity duration-500">
                     {link.label}
                   </span>
                 </Link>
@@ -159,7 +159,7 @@ export default function Header() {
 
             {/* Contact Info */}
             <div
-              className="lg:w-[420px] px-8 lg:px-20 py-12 lg:py-20 lg:flex lg:flex-col lg:justify-center lg:border-l border-white/5 bg-black/30 lg:bg-transparent"
+              className="lg:w-[420px] px-4 sm:px-6 lg:px-20 py-8 lg:py-20 lg:flex lg:flex-col lg:justify-center lg:border-l border-white/5 bg-black/30 lg:bg-transparent"
               style={{
                 opacity: isMenuOpen ? 1 : 0,
                 transform: isMenuOpen ? "translateY(0)" : "translateY(30px)",
