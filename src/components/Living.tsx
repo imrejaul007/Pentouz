@@ -7,10 +7,22 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, Play } from "lucide-react";
 import { living, livingImage } from "@/data/content";
+import AnimatedCounter from "./AnimatedCounter";
+import Marquee from "./Marquee";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
+
+// Awards and accolades for marquee
+const awards = [
+  "Forbes Travel Guide Recommended",
+  "TripAdvisor Travelers' Choice 2024",
+  "Condé Nast Traveller Hot List",
+  "World Luxury Hotel Awards",
+  "Booking.com Excellence Award",
+  "Times Travel Award Winner",
+];
 
 export default function Living() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -124,7 +136,7 @@ export default function Living() {
               </p>
               <Link
                 href="/destinations"
-                className="inline-flex items-center gap-3 bg-white text-brand-ink px-6 sm:px-8 py-3 sm:py-4 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] font-medium hover:bg-white/90 transition-colors duration-300 active:scale-95"
+                className="inline-flex items-center gap-3 bg-white text-brand-ink px-6 sm:px-8 py-3 sm:py-4 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] font-medium hover:bg-white/90 transition-colors duration-300 active:scale-95 btn-shimmer"
               >
                 Explore All Properties
               </Link>
@@ -180,7 +192,16 @@ export default function Living() {
         </div>
       </section>
 
-      {/* Statistics Section - Four Seasons style */}
+      {/* Awards Marquee - Premium touch */}
+      <section className="py-6 sm:py-8 bg-[#0a0a0a] border-y border-white/5 overflow-hidden">
+        <Marquee
+          items={awards}
+          speed={40}
+          className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-white/40"
+        />
+      </section>
+
+      {/* Statistics Section with Animated Counters */}
       <StatsSection />
     </>
   );
@@ -218,10 +239,10 @@ function StatsSection() {
   }, []);
 
   const stats = [
-    { number: "3", label: "Exclusive Properties" },
-    { number: "15+", label: "Years of Excellence" },
-    { number: "98%", label: "Guest Satisfaction" },
-    { number: "24/7", label: "Concierge Service" },
+    { number: 3, suffix: "", label: "Exclusive Properties" },
+    { number: 15, suffix: "+", label: "Years of Excellence" },
+    { number: 98, suffix: "%", label: "Guest Satisfaction" },
+    { number: 24, suffix: "/7", label: "Concierge Service" },
   ];
 
   return (
@@ -235,7 +256,11 @@ function StatsSection() {
               className="text-center lg:border-r last:border-r-0 border-brand-border/30"
             >
               <div className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-brand-ink mb-2 sm:mb-4">
-                {stat.number}
+                <AnimatedCounter
+                  end={stat.number}
+                  suffix={stat.suffix}
+                  duration={2.5}
+                />
               </div>
               <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-brand-muted">
                 {stat.label}

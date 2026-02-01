@@ -3,6 +3,8 @@ import { Montserrat, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
+import Preloader from "@/components/Preloader";
+import PageTransition from "@/components/PageTransition";
 
 const bodyFont = Montserrat({
   variable: "--font-body-family",
@@ -36,9 +38,10 @@ export default function RootLayout({
       <body
         className={`${bodyFont.variable} ${displayFont.variable} antialiased bg-white text-brand-ink grain-overlay`}
       >
+        <Preloader />
         <SmoothScroll>
           <CustomCursor />
-          {children}
+          <PageTransition>{children}</PageTransition>
         </SmoothScroll>
       </body>
     </html>
