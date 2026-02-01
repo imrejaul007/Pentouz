@@ -20,8 +20,8 @@ const categories = [
   { name: "Heritage", icon: "🏛️" },
 ];
 
-// Luxury hotel ambient video
-const heroVideo = "https://videos.pexels.com/video-files/3773486/3773486-uhd_2560_1440_30fps.mp4";
+// Local hero video
+const heroVideo = "/hero-video.mp4";
 
 export default function Hero() {
   const heroRef = useRef<HTMLElement>(null);
