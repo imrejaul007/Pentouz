@@ -2,7 +2,6 @@ services:
   - type: web
     name: pentouz
     runtime: node
-    rootDir: pentouz-site
     buildCommand: npm install && npm run build
     startCommand: npm run start:standalone
     envVars:
