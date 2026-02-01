@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Volume2, VolumeX } from "lucide-react";
 import { destinations, heroImage } from "@/data/content";
 
 if (typeof window !== "undefined") {
@@ -20,22 +20,28 @@ const categories = [
   { name: "Heritage", icon: "🏛️" },
 ];
 
+// Luxury hotel ambient video
+const heroVideo = "https://videos.pexels.com/video-files/3773486/3773486-uhd_2560_1440_30fps.mp4";
+
 export default function Hero() {
   const heroRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
 
   useEffect(() => {
-    if (!contentRef.current || !imageRef.current) return;
+    if (!contentRef.current || !videoContainerRef.current) return;
 
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
     // Initial states
     gsap.set(contentRef.current.children, { y: 60, opacity: 0 });
-    gsap.set(imageRef.current, { scale: 1.05 });
+    gsap.set(videoContainerRef.current, { scale: 1.05 });
 
-    // Image zoom out
-    tl.to(imageRef.current, {
+    // Video zoom out
+    tl.to(videoContainerRef.current, {
       scale: 1,
       duration: 1.8,
       ease: "power2.out",
@@ -57,7 +63,7 @@ export default function Hero() {
     // Parallax on scroll - disable on mobile for performance
     const mm = gsap.matchMedia();
     mm.add("(min-width: 768px)", () => {
-      gsap.to(imageRef.current, {
+      gsap.to(videoContainerRef.current, {
         yPercent: 15,
         ease: "none",
         scrollTrigger: {
@@ -75,26 +81,60 @@ export default function Hero() {
     };
   }, []);
 
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(!isMuted);
+    }
+  };
+
   return (
     <>
-      {/* Hero Section - Four Seasons Style */}
+      {/* Hero Section - Four Seasons Style with Video */}
       <section ref={heroRef} className="relative h-[100svh] min-h-[600px] sm:min-h-[700px] lg:min-h-[800px] overflow-hidden">
-        {/* Background Image */}
-        <div ref={imageRef} className="absolute inset-0">
+        {/* Background Video */}
+        <div ref={videoContainerRef} className="absolute inset-0">
+          {/* Fallback Image - shows while video loads */}
           <Image
             src={heroImage}
             alt="The Pentouz Luxury Residence"
             fill
             priority
-            className="object-cover"
+            className={`object-cover transition-opacity duration-1000 ${videoLoaded ? "opacity-0" : "opacity-100"}`}
             sizes="100vw"
             quality={85}
-            placeholder="blur"
-            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAMH/8QAHhAAAgICAwEBAAAAAAAAAAAAAQIDBAARBRIhMUH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAIDAQAAAAAAAAAAAAAAAAECABEhA//aAAwDAQACEQMRAD8AxqnXhnjYmMyqy7G/Obdfi4oIyMxHqNqG9+5xjFFl2MDQmf/Z"
           />
+
+          {/* Video Background */}
+          <video
+            ref={videoRef}
+            autoPlay
+            loop
+            muted
+            playsInline
+            onLoadedData={() => setVideoLoaded(true)}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${videoLoaded ? "opacity-100" : "opacity-0"}`}
+            poster={heroImage}
+          >
+            <source src={heroVideo} type="video/mp4" />
+          </video>
+
           {/* Gradient overlay - subtle like Four Seasons */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/25 to-black/60" />
         </div>
+
+        {/* Sound Toggle Button */}
+        <button
+          onClick={toggleMute}
+          className="absolute bottom-6 sm:bottom-8 right-4 sm:right-8 z-20 w-10 h-10 sm:w-12 sm:h-12 border border-white/30 flex items-center justify-center text-white/70 hover:text-white hover:border-white/50 transition-all duration-300 backdrop-blur-sm bg-black/10"
+          aria-label={isMuted ? "Unmute video" : "Mute video"}
+        >
+          {isMuted ? (
+            <VolumeX className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={1.5} />
+          ) : (
+            <Volume2 className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={1.5} />
+          )}
+        </button>
 
         {/* Content - Centered like Four Seasons */}
         <div
