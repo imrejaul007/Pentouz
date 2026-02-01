@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { X, Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { navLinks, contactInfo } from "@/data/content";
@@ -43,14 +44,18 @@ export default function Header() {
         <div className="max-w-container-2xl mx-auto px-8 lg:px-20">
           <div className="flex items-center justify-between h-24 lg:h-32">
             {/* Logo */}
-            <Link
-              href="/"
-              className={cn(
-                "text-sm lg:text-base tracking-[0.4em] font-extralight uppercase transition-colors duration-700",
-                isScrolled ? "text-brand-ink" : "text-white"
-              )}
-            >
-              The Pentouz
+            <Link href="/" className="relative block">
+              <Image
+                src="/logo-white.png"
+                alt="The Pentouz"
+                width={160}
+                height={45}
+                className={cn(
+                  "h-8 lg:h-10 w-auto transition-all duration-700",
+                  isScrolled ? "invert" : ""
+                )}
+                priority
+              />
             </Link>
 
             {/* Desktop Navigation - Center */}
@@ -109,9 +114,13 @@ export default function Header() {
         <div className="h-full flex flex-col">
           {/* Menu Header */}
           <div className="flex justify-between items-center px-8 lg:px-20 h-24 lg:h-32">
-            <span className="text-sm lg:text-base tracking-[0.4em] font-extralight uppercase text-white">
-              The Pentouz
-            </span>
+            <Image
+              src="/logo-white.png"
+              alt="The Pentouz"
+              width={160}
+              height={45}
+              className="h-8 lg:h-10 w-auto"
+            />
             <button
               onClick={() => setIsMenuOpen(false)}
               className="flex items-center gap-4 text-white hover:opacity-40 transition-opacity duration-500"

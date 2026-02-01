@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { contactInfo, navLinks, destinations } from "@/data/content";
 
@@ -22,10 +23,14 @@ export default function Footer() {
         <div className="grid lg:grid-cols-12 gap-16 lg:gap-20">
           {/* Brand + Contact - 5 cols */}
           <div className="lg:col-span-5">
-            <Link href="/" className="inline-block">
-              <p className="text-2xl tracking-[0.35em] font-light mb-8 hover:opacity-70 transition-opacity duration-300">
-                THE PENTOUZ
-              </p>
+            <Link href="/" className="inline-block mb-8">
+              <Image
+                src="/logo-white.png"
+                alt="The Pentouz"
+                width={180}
+                height={50}
+                className="h-10 lg:h-12 w-auto hover:opacity-70 transition-opacity duration-300"
+              />
             </Link>
             <div className="w-16 h-px bg-white/20 mb-8" />
             <p className="text-body-lg text-white/50 mb-10 max-w-sm leading-relaxed">
