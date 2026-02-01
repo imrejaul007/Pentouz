@@ -210,10 +210,10 @@ export const testimonials = [
 // Navigation links - Updated for multi-page
 export const navLinks = [
   { href: "/destinations", label: "Destinations" },
-  { href: "/#experiences", label: "Experiences" },
-  { href: "/#offers", label: "Offers" },
+  { href: "/experiences", label: "Experiences" },
+  { href: "/about", label: "About" },
   { href: "/#gallery", label: "Gallery" },
-  { href: "/#contact", label: "Contact" },
+  { href: "/contact", label: "Contact" },
 ];
 
 // Contact info
