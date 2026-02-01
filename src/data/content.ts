@@ -211,8 +211,10 @@ export const testimonials = [
 export const navLinks = [
   { href: "/destinations", label: "Destinations" },
   { href: "/experiences", label: "Experiences" },
+  { href: "/prive-club", label: "Privé Club" },
+  { href: "/offers", label: "Offers" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/about", label: "About" },
-  { href: "/#gallery", label: "Gallery" },
   { href: "/contact", label: "Contact" },
 ];
 
