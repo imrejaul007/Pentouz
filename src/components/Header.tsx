@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { X, Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { navLinks, contactInfo } from "@/data/content";
@@ -42,7 +43,7 @@ export default function Header() {
         <div className="max-w-container-2xl mx-auto px-8 lg:px-20">
           <div className="flex items-center justify-between h-24 lg:h-32">
             {/* Logo */}
-            <a
+            <Link
               href="/"
               className={cn(
                 "text-sm lg:text-base tracking-[0.4em] font-extralight uppercase transition-colors duration-700",
@@ -50,12 +51,12 @@ export default function Header() {
               )}
             >
               The Pentouz
-            </a>
+            </Link>
 
             {/* Desktop Navigation - Center */}
             <nav className="hidden lg:flex items-center gap-14">
               {navLinks.slice(0, 4).map((link) => (
-                <a
+                <Link
                   key={link.href}
                   href={link.href}
                   className={cn(
@@ -64,22 +65,22 @@ export default function Header() {
                   )}
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </nav>
 
             {/* Right Actions */}
             <div className="flex items-center gap-8 lg:gap-12">
               {/* Check Rates CTA - Desktop */}
-              <a
-                href="#booking"
+              <Link
+                href="/#booking"
                 className={cn(
                   "hidden lg:inline-block text-[11px] uppercase tracking-[0.15em] transition-all duration-500 hover:opacity-40 font-light",
                   isScrolled ? "text-brand-ink" : "text-white"
                 )}
               >
                 Check Rates
-              </a>
+              </Link>
 
               {/* Menu Button */}
               <button
@@ -126,7 +127,7 @@ export default function Header() {
             {/* Navigation Links */}
             <nav className="flex-1 flex flex-col justify-center px-8 lg:px-24 py-12 lg:py-20">
               {navLinks.map((link, i) => (
-                <a
+                <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsMenuOpen(false)}
@@ -143,7 +144,7 @@ export default function Header() {
                   <span className="text-3xl lg:text-5xl font-display font-light text-white group-hover:opacity-40 transition-opacity duration-500">
                     {link.label}
                   </span>
-                </a>
+                </Link>
               ))}
             </nav>
 
@@ -177,11 +178,29 @@ export default function Header() {
                   <p className="text-[10px] uppercase tracking-[0.3em] text-white/25 mb-6 font-light">
                     Destinations
                   </p>
-                  <p className="text-sm text-white/40 leading-relaxed font-light">
-                    Indiranagar, Bangalore<br />
-                    Lavelle Road, Bangalore<br />
-                    Elk Hill, Ooty
-                  </p>
+                  <div className="space-y-3">
+                    <Link
+                      href="/destinations/indiranagar"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block text-sm text-white/40 hover:text-white transition-colors duration-500 font-light"
+                    >
+                      Indiranagar, Bangalore
+                    </Link>
+                    <Link
+                      href="/destinations/lavelle-road"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block text-sm text-white/40 hover:text-white transition-colors duration-500 font-light"
+                    >
+                      Lavelle Road, Bangalore
+                    </Link>
+                    <Link
+                      href="/destinations/ooty"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block text-sm text-white/40 hover:text-white transition-colors duration-500 font-light"
+                    >
+                      Elk Hill, Ooty
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

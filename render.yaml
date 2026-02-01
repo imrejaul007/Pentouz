@@ -2,11 +2,12 @@ services:
   - type: web
     name: pentouz
     runtime: node
-    buildCommand: npm install && npm run build && cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/
-    startCommand: node .next/standalone/server.js
+    rootDir: pentouz-site
+    buildCommand: npm install && npm run build
+    startCommand: npm run start:standalone
     envVars:
       - key: NODE_VERSION
-        value: "18"
+        value: "18.20.0"
       - key: PORT
         value: "10000"
       - key: HOSTNAME
