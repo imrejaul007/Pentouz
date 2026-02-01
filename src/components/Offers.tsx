@@ -130,6 +130,7 @@ export default function Offers() {
                   fill
                   className="object-cover transition-transform duration-1000 group-hover:scale-105"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  loading="lazy"
                 />
                 {/* Badge */}
                 <div className="absolute top-4 sm:top-6 left-4 sm:left-6">

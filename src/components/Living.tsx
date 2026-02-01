@@ -100,7 +100,7 @@ export default function Living() {
             fill
             className="object-cover scale-110"
             sizes="100vw"
-            priority
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-black/30 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#1a1a1a]/60 to-transparent" />

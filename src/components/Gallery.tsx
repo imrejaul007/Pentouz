@@ -229,6 +229,7 @@ export default function Gallery() {
                 fill
                 className="object-cover transition-transform duration-1000 group-hover:scale-110"
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                loading="lazy"
               />
               {/* Hover overlay - Four Seasons style */}
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 sm:group-hover:bg-black/40 transition-colors duration-500 flex items-end">
@@ -303,7 +304,7 @@ export default function Gallery() {
               width={1400}
               height={900}
               className="object-contain max-h-[80vh] sm:max-h-[85vh] w-auto"
-              priority
+              loading="eager"
             />
           </div>
 

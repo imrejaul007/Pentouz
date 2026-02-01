@@ -110,7 +110,7 @@ export default function PropertyCarousel() {
           fill
           className="object-cover"
           sizes="100vw"
-          priority
+          loading="eager"
         />
         <div className="absolute inset-0 bg-black/60" />
       </div>
@@ -256,6 +256,7 @@ function PropertyCard({ property, index, isActive, onClick, isMobile }: Property
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-105"
           sizes="(max-width: 640px) 280px, (max-width: 1024px) 320px, 33vw"
+          loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
