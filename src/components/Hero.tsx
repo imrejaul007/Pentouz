@@ -264,6 +264,19 @@ function BookingWidget() {
     };
   }, []);
 
+  const handleCheckRates = () => {
+    if (!property) {
+      alert("Please select a property");
+      return;
+    }
+
+    const selectedProperty = destinations.find((d) => d.slug === property);
+    if (selectedProperty?.bookingUrl) {
+      // Open booking URL in new tab
+      window.open(selectedProperty.bookingUrl, "_blank", "noopener,noreferrer");
+    }
+  };
+
   return (
     <section
       ref={sectionRef}
@@ -349,7 +362,10 @@ function BookingWidget() {
 
             {/* Submit Button */}
             <div className="col-span-1 md:col-span-1">
-              <button className="w-full bg-brand-ink text-white py-3 px-4 sm:px-6 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] sm:tracking-[0.2em] font-medium hover:bg-black transition-colors duration-300 active:scale-95">
+              <button
+                onClick={handleCheckRates}
+                className="w-full bg-brand-ink text-white py-3 px-4 sm:px-6 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] sm:tracking-[0.2em] font-medium hover:bg-black transition-colors duration-300 active:scale-95"
+              >
                 Check Rates
               </button>
             </div>
