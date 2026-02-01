@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ArrowRight } from "lucide-react";
 import { contactInfo, navLinks, destinations } from "@/data/content";
 
 export default function Footer() {
@@ -14,31 +15,35 @@ export default function Footer() {
   };
 
   return (
-    <footer id="contact" className="bg-brand-ink text-white py-section-md">
-      <div className="container-luxury">
-        {/* Main Footer Content */}
-        <div className="grid lg:grid-cols-12 gap-12 pb-16 border-b border-white/10">
-          {/* Brand + Contact - 4 cols */}
-          <div className="lg:col-span-4">
-            <p className="text-2xl tracking-[0.2em] font-light mb-6">
-              <span className="font-medium">THE</span> PENTOUZ
+    <footer id="contact" className="bg-brand-ink text-white">
+      {/* Main Footer Content */}
+      <div className="container-wide py-24 lg:py-32">
+        <div className="grid lg:grid-cols-12 gap-16 lg:gap-20">
+          {/* Brand + Contact - 5 cols */}
+          <div className="lg:col-span-5">
+            <p className="text-2xl tracking-[0.35em] font-light mb-8">
+              THE PENTOUZ
             </p>
-            <div className="space-y-3 text-body-sm text-white/70">
+            <div className="w-16 h-px bg-white/20 mb-8" />
+            <p className="text-body-lg text-white/50 mb-10 max-w-sm leading-relaxed">
+              Exceptional residences where modern luxury meets timeless elegance.
+            </p>
+            <div className="space-y-4 text-body-md text-white/60">
               <p>{contactInfo.address}</p>
               <p>{contactInfo.city}</p>
-              <div className="pt-4 space-y-2">
+              <div className="pt-6 space-y-3">
                 {contactInfo.phones.map((phone) => (
                   <a
                     key={phone}
                     href={`tel:${phone.replace(/\s/g, "")}`}
-                    className="block hover:text-white transition-colors"
+                    className="block text-white/80 hover:text-white transition-colors"
                   >
                     {phone}
                   </a>
                 ))}
                 <a
                   href={`mailto:${contactInfo.email}`}
-                  className="block hover:text-white transition-colors"
+                  className="block text-white/60 hover:text-white transition-colors"
                 >
                   {contactInfo.email}
                 </a>
@@ -48,15 +53,15 @@ export default function Footer() {
 
           {/* Navigation - 2 cols */}
           <div className="lg:col-span-2">
-            <p className="text-caption uppercase tracking-[0.15em] text-white/50 mb-6">
+            <p className="text-overline uppercase tracking-[0.25em] text-white/40 mb-8">
               Explore
             </p>
-            <nav className="space-y-3 text-body-sm text-white/70">
+            <nav className="space-y-4">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="block hover:text-white transition-colors"
+                  className="block text-body-md text-white/60 hover:text-white transition-colors"
                 >
                   {link.label}
                 </a>
@@ -64,17 +69,17 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Properties - 3 cols */}
-          <div className="lg:col-span-3">
-            <p className="text-caption uppercase tracking-[0.15em] text-white/50 mb-6">
-              Our Properties
+          {/* Properties - 2 cols */}
+          <div className="lg:col-span-2">
+            <p className="text-overline uppercase tracking-[0.25em] text-white/40 mb-8">
+              Properties
             </p>
-            <nav className="space-y-3 text-body-sm text-white/70">
+            <nav className="space-y-4">
               {destinations.map((dest) => (
                 <a
                   key={dest.slug}
                   href={`#${dest.slug}`}
-                  className="block hover:text-white transition-colors"
+                  className="block text-body-md text-white/60 hover:text-white transition-colors"
                 >
                   {dest.subtitle}
                 </a>
@@ -84,44 +89,49 @@ export default function Footer() {
 
           {/* Newsletter - 3 cols */}
           <div className="lg:col-span-3">
-            <p className="text-caption uppercase tracking-[0.15em] text-white/50 mb-6">
+            <p className="text-overline uppercase tracking-[0.25em] text-white/40 mb-8">
               Stay Connected
             </p>
-            <p className="text-body-sm text-white/70 mb-4">
-              Receive exclusive offers and updates.
+            <p className="text-body-md text-white/60 mb-8 leading-relaxed">
+              Subscribe for exclusive offers and the latest updates from our properties.
             </p>
-            <form onSubmit={handleSubscribe} className="flex">
+            <form onSubmit={handleSubscribe} className="relative">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email address"
+                placeholder="Your email address"
                 required
-                className="flex-1 bg-transparent border-b border-white/30 pb-2 text-body-sm outline-none focus:border-white transition-colors placeholder:text-white/40"
+                className="w-full bg-transparent border-b border-white/20 pb-4 text-body-md outline-none focus:border-white/50 transition-colors placeholder:text-white/30"
               />
               <button
                 type="submit"
-                className="ml-4 text-caption uppercase tracking-[0.1em] hover:text-white/70 transition-colors"
+                className="absolute right-0 bottom-4 text-white/60 hover:text-white transition-colors"
+                aria-label="Subscribe"
               >
-                Subscribe
+                <ArrowRight className="w-5 h-5" />
               </button>
             </form>
           </div>
         </div>
+      </div>
 
-        {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center pt-8 text-caption text-white/50">
-          <p>&copy; {new Date().getFullYear()} The Pentouz Hotels & Residences</p>
-          <div className="flex gap-6 mt-4 md:mt-0">
-            <a href="#" className="hover:text-white transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              Terms of Use
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              Cookie Policy
-            </a>
+      {/* Bottom Bar */}
+      <div className="border-t border-white/10">
+        <div className="container-wide py-8">
+          <div className="flex flex-col md:flex-row justify-between items-center text-caption text-white/40">
+            <p>&copy; {new Date().getFullYear()} The Pentouz Hotels & Residences. All rights reserved.</p>
+            <div className="flex gap-8 mt-6 md:mt-0">
+              <a href="#" className="hover:text-white/70 transition-colors uppercase tracking-[0.1em]">
+                Privacy
+              </a>
+              <a href="#" className="hover:text-white/70 transition-colors uppercase tracking-[0.1em]">
+                Terms
+              </a>
+              <a href="#" className="hover:text-white/70 transition-colors uppercase tracking-[0.1em]">
+                Cookies
+              </a>
+            </div>
           </div>
         </div>
       </div>

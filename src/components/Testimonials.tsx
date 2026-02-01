@@ -11,41 +11,47 @@ export default function Testimonials() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % testimonials.length);
-    }, 6000);
+    }, 7000);
     return () => clearInterval(interval);
   }, []);
 
   return (
     <section className="section-padding bg-white">
-      <div className="max-w-4xl mx-auto px-6 text-center">
+      <div className="max-w-5xl mx-auto px-6 lg:px-12 text-center">
         {/* Header */}
-        <p className="text-overline text-brand-muted uppercase tracking-[0.2em] mb-8">
-          Guest Experiences
+        <p className="text-overline text-brand-accent uppercase tracking-[0.3em] mb-10">
+          Guest Voices
         </p>
 
         {/* Quote Carousel */}
-        <div className="relative min-h-[250px] flex items-center justify-center">
+        <div className="relative min-h-[320px] flex items-center justify-center">
           {testimonials.map((testimonial, i) => (
             <div
               key={testimonial.name}
               className={cn(
-                "absolute inset-0 flex flex-col items-center justify-center transition-all duration-700",
+                "absolute inset-0 flex flex-col items-center justify-center transition-all duration-1000",
                 i === activeIndex
                   ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-4 pointer-events-none"
+                  : "opacity-0 translate-y-6 pointer-events-none"
               )}
             >
+              {/* Quote mark */}
+              <div className="text-brand-border text-8xl font-display leading-none mb-6">&ldquo;</div>
+
               {/* Quote */}
-              <blockquote className="font-display text-display-sm lg:text-display-md font-light italic text-brand-ink mb-8 text-balance">
-                &ldquo;{testimonial.quote}&rdquo;
+              <blockquote className="font-display text-display-sm lg:text-display-md font-light italic text-brand-ink mb-10 text-balance leading-snug">
+                {testimonial.quote}
               </blockquote>
+
+              {/* Divider */}
+              <div className="w-12 h-px bg-brand-accent mb-8" />
 
               {/* Attribution */}
               <div>
-                <p className="text-body-md font-medium text-brand-ink">
+                <p className="text-body-lg font-display text-brand-ink mb-2">
                   {testimonial.name}
                 </p>
-                <p className="text-caption text-brand-muted uppercase tracking-[0.1em]">
+                <p className="text-caption text-brand-muted uppercase tracking-[0.2em]">
                   {testimonial.source}
                 </p>
               </div>
@@ -53,17 +59,17 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* Navigation Dots */}
-        <div className="flex justify-center gap-3 mt-12">
+        {/* Navigation Dots - refined */}
+        <div className="flex justify-center gap-4 mt-14">
           {testimonials.map((_, i) => (
             <button
               key={i}
               onClick={() => setActiveIndex(i)}
               className={cn(
-                "h-2 rounded-full transition-all duration-300",
+                "transition-all duration-500",
                 i === activeIndex
-                  ? "w-8 bg-brand-ink"
-                  : "w-2 bg-brand-border hover:bg-brand-muted"
+                  ? "w-12 h-px bg-brand-ink"
+                  : "w-6 h-px bg-brand-border hover:bg-brand-muted"
               )}
               aria-label={`View testimonial ${i + 1}`}
             />

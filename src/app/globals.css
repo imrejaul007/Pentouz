@@ -93,7 +93,7 @@ html {
 @layer utilities {
   /* Hover animations */
   .hover-lift {
-    @apply transition-transform duration-500 ease-out hover:-translate-y-2;
+    @apply transition-transform duration-500 ease-out hover:-translate-y-3;
   }
 
   .hover-scale {
@@ -114,14 +114,22 @@ html {
     @apply object-cover w-full h-full;
   }
 
-  /* Container */
+  /* Container - larger for premium feel */
   .container-luxury {
-    @apply max-w-7xl mx-auto px-6 lg:px-12;
+    @apply max-w-container-xl mx-auto px-6 lg:px-16;
   }
 
-  /* Section padding */
+  .container-wide {
+    @apply max-w-container-2xl mx-auto px-6 lg:px-20;
+  }
+
+  /* Section padding - more generous */
   .section-padding {
-    @apply py-24 lg:py-32;
+    @apply py-28 lg:py-40;
+  }
+
+  .section-padding-sm {
+    @apply py-20 lg:py-28;
   }
 
   /* Underline animation */
@@ -138,9 +146,18 @@ html {
     @apply w-full;
   }
 
-  /* Glass effect */
+  /* Glass effect - enhanced */
   .glass {
-    @apply bg-white/10 backdrop-blur-sm border border-white/20;
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+
+  .glass-dark {
+    @apply bg-black/20 backdrop-blur-md border border-white/10;
+  }
+
+  /* Divider */
+  .divider {
+    @apply w-16 h-px bg-brand-accent mx-auto;
   }
 
   /* Hide scrollbar */

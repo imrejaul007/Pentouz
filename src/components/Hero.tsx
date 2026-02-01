@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { ChevronDown } from "lucide-react";
 import { destinations, heroImage } from "@/data/content";
 
 export default function Hero() {
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative h-screen min-h-[700px] max-h-[900px]">
+      {/* Hero Section - Full viewport like Four Seasons */}
+      <section className="relative h-screen min-h-[800px]">
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
@@ -19,36 +20,32 @@ export default function Hero() {
             className="object-cover"
             sizes="100vw"
           />
-          {/* Gradient overlay - bottom to top */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/10" />
+          {/* Subtle gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-hero" />
         </div>
 
-        {/* Content - Centered at bottom */}
-        <div className="relative h-full flex flex-col justify-end items-center text-center text-white pb-24 lg:pb-32 px-6">
-          <p className="text-overline uppercase tracking-[0.25em] text-white/70 mb-4">
-            Bangalore & Ooty
+        {/* Content - Centered */}
+        <div className="relative h-full flex flex-col justify-center items-center text-center text-white px-6">
+          <p className="text-overline uppercase tracking-[0.3em] text-white/60 mb-6">
+            Luxury Residences
           </p>
-          <h1 className="font-display text-display-md lg:text-display-lg font-light max-w-4xl mb-6 text-balance">
-            Where Luxury Meets Serenity
+          <h1 className="font-display text-display-lg md:text-display-xl lg:text-display-hero font-light max-w-5xl mb-8">
+            Where <em className="italic">Luxury</em> Meets Serenity
           </h1>
-          <p className="text-body-lg text-white/80 max-w-2xl mb-10">
-            Boutique residences in the heart of Bangalore and the hills of Ooty,
-            crafted for discerning travelers.
+          <p className="text-body-lg md:text-body-xl text-white/70 max-w-2xl mb-12 font-light">
+            Boutique residences in the heart of Bangalore and the hills of Ooty
           </p>
           <a
             href="#properties"
-            className="px-8 py-4 border border-white text-sm tracking-[0.15em] uppercase hover:bg-white hover:text-brand-ink transition-all duration-300"
+            className="group flex flex-col items-center gap-4 text-white/80 hover:text-white transition-colors"
           >
-            Explore Properties
+            <span className="text-label uppercase tracking-[0.2em]">Discover</span>
+            <ChevronDown className="w-5 h-5 animate-bounce" strokeWidth={1} />
           </a>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-          <div className="w-px h-16 bg-white/30 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-8 bg-white animate-scroll-down" />
-          </div>
-        </div>
+        {/* Bottom gradient for smooth transition */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
       </section>
 
       {/* Booking Widget Section */}
@@ -64,28 +61,30 @@ function BookingWidget() {
   const [guests, setGuests] = useState("2");
 
   return (
-    <section id="booking" className="bg-brand-cream py-16 lg:py-20">
-      <div className="max-w-5xl mx-auto px-6">
+    <section id="booking" className="bg-white py-20 lg:py-28 -mt-16 relative z-10">
+      <div className="max-w-container-lg mx-auto px-6 lg:px-12">
         {/* Header */}
-        <div className="text-center mb-10">
-          <p className="text-overline uppercase tracking-[0.2em] text-brand-muted mb-2">
+        <div className="text-center mb-14">
+          <p className="text-overline uppercase tracking-[0.25em] text-brand-muted mb-4">
             Plan Your Stay
           </p>
-          <h2 className="font-display text-display-sm">Check Availability</h2>
+          <h2 className="font-display text-display-sm lg:text-display-md font-light">
+            Check Availability
+          </h2>
         </div>
 
-        {/* Booking Form */}
-        <div className="bg-white border border-brand-border p-6 lg:p-10">
-          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-8 items-end">
+        {/* Booking Form - Refined */}
+        <div className="max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 items-end">
             {/* Property */}
-            <div className="lg:col-span-1 space-y-2">
-              <label className="text-caption uppercase tracking-[0.1em] text-brand-muted block">
+            <div className="space-y-3">
+              <label className="text-micro uppercase tracking-[0.15em] text-brand-muted block">
                 Property
               </label>
               <select
                 value={property}
                 onChange={(e) => setProperty(e.target.value)}
-                className="w-full border-b border-brand-border pb-3 bg-transparent focus:border-brand-ink outline-none transition-colors text-body-md cursor-pointer"
+                className="w-full border-b border-brand-border pb-3 bg-transparent focus:border-brand-ink outline-none transition-colors text-body-md cursor-pointer appearance-none"
               >
                 <option value="">Select property</option>
                 {destinations.map((dest) => (
@@ -97,8 +96,8 @@ function BookingWidget() {
             </div>
 
             {/* Check In */}
-            <div className="space-y-2">
-              <label className="text-caption uppercase tracking-[0.1em] text-brand-muted block">
+            <div className="space-y-3">
+              <label className="text-micro uppercase tracking-[0.15em] text-brand-muted block">
                 Check In
               </label>
               <input
@@ -110,8 +109,8 @@ function BookingWidget() {
             </div>
 
             {/* Check Out */}
-            <div className="space-y-2">
-              <label className="text-caption uppercase tracking-[0.1em] text-brand-muted block">
+            <div className="space-y-3">
+              <label className="text-micro uppercase tracking-[0.15em] text-brand-muted block">
                 Check Out
               </label>
               <input
@@ -123,14 +122,14 @@ function BookingWidget() {
             </div>
 
             {/* Guests */}
-            <div className="space-y-2">
-              <label className="text-caption uppercase tracking-[0.1em] text-brand-muted block">
+            <div className="space-y-3">
+              <label className="text-micro uppercase tracking-[0.15em] text-brand-muted block">
                 Guests
               </label>
               <select
                 value={guests}
                 onChange={(e) => setGuests(e.target.value)}
-                className="w-full border-b border-brand-border pb-3 bg-transparent focus:border-brand-ink outline-none transition-colors text-body-md cursor-pointer"
+                className="w-full border-b border-brand-border pb-3 bg-transparent focus:border-brand-ink outline-none transition-colors text-body-md cursor-pointer appearance-none"
               >
                 {[1, 2, 3, 4, 5, 6].map((num) => (
                   <option key={num} value={num}>
@@ -139,9 +138,11 @@ function BookingWidget() {
                 ))}
               </select>
             </div>
+          </div>
 
-            {/* Submit Button */}
-            <button className="bg-brand-primary text-white py-4 px-6 text-sm tracking-[0.1em] uppercase hover:bg-brand-primaryHover transition-colors">
+          {/* Submit Button - Centered below */}
+          <div className="text-center mt-12">
+            <button className="inline-flex items-center justify-center bg-brand-ink text-white py-4 px-12 text-label uppercase tracking-[0.15em] hover:bg-black transition-colors duration-300">
               Check Rates
             </button>
           </div>

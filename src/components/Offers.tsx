@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import { offers, offersBackgroundImage } from "@/data/content";
 
 export default function Offers() {
   return (
-    <section id="offers" className="relative section-padding overflow-hidden">
+    <section id="offers" className="relative py-32 lg:py-44 overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
@@ -15,48 +16,51 @@ export default function Offers() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-brand-ink/85" />
+        <div className="absolute inset-0 bg-brand-ink/80" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container-luxury">
+      <div className="relative z-10 container-wide">
         {/* Header */}
-        <div className="text-center mb-16">
-          <p className="text-overline text-white/60 uppercase tracking-[0.2em] mb-4">
-            Special Offers
+        <div className="text-center mb-20 lg:mb-28">
+          <p className="text-overline text-white/50 uppercase tracking-[0.3em] mb-6">
+            Exclusive Offerings
           </p>
-          <h2 className="font-display text-display-md font-light text-white">
-            Exclusive Benefits
+          <h2 className="font-display text-display-md lg:text-display-lg font-light text-white">
+            Signature <em className="italic">Benefits</em>
           </h2>
+          <div className="w-16 h-px bg-white/30 mx-auto mt-10" />
         </div>
 
         {/* Offer Cards */}
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
           {offers.map((offer) => (
             <div
               key={offer.title}
-              className="glass p-8 text-white group hover:bg-white/20 transition-all duration-300"
+              className="glass-dark p-10 lg:p-12 text-white group hover:bg-white/15 transition-all duration-500"
             >
               {/* Badge */}
-              <span className="text-caption uppercase tracking-[0.15em] text-white/60">
+              <span className="text-overline uppercase tracking-[0.2em] text-brand-accent">
                 {offer.badge}
               </span>
 
               {/* Title */}
-              <h3 className="font-display text-heading-lg font-light mt-4 mb-3">
+              <h3 className="font-display text-heading-xl font-light mt-6 mb-4">
                 {offer.title}
               </h3>
 
               {/* Description */}
-              <p className="text-body-sm text-white/70 mb-6">{offer.copy}</p>
+              <p className="text-body-md text-white/60 mb-8 leading-relaxed">
+                {offer.copy}
+              </p>
 
               {/* CTA */}
               <a
                 href="#contact"
-                className="inline-flex items-center gap-3 text-caption uppercase tracking-[0.1em]"
+                className="inline-flex items-center gap-4 text-label uppercase tracking-[0.15em] text-white/80 hover:text-white transition-colors group/link"
               >
-                <span>Learn More</span>
-                <span className="w-6 h-px bg-white transition-all duration-300 group-hover:w-10" />
+                <span>Inquire</span>
+                <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
               </a>
             </div>
           ))}
