@@ -6,41 +6,49 @@ import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight } from "lucide-react";
-import { offers, offersBackgroundImage } from "@/data/content";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+// Four Seasons style offers with images
+const offers = [
+  {
+    title: "Extended Stay Privilege",
+    badge: "Featured",
+    description: "Stay 4 nights and receive the 5th night complimentary, plus exclusive dining credits and spa treatments.",
+    image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=600&fit=crop",
+    terms: "Valid through March 2026",
+  },
+  {
+    title: "Romantic Retreat",
+    badge: "Couples",
+    description: "Celebrate love with champagne on arrival, couples spa ritual, and private candlelit dinner.",
+    image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&h=600&fit=crop",
+    terms: "Minimum 2 night stay",
+  },
+  {
+    title: "Family Discovery",
+    badge: "Families",
+    description: "Create lasting memories with connecting rooms, kids&apos; amenities, and curated family activities.",
+    image: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=800&h=600&fit=crop",
+    terms: "Children under 12 stay free",
+  },
+];
+
 export default function Offers() {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
-  const bgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!sectionRef.current) return;
 
-    // Background parallax
-    if (bgRef.current) {
-      gsap.to(bgRef.current, {
-        yPercent: 20,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-    }
-
     // Header reveal
     if (headerRef.current) {
-      const elements = headerRef.current.children;
       gsap.fromTo(
-        elements,
-        { y: 50, opacity: 0 },
+        headerRef.current.children,
+        { y: 60, opacity: 0 },
         {
           y: 0,
           opacity: 1,
@@ -58,15 +66,14 @@ export default function Offers() {
 
     // Cards stagger
     if (cardsRef.current) {
-      const cards = cardsRef.current.children;
       gsap.fromTo(
-        cards,
-        { y: 60, opacity: 0 },
+        cardsRef.current.children,
+        { y: 80, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1,
-          stagger: 0.15,
+          duration: 1.2,
+          stagger: 0.2,
           ease: "power3.out",
           scrollTrigger: {
             trigger: cardsRef.current,
@@ -86,70 +93,84 @@ export default function Offers() {
     <section
       ref={sectionRef}
       id="offers"
-      className="relative py-36 lg:py-48 overflow-hidden"
+      className="py-32 lg:py-44 bg-[#f8f7f5]"
     >
-      {/* Background Image with parallax */}
-      <div ref={bgRef} className="absolute inset-0 -top-20 -bottom-20">
-        <Image
-          src={offersBackgroundImage}
-          alt="Luxury ambiance"
-          fill
-          className="object-cover"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-brand-ink/85" />
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 container-wide">
-        {/* Header */}
-        <div ref={headerRef} className="text-center mb-24 lg:mb-32">
-          <p className="text-[11px] text-white/40 uppercase tracking-[0.4em] mb-8 font-light">
-            Exclusive Offerings
-          </p>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light text-white leading-[1.15]">
-            Signature <em className="italic font-normal">Benefits</em>
-          </h2>
-          <div className="w-16 h-[1px] bg-white/30 mx-auto mt-12" />
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        {/* Header - Four Seasons style */}
+        <div ref={headerRef} className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16 lg:mb-24">
+          <div>
+            <p className="text-[11px] uppercase tracking-[0.35em] text-brand-accent mb-6">
+              Exclusive Offers
+            </p>
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light leading-[1.1]">
+              Signature <em className="italic font-normal">Benefits</em>
+            </h2>
+          </div>
+          <Link
+            href="/contact"
+            className="hidden lg:inline-flex items-center gap-4 text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:text-brand-accent transition-colors duration-500 group mt-8 lg:mt-0"
+          >
+            <span>View All Offers</span>
+            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
         </div>
 
-        {/* Offer Cards */}
-        <div ref={cardsRef} className="grid md:grid-cols-3 gap-10 lg:gap-12">
-          {offers.map((offer, i) => (
+        {/* Offer Cards - Four Seasons horizontal layout */}
+        <div ref={cardsRef} className="grid lg:grid-cols-3 gap-8 lg:gap-10">
+          {offers.map((offer) => (
             <div
               key={offer.title}
-              className="relative bg-white/5 backdrop-blur-sm border border-white/10 p-10 lg:p-14 text-white group hover:bg-white/10 hover:border-white/20 transition-all duration-700"
+              className="group bg-white"
             >
-              {/* Number */}
-              <span className="absolute top-8 right-8 text-5xl font-display text-white/5 font-light">
-                {String(i + 1).padStart(2, "0")}
-              </span>
+              {/* Image */}
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <Image
+                  src={offer.image}
+                  alt={offer.title}
+                  fill
+                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                />
+                {/* Badge */}
+                <div className="absolute top-6 left-6">
+                  <span className="bg-white px-4 py-2 text-[10px] uppercase tracking-[0.2em] text-brand-ink">
+                    {offer.badge}
+                  </span>
+                </div>
+              </div>
 
-              {/* Badge */}
-              <span className="text-[10px] uppercase tracking-[0.3em] text-brand-accent font-light">
-                {offer.badge}
-              </span>
-
-              {/* Title */}
-              <h3 className="font-display text-2xl lg:text-3xl font-light mt-8 mb-5">
-                {offer.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-sm lg:text-base text-white/50 mb-10 leading-relaxed font-light">
-                {offer.copy}
-              </p>
-
-              {/* CTA */}
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-4 text-[10px] uppercase tracking-[0.2em] text-white/60 hover:text-white transition-colors duration-500 group/link"
-              >
-                <span>Inquire</span>
-                <ArrowRight className="w-4 h-4 transition-transform duration-500 group-hover/link:translate-x-2" />
-              </Link>
+              {/* Content */}
+              <div className="p-8 lg:p-10">
+                <h3 className="font-display text-2xl font-light mb-4 group-hover:text-brand-accent transition-colors duration-500">
+                  {offer.title}
+                </h3>
+                <p className="text-sm text-brand-body leading-relaxed font-light mb-6">
+                  {offer.description}
+                </p>
+                <p className="text-[10px] uppercase tracking-[0.15em] text-brand-muted mb-8">
+                  {offer.terms}
+                </p>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:text-brand-accent transition-colors duration-500 group/link"
+                >
+                  <span>Book This Offer</span>
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/link:translate-x-1" />
+                </Link>
+              </div>
             </div>
           ))}
+        </div>
+
+        {/* Mobile View All */}
+        <div className="lg:hidden text-center mt-12">
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-4 border border-brand-ink px-10 py-4 text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:bg-brand-ink hover:text-white transition-all duration-500 group"
+          >
+            <span>View All Offers</span>
+            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
         </div>
       </div>
     </section>

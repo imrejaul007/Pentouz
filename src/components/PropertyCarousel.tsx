@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { destinations } from "@/data/content";
 
@@ -18,22 +18,19 @@ export default function PropertyCarousel() {
   const sectionRef = useRef<HTMLElement>(null);
   const backgroundRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
-  // Background transition animation
+  // Background crossfade animation
   useEffect(() => {
     if (backgroundRef.current) {
-      // Smooth crossfade
       gsap.to(backgroundRef.current, {
         opacity: 0,
-        scale: 1.05,
-        duration: 0.6,
+        duration: 0.4,
         ease: "power2.inOut",
         onComplete: () => {
           gsap.to(backgroundRef.current, {
             opacity: 1,
-            scale: 1,
-            duration: 1,
+            duration: 0.6,
             ease: "power2.out",
           });
         },
@@ -41,43 +38,22 @@ export default function PropertyCarousel() {
     }
   }, [activeIndex]);
 
-  // Scroll-triggered reveal animations
+  // Scroll reveal
   useEffect(() => {
-    if (!sectionRef.current || !headerRef.current || !cardsRef.current) return;
+    if (!sectionRef.current || !headerRef.current) return;
 
-    // Header animation
-    const headerElements = headerRef.current.children;
     gsap.fromTo(
-      headerElements,
-      { y: 60, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1.2,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: headerRef.current,
-          start: "top 80%",
-          toggleActions: "play none none none",
-        },
-      }
-    );
-
-    // Cards stagger animation
-    const cards = cardsRef.current.children;
-    gsap.fromTo(
-      cards,
-      { y: 80, opacity: 0 },
+      headerRef.current.children,
+      { y: 50, opacity: 0 },
       {
         y: 0,
         opacity: 1,
         duration: 1,
-        stagger: 0.2,
+        stagger: 0.1,
         ease: "power3.out",
         scrollTrigger: {
-          trigger: cardsRef.current,
-          start: "top 75%",
+          trigger: headerRef.current,
+          start: "top 80%",
           toggleActions: "play none none none",
         },
       }
@@ -88,13 +64,21 @@ export default function PropertyCarousel() {
     };
   }, []);
 
+  const nextSlide = () => {
+    setActiveIndex((prev) => (prev + 1) % destinations.length);
+  };
+
+  const prevSlide = () => {
+    setActiveIndex((prev) => (prev - 1 + destinations.length) % destinations.length);
+  };
+
   return (
     <section
       ref={sectionRef}
       id="properties"
-      className="relative min-h-screen bg-brand-ink overflow-hidden"
+      className="relative bg-[#1a1a1a] overflow-hidden"
     >
-      {/* Animated Background with smooth transition */}
+      {/* Background Image - Four Seasons style with full coverage */}
       <div ref={backgroundRef} className="absolute inset-0">
         <Image
           src={destinations[activeIndex].image}
@@ -103,63 +87,94 @@ export default function PropertyCarousel() {
           className="object-cover"
           sizes="100vw"
           priority
-          quality={85}
         />
-        {/* Refined gradient - Four Seasons style */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
+        <div className="absolute inset-0 bg-black/60" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 h-full flex flex-col justify-center py-36 lg:py-48">
-        {/* Section Header */}
-        <div ref={headerRef} className="container-wide mb-20 lg:mb-28">
-          <p className="text-[11px] text-white/40 uppercase tracking-[0.4em] mb-8 font-light">
-            Our Destinations
+      <div className="relative z-10 py-24 lg:py-32">
+        {/* Header - Four Seasons style */}
+        <div ref={headerRef} className="max-w-7xl mx-auto px-6 lg:px-12 mb-16 lg:mb-20">
+          <p className="text-[11px] uppercase tracking-[0.35em] text-white/50 mb-4">
+            Our Properties
           </p>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white font-light max-w-3xl leading-[1.1]">
-            Exceptional{" "}
-            <em className="italic font-normal">Residences</em>
-          </h2>
-          <div className="w-24 h-[1px] bg-gradient-to-r from-white/40 to-transparent mt-10" />
+          <div className="flex items-end justify-between">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light text-white leading-tight">
+              The Definition of{" "}
+              <em className="italic font-normal">Luxury Modern</em>
+              <br />
+              Living
+            </h2>
+
+            {/* Navigation Arrows - Four Seasons style */}
+            <div className="hidden lg:flex items-center gap-3">
+              <button
+                onClick={prevSlide}
+                className="w-12 h-12 border border-white/30 flex items-center justify-center hover:bg-white hover:border-white group transition-all duration-300"
+                aria-label="Previous"
+              >
+                <ChevronLeft className="w-5 h-5 text-white group-hover:text-brand-ink transition-colors" />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="w-12 h-12 border border-white/30 flex items-center justify-center hover:bg-white hover:border-white group transition-all duration-300"
+                aria-label="Next"
+              >
+                <ChevronRight className="w-5 h-5 text-white group-hover:text-brand-ink transition-colors" />
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* Property Cards */}
-        <div className="container-wide">
-          <div ref={cardsRef} className="grid lg:grid-cols-3 gap-10 lg:gap-14">
+        {/* Carousel Cards - Four Seasons animated card style */}
+        <div ref={carouselRef} className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
             {destinations.map((dest, i) => (
               <PropertyCard
                 key={dest.slug}
                 property={dest}
                 index={i}
                 isActive={i === activeIndex}
-                onHover={() => setActiveIndex(i)}
+                onClick={() => setActiveIndex(i)}
               />
             ))}
           </div>
         </div>
 
-        {/* Navigation Dots - refined */}
-        <div className="flex justify-center gap-8 mt-20 lg:mt-28">
-          {destinations.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setActiveIndex(i)}
-              className={cn(
-                "relative h-[2px] transition-all duration-700 ease-out",
-                i === activeIndex
-                  ? "w-20 bg-white"
-                  : "w-10 bg-white/20 hover:bg-white/40"
-              )}
-              aria-label={`View property ${i + 1}`}
-            >
-              {i === activeIndex && (
-                <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] text-white/60 tracking-widest">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-              )}
-            </button>
-          ))}
+        {/* Progress Indicator - Four Seasons style */}
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 mt-12 lg:mt-16">
+          <div className="flex items-center gap-4">
+            <span className="text-[11px] text-white/50 tracking-wider">
+              {String(activeIndex + 1).padStart(2, "0")}
+            </span>
+            <div className="flex-1 h-[1px] bg-white/20 relative">
+              <div
+                className="absolute top-0 left-0 h-full bg-white transition-all duration-500"
+                style={{ width: `${((activeIndex + 1) / destinations.length) * 100}%` }}
+              />
+            </div>
+            <span className="text-[11px] text-white/50 tracking-wider">
+              {String(destinations.length).padStart(2, "0")}
+            </span>
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
+        <div className="flex lg:hidden justify-center gap-4 mt-8 px-6">
+          <button
+            onClick={prevSlide}
+            className="w-12 h-12 border border-white/30 flex items-center justify-center"
+            aria-label="Previous"
+          >
+            <ChevronLeft className="w-5 h-5 text-white" />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="w-12 h-12 border border-white/30 flex items-center justify-center"
+            aria-label="Next"
+          >
+            <ChevronRight className="w-5 h-5 text-white" />
+          </button>
         </div>
       </div>
     </section>
@@ -170,68 +185,59 @@ interface PropertyCardProps {
   property: (typeof destinations)[0];
   index: number;
   isActive: boolean;
-  onHover: () => void;
+  onClick: () => void;
 }
 
-function PropertyCard({ property, index, isActive, onHover }: PropertyCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null);
-
+function PropertyCard({ property, index, isActive, onClick }: PropertyCardProps) {
   return (
-    <Link
-      href={`/destinations/${property.slug}`}
+    <div
       className={cn(
-        "group block cursor-pointer transition-all duration-700",
-        isActive ? "opacity-100" : "opacity-40 hover:opacity-100"
+        "group cursor-pointer transition-all duration-500",
+        isActive ? "opacity-100" : "opacity-60 hover:opacity-90"
       )}
-      onMouseEnter={onHover}
+      onClick={onClick}
     >
-      <div ref={cardRef}>
-        {/* Card Image */}
-        <div className="aspect-[3/4] relative overflow-hidden mb-8">
-          <Image
-            src={property.image}
-            alt={property.title}
-            fill
-            className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-110"
-            sizes="(max-width: 768px) 100vw, 33vw"
-          />
-          {/* Gradient overlay - refined */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+      {/* Card - Four Seasons style with 16:9 aspect ratio */}
+      <div className="relative aspect-[16/10] overflow-hidden mb-6">
+        <Image
+          src={property.image}
+          alt={property.title}
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, 33vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-          {/* Number badge - elegant positioning */}
-          <div className="absolute top-8 left-8">
-            <span className="text-5xl lg:text-6xl font-display text-white/20 font-light transition-colors duration-500 group-hover:text-white/40">
-              {String(index + 1).padStart(2, "0")}
-            </span>
-          </div>
-
-          {/* Content overlay - revealed on hover */}
-          <div className="absolute inset-x-0 bottom-0 p-8 lg:p-10 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-            <p className="text-[10px] text-white/50 uppercase tracking-[0.3em] mb-3 font-light">
-              {property.subtitle}
-            </p>
-            <h3 className="font-display text-xl lg:text-2xl text-white font-light leading-snug">
-              {property.title}
-            </h3>
-          </div>
-
-          {/* Arrow button - appears on hover */}
-          <div className="absolute bottom-8 right-8 w-12 h-12 border border-white/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:bg-white group-hover:border-white">
-            <ArrowRight className="w-5 h-5 text-white group-hover:text-brand-ink transition-colors duration-300" />
-          </div>
-        </div>
-
-        {/* Card Content - below image */}
-        <div className="text-white px-1">
-          <p className="text-sm lg:text-base text-white/50 line-clamp-2 leading-relaxed font-light">
-            {property.copy}
-          </p>
-          <div className="inline-flex items-center gap-4 mt-6 text-[10px] uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-colors duration-500">
-            <span>Explore</span>
-            <span className="w-8 h-[1px] bg-white/40 transition-all duration-500 group-hover:w-14 group-hover:bg-white" />
-          </div>
+        {/* Hover overlay with view button */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <Link
+            href={`/destinations/${property.slug}`}
+            className="bg-white text-brand-ink px-6 py-3 text-[11px] uppercase tracking-[0.15em] font-medium hover:bg-white/90 transition-colors"
+          >
+            View Property
+          </Link>
         </div>
       </div>
-    </Link>
+
+      {/* Card Content - Four Seasons style */}
+      <div className="text-white">
+        <p className="text-[10px] uppercase tracking-[0.25em] text-white/50 mb-2">
+          {property.subtitle}
+        </p>
+        <h3 className="font-display text-xl lg:text-2xl font-light mb-3">
+          {property.shortTitle}
+        </h3>
+        <p className="text-sm text-white/60 leading-relaxed line-clamp-2 mb-4">
+          {property.copy}
+        </p>
+        <Link
+          href={`/destinations/${property.slug}`}
+          className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.15em] text-white/70 hover:text-white transition-colors group/link"
+        >
+          <span>Explore</span>
+          <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
+        </Link>
+      </div>
+    </div>
   );
 }

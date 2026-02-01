@@ -34,39 +34,20 @@ export default function Gallery() {
     if (!sectionRef.current) return;
 
     const header = sectionRef.current.querySelector(".gallery-header");
-    const filters = sectionRef.current.querySelector(".gallery-filters");
 
     if (header) {
       gsap.fromTo(
         header.children,
-        { y: 50, opacity: 0 },
+        { y: 60, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1,
+          duration: 1.2,
           ease: "power3.out",
           stagger: 0.15,
           scrollTrigger: {
             trigger: header,
             start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    }
-
-    if (filters) {
-      gsap.fromTo(
-        filters,
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: filters,
-            start: "top 90%",
             toggleActions: "play none none none",
           },
         }
@@ -85,14 +66,13 @@ export default function Gallery() {
     const items = gridRef.current.children;
     gsap.fromTo(
       items,
-      { y: 40, opacity: 0, scale: 0.95 },
+      { y: 60, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        scale: 1,
-        duration: 0.8,
+        duration: 1,
         ease: "power3.out",
-        stagger: 0.08,
+        stagger: 0.1,
         scrollTrigger: {
           trigger: gridRef.current,
           start: "top 80%",
@@ -105,21 +85,18 @@ export default function Gallery() {
   // Lightbox open animation
   useEffect(() => {
     if (lightbox && lightboxRef.current && imageRef.current) {
-      // Animate lightbox background
       gsap.fromTo(
         lightboxRef.current,
         { opacity: 0 },
         { opacity: 1, duration: 0.4, ease: "power2.out" }
       );
 
-      // Animate image
       gsap.fromTo(
         imageRef.current,
-        { scale: 0.9, opacity: 0 },
+        { scale: 0.95, opacity: 0 },
         { scale: 1, opacity: 1, duration: 0.5, ease: "power3.out", delay: 0.1 }
       );
 
-      // Disable scroll
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -133,7 +110,7 @@ export default function Gallery() {
   const closeLightbox = useCallback(() => {
     if (lightboxRef.current && imageRef.current) {
       gsap.to(imageRef.current, {
-        scale: 0.9,
+        scale: 0.95,
         opacity: 0,
         duration: 0.3,
         ease: "power2.in",
@@ -154,8 +131,8 @@ export default function Gallery() {
     (direction: "prev" | "next") => {
       if (currentIndex === -1 || !imageRef.current) return;
 
-      const exitDirection = direction === "next" ? -50 : 50;
-      const enterDirection = direction === "next" ? 50 : -50;
+      const exitDirection = direction === "next" ? -30 : 30;
+      const enterDirection = direction === "next" ? 30 : -30;
 
       gsap.to(imageRef.current, {
         x: exitDirection,
@@ -195,27 +172,26 @@ export default function Gallery() {
   }, [lightbox, closeLightbox, navigateLightbox]);
 
   return (
-    <section ref={sectionRef} id="gallery" className="section-padding bg-brand-linen">
-      <div className="container-wide">
-        {/* Header */}
-        <div className="gallery-header text-center mb-16 lg:mb-20">
-          <p className="text-overline text-brand-accent uppercase tracking-[0.3em] mb-6">
+    <section ref={sectionRef} id="gallery" className="py-32 lg:py-44 bg-white">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        {/* Header - Four Seasons minimal style */}
+        <div className="gallery-header text-center mb-16 lg:mb-24">
+          <p className="text-[11px] uppercase tracking-[0.35em] text-brand-accent mb-6">
             Visual Journey
           </p>
-          <h2 className="font-display text-display-md lg:text-display-lg font-light">
-            A Glimpse <em className="italic">Inside</em>
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light">
+            A Glimpse <em className="italic font-normal">Inside</em>
           </h2>
-          <div className="w-16 h-px bg-brand-accent mx-auto mt-10" />
         </div>
 
-        {/* Filter Tabs */}
-        <div className="gallery-filters flex justify-center gap-10 lg:gap-14 mb-14 lg:mb-18">
+        {/* Filter Tabs - Four Seasons text underline style */}
+        <div className="flex justify-center gap-10 lg:gap-14 mb-16 lg:mb-20">
           {galleryCategories.map((cat) => (
             <button
               key={cat}
               onClick={() => setFilter(cat)}
               className={cn(
-                "relative text-label uppercase tracking-[0.15em] pb-3 transition-colors duration-500",
+                "relative text-[11px] uppercase tracking-[0.15em] pb-3 transition-all duration-500",
                 filter === cat
                   ? "text-brand-ink"
                   : "text-brand-muted hover:text-brand-ink"
@@ -224,18 +200,18 @@ export default function Gallery() {
               {cat}
               <span
                 className={cn(
-                  "absolute bottom-0 left-0 right-0 h-px bg-brand-ink transition-transform duration-500 origin-left",
-                  filter === cat ? "scale-x-100" : "scale-x-0"
+                  "absolute bottom-0 left-0 right-0 h-[2px] bg-brand-ink transition-all duration-500",
+                  filter === cat ? "opacity-100" : "opacity-0"
                 )}
               />
             </button>
           ))}
         </div>
 
-        {/* Gallery Grid - Masonry style */}
+        {/* Gallery Grid - Four Seasons clean grid */}
         <div
           ref={gridRef}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-6"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6"
         >
           {filteredGallery.map((item, i) => (
             <button
@@ -243,8 +219,8 @@ export default function Gallery() {
               onClick={() => setLightbox(item)}
               className={cn(
                 "relative group overflow-hidden",
-                // Vary heights for masonry effect
-                i % 5 === 0 || i % 5 === 3 ? "aspect-[3/4]" : "aspect-square"
+                // Featured items span 2 columns
+                i === 0 || i === 5 ? "lg:col-span-2 lg:row-span-2 aspect-square" : "aspect-[4/3]"
               )}
             >
               <Image
@@ -254,13 +230,13 @@ export default function Gallery() {
                 className="object-cover transition-transform duration-1000 group-hover:scale-110"
                 sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
               />
-              {/* Hover overlay */}
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors duration-700 flex items-end p-6 lg:p-8">
-                <div className="translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                  <p className="text-white text-heading-md font-display font-light mb-1">
+              {/* Hover overlay - Four Seasons style */}
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-500 flex items-end">
+                <div className="p-6 lg:p-8 translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                  <p className="text-white font-display text-lg lg:text-xl font-light mb-1">
                     {item.title}
                   </p>
-                  <p className="text-white/60 text-caption uppercase tracking-[0.15em]">
+                  <p className="text-white/60 text-[10px] uppercase tracking-[0.15em]">
                     {item.category}
                   </p>
                 </div>
@@ -270,20 +246,20 @@ export default function Gallery() {
         </div>
       </div>
 
-      {/* Lightbox - Enhanced with animations */}
+      {/* Lightbox - Four Seasons elegant style */}
       {lightbox && (
         <div
           ref={lightboxRef}
-          className="fixed inset-0 z-[100] bg-brand-ink/98 flex items-center justify-center"
+          className="fixed inset-0 z-[100] bg-[#0a0a0a]/98 flex items-center justify-center"
           onClick={closeLightbox}
         >
           {/* Close button */}
           <button
-            className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors duration-300 z-10 flex items-center gap-3 group"
+            className="absolute top-8 right-8 flex items-center gap-4 text-white/50 hover:text-white transition-colors duration-300 z-10 group"
             onClick={closeLightbox}
             aria-label="Close lightbox"
           >
-            <span className="text-label uppercase tracking-[0.15em] hidden sm:inline opacity-0 group-hover:opacity-100 transition-opacity">
+            <span className="text-[11px] uppercase tracking-[0.15em] hidden sm:inline">
               Close
             </span>
             <div className="w-12 h-12 border border-white/20 flex items-center justify-center hover:border-white/50 transition-colors">
@@ -293,7 +269,7 @@ export default function Gallery() {
 
           {/* Navigation - Previous */}
           <button
-            className="absolute left-6 lg:left-10 top-1/2 -translate-y-1/2 w-14 h-14 border border-white/20 flex items-center justify-center hover:border-white/50 hover:bg-white/5 transition-all duration-300 z-10"
+            className="absolute left-6 lg:left-12 top-1/2 -translate-y-1/2 w-14 h-14 border border-white/20 flex items-center justify-center hover:border-white/50 hover:bg-white/5 transition-all duration-300 z-10"
             onClick={(e) => {
               e.stopPropagation();
               navigateLightbox("prev");
@@ -305,7 +281,7 @@ export default function Gallery() {
 
           {/* Navigation - Next */}
           <button
-            className="absolute right-6 lg:right-10 top-1/2 -translate-y-1/2 w-14 h-14 border border-white/20 flex items-center justify-center hover:border-white/50 hover:bg-white/5 transition-all duration-300 z-10"
+            className="absolute right-6 lg:right-12 top-1/2 -translate-y-1/2 w-14 h-14 border border-white/20 flex items-center justify-center hover:border-white/50 hover:bg-white/5 transition-all duration-300 z-10"
             onClick={(e) => {
               e.stopPropagation();
               navigateLightbox("next");
@@ -318,7 +294,7 @@ export default function Gallery() {
           {/* Image Container */}
           <div
             ref={imageRef}
-            className="max-w-6xl max-h-[80vh] relative px-20"
+            className="max-w-5xl max-h-[85vh] relative px-20"
             onClick={(e) => e.stopPropagation()}
           >
             <Image
@@ -326,36 +302,26 @@ export default function Gallery() {
               alt={lightbox.title}
               width={1400}
               height={900}
-              className="object-contain max-h-[80vh] w-auto"
+              className="object-contain max-h-[85vh] w-auto"
               priority
             />
           </div>
 
           {/* Caption */}
           <div className="absolute bottom-12 left-1/2 -translate-x-1/2 text-center text-white">
-            <p className="text-heading-lg font-display font-light mb-2">
+            <p className="font-display text-xl lg:text-2xl font-light mb-2">
               {lightbox.title}
             </p>
-            <p className="text-caption text-white/40 uppercase tracking-[0.2em]">
+            <p className="text-[10px] text-white/40 uppercase tracking-[0.2em]">
               {lightbox.category}
             </p>
           </div>
 
           {/* Counter */}
-          <div className="absolute bottom-12 right-10 text-white/30 text-label tracking-widest font-light">
+          <div className="absolute bottom-12 right-12 text-white/30 text-[11px] tracking-widest font-light">
             <span className="text-white/60">{String(currentIndex + 1).padStart(2, "0")}</span>
             <span className="mx-2">/</span>
             <span>{String(filteredGallery.length).padStart(2, "0")}</span>
-          </div>
-
-          {/* Progress bar */}
-          <div className="absolute bottom-0 left-0 right-0 h-px bg-white/10">
-            <div
-              className="h-full bg-white/40 transition-all duration-500"
-              style={{
-                width: `${((currentIndex + 1) / filteredGallery.length) * 100}%`,
-              }}
-            />
           </div>
         </div>
       )}
