@@ -28,7 +28,7 @@ export const destinations = [
       "https://pentouz.com/wp-content/uploads/elementor/thumbs/04.-The-Skyline-Suite_Bedroom-r0jo1p5gz5rec45jsthw691ismb6d8dnu3xnv1n39c.jpg",
       "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-5-1.jpg"
     ],
-    bookingUrl: "https://hotels.eglobe-solutions.com",
+    bookingUrl: "https://hotels.eglobe-solutions.com/pentouz/booking/hotels/the-pentouz-bangalore",
     location: {
       airport: { name: "Kempegowda International Airport", distance: "37 km", time: "60 minutes" },
       railway: { name: "KSR Bengaluru City Junction", distance: "10 km", time: "35 minutes" },
@@ -94,7 +94,7 @@ export const destinations = [
       "https://pentouz.com/wp-content/uploads/2025/01/TPH-MB-Bath-2-1.jpg",
       "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-10-2.jpg"
     ],
-    bookingUrl: "https://bookmystay.io",
+    bookingUrl: "https://bookmystay.io/rooms/37853/2026-02-01/2026-02-02/2/0?utm_source=brandWebsite",
     location: {
       airport: { name: "Kempegowda International Airport", distance: "35 km", time: "55 minutes" },
       railway: { name: "KSR Bengaluru City Junction", distance: "3 km", time: "15 minutes" },
