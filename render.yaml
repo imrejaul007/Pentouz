@@ -3,7 +3,7 @@ services:
     name: pentouz
     runtime: node
     buildCommand: npm install && npm run build
-    startCommand: npm run start:standalone
+    startCommand: npm start
     envVars:
       - key: NODE_VERSION
         value: "20.11.0"
