@@ -5,14 +5,14 @@ import "./globals.css";
 const bodyFont = Montserrat({
   variable: "--font-body-family",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["200", "300", "400", "500", "600"],
   display: "swap",
 });
 
 const displayFont = Playfair_Display({
   variable: "--font-display-family",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
   style: ["normal", "italic"],
   display: "swap",
 });
