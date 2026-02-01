@@ -10,6 +10,8 @@ module.exports = {
           primaryHover: "#000000",
           accent: "#8a7968",
           accentLight: "#a69484",
+          gold: "#c9a962",
+          goldLight: "#d4b978",
 
           // Text hierarchy
           ink: "#0a0a0a",

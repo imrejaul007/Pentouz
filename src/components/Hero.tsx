@@ -115,10 +115,10 @@ export default function Hero() {
             Living
           </h1>
 
-          {/* CTA Button - Four Seasons style */}
+          {/* CTA Button - Four Seasons style with shimmer */}
           <Link
             href="#properties"
-            className="mt-8 sm:mt-12 inline-flex items-center gap-3 bg-white text-brand-ink px-6 sm:px-10 py-3 sm:py-4 text-[11px] sm:text-[12px] uppercase tracking-[0.15em] sm:tracking-[0.2em] font-medium hover:bg-white/90 transition-colors duration-300 active:scale-95"
+            className="mt-8 sm:mt-12 inline-flex items-center gap-3 bg-white text-brand-ink px-6 sm:px-10 py-3 sm:py-4 text-[11px] sm:text-[12px] uppercase tracking-[0.15em] sm:tracking-[0.2em] font-medium hover:bg-white/95 transition-all duration-500 active:scale-95 btn-shimmer hover:shadow-lg hover:shadow-white/20"
           >
             Explore Properties
           </Link>

@@ -10,6 +10,7 @@
   /* Brand Colors - Ultra Luxury */
   --brand-primary: #0a0a0a;
   --brand-accent: #8a7968;
+  --brand-gold: #c9a962;
   --brand-cream: #faf9f7;
   --brand-linen: #f5f4f2;
   --brand-border: #e5e4e2;
@@ -26,7 +27,7 @@
 
   /* Fonts */
   --font-body: var(--font-body-family, "Montserrat");
-  --font-display: var(--font-display-family, "Playfair Display");
+  --font-display: var(--font-display-family, "Cormorant Garamond");
 }
 
 /* Base Styles */
@@ -47,24 +48,33 @@ a {
   text-decoration: none;
 }
 
-/* Typography */
+/* Premium Typography */
 h1,
 h2,
 h3,
 h4 {
   font-family: var(--font-display), Georgia, serif;
-  font-weight: 300;
-  letter-spacing: -0.02em;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
-/* Smooth scrolling */
+h1 {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+}
+
+/* Smooth scrolling disabled - using Lenis instead */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 /* Selection */
 ::selection {
-  background: var(--brand-primary);
+  background: var(--brand-gold);
   color: white;
 }
 
@@ -74,29 +84,49 @@ html {
   outline-offset: 3px;
 }
 
-/* Custom scrollbar - minimal */
+/* Premium Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--brand-cream);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--brand-border);
-  border-radius: 3px;
+  background: linear-gradient(180deg, var(--brand-accent), #6b5a4a);
+  border-radius: 4px;
+  border: 2px solid var(--brand-cream);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--text-muted);
+  background: linear-gradient(180deg, var(--brand-gold), var(--brand-accent));
+}
+
+/* Film Grain Overlay - Premium texture */
+.grain-overlay::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
 /* Utility Classes */
 @layer utilities {
   /* Hover animations - slower for luxury */
   .hover-lift {
-    @apply transition-transform duration-700 ease-out hover:-translate-y-2;
+    @apply transition-all duration-700 ease-out;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   }
 
   .hover-scale {
@@ -179,6 +209,94 @@ html {
   .font-extralight {
     font-weight: 200;
   }
+
+  /* Gold shimmer button */
+  .btn-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-shimmer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(201, 169, 98, 0.2),
+      transparent
+    );
+    transition: left 0.7s ease;
+  }
+
+  .btn-shimmer:hover::before {
+    left: 100%;
+  }
+
+  /* Magnetic button effect - applied via JS */
+  .magnetic-btn {
+    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  /* Text reveal animation helper */
+  .text-reveal {
+    overflow: hidden;
+  }
+
+  .text-reveal > * {
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .text-reveal.revealed > * {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* Stagger delays for text reveal */
+  .text-reveal > *:nth-child(1) { transition-delay: 0ms; }
+  .text-reveal > *:nth-child(2) { transition-delay: 50ms; }
+  .text-reveal > *:nth-child(3) { transition-delay: 100ms; }
+  .text-reveal > *:nth-child(4) { transition-delay: 150ms; }
+  .text-reveal > *:nth-child(5) { transition-delay: 200ms; }
+
+  /* Premium border animation */
+  .border-animate {
+    position: relative;
+  }
+
+  .border-animate::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--brand-gold);
+    transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .border-animate:hover::after {
+    width: 100%;
+  }
+
+  /* Image vignette for premium look */
+  .img-vignette {
+    position: relative;
+  }
+
+  .img-vignette::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+  }
 }
 
 /* Animation utilities */
@@ -202,4 +320,48 @@ html {
   .animate-delay-500 {
     animation-delay: 500ms;
   }
+}
+
+/* Scroll indicator animation */
+@keyframes scroll-down {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.animate-scroll-down {
+  animation: scroll-down 1.5s ease-in-out infinite;
+}
+
+/* Premium fade in animation */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Elegant pulse for accents */
+@keyframes elegant-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-elegant-pulse {
+  animation: elegant-pulse 3s ease-in-out infinite;
 }

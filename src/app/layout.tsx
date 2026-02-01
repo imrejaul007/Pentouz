@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import { Montserrat, Playfair_Display } from "next/font/google";
+import { Montserrat, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
+import SmoothScroll from "@/components/SmoothScroll";
+import CustomCursor from "@/components/CustomCursor";
 
 const bodyFont = Montserrat({
   variable: "--font-body-family",
@@ -9,10 +11,11 @@ const bodyFont = Montserrat({
   display: "swap",
 });
 
-const displayFont = Playfair_Display({
+// Premium elegant serif font
+const displayFont = Cormorant_Garamond({
   variable: "--font-display-family",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["300", "400", "500", "600"],
   style: ["normal", "italic"],
   display: "swap",
 });
@@ -31,9 +34,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${bodyFont.variable} ${displayFont.variable} antialiased bg-white text-brand-ink`}
+        className={`${bodyFont.variable} ${displayFont.variable} antialiased bg-white text-brand-ink grain-overlay`}
       >
-        {children}
+        <SmoothScroll>
+          <CustomCursor />
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );
