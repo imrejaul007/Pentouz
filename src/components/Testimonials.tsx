@@ -1,75 +1,116 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
 import { testimonials } from "@/data/content";
 
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
 export default function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const quoteRef = useRef<HTMLDivElement>(null);
 
   // Auto-rotate testimonials
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % testimonials.length);
-    }, 7000);
+    }, 8000);
     return () => clearInterval(interval);
   }, []);
 
+  // Animate quote change
+  useEffect(() => {
+    if (quoteRef.current) {
+      gsap.fromTo(
+        quoteRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
+      );
+    }
+  }, [activeIndex]);
+
+  // Scroll reveal
+  useEffect(() => {
+    if (!sectionRef.current || !contentRef.current) return;
+
+    gsap.fromTo(
+      contentRef.current.children,
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1.2,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: contentRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
+
+  const currentTestimonial = testimonials[activeIndex];
+
   return (
-    <section className="section-padding bg-white">
-      <div className="max-w-5xl mx-auto px-6 lg:px-12 text-center">
+    <section ref={sectionRef} className="py-36 lg:py-48 bg-white">
+      <div
+        ref={contentRef}
+        className="max-w-5xl mx-auto px-8 lg:px-12 text-center"
+      >
         {/* Header */}
-        <p className="text-overline text-brand-accent uppercase tracking-[0.3em] mb-10">
+        <p className="text-[11px] text-brand-accent uppercase tracking-[0.4em] mb-12 font-light">
           Guest Voices
         </p>
 
-        {/* Quote Carousel */}
-        <div className="relative min-h-[320px] flex items-center justify-center">
-          {testimonials.map((testimonial, i) => (
-            <div
-              key={testimonial.name}
-              className={cn(
-                "absolute inset-0 flex flex-col items-center justify-center transition-all duration-1000",
-                i === activeIndex
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-6 pointer-events-none"
-              )}
-            >
-              {/* Quote mark */}
-              <div className="text-brand-border text-8xl font-display leading-none mb-6">&ldquo;</div>
+        {/* Quote */}
+        <div ref={quoteRef} className="min-h-[280px] flex flex-col items-center justify-center">
+          {/* Quote mark */}
+          <div className="text-brand-border/30 text-[120px] lg:text-[150px] font-display leading-none mb-4 select-none">
+            &ldquo;
+          </div>
 
-              {/* Quote */}
-              <blockquote className="font-display text-display-sm lg:text-display-md font-light italic text-brand-ink mb-10 text-balance leading-snug">
-                {testimonial.quote}
-              </blockquote>
+          {/* Quote text */}
+          <blockquote className="font-display text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light italic text-brand-ink mb-12 text-balance leading-[1.3] max-w-4xl">
+            {currentTestimonial.quote}
+          </blockquote>
 
-              {/* Divider */}
-              <div className="w-12 h-px bg-brand-accent mb-8" />
+          {/* Divider */}
+          <div className="w-12 h-[1px] bg-brand-accent mb-10" />
 
-              {/* Attribution */}
-              <div>
-                <p className="text-body-lg font-display text-brand-ink mb-2">
-                  {testimonial.name}
-                </p>
-                <p className="text-caption text-brand-muted uppercase tracking-[0.2em]">
-                  {testimonial.source}
-                </p>
-              </div>
-            </div>
-          ))}
+          {/* Attribution */}
+          <div>
+            <p className="text-lg font-display text-brand-ink mb-2 font-light">
+              {currentTestimonial.name}
+            </p>
+            <p className="text-[10px] text-brand-muted uppercase tracking-[0.3em]">
+              {currentTestimonial.source}
+            </p>
+          </div>
         </div>
 
         {/* Navigation Dots - refined */}
-        <div className="flex justify-center gap-4 mt-14">
+        <div className="flex justify-center gap-5 mt-16">
           {testimonials.map((_, i) => (
             <button
               key={i}
               onClick={() => setActiveIndex(i)}
               className={cn(
-                "transition-all duration-500",
+                "relative h-[2px] transition-all duration-700 ease-out",
                 i === activeIndex
-                  ? "w-12 h-px bg-brand-ink"
-                  : "w-6 h-px bg-brand-border hover:bg-brand-muted"
+                  ? "w-16 bg-brand-ink"
+                  : "w-8 bg-brand-border hover:bg-brand-muted"
               )}
               aria-label={`View testimonial ${i + 1}`}
             />
