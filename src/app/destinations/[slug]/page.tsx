@@ -190,6 +190,17 @@ export default function DestinationPage({ params }: { params: { slug: string } }
                 </div>
               ))}
             </div>
+
+            {/* View All Rooms Link */}
+            <div className="text-center mt-16">
+              <Link
+                href={`/destinations/${destination.slug}/living`}
+                className="inline-flex items-center gap-3 border border-brand-ink px-10 py-4 text-label uppercase tracking-[0.15em] text-brand-ink hover:bg-brand-ink hover:text-white transition-all duration-500"
+              >
+                <span>View All Living Options</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
         </section>
 

@@ -129,16 +129,16 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-6 sm:py-8">
           <div className="flex flex-col sm:flex-row justify-between items-center text-[10px] sm:text-xs text-white/40 gap-4 sm:gap-0">
             <p className="text-center sm:text-left">&copy; {new Date().getFullYear()} The Pentouz Hotels & Residences. All rights reserved.</p>
-            <div className="flex gap-6 sm:gap-8">
-              <Link href="/about" className="hover:text-white/70 transition-colors duration-300 uppercase tracking-[0.1em]">
-                About
+            <div className="flex flex-wrap justify-center sm:justify-end gap-4 sm:gap-8">
+              <Link href="/privacy-policy" className="hover:text-white/70 transition-colors duration-300 uppercase tracking-[0.1em]">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="hover:text-white/70 transition-colors duration-300 uppercase tracking-[0.1em]">
+                Terms of Use
               </Link>
               <Link href="/contact" className="hover:text-white/70 transition-colors duration-300 uppercase tracking-[0.1em]">
                 Contact
               </Link>
-              <a href="#" className="hover:text-white/70 transition-colors duration-300 uppercase tracking-[0.1em]">
-                Privacy
-              </a>
             </div>
           </div>
         </div>
