@@ -32,6 +32,10 @@ const Newsletter = dynamic(() => import("@/components/Newsletter"), {
   loading: () => <SectionSkeleton dark />,
 });
 
+const Booking = dynamic(() => import("@/components/Booking"), {
+  loading: () => <SectionSkeleton dark />,
+});
+
 const WhatsAppWidget = dynamic(() => import("@/components/WhatsAppWidget"), {
   ssr: false,
 });
@@ -81,7 +85,10 @@ export default function Home() {
         {/* 7. Guest Stories - Voices */}
         <GuestStories />
 
-        {/* 8. Newsletter - Stay Inspired */}
+        {/* 8. Booking - Reserve Your Stay */}
+        <Booking />
+
+        {/* 9. Newsletter - Stay Inspired */}
         <Newsletter />
       </main>
       <Footer />
