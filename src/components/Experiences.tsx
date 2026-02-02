@@ -1,166 +1,202 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
-// Four Seasons style experience cards with images
 const experienceCards = [
   {
     title: "Culinary Excellence",
     subtitle: "Dining",
-    description: "From intimate in-residence dining to curated culinary journeys, savor exceptional flavors crafted by our chefs.",
-    image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=1000&fit=crop",
+    description: "Savor exceptional flavors crafted by our chefs, from intimate in-residence dining to curated culinary journeys.",
+    image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=900&fit=crop",
     link: "/experiences#dining",
   },
   {
     title: "Wellness & Spa",
     subtitle: "Rejuvenation",
     description: "Restore balance with personalized spa treatments and wellness programs designed for complete renewal.",
-    image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&h=1000&fit=crop",
+    image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=900&fit=crop",
     link: "/experiences#wellness",
   },
   {
     title: "Curated Journeys",
     subtitle: "Exploration",
     description: "Discover the essence of each destination through bespoke experiences tailored to your interests.",
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=1000&fit=crop",
+    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=900&fit=crop",
     link: "/experiences#journeys",
+  },
+  {
+    title: "Private Events",
+    subtitle: "Celebrations",
+    description: "Create unforgettable moments in extraordinary settings, from intimate gatherings to grand celebrations.",
+    image: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=600&h=900&fit=crop",
+    link: "/experiences#events",
+  },
+  {
+    title: "Local Artisans",
+    subtitle: "Discovery",
+    description: "Meet the makers and craftspeople who bring local culture to life through their extraordinary work.",
+    image: "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=600&h=900&fit=crop",
+    link: "/experiences#artisans",
   },
 ];
 
 export default function Experiences() {
+  const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!sectionRef.current) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
-    // Header reveal
-    if (headerRef.current) {
-      gsap.fromTo(
-        headerRef.current.children,
-        { y: 60, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.2,
-          stagger: 0.15,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: headerRef.current,
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
     }
 
-    // Cards stagger
-    if (cardsRef.current) {
-      gsap.fromTo(
-        cardsRef.current.children,
-        { y: 80, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.2,
-          stagger: 0.2,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: cardsRef.current,
-            start: "top 75%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    }
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
+    return () => observer.disconnect();
   }, []);
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      const scrollAmount = 320;
+      scrollRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
 
   return (
     <section
       ref={sectionRef}
       id="experiences"
-      className="py-16 sm:py-24 lg:py-44 bg-white"
+      className="py-20 sm:py-28 lg:py-40 bg-white overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-        {/* Header - Four Seasons centered style */}
-        <div ref={headerRef} className="text-center mb-12 sm:mb-16 lg:mb-28">
-          <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] sm:tracking-[0.35em] text-brand-accent mb-4 sm:mb-6">
-            Signature Experiences
-          </p>
-          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light max-w-3xl mx-auto leading-[1.15]">
-            Curated <em className="italic font-normal">Moments</em>,
-            <br className="hidden sm:block" />
-            <span className="sm:hidden"> </span>
-            Lasting Memories
-          </h2>
-        </div>
-
-        {/* Experience Cards - Four Seasons style with portrait images */}
-        <div ref={cardsRef} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
-          {experienceCards.map((exp) => (
-            <Link
-              key={exp.title}
-              href={exp.link}
-              className="group block"
+      {/* Header */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-12 sm:mb-16">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+          <div>
+            <p
+              className={`section-overline mb-4 sm:mb-6 transition-all duration-1000 ease-out ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+              }`}
             >
-              {/* Image Container */}
-              <div className="relative aspect-[4/5] sm:aspect-[4/5] overflow-hidden mb-5 sm:mb-8">
-                <Image
-                  src={exp.image}
-                  alt={exp.title}
-                  fill
-                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              Curated Moments
+            </p>
+            <h2
+              className={`section-title transition-all duration-1000 ease-out ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
+              style={{ transitionDelay: "100ms" }}
+            >
+              Experiences That
+              <br />
+              <em className="italic text-brand-gold">Transform</em>
+            </h2>
+          </div>
 
-                {/* Hover Arrow - hidden on mobile */}
-                <div className="absolute bottom-4 sm:bottom-6 right-4 sm:right-6 w-10 sm:w-12 h-10 sm:h-12 bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0 hidden sm:flex">
-                  <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 text-brand-ink" />
-                </div>
-              </div>
+          {/* Desktop Navigation */}
+          <div
+            className={`hidden lg:flex items-center gap-3 transition-all duration-1000 ease-out ${
+              isVisible ? "opacity-100" : "opacity-0"
+            }`}
+            style={{ transitionDelay: "200ms" }}
+          >
+            <button
+              onClick={() => scroll("left")}
+              className="w-12 h-12 border border-brand-border flex items-center justify-center hover:border-brand-gold hover:text-brand-gold transition-all duration-300"
+              aria-label="Previous"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => scroll("right")}
+              className="w-12 h-12 border border-brand-border flex items-center justify-center hover:border-brand-gold hover:text-brand-gold transition-all duration-300"
+              aria-label="Next"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      </div>
 
-              {/* Content */}
-              <div>
-                <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-brand-muted mb-2 sm:mb-3">
-                  {exp.subtitle}
-                </p>
-                <h3 className="font-display text-xl sm:text-2xl lg:text-3xl font-light mb-3 sm:mb-4 group-hover:text-brand-accent transition-colors duration-500">
-                  {exp.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-brand-body leading-relaxed font-light">
+      {/* Horizontal Scroll Cards */}
+      <div
+        ref={scrollRef}
+        className="horizontal-scroll pl-4 sm:pl-6 lg:pl-12"
+        style={{ paddingRight: "calc(100vw - 100%)" }}
+      >
+        {experienceCards.map((exp, index) => (
+          <Link
+            key={exp.title}
+            href={exp.link}
+            className={`group block w-[280px] sm:w-[300px] lg:w-[320px] transition-all duration-1000 ease-out ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+            }`}
+            style={{ transitionDelay: `${300 + index * 100}ms` }}
+          >
+            {/* Image */}
+            <div className="relative aspect-[2/3] overflow-hidden mb-5">
+              <Image
+                src={exp.image}
+                alt={exp.title}
+                fill
+                className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                sizes="320px"
+              />
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+              {/* Hover Content */}
+              <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                <p className="text-white/90 text-sm leading-relaxed">
                   {exp.description}
                 </p>
               </div>
-            </Link>
-          ))}
-        </div>
+            </div>
 
-        {/* View All Experiences CTA */}
-        <div className="text-center mt-12 sm:mt-16 lg:mt-28">
-          <Link
-            href="/experiences"
-            className="inline-flex items-center gap-3 sm:gap-4 border border-brand-ink px-6 sm:px-10 py-3 sm:py-4 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:bg-brand-ink hover:text-white transition-all duration-500 group active:scale-95"
-          >
-            <span>View All Experiences</span>
-            <ArrowRight className="w-3.5 sm:w-4 h-3.5 sm:h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            {/* Content */}
+            <p className="card-subtitle mb-2">{exp.subtitle}</p>
+            <h3 className="card-title text-brand-ink group-hover:text-brand-gold transition-colors duration-500">
+              {exp.title}
+            </h3>
+
+            {/* Arrow */}
+            <div className="mt-3 flex items-center gap-2 text-[10px] uppercase tracking-[0.15em] text-brand-muted group-hover:text-brand-gold transition-colors duration-500">
+              <span>Discover</span>
+              <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+            </div>
           </Link>
-        </div>
+        ))}
+
+        {/* Spacer for last item */}
+        <div className="w-4 sm:w-6 lg:w-12 flex-shrink-0" />
+      </div>
+
+      {/* View All Link */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mt-12 sm:mt-16">
+        <Link
+          href="/experiences"
+          className={`inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.2em] text-brand-ink hover:text-brand-gold transition-all duration-500 group ${
+            isVisible ? "opacity-100" : "opacity-0"
+          }`}
+          style={{ transitionDelay: "800ms" }}
+        >
+          <span>View All Experiences</span>
+          <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-2" />
+        </Link>
       </div>
     </section>
   );

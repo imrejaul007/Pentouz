@@ -1,415 +1,173 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ChevronRight, Volume2, VolumeX } from "lucide-react";
-import { destinations, heroImage } from "@/data/content";
+import { Volume2, VolumeX } from "lucide-react";
+import { heroImage } from "@/data/content";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
-// Destination categories like Four Seasons
-const categories = [
-  { name: "Urban", icon: "🏙️" },
-  { name: "Beach", icon: "🏖️" },
-  { name: "Mountain", icon: "⛰️" },
-  { name: "Heritage", icon: "🏛️" },
-];
-
-// Local hero video
 const heroVideo = "/hero-video.mp4";
 
 export default function Hero() {
-  const heroRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const videoContainerRef = useRef<HTMLDivElement>(null);
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoStarted, setVideoStarted] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    if (!contentRef.current || !videoContainerRef.current) return;
-
-    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-    // Initial states
-    gsap.set(contentRef.current.children, { y: 60, opacity: 0 });
-    gsap.set(videoContainerRef.current, { scale: 1.05 });
-
-    // Video zoom out
-    tl.to(videoContainerRef.current, {
-      scale: 1,
-      duration: 1.8,
-      ease: "power2.out",
+    requestAnimationFrame(() => {
+      setIsReady(true);
     });
 
-    // Content reveal
-    tl.to(
-      contentRef.current.children,
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1.2,
-        stagger: 0.12,
-        ease: "power3.out",
-      },
-      "-=1.4"
-    );
+    const videoTimer = setTimeout(() => {
+      setVideoStarted(true);
+    }, 1500);
 
-    // Parallax on scroll - disable on mobile for performance
-    const mm = gsap.matchMedia();
-    mm.add("(min-width: 768px)", () => {
-      gsap.to(videoContainerRef.current, {
-        yPercent: 15,
-        ease: "none",
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      mm.revert();
-    };
+    return () => clearTimeout(videoTimer);
   }, []);
 
-  const toggleMute = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = !videoRef.current.muted;
-      setIsMuted(!isMuted);
-    }
-  };
-
   return (
-    <>
-      {/* Hero Section - Four Seasons Style with Video */}
-      <section ref={heroRef} className="relative h-[100svh] min-h-[600px] sm:min-h-[700px] lg:min-h-[800px] overflow-hidden">
-        {/* Background Video */}
-        <div ref={videoContainerRef} className="absolute inset-0">
-          {/* Fallback Image - shows while video loads */}
-          <Image
-            src={heroImage}
-            alt="The Pentouz Luxury Residence"
-            fill
-            priority
-            className={`object-cover transition-opacity duration-1000 ${videoLoaded ? "opacity-0" : "opacity-100"}`}
-            sizes="100vw"
-            quality={85}
-          />
+    <section className="relative h-[100svh] min-h-[600px] sm:min-h-[700px] lg:min-h-[800px] overflow-hidden">
+      {/* Background Video/Image */}
+      <div
+        className={`absolute inset-0 transition-transform duration-[1.8s] ease-out ${
+          isReady ? "scale-100" : "scale-105"
+        }`}
+      >
+        {/* Animated placeholder */}
+        <div
+          className={`absolute inset-0 video-placeholder transition-opacity duration-1000 ${
+            videoStarted && videoLoaded ? "opacity-0 pointer-events-none" : "opacity-100"
+          }`}
+        />
 
-          {/* Video Background */}
+        {/* Fallback Image */}
+        <Image
+          src={heroImage}
+          alt="The Pentouz Luxury Residence"
+          fill
+          priority
+          className={`object-cover transition-opacity duration-1000 ${
+            videoStarted ? (videoLoaded ? "opacity-0" : "opacity-100") : "opacity-100"
+          }`}
+          sizes="100vw"
+          quality={90}
+        />
+
+        {/* Video Background */}
+        {videoStarted && (
           <video
-            ref={videoRef}
             autoPlay
             loop
-            muted
+            muted={isMuted}
             playsInline
             onLoadedData={() => setVideoLoaded(true)}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${videoLoaded ? "opacity-100" : "opacity-0"}`}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+              videoLoaded ? "opacity-100" : "opacity-0"
+            }`}
             poster={heroImage}
           >
             <source src={heroVideo} type="video/mp4" />
           </video>
+        )}
 
-          {/* Gradient overlay - subtle like Four Seasons */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/25 to-black/60" />
-        </div>
+        {/* Gradient overlays */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40" />
+      </div>
 
-        {/* Sound Toggle Button */}
-        <button
-          onClick={toggleMute}
-          className="absolute bottom-6 sm:bottom-8 right-4 sm:right-8 z-20 w-10 h-10 sm:w-12 sm:h-12 border border-white/30 flex items-center justify-center text-white/70 hover:text-white hover:border-white/50 transition-all duration-300 backdrop-blur-sm bg-black/10"
-          aria-label={isMuted ? "Unmute video" : "Mute video"}
+      {/* Sound Toggle */}
+      <button
+        onClick={() => setIsMuted(!isMuted)}
+        className="absolute bottom-6 sm:bottom-8 right-4 sm:right-8 z-20 w-10 h-10 sm:w-12 sm:h-12 border border-white/40 flex items-center justify-center text-white hover:text-brand-gold hover:border-brand-gold transition-all duration-300 backdrop-blur-sm bg-black/20"
+        aria-label={isMuted ? "Unmute video" : "Mute video"}
+      >
+        {isMuted ? (
+          <VolumeX className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={1.5} />
+        ) : (
+          <Volume2 className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={1.5} />
+        )}
+      </button>
+
+      {/* Editorial Content - Magazine Cover Style */}
+      <div className="relative h-full flex flex-col justify-center items-center text-center text-white px-4 sm:px-6">
+        {/* Masthead */}
+        <p
+          className={`editorial-masthead mb-6 sm:mb-8 transition-all duration-1000 ease-out ${
+            isReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          }`}
+          style={{ transitionDelay: "100ms" }}
         >
-          {isMuted ? (
-            <VolumeX className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={1.5} />
-          ) : (
-            <Volume2 className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={1.5} />
-          )}
-        </button>
+          The Pentouz Living
+        </p>
 
-        {/* Content - Centered like Four Seasons */}
+        {/* Gold Divider */}
         <div
-          ref={contentRef}
-          className="relative h-full flex flex-col justify-center items-center text-center text-white px-4 sm:px-6 pt-16 sm:pt-20"
+          className={`editorial-divider mb-8 sm:mb-12 transition-all duration-1000 ease-out ${
+            isReady ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
+          }`}
+          style={{ transitionDelay: "200ms" }}
+        />
+
+        {/* Main Headline */}
+        <h1
+          className={`editorial-headline text-white max-w-4xl transition-all duration-1000 ease-out ${
+            isReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+          style={{ transitionDelay: "300ms" }}
         >
-          {/* Overline */}
-          <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] sm:tracking-[0.35em] text-white/70 mb-4 sm:mb-6 font-normal">
-            Luxury Residences & Suites
-          </p>
+          Where Luxury
+          <br />
+          Meets <em className="italic text-brand-gold gold-glow">Soul</em>
+        </h1>
 
-          {/* Main headline - Four Seasons style with italics */}
-          <h1 className="font-display text-[2rem] sm:text-[2.75rem] md:text-[3.5rem] lg:text-[4.5rem] xl:text-[5.5rem] font-light max-w-5xl leading-[1.1] tracking-[-0.02em]">
-            Experience{" "}
-            <em className="italic font-normal">Exceptional</em>
-            <br className="hidden sm:block" />
-            <span className="sm:hidden"> </span>
-            Living
-          </h1>
+        {/* Subtitle */}
+        <p
+          className={`editorial-subtitle mt-6 sm:mt-8 max-w-lg mx-auto transition-all duration-1000 ease-out ${
+            isReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+          style={{ transitionDelay: "450ms" }}
+        >
+          A journey through India&apos;s most extraordinary residences, where
+          every stay becomes a chapter in your story.
+        </p>
 
-          {/* CTA Button - Four Seasons style with shimmer */}
+        {/* CTAs */}
+        <div
+          className={`flex flex-col sm:flex-row gap-4 sm:gap-6 mt-10 sm:mt-14 transition-all duration-1000 ease-out ${
+            isReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+          style={{ transitionDelay: "600ms" }}
+        >
           <Link
-            href="#properties"
-            className="mt-8 sm:mt-12 inline-flex items-center gap-3 bg-white text-brand-ink px-6 sm:px-10 py-3 sm:py-4 text-[11px] sm:text-[12px] uppercase tracking-[0.15em] sm:tracking-[0.2em] font-medium hover:bg-white/95 transition-all duration-500 active:scale-95 btn-shimmer hover:shadow-lg hover:shadow-white/20"
+            href="/about"
+            className="inline-flex items-center justify-center gap-3 bg-white text-brand-ink px-8 sm:px-10 py-3.5 sm:py-4 text-[10px] sm:text-[11px] uppercase tracking-[0.2em] font-medium hover:bg-brand-gold hover:text-white transition-all duration-500 btn-shimmer"
           >
-            Explore Properties
+            Discover Our Story
+          </Link>
+          <Link
+            href="#booking"
+            className="inline-flex items-center justify-center gap-3 border border-white/60 text-white px-8 sm:px-10 py-3.5 sm:py-4 text-[10px] sm:text-[11px] uppercase tracking-[0.2em] font-medium hover:bg-white hover:text-brand-ink transition-all duration-500"
+          >
+            Book Your Stay
           </Link>
         </div>
 
-        {/* Scroll indicator - hidden on very small screens */}
-        <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 hidden sm:block">
-          <div className="w-[1px] h-12 sm:h-16 bg-white/30 overflow-hidden">
-            <div className="w-full h-6 sm:h-8 bg-white animate-scroll-down" />
-          </div>
-        </div>
-      </section>
-
-      {/* Discovery Section - Four Seasons Style */}
-      <DiscoverySection />
-
-      {/* Booking Widget */}
-      <BookingWidget />
-    </>
-  );
-}
-
-function DiscoverySection() {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    if (!sectionRef.current) return;
-
-    const elements = sectionRef.current.querySelectorAll("[data-reveal]");
-    elements.forEach((el, i) => {
-      gsap.fromTo(
-        el,
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          delay: i * 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
-
-  return (
-    <section ref={sectionRef} className="relative py-16 sm:py-20 lg:py-32 bg-[#f8f7f5]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-        <div className="text-center mb-10 sm:mb-16">
-          <h2 data-reveal className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light mb-4 sm:mb-6">
-            Discover <em className="italic">The Pentouz</em>
-          </h2>
-          <p data-reveal className="text-sm sm:text-base text-brand-body max-w-2xl mx-auto px-4">
-            Find your perfect stay across our curated collection of luxury residences
-          </p>
-        </div>
-
-        {/* Category Pills - Four Seasons style - horizontal scroll on mobile */}
-        <div data-reveal className="flex justify-start sm:justify-center gap-3 sm:gap-4 mb-10 sm:mb-12 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap scrollbar-hide">
-          {categories.map((cat) => (
-            <button
-              key={cat.name}
-              className="flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-white border border-brand-border/50 text-sm text-brand-body hover:border-brand-ink hover:text-brand-ink transition-all duration-300 whitespace-nowrap flex-shrink-0"
-            >
-              <span>{cat.icon}</span>
-              <span>{cat.name}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Destination Quick Links - stack on mobile */}
-        <div data-reveal className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-          {destinations.map((dest) => (
-            <Link
-              key={dest.slug}
-              href={`/destinations/${dest.slug}`}
-              className="group relative aspect-[4/3] sm:aspect-[4/3] overflow-hidden"
-            >
-              <Image
-                src={dest.image}
-                alt={dest.title}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 lg:p-8">
-                <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white/60 mb-1 sm:mb-2">
-                  {dest.subtitle}
-                </p>
-                <h3 className="text-lg sm:text-xl lg:text-2xl font-display font-light text-white">
-                  {dest.shortTitle}
-                </h3>
-              </div>
-              <div className="absolute top-4 sm:top-6 right-4 sm:right-6 w-8 sm:w-10 h-8 sm:h-10 bg-white/0 group-hover:bg-white flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100">
-                <ChevronRight className="w-4 sm:w-5 h-4 sm:h-5 text-brand-ink" />
-              </div>
-            </Link>
-          ))}
-        </div>
+        {/* Photo Credit */}
+        <p
+          className={`photo-credit absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 transition-all duration-1000 ease-out ${
+            isReady ? "opacity-100" : "opacity-0"
+          }`}
+          style={{ transitionDelay: "800ms" }}
+        >
+          Photography by The Pentouz Studio &bull; Bangalore, India
+        </p>
       </div>
-    </section>
-  );
-}
 
-function BookingWidget() {
-  const [property, setProperty] = useState("");
-  const [checkIn, setCheckIn] = useState("");
-  const [checkOut, setCheckOut] = useState("");
-  const [guests, setGuests] = useState("2");
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    if (!sectionRef.current) return;
-
-    gsap.fromTo(
-      sectionRef.current,
-      { y: 30, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 90%",
-          toggleActions: "play none none none",
-        },
-      }
-    );
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
-
-  const handleCheckRates = () => {
-    if (!property) {
-      alert("Please select a property");
-      return;
-    }
-
-    const selectedProperty = destinations.find((d) => d.slug === property);
-    if (selectedProperty?.bookingUrl) {
-      // Open booking URL in new tab
-      window.open(selectedProperty.bookingUrl, "_blank", "noopener,noreferrer");
-    }
-  };
-
-  return (
-    <section
-      ref={sectionRef}
-      id="booking"
-      className="py-12 sm:py-16 lg:py-28 bg-white border-t border-brand-border/30"
-    >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
-        {/* Header */}
-        <div className="text-center mb-8 sm:mb-14">
-          <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-brand-accent mb-3 sm:mb-4 font-normal">
-            Plan Your Stay
-          </p>
-          <h2 className="font-display text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light">
-            Check <em className="italic">Availability</em>
-          </h2>
-        </div>
-
-        {/* Booking Form - Stack on mobile, inline on desktop */}
-        <div className="bg-[#f8f7f5] p-4 sm:p-6 lg:p-12">
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 gap-4 sm:gap-6 items-end">
-            {/* Property - full width on mobile */}
-            <div className="col-span-2 sm:col-span-2 md:col-span-1">
-              <label className="text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-brand-muted block mb-2 sm:mb-3">
-                Property
-              </label>
-              <select
-                value={property}
-                onChange={(e) => setProperty(e.target.value)}
-                className="w-full bg-white border border-brand-border px-3 sm:px-4 py-3 text-sm outline-none focus:border-brand-ink transition-colors rounded-none appearance-none"
-              >
-                <option value="">Select Property</option>
-                {destinations.map((dest) => (
-                  <option key={dest.slug} value={dest.slug}>
-                    {dest.shortTitle}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* Check In */}
-            <div className="col-span-1">
-              <label className="text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-brand-muted block mb-2 sm:mb-3">
-                Check In
-              </label>
-              <input
-                type="date"
-                value={checkIn}
-                onChange={(e) => setCheckIn(e.target.value)}
-                className="w-full bg-white border border-brand-border px-3 sm:px-4 py-3 text-sm outline-none focus:border-brand-ink transition-colors rounded-none"
-              />
-            </div>
-
-            {/* Check Out */}
-            <div className="col-span-1">
-              <label className="text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-brand-muted block mb-2 sm:mb-3">
-                Check Out
-              </label>
-              <input
-                type="date"
-                value={checkOut}
-                onChange={(e) => setCheckOut(e.target.value)}
-                className="w-full bg-white border border-brand-border px-3 sm:px-4 py-3 text-sm outline-none focus:border-brand-ink transition-colors rounded-none"
-              />
-            </div>
-
-            {/* Guests */}
-            <div className="col-span-1">
-              <label className="text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-brand-muted block mb-2 sm:mb-3">
-                Guests
-              </label>
-              <select
-                value={guests}
-                onChange={(e) => setGuests(e.target.value)}
-                className="w-full bg-white border border-brand-border px-3 sm:px-4 py-3 text-sm outline-none focus:border-brand-ink transition-colors rounded-none appearance-none"
-              >
-                {[1, 2, 3, 4, 5, 6].map((num) => (
-                  <option key={num} value={num}>
-                    {num} {num === 1 ? "Guest" : "Guests"}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* Submit Button */}
-            <div className="col-span-1 md:col-span-1">
-              <button
-                onClick={handleCheckRates}
-                className="w-full bg-brand-ink text-white py-3 px-4 sm:px-6 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] sm:tracking-[0.2em] font-medium hover:bg-black transition-colors duration-300 active:scale-95"
-              >
-                Check Rates
-              </button>
-            </div>
-          </div>
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-24 sm:bottom-20 left-1/2 -translate-x-1/2 hidden sm:block">
+        <div className="w-[1px] h-12 sm:h-16 bg-white/40 overflow-hidden">
+          <div className="w-full h-6 sm:h-8 bg-white animate-scroll-down" />
         </div>
       </div>
     </section>
