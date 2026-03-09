@@ -243,6 +243,196 @@ export const genericSurroundingGuides: readonly GenericGuide[] = [
     ],
   },
   {
+    slug: "where-to-stay-near-ub-city-bangalore",
+    title: "Where to Stay Near UB City Bangalore",
+    subtitle: "Premium-location planning for executives, shoppers, and leisure travelers.",
+    focusArea: "UB City",
+    keywords: ["hotel near UB City Bangalore", "where to stay near UB City"],
+    intro:
+      "UB City travelers usually prioritize central movement, premium stay comfort, and easy access to both meetings and evening plans.",
+    highlights: [
+      "Use Lavelle Road as a short-transfer base for UB City appointments.",
+      "Plan separate windows for meetings, dining, and retail.",
+      "Keep evenings close to central corridors to avoid return delays.",
+    ],
+    tips: [
+      "Pre-confirm your meeting and dining slots before arrival.",
+      "Use a compact itinerary instead of city-wide overplanning.",
+      "Anchor your stay around predictable city-core movement.",
+    ],
+  },
+  {
+    slug: "hotel-guide-near-vidhana-soudha-and-vikasa-soudha",
+    title: "Hotel Guide Near Vidhana Soudha and Vikasa Soudha",
+    subtitle: "Practical stay planning for official visits and government workflows.",
+    focusArea: "Vidhana Soudha Zone",
+    keywords: ["hotel near Vidhana Soudha", "stay near Vikasa Soudha Bangalore"],
+    intro:
+      "Government-related travel requires punctuality and schedule buffers. A central Lavelle Road base helps keep official movement structured.",
+    highlights: [
+      "Keep reporting-time buffers for security and administrative flow.",
+      "Use central routing for post-appointment office meetings.",
+      "Pair official visits with short commute recovery windows.",
+    ],
+    tips: [
+      "Carry both digital and physical copies of required documents.",
+      "Confirm department timing one day prior.",
+      "Avoid long-distance accommodation for same-day official work.",
+    ],
+  },
+  {
+    slug: "lawyer-stay-playbook-near-attara-kacheri",
+    title: "Lawyer Stay Playbook Near Attara Kacheri",
+    subtitle: "A legal-travel framework for outstation advocates handling court schedules.",
+    focusArea: "Attara Kacheri",
+    keywords: ["hotel near Attara Kacheri", "advocate accommodation Bangalore"],
+    intro:
+      "Court-focused travel is often high pressure. A stable stay plan around Lavelle Road helps advocates preserve focus across hearings and prep windows.",
+    highlights: [
+      "Begin with early-morning case and document alignment.",
+      "Use the midday window for legal team coordination and filings.",
+      "Return to a quiet premium base for next-day preparation.",
+    ],
+    tips: [
+      "Add fallback commute options before hearing day.",
+      "Keep essentials in one legal-ready carry kit.",
+      "Use direct booking channels for short-notice date shifts.",
+    ],
+  },
+  {
+    slug: "hotel-near-mg-road-metro-commute-first-guide",
+    title: "Hotel Near MG Road Metro: Commute-First Guide",
+    subtitle: "How to optimize central Bengaluru movement with metro-linked flexibility.",
+    focusArea: "MG Road Metro Corridor",
+    keywords: ["hotel near MG Road Metro", "stay near metro Bangalore central"],
+    intro:
+      "When city traffic is unpredictable, metro-proximate movement becomes a practical backup. Lavelle Road stays provide multi-route access for this pattern.",
+    highlights: [
+      "Pair metro and cab options by time-of-day demand.",
+      "Use nearest stations for schedule-protected transfers.",
+      "Return to Lavelle Road for low-noise evening recovery.",
+    ],
+    tips: [
+      "Keep one fallback route in every itinerary block.",
+      "Account for peak interchange time in evening slots.",
+      "Plan flexible departure windows on high-load days.",
+    ],
+  },
+  {
+    slug: "business-trip-hotel-near-brigade-road-and-residency-road",
+    title: "Business Trip Hotel Near Brigade Road and Residency Road",
+    subtitle: "A central stay strategy for meeting-heavy Bengaluru workdays.",
+    focusArea: "Brigade and Residency Corridor",
+    keywords: ["business hotel near Brigade Road", "stay near Residency Road Bangalore"],
+    intro:
+      "Executives in this corridor need predictable routing between offices, partner meetings, and evening business dinners.",
+    highlights: [
+      "Block commute windows around core business meetings.",
+      "Use Lavelle Road proximity for efficient back-to-back sessions.",
+      "Reduce late-night cross-city transfers for better next-day readiness.",
+    ],
+    tips: [
+      "Keep meetings clustered by micro-zone where possible.",
+      "Choose a central property with strong rest quality.",
+      "Confirm transport logistics before peak business hours.",
+    ],
+  },
+  {
+    slug: "premium-stay-near-cubbon-park-for-walk-and-work-routines",
+    title: "Premium Stay Near Cubbon Park for Walk-and-Work Routines",
+    subtitle: "Blend wellness mornings with productive central-city schedules.",
+    focusArea: "Cubbon Park",
+    keywords: ["hotel near Cubbon Park", "premium stay central Bangalore"],
+    intro:
+      "Many guests want a city stay that supports both physical reset and high-focus daytime plans. Cubbon Park proximity helps create that balance.",
+    highlights: [
+      "Start the day with a short green-space walk.",
+      "Transition into central meetings without long transfers.",
+      "Close with an evening dining loop near Lavelle Road.",
+    ],
+    tips: [
+      "Keep morning routines simple and repeatable.",
+      "Avoid overloading the day with unnecessary stops.",
+      "Use central return plans to reduce decision fatigue.",
+    ],
+  },
+  {
+    slug: "hotel-near-bangalore-cantonment-for-outstation-arrivals",
+    title: "Hotel Near Bangalore Cantonment for Outstation Arrivals",
+    subtitle: "Rail-arrival planning for legal, business, and family travel.",
+    focusArea: "Bengaluru Cantonment Station",
+    keywords: ["hotel near Bangalore Cantonment", "stay near Bengaluru Cantonment station"],
+    intro:
+      "Rail-based arrivals need smooth transition into central stays. Lavelle Road is practical for travelers combining station access with city commitments.",
+    highlights: [
+      "Use direct transfer plans from station to stay.",
+      "Build a short reset window before first appointment.",
+      "Keep central routes open for follow-up meetings or errands.",
+    ],
+    tips: [
+      "Share arrival ETA with property before departure.",
+      "Carry priority documents in hand luggage.",
+      "Use location-first booking for same-day city movement.",
+    ],
+  },
+  {
+    slug: "stay-near-commercial-street-shopping-with-lavelle-base",
+    title: "Stay Near Commercial Street Shopping with a Lavelle Base",
+    subtitle: "How to enjoy high-street shopping without long commute fatigue.",
+    focusArea: "Commercial Street",
+    keywords: ["hotel near Commercial Street Bangalore", "shopping stay Bangalore"],
+    intro:
+      "Commercial Street visitors often combine shopping with meetings and evening plans. A Lavelle Road base keeps the day efficient.",
+    highlights: [
+      "Divide high-street and premium shopping into separate slots.",
+      "Use short-transfer returns between shopping legs.",
+      "Plan post-shopping rest before evening commitments.",
+    ],
+    tips: [
+      "Travel light and keep drop-off points pre-planned.",
+      "Avoid peak-hour movement across multiple shopping zones.",
+      "Use central booking for flexible city repositioning.",
+    ],
+  },
+  {
+    slug: "corporate-stay-near-manyata-tech-meetings-central-bangalore",
+    title: "Corporate Stay for Manyata-Tech Meetings from Central Bangalore",
+    subtitle: "A realistic central-stay approach for tech and partner meetings.",
+    focusArea: "Manyata and Tech Meeting Routes",
+    keywords: ["corporate hotel Bangalore central", "business stay near Manyata travel route"],
+    intro:
+      "Even when meetings happen in outer tech corridors, many travelers prefer central premium stays for evening quality and wider city access.",
+    highlights: [
+      "Start earlier for tech-corridor commute reliability.",
+      "Use Lavelle Road as your evening recovery and networking base.",
+      "Keep flexible buffers for cross-city return movement.",
+    ],
+    tips: [
+      "Cluster tech-side meetings into single route windows.",
+      "Avoid unnecessary midday location switches.",
+      "Use direct support channels for schedule changes.",
+    ],
+  },
+  {
+    slug: "weekend-luxury-itinerary-ub-city-cubbon-and-lavelle",
+    title: "Weekend Luxury Itinerary: UB City, Cubbon, and Lavelle",
+    subtitle: "A premium two-day plan for city guests who prefer quality over rush.",
+    focusArea: "Lavelle Central Loop",
+    keywords: ["luxury weekend Bangalore", "Lavelle Road itinerary"],
+    intro:
+      "This route is designed for guests who want a relaxed premium weekend with strong location value and low transfer stress.",
+    highlights: [
+      "Day 1: central dining, retail, and evening social route.",
+      "Day 2: morning green-space rhythm with cultural stops.",
+      "Keep both days anchored to a central Lavelle Road return.",
+    ],
+    tips: [
+      "Reserve key venues before weekend peak demand.",
+      "Prefer fewer premium experiences over rushed checklists.",
+      "Use late checkout options when travel timing allows.",
+    ],
+  },
+  {
     slug: "airport-to-lavelle-road-arrival-guide",
     title: "Airport to Lavelle Road Arrival Guide",
     subtitle: "Smart arrival planning for domestic and international guests.",

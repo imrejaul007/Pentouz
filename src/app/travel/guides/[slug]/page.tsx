@@ -8,6 +8,7 @@ import {
   genericSurroundingGuides,
   getGenericGuide,
 } from "@/data/lavelleTravelContent";
+import { lavelleSeoPages } from "@/data/lavelleSeoPages";
 import { withSiteUrl } from "@/lib/site";
 
 type Params = { slug: string };
@@ -44,6 +45,14 @@ export default function GenericGuidePage({ params }: { params: Params }) {
   if (!guide) notFound();
 
   const related = genericSurroundingGuides.filter((item) => item.slug !== guide.slug).slice(0, 6);
+  const matchedKeywordPages = lavelleSeoPages.filter((page) => {
+    const query = `${guide.title} ${guide.subtitle} ${guide.keywords.join(" ")}`.toLowerCase();
+    return query.includes(page.place.toLowerCase()) || query.includes(page.keyword.toLowerCase());
+  });
+  const relatedKeywordPages =
+    matchedKeywordPages.length > 0
+      ? matchedKeywordPages.slice(0, 6)
+      : lavelleSeoPages.slice(0, 6);
   const pageUrl = withSiteUrl(`/travel/guides/${guide.slug}`);
 
   const faqItems = [
@@ -180,6 +189,27 @@ export default function GenericGuidePage({ params }: { params: Params }) {
             </div>
           </div>
         </section>
+
+        {relatedKeywordPages.length > 0 ? (
+          <section className="py-14 sm:py-18 bg-white border-y border-brand-border">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
+              <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Related Stay Keywords Near Lavelle Road</h2>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+                {relatedKeywordPages.map((page) => (
+                  <article key={page.slug} className="border border-brand-border p-5 bg-[#f8f7f5]">
+                    <p className="text-[10px] uppercase tracking-[0.15em] text-brand-gold mb-2">{page.category}</p>
+                    <h3 className="font-display text-lg font-light mb-2">
+                      <Link href={`/destinations/lavelle-road/near/${page.slug}`} className="hover:text-brand-gold transition-colors">
+                        Hotel Near {page.place}
+                      </Link>
+                    </h3>
+                    <p className="text-sm text-brand-body">{page.keyword}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+        ) : null}
 
         <section className="py-14 sm:py-18 bg-white border-y border-brand-border">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">

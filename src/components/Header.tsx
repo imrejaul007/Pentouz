@@ -4,17 +4,20 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { X } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { contactInfo } from "@/data/content";
 
 const editorialNav = [
-  { label: "Stories", href: "/stories" },
-  { label: "Collections", href: "/destinations" },
+  { label: "Destinations", href: "/destinations" },
+  { label: "Travel", href: "/travel" },
   { label: "Experiences", href: "/experiences" },
+  { label: "Stories", href: "/stories" },
   { label: "Contact", href: "/contact" },
 ];
 
 export default function Header() {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,6 +43,23 @@ export default function Header() {
     };
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMenuOpen(false);
+      }
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, []);
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
+
   return (
     <>
       {/* Top Gradient Overlay */}
@@ -57,6 +77,52 @@ export default function Header() {
             : "bg-transparent"
         )}
       >
+        <div
+          className={cn(
+            "hidden xl:block border-b transition-colors duration-300",
+            isScrolled ? "border-black/10 bg-white" : "border-white/15 bg-black/15 backdrop-blur-sm"
+          )}
+        >
+          <div className="max-w-container-2xl mx-auto px-6 lg:px-12 h-9 flex items-center justify-between text-[10px] uppercase tracking-[0.18em]">
+            <div className={cn("flex items-center gap-6", isScrolled ? "text-brand-muted" : "text-white/70")}>
+              <Link href="/destinations/lavelle-road/near/karnataka-high-court" className="hover:text-brand-gold transition-colors">
+                Hotel Near High Court
+              </Link>
+              <Link href="/travel/guides/best-things-to-do-in-mg-road-bangalore" className="hover:text-brand-gold transition-colors">
+                MG Road Guide
+              </Link>
+            </div>
+            <div className="flex items-center gap-3">
+              <a
+                href="https://bookmystay.io/rooms/37853/2025-12-23/2025-12-24/2/0?utm_source=brandWebsite"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  "px-3 py-1.5 border transition-colors",
+                  isScrolled
+                    ? "border-brand-border text-brand-ink hover:border-brand-gold hover:text-brand-gold"
+                    : "border-white/35 text-white hover:border-brand-gold hover:text-brand-gold"
+                )}
+              >
+                Book Lavelle
+              </a>
+              <a
+                href="https://hotels.eglobe-solutions.com/pentouz/booking/hotels/the-pentouz-bangalore"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  "px-3 py-1.5 border transition-colors",
+                  isScrolled
+                    ? "border-brand-border text-brand-ink hover:border-brand-gold hover:text-brand-gold"
+                    : "border-white/35 text-white hover:border-brand-gold hover:text-brand-gold"
+                )}
+              >
+                Book Indiranagar
+              </a>
+            </div>
+          </div>
+        </div>
+
         {/* Progress line */}
         <div
           className={cn(
@@ -110,16 +176,20 @@ export default function Header() {
                     href={link.href}
                     className={cn(
                       "relative text-[11px] uppercase tracking-[0.15em] font-light transition-all duration-300 group",
-                      isScrolled
-                        ? "text-brand-body hover:text-brand-ink"
-                        : "text-white/90 hover:text-white"
+                      isActive(link.href)
+                        ? "text-brand-gold"
+                        : isScrolled
+                          ? "text-brand-body hover:text-brand-ink"
+                          : "text-white/90 hover:text-white"
                     )}
                   >
                     {link.label}
                     <span
                       className={cn(
-                        "absolute -bottom-1 left-0 w-0 h-[1px] transition-all duration-300 group-hover:w-full",
-                        isScrolled ? "bg-brand-gold" : "bg-white"
+                        "absolute -bottom-1 left-0 h-[1px] transition-all duration-300",
+                        isActive(link.href)
+                          ? "w-full bg-brand-gold"
+                          : `w-0 group-hover:w-full ${isScrolled ? "bg-brand-gold" : "bg-white"}`
                       )}
                     />
                   </Link>
@@ -197,10 +267,11 @@ export default function Header() {
             <nav className="flex-1 flex flex-col justify-center px-4 sm:px-6 lg:px-16 py-8 lg:py-16">
               {[
                 { label: "Home", href: "/" },
-                { label: "Stories", href: "/stories" },
-                { label: "Collections", href: "/destinations" },
+                { label: "Destinations", href: "/destinations" },
+                { label: "Lavelle Nearby SEO Hub", href: "/destinations/lavelle-road/near" },
+                { label: "Travel Hub", href: "/travel" },
                 { label: "Experiences", href: "/experiences" },
-                { label: "Gallery", href: "/#gallery" },
+                { label: "Stories", href: "/stories" },
                 { label: "Contact", href: "/contact" },
               ].map((link, i) => (
                 <Link
@@ -222,6 +293,24 @@ export default function Header() {
                   </span>
                 </Link>
               ))}
+              <div className="mt-8 grid sm:grid-cols-2 gap-3 sm:gap-4">
+                <a
+                  href="https://bookmystay.io/rooms/37853/2025-12-23/2025-12-24/2/0?utm_source=brandWebsite"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex justify-center border border-white/35 px-4 py-3 text-[10px] uppercase tracking-[0.18em] text-white hover:border-brand-gold hover:text-brand-gold transition-colors"
+                >
+                  Book Lavelle Road
+                </a>
+                <a
+                  href="https://hotels.eglobe-solutions.com/pentouz/booking/hotels/the-pentouz-bangalore"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex justify-center border border-white/35 px-4 py-3 text-[10px] uppercase tracking-[0.18em] text-white hover:border-brand-gold hover:text-brand-gold transition-colors"
+                >
+                  Book Indiranagar
+                </a>
+              </div>
             </nav>
 
             {/* Contact Info */}
