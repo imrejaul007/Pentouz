@@ -14,6 +14,19 @@ interface LeadPayload {
   checkOut?: string;
   guests?: string;
   website?: string;
+  sourcePath?: string;
+  sourceKeywordSlug?: string;
+  sourceArticleSlug?: string;
+  sourceIntent?: string;
+  sourceReferrer?: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+  utmTerm?: string;
+  utmContent?: string;
+  gclid?: string;
+  fbclid?: string;
+  msclkid?: string;
 }
 
 function isValidEmail(email?: string) {
@@ -101,6 +114,13 @@ export async function POST(request: Request) {
     type: payload.type,
     email: payload.email || null,
     property: payload.property || null,
+    sourcePath: payload.sourcePath || null,
+    sourceKeywordSlug: payload.sourceKeywordSlug || null,
+    sourceArticleSlug: payload.sourceArticleSlug || null,
+    sourceIntent: payload.sourceIntent || null,
+    utmSource: payload.utmSource || null,
+    utmMedium: payload.utmMedium || null,
+    utmCampaign: payload.utmCampaign || null,
     at: new Date().toISOString(),
   });
 

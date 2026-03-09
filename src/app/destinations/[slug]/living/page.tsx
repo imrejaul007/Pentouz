@@ -495,6 +495,27 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
                 </Link>
               ))}
             </div>
+
+            <div className="mt-8">
+              <p className="text-[10px] uppercase tracking-[0.2em] text-brand-muted mb-3">
+                Related Travel Guides
+              </p>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {[
+                  { label: "Court-Day Itinerary Near Karnataka High Court", href: "/travel/guides/court-day-itinerary-near-karnataka-high-court" },
+                  { label: "Luxury Evening Walks Near Lavelle Road", href: "/travel/guides/luxury-evening-walks-near-lavelle-road" },
+                  { label: "Executive Breakfast Spots Around UB City", href: "/travel/guides/executive-breakfast-spots-around-ub-city" },
+                ].map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="border border-brand-border bg-white p-3 text-sm hover:bg-brand-ink hover:text-white transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
       )}

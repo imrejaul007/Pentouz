@@ -8,6 +8,8 @@ const editorialLinks = [
   { label: "Stories", href: "/stories" },
   { label: "Collections", href: "/destinations" },
   { label: "Experiences", href: "/experiences" },
+  { label: "Travel", href: "/travel" },
+  { label: "Lavelle SEO Hub", href: "/destinations/lavelle-road/near" },
   { label: "About", href: "/about" },
 ];
 

@@ -571,6 +571,27 @@ export default function DestinationPage({
                   </span>
                 ))}
               </div>
+
+              <div className="mt-8">
+                <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-brand-muted mb-3">
+                  Related Travel Guides
+                </p>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {[
+                    { label: "Court-Day Itinerary Near Karnataka High Court", href: "/travel/guides/court-day-itinerary-near-karnataka-high-court" },
+                    { label: "Best Things to Do in MG Road Bangalore", href: "/travel/guides/best-things-to-do-in-mg-road-bangalore" },
+                    { label: "Airport to Lavelle Road Arrival Guide", href: "/travel/guides/airport-to-lavelle-road-arrival-guide" },
+                  ].map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="border border-brand-border bg-white p-3 text-sm hover:bg-brand-ink hover:text-white transition-colors"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </section>
         )}

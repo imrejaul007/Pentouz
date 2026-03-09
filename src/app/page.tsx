@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
@@ -66,6 +67,33 @@ export default function Home() {
       <main>
         {/* 1. Hero - Magazine Cover */}
         <Hero />
+
+        {/* SEO Navigation Bridge */}
+        <section className="py-12 sm:py-14 bg-[#f8f7f5] border-y border-brand-border">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+              <div>
+                <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-brand-gold mb-2">
+                  Discover Bengaluru Guides
+                </p>
+                <h2 className="font-display text-2xl sm:text-3xl font-light">
+                  Lavelle Road Travel & Nearby Stay Pages
+                </h2>
+              </div>
+              <div className="flex flex-wrap gap-3 text-[10px] sm:text-[11px] uppercase tracking-[0.15em]">
+                <Link href="/travel" className="border border-brand-ink px-4 py-2 text-brand-ink hover:bg-brand-ink hover:text-white transition-colors">
+                  Explore Travel Hub
+                </Link>
+                <Link href="/destinations/lavelle-road/near" className="border border-brand-ink px-4 py-2 text-brand-ink hover:bg-brand-ink hover:text-white transition-colors">
+                  50+ Nearby Pages
+                </Link>
+                <Link href="/destinations/lavelle-road" className="bg-brand-ink px-4 py-2 text-white hover:bg-brand-gold transition-colors">
+                  Lavelle Property
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* 2. Brand Story - The Pentouz Story */}
         <BrandStory />

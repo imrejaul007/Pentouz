@@ -10,6 +10,19 @@ type LeadPayload = {
   checkOut?: string;
   guests?: string;
   website?: string;
+  sourcePath?: string;
+  sourceKeywordSlug?: string;
+  sourceArticleSlug?: string;
+  sourceIntent?: string;
+  sourceReferrer?: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+  utmTerm?: string;
+  utmContent?: string;
+  gclid?: string;
+  fbclid?: string;
+  msclkid?: string;
 };
 
 export async function submitLead(payload: LeadPayload) {

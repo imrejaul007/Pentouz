@@ -106,6 +106,33 @@ export default function IntentLeadForm({
     ].join(". ");
   }, [articleTitle, intent, keyword, keywordSlug, articleSlug, pathname, attribution]);
 
+  const attributionFields = useMemo(() => {
+    if (typeof window === "undefined") {
+      return {
+        utmSource: "",
+        utmMedium: "",
+        utmCampaign: "",
+        utmTerm: "",
+        utmContent: "",
+        gclid: "",
+        fbclid: "",
+        msclkid: "",
+      };
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    return {
+      utmSource: params.get("utm_source") || "",
+      utmMedium: params.get("utm_medium") || "",
+      utmCampaign: params.get("utm_campaign") || "",
+      utmTerm: params.get("utm_term") || "",
+      utmContent: params.get("utm_content") || "",
+      gclid: params.get("gclid") || "",
+      fbclid: params.get("fbclid") || "",
+      msclkid: params.get("msclkid") || "",
+    };
+  }, []);
+
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -121,6 +148,20 @@ export default function IntentLeadForm({
         message,
         property: "Lavelle Road",
         website,
+        sourcePath: pathname || "",
+        sourceKeywordSlug: keywordSlug,
+        sourceArticleSlug: articleSlug,
+        sourceIntent: intent,
+        sourceReferrer:
+          typeof document !== "undefined" ? document.referrer || "direct/unknown" : "",
+        utmSource: attributionFields.utmSource,
+        utmMedium: attributionFields.utmMedium,
+        utmCampaign: attributionFields.utmCampaign,
+        utmTerm: attributionFields.utmTerm,
+        utmContent: attributionFields.utmContent,
+        gclid: attributionFields.gclid,
+        fbclid: attributionFields.fbclid,
+        msclkid: attributionFields.msclkid,
       });
 
       setStatus({
