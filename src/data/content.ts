@@ -133,10 +133,26 @@ export const destinations = [
       "24-Hour Front Desk",
     ],
     rooms: [
-      { name: "KING STUDIO", description: "475 sq. ft. studio with king bed, kitchenette, work desk, and city views." },
-      { name: "QUEEN STUDIO", description: "450 sq. ft. studio with queen bed, kitchenette, smart TV, and elegant bath." },
-      { name: "SUPERIOR STUDIO", description: "450 sq. ft. studio with twin beds, kitchenette, and refined interiors." },
-      { name: "THREE BEDROOM UNIT", description: "Combined Superior + two King Studios, ~1,400 sq. ft., ideal for up to six guests." },
+      {
+        name: "KING STUDIO",
+        description: "475 sq. ft. studio with king bed, kitchenette, work desk, and city views.",
+        image: "/lavelle-road/king-suite-1.jpg",
+      },
+      {
+        name: "QUEEN STUDIO",
+        description: "450 sq. ft. studio with queen bed, kitchenette, smart TV, and elegant bath.",
+        image: "/lavelle-road/queen-suite-1.jpg",
+      },
+      {
+        name: "SUPERIOR STUDIO",
+        description: "450 sq. ft. studio with twin beds, kitchenette, and refined interiors.",
+        image: "/lavelle-road/superior-suite-1.jpg",
+      },
+      {
+        name: "THREE BEDROOM UNIT",
+        description: "Combined Superior + two King Studios, ~1,400 sq. ft., ideal for up to six guests.",
+        image: "/lavelle-road/terrace-1.jpg",
+      },
     ],
     gallery: [
       "/lavelle-road/facade-1.jpg",

@@ -750,7 +750,11 @@ export default function DestinationPage({
                     {/* Loading placeholder */}
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-200 via-gray-100 to-gray-200 animate-shimmer bg-[length:200%_100%]" />
                     <Image
-                      src={destination.gallery?.[index] || destination.image}
+                      src={
+                        ("image" in room ? room.image : undefined) ||
+                        destination.gallery?.[index] ||
+                        destination.image
+                      }
                       alt={room.name}
                       fill
                       className="object-cover transition-transform duration-1000 group-hover:scale-110"
