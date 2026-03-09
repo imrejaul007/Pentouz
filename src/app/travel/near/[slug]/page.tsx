@@ -7,6 +7,7 @@ import { getLavelleSeoPage, lavelleSeoPages } from "@/data/lavelleSeoPages";
 import { getLavelleEditorialOverride } from "@/data/lavelleEditorialOverrides";
 import {
   getKeywordHubArticles,
+  getNearbyAnchorsForKeyword,
   getRelatedKeywordArticleLinks,
   getArticleTitle,
   keywordArticleTemplates,
@@ -44,6 +45,7 @@ export default function KeywordTravelHubPage({ params }: { params: Params }) {
 
   const articles = getKeywordHubArticles(keyword.slug);
   const crossLinks = getRelatedKeywordArticleLinks(keyword.slug, "where-to-stay");
+  const anchors = getNearbyAnchorsForKeyword(keyword.slug).slice(0, 3);
 
   return (
     <>
@@ -95,6 +97,21 @@ export default function KeywordTravelHubPage({ params }: { params: Params }) {
                     </Link>
                   </h3>
                   <p className="text-sm text-brand-body">{article.intent}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 sm:py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Priority Local Anchors</h2>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+              {anchors.map((anchor) => (
+                <article key={anchor.name} className="border border-brand-border p-5 bg-white">
+                  <p className="text-[10px] uppercase tracking-[0.15em] text-brand-gold mb-2">{anchor.type}</p>
+                  <h3 className="font-display text-lg font-light mb-2">{anchor.name}</h3>
+                  <p className="text-sm text-brand-body">{anchor.whyItMatters}</p>
                 </article>
               ))}
             </div>

@@ -36,6 +36,7 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
       `${narrative.template.intent} ${narrative.keyword.place}`,
       "Lavelle Road travel guide",
       "The Pentouz Travel",
+      ...narrative.anchors.map((anchor) => anchor.name),
     ],
     alternates: {
       canonical: withSiteUrl(path),
@@ -72,6 +73,7 @@ export default function KeywordArticlePage({ params }: { params: Params }) {
         headline: getArticleTitle(narrative.keyword.place, narrative.template),
         description: `Guide for ${narrative.keyword.keyword}`,
         about: [narrative.keyword.place, narrative.template.intent, "Lavelle Road Bengaluru"],
+        mentions: narrative.anchors.map((anchor) => anchor.name),
         mainEntityOfPage: withSiteUrl(`/travel/near/${params.slug}/${params.article}`),
       },
       {
@@ -150,6 +152,23 @@ export default function KeywordArticlePage({ params }: { params: Params }) {
                 Read Surrounding Guide
               </Link>
             </article>
+          </div>
+        </section>
+
+        <section className="py-14 sm:py-18 bg-white border-y border-brand-border">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Key Nearby Anchors for This Article</h2>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+              {narrative.anchors.map((anchor) => (
+                <article key={anchor.name} className="border border-brand-border p-5 bg-[#f8f7f5]">
+                  <p className="text-[10px] uppercase tracking-[0.15em] text-brand-gold mb-2">
+                    {anchor.type}
+                  </p>
+                  <h3 className="font-display text-lg font-light mb-2">{anchor.name}</h3>
+                  <p className="text-sm text-brand-body leading-relaxed">{anchor.whyItMatters}</p>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 

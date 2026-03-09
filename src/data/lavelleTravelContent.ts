@@ -22,6 +22,12 @@ export interface GenericGuide {
   tips: string[];
 }
 
+export interface NearbyAnchor {
+  name: string;
+  type: "office" | "government" | "court" | "landmark" | "transport" | "service";
+  whyItMatters: string;
+}
+
 export const keywordArticleTemplates: readonly ArticleTemplate[] = [
   {
     slug: "where-to-stay",
@@ -267,6 +273,192 @@ function pickVariant<T>(items: readonly T[], seed: number, offset = 0) {
   return items[(seed + offset) % items.length];
 }
 
+function buildCategoryAnchors(category: string, place: string): NearbyAnchor[] {
+  if (category === "Legal & Courts") {
+    return [
+      {
+        name: "Karnataka High Court Legal Belt",
+        type: "court",
+        whyItMatters: "Useful for hearing-day movement and legal office coordination.",
+      },
+      {
+        name: "Vidhana Soudha Administrative Zone",
+        type: "government",
+        whyItMatters: "Supports official documentation and related city errands.",
+      },
+      {
+        name: "MG Road Metro Corridor",
+        type: "transport",
+        whyItMatters: "Gives backup commute options when traffic patterns shift.",
+      },
+    ];
+  }
+
+  if (category === "Government Offices") {
+    return [
+      {
+        name: "Vidhana Soudha - Vikasa Soudha Cluster",
+        type: "government",
+        whyItMatters: "Central for ministry and administration-led appointments.",
+      },
+      {
+        name: "UB City - Lavelle Office Stretch",
+        type: "office",
+        whyItMatters: "Useful for consultant meetings after official visits.",
+      },
+      {
+        name: "Cubbon Park Metro Access",
+        type: "transport",
+        whyItMatters: "Adds flexible route planning on fixed-time appointment days.",
+      },
+    ];
+  }
+
+  if (category === "Business Districts") {
+    return [
+      {
+        name: "UB City Commercial Core",
+        type: "office",
+        whyItMatters: "High concentration of executive meetings and premium dining.",
+      },
+      {
+        name: "MG Road - Residency Road Connector",
+        type: "office",
+        whyItMatters: "Strong corridor for back-to-back city business movement.",
+      },
+      {
+        name: "Bengaluru Cantonment Rail Link",
+        type: "transport",
+        whyItMatters: "Useful for outstation client and consultant arrivals.",
+      },
+    ];
+  }
+
+  if (category === "Healthcare & Services") {
+    return [
+      {
+        name: "Central Hospital Consultation Belt",
+        type: "service",
+        whyItMatters: "Reduces transfer strain for appointment-focused days.",
+      },
+      {
+        name: "Documentation and Service Office Zone",
+        type: "service",
+        whyItMatters: "Helps combine essential city tasks into one structured day.",
+      },
+      {
+        name: "MG Road Mobility Corridor",
+        type: "transport",
+        whyItMatters: "Provides route flexibility between appointments and stay.",
+      },
+    ];
+  }
+
+  if (category === "Landmarks & Culture") {
+    return [
+      {
+        name: "Cubbon Park Culture Circuit",
+        type: "landmark",
+        whyItMatters: "Supports relaxed day pacing and short-distance cultural routing.",
+      },
+      {
+        name: "UB City Lifestyle District",
+        type: "landmark",
+        whyItMatters: "Ideal for dining, social evenings, and premium retail windows.",
+      },
+      {
+        name: "Church Street - Brigade Connector",
+        type: "landmark",
+        whyItMatters: "Useful for post-visit leisure and city atmosphere.",
+      },
+    ];
+  }
+
+  return [
+    {
+      name: "MG Road Metro and Transit Band",
+      type: "transport",
+      whyItMatters: "Offers predictable city access during peak-hour windows.",
+    },
+    {
+      name: "KSR and Cantonment Rail Connectors",
+      type: "transport",
+      whyItMatters: "Supports intercity arrivals with central onward movement.",
+    },
+    {
+      name: `${place} City Access Corridor`,
+      type: "transport",
+      whyItMatters: "Keeps transfer planning flexible around schedule changes.",
+    },
+  ];
+}
+
+function getKeywordSpecificAnchors(keywordSlug: string, place: string): NearbyAnchor[] | null {
+  const map: Record<string, NearbyAnchor[]> = {
+    "karnataka-high-court": [
+      {
+        name: "Karnataka High Court",
+        type: "court",
+        whyItMatters: "Primary hearing destination for legal travelers.",
+      },
+      {
+        name: "Attara Kacheri",
+        type: "court",
+        whyItMatters: "Historic legal landmark and court-visit reference point.",
+      },
+      {
+        name: "Vidhana Soudha",
+        type: "government",
+        whyItMatters: "Important nearby administrative anchor for official tasks.",
+      },
+    ],
+    "ub-city": [
+      {
+        name: "UB City",
+        type: "landmark",
+        whyItMatters: "Premium business and lifestyle center near Lavelle Road.",
+      },
+      {
+        name: "Lavelle Road Commercial Stretch",
+        type: "office",
+        whyItMatters: "Useful for executive meetings and concierge-led city plans.",
+      },
+      {
+        name: "MG Road",
+        type: "landmark",
+        whyItMatters: "Adds shopping and transit flexibility to UB City itineraries.",
+      },
+    ],
+    "mg-road": [
+      {
+        name: "MG Road",
+        type: "landmark",
+        whyItMatters: "Core corridor for business and city access.",
+      },
+      {
+        name: "Church Street",
+        type: "landmark",
+        whyItMatters: "Dining and culture extension for evening planning.",
+      },
+      {
+        name: "MG Road Metro Station",
+        type: "transport",
+        whyItMatters: "Predictable fallback for central-route commute planning.",
+      },
+    ],
+  };
+
+  return map[keywordSlug] || null;
+}
+
+export function getNearbyAnchorsForKeyword(keywordSlug: string) {
+  const keyword = getLavelleSeoPage(keywordSlug);
+  if (!keyword) return [];
+
+  const specific = getKeywordSpecificAnchors(keywordSlug, keyword.place);
+  return specific || buildCategoryAnchors(keyword.category, keyword.place);
+}
+
 export function getArticleTitle(place: string, template: ArticleTemplate) {
   return `${template.titlePrefix} ${place}`;
 }
@@ -279,6 +471,7 @@ export function getKeywordArticleNarrative(keywordSlug: string, articleSlug: str
 
   const seed = hashSeed(`${keywordSlug}-${articleSlug}`);
   const nearbyGuide = pickVariant(genericSurroundingGuides, seed);
+  const anchors = getNearbyAnchorsForKeyword(keywordSlug).slice(0, 3);
 
   const lead = pickVariant(
     [
@@ -290,16 +483,43 @@ export function getKeywordArticleNarrative(keywordSlug: string, articleSlug: str
     1
   );
 
+  const operationalLens = pickVariant(
+    [
+      "The strongest results come from reducing avoidable movement and protecting high-focus hours.",
+      "Better trip outcomes usually come from route clarity, not schedule overloading.",
+      "Decision quality improves when stay, commute, and appointment flow are planned together.",
+    ],
+    seed,
+    4
+  );
+
+  const serviceLens = pickVariant(
+    [
+      "Travelers value fast response, clean communication, and a room setup that supports recovery after city pressure.",
+      "Service consistency often matters more than discount-led decisions for this intent type.",
+      "A premium base becomes practical when plans include long days and variable timelines.",
+    ],
+    seed,
+    5
+  );
+
+  const anchorNarrative = anchors
+    .map((anchor) => `${anchor.name} (${anchor.whyItMatters})`)
+    .join("; ");
+
   const paragraphs = [
     `${lead} The Pentouz @ Lavelle Road fits this intent by combining central positioning, refined room quality, and direct booking support for ${keyword.audience}.`,
     `For ${template.intent}, travelers should evaluate location relevance first. ${template.angle} often impacts real trip outcomes more than short-term price differences. A central base allows better control across check-in, appointments, and evening planning.`,
-    `Guests can combine this keyword-specific plan with nearby neighborhood experiences to improve overall trip value. We recommend pairing this route with our ${nearbyGuide.focusArea} guide for better day sequencing and lower commute fatigue.`,
+    `${operationalLens} Around ${keyword.place}, this is especially useful for ${keyword.audience} who need both productivity and low-friction city movement within the same day.`,
+    `Key surrounding anchors that improve practical planning include ${anchorNarrative}. Mapping your day around these touchpoints helps reduce transfer uncertainty and maintain schedule integrity.`,
+    `${serviceLens} Guests can combine this keyword-specific plan with nearby neighborhood experiences to improve overall trip value. We recommend pairing this route with our ${nearbyGuide.focusArea} guide for better day sequencing and lower commute fatigue.`,
   ];
 
   const bulletPoints = [
     `Primary keyword intent: ${keyword.keyword}`,
     `Best suited for: ${keyword.audience}`,
     `Stay strategy: use Lavelle Road as the central planning anchor`,
+    `Nearby anchors: ${anchors.map((anchor) => anchor.name).join(" | ")}`,
     `Supporting guide: ${nearbyGuide.title}`,
   ];
 
@@ -325,6 +545,7 @@ export function getKeywordArticleNarrative(keywordSlug: string, articleSlug: str
     keyword,
     template,
     nearbyGuide,
+    anchors,
     paragraphs,
     bulletPoints,
     faqs,
