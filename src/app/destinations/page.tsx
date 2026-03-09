@@ -21,7 +21,7 @@ export default function DestinationsPage() {
             {/* Loading placeholder */}
             <div className="absolute inset-0 video-placeholder" />
             <Image
-              src="https://pentouz.com/wp-content/uploads/2025/01/Living-Room-10-2.jpg"
+              src="/indiranagar/living-room-10.jpg"
               alt="Pentouz Destinations"
               fill
               priority

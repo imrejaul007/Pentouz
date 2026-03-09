@@ -122,7 +122,7 @@ export default function CollectionPage() {
         {/* Loading placeholder */}
         <div className="absolute inset-0 video-placeholder" />
         <Image
-          src="https://pentouz.com/wp-content/uploads/2025/01/Living-Room-5-1.jpg"
+          src="/indiranagar/living-room-5.jpg"
           alt="The Collection"
           fill
           className="object-cover"

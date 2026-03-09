@@ -159,7 +159,7 @@ export default function ContactPage() {
         <section className="relative h-[70vh] min-h-[600px]">
           <div className="absolute inset-0">
             <Image
-              src="https://pentouz.com/wp-content/uploads/2025/01/4.-Reception-e1738559433177.jpeg"
+              src="/lavelle-road/reception-1.jpg"
               alt="Contact The Pentouz"
               fill
               priority

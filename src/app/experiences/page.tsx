@@ -21,7 +21,7 @@ const experienceCategories = [
     subtitle: "Private Dining",
     description:
       "From intimate in-suite dinners crafted by private chefs to curated food tours through local markets, every meal becomes a discovery.",
-    image: "https://pentouz.com/wp-content/uploads/elementor/thumbs/21.-Restaurant-r0jnyygf1k0ah24wt4u2efy4f5tmx0hugjfogzpfeo.jpeg",
+    image: "/ooty/restaurant-20.jpeg",
     features: ["Private chef experiences", "Wine pairing dinners", "Local food tours", "Cooking classes"],
   },
   {
@@ -30,7 +30,7 @@ const experienceCategories = [
     subtitle: "Spa & Wellness",
     description:
       "Discover inner peace through personalized wellness programs, from traditional Ayurvedic treatments to contemporary spa therapies.",
-    image: "https://pentouz.com/wp-content/uploads/2025/01/TPH-MB-Bath-2-1.jpg",
+    image: "/indiranagar/master-bath.jpg",
     features: ["Ayurvedic treatments", "Yoga sessions", "Meditation retreats", "Wellness consultations"],
   },
   {
@@ -39,7 +39,7 @@ const experienceCategories = [
     subtitle: "Curated Tours",
     description:
       "Explore hidden gems and cultural treasures with our expertly curated tours, designed to reveal the authentic spirit of each destination.",
-    image: "https://pentouz.com/wp-content/uploads/2025/01/24.-Terrace-550x367.jpg",
+    image: "/ooty/view-24.jpeg",
     features: ["Heritage walks", "Art gallery visits", "Tea garden tours", "Temple & culture tours"],
   },
   {
@@ -48,7 +48,7 @@ const experienceCategories = [
     subtitle: "Special Occasions",
     description:
       "Whether it's an intimate anniversary or a milestone birthday, we craft celebrations that exceed expectations and create lasting memories.",
-    image: "https://pentouz.com/wp-content/uploads/2025/01/11.-The-Terrace-Haven_Terrace-1024x683.jpg",
+    image: "/indiranagar/terrace-7.jpg",
     features: ["Anniversary packages", "Birthday celebrations", "Proposal setups", "Family gatherings"],
   },
 ];
@@ -160,7 +160,7 @@ export default function ExperiencesPage() {
         <section className="relative h-[80vh] min-h-[700px]">
           <div className="absolute inset-0">
             <Image
-              src="https://pentouz.com/wp-content/uploads/2025/01/Living-Room-10-2.jpg"
+              src="/indiranagar/living-room-10.jpg"
               alt="Pentouz Experiences"
               fill
               priority
@@ -221,7 +221,7 @@ export default function ExperiencesPage() {
         <section className="relative min-h-[90vh]">
           <div className="absolute inset-0">
             <Image
-              src="https://pentouz.com/wp-content/uploads/elementor/thumbs/04.-The-Skyline-Suite_Bedroom-r0jo1p5gz5rec45jsthw691ismb6d8dnu3xnv1n39c.jpg"
+              src="/indiranagar/skyline-suite.jpg"
               alt="Pentouz Privé"
               fill
               className="object-cover"

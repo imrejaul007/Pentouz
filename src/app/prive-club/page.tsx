@@ -185,7 +185,7 @@ export default function PriveClubPage() {
         className="relative h-[60vh] sm:h-[70vh] min-h-[500px] flex items-center justify-center bg-[#1a1a1a]"
       >
         <Image
-          src="https://pentouz.com/wp-content/uploads/2025/01/Living-Room-5-1.jpg"
+          src="/indiranagar/living-room-5.jpg"
           alt="Privé Club"
           fill
           className="object-cover opacity-40"

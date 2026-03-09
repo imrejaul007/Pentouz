@@ -118,7 +118,7 @@ export default function AboutPage() {
         <section className="relative h-[80vh] min-h-[700px]">
           <div className="absolute inset-0">
             <Image
-              src="https://pentouz.com/wp-content/uploads/2025/01/Living-Room-5-1.jpg"
+              src="/indiranagar/living-room-5.jpg"
               alt="The Pentouz Story"
               fill
               priority
@@ -153,7 +153,7 @@ export default function AboutPage() {
               <div data-reveal className="relative">
                 <div className="aspect-[4/5] relative overflow-hidden">
                   <Image
-                    src="https://pentouz.com/wp-content/uploads/2025/01/11.-The-Terrace-Haven_Terrace-1024x683.jpg"
+                    src="/indiranagar/terrace-7.jpg"
                     alt="Pentouz Heritage"
                     fill
                     className="object-cover"
@@ -247,7 +247,7 @@ export default function AboutPage() {
         <section className="relative min-h-[80vh]">
           <div className="absolute inset-0">
             <Image
-              src="https://pentouz.com/wp-content/uploads/2025/01/TPH-MB-Bath-2-1.jpg"
+              src="/indiranagar/master-bath.jpg"
               alt="Luxury Experience"
               fill
               className="object-cover"
