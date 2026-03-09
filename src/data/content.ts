@@ -5,25 +5,40 @@ export const destinations = [
     subtitle: "Indiranagar, Bangalore",
     title: "THE PENTOUZ @ 100 Feet Road",
     shortTitle: "Indiranagar",
-    copy: "An ultra-luxury 6,000 sq ft penthouse in Bangalore's most vibrant neighborhood. Perfect for corporate guests and families.",
-    description: "The Pentouz @ 100 Feet Road Indiranagar is an Ultra-Luxury 3 BHK Fully Serviced Apartment on the top floor that offers the pinnacle of sophistication and comfort. This 6,000 square feet penthouse features elegant living areas with modern design and includes a fully equipped kitchen suitable for gourmet meal preparation. Located in the heart of Bangalore's vibrant Indiranagar neighborhood, it's perfect for corporate guests, families, and those seeking extended stays.",
+    copy: "A luxurious three-bedroom penthouse in the heart of Indiranagar, crafted for families, groups, and business travelers seeking premium comfort.",
+    description: "The Pentouz Indiranagar is a luxurious 3-bedroom penthouse nestled in one of Bangalore's most upscale neighborhoods. This exclusive residence blends comfort, elegance, and convenience with spacious interiors and thoughtfully designed living areas. Each bedroom features a private balcony with vibrant city views, plush bedding, ample storage, and tasteful decor for a serene and elevated stay.",
     image: "https://pentouz.com/wp-content/uploads/2025/01/11.-The-Terrace-Haven_Terrace-1024x683.jpg",
     heroImage: "https://pentouz.com/wp-content/uploads/2025/01/11.-The-Terrace-Haven_Terrace-1024x683.jpg",
-    propertyType: "Ultra-Luxury Serviced Penthouse",
+    propertyType: "THREE BEDROOM PENTHOUSE",
     totalSize: "6,000 sq ft",
     rating: 5,
     reviews: 4,
     capacity: "Up to 6 guests",
     address: "2022, 100 Feet Road, Indiranagar, Bangalore – 560038, India",
     features: [
-      "Top-floor penthouse location",
-      "Fully equipped gourmet kitchen",
-      "Elegant modern interior design",
-      "Three bedrooms with private balconies",
-      "24/7 concierge service",
-      "Spectacular outdoor terrace"
+      "Three-bedroom private penthouse",
+      "Private balcony in each bedroom",
+      "Open terrace and city views",
+      "Ultra-modern kitchen",
+      "Daily housekeeping",
+      "Covered car parking",
     ],
-    amenities: ["Free WiFi", "Full Kitchen", "Mini Bar", "Nespresso", "Smart TV", "Bathtub", "Air Conditioning", "Laundry", "Private Parking"],
+    amenities: [
+      "Prime Location",
+      "Peace & Tranquillity",
+      "Great Views",
+      "Safe & Secure",
+      "Ultra-modern Kitchen",
+      "Daily Housekeeping",
+      "Laundry Room",
+      "Wifi & Internet",
+      "State-Of-Art Entertainment",
+      "Spacious Balconies",
+      "Open Terrace",
+      "Covered Car Parking",
+      "Transport Services",
+      "Airport Pick-up Service",
+    ],
     rooms: [
       { name: "The Skyline Suite", description: "Panoramic city views with private terrace" },
       { name: "The Terrace Haven", description: "Direct terrace access with lounge seating" },
@@ -34,7 +49,7 @@ export const destinations = [
       "https://pentouz.com/wp-content/uploads/elementor/thumbs/04.-The-Skyline-Suite_Bedroom-r0jo1p5gz5rec45jsthw691ismb6d8dnu3xnv1n39c.jpg",
       "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-5-1.jpg"
     ],
-    bookingUrl: "https://pentouz.com/indiranagar-branch/",
+    bookingUrl: "https://hotels.eglobe-solutions.com/pentouz/booking/hotels/the-pentouz-bangalore",
     location: {
       airport: { name: "Kempegowda International Airport", distance: "37 km", time: "60 minutes" },
       railway: { name: "KSR Bengaluru City Junction", distance: "10 km", time: "35 minutes" },
@@ -42,33 +57,40 @@ export const destinations = [
     },
     coordinates: { lat: 12.9767, lng: 77.641 },
     idealFor: ["Corporate Guests", "Families", "Extended Stays", "Special Occasions"],
+    livingIntro:
+      "The centerpiece of The Pentouz Indiranagar is its spacious and thoughtfully designed penthouse with three well-appointed bedrooms and private balconies overlooking the city.",
+    livingLocation: {
+      airport: { name: "Kempegowda International Airport", distance: "37 km", time: "60 minutes" },
+      railway: { name: "KSR Bengaluru City Junction", distance: "10 km", time: "35 minutes" },
+      metro: { name: "Indiranagar Metro Station", distance: "1 km", time: "5 minutes" },
+    },
     livingRooms: [
       {
-        name: "Entire Penthouse",
+        name: "THREE BEDROOM PENTHOUSE",
         size: "6,000 sq ft",
-        description: "A vast, fully serviced 3 BHK penthouse featuring three well-appointed bedrooms, each with a private balcony. Includes spacious living room, dining area, modern kitchen, and a spectacular outdoor terrace perfect for entertaining.",
-        features: ["3 Bedrooms", "Private Balconies", "Full Kitchen", "Outdoor Terrace", "Laundry"],
+        description: "A spacious full-floor penthouse with three bedrooms, private balconies, elegant living and dining spaces, an ultra-modern kitchen, and an open terrace for memorable gatherings.",
+        features: ["3 Bedrooms", "Private Balconies", "Open Terrace", "Ultra-modern Kitchen"],
         image: "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-5-1.jpg"
       },
       {
         name: "The Terrace Haven",
         size: "3,000 sq ft",
-        description: "Direct terrace access with plush bedding and contemporary decor. Features en-suite bathroom with walk-in shower and shared access to common areas including living, dining, and kitchen.",
-        features: ["Terrace Access", "En-suite Bathroom", "Walk-in Shower", "Shared Living Areas"],
+        description: "A refined suite with direct terrace access, plush bedding, elegant interiors, and shared access to the penthouse living and dining spaces.",
+        features: ["Terrace Access", "Private Balcony", "Shared Living Areas", "City Views"],
         image: "https://pentouz.com/wp-content/uploads/2025/01/11.-The-Terrace-Haven_Terrace-1024x683.jpg"
       },
       {
         name: "The Skyline Suite",
         size: "600 sq ft",
-        description: "Floor-to-ceiling windows offering stunning city views. King-sized bed, private balcony, en-suite bathroom, LED TV, and high-speed internet for the perfect urban retreat.",
-        features: ["City Views", "King Bed", "Private Balcony", "En-suite Bathroom"],
+        description: "A sophisticated king suite with expansive city views, private balcony, elegant bath, and all modern in-room essentials.",
+        features: ["City Views", "King Bed", "Private Balcony", "Wifi & Internet"],
         image: "https://pentouz.com/wp-content/uploads/elementor/thumbs/04.-The-Skyline-Suite_Bedroom-r0jo1p5gz5rec45jsthw691ismb6d8dnu3xnv1n39c.jpg"
       },
       {
         name: "The Vista Room",
         size: "500 sq ft",
-        description: "Stunning city views with private balcony. Air-conditioned comfort with premium bathroom fixtures and access to shared living, dining, and kitchen spaces.",
-        features: ["City Views", "Private Balcony", "Air Conditioning", "Shared Spaces"],
+        description: "A calm and comfortable room with private balcony, city outlook, and seamless access to the penthouse common areas.",
+        features: ["City Views", "Private Balcony", "Peace & Tranquillity", "Shared Spaces"],
         image: "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-10-2.jpg"
       }
     ]
