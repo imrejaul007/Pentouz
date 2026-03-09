@@ -80,8 +80,8 @@ export const destinations = [
     shortTitle: "Lavelle Road",
     copy: "A boutique rooftop hotel with 6 elegantly designed studio rooms offering panoramic city views, just steps from UB City.",
     description: "The Pentouz @ Lavelle Road is a 4-star boutique hotel situated on the rooftop of a prime Lavelle Road location, featuring 6 beautifully appointed studio rooms with panoramic city views. Located just a 6-minute walk from UB City Mall, this property combines sophisticated urban living with personalized concierge service. Each studio features a private balcony, fully equipped kitchenette, and modern amenities. Enjoy 24-hour front desk service, in-house restaurant, and complimentary breakfast.",
-    image: "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-5-1.jpg",
-    heroImage: "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-5-1.jpg",
+    image: "/lavelle-road/facade-1.jpg",
+    heroImage: "/lavelle-road/terrace-1.jpg",
     propertyType: "Boutique Hotel",
     totalRooms: "6 Studio Rooms",
     rating: 4,
@@ -103,9 +103,19 @@ export const destinations = [
       { name: "The Classic Studio", description: "Elegant studio with modern comforts" }
     ],
     gallery: [
-      "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-5-1.jpg",
-      "https://pentouz.com/wp-content/uploads/2025/01/TPH-MB-Bath-2-1.jpg",
-      "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-10-2.jpg"
+      "/lavelle-road/facade-1.jpg",
+      "/lavelle-road/entrance-1.jpg",
+      "/lavelle-road/reception-1.jpg",
+      "/lavelle-road/reception-2.jpg",
+      "/lavelle-road/restaurant-1.jpg",
+      "/lavelle-road/restaurant-2.jpg",
+      "/lavelle-road/terrace-1.jpg",
+      "/lavelle-road/terrace-2.jpg",
+      "/lavelle-road/patio-1.jpg",
+      "/lavelle-road/parking.jpg",
+      "/lavelle-road/king-suite-1.jpg",
+      "/lavelle-road/queen-suite-1.jpg",
+      "/lavelle-road/superior-suite-1.jpg"
     ],
     bookingUrl: "https://pentouz.com/the-pentouz-lavelle-road-bangalore/",
     coordinates: { lat: 12.9716, lng: 77.5946 },
@@ -121,21 +131,21 @@ export const destinations = [
         size: "450 sq ft",
         description: "Corner studio offering wraparound panoramic views of Bangalore's skyline. Features king bed, private balcony, fully equipped kitchenette, and premium bathroom with rain shower.",
         features: ["Wraparound Views", "King Bed", "Private Balcony", "Kitchenette"],
-        image: "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-5-1.jpg"
+        image: "/lavelle-road/king-suite-1.jpg"
       },
       {
         name: "The Skyline Studio",
         size: "400 sq ft",
         description: "Premium studio with direct views of UB City skyline. Comfortable queen bed, dedicated workspace, private balcony, and modern en-suite bathroom.",
         features: ["UB City Views", "Queen Bed", "Workspace", "Private Balcony"],
-        image: "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-10-2.jpg"
+        image: "/lavelle-road/queen-suite-1.jpg"
       },
       {
         name: "The Classic Studio",
         size: "380 sq ft",
         description: "Elegant studio with modern comforts and city views. Queen bed, kitchenette, Smart TV, and contemporary bathroom with premium amenities.",
         features: ["City Views", "Queen Bed", "Kitchenette", "Smart TV"],
-        image: "https://pentouz.com/wp-content/uploads/2025/01/TPH-MB-Bath-2-1.jpg"
+        image: "/lavelle-road/superior-suite-1.jpg"
       }
     ]
   },
