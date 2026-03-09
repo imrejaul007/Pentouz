@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import EditorialTrustBar from "@/components/EditorialTrustBar";
 import {
   getLavelleSeoPage,
   getRelatedLavelleSeoPages,
@@ -418,6 +419,8 @@ export default function LavelleNearPlacePage({ params }: { params: Params }) {
             </div>
           </div>
         </section>
+
+        <EditorialTrustBar />
       </main>
       <Footer />
     </>

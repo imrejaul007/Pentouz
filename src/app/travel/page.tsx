@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import EditorialTrustBar from "@/components/EditorialTrustBar";
 import { lavelleSeoPages } from "@/data/lavelleSeoPages";
 import {
   genericSurroundingGuides,
@@ -95,6 +96,8 @@ export default function TravelHubPage() {
             </div>
           </div>
         </section>
+
+        <EditorialTrustBar />
       </main>
       <Footer />
     </>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import EditorialTrustBar from "@/components/EditorialTrustBar";
 import { getLavelleSeoPage, lavelleSeoPages } from "@/data/lavelleSeoPages";
 import { getLavelleEditorialOverride } from "@/data/lavelleEditorialOverrides";
 import {
@@ -139,6 +140,8 @@ export default function KeywordTravelHubPage({ params }: { params: Params }) {
             </div>
           </div>
         </section>
+
+        <EditorialTrustBar />
       </main>
       <Footer />
     </>

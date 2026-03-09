@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import IntentLeadForm from "@/components/IntentLeadForm";
+import EditorialTrustBar from "@/components/EditorialTrustBar";
 import { getLavelleSeoPage } from "@/data/lavelleSeoPages";
 import { getLavelleEditorialOverride } from "@/data/lavelleEditorialOverrides";
 import { getManualArticleOverride } from "@/data/lavelleManualArticleOverrides";
@@ -248,6 +249,8 @@ export default function KeywordArticlePage({ params }: { params: Params }) {
             articleSlug={params.article}
           />
         ) : null}
+
+        <EditorialTrustBar />
       </main>
       <Footer />
     </>
