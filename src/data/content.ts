@@ -131,7 +131,7 @@ export const destinations = [
       "/lavelle-road/queen-suite-1.jpg",
       "/lavelle-road/superior-suite-1.jpg"
     ],
-    bookingUrl: "https://pentouz.com/the-pentouz-lavelle-road-bangalore/",
+    bookingUrl: "https://bookmystay.io/rooms/37853/2025-12-23/2025-12-24/2/0?utm_source=brandWebsite",
     coordinates: { lat: 12.9716, lng: 77.5946 },
     idealFor: ["Business Travelers", "Couples", "Solo Travelers", "Weekend Getaways"],
     location: {
