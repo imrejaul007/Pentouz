@@ -463,6 +463,42 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
         </section>
       )}
 
+      {isLavelleRoad && (
+        <section className="py-14 sm:py-18 bg-white border-y border-brand-border">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-7">
+              <h2 className="font-display text-2xl sm:text-3xl font-light">
+                Explore Nearby Lavelle Road Search Pages
+              </h2>
+              <Link
+                href="/destinations/lavelle-road/near"
+                className="text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:text-brand-accent transition-colors"
+              >
+                View Full Location Hub
+              </Link>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[
+                { label: "Hotel Near Karnataka High Court", href: "/destinations/lavelle-road/near/karnataka-high-court" },
+                { label: "Hotel Near UB City", href: "/destinations/lavelle-road/near/ub-city" },
+                { label: "Hotel Near Vidhana Soudha", href: "/destinations/lavelle-road/near/vidhana-soudha" },
+                { label: "Hotel Near Cubbon Park", href: "/destinations/lavelle-road/near/cubbon-park" },
+                { label: "Hotel Near MG Road Metro Station", href: "/destinations/lavelle-road/near/mg-road-metro" },
+                { label: "Hotel Near KSR Railway Station", href: "/destinations/lavelle-road/near/ksr-railway-station" },
+              ].map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="border border-brand-border bg-[#f8f7f5] p-4 text-sm hover:bg-brand-ink hover:text-white transition-colors"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Contact CTA - Enhanced */}
       <section className="py-16 sm:py-24 lg:py-32 bg-[#1a1a1a] relative overflow-hidden">
         {/* Background pattern */}

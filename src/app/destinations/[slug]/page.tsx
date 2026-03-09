@@ -898,6 +898,50 @@ export default function DestinationPage({
           </div>
         </section>
 
+        {isLavelleRoad && (
+          <section className="py-16 sm:py-20 bg-white border-y border-brand-border">
+            <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
+              <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-8 sm:mb-10">
+                <div>
+                  <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-gold mb-3">
+                    SEO Location Hub
+                  </p>
+                  <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-light">
+                    Lavelle Road Nearby <em className="italic">Stay Guides</em>
+                  </h2>
+                </div>
+                <Link
+                  href="/destinations/lavelle-road/near"
+                  className="text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:text-brand-gold transition-colors"
+                >
+                  View All 50+ Pages
+                </Link>
+              </div>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+                {[
+                  { label: "Hotel Near Karnataka High Court", href: "/destinations/lavelle-road/near/karnataka-high-court" },
+                  { label: "Hotel Near UB City", href: "/destinations/lavelle-road/near/ub-city" },
+                  { label: "Hotel Near MG Road", href: "/destinations/lavelle-road/near/mg-road" },
+                  { label: "Hotel Near Vidhana Soudha", href: "/destinations/lavelle-road/near/vidhana-soudha" },
+                  { label: "Hotel Near Cubbon Park", href: "/destinations/lavelle-road/near/cubbon-park" },
+                  { label: "Hotel Near Chinnaswamy Stadium", href: "/destinations/lavelle-road/near/chinnaswamy-stadium" },
+                  { label: "Hotel Near MG Road Metro", href: "/destinations/lavelle-road/near/mg-road-metro" },
+                  { label: "Hotel Near KSR Railway Station", href: "/destinations/lavelle-road/near/ksr-railway-station" },
+                ].map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="bg-[#f8f7f5] border border-brand-border p-4 text-sm hover:bg-brand-ink hover:text-white transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* Booking CTA - Enhanced design */}
         <section className="py-16 sm:py-24 lg:py-32 bg-brand-ink text-white relative overflow-hidden">
           {/* Background pattern */}

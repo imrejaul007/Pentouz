@@ -1,4 +1,5 @@
 import { destinations } from "@/data/content";
+import { withSiteUrl } from "@/lib/site";
 
 export default function Head({ params }: { params: { slug: string } }) {
   const destination = destinations.find((item) => item.slug === params.slug);
@@ -11,7 +12,7 @@ export default function Head({ params }: { params: { slug: string } }) {
   const description = isLavelle
     ? "Explore studio options at The Pentouz Lavelle Road, preferred by outstation advocates and business travelers seeking quick access to High Court of Karnataka."
     : `Explore room and suite options at The Pentouz ${destination.shortTitle}.`;
-  const canonical = `https://pentouz-web.onrender.com/destinations/${destination.slug}/living`;
+  const canonical = withSiteUrl(`/destinations/${destination.slug}/living`);
 
   return (
     <>

@@ -1,4 +1,5 @@
 import { destinations } from "@/data/content";
+import { withSiteUrl } from "@/lib/site";
 
 export default function Head({ params }: { params: { slug: string } }) {
   const destination = destinations.find((item) => item.slug === params.slug);
@@ -14,7 +15,7 @@ export default function Head({ params }: { params: { slug: string } }) {
   const title =
     lavelleSeo?.title || `${destination.title} | The Pentouz ${destination.shortTitle}`;
   const description = lavelleSeo?.description || destination.description;
-  const canonical = `https://pentouz-web.onrender.com/destinations/${destination.slug}`;
+  const canonical = withSiteUrl(`/destinations/${destination.slug}`);
   const keywords = lavelleSeo?.keywords?.join(", ");
 
   return (
