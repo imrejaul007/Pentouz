@@ -40,6 +40,9 @@ export default function LavelleNearHubPage() {
               <Link href="/destinations/lavelle-road" className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
                 Lavelle Property Page
               </Link>
+              <Link href="/travel" className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
+                Travel Content Hub
+              </Link>
               <a href="https://bookmystay.io/rooms/37853/2025-12-23/2025-12-24/2/0?utm_source=brandWebsite" target="_blank" rel="noopener noreferrer" className="bg-brand-gold text-white px-4 py-2 hover:bg-brand-goldLight transition-colors">
                 Book Lavelle Road
               </a>
@@ -85,9 +88,15 @@ export default function LavelleNearHubPage() {
               Every page in this hub links back to the Lavelle Road property page, links to related location guides,
               and links to direct booking. This creates crawl depth, relevance, and topical authority around intent-based searches.
             </p>
+            <p className="mt-4 text-sm sm:text-base text-brand-body leading-relaxed max-w-4xl">
+              We also link each keyword to a dedicated travel cluster with multiple supporting articles to build stronger topical authority.
+            </p>
             <p className="mt-4 text-xs uppercase tracking-[0.15em] text-brand-muted">
               Total indexed location pages: {lavelleSeoPages.length}
             </p>
+            <Link href="/travel" className="inline-flex mt-5 text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:text-brand-gold transition-colors">
+              Explore Travel Hub
+            </Link>
           </div>
         </section>
       </main>

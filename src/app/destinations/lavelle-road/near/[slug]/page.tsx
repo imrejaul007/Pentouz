@@ -242,6 +242,9 @@ export default function LavelleNearPlacePage({ params }: { params: Params }) {
               <Link href="/destinations/lavelle-road" className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
                 View Lavelle Property
               </Link>
+              <Link href={`/travel/near/${page.slug}`} className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
+                6 Article Cluster
+              </Link>
               <Link href="/destinations/lavelle-road/living" className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
                 View Room Types
               </Link>
@@ -333,6 +336,17 @@ export default function LavelleNearPlacePage({ params }: { params: Params }) {
 
         <section className="py-14 sm:py-18 bg-white border-y border-brand-border">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-5">
+              Expand This Topic with Interconnected Travel Articles
+            </h2>
+            <p className="text-sm sm:text-base text-brand-body leading-relaxed mb-6 max-w-4xl">
+              For broader keyword depth, this page is supported by a dedicated travel cluster covering commute guidance,
+              short-stay strategy, extended-stay planning, and local area utility around {page.place}.
+            </p>
+            <Link href={`/travel/near/${page.slug}`} className="inline-flex mb-8 text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:text-brand-gold transition-colors">
+              Open Travel Cluster for {page.place}
+            </Link>
+
             <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Related Bengaluru Location Guides</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {relatedPages.map((related) => (
