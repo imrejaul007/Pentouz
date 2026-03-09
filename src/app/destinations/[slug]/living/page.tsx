@@ -108,6 +108,15 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
     features: destination.amenities?.slice(0, 4) || [],
     image: destination.gallery?.[i] || destination.image,
   }));
+  const livingLocation =
+    (destination as typeof destination & {
+      livingLocation?: typeof destination.location;
+    }).livingLocation || destination.location;
+  const livingIntro =
+    (destination as typeof destination & {
+      livingIntro?: string;
+    }).livingIntro ||
+    "Discover our collection of meticulously designed spaces, each offering a unique perspective on luxury living.";
 
   return (
     <>
@@ -158,7 +167,7 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
                   data-reveal
                   className="text-sm sm:text-base text-white/90 max-w-xl leading-relaxed"
                 >
-                  Discover our collection of meticulously designed spaces, each offering a unique perspective on luxury living.
+                  {livingIntro}
                 </p>
               </div>
 
@@ -319,7 +328,7 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
       </section>
 
       {/* Location - Enhanced with better cards */}
-      {destination.location && (
+      {livingLocation && (
         <section className="py-16 sm:py-24 lg:py-32 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
             <div className="text-center mb-12 sm:mb-16">
@@ -333,55 +342,55 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {destination.location.airport && (
+              {livingLocation.airport && (
                 <div className="group p-6 sm:p-8 bg-[#f8f7f5] hover:bg-brand-ink transition-colors duration-500">
                   <Plane className="w-10 h-10 text-brand-accent group-hover:text-white mb-5" strokeWidth={1} />
                   <h3 className="font-display text-lg sm:text-xl font-light mb-2 group-hover:text-white transition-colors">
-                    {destination.location.airport.name}
+                    {livingLocation.airport.name}
                   </h3>
                   <p className="text-sm text-brand-muted group-hover:text-white/60 transition-colors">
-                    {destination.location.airport.distance} away
+                    {livingLocation.airport.distance} away
                   </p>
                   <div className="flex items-center gap-2 mt-4 pt-4 border-t border-brand-border group-hover:border-white/20 transition-colors">
                     <Clock className="w-4 h-4 text-brand-accent group-hover:text-white transition-colors" />
                     <p className="text-sm text-brand-body group-hover:text-white/80 transition-colors">
-                      {destination.location.airport.time}
+                      {livingLocation.airport.time}
                     </p>
                   </div>
                 </div>
               )}
 
-              {destination.location.railway && (
+              {livingLocation.railway && (
                 <div className="group p-6 sm:p-8 bg-[#f8f7f5] hover:bg-brand-ink transition-colors duration-500">
                   <Train className="w-10 h-10 text-brand-accent group-hover:text-white mb-5" strokeWidth={1} />
                   <h3 className="font-display text-lg sm:text-xl font-light mb-2 group-hover:text-white transition-colors">
-                    {destination.location.railway.name}
+                    {livingLocation.railway.name}
                   </h3>
                   <p className="text-sm text-brand-muted group-hover:text-white/60 transition-colors">
-                    {destination.location.railway.distance} away
+                    {livingLocation.railway.distance} away
                   </p>
                   <div className="flex items-center gap-2 mt-4 pt-4 border-t border-brand-border group-hover:border-white/20 transition-colors">
                     <Clock className="w-4 h-4 text-brand-accent group-hover:text-white transition-colors" />
                     <p className="text-sm text-brand-body group-hover:text-white/80 transition-colors">
-                      {destination.location.railway.time}
+                      {livingLocation.railway.time}
                     </p>
                   </div>
                 </div>
               )}
 
-              {(destination.location.metro || destination.location.landmark) && (
+              {(livingLocation.metro || livingLocation.landmark) && (
                 <div className="group p-6 sm:p-8 bg-[#f8f7f5] hover:bg-brand-ink transition-colors duration-500">
                   <Building className="w-10 h-10 text-brand-accent group-hover:text-white mb-5" strokeWidth={1} />
                   <h3 className="font-display text-lg sm:text-xl font-light mb-2 group-hover:text-white transition-colors">
-                    {destination.location.metro?.name || destination.location.landmark?.name}
+                    {livingLocation.metro?.name || livingLocation.landmark?.name}
                   </h3>
                   <p className="text-sm text-brand-muted group-hover:text-white/60 transition-colors">
-                    {destination.location.metro?.distance || destination.location.landmark?.distance} away
+                    {livingLocation.metro?.distance || livingLocation.landmark?.distance} away
                   </p>
                   <div className="flex items-center gap-2 mt-4 pt-4 border-t border-brand-border group-hover:border-white/20 transition-colors">
                     <Clock className="w-4 h-4 text-brand-accent group-hover:text-white transition-colors" />
                     <p className="text-sm text-brand-body group-hover:text-white/80 transition-colors">
-                      {destination.location.metro?.time || destination.location.landmark?.time}
+                      {livingLocation.metro?.time || livingLocation.landmark?.time}
                     </p>
                   </div>
                 </div>

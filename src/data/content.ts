@@ -139,6 +139,13 @@ export const destinations = [
       railway: { name: "KSR Bengaluru City Junction", distance: "5 km", time: "15 minutes" },
       metro: { name: "MG Road Metro Station", distance: "1 km", time: "5 minutes" },
     },
+    livingIntro:
+      "The Pentouz @ Lavelle Road offers six elegantly designed top-floor studio accommodations, each balancing space, privacy, and refined comfort in Bangalore's premier neighborhood.",
+    livingLocation: {
+      airport: { name: "Kempegowda International Airport", distance: "37 km", time: "60 minutes" },
+      railway: { name: "KSR Bengaluru City Junction", distance: "10 km", time: "35 minutes" },
+      metro: { name: "MG Road Metro Station", distance: "1 km", time: "5 minutes" },
+    },
     livingRooms: [
       {
         name: "KING STUDIO",
