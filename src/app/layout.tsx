@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import Preloader from "@/components/Preloader";
+import { withSiteUrl } from "@/lib/site";
 
 const bodyFont = Montserrat({
   variable: "--font-body-family",
@@ -30,11 +31,32 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const siteJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        name: "The Pentouz",
+        url: withSiteUrl("/"),
+        logo: withSiteUrl("/logo-dark.png"),
+      },
+      {
+        "@type": "WebSite",
+        name: "The Pentouz",
+        url: withSiteUrl("/"),
+      },
+    ],
+  };
+
   return (
     <html lang="en">
       <body
         className={`${bodyFont.variable} ${displayFont.variable} antialiased bg-white text-brand-ink`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }}
+        />
         <Preloader />
         {children}
       </body>

@@ -47,10 +47,46 @@ export default function KeywordTravelHubPage({ params }: { params: Params }) {
   const articles = getKeywordHubArticles(keyword.slug);
   const crossLinks = getRelatedKeywordArticleLinks(keyword.slug, "where-to-stay");
   const anchors = getNearbyAnchorsForKeyword(keyword.slug).slice(0, 3);
+  const pageUrl = withSiteUrl(`/travel/near/${keyword.slug}`);
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        name: `Travel Guides Near ${keyword.place}`,
+        description: `Keyword travel hub for ${keyword.keyword}`,
+        url: pageUrl,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: withSiteUrl("/"),
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Travel",
+            item: withSiteUrl("/travel"),
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: keyword.place,
+            item: pageUrl,
+          },
+        ],
+      },
+    ],
+  };
 
   return (
     <>
       <Header />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <main className="bg-[#f8f7f5] min-h-screen">
         <section className="bg-brand-ink text-white py-20 sm:py-24 lg:py-28">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">

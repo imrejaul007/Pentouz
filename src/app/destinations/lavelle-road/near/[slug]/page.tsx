@@ -226,6 +226,29 @@ export default function LavelleNearPlacePage({ params }: { params: Params }) {
           },
         })),
       },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: withSiteUrl("/"),
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Lavelle Road Nearby",
+            item: withSiteUrl("/destinations/lavelle-road/near"),
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: page.place,
+            item: pageUrl,
+          },
+        ],
+      },
     ],
   };
 

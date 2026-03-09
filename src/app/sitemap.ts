@@ -20,6 +20,7 @@ const staticPaths = [
   "/prive-club",
   "/stories",
   "/terms",
+  "/editorial-policy",
   "/destinations/lavelle-road/near",
   "/travel",
 ];
