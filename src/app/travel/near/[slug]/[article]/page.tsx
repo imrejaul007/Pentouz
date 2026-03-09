@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getLavelleSeoPage } from "@/data/lavelleSeoPages";
+import { getLavelleEditorialOverride } from "@/data/lavelleEditorialOverrides";
 import {
   genericSurroundingGuides,
   getAllKeywordArticleParams,
@@ -55,6 +56,10 @@ export default function KeywordArticlePage({ params }: { params: Params }) {
 
   const keyword = getLavelleSeoPage(params.slug);
   if (!keyword) notFound();
+  const editorial = getLavelleEditorialOverride(keyword.slug);
+  const editorialArticleLead = editorial?.articleLeadByType[
+    params.article as keyof typeof editorial.articleLeadByType
+  ];
 
   const relatedLinks = getRelatedKeywordArticleLinks(params.slug, params.article);
   const genericLinks = genericSurroundingGuides.slice(0, 4);
@@ -97,7 +102,13 @@ export default function KeywordArticlePage({ params }: { params: Params }) {
               {getArticleTitle(narrative.keyword.place, narrative.template)}
             </h1>
             <p className="mt-6 text-sm sm:text-base text-white/85 max-w-4xl leading-relaxed">
-              This article supports users searching <strong>{narrative.keyword.keyword}</strong>, with practical recommendations for {narrative.keyword.audience}.
+              {editorialArticleLead ? (
+                <>{editorialArticleLead}</>
+              ) : (
+                <>
+                  This article supports users searching <strong>{narrative.keyword.keyword}</strong>, with practical recommendations for {narrative.keyword.audience}.
+                </>
+              )}
             </p>
             <div className="mt-8 flex flex-wrap gap-3 text-[10px] sm:text-[11px] uppercase tracking-[0.15em]">
               <Link href={`/travel/near/${params.slug}`} className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">

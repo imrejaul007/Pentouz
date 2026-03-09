@@ -8,6 +8,7 @@ import {
   getRelatedLavelleSeoPages,
   lavelleSeoPages,
 } from "@/data/lavelleSeoPages";
+import { getLavelleEditorialOverride } from "@/data/lavelleEditorialOverrides";
 import { withSiteUrl } from "@/lib/site";
 
 const categoryCopy = {
@@ -185,7 +186,14 @@ export default function LavelleNearPlacePage({ params }: { params: Params }) {
   const relatedPages = getRelatedLavelleSeoPages(page.slug, 6);
   const copy = categoryCopy[page.category];
   const pageUrl = withSiteUrl(`/destinations/lavelle-road/near/${page.slug}`);
-  const narrative = getPageNarrative(page);
+  const editorial = getLavelleEditorialOverride(page.slug);
+  const narrative = editorial
+    ? {
+        planningTips: editorial.planningTips,
+        longFormParagraphs: editorial.longFormParagraphs,
+        faqs: editorial.faqs,
+      }
+    : getPageNarrative(page);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -234,9 +242,15 @@ export default function LavelleNearPlacePage({ params }: { params: Params }) {
               Hotel Near {page.place}
             </h1>
             <p className="mt-6 text-sm sm:text-base text-white/85 max-w-4xl leading-relaxed">
-              If you are searching for <strong>{page.keyword}</strong>, The Pentouz @ Lavelle Road offers a premium,
-              city-central stay for {page.audience}. This page is designed to help guests compare location intent,
-              travel practicality, and stay quality before booking.
+              {editorial ? (
+                <>{editorial.heroIntro}</>
+              ) : (
+                <>
+                  If you are searching for <strong>{page.keyword}</strong>, The Pentouz @ Lavelle Road offers a premium,
+                  city-central stay for {page.audience}. This page is designed to help guests compare location intent,
+                  travel practicality, and stay quality before booking.
+                </>
+              )}
             </p>
             <div className="mt-8 flex flex-wrap gap-3 text-[10px] sm:text-[11px] uppercase tracking-[0.15em]">
               <Link href="/destinations/lavelle-road" className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">

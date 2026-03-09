@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getLavelleSeoPage, lavelleSeoPages } from "@/data/lavelleSeoPages";
+import { getLavelleEditorialOverride } from "@/data/lavelleEditorialOverrides";
 import {
   getKeywordHubArticles,
   getRelatedKeywordArticleLinks,
@@ -39,6 +40,7 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
 export default function KeywordTravelHubPage({ params }: { params: Params }) {
   const keyword = getLavelleSeoPage(params.slug);
   if (!keyword) notFound();
+  const editorial = getLavelleEditorialOverride(keyword.slug);
 
   const articles = getKeywordHubArticles(keyword.slug);
   const crossLinks = getRelatedKeywordArticleLinks(keyword.slug, "where-to-stay");
@@ -56,8 +58,14 @@ export default function KeywordTravelHubPage({ params }: { params: Params }) {
               Travel Guides Near <em className="italic">{keyword.place}</em>
             </h1>
             <p className="mt-6 text-sm sm:text-base text-white/85 max-w-4xl leading-relaxed">
-              Built for users searching <strong>{keyword.keyword}</strong>. This hub contains multiple intent-focused articles for {keyword.audience},
-              with internal links to the Lavelle Road property page, living page, booking page, and related locations.
+              {editorial ? (
+                <>{editorial.travelHubIntro}</>
+              ) : (
+                <>
+                  Built for users searching <strong>{keyword.keyword}</strong>. This hub contains multiple intent-focused articles for {keyword.audience},
+                  with internal links to the Lavelle Road property page, living page, booking page, and related locations.
+                </>
+              )}
             </p>
             <div className="mt-8 flex flex-wrap gap-3 text-[10px] sm:text-[11px] uppercase tracking-[0.15em]">
               <Link href={`/destinations/lavelle-road/near/${keyword.slug}`} className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
