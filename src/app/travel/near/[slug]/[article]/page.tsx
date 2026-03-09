@@ -244,6 +244,8 @@ export default function KeywordArticlePage({ params }: { params: Params }) {
             keyword={keyword.keyword}
             place={keyword.place}
             articleTitle={getArticleTitle(narrative.keyword.place, narrative.template)}
+            keywordSlug={params.slug}
+            articleSlug={params.article}
           />
         ) : null}
       </main>

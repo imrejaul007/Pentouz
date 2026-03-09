@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { usePathname } from "next/navigation";
 import { submitLead } from "@/lib/leads";
 
 type IntentType = "legal" | "business" | "medical" | "leisure";
@@ -10,6 +11,8 @@ interface IntentLeadFormProps {
   keyword: string;
   place: string;
   articleTitle: string;
+  keywordSlug: string;
+  articleSlug: string;
 }
 
 const intentCopy: Record<IntentType, { title: string; description: string; cta: string }> = {
@@ -44,6 +47,8 @@ export default function IntentLeadForm({
   keyword,
   place,
   articleTitle,
+  keywordSlug,
+  articleSlug,
 }: IntentLeadFormProps) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -55,14 +60,51 @@ export default function IntentLeadForm({
   );
 
   const copy = intentCopy[intent];
+  const pathname = usePathname();
+
+  const attribution = useMemo(() => {
+    if (typeof window === "undefined") return "none";
+
+    const keys = [
+      "utm_source",
+      "utm_medium",
+      "utm_campaign",
+      "utm_term",
+      "utm_content",
+      "gclid",
+      "fbclid",
+      "msclkid",
+    ];
+
+    const params = new URLSearchParams(window.location.search);
+
+    const items = keys
+      .map((key) => {
+        const value = params.get(key);
+        if (!value) return null;
+        return `${key}=${value}`;
+      })
+      .filter((entry): entry is string => Boolean(entry));
+
+    return items.length ? items.join(" | ") : "none";
+  }, []);
 
   const subject = useMemo(() => {
-    return `Intent Lead (${intent.toUpperCase()}): ${place}`;
-  }, [intent, place]);
+    return `Intent Lead (${intent.toUpperCase()}): ${place} | keyword=${keywordSlug} | article=${articleSlug}`;
+  }, [intent, place, keywordSlug, articleSlug]);
 
   const message = useMemo(() => {
-    return `Lead source article: ${articleTitle}. Keyword intent: ${keyword}. Requested support type: ${intent}.`;
-  }, [articleTitle, intent, keyword]);
+    return [
+      `Lead source article: ${articleTitle}`,
+      `Keyword intent: ${keyword}`,
+      `Requested support type: ${intent}`,
+      `Keyword slug: ${keywordSlug}`,
+      `Article slug: ${articleSlug}`,
+      `Page path: ${pathname || "unknown"}`,
+      `Query attribution: ${attribution}`,
+      `Referrer: ${typeof document !== "undefined" ? document.referrer || "direct/unknown" : "unknown"}`,
+    ].join(". ");
+  }, [articleTitle, intent, keyword, keywordSlug, articleSlug, pathname, attribution]);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
