@@ -44,10 +44,77 @@ export default function GenericGuidePage({ params }: { params: Params }) {
   if (!guide) notFound();
 
   const related = genericSurroundingGuides.filter((item) => item.slug !== guide.slug).slice(0, 6);
+  const pageUrl = withSiteUrl(`/travel/guides/${guide.slug}`);
+
+  const faqItems = [
+    {
+      question: `What is the best way to plan a day around ${guide.focusArea}?`,
+      answer:
+        "Use a compact route plan with fixed anchor stops and time buffers instead of overloading one day with too many stops.",
+    },
+    {
+      question: "Is this guide suitable for short Bengaluru stays?",
+      answer:
+        "Yes. The structure is designed for short and extended trips, with practical sequencing you can adapt to your schedule.",
+    },
+    {
+      question: "Can I combine this guide with a Lavelle Road stay?",
+      answer:
+        "Yes. These guides are designed to pair with The Pentouz Lavelle Road as a central stay base for city movement.",
+    },
+  ];
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        headline: guide.title,
+        description: guide.subtitle,
+        mainEntityOfPage: pageUrl,
+        about: [guide.focusArea, "Bengaluru Travel", "Lavelle Road"],
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: faqItems.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: withSiteUrl("/"),
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Travel",
+            item: withSiteUrl("/travel"),
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: guide.title,
+            item: pageUrl,
+          },
+        ],
+      },
+    ],
+  };
 
   return (
     <>
       <Header />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <main className="bg-[#f8f7f5] min-h-screen">
         <section className="bg-brand-ink text-white py-20 sm:py-24 lg:py-28">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
@@ -108,6 +175,20 @@ export default function GenericGuidePage({ params }: { params: Params }) {
                     </Link>
                   </h3>
                   <p className="text-sm text-brand-body">{item.subtitle}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-14 sm:py-18 bg-white border-y border-brand-border">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Frequently Asked Questions</h2>
+            <div className="grid md:grid-cols-3 gap-4 sm:gap-5">
+              {faqItems.map((faq) => (
+                <article key={faq.question} className="border border-brand-border p-5 bg-[#f8f7f5]">
+                  <h3 className="font-display text-lg font-light mb-2">{faq.question}</h3>
+                  <p className="text-sm text-brand-body leading-relaxed">{faq.answer}</p>
                 </article>
               ))}
             </div>
