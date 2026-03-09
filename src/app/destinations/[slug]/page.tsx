@@ -257,6 +257,11 @@ export default function DestinationPage({
 
   // Get all gallery images
   const allGalleryImages = destination.gallery || [destination.image];
+  const stripImages = allGalleryImages.slice(0, 8);
+  const galleryStripImages =
+    stripImages.length > 0 && stripImages.length <= 4
+      ? [...stripImages, ...stripImages]
+      : stripImages;
 
   // Lightbox handlers
   const openLightbox = (index: number) => {
@@ -792,11 +797,13 @@ export default function DestinationPage({
             ref={galleryRef}
             className="flex gap-3 sm:gap-4 lg:gap-6 cursor-pointer"
           >
-            {[...allGalleryImages, ...allGalleryImages].map((image, index) => (
+            {galleryStripImages.map((image, index) => {
+              const sourceIndex = stripImages.length > 0 ? index % stripImages.length : 0;
+              return (
               <div
-                key={index}
+                key={`${image}-${index}`}
                 className="aspect-[16/10] w-[280px] sm:w-[400px] lg:w-[500px] relative flex-shrink-0 group"
-                onClick={() => openLightbox(index % allGalleryImages.length)}
+                onClick={() => openLightbox(sourceIndex)}
               >
                 {/* Loading placeholder */}
                 <div className="absolute inset-0 bg-gradient-to-br from-gray-700 via-gray-600 to-gray-700 animate-shimmer bg-[length:200%_100%]" />
@@ -815,7 +822,8 @@ export default function DestinationPage({
                   </div>
                 </div>
               </div>
-            ))}
+            );
+            })}
           </div>
         </section>
 

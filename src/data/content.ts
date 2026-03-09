@@ -78,29 +78,43 @@ export const destinations = [
     subtitle: "Lavelle Road, Bangalore",
     title: "THE PENTOUZ @ Lavelle Road",
     shortTitle: "Lavelle Road",
-    copy: "A boutique rooftop hotel with 6 elegantly designed studio rooms offering panoramic city views, just steps from UB City.",
-    description: "The Pentouz @ Lavelle Road is a 4-star boutique hotel situated on the rooftop of a prime Lavelle Road location, featuring 6 beautifully appointed studio rooms with panoramic city views. Located just a 6-minute walk from UB City Mall, this property combines sophisticated urban living with personalized concierge service. Each studio features a private balcony, fully equipped kitchenette, and modern amenities. Enjoy 24-hour front desk service, in-house restaurant, and complimentary breakfast.",
+    copy: "Perched in Bangalore's prestigious Lavelle Road, The Pentouz offers an elegant blend of tranquility, sophistication, and city convenience.",
+    description: "The Pentouz Lavelle Road boasts six exquisitely designed, spacious studio rooms located on the top floor, each offering panoramic city views. Thoughtfully curated for discerning travelers, every studio balances timeless elegance with modern comfort. Set in one of Bangalore's most coveted neighborhoods and just a short stroll from UB City, this address places luxury dining, shopping, and culture right at your doorstep.",
     image: "/lavelle-road/facade-1.jpg",
     heroImage: "/lavelle-road/terrace-1.jpg",
-    propertyType: "Boutique Hotel",
+    propertyType: "BOTIQUE HOTEL",
     totalRooms: "6 Studio Rooms",
     rating: 4,
     reviews: 12,
-    capacity: "2 guests per studio",
+    capacity: "Up to 6 guests",
     address: "46, 6th Cross, Lavelle Road, Bangalore – 560001, India",
     features: [
-      "Panoramic city views from rooftop",
-      "Private balcony in each room",
-      "Fully equipped kitchenette",
-      "In-house restaurant",
-      "Complimentary breakfast",
-      "24-hour front desk & concierge"
+      "Six spacious top-floor studio rooms",
+      "Panoramic city views",
+      "Prime Lavelle Road location near UB City",
+      "24-hour front desk and concierge",
+      "Open terrace",
+      "Covered car parking"
     ],
-    amenities: ["Free WiFi", "Private Balcony", "Kitchenette", "Smart TV", "Air Conditioning", "Mini Bar", "Rain Shower", "Room Service"],
+    amenities: [
+      "High-Speed WiFi",
+      "Smart TV",
+      "Air Conditioning",
+      "Kitchenette",
+      "Refrigerator",
+      "Microwave Oven",
+      "Work Desk",
+      "Daily Housekeeping",
+      "Open Terrace",
+      "Covered Car Parking",
+      "Lift Access",
+      "24-Hour Front Desk",
+    ],
     rooms: [
-      { name: "The Panorama Studio", description: "Corner studio with wraparound city views" },
-      { name: "The Skyline Studio", description: "Premium studio with UB City skyline view" },
-      { name: "The Classic Studio", description: "Elegant studio with modern comforts" }
+      { name: "KING STUDIO", description: "475 sq. ft. studio with king bed, kitchenette, work desk, and city views." },
+      { name: "QUEEN STUDIO", description: "450 sq. ft. studio with queen bed, kitchenette, smart TV, and elegant bath." },
+      { name: "SUPERIOR STUDIO", description: "450 sq. ft. studio with twin beds, kitchenette, and refined interiors." },
+      { name: "THREE BEDROOM UNIT", description: "Combined Superior + two King Studios, ~1,400 sq. ft., ideal for up to six guests." },
     ],
     gallery: [
       "/lavelle-road/facade-1.jpg",
@@ -127,25 +141,32 @@ export const destinations = [
     },
     livingRooms: [
       {
-        name: "The Panorama Studio",
-        size: "450 sq ft",
-        description: "Corner studio offering wraparound panoramic views of Bangalore's skyline. Features king bed, private balcony, fully equipped kitchenette, and premium bathroom with rain shower.",
-        features: ["Wraparound Views", "King Bed", "Private Balcony", "Kitchenette"],
+        name: "KING STUDIO",
+        size: "475 sq ft",
+        description: "A luxurious king-bed studio with kitchenette, refrigerator, microwave oven, dedicated work desk, smart TV, high-speed WiFi, air conditioning, spacious wardrobes, and an elegantly designed bathroom.",
+        features: ["King Bed", "Kitchenette", "Work Desk", "High-Speed WiFi"],
         image: "/lavelle-road/king-suite-1.jpg"
       },
       {
-        name: "The Skyline Studio",
-        size: "400 sq ft",
-        description: "Premium studio with direct views of UB City skyline. Comfortable queen bed, dedicated workspace, private balcony, and modern en-suite bathroom.",
-        features: ["UB City Views", "Queen Bed", "Workspace", "Private Balcony"],
+        name: "QUEEN STUDIO",
+        size: "450 sq ft",
+        description: "A refined queen-bed studio with kitchenette, refrigerator, microwave oven, work desk, smart TV, high-speed WiFi, air conditioning, spacious wardrobes, and a beautifully designed bathroom.",
+        features: ["Queen Bed", "Kitchenette", "Work Desk", "Smart TV"],
         image: "/lavelle-road/queen-suite-1.jpg"
       },
       {
-        name: "The Classic Studio",
-        size: "380 sq ft",
-        description: "Elegant studio with modern comforts and city views. Queen bed, kitchenette, Smart TV, and contemporary bathroom with premium amenities.",
-        features: ["City Views", "Queen Bed", "Kitchenette", "Smart TV"],
+        name: "SUPERIOR STUDIO",
+        size: "450 sq ft",
+        description: "A stylish twin-bed studio with kitchenette, refrigerator, microwave oven, work desk, smart TV, high-speed WiFi, air conditioning, and premium bathroom design.",
+        features: ["Twin Beds", "Kitchenette", "Work Desk", "High-Speed WiFi"],
         image: "/lavelle-road/superior-suite-1.jpg"
+      },
+      {
+        name: "THREE BEDROOM UNIT",
+        size: "1,400 sq ft",
+        description: "An expansive three-bedroom unit that combines one Superior Studio and two King Studios. Ideal for families, groups, or business travelers who want both privacy and shared comfort.",
+        features: ["Up to 6 Guests", "3 Bedroom Combination", "City Views", "Extended-Stay Ready"],
+        image: "/lavelle-road/terrace-1.jpg"
       }
     ]
   },

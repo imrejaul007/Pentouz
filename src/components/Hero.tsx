@@ -13,15 +13,26 @@ export default function Hero() {
   const [videoStarted, setVideoStarted] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [isReady, setIsReady] = useState(false);
+  const [shouldPlayVideo, setShouldPlayVideo] = useState(false);
 
   useEffect(() => {
     requestAnimationFrame(() => {
       setIsReady(true);
     });
 
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+
+    if (!(isDesktop && !prefersReducedMotion && !saveData)) {
+      return;
+    }
+
+    setShouldPlayVideo(true);
+
     const videoTimer = setTimeout(() => {
       setVideoStarted(true);
-    }, 1500);
+    }, 2500);
 
     return () => clearTimeout(videoTimer);
   }, []);
@@ -77,17 +88,19 @@ export default function Hero() {
       </div>
 
       {/* Sound Toggle */}
-      <button
-        onClick={() => setIsMuted(!isMuted)}
-        className="absolute bottom-6 sm:bottom-8 right-4 sm:right-8 z-20 w-10 h-10 sm:w-12 sm:h-12 border border-white/40 flex items-center justify-center text-white hover:text-brand-gold hover:border-brand-gold transition-all duration-300 backdrop-blur-sm bg-black/20"
-        aria-label={isMuted ? "Unmute video" : "Mute video"}
-      >
-        {isMuted ? (
-          <VolumeX className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={1.5} />
-        ) : (
-          <Volume2 className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={1.5} />
-        )}
-      </button>
+      {shouldPlayVideo && (
+        <button
+          onClick={() => setIsMuted(!isMuted)}
+          className="absolute bottom-6 sm:bottom-8 right-4 sm:right-8 z-20 w-10 h-10 sm:w-12 sm:h-12 border border-white/40 flex items-center justify-center text-white hover:text-brand-gold hover:border-brand-gold transition-all duration-300 backdrop-blur-sm bg-black/20"
+          aria-label={isMuted ? "Unmute video" : "Mute video"}
+        >
+          {isMuted ? (
+            <VolumeX className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={1.5} />
+          ) : (
+            <Volume2 className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={1.5} />
+          )}
+        </button>
+      )}
 
       {/* Editorial Content - Magazine Cover Style */}
       <div className="relative h-full flex flex-col justify-center items-center text-center text-white px-4 sm:px-6">
