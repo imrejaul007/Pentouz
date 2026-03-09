@@ -39,6 +39,100 @@ const categoryCopy = {
 
 type Params = { slug: string };
 
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+function hashSeed(input: string) {
+  let hash = 0;
+  for (let i = 0; i < input.length; i += 1) {
+    hash = (hash << 5) - hash + input.charCodeAt(i);
+    hash |= 0;
+  }
+  return Math.abs(hash);
+}
+
+function pickVariant<T>(items: readonly T[], seed: number, offset = 0) {
+  return items[(seed + offset) % items.length];
+}
+
+function getPageNarrative(page: NonNullable<ReturnType<typeof getLavelleSeoPage>>) {
+  const seed = hashSeed(page.slug);
+
+  const introLead = pickVariant(
+    [
+      "Guests searching this route usually want location certainty before they confirm a stay.",
+      "This keyword is intent-rich because travelers are choosing convenience over generic city stays.",
+      "Most users on this query are not browsing casually, they are solving a real schedule problem.",
+    ],
+    seed,
+    1
+  );
+
+  const commuteAngle = pickVariant(
+    [
+      `From Lavelle Road, guests can plan efficient travel windows around ${page.place} without over-stretching the day.`,
+      `Lavelle Road works as a strong base for visits to ${page.place}, especially when timing and reliability matter.`,
+      `For appointments and events near ${page.place}, central positioning helps reduce avoidable travel friction.`,
+    ],
+    seed,
+    2
+  );
+
+  const qualityAngle = pickVariant(
+    [
+      "Instead of choosing only by price, many guests prefer a premium base that supports rest, work, and responsive support.",
+      "Travelers in this segment often choose comfort and service consistency because schedules are hard to predict.",
+      "A premium stay with practical amenities becomes important when plans include long days and back-to-back commitments.",
+    ],
+    seed,
+    3
+  );
+
+  const planningTips = [
+    `Confirm your ${page.place} reporting time in advance and keep a time buffer for city traffic variations.`,
+    "Use a central stay to split your day into high-focus appointments and low-stress recovery windows.",
+    "Keep key documents, device chargers, and meeting essentials organized the night before.",
+    "If your itinerary may extend, choose a room setup that supports both work calls and comfortable downtime.",
+  ];
+
+  const longFormParagraphs = [
+    `Searching for ${page.keyword} usually means a guest already knows where they need to be and now needs the right stay partner. ${introLead} At The Pentouz @ Lavelle Road, this is addressed through a city-central location, refined room experience, and dependable hospitality support for time-sensitive travel days.`,
+    `${commuteAngle} This matters for ${page.audience}, who typically optimize for shorter transfers, easier day planning, and a reliable evening base. The property is also positioned near key commercial and dining corridors, so guests can complete obligations and still maintain schedule flexibility.`,
+    `${qualityAngle} That is why this page focuses on practical decision factors: location intent, stay comfort, service predictability, and direct booking access. When travelers compare options for ${page.place}, this balanced approach often leads to better outcomes than choosing a generic hotel listing.`,
+  ];
+
+  const faqs: FaqItem[] = [
+    {
+      question: `Is The Pentouz a good hotel near ${page.place}?`,
+      answer: `Yes. The Pentouz @ Lavelle Road is a strong fit for travelers who need central Bengaluru access for visits to ${page.place}, with premium rooms and practical booking support.`,
+    },
+    {
+      question: `Who usually books this stay for ${page.place}?`,
+      answer: `Most bookings come from ${page.audience} who want predictable city movement, responsive assistance, and a comfortable base for short or extended schedules.`,
+    },
+    {
+      question: `Can I book directly for a visit near ${page.place}?`,
+      answer: "Yes. You can use the direct booking link on this page for faster reservation flow and property-specific support.",
+    },
+    {
+      question: `Is Lavelle Road suitable for business and appointment-focused travel?`,
+      answer: "Lavelle Road is one of Bengaluru's most practical central zones for travelers managing meetings, official work, and time-sensitive plans.",
+    },
+    {
+      question: `What should I check before booking a hotel near ${page.place}?`,
+      answer: "Check location relevance, room comfort, flexible support, and how quickly you can reach key city corridors from the property.",
+    },
+  ];
+
+  return {
+    planningTips,
+    longFormParagraphs,
+    faqs,
+  };
+}
+
 export function generateStaticParams() {
   return lavelleSeoPages.map((page) => ({ slug: page.slug }));
 }
@@ -91,23 +185,39 @@ export default function LavelleNearPlacePage({ params }: { params: Params }) {
   const relatedPages = getRelatedLavelleSeoPages(page.slug, 6);
   const copy = categoryCopy[page.category];
   const pageUrl = withSiteUrl(`/destinations/lavelle-road/near/${page.slug}`);
+  const narrative = getPageNarrative(page);
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "LodgingBusiness",
-    name: "The Pentouz @ Lavelle Road",
-    url: withSiteUrl("/destinations/lavelle-road"),
-    image: withSiteUrl("/lavelle-road/terrace-1.jpg"),
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "46, 6th Cross, Lavelle Road",
-      addressLocality: "Bengaluru",
-      addressRegion: "Karnataka",
-      postalCode: "560001",
-      addressCountry: "IN",
-    },
-    areaServed: page.place,
-    sameAs: [pageUrl],
+    "@graph": [
+      {
+        "@type": "LodgingBusiness",
+        name: "The Pentouz @ Lavelle Road",
+        url: withSiteUrl("/destinations/lavelle-road"),
+        image: withSiteUrl("/lavelle-road/terrace-1.jpg"),
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "46, 6th Cross, Lavelle Road",
+          addressLocality: "Bengaluru",
+          addressRegion: "Karnataka",
+          postalCode: "560001",
+          addressCountry: "IN",
+        },
+        areaServed: page.place,
+        sameAs: [pageUrl],
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: narrative.faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
+      },
+    ],
   };
 
   return (
@@ -185,6 +295,44 @@ export default function LavelleNearPlacePage({ params }: { params: Params }) {
 
         <section className="py-14 sm:py-18 bg-white border-y border-brand-border">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">
+              Human-Centered Guide: Staying Near {page.place}
+            </h2>
+            <div className="space-y-4 text-sm sm:text-base text-brand-body leading-relaxed">
+              {narrative.longFormParagraphs.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-14 sm:py-18">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 grid lg:grid-cols-2 gap-6">
+            <article className="bg-white border border-brand-border p-6 sm:p-7">
+              <h2 className="font-display text-2xl font-light mb-4">Pre-Arrival Planning Checklist</h2>
+              <ul className="space-y-3 text-sm sm:text-base text-brand-body leading-relaxed list-disc list-inside">
+                {narrative.planningTips.map((tip) => (
+                  <li key={tip}>{tip}</li>
+                ))}
+              </ul>
+            </article>
+            <article className="bg-white border border-brand-border p-6 sm:p-7">
+              <h2 className="font-display text-2xl font-light mb-4">Decision Factors That Improve Stay Quality</h2>
+              <p className="text-sm sm:text-base text-brand-body leading-relaxed">
+                For this keyword, travelers usually rank location relevance first, followed by room comfort, reliable communication,
+                and smooth booking flow. The Pentouz Lavelle Road is designed around these practical priorities rather than generic
+                one-size-fits-all positioning.
+              </p>
+              <p className="mt-4 text-sm sm:text-base text-brand-body leading-relaxed">
+                If your trip around {page.place} may involve schedule changes, choose a central base with easy access to core Bengaluru
+                routes. That flexibility often saves more time than short-term rate differences.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section className="py-14 sm:py-18 bg-white border-y border-brand-border">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
             <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Related Bengaluru Location Guides</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {relatedPages.map((related) => (
@@ -223,6 +371,22 @@ export default function LavelleNearPlacePage({ params }: { params: Params }) {
               <a href="https://bookmystay.io/rooms/37853/2025-12-23/2025-12-24/2/0?utm_source=brandWebsite" target="_blank" rel="noopener noreferrer" className="bg-brand-gold text-white px-5 py-3 hover:bg-brand-goldLight transition-colors">
                 Reserve Now
               </a>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-14 sm:py-18 bg-white border-t border-brand-border">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">
+              Frequently Asked Questions: Hotel Near {page.place}
+            </h2>
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-5">
+              {narrative.faqs.map((faq) => (
+                <article key={faq.question} className="border border-brand-border p-5 sm:p-6 bg-[#f8f7f5]">
+                  <h3 className="font-display text-lg font-light mb-2">{faq.question}</h3>
+                  <p className="text-sm text-brand-body leading-relaxed">{faq.answer}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
