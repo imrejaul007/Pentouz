@@ -3,6 +3,7 @@ import {
   getRelatedLavelleSeoPages,
   lavelleSeoPages,
 } from "@/data/lavelleSeoPages";
+import { getManualArticleOverride } from "@/data/lavelleManualArticleOverrides";
 
 export interface ArticleTemplate {
   slug: string;
@@ -472,6 +473,7 @@ export function getKeywordArticleNarrative(keywordSlug: string, articleSlug: str
   const seed = hashSeed(`${keywordSlug}-${articleSlug}`);
   const nearbyGuide = pickVariant(genericSurroundingGuides, seed);
   const anchors = getNearbyAnchorsForKeyword(keywordSlug).slice(0, 3);
+  const manualOverride = getManualArticleOverride(keywordSlug, articleSlug);
 
   const lead = pickVariant(
     [
@@ -507,21 +509,34 @@ export function getKeywordArticleNarrative(keywordSlug: string, articleSlug: str
     .map((anchor) => `${anchor.name} (${anchor.whyItMatters})`)
     .join("; ");
 
+  const activeLead = manualOverride?.lead || lead;
+  const baseParagraphs = manualOverride
+    ? manualOverride.paragraphs
+    : [
+        `${lead} The Pentouz @ Lavelle Road fits this intent by combining central positioning, refined room quality, and direct booking support for ${keyword.audience}.`,
+        `For ${template.intent}, travelers should evaluate location relevance first. ${template.angle} often impacts real trip outcomes more than short-term price differences. A central base allows better control across check-in, appointments, and evening planning.`,
+        `${operationalLens} Around ${keyword.place}, this is especially useful for ${keyword.audience} who need both productivity and low-friction city movement within the same day.`,
+      ];
+
   const paragraphs = [
-    `${lead} The Pentouz @ Lavelle Road fits this intent by combining central positioning, refined room quality, and direct booking support for ${keyword.audience}.`,
-    `For ${template.intent}, travelers should evaluate location relevance first. ${template.angle} often impacts real trip outcomes more than short-term price differences. A central base allows better control across check-in, appointments, and evening planning.`,
-    `${operationalLens} Around ${keyword.place}, this is especially useful for ${keyword.audience} who need both productivity and low-friction city movement within the same day.`,
+    ...baseParagraphs,
     `Key surrounding anchors that improve practical planning include ${anchorNarrative}. Mapping your day around these touchpoints helps reduce transfer uncertainty and maintain schedule integrity.`,
     `${serviceLens} Guests can combine this keyword-specific plan with nearby neighborhood experiences to improve overall trip value. We recommend pairing this route with our ${nearbyGuide.focusArea} guide for better day sequencing and lower commute fatigue.`,
   ];
 
-  const bulletPoints = [
-    `Primary keyword intent: ${keyword.keyword}`,
-    `Best suited for: ${keyword.audience}`,
-    `Stay strategy: use Lavelle Road as the central planning anchor`,
-    `Nearby anchors: ${anchors.map((anchor) => anchor.name).join(" | ")}`,
-    `Supporting guide: ${nearbyGuide.title}`,
-  ];
+  const bulletPoints = manualOverride
+    ? [
+        ...manualOverride.bulletPoints,
+        `Nearby anchors: ${anchors.map((anchor) => anchor.name).join(" | ")}`,
+        `Supporting guide: ${nearbyGuide.title}`,
+      ]
+    : [
+        `Primary keyword intent: ${keyword.keyword}`,
+        `Best suited for: ${keyword.audience}`,
+        `Stay strategy: use Lavelle Road as the central planning anchor`,
+        `Nearby anchors: ${anchors.map((anchor) => anchor.name).join(" | ")}`,
+        `Supporting guide: ${nearbyGuide.title}`,
+      ];
 
   const faqs = [
     {
@@ -544,6 +559,7 @@ export function getKeywordArticleNarrative(keywordSlug: string, articleSlug: str
   return {
     keyword,
     template,
+    lead: activeLead,
     nearbyGuide,
     anchors,
     paragraphs,
