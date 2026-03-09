@@ -257,6 +257,32 @@ export default function DestinationPage({
 
   // Get all gallery images
   const allGalleryImages = destination.gallery || [destination.image];
+  const isLavelleRoad = destination.slug === "lavelle-road";
+  const lavelleLegalSeo =
+    isLavelleRoad && "legalSeo" in destination ? destination.legalSeo : null;
+  const lavelleLegalJsonLd = isLavelleRoad
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Hotel",
+        name: destination.title,
+        description: destination.description,
+        image: destination.heroImage || destination.image,
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: destination.address || "46, 6th Cross, Lavelle Road",
+          addressLocality: "Bengaluru",
+          addressRegion: "Karnataka",
+          postalCode: "560001",
+          addressCountry: "IN",
+        },
+        amenityFeature: destination.amenities?.map((item) => ({
+          "@type": "LocationFeatureSpecification",
+          name: item,
+          value: true,
+        })),
+        areaServed: "Outstation advocates and legal professionals visiting High Court of Karnataka",
+      }
+    : null;
   const stripImages = allGalleryImages.slice(0, 8);
   const galleryStripImages =
     stripImages.length > 0 && stripImages.length <= 4
@@ -298,6 +324,12 @@ export default function DestinationPage({
   return (
     <>
       <Header />
+      {lavelleLegalJsonLd ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(lavelleLegalJsonLd) }}
+        />
+      ) : null}
       <main>
         {/* Hero Section - Enhanced with property badge and rating */}
         <section
@@ -417,6 +449,41 @@ export default function DestinationPage({
             </div>
           </div>
         </section>
+
+        {isLavelleRoad && (
+          <section className="py-14 sm:py-20 lg:py-24 bg-brand-cream">
+            <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
+              <div className="max-w-4xl">
+                <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-gold mb-4 font-light">
+                  Legal Travel
+                </p>
+                <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-light mb-5">
+                  Trusted Stay for <em className="italic">Outstation Advocates</em> Near High Court of Karnataka
+                </h2>
+                <p className="text-sm sm:text-base text-brand-body leading-relaxed mb-6">
+                  Built for legal professionals visiting Bengaluru for hearings, appeals, and trial preparation, The Pentouz Lavelle Road combines central court access, reliable short-notice stays, and business-friendly comfort.
+                </p>
+              </div>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+                {[
+                  "Quick access to High Court of Karnataka and central legal district",
+                  "Fast check-in support for short-notice court schedules",
+                  "Stable high-speed WiFi and workspace-friendly studio layout",
+                  "Longer-stay flexibility for multi-day hearings",
+                ].map((item) => (
+                  <div key={item} className="bg-white p-5 border border-brand-border">
+                    <p className="text-xs sm:text-sm text-brand-body leading-relaxed">{item}</p>
+                  </div>
+                ))}
+              </div>
+              {lavelleLegalSeo?.keywords?.length ? (
+                <p className="mt-5 text-[11px] text-brand-muted">
+                  Popular searches: {lavelleLegalSeo.keywords.join(" • ")}
+                </p>
+              ) : null}
+            </div>
+          </section>
+        )}
 
         {/* Property Stats Bar */}
         <section

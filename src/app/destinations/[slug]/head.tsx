@@ -1,0 +1,33 @@
+import { destinations } from "@/data/content";
+
+export default function Head({ params }: { params: { slug: string } }) {
+  const destination = destinations.find((item) => item.slug === params.slug);
+  if (!destination) return null;
+
+  const lavelleSeo =
+    destination.slug === "lavelle-road" &&
+    "legalSeo" in destination &&
+    destination.legalSeo
+      ? destination.legalSeo
+      : null;
+
+  const title =
+    lavelleSeo?.title || `${destination.title} | The Pentouz ${destination.shortTitle}`;
+  const description = lavelleSeo?.description || destination.description;
+  const canonical = `https://pentouz-web.onrender.com/destinations/${destination.slug}`;
+  const keywords = lavelleSeo?.keywords?.join(", ");
+
+  return (
+    <>
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      {keywords ? <meta name="keywords" content={keywords} /> : null}
+      <link rel="canonical" href={canonical} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content={canonical} />
+      <meta property="og:image" content={destination.heroImage || destination.image} />
+    </>
+  );
+}

@@ -1,3 +1,24 @@
+import {
+  indiranagarImageSet,
+  lavelleImageSet,
+  ootyImageSet,
+} from "./propertyImageSets";
+
+const lavelleKingImages = lavelleImageSet.filter((path) =>
+  /9042_|9046_|9047_/i.test(path)
+);
+const lavelleQueenImages = lavelleImageSet.filter((path) =>
+  /9041_|9043_/i.test(path)
+);
+const lavelleSuperiorImages = lavelleImageSet.filter((path) =>
+  /9045_/i.test(path)
+);
+const lavelleCommonImages = lavelleImageSet.filter((path) =>
+  /(facade|entrance|reception|restaurant|terrace|patio|parking|lift|staircase)/i.test(
+    path
+  )
+);
+
 // Destinations / Properties - Extended data
 export const destinations = [
   {
@@ -56,19 +77,7 @@ export const destinations = [
         image: "/indiranagar/vista-room.jpg",
       },
     ],
-    gallery: [
-      "/indiranagar/living-room-5.jpg",
-      "/indiranagar/living-room-10.jpg",
-      "/indiranagar/living-room-1.jpg",
-      "/indiranagar/terrace-7.jpg",
-      "/indiranagar/terrace-2.jpg",
-      "/indiranagar/skyline-suite.jpg",
-      "/indiranagar/master-bedroom.jpg",
-      "/indiranagar/vista-room.jpg",
-      "/indiranagar/dining-kitchen.jpg",
-      "/indiranagar/kitchen-6.jpg",
-      "/indiranagar/master-bath.jpg",
-    ],
+    gallery: [...indiranagarImageSet],
     bookingUrl: "https://hotels.eglobe-solutions.com/pentouz/booking/hotels/the-pentouz-bangalore",
     location: {
       airport: { name: "Kempegowda International Airport", distance: "37 km", time: "60 minutes" },
@@ -174,21 +183,7 @@ export const destinations = [
         image: "/lavelle-road/terrace-1.jpg",
       },
     ],
-    gallery: [
-      "/lavelle-road/facade-1.jpg",
-      "/lavelle-road/entrance-1.jpg",
-      "/lavelle-road/reception-1.jpg",
-      "/lavelle-road/reception-2.jpg",
-      "/lavelle-road/restaurant-1.jpg",
-      "/lavelle-road/restaurant-2.jpg",
-      "/lavelle-road/terrace-1.jpg",
-      "/lavelle-road/terrace-2.jpg",
-      "/lavelle-road/patio-1.jpg",
-      "/lavelle-road/parking.jpg",
-      "/lavelle-road/king-suite-1.jpg",
-      "/lavelle-road/queen-suite-1.jpg",
-      "/lavelle-road/superior-suite-1.jpg"
-    ],
+    gallery: [...lavelleImageSet],
     bookingUrl: "https://bookmystay.io/rooms/37853/2025-12-23/2025-12-24/2/0?utm_source=brandWebsite",
     coordinates: { lat: 12.9716, lng: 77.5946 },
     idealFor: ["Business Travelers", "Couples", "Solo Travelers", "Weekend Getaways"],
@@ -199,6 +194,19 @@ export const destinations = [
     },
     livingIntro:
       "The Pentouz @ Lavelle Road offers six elegantly designed top-floor studio accommodations, each balancing space, privacy, and refined comfort in Bangalore's premier neighborhood.",
+    legalSeo: {
+      title:
+        "Hotel Near High Court of Karnataka for Outstation Advocates | The Pentouz Lavelle Road",
+      description:
+        "Business-friendly hotel near the High Court of Karnataka, ideal for outstation advocates in Bengaluru. Stay close to court access, UB City, and central legal districts.",
+      keywords: [
+        "hotel near Bangalore High Court",
+        "hotel near High Court of Karnataka",
+        "outstation advocates accommodation Bengaluru",
+        "lawyers hotel stay Bangalore",
+        "Lavelle Road hotel for court hearings",
+      ],
+    },
     livingLocation: {
       airport: { name: "Kempegowda International Airport", distance: "37 km", time: "60 minutes" },
       railway: { name: "KSR Bengaluru City Junction", distance: "10 km", time: "35 minutes" },
@@ -210,28 +218,32 @@ export const destinations = [
         size: "475 sq ft",
         description: "A luxurious king-bed studio with kitchenette, refrigerator, microwave oven, dedicated work desk, smart TV, high-speed WiFi, air conditioning, spacious wardrobes, and an elegantly designed bathroom.",
         features: ["King Bed", "Kitchenette", "Work Desk", "High-Speed WiFi"],
-        image: "/lavelle-road/king-suite-1.jpg"
+        image: lavelleKingImages[0] || "/lavelle-road/king-suite-1.jpg",
+        images: lavelleKingImages,
       },
       {
         name: "QUEEN STUDIO",
         size: "450 sq ft",
         description: "A refined queen-bed studio with kitchenette, refrigerator, microwave oven, work desk, smart TV, high-speed WiFi, air conditioning, spacious wardrobes, and a beautifully designed bathroom.",
         features: ["Queen Bed", "Kitchenette", "Work Desk", "Smart TV"],
-        image: "/lavelle-road/queen-suite-1.jpg"
+        image: lavelleQueenImages[0] || "/lavelle-road/queen-suite-1.jpg",
+        images: lavelleQueenImages,
       },
       {
         name: "SUPERIOR STUDIO",
         size: "450 sq ft",
         description: "A stylish twin-bed studio with kitchenette, refrigerator, microwave oven, work desk, smart TV, high-speed WiFi, air conditioning, and premium bathroom design.",
         features: ["Twin Beds", "Kitchenette", "Work Desk", "High-Speed WiFi"],
-        image: "/lavelle-road/superior-suite-1.jpg"
+        image: lavelleSuperiorImages[0] || "/lavelle-road/superior-suite-1.jpg",
+        images: lavelleSuperiorImages,
       },
       {
         name: "THREE BEDROOM UNIT",
         size: "1,400 sq ft",
         description: "An expansive three-bedroom unit that combines one Superior Studio and two King Studios. Ideal for families, groups, or business travelers who want both privacy and shared comfort.",
         features: ["Up to 6 Guests", "3 Bedroom Combination", "City Views", "Extended-Stay Ready"],
-        image: "/lavelle-road/terrace-1.jpg"
+        image: lavelleCommonImages[0] || "/lavelle-road/terrace-1.jpg",
+        images: lavelleCommonImages,
       }
     ]
   },
@@ -271,19 +283,7 @@ export const destinations = [
         image: "/ooty/bedroom-15.jpeg",
       },
     ],
-    gallery: [
-      "/ooty/facade-1.jpeg",
-      "/ooty/facade-3.jpeg",
-      "/ooty/reception-5.jpeg",
-      "/ooty/restaurant-20.jpeg",
-      "/ooty/lawn-22.jpeg",
-      "/ooty/view-24.jpeg",
-      "/ooty/bedroom-10.jpeg",
-      "/ooty/bedroom-12.jpeg",
-      "/ooty/bedroom-15.jpeg",
-      "/ooty/bathroom-18.jpeg",
-      "/ooty/parking-25.jpeg",
-    ],
+    gallery: [...ootyImageSet],
     bookingUrl: "https://pentouz.com/the-pentouz-windsor-heights-ooty/",
     location: {
       airport: { name: "Coimbatore International Airport", distance: "84 km", time: "3 hours" },

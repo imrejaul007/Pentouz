@@ -107,6 +107,7 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
     description: room.description,
     features: destination.amenities?.slice(0, 4) || [],
     image: destination.gallery?.[i] || destination.image,
+    images: destination.gallery?.slice(i, i + 4) || [destination.image],
   }));
   const livingLocation =
     (destination as typeof destination & {
@@ -117,6 +118,19 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
       livingIntro?: string;
     }).livingIntro ||
     "Discover our collection of meticulously designed spaces, each offering a unique perspective on luxury living.";
+  const isLavelleRoad = destination.slug === "lavelle-road";
+  const getRoomPrimaryImage = (room: (typeof livingRooms)[number]) => {
+    if ("image" in room && room.image) return room.image;
+    if ("images" in room && Array.isArray(room.images) && room.images[0]) return room.images[0];
+    return destination.image;
+  };
+  const getRoomImages = (room: (typeof livingRooms)[number]) => {
+    if ("images" in room && Array.isArray(room.images) && room.images.length > 0) {
+      return room.images;
+    }
+    const primary = getRoomPrimaryImage(room);
+    return primary ? [primary] : [];
+  };
 
   return (
     <>
@@ -128,7 +142,11 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
         className="relative h-[70vh] sm:h-[80vh] min-h-[550px] flex items-end"
       >
         <Image
-          src={livingRooms?.[selectedRoom]?.image || destination.heroImage || destination.image}
+          src={
+            (livingRooms?.[selectedRoom] && getRoomPrimaryImage(livingRooms[selectedRoom])) ||
+            destination.heroImage ||
+            destination.image
+          }
           alt={`Living at ${destination.title}`}
           fill
           className="object-cover transition-all duration-1000"
@@ -186,7 +204,7 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
                       }`}
                     >
                       <Image
-                        src={room.image}
+                        src={getRoomPrimaryImage(room)}
                         alt={room.name}
                         fill
                         className="object-cover"
@@ -199,6 +217,33 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
           </div>
         </div>
       </section>
+
+      {isLavelleRoad && (
+        <section className="py-12 sm:py-16 bg-brand-cream">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="grid lg:grid-cols-2 gap-6">
+              <div className="bg-white p-6 sm:p-8 border border-brand-border">
+                <h2 className="font-display text-xl sm:text-2xl font-light mb-3">
+                  Rooms Designed for Court-Visit Schedules
+                </h2>
+                <p className="text-sm sm:text-base text-brand-body leading-relaxed">
+                  Ideal for outstation advocates attending hearings at the High Court of Karnataka, our studio formats offer reliable WiFi, practical workspaces, and easy city access.
+                </p>
+              </div>
+              <div className="bg-white p-6 sm:p-8 border border-brand-border">
+                <h3 className="font-display text-lg sm:text-xl font-light mb-3">
+                  Why Legal Travelers Choose Lavelle Road
+                </h3>
+                <ul className="space-y-2 text-sm text-brand-body">
+                  <li>Fast check-in support for short-notice legal travel</li>
+                  <li>Central location near High Court and legal offices</li>
+                  <li>Comfortable extended stays for multi-day hearings</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Room Types - Enhanced with better layout */}
       <section className="py-16 sm:py-24 lg:py-32 bg-white">
@@ -224,7 +269,7 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
                   <div className="relative aspect-[4/3] sm:aspect-[3/2] overflow-hidden">
                     <Image
                       data-room-reveal
-                      src={room.image}
+                      src={getRoomPrimaryImage(room)}
                       alt={room.name}
                       fill
                       className="object-cover transition-transform duration-1000 group-hover:scale-105"
@@ -269,6 +314,24 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
                       </span>
                     ))}
                   </div>
+
+                  {getRoomImages(room).length > 1 && (
+                    <div data-room-reveal className="grid grid-cols-4 gap-2 mb-8">
+                      {getRoomImages(room)
+                        .slice(1, 5)
+                        .map((img) => (
+                          <div key={img} className="relative aspect-square overflow-hidden">
+                            <Image
+                              src={img}
+                              alt={`${room.name} additional view`}
+                              fill
+                              className="object-cover"
+                              sizes="120px"
+                            />
+                          </div>
+                        ))}
+                    </div>
+                  )}
 
                   <div data-room-reveal className="flex flex-wrap gap-3">
                     <a
