@@ -30,6 +30,7 @@ const allCategories = ["All", ...galleryCategories.filter((c) => c !== "All"), "
 
 export default function GalleryPage() {
   const [filter, setFilter] = useState("All");
+  const [visibleCount, setVisibleCount] = useState(24);
   const [lightbox, setLightbox] = useState<(typeof allGalleryItems)[0] | null>(null);
   const heroRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
@@ -40,6 +41,7 @@ export default function GalleryPage() {
     filter === "All"
       ? allGalleryItems
       : allGalleryItems.filter((item) => item.category === filter);
+  const displayedGallery = filteredGallery.slice(0, visibleCount);
 
   const currentIndex = lightbox
     ? filteredGallery.findIndex((item) => item.title === lightbox.title)
@@ -82,6 +84,11 @@ export default function GalleryPage() {
         },
       }
     );
+  }, [filter]);
+
+  // Reset and progressively load images by filter
+  useEffect(() => {
+    setVisibleCount(24);
   }, [filter]);
 
   // Lightbox
@@ -189,7 +196,7 @@ export default function GalleryPage() {
 
           {/* Gallery Grid */}
           <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4 lg:gap-6">
-            {filteredGallery.map((item, i) => (
+            {displayedGallery.map((item, i) => (
               <button
                 key={`${item.title}-${i}`}
                 onClick={() => setLightbox(item)}
@@ -221,6 +228,17 @@ export default function GalleryPage() {
               </button>
             ))}
           </div>
+
+          {displayedGallery.length < filteredGallery.length && (
+            <div className="mt-10 sm:mt-14 flex justify-center">
+              <button
+                onClick={() => setVisibleCount((prev) => prev + 24)}
+                className="inline-flex items-center justify-center border border-brand-ink px-8 py-3 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:bg-brand-ink hover:text-white transition-all duration-300"
+              >
+                Load More Photos
+              </button>
+            </div>
+          )}
         </div>
       </section>
 

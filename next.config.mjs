@@ -26,7 +26,8 @@ const nextConfig = {
     imageSizes: [32, 64, 128, 256],
     // Limit concurrent image optimization to reduce memory
     dangerouslyAllowSVG: false,
-    unoptimized: false,
+    // Serve local images directly in production to avoid optimizer timeouts on Render
+    unoptimized: true,
   },
   // Enable gzip compression
   compress: true,
