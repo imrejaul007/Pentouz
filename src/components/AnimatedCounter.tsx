@@ -32,7 +32,7 @@ export default function AnimatedCounter({
     const numericEnd = typeof end === "string" ? parseFloat(end) : end;
     const isFloat = !Number.isInteger(numericEnd);
 
-    ScrollTrigger.create({
+    const trigger = ScrollTrigger.create({
       trigger: counterRef.current,
       start: "top 85%",
       onEnter: () => {
@@ -57,7 +57,7 @@ export default function AnimatedCounter({
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      trigger.kill();
     };
   }, [end, duration, suffix, prefix, hasAnimated]);
 

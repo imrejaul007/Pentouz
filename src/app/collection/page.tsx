@@ -9,6 +9,7 @@ import { ArrowRight, MapPin, Check, Star, Building2 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { relatedProperties, destinations } from "@/data/content";
+import { killScrollTriggersByRoots } from "@/lib/scrollTrigger";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -100,7 +101,12 @@ export default function CollectionPage() {
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      killScrollTriggersByRoots([
+        heroRef.current,
+        propertiesRef.current,
+        pentouzRef.current,
+        statsRef.current,
+      ]);
     };
   }, []);
 
@@ -113,12 +119,16 @@ export default function CollectionPage() {
         ref={heroRef}
         className="relative h-[70vh] sm:h-[80vh] min-h-[550px] flex items-center justify-center"
       >
+        {/* Loading placeholder */}
+        <div className="absolute inset-0 video-placeholder" />
         <Image
           src="https://pentouz.com/wp-content/uploads/2025/01/Living-Room-5-1.jpg"
           alt="The Collection"
           fill
           className="object-cover"
           priority
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIRAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBQYSIRMxQVH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAIDAQAAAAAAAAAAAAAAAAECAAMRIf/aAAwDAQACEQMRAD8Aq7fudw7V1C7ggaZraYYj8kpZYpEHJgQMFgTk5HBANaOdzWdxbW9y0M0Us0SSMhXkFLKCR/DSlKiazK0M7B4j/9k="
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
 
@@ -130,19 +140,19 @@ export default function CollectionPage() {
           </div>
           <p
             data-reveal
-            className="text-[10px] sm:text-[11px] uppercase tracking-[0.4em] text-white/60 mb-4 sm:mb-6"
+            className="text-[10px] sm:text-[11px] uppercase tracking-[0.4em] text-white/80 mb-4 sm:mb-6 drop-shadow-sm"
           >
             Our Properties
           </p>
           <h1
             data-reveal
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light text-white mb-6"
+            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light text-white mb-6 drop-shadow-md"
           >
             The <em className="italic">Collection</em>
           </h1>
           <p
             data-reveal
-            className="text-sm sm:text-base lg:text-lg text-white/70 max-w-2xl mx-auto leading-relaxed"
+            className="text-sm sm:text-base lg:text-lg text-white/90 max-w-2xl mx-auto leading-relaxed"
           >
             Discover our portfolio of distinctive properties, each offering a unique blend of comfort, convenience, and character.
           </p>
@@ -164,7 +174,7 @@ export default function CollectionPage() {
               <p className="stat-number font-display text-3xl sm:text-4xl lg:text-5xl text-white font-light mb-2">
                 7+
               </p>
-              <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-white/50">
+              <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-white/80">
                 Properties
               </p>
             </div>
@@ -172,7 +182,7 @@ export default function CollectionPage() {
               <p className="stat-number font-display text-3xl sm:text-4xl lg:text-5xl text-white font-light mb-2">
                 3
               </p>
-              <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-white/50">
+              <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-white/80">
                 Cities
               </p>
             </div>
@@ -180,7 +190,7 @@ export default function CollectionPage() {
               <p className="stat-number font-display text-3xl sm:text-4xl lg:text-5xl text-white font-light mb-2">
                 15+
               </p>
-              <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-white/50">
+              <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-white/80">
                 Years Experience
               </p>
             </div>
@@ -188,7 +198,7 @@ export default function CollectionPage() {
               <p className="stat-number font-display text-3xl sm:text-4xl lg:text-5xl text-white font-light mb-2">
                 98%
               </p>
-              <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-white/50">
+              <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-white/80">
                 Guest Satisfaction
               </p>
             </div>
@@ -227,6 +237,8 @@ export default function CollectionPage() {
                 onMouseLeave={() => setHoveredProperty(null)}
               >
                 <div className="relative aspect-[3/4] overflow-hidden mb-6">
+                  {/* Loading placeholder */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-200 via-gray-100 to-gray-200 animate-shimmer bg-[length:200%_100%]" />
                   <Image
                     src={destination.image}
                     alt={destination.title}
@@ -235,6 +247,8 @@ export default function CollectionPage() {
                       hoveredProperty === destination.slug ? "scale-110" : "scale-100"
                     }`}
                     sizes="(max-width: 768px) 100vw, 33vw"
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIRAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBQYSIRMxQVH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAIDAQAAAAAAAAAAAAAAAAECAAMRIf/aAAwDAQACEQMRAD8Aq7fudw7V1C7ggaZraYYj8kpZYpEHJgQMFgTk5HBANaOdzWdxbW9y0M0Us0SSMhXkFLKCR/DSlKiazK0M7B4j/9k="
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
@@ -249,11 +263,11 @@ export default function CollectionPage() {
                   <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
                     <div className="flex items-center gap-2 mb-3">
                       <MapPin className="w-3 h-3 text-brand-accent" />
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/70">
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/90 drop-shadow-sm">
                         {destination.subtitle}
                       </p>
                     </div>
-                    <h3 className="font-display text-lg sm:text-xl lg:text-2xl font-light text-white mb-2">
+                    <h3 className="font-display text-lg sm:text-xl lg:text-2xl font-light text-white mb-2 drop-shadow-md">
                       {destination.title}
                     </h3>
 
@@ -261,7 +275,7 @@ export default function CollectionPage() {
                     <div className={`overflow-hidden transition-all duration-500 ${
                       hoveredProperty === destination.slug ? "max-h-24 opacity-100" : "max-h-0 opacity-0"
                     }`}>
-                      <p className="text-xs text-white/60 mt-2 line-clamp-2">
+                      <p className="text-xs text-white/90 mt-2 line-clamp-2">
                         {destination.copy}
                       </p>
                     </div>
@@ -332,12 +346,16 @@ export default function CollectionPage() {
                 className="partner-card group bg-[#f8f7f5] flex flex-col sm:flex-row overflow-hidden hover:shadow-xl transition-all duration-500"
               >
                 <div className="relative aspect-[4/3] sm:aspect-auto sm:w-2/5 flex-shrink-0 overflow-hidden">
+                  {/* Loading placeholder */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-200 via-gray-100 to-gray-200 animate-shimmer bg-[length:200%_100%]" />
                   <Image
                     src={property.image}
                     alt={property.name}
                     fill
                     className="object-cover transition-transform duration-1000 group-hover:scale-110"
                     sizes="(max-width: 640px) 100vw, 40vw"
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIRAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBQYSIRMxQVH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAIDAQAAAAAAAAAAAAAAAAECAAMRIf/aAAwDAQACEQMRAD8Aq7fudw7V1C7ggaZraYYj8kpZYpEHJgQMFgTk5HBANaOdzWdxbW9y0M0Us0SSMhXkFLKCR/DSlKiazK0M7B4j/9k="
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
                 </div>
@@ -390,7 +408,7 @@ export default function CollectionPage() {
           <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-light mb-4 sm:mb-6">
             Looking for Something <em className="italic">Special</em>?
           </h2>
-          <p className="text-sm sm:text-base text-white/60 mb-8 sm:mb-10 max-w-xl mx-auto">
+          <p className="text-sm sm:text-base text-white/90 mb-8 sm:mb-10 max-w-xl mx-auto">
             Our dedicated team can help you find the perfect property tailored to your unique needs and preferences.
           </p>
           <Link

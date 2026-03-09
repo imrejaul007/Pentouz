@@ -1,15 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight } from "lucide-react";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 // Four Seasons style offers with images
 const offers = [
@@ -37,78 +30,25 @@ const offers = [
 ];
 
 export default function Offers() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!sectionRef.current) return;
-
-    // Header reveal
-    if (headerRef.current) {
-      gsap.fromTo(
-        headerRef.current.children,
-        { y: 60, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.2,
-          stagger: 0.15,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: headerRef.current,
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    }
-
-    // Cards stagger
-    if (cardsRef.current) {
-      gsap.fromTo(
-        cardsRef.current.children,
-        { y: 80, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.2,
-          stagger: 0.2,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: cardsRef.current,
-            start: "top 75%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    }
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
-
   return (
     <section
-      ref={sectionRef}
       id="offers"
       className="py-16 sm:py-24 lg:py-44 bg-[#f8f7f5]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         {/* Header - Four Seasons style */}
-        <div ref={headerRef} className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-10 sm:mb-16 lg:mb-24">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-10 sm:mb-16 lg:mb-24">
           <div>
             <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] sm:tracking-[0.35em] text-brand-accent mb-4 sm:mb-6">
               Exclusive Offers
             </p>
             <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light leading-[1.15]">
-              Signature <em className="italic font-normal">Benefits</em>
+              Signature <em className="italic font-normal text-brand-gold">Benefits</em>
             </h2>
           </div>
           <Link
             href="/contact"
-            className="hidden lg:inline-flex items-center gap-4 text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:text-brand-accent transition-colors duration-500 group mt-8 lg:mt-0"
+            className="hidden lg:inline-flex items-center gap-4 text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:text-brand-gold transition-colors duration-500 group mt-8 lg:mt-0"
           >
             <span>View All Offers</span>
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -116,7 +56,7 @@ export default function Offers() {
         </div>
 
         {/* Offer Cards - Stack on mobile, horizontal on desktop */}
-        <div ref={cardsRef} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
           {offers.map((offer) => (
             <div
               key={offer.title}
@@ -132,9 +72,9 @@ export default function Offers() {
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   loading="lazy"
                 />
-                {/* Badge */}
+                {/* Badge with gold accent */}
                 <div className="absolute top-4 sm:top-6 left-4 sm:left-6">
-                  <span className="bg-white px-3 sm:px-4 py-1.5 sm:py-2 text-[9px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-brand-ink">
+                  <span className="bg-brand-gold px-3 sm:px-4 py-1.5 sm:py-2 text-[9px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-white font-medium">
                     {offer.badge}
                   </span>
                 </div>
@@ -142,7 +82,7 @@ export default function Offers() {
 
               {/* Content */}
               <div className="p-5 sm:p-8 lg:p-10">
-                <h3 className="font-display text-xl sm:text-2xl font-light mb-3 sm:mb-4 group-hover:text-brand-accent transition-colors duration-500">
+                <h3 className="font-display text-xl sm:text-2xl font-light mb-3 sm:mb-4 group-hover:text-brand-gold transition-colors duration-500">
                   {offer.title}
                 </h3>
                 <p className="text-xs sm:text-sm text-brand-body leading-relaxed font-light mb-4 sm:mb-6">
@@ -153,7 +93,7 @@ export default function Offers() {
                 </p>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 sm:gap-3 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:text-brand-accent transition-colors duration-500 group/link"
+                  className="inline-flex items-center gap-2 sm:gap-3 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:text-brand-gold transition-colors duration-500 group/link"
                 >
                   <span>Book This Offer</span>
                   <ArrowRight className="w-3.5 sm:w-4 h-3.5 sm:h-4 transition-transform duration-300 group-hover/link:translate-x-1" />
@@ -163,11 +103,11 @@ export default function Offers() {
           ))}
         </div>
 
-        {/* Mobile View All */}
+        {/* Mobile View All with gold hover */}
         <div className="lg:hidden text-center mt-8 sm:mt-12">
           <Link
             href="/contact"
-            className="inline-flex items-center gap-3 border border-brand-ink px-6 sm:px-10 py-3 sm:py-4 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:bg-brand-ink hover:text-white transition-all duration-500 group active:scale-95"
+            className="inline-flex items-center gap-3 border border-brand-ink px-6 sm:px-10 py-3 sm:py-4 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:bg-brand-gold hover:border-brand-gold hover:text-white transition-all duration-500 group active:scale-95"
           >
             <span>View All Offers</span>
             <ArrowRight className="w-3.5 sm:w-4 h-3.5 sm:h-4 transition-transform duration-300 group-hover:translate-x-1" />

@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { Calendar, Users, MapPin, ArrowRight } from "lucide-react";
 import { destinations } from "@/data/content";
+import { submitLead } from "@/lib/leads";
 
 export default function Booking() {
   const [isVisible, setIsVisible] = useState(false);
@@ -15,6 +16,9 @@ export default function Booking() {
     checkOut: "",
     guests: "2",
   });
+  const [website, setWebsite] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -36,12 +40,41 @@ export default function Booking() {
     return () => observer.disconnect();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would redirect to a booking system
-    alert(
-      `Checking availability for ${formData.property || "all properties"} from ${formData.checkIn} to ${formData.checkOut} for ${formData.guests} guests`
-    );
+    setIsSubmitting(true);
+    setStatus(null);
+
+    const selectedProperty = destinations.find((dest) => dest.slug === formData.property);
+
+    try {
+      await submitLead({
+        type: "booking",
+        property: formData.property || "all-properties",
+        checkIn: formData.checkIn,
+        checkOut: formData.checkOut,
+        guests: formData.guests,
+        website,
+      });
+
+      setStatus({
+        type: "success",
+        message: "Availability request sent. Redirecting to booking details...",
+      });
+
+      const redirectUrl = selectedProperty?.bookingUrl || "/contact";
+      window.location.assign(redirectUrl);
+    } catch (error) {
+      setStatus({
+        type: "error",
+        message:
+          error instanceof Error
+            ? error.message
+            : "Could not send your request. Please try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -84,6 +117,16 @@ export default function Booking() {
           }`}
           style={{ transitionDelay: "300ms" }}
         >
+          <input
+            type="text"
+            name="website"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+            className="hidden"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+          />
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
             {/* Property Select */}
             <div className="relative">
@@ -181,12 +224,22 @@ export default function Booking() {
           <div className="text-center">
             <button
               type="submit"
+              disabled={isSubmitting}
               className="inline-flex items-center justify-center gap-3 bg-brand-gold text-white px-10 sm:px-14 py-4 sm:py-5 text-[10px] sm:text-[11px] uppercase tracking-[0.2em] font-medium hover:bg-white hover:text-brand-ink transition-all duration-500"
             >
-              <span>Check Availability</span>
+              <span>{isSubmitting ? "Submitting..." : "Check Availability"}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
+          {status && (
+            <p
+              className={`mt-6 text-center text-xs ${
+                status.type === "success" ? "text-green-300" : "text-red-300"
+              }`}
+            >
+              {status.message}
+            </p>
+          )}
         </form>
 
         {/* Contact Note */}

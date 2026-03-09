@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
 import { Montserrat, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
-import SmoothScroll from "@/components/SmoothScroll";
-import CustomCursor from "@/components/CustomCursor";
 import Preloader from "@/components/Preloader";
-import PageTransition from "@/components/PageTransition";
 
 const bodyFont = Montserrat({
   variable: "--font-body-family",
   subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600"],
+  weight: ["300", "400", "500"],
   display: "swap",
 });
 
@@ -17,7 +14,7 @@ const bodyFont = Montserrat({
 const displayFont = Cormorant_Garamond({
   variable: "--font-display-family",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500"],
   style: ["normal", "italic"],
   display: "swap",
 });
@@ -36,13 +33,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${bodyFont.variable} ${displayFont.variable} antialiased bg-white text-brand-ink grain-overlay`}
+        className={`${bodyFont.variable} ${displayFont.variable} antialiased bg-white text-brand-ink`}
       >
         <Preloader />
-        <SmoothScroll>
-          <CustomCursor />
-          <PageTransition>{children}</PageTransition>
-        </SmoothScroll>
+        {children}
       </body>
     </html>
   );

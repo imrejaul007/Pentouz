@@ -18,6 +18,8 @@ export default function DestinationsPage() {
         {/* Hero Section */}
         <section className="relative h-[70vh] min-h-[600px]">
           <div className="absolute inset-0">
+            {/* Loading placeholder */}
+            <div className="absolute inset-0 video-placeholder" />
             <Image
               src="https://pentouz.com/wp-content/uploads/2025/01/Living-Room-10-2.jpg"
               alt="Pentouz Destinations"
@@ -25,19 +27,21 @@ export default function DestinationsPage() {
               priority
               className="object-cover"
               sizes="100vw"
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIRAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBQYSIRMxQVH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAIDAQAAAAAAAAAAAAAAAAECAAMRIf/aAAwDAQACEQMRAD8Aq7fudw7V1C7ggaZraYYj8kpZYpEHJgQMFgTk5HBANaOdzWdxbW9y0M0Us0SSMhXkFLKCR/DSlKiazK0M7B4j/9k="
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/40" />
           </div>
 
           <div className="relative h-full flex flex-col justify-end items-center text-center text-white px-8 pb-24">
-            <p className="text-overline uppercase tracking-[0.4em] text-white/50 mb-6 font-light">
+            <p className="text-overline uppercase tracking-[0.4em] text-white/80 mb-6 font-light drop-shadow-sm">
               Our Collection
             </p>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light max-w-4xl mb-8">
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light max-w-4xl mb-8 drop-shadow-md">
               Discover Our <em className="italic">Destinations</em>
             </h1>
-            <div className="w-20 h-px bg-white/30 mb-8" />
-            <p className="text-lg text-white/60 max-w-2xl font-light">
+            <div className="w-20 h-px bg-white/50 mb-8" />
+            <p className="text-lg text-white/90 max-w-2xl font-light">
               Three exceptional properties, each offering a unique experience of luxury and comfort
             </p>
           </div>
@@ -97,12 +101,16 @@ function DestinationCard({ destination, index, reversed }: DestinationCardProps)
       {/* Image */}
       <div className={`relative ${reversed ? "lg:order-2" : ""}`}>
         <div className="aspect-[4/3] relative overflow-hidden">
+          {/* Loading placeholder */}
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-200 via-gray-100 to-gray-200 animate-shimmer bg-[length:200%_100%]" />
           <Image
             src={destination.heroImage || destination.image}
             alt={destination.title}
             fill
             className="object-cover hover-scale"
             sizes="(max-width: 1024px) 100vw, 50vw"
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIRAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBQYSIRMxQVH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAIDAQAAAAAAAAAAAAAAAAECAAMRIf/aAAwDAQACEQMRAD8Aq7fudw7V1C7ggaZraYYj8kpZYpEHJgQMFgTk5HBANaOdzWdxbW9y0M0Us0SSMhXkFLKCR/DSlKiazK0M7B4j/9k="
           />
         </div>
         {/* Number badge */}

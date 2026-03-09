@@ -8,6 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, Calendar, Users, Gift } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { killScrollTriggersByRoots } from "@/lib/scrollTrigger";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -105,7 +106,7 @@ export default function OffersPage() {
     );
 
     return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      killScrollTriggersByRoots([heroRef.current, offersRef.current]);
     };
   }, []);
 
@@ -128,13 +129,13 @@ export default function OffersPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-transparent to-black/40" />
 
         <div className="relative z-10 text-center px-4">
-          <p data-reveal className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-white/50 mb-4 sm:mb-6">
+          <p data-reveal className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-white/80 mb-4 sm:mb-6 drop-shadow-sm">
             Exclusive Benefits
           </p>
-          <h1 data-reveal className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white">
+          <h1 data-reveal className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white drop-shadow-md">
             Special <em className="italic">Offers</em>
           </h1>
-          <p data-reveal className="mt-6 text-sm sm:text-base text-white/60 max-w-xl mx-auto">
+          <p data-reveal className="mt-6 text-sm sm:text-base text-white/90 max-w-xl mx-auto">
             Discover exclusive packages designed to enhance your stay with exceptional value and memorable experiences.
           </p>
         </div>
@@ -253,7 +254,7 @@ export default function OffersPage() {
           <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-light text-white mb-6">
             Have Questions About Our Offers?
           </h2>
-          <p className="text-sm sm:text-base text-white/60 mb-8">
+          <p className="text-sm sm:text-base text-white/90 mb-8">
             Our concierge team is available 24/7 to help you find the perfect package for your stay.
           </p>
           <Link

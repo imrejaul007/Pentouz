@@ -2,9 +2,13 @@
 
 import { useState, useRef, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
+import { submitLead } from "@/lib/leads";
 
 export default function Newsletter() {
   const [email, setEmail] = useState("");
+  const [website, setWebsite] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -28,10 +32,27 @@ export default function Newsletter() {
     return () => observer.disconnect();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Thank you for subscribing with: ${email}`);
-    setEmail("");
+    setIsSubmitting(true);
+    setStatus(null);
+
+    try {
+      await submitLead({ type: "newsletter", email, website });
+      setStatus({ type: "success", message: "Subscribed successfully." });
+      setEmail("");
+      setWebsite("");
+    } catch (error) {
+      setStatus({
+        type: "error",
+        message:
+          error instanceof Error
+            ? error.message
+            : "Subscription failed. Please try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -77,6 +98,16 @@ export default function Newsletter() {
           style={{ transitionDelay: "300ms" }}
         >
           <input
+            type="text"
+            name="website"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+            className="hidden"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+          />
+          <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -86,12 +117,22 @@ export default function Newsletter() {
           />
           <button
             type="submit"
+            disabled={isSubmitting}
             className="inline-flex items-center justify-center gap-2 bg-brand-gold text-white px-8 py-3.5 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] font-medium hover:bg-white hover:text-brand-ink transition-all duration-500"
           >
-            <span>Subscribe</span>
+            <span>{isSubmitting ? "Submitting..." : "Subscribe"}</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </form>
+        {status && (
+          <p
+            className={`mt-4 text-xs ${
+              status.type === "success" ? "text-green-300" : "text-red-300"
+            }`}
+          >
+            {status.message}
+          </p>
+        )}
 
         {/* Privacy Note */}
         <p

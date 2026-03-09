@@ -147,14 +147,16 @@ export default function GalleryPage() {
           fill
           className="object-cover opacity-50"
           priority
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIRAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBQYSIRMxQVH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAIDAQAAAAAAAAAAAAAAAAECAAMRIf/aAAwDAQACEQMRAD8Aq7fudw7V1C7ggaZraYYj8kpZYpEHJgQMFgTk5HBANaOdzWdxbW9y0M0Us0SSMhXkFLKCR/DSlKiazK0M7B4j/9k="
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-transparent to-black/40" />
 
         <div className="relative z-10 text-center px-4">
-          <p data-reveal className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-white/50 mb-4 sm:mb-6">
+          <p data-reveal className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-white/80 mb-4 sm:mb-6 drop-shadow-sm">
             Visual Journey
           </p>
-          <h1 data-reveal className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white">
+          <h1 data-reveal className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white drop-shadow-md">
             Our <em className="italic">Gallery</em>
           </h1>
         </div>
@@ -196,19 +198,22 @@ export default function GalleryPage() {
                   i % 7 === 0 ? "sm:col-span-2 sm:row-span-2 aspect-square" : "aspect-[4/3]"
                 )}
               >
+                {/* Loading placeholder */}
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-200 via-gray-100 to-gray-200 animate-shimmer bg-[length:200%_100%]" />
                 <Image
                   src={item.image}
                   alt={item.title}
                   fill
                   className="object-cover transition-transform duration-1000 group-hover:scale-110"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-500 flex items-end">
                   <div className="p-3 sm:p-6 translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 hidden sm:block">
                     <p className="text-white font-display text-base sm:text-lg font-light mb-1">
                       {item.title}
                     </p>
-                    <p className="text-white/60 text-[9px] sm:text-[10px] uppercase tracking-[0.15em]">
+                    <p className="text-white/80 text-[9px] sm:text-[10px] uppercase tracking-[0.15em]">
                       {item.category}
                     </p>
                   </div>
@@ -227,7 +232,7 @@ export default function GalleryPage() {
           onClick={closeLightbox}
         >
           <button
-            className="absolute top-4 sm:top-8 right-4 sm:right-8 flex items-center gap-4 text-white/50 hover:text-white transition-colors z-10"
+            className="absolute top-4 sm:top-8 right-4 sm:right-8 flex items-center gap-4 text-white/80 hover:text-white transition-colors z-10"
             onClick={closeLightbox}
           >
             <span className="text-[11px] uppercase tracking-[0.15em] hidden sm:inline">Close</span>
@@ -257,17 +262,17 @@ export default function GalleryPage() {
               width={1400}
               height={900}
               className="object-contain max-h-[80vh] sm:max-h-[85vh] w-auto"
-              priority
+              loading="eager"
             />
           </div>
 
           <div className="absolute bottom-16 sm:bottom-12 left-1/2 -translate-x-1/2 text-center text-white px-4 w-full">
             <p className="font-display text-lg sm:text-xl font-light mb-1">{lightbox.title}</p>
-            <p className="text-[9px] sm:text-[10px] text-white/40 uppercase tracking-[0.2em]">{lightbox.category}</p>
+            <p className="text-[9px] sm:text-[10px] text-white/70 uppercase tracking-[0.2em]">{lightbox.category}</p>
           </div>
 
-          <div className="absolute bottom-16 sm:bottom-12 right-4 sm:right-12 text-white/30 text-[10px] sm:text-[11px] tracking-widest hidden sm:block">
-            <span className="text-white/60">{String(currentIndex + 1).padStart(2, "0")}</span>
+          <div className="absolute bottom-16 sm:bottom-12 right-4 sm:right-12 text-white/50 text-[10px] sm:text-[11px] tracking-widest hidden sm:block">
+            <span className="text-white/80">{String(currentIndex + 1).padStart(2, "0")}</span>
             <span className="mx-2">/</span>
             <span>{String(filteredGallery.length).padStart(2, "0")}</span>
           </div>

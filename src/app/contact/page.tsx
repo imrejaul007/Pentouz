@@ -9,6 +9,8 @@ import { MapPin, Phone, Mail, Clock, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { contactInfo, destinations } from "@/data/content";
+import { killScrollTriggersByRoots } from "@/lib/scrollTrigger";
+import { submitLead } from "@/lib/leads";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -29,6 +31,8 @@ export default function ContactPage() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [website, setWebsite] = useState("");
+  const [status, setStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
   useEffect(() => {
     // Hero animation
@@ -92,27 +96,50 @@ export default function ContactPage() {
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      killScrollTriggersByRoots([
+        heroRef.current,
+        formRef.current,
+        locationsRef.current,
+      ]);
     };
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setStatus(null);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      await submitLead({
+        type: "contact",
+        ...formData,
+        website,
+      });
 
-    alert("Thank you for your message. Our concierge team will respond within 24 hours.");
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      property: "",
-      subject: "",
-      message: "",
-    });
-    setIsSubmitting(false);
+      setStatus({
+        type: "success",
+        message: "Thank you. Our concierge team will respond within 24 hours.",
+      });
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        property: "",
+        subject: "",
+        message: "",
+      });
+      setWebsite("");
+    } catch (error) {
+      setStatus({
+        type: "error",
+        message:
+          error instanceof Error
+            ? error.message
+            : "Could not send your message. Please try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -138,6 +165,8 @@ export default function ContactPage() {
               priority
               className="object-cover"
               sizes="100vw"
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIRAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBQYSIRMxQVH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAIDAQAAAAAAAAAAAAAAAAECAAMRIf/aAAwDAQACEQMRAD8Aq7fudw7V1C7ggaZraYYj8kpZYpEHJgQMFgTk5HBANaOdzWdxbW9y0M0Us0SSMhXkFLKCR/DSlKiazK0M7B4j/9k="
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/30" />
           </div>
@@ -146,14 +175,14 @@ export default function ContactPage() {
             ref={heroRef}
             className="relative h-full flex flex-col justify-end items-center text-center text-white px-8 pb-24"
           >
-            <p data-hero-reveal className="text-overline uppercase tracking-[0.4em] text-white/50 mb-6 font-light">
+            <p data-hero-reveal className="text-overline uppercase tracking-[0.4em] text-white/80 mb-6 font-light drop-shadow-sm">
               Get in Touch
             </p>
-            <h1 data-hero-reveal className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light max-w-4xl mb-8">
+            <h1 data-hero-reveal className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light max-w-4xl mb-8 drop-shadow-md">
               We&apos;re Here to <em className="italic">Assist</em>
             </h1>
-            <div data-hero-reveal className="w-20 h-px bg-white/30 mb-8" />
-            <p data-hero-reveal className="text-lg text-white/60 max-w-2xl font-light">
+            <div data-hero-reveal className="w-20 h-px bg-white/50 mb-8" />
+            <p data-hero-reveal className="text-lg text-white/90 max-w-2xl font-light">
               Our concierge team is available around the clock to ensure your experience is exceptional
             </p>
           </div>
@@ -266,6 +295,16 @@ export default function ContactPage() {
                 <div className="w-12 h-px bg-brand-accent mb-10" />
 
                 <form onSubmit={handleSubmit} className="space-y-8">
+                  <input
+                    type="text"
+                    name="website"
+                    value={website}
+                    onChange={(e) => setWebsite(e.target.value)}
+                    className="hidden"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                  />
                   <div className="grid md:grid-cols-2 gap-8">
                     <div>
                       <label className="text-caption uppercase tracking-[0.15em] text-brand-muted block mb-3">
@@ -369,6 +408,15 @@ export default function ContactPage() {
                     >
                       {isSubmitting ? "Sending..." : "Send Message"}
                     </button>
+                    {status && (
+                      <p
+                        className={`mt-4 text-xs ${
+                          status.type === "success" ? "text-green-700" : "text-red-700"
+                        }`}
+                      >
+                        {status.message}
+                      </p>
+                    )}
                   </div>
                 </form>
               </div>
@@ -398,12 +446,16 @@ export default function ContactPage() {
                   className="location-card group bg-white p-8 lg:p-10 hover:shadow-card transition-shadow duration-500"
                 >
                   <div className="aspect-video relative overflow-hidden mb-8">
+                    {/* Loading placeholder */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-200 via-gray-100 to-gray-200 animate-shimmer bg-[length:200%_100%]" />
                     <Image
                       src={dest.image}
                       alt={dest.title}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                       sizes="(max-width: 768px) 100vw, 33vw"
+                      placeholder="blur"
+                      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIRAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBQYSIRMxQVH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAIDAQAAAAAAAAAAAAAAAAECAAMRIf/aAAwDAQACEQMRAD8Aq7fudw7V1C7ggaZraYYj8kpZYpEHJgQMFgTk5HBANaOdzWdxbW9y0M0Us0SSMhXkFLKCR/DSlKiazK0M7B4j/9k="
                     />
                   </div>
                   <p className="text-overline uppercase tracking-[0.2em] text-brand-accent mb-3 font-light">

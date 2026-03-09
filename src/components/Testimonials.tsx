@@ -1,83 +1,52 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { testimonials } from "@/data/content";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 export default function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const sectionRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const quoteRef = useRef<HTMLDivElement>(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   // Auto-rotate testimonials
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % testimonials.length);
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setActiveIndex((prev) => (prev + 1) % testimonials.length);
+        setIsTransitioning(false);
+      }, 300);
     }, 8000);
     return () => clearInterval(interval);
   }, []);
 
-  // Animate quote change
-  useEffect(() => {
-    if (quoteRef.current) {
-      gsap.fromTo(
-        quoteRef.current,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
-      );
-    }
-  }, [activeIndex]);
-
-  // Scroll reveal
-  useEffect(() => {
-    if (!sectionRef.current || !contentRef.current) return;
-
-    gsap.fromTo(
-      contentRef.current.children,
-      { y: 50, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1.2,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: contentRef.current,
-          start: "top 80%",
-          toggleActions: "play none none none",
-        },
-      }
-    );
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
+  const handleDotClick = (index: number) => {
+    if (index === activeIndex) return;
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setActiveIndex(index);
+      setIsTransitioning(false);
+    }, 300);
+  };
 
   const currentTestimonial = testimonials[activeIndex];
 
   return (
-    <section ref={sectionRef} className="py-20 sm:py-28 lg:py-48 bg-white">
-      <div
-        ref={contentRef}
-        className="max-w-5xl mx-auto px-4 sm:px-8 lg:px-12 text-center"
-      >
+    <section className="py-20 sm:py-28 lg:py-48 bg-white">
+      <div className="max-w-5xl mx-auto px-4 sm:px-8 lg:px-12 text-center">
         {/* Header */}
         <p className="text-[10px] sm:text-[11px] text-brand-accent uppercase tracking-[0.3em] sm:tracking-[0.4em] mb-8 sm:mb-12 font-light">
           Guest Voices
         </p>
 
         {/* Quote */}
-        <div ref={quoteRef} className="min-h-[220px] sm:min-h-[280px] flex flex-col items-center justify-center">
-          {/* Quote mark */}
-          <div className="text-brand-border/30 text-[80px] sm:text-[100px] lg:text-[150px] font-display leading-none mb-2 sm:mb-4 select-none">
+        <div
+          className={`min-h-[220px] sm:min-h-[280px] flex flex-col items-center justify-center transition-all duration-300 ease-out ${
+            isTransitioning ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
+          }`}
+        >
+          {/* Quote mark with gold accent */}
+          <div className="text-brand-gold/30 text-[80px] sm:text-[100px] lg:text-[150px] font-display leading-none mb-2 sm:mb-4 select-none">
             &ldquo;
           </div>
 
@@ -86,8 +55,8 @@ export default function Testimonials() {
             {currentTestimonial.quote}
           </blockquote>
 
-          {/* Divider */}
-          <div className="w-10 sm:w-12 h-[1px] bg-brand-accent mb-6 sm:mb-10" />
+          {/* Divider with gold gradient */}
+          <div className="w-16 h-[2px] bg-gradient-to-r from-transparent via-brand-gold to-transparent mb-6 sm:mb-10" />
 
           {/* Attribution */}
           <div>
@@ -105,12 +74,12 @@ export default function Testimonials() {
           {testimonials.map((_, i) => (
             <button
               key={i}
-              onClick={() => setActiveIndex(i)}
+              onClick={() => handleDotClick(i)}
               className={cn(
                 "relative h-[2px] transition-all duration-700 ease-out",
                 i === activeIndex
-                  ? "w-12 sm:w-16 bg-brand-ink"
-                  : "w-6 sm:w-8 bg-brand-border hover:bg-brand-muted"
+                  ? "w-12 sm:w-16 bg-brand-gold"
+                  : "w-6 sm:w-8 bg-brand-border hover:bg-brand-gold/50"
               )}
               aria-label={`View testimonial ${i + 1}`}
             />

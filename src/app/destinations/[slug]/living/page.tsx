@@ -10,6 +10,7 @@ import { ArrowLeft, ArrowRight, MapPin, Clock, Plane, Train, Building, Check, Ph
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { destinations, contactInfo } from "@/data/content";
+import { killScrollTriggersByRoots } from "@/lib/scrollTrigger";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -88,7 +89,11 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      killScrollTriggersByRoots([
+        heroRef.current,
+        roomsRef.current,
+        amenitiesRef.current,
+      ]);
     };
   }, []);
 
@@ -127,7 +132,7 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
             <Link
               data-reveal
               href={`/destinations/${destination.slug}`}
-              className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors mb-6"
+              className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors mb-6"
             >
               <ArrowLeft className="w-4 h-4" />
               <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em]">
@@ -139,7 +144,7 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
               <div>
                 <div data-reveal className="flex items-center gap-2 mb-4">
                   <MapPin className="w-4 h-4 text-brand-accent" />
-                  <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-white/60">
+                  <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-white/80 drop-shadow-sm">
                     {destination.subtitle}
                   </p>
                 </div>
@@ -151,7 +156,7 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
                 </h1>
                 <p
                   data-reveal
-                  className="text-sm sm:text-base text-white/70 max-w-xl leading-relaxed"
+                  className="text-sm sm:text-base text-white/90 max-w-xl leading-relaxed"
                 >
                   Discover our collection of meticulously designed spaces, each offering a unique perspective on luxury living.
                 </p>
@@ -159,7 +164,7 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
 
               {/* Room quick selector - desktop only */}
               <div data-reveal className="hidden lg:block">
-                <p className="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-4">
+                <p className="text-[10px] uppercase tracking-[0.2em] text-white/70 mb-4">
                   Quick View: {livingRooms?.length} Room Types
                 </p>
                 <div className="flex gap-2">
@@ -400,7 +405,7 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white mb-6">
             Reserve Your <em className="italic">Stay</em>
           </h2>
-          <p className="text-sm sm:text-base text-white/60 mb-10 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-white/90 mb-10 max-w-2xl mx-auto">
             Contact our reservations team for personalized assistance with your booking.
           </p>
 
@@ -426,7 +431,7 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
           <div className="flex items-center justify-center gap-6 text-sm">
             <a
               href={`mailto:${contactInfo.email}`}
-              className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors"
             >
               <Mail className="w-4 h-4" />
               {contactInfo.email}

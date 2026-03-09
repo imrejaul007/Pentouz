@@ -5,19 +5,25 @@ export const destinations = [
     subtitle: "Indiranagar, Bangalore",
     title: "THE PENTOUZ @ 100 Feet Road",
     shortTitle: "Indiranagar",
-    copy: "Walking distance from UB City. Access to the best dining, galleries, and nightlife Bangalore offers.",
-    description: "Nestled in the heart of Bangalore's most vibrant neighborhood, The Pentouz @ 100 Feet Road offers an urban sanctuary where luxury meets convenience. Steps away from the city's finest restaurants, boutiques, and cultural venues, our Indiranagar residence is perfect for the discerning traveler who wants to experience the pulse of the city while retreating to refined comfort.",
+    copy: "An ultra-luxury 6,000 sq ft penthouse in Bangalore's most vibrant neighborhood. Perfect for corporate guests and families.",
+    description: "The Pentouz @ 100 Feet Road Indiranagar is an Ultra-Luxury 3 BHK Fully Serviced Apartment on the top floor that offers the pinnacle of sophistication and comfort. This 6,000 square feet penthouse features elegant living areas with modern design and includes a fully equipped kitchen suitable for gourmet meal preparation. Located in the heart of Bangalore's vibrant Indiranagar neighborhood, it's perfect for corporate guests, families, and those seeking extended stays.",
     image: "https://pentouz.com/wp-content/uploads/2025/01/11.-The-Terrace-Haven_Terrace-1024x683.jpg",
     heroImage: "https://pentouz.com/wp-content/uploads/2025/01/11.-The-Terrace-Haven_Terrace-1024x683.jpg",
+    propertyType: "Ultra-Luxury Serviced Penthouse",
+    totalSize: "6,000 sq ft",
+    rating: 5,
+    reviews: 4,
+    capacity: "Up to 6 guests",
+    address: "2022, 100 Feet Road, Indiranagar, Bangalore – 560038, India",
     features: [
-      "Walking distance to UB City",
-      "Rooftop terrace with city views",
-      "Complimentary high-speed WiFi",
-      "In-room Nespresso machine",
+      "Top-floor penthouse location",
+      "Fully equipped gourmet kitchen",
+      "Elegant modern interior design",
+      "Three bedrooms with private balconies",
       "24/7 concierge service",
-      "Private parking"
+      "Spectacular outdoor terrace"
     ],
-    amenities: ["Free WiFi", "Mini Bar", "Nespresso", "Cable TV", "Bathtub", "Air Conditioning"],
+    amenities: ["Free WiFi", "Full Kitchen", "Mini Bar", "Nespresso", "Smart TV", "Bathtub", "Air Conditioning", "Laundry", "Private Parking"],
     rooms: [
       { name: "The Skyline Suite", description: "Panoramic city views with private terrace" },
       { name: "The Terrace Haven", description: "Direct terrace access with lounge seating" },
@@ -28,12 +34,14 @@ export const destinations = [
       "https://pentouz.com/wp-content/uploads/elementor/thumbs/04.-The-Skyline-Suite_Bedroom-r0jo1p5gz5rec45jsthw691ismb6d8dnu3xnv1n39c.jpg",
       "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-5-1.jpg"
     ],
-    bookingUrl: "https://hotels.eglobe-solutions.com/pentouz/booking/hotels/the-pentouz-bangalore",
+    bookingUrl: "https://pentouz.com/indiranagar-branch/",
     location: {
       airport: { name: "Kempegowda International Airport", distance: "37 km", time: "60 minutes" },
       railway: { name: "KSR Bengaluru City Junction", distance: "10 km", time: "35 minutes" },
-      metro: { name: "Indiranagar Metro Station", distance: "1 km", time: "5 minutes" }
+      metro: { name: "Indiranagar Metro Station", distance: "1 km", time: "5 minutes" },
     },
+    coordinates: { lat: 12.9767, lng: 77.641 },
+    idealFor: ["Corporate Guests", "Families", "Extended Stays", "Special Occasions"],
     livingRooms: [
       {
         name: "Entire Penthouse",
@@ -70,56 +78,63 @@ export const destinations = [
     subtitle: "Lavelle Road, Bangalore",
     title: "THE PENTOUZ @ Lavelle Road",
     shortTitle: "Lavelle Road",
-    copy: "Elegant residences with personalized concierge service. Wake to skyline views, unwind at rooftop lounges.",
-    description: "The Pentouz @ Lavelle Road represents the pinnacle of Bangalore's cosmopolitan elegance. Located in one of the city's most prestigious addresses, our Lavelle Road property offers breathtaking skyline views, sophisticated interiors, and unparalleled service. Each suite is designed to be a home away from home, with meticulous attention to every detail.",
+    copy: "A boutique rooftop hotel with 6 elegantly designed studio rooms offering panoramic city views, just steps from UB City.",
+    description: "The Pentouz @ Lavelle Road is a 4-star boutique hotel situated on the rooftop of a prime Lavelle Road location, featuring 6 beautifully appointed studio rooms with panoramic city views. Located just a 6-minute walk from UB City Mall, this property combines sophisticated urban living with personalized concierge service. Each studio features a private balcony, fully equipped kitchenette, and modern amenities. Enjoy 24-hour front desk service, in-house restaurant, and complimentary breakfast.",
     image: "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-5-1.jpg",
     heroImage: "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-5-1.jpg",
+    propertyType: "Boutique Hotel",
+    totalRooms: "6 Studio Rooms",
+    rating: 4,
+    reviews: 12,
+    capacity: "2 guests per studio",
     address: "46, 6th Cross, Lavelle Road, Bangalore – 560001, India",
     features: [
-      "Skyline views from every room",
-      "Rooftop terrace lounge",
-      "Premium bathroom amenities",
+      "Panoramic city views from rooftop",
+      "Private balcony in each room",
       "Fully equipped kitchenette",
-      "Dedicated workspace",
-      "Valet parking service"
+      "In-house restaurant",
+      "Complimentary breakfast",
+      "24-hour front desk & concierge"
     ],
-    amenities: ["Free WiFi", "Mini Bar", "Nespresso", "Cable TV", "Bathtub", "Rain Shower", "Smart TV"],
+    amenities: ["Free WiFi", "Private Balcony", "Kitchenette", "Smart TV", "Air Conditioning", "Mini Bar", "Rain Shower", "Room Service"],
     rooms: [
-      { name: "The Penthouse Suite", description: "Ultimate luxury with panoramic views" },
-      { name: "The Executive Suite", description: "Perfect blend of work and relaxation" },
-      { name: "The Classic Suite", description: "Timeless elegance with modern comforts" }
+      { name: "The Panorama Studio", description: "Corner studio with wraparound city views" },
+      { name: "The Skyline Studio", description: "Premium studio with UB City skyline view" },
+      { name: "The Classic Studio", description: "Elegant studio with modern comforts" }
     ],
     gallery: [
       "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-5-1.jpg",
       "https://pentouz.com/wp-content/uploads/2025/01/TPH-MB-Bath-2-1.jpg",
       "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-10-2.jpg"
     ],
-    bookingUrl: "https://bookmystay.io/rooms/37853/2026-02-01/2026-02-02/2/0?utm_source=brandWebsite",
+    bookingUrl: "https://pentouz.com/the-pentouz-lavelle-road-bangalore/",
+    coordinates: { lat: 12.9716, lng: 77.5946 },
+    idealFor: ["Business Travelers", "Couples", "Solo Travelers", "Weekend Getaways"],
     location: {
       airport: { name: "Kempegowda International Airport", distance: "35 km", time: "55 minutes" },
-      railway: { name: "KSR Bengaluru City Junction", distance: "3 km", time: "15 minutes" },
-      landmark: { name: "UB City Mall", distance: "1.5 km", time: "8 minutes" }
+      railway: { name: "KSR Bengaluru City Junction", distance: "5 km", time: "15 minutes" },
+      metro: { name: "MG Road Metro Station", distance: "1 km", time: "5 minutes" },
     },
     livingRooms: [
       {
-        name: "The Penthouse Suite",
-        size: "2,500 sq ft",
-        description: "Ultimate luxury with panoramic skyline views. Features master bedroom with walk-in closet, separate living area, private terrace, and premium amenities throughout.",
-        features: ["Panoramic Views", "Walk-in Closet", "Private Terrace", "Premium Amenities"],
+        name: "The Panorama Studio",
+        size: "450 sq ft",
+        description: "Corner studio offering wraparound panoramic views of Bangalore's skyline. Features king bed, private balcony, fully equipped kitchenette, and premium bathroom with rain shower.",
+        features: ["Wraparound Views", "King Bed", "Private Balcony", "Kitchenette"],
         image: "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-5-1.jpg"
       },
       {
-        name: "The Executive Suite",
-        size: "800 sq ft",
-        description: "Perfect blend of work and relaxation. Dedicated workspace, comfortable king bed, en-suite bathroom with rain shower, and city views.",
-        features: ["Workspace", "King Bed", "Rain Shower", "City Views"],
+        name: "The Skyline Studio",
+        size: "400 sq ft",
+        description: "Premium studio with direct views of UB City skyline. Comfortable queen bed, dedicated workspace, private balcony, and modern en-suite bathroom.",
+        features: ["UB City Views", "Queen Bed", "Workspace", "Private Balcony"],
         image: "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-10-2.jpg"
       },
       {
-        name: "The Classic Suite",
-        size: "600 sq ft",
-        description: "Timeless elegance with modern comforts. Queen bed, contemporary bathroom, and access to shared lounge and rooftop terrace.",
-        features: ["Queen Bed", "Modern Bathroom", "Shared Lounge", "Rooftop Access"],
+        name: "The Classic Studio",
+        size: "380 sq ft",
+        description: "Elegant studio with modern comforts and city views. Queen bed, kitchenette, Smart TV, and contemporary bathroom with premium amenities.",
+        features: ["City Views", "Queen Bed", "Kitchenette", "Smart TV"],
         image: "https://pentouz.com/wp-content/uploads/2025/01/TPH-MB-Bath-2-1.jpg"
       }
     ]
@@ -131,6 +146,7 @@ export const destinations = [
     shortTitle: "Ooty",
     copy: "A mountain retreat where tea gardens meet misty mornings. Embrace the serenity of the Nilgiris.",
     description: "Escape to the misty hills of the Nilgiris at The Pentouz Windsor Heights. Surrounded by lush tea gardens and colonial charm, our Ooty property offers a tranquil retreat from the ordinary. Whether you're seeking contemplation, celebration, or creative inspiration, the serene mountain setting provides the perfect backdrop for an unforgettable stay.",
+    address: "Elk Hill, Ooty, Tamil Nadu, India",
     image: "https://pentouz.com/wp-content/uploads/2025/01/24.-Terrace-550x367.jpg",
     heroImage: "https://pentouz.com/wp-content/uploads/elementor/thumbs/24.-Terrace-scaled-r0jnp19qwifbx8jqqufu2y2yoqq5o13uffj63uf134.jpg",
     features: [
@@ -152,10 +168,10 @@ export const destinations = [
       "https://pentouz.com/wp-content/uploads/elementor/thumbs/21.-Restaurant-r0jnyygf1k0ah24wt4u2efy4f5tmx0hugjfogzpfeo.jpeg",
       "https://pentouz.com/wp-content/uploads/elementor/thumbs/24.-Terrace-scaled-r0jnp19qwifbx8jqqufu2y2yoqq5o13uffj63uf134.jpg"
     ],
-    bookingUrl: "https://pentouz.com/booking",
+    bookingUrl: "https://pentouz.com/the-pentouz-windsor-heights-ooty/",
     location: {
-      airport: { name: "Coimbatore International Airport", distance: "88 km", time: "3 hours" },
-      railway: { name: "Ooty Railway Station", distance: "2 km", time: "10 minutes" },
+      airport: { name: "Coimbatore International Airport", distance: "84 km", time: "3 hours" },
+      railway: { name: "Udhagamandalam Railway Junction", distance: "10 km", time: "25 minutes" },
       landmark: { name: "Ooty Lake", distance: "3 km", time: "15 minutes" }
     },
     livingRooms: [
@@ -354,7 +370,7 @@ export const navLinks = [
 export const contactInfo = {
   address: "46, 6th Cross, Lavelle Road",
   city: "Bangalore - 560001, India",
-  phones: ["+91 8970 298 300", "+91 8884 449 930"],
+  phones: ["+91 8970 298 300", "+91 888 444 9930"],
   email: "sales@pentouz.com",
   whatsapp: "+918970298300",
 };

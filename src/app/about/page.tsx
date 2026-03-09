@@ -7,6 +7,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { killScrollTriggersByRoots } from "@/lib/scrollTrigger";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -100,7 +101,12 @@ export default function AboutPage() {
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      killScrollTriggersByRoots([
+        heroRef.current,
+        storyRef.current,
+        valuesRef.current,
+        teamRef.current,
+      ]);
     };
   }, []);
 
@@ -126,14 +132,14 @@ export default function AboutPage() {
             ref={heroRef}
             className="relative h-full flex flex-col justify-end items-center text-center text-white px-8 pb-32"
           >
-            <p data-hero-reveal className="text-overline uppercase tracking-[0.4em] text-white/50 mb-6 font-light">
+            <p data-hero-reveal className="text-overline uppercase tracking-[0.4em] text-white/80 mb-6 font-light drop-shadow-sm">
               Our Story
             </p>
-            <h1 data-hero-reveal className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light max-w-4xl mb-8">
+            <h1 data-hero-reveal className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light max-w-4xl mb-8 drop-shadow-md">
               A Legacy of <em className="italic">Refined</em> Hospitality
             </h1>
-            <div data-hero-reveal className="w-20 h-px bg-white/30 mb-8" />
-            <p data-hero-reveal className="text-lg text-white/60 max-w-2xl font-light leading-relaxed">
+            <div data-hero-reveal className="w-20 h-px bg-white/50 mb-8" />
+            <p data-hero-reveal className="text-lg text-white/90 max-w-2xl font-light leading-relaxed">
               Where every stay becomes a cherished memory, and every guest becomes family
             </p>
           </div>
@@ -253,19 +259,19 @@ export default function AboutPage() {
           <div ref={teamRef} className="relative h-full flex items-center py-32 lg:py-48">
             <div className="max-w-container-xl mx-auto px-8 lg:px-20">
               <div className="max-w-2xl">
-                <p data-reveal className="text-overline uppercase tracking-[0.3em] text-white/50 mb-6 font-light">
+                <p data-reveal className="text-overline uppercase tracking-[0.3em] text-white/80 mb-6 font-light drop-shadow-sm">
                   Our Commitment
                 </p>
-                <h2 data-reveal className="font-display text-display-sm lg:text-display-md font-light text-white mb-8">
+                <h2 data-reveal className="font-display text-display-sm lg:text-display-md font-light text-white mb-8 drop-shadow-md">
                   Excellence in <em className="italic">Every</em> Detail
                 </h2>
-                <div data-reveal className="w-16 h-px bg-white/30 mb-10" />
-                <p data-reveal className="text-body-lg text-white/70 leading-relaxed mb-8">
+                <div data-reveal className="w-16 h-px bg-white/50 mb-10" />
+                <p data-reveal className="text-body-lg text-white/90 leading-relaxed mb-8">
                   From the thread count of our linens to the aroma that greets you at the door,
                   every element of The Pentouz experience is meticulously curated. Our dedicated
                   team works tirelessly to anticipate your needs before you even express them.
                 </p>
-                <p data-reveal className="text-body-lg text-white/70 leading-relaxed mb-12">
+                <p data-reveal className="text-body-lg text-white/90 leading-relaxed mb-12">
                   We don&apos;t just provide accommodation; we craft experiences that linger in
                   your memory long after you&apos;ve returned home.
                 </p>

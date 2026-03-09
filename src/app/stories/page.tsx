@@ -8,6 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, Clock } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { killScrollTriggersByRoots } from "@/lib/scrollTrigger";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -148,7 +149,11 @@ export default function StoriesPage() {
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      killScrollTriggersByRoots([
+        heroRef.current,
+        featuredRef.current,
+        gridRef.current,
+      ]);
     };
   }, []);
 

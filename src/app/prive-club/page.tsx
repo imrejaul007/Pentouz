@@ -8,6 +8,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Crown, Star, Gift, Clock, Shield, ArrowRight, Check } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { killScrollTriggersByRoots } from "@/lib/scrollTrigger";
+import { submitLead } from "@/lib/leads";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -86,6 +88,9 @@ export default function PriveClubPage() {
   const benefitsRef = useRef<HTMLDivElement>(null);
   const tiersRef = useRef<HTMLDivElement>(null);
   const [email, setEmail] = useState("");
+  const [website, setWebsite] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
   useEffect(() => {
     if (!heroRef.current) return;
@@ -136,14 +141,38 @@ export default function PriveClubPage() {
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      killScrollTriggersByRoots([
+        heroRef.current,
+        benefitsRef.current,
+        tiersRef.current,
+      ]);
     };
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Thank you for joining! We'll send confirmation to: ${email}`);
-    setEmail("");
+    setIsSubmitting(true);
+    setStatus(null);
+
+    try {
+      await submitLead({ type: "prive", email, website });
+      setStatus({
+        type: "success",
+        message: "Thanks for joining. We will email your membership details shortly.",
+      });
+      setEmail("");
+      setWebsite("");
+    } catch (error) {
+      setStatus({
+        type: "error",
+        message:
+          error instanceof Error
+            ? error.message
+            : "Could not submit your membership request.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -161,20 +190,22 @@ export default function PriveClubPage() {
           fill
           className="object-cover opacity-40"
           priority
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIRAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBQYSIRMxQVH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAIDAQAAAAAAAAAAAAAAAAECAAMRIf/aAAwDAQACEQMRAD8Aq7fudw7V1C7ggaZraYYj8kpZYpEHJgQMFgTk5HBANaOdzWdxbW9y0M0Us0SSMhXkFLKCR/DSlKiazK0M7B4j/9k="
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-transparent to-black/40" />
 
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
           <div data-reveal className="flex items-center justify-center gap-2 mb-6">
             <Crown className="w-5 h-5 sm:w-6 sm:h-6 text-brand-accent" strokeWidth={1} />
-            <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-white/50">
+            <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-white/80 drop-shadow-sm">
               Membership Program
             </span>
           </div>
-          <h1 data-reveal className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white mb-6">
+          <h1 data-reveal className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white mb-6 drop-shadow-md">
             The Pentouz <em className="italic">Privé</em> Club
           </h1>
-          <p data-reveal className="text-sm sm:text-base lg:text-lg text-white/60 max-w-2xl mx-auto mb-8">
+          <p data-reveal className="text-sm sm:text-base lg:text-lg text-white/80 max-w-2xl mx-auto mb-8">
             Join our exclusive membership program and unlock a world of privileges, personalized experiences, and extraordinary benefits at every stay.
           </p>
           <Link
@@ -282,12 +313,22 @@ export default function PriveClubPage() {
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-4">
             Join Privé <em className="italic">Today</em>
           </h2>
-          <p className="text-sm sm:text-base text-white/60 mb-10">
+          <p className="text-sm sm:text-base text-white/90 mb-10">
             Membership is complimentary. Simply enter your email to get started and unlock exclusive benefits on your very first stay.
           </p>
 
           <form onSubmit={handleSubmit} className="max-w-md mx-auto">
             <div className="flex flex-col sm:flex-row gap-4">
+              <input
+                type="text"
+                name="website"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+                className="hidden"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+              />
               <input
                 type="email"
                 value={email}
@@ -298,14 +339,24 @@ export default function PriveClubPage() {
               />
               <button
                 type="submit"
+                disabled={isSubmitting}
                 className="bg-white text-brand-ink px-6 sm:px-8 py-3 sm:py-4 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] font-medium hover:bg-white/90 transition-colors active:scale-95 whitespace-nowrap"
               >
-                Join Now
+                {isSubmitting ? "Submitting..." : "Join Now"}
               </button>
             </div>
-            <p className="text-[10px] sm:text-xs text-white/40 mt-4">
+            <p className="text-[10px] sm:text-xs text-white/70 mt-4">
               By joining, you agree to our Terms & Conditions and Privacy Policy.
             </p>
+            {status && (
+              <p
+                className={`mt-3 text-xs ${
+                  status.type === "success" ? "text-green-300" : "text-red-300"
+                }`}
+              >
+                {status.message}
+              </p>
+            )}
           </form>
         </div>
       </section>

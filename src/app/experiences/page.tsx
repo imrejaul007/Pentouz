@@ -8,6 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, Utensils, Leaf, Star, Users, Gift, MapPin } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { killScrollTriggersByRoots } from "@/lib/scrollTrigger";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -143,7 +144,11 @@ export default function ExperiencesPage() {
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      killScrollTriggersByRoots([
+        heroRef.current,
+        categoriesRef.current,
+        privilegeRef.current,
+      ]);
     };
   }, []);
 
@@ -169,14 +174,14 @@ export default function ExperiencesPage() {
             ref={heroRef}
             className="relative h-full flex flex-col justify-end items-center text-center text-white px-8 pb-32"
           >
-            <p data-hero-reveal className="text-overline uppercase tracking-[0.4em] text-white/50 mb-6 font-light">
+            <p data-hero-reveal className="text-overline uppercase tracking-[0.4em] text-white/80 mb-6 font-light drop-shadow-sm">
               Signature Experiences
             </p>
-            <h1 data-hero-reveal className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light max-w-5xl mb-8">
+            <h1 data-hero-reveal className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light max-w-5xl mb-8 drop-shadow-md">
               Moments That <em className="italic">Become</em> Memories
             </h1>
-            <div data-hero-reveal className="w-20 h-px bg-white/30 mb-8" />
-            <p data-hero-reveal className="text-lg text-white/60 max-w-2xl font-light leading-relaxed">
+            <div data-hero-reveal className="w-20 h-px bg-white/50 mb-8" />
+            <p data-hero-reveal className="text-lg text-white/90 max-w-2xl font-light leading-relaxed">
               Curated experiences designed to enrich your stay and create unforgettable moments
             </p>
           </div>
@@ -230,19 +235,19 @@ export default function ExperiencesPage() {
               <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
                 {/* Content */}
                 <div>
-                  <p data-reveal className="text-overline uppercase tracking-[0.4em] text-white/50 mb-6 font-light">
+                  <p data-reveal className="text-overline uppercase tracking-[0.4em] text-white/80 mb-6 font-light drop-shadow-sm">
                     Exclusive Membership
                   </p>
-                  <h2 data-reveal className="font-display text-display-sm lg:text-display-md font-light text-white mb-8">
+                  <h2 data-reveal className="font-display text-display-sm lg:text-display-md font-light text-white mb-8 drop-shadow-md">
                     Pentouz <em className="italic">Privé</em>
                   </h2>
-                  <div data-reveal className="w-16 h-px bg-white/30 mb-10" />
-                  <p data-reveal className="text-body-lg text-white/70 leading-relaxed mb-8">
+                  <div data-reveal className="w-16 h-px bg-white/50 mb-10" />
+                  <p data-reveal className="text-body-lg text-white/90 leading-relaxed mb-8">
                     Join our exclusive membership program and unlock a world of privileges.
                     Pentouz Privé members enjoy preferential rates, room upgrades, and access
                     to invitation-only experiences.
                   </p>
-                  <p data-reveal className="text-body-lg text-white/70 leading-relaxed mb-12">
+                  <p data-reveal className="text-body-lg text-white/90 leading-relaxed mb-12">
                     Whether you&apos;re a frequent traveler or planning a special occasion,
                     Privé membership elevates every stay into something extraordinary.
                   </p>
@@ -258,7 +263,7 @@ export default function ExperiencesPage() {
                           <p className="text-body-sm text-white font-light mb-1">
                             {feature.title}
                           </p>
-                          <p className="text-caption text-white/50">
+                          <p className="text-caption text-white/80">
                             {feature.description}
                           </p>
                         </div>
@@ -278,31 +283,31 @@ export default function ExperiencesPage() {
                 {/* Decorative Card */}
                 <div data-reveal className="hidden lg:block">
                   <div className="glass-dark p-12 lg:p-16">
-                    <p className="text-overline uppercase tracking-[0.4em] text-white/40 mb-6 font-light">
+                    <p className="text-overline uppercase tracking-[0.4em] text-white/70 mb-6 font-light">
                       Member Benefits
                     </p>
                     <ul className="space-y-5">
-                      <li className="flex items-center gap-4 text-body-md text-white/70">
+                      <li className="flex items-center gap-4 text-body-md text-white/90">
                         <span className="w-2 h-2 bg-brand-accent rounded-full" />
                         15% savings on all bookings
                       </li>
-                      <li className="flex items-center gap-4 text-body-md text-white/70">
+                      <li className="flex items-center gap-4 text-body-md text-white/90">
                         <span className="w-2 h-2 bg-brand-accent rounded-full" />
                         Complimentary airport transfers
                       </li>
-                      <li className="flex items-center gap-4 text-body-md text-white/70">
+                      <li className="flex items-center gap-4 text-body-md text-white/90">
                         <span className="w-2 h-2 bg-brand-accent rounded-full" />
                         Priority spa reservations
                       </li>
-                      <li className="flex items-center gap-4 text-body-md text-white/70">
+                      <li className="flex items-center gap-4 text-body-md text-white/90">
                         <span className="w-2 h-2 bg-brand-accent rounded-full" />
                         Exclusive event invitations
                       </li>
-                      <li className="flex items-center gap-4 text-body-md text-white/70">
+                      <li className="flex items-center gap-4 text-body-md text-white/90">
                         <span className="w-2 h-2 bg-brand-accent rounded-full" />
                         Dedicated concierge line
                       </li>
-                      <li className="flex items-center gap-4 text-body-md text-white/70">
+                      <li className="flex items-center gap-4 text-body-md text-white/90">
                         <span className="w-2 h-2 bg-brand-accent rounded-full" />
                         Birthday & anniversary surprises
                       </li>
