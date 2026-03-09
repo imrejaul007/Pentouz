@@ -7,8 +7,8 @@ export const destinations = [
     shortTitle: "Indiranagar",
     copy: "A luxurious three-bedroom penthouse in the heart of Indiranagar, crafted for families, groups, and business travelers seeking premium comfort.",
     description: "The Pentouz Indiranagar is a luxurious 3-bedroom penthouse nestled in one of Bangalore's most upscale neighborhoods. This exclusive residence blends comfort, elegance, and convenience with spacious interiors and thoughtfully designed living areas. Each bedroom features a private balcony with vibrant city views, plush bedding, ample storage, and tasteful decor for a serene and elevated stay.",
-    image: "https://pentouz.com/wp-content/uploads/2025/01/11.-The-Terrace-Haven_Terrace-1024x683.jpg",
-    heroImage: "https://pentouz.com/wp-content/uploads/2025/01/11.-The-Terrace-Haven_Terrace-1024x683.jpg",
+    image: "/indiranagar/terrace-7.jpg",
+    heroImage: "/indiranagar/living-room-5.jpg",
     propertyType: "THREE BEDROOM PENTHOUSE",
     totalSize: "6,000 sq ft",
     rating: 5,
@@ -40,14 +40,34 @@ export const destinations = [
       "Airport Pick-up Service",
     ],
     rooms: [
-      { name: "The Skyline Suite", description: "Panoramic city views with private terrace" },
-      { name: "The Terrace Haven", description: "Direct terrace access with lounge seating" },
-      { name: "The Urban Retreat", description: "Contemporary comfort in the heart of the city" }
+      {
+        name: "The Skyline Suite",
+        description: "Panoramic city views with private terrace",
+        image: "/indiranagar/skyline-suite.jpg",
+      },
+      {
+        name: "The Terrace Haven",
+        description: "Direct terrace access with lounge seating",
+        image: "/indiranagar/terrace-7.jpg",
+      },
+      {
+        name: "The Urban Retreat",
+        description: "Contemporary comfort in the heart of the city",
+        image: "/indiranagar/vista-room.jpg",
+      },
     ],
     gallery: [
-      "https://pentouz.com/wp-content/uploads/2025/01/11.-The-Terrace-Haven_Terrace-1024x683.jpg",
-      "https://pentouz.com/wp-content/uploads/elementor/thumbs/04.-The-Skyline-Suite_Bedroom-r0jo1p5gz5rec45jsthw691ismb6d8dnu3xnv1n39c.jpg",
-      "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-5-1.jpg"
+      "/indiranagar/living-room-5.jpg",
+      "/indiranagar/living-room-10.jpg",
+      "/indiranagar/living-room-1.jpg",
+      "/indiranagar/terrace-7.jpg",
+      "/indiranagar/terrace-2.jpg",
+      "/indiranagar/skyline-suite.jpg",
+      "/indiranagar/master-bedroom.jpg",
+      "/indiranagar/vista-room.jpg",
+      "/indiranagar/dining-kitchen.jpg",
+      "/indiranagar/kitchen-6.jpg",
+      "/indiranagar/master-bath.jpg",
     ],
     bookingUrl: "https://hotels.eglobe-solutions.com/pentouz/booking/hotels/the-pentouz-bangalore",
     location: {
@@ -70,28 +90,28 @@ export const destinations = [
         size: "6,000 sq ft",
         description: "A spacious full-floor penthouse with three bedrooms, private balconies, elegant living and dining spaces, an ultra-modern kitchen, and an open terrace for memorable gatherings.",
         features: ["3 Bedrooms", "Private Balconies", "Open Terrace", "Ultra-modern Kitchen"],
-        image: "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-5-1.jpg"
+        image: "/indiranagar/living-room-5.jpg"
       },
       {
         name: "The Terrace Haven",
         size: "3,000 sq ft",
         description: "A refined suite with direct terrace access, plush bedding, elegant interiors, and shared access to the penthouse living and dining spaces.",
         features: ["Terrace Access", "Private Balcony", "Shared Living Areas", "City Views"],
-        image: "https://pentouz.com/wp-content/uploads/2025/01/11.-The-Terrace-Haven_Terrace-1024x683.jpg"
+        image: "/indiranagar/terrace-7.jpg"
       },
       {
         name: "The Skyline Suite",
         size: "600 sq ft",
         description: "A sophisticated king suite with expansive city views, private balcony, elegant bath, and all modern in-room essentials.",
         features: ["City Views", "King Bed", "Private Balcony", "Wifi & Internet"],
-        image: "https://pentouz.com/wp-content/uploads/elementor/thumbs/04.-The-Skyline-Suite_Bedroom-r0jo1p5gz5rec45jsthw691ismb6d8dnu3xnv1n39c.jpg"
+        image: "/indiranagar/skyline-suite.jpg"
       },
       {
         name: "The Vista Room",
         size: "500 sq ft",
         description: "A calm and comfortable room with private balcony, city outlook, and seamless access to the penthouse common areas.",
         features: ["City Views", "Private Balcony", "Peace & Tranquillity", "Shared Spaces"],
-        image: "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-10-2.jpg"
+        image: "/indiranagar/vista-room.jpg"
       }
     ]
   },
@@ -223,8 +243,8 @@ export const destinations = [
     copy: "A mountain retreat where tea gardens meet misty mornings. Embrace the serenity of the Nilgiris.",
     description: "Escape to the misty hills of the Nilgiris at The Pentouz Windsor Heights. Surrounded by lush tea gardens and colonial charm, our Ooty property offers a tranquil retreat from the ordinary. Whether you're seeking contemplation, celebration, or creative inspiration, the serene mountain setting provides the perfect backdrop for an unforgettable stay.",
     address: "Elk Hill, Ooty, Tamil Nadu, India",
-    image: "https://pentouz.com/wp-content/uploads/2025/01/24.-Terrace-550x367.jpg",
-    heroImage: "https://pentouz.com/wp-content/uploads/elementor/thumbs/24.-Terrace-scaled-r0jnp19qwifbx8jqqufu2y2yoqq5o13uffj63uf134.jpg",
+    image: "/ooty/view-24.jpeg",
+    heroImage: "/ooty/facade-3.jpeg",
     features: [
       "Surrounded by tea gardens",
       "Panoramic mountain views",
@@ -235,14 +255,34 @@ export const destinations = [
     ],
     amenities: ["Free WiFi", "Restaurant", "Room Service", "Fireplace", "Garden Views", "Heating"],
     rooms: [
-      { name: "The Heritage Suite", description: "Colonial charm with modern luxury" },
-      { name: "The Garden View Room", description: "Wake up to lush green vistas" },
-      { name: "The Mountain Retreat", description: "Cozy comfort with hill views" }
+      {
+        name: "The Heritage Suite",
+        description: "Colonial charm with modern luxury",
+        image: "/ooty/bedroom-10.jpeg",
+      },
+      {
+        name: "The Garden View Room",
+        description: "Wake up to lush green vistas",
+        image: "/ooty/bedroom-12.jpeg",
+      },
+      {
+        name: "The Mountain Retreat",
+        description: "Cozy comfort with hill views",
+        image: "/ooty/bedroom-15.jpeg",
+      },
     ],
     gallery: [
-      "https://pentouz.com/wp-content/uploads/2025/01/24.-Terrace-550x367.jpg",
-      "https://pentouz.com/wp-content/uploads/elementor/thumbs/21.-Restaurant-r0jnyygf1k0ah24wt4u2efy4f5tmx0hugjfogzpfeo.jpeg",
-      "https://pentouz.com/wp-content/uploads/elementor/thumbs/24.-Terrace-scaled-r0jnp19qwifbx8jqqufu2y2yoqq5o13uffj63uf134.jpg"
+      "/ooty/facade-1.jpeg",
+      "/ooty/facade-3.jpeg",
+      "/ooty/reception-5.jpeg",
+      "/ooty/restaurant-20.jpeg",
+      "/ooty/lawn-22.jpeg",
+      "/ooty/view-24.jpeg",
+      "/ooty/bedroom-10.jpeg",
+      "/ooty/bedroom-12.jpeg",
+      "/ooty/bedroom-15.jpeg",
+      "/ooty/bathroom-18.jpeg",
+      "/ooty/parking-25.jpeg",
     ],
     bookingUrl: "https://pentouz.com/the-pentouz-windsor-heights-ooty/",
     location: {
@@ -256,21 +296,21 @@ export const destinations = [
         size: "900 sq ft",
         description: "Colonial charm meets modern luxury. Features four-poster bed, fireplace, private sitting area, and stunning views of the Nilgiri hills.",
         features: ["Four-poster Bed", "Fireplace", "Sitting Area", "Hill Views"],
-        image: "https://pentouz.com/wp-content/uploads/2025/01/24.-Terrace-550x367.jpg"
+        image: "/ooty/bedroom-10.jpeg"
       },
       {
         name: "The Garden View Room",
         size: "500 sq ft",
         description: "Wake up to lush green vistas. Comfortable queen bed, en-suite bathroom, and French windows opening to the manicured gardens.",
         features: ["Garden Views", "Queen Bed", "French Windows", "En-suite Bathroom"],
-        image: "https://pentouz.com/wp-content/uploads/elementor/thumbs/21.-Restaurant-r0jnyygf1k0ah24wt4u2efy4f5tmx0hugjfogzpfeo.jpeg"
+        image: "/ooty/bedroom-12.jpeg"
       },
       {
         name: "The Mountain Retreat",
         size: "450 sq ft",
         description: "Cozy comfort with spectacular hill views. Features plush bedding, heating, and a private balcony overlooking the tea gardens.",
         features: ["Hill Views", "Heating", "Private Balcony", "Tea Garden Views"],
-        image: "https://pentouz.com/wp-content/uploads/elementor/thumbs/24.-Terrace-scaled-r0jnp19qwifbx8jqqufu2y2yoqq5o13uffj63uf134.jpg"
+        image: "/ooty/bedroom-15.jpeg"
       }
     ]
   },
@@ -283,7 +323,7 @@ export const relatedProperties = [
     name: "Hotel Kingdom Manyata",
     location: "Manyata Tech Park, Bangalore",
     description: "Ideally located near Manyata Tech Park, perfect for business travelers seeking comfort and convenience.",
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=600&fit=crop",
+    image: "/lavelle-road/facade-2.jpg",
     bookingUrl: "https://pentouz.com/hotel-kingdom-manyata/",
     features: ["Business Center", "Free Parking", "Restaurant", "Conference Rooms"]
   },
@@ -292,7 +332,7 @@ export const relatedProperties = [
     name: "Bangalore Inn Doddanekundi",
     location: "Doddanekundi, Bangalore",
     description: "A comfortable stay in the heart of Bangalore's IT corridor, offering modern amenities and excellent connectivity.",
-    image: "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=800&h=600&fit=crop",
+    image: "/indiranagar/living-room-1.jpg",
     bookingUrl: "https://pentouz.com/bangalore-inn-doddanekundi/",
     features: ["24/7 Front Desk", "Free WiFi", "Airport Shuttle", "Laundry Service"]
   },
@@ -301,7 +341,7 @@ export const relatedProperties = [
     name: "Bangalore Times Brookefield",
     location: "Brookefield, Bangalore",
     description: "Contemporary accommodations in the vibrant Brookefield area, close to major tech parks and shopping centers.",
-    image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&h=600&fit=crop",
+    image: "/ooty/facade-1.jpeg",
     bookingUrl: "https://pentouz.com/bangalore-times-brookefield/",
     features: ["Modern Rooms", "Rooftop Lounge", "Gym", "Meeting Rooms"]
   },
@@ -310,7 +350,7 @@ export const relatedProperties = [
     name: "Bangalore Inn Brookefield",
     location: "Brookefield, Bangalore",
     description: "Budget-friendly comfort without compromising on quality. Ideal for both short and extended stays.",
-    image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&h=600&fit=crop",
+    image: "/lavelle-road/entrance-2.jpg",
     bookingUrl: "https://pentouz.com/bangalore-inn-brookefield/",
     features: ["Value Pricing", "Clean Rooms", "Breakfast Included", "Travel Desk"]
   }
@@ -372,42 +412,42 @@ export const galleryItems = [
   {
     title: "Skyline Suite",
     category: "Bedroom",
-    image: "https://pentouz.com/wp-content/uploads/elementor/thumbs/04.-The-Skyline-Suite_Bedroom-r0jo1p5gz5rec45jsthw691ismb6d8dnu3xnv1n39c.jpg",
+    image: "/indiranagar/skyline-suite.jpg",
   },
   {
     title: "Terrace Lounge",
     category: "Terrace",
-    image: "https://pentouz.com/wp-content/uploads/2025/01/11.-The-Terrace-Haven_Terrace-1024x683.jpg",
+    image: "/indiranagar/terrace-7.jpg",
   },
   {
     title: "Restaurant",
     category: "Lifestyle",
-    image: "https://pentouz.com/wp-content/uploads/elementor/thumbs/21.-Restaurant-r0jnyygf1k0ah24wt4u2efy4f5tmx0hugjfogzpfeo.jpeg",
+    image: "/ooty/restaurant-20.jpeg",
   },
   {
     title: "Terrace Views",
     category: "Terrace",
-    image: "https://pentouz.com/wp-content/uploads/elementor/thumbs/24.-Terrace-scaled-r0jnp19qwifbx8jqqufu2y2yoqq5o13uffj63uf134.jpg",
+    image: "/ooty/view-24.jpeg",
   },
   {
     title: "Living Room",
     category: "Lifestyle",
-    image: "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-5-1.jpg",
+    image: "/indiranagar/living-room-5.jpg",
   },
   {
     title: "Master Bathroom",
     category: "Bedroom",
-    image: "https://pentouz.com/wp-content/uploads/2025/01/TPH-MB-Bath-2-1.jpg",
+    image: "/indiranagar/master-bath.jpg",
   },
   {
     title: "Reception",
     category: "Lifestyle",
-    image: "https://pentouz.com/wp-content/uploads/2025/01/4.-Reception-e1738559433177.jpeg",
+    image: "/lavelle-road/reception-1.jpg",
   },
   {
     title: "Premium Living",
     category: "Lifestyle",
-    image: "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-10-2.jpg",
+    image: "/indiranagar/living-room-10.jpg",
   },
 ];
 
@@ -455,10 +495,10 @@ export const contactInfo = {
 export const galleryCategories = ["All", "Bedroom", "Terrace", "Lifestyle"];
 
 // Hero image
-export const heroImage = "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-10-2.jpg";
+export const heroImage = "/indiranagar/living-room-10.jpg";
 
 // Living section image
-export const livingImage = "https://pentouz.com/wp-content/uploads/2025/01/TPH-MB-Bath-2-1.jpg";
+export const livingImage = "/indiranagar/master-bath.jpg";
 
 // Offers background image
-export const offersBackgroundImage = "https://pentouz.com/wp-content/uploads/2025/01/4.-Reception-e1738559433177.jpeg";
+export const offersBackgroundImage = "/lavelle-road/reception-1.jpg";

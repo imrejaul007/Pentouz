@@ -19,7 +19,7 @@ const featuredStory = {
   subtitle: "A Philosophy",
   excerpt:
     "In a world that moves at relentless pace, The Pentouz offers a sanctuary where time takes on a different meaning. Discover how we've crafted spaces that invite you to pause, breathe, and truly live.",
-  image: "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-5-1.jpg",
+  image: "/indiranagar/living-room-5.jpg",
   readTime: "8 min read",
   category: "Philosophy",
   slug: "art-of-slow-living",
@@ -31,7 +31,7 @@ const stories = [
     subtitle: "Architecture",
     excerpt:
       "A conversation with our design team about creating an urban sanctuary that bridges tradition and contemporary luxury.",
-    image: "https://pentouz.com/wp-content/uploads/2025/01/11.-The-Terrace-Haven_Terrace-1024x683.jpg",
+    image: "/indiranagar/terrace-7.jpg",
     readTime: "6 min read",
     category: "Design",
     slug: "behind-design-indiranagar",
@@ -41,7 +41,7 @@ const stories = [
     subtitle: "Gastronomy",
     excerpt:
       "Exploring the vibrant food scene of Bangalore through the eyes of our resident chef and his passion for local ingredients.",
-    image: "https://pentouz.com/wp-content/uploads/elementor/thumbs/21.-Restaurant-r0jnyygf1k0ah24wt4u2efy4f5tmx0hugjfogzpfeo.jpeg",
+    image: "/ooty/restaurant-20.jpeg",
     readTime: "5 min read",
     category: "Culinary",
     slug: "culinary-journey-local-flavors",
@@ -51,7 +51,7 @@ const stories = [
     subtitle: "Destinations",
     excerpt:
       "Escape to the misty hills where tea plantations meet luxury, and every morning begins with panoramic views of the Nilgiris.",
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
+    image: "/ooty/view-24.jpeg",
     readTime: "7 min read",
     category: "Travel",
     slug: "mountains-call-ooty",
@@ -61,7 +61,7 @@ const stories = [
     subtitle: "Well-being",
     excerpt:
       "Our spa director shares ancient Ayurvedic practices reimagined for today's wellness-conscious traveler.",
-    image: "https://pentouz.com/wp-content/uploads/2025/01/TPH-MB-Bath-2-1.jpg",
+    image: "/indiranagar/master-bath.jpg",
     readTime: "6 min read",
     category: "Wellness",
     slug: "wellness-rituals-modern-life",
@@ -71,7 +71,7 @@ const stories = [
     subtitle: "Craftsmanship",
     excerpt:
       "Meet the local artisans whose handcrafted pieces bring warmth and authenticity to every corner of The Pentouz.",
-    image: "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=800&h=600&fit=crop",
+    image: "/indiranagar/dining-kitchen.jpg",
     readTime: "5 min read",
     category: "Artisans",
     slug: "artisan-spotlight-handcrafted",
@@ -81,7 +81,7 @@ const stories = [
     subtitle: "City Guide",
     excerpt:
       "From morning yoga to evening cocktails, discover the perfect itinerary for experiencing Bangalore's most prestigious address.",
-    image: "https://pentouz.com/wp-content/uploads/elementor/thumbs/04.-The-Skyline-Suite_Bedroom-r0jo1p5gz5rec45jsthw691ismb6d8dnu3xnv1n39c.jpg",
+    image: "/indiranagar/skyline-suite.jpg",
     readTime: "4 min read",
     category: "Guide",
     slug: "day-in-lavelle-road",
@@ -167,7 +167,7 @@ export default function StoriesPage() {
         className="relative h-[50vh] sm:h-[60vh] min-h-[400px] flex items-center justify-center bg-[#0a0a0a]"
       >
         <Image
-          src="https://pentouz.com/wp-content/uploads/2025/01/Living-Room-10-2.jpg"
+          src="/indiranagar/living-room-10.jpg"
           alt="The Pentouz Stories"
           fill
           className="object-cover opacity-40"

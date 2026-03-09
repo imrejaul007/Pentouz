@@ -19,7 +19,7 @@ const offers = [
     title: "Extended Stay Privilege",
     badge: "Featured",
     description: "Stay 4 nights and receive the 5th night complimentary, plus exclusive dining credits and spa treatments. Perfect for those seeking an extended urban escape.",
-    image: "https://pentouz.com/wp-content/uploads/2025/01/Living-Room-5-1.jpg",
+    image: "/indiranagar/living-room-5.jpg",
     terms: "Valid through March 2026",
     benefits: ["5th Night Free", "Dining Credits", "Spa Access", "Late Checkout"],
   },
@@ -27,7 +27,7 @@ const offers = [
     title: "Romantic Retreat",
     badge: "Couples",
     description: "Celebrate love with champagne on arrival, couples spa ritual, and private candlelit dinner. Create unforgettable memories in our most romantic suites.",
-    image: "https://pentouz.com/wp-content/uploads/2025/01/11.-The-Terrace-Haven_Terrace-1024x683.jpg",
+    image: "/indiranagar/terrace-7.jpg",
     terms: "Minimum 2 night stay",
     benefits: ["Champagne Welcome", "Couples Spa", "Private Dinner", "Rose Turndown"],
   },
@@ -35,7 +35,7 @@ const offers = [
     title: "Family Discovery",
     badge: "Families",
     description: "Create lasting memories with connecting rooms, kids' amenities, and curated family activities. Experience luxury that welcomes the whole family.",
-    image: "https://pentouz.com/wp-content/uploads/elementor/thumbs/04.-The-Skyline-Suite_Bedroom-r0jo1p5gz5rec45jsthw691ismb6d8dnu3xnv1n39c.jpg",
+    image: "/indiranagar/skyline-suite.jpg",
     terms: "Children under 12 stay free",
     benefits: ["Connecting Rooms", "Kids Amenities", "Family Activities", "Childcare Available"],
   },
@@ -43,7 +43,7 @@ const offers = [
     title: "Business Excellence",
     badge: "Corporate",
     description: "Elevate your business travel with dedicated workspace, premium connectivity, and exclusive access to meeting facilities.",
-    image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=600&fit=crop",
+    image: "/lavelle-road/reception-2.jpg",
     terms: "Weekday stays only",
     benefits: ["High-Speed WiFi", "Meeting Room", "Express Laundry", "Airport Transfer"],
   },
@@ -51,7 +51,7 @@ const offers = [
     title: "Wellness Escape",
     badge: "Wellness",
     description: "Rejuvenate with daily yoga sessions, spa treatments, and healthy cuisine options. A complete reset for mind, body, and soul.",
-    image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&h=600&fit=crop",
+    image: "/ooty/view-24.jpeg",
     terms: "3 night minimum",
     benefits: ["Daily Yoga", "Spa Credits", "Healthy Menu", "Meditation Sessions"],
   },
@@ -59,7 +59,7 @@ const offers = [
     title: "Anniversary Special",
     badge: "Celebration",
     description: "Mark your milestone with upgraded accommodation, celebration cake, in-room decoration, and a keepsake photo session.",
-    image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&h=600&fit=crop",
+    image: "/indiranagar/living-room-1.jpg",
     terms: "Proof of anniversary required",
     benefits: ["Room Upgrade", "Celebration Cake", "Decorations", "Photo Session"],
   },
@@ -120,7 +120,7 @@ export default function OffersPage() {
         className="relative h-[50vh] sm:h-[60vh] min-h-[400px] flex items-center justify-center bg-[#1a1a1a]"
       >
         <Image
-          src="https://pentouz.com/wp-content/uploads/2025/01/11.-The-Terrace-Haven_Terrace-1024x683.jpg"
+          src="/indiranagar/terrace-7.jpg"
           alt="Special Offers"
           fill
           className="object-cover opacity-50"

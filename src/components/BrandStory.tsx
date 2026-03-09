@@ -43,7 +43,7 @@ export default function BrandStory() {
             }`}
           >
             <Image
-              src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=1000&fit=crop"
+              src="/indiranagar/living-room-1.jpg"
               alt="The Pentouz Story"
               fill
               className="object-cover"
