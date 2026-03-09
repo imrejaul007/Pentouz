@@ -3,12 +3,15 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import IntentLeadForm from "@/components/IntentLeadForm";
 import { getLavelleSeoPage } from "@/data/lavelleSeoPages";
 import { getLavelleEditorialOverride } from "@/data/lavelleEditorialOverrides";
+import { getManualArticleOverride } from "@/data/lavelleManualArticleOverrides";
 import {
   genericSurroundingGuides,
   getAllKeywordArticleParams,
   getArticleTitle,
+  getIntentTypeForKeyword,
   getKeywordArticleNarrative,
   getRelatedKeywordArticleLinks,
 } from "@/data/lavelleTravelContent";
@@ -58,6 +61,8 @@ export default function KeywordArticlePage({ params }: { params: Params }) {
   const keyword = getLavelleSeoPage(params.slug);
   if (!keyword) notFound();
   const editorial = getLavelleEditorialOverride(keyword.slug);
+  const manualArticle = getManualArticleOverride(params.slug, params.article);
+  const intentType = getIntentTypeForKeyword(params.slug);
   const editorialArticleLead = editorial?.articleLeadByType[
     params.article as keyof typeof editorial.articleLeadByType
   ];
@@ -232,6 +237,15 @@ export default function KeywordArticlePage({ params }: { params: Params }) {
             </div>
           </div>
         </section>
+
+        {manualArticle ? (
+          <IntentLeadForm
+            intent={intentType}
+            keyword={keyword.keyword}
+            place={keyword.place}
+            articleTitle={getArticleTitle(narrative.keyword.place, narrative.template)}
+          />
+        ) : null}
       </main>
       <Footer />
     </>

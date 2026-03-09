@@ -29,6 +29,8 @@ export interface NearbyAnchor {
   whyItMatters: string;
 }
 
+export type IntentType = "legal" | "business" | "medical" | "leisure";
+
 export const keywordArticleTemplates: readonly ArticleTemplate[] = [
   {
     slug: "where-to-stay",
@@ -458,6 +460,24 @@ export function getNearbyAnchorsForKeyword(keywordSlug: string) {
 
   const specific = getKeywordSpecificAnchors(keywordSlug, keyword.place);
   return specific || buildCategoryAnchors(keyword.category, keyword.place);
+}
+
+export function getIntentTypeForKeyword(keywordSlug: string): IntentType {
+  const keyword = getLavelleSeoPage(keywordSlug);
+  if (!keyword) return "business";
+
+  if (keyword.category === "Legal & Courts") return "legal";
+  if (keyword.category === "Landmarks & Culture") return "leisure";
+
+  if (keyword.category === "Healthcare & Services") {
+    const medicalSlugSignals = ["hospital", "hcg", "medical", "cancer"];
+    if (medicalSlugSignals.some((signal) => keyword.slug.includes(signal))) {
+      return "medical";
+    }
+    return "business";
+  }
+
+  return "business";
 }
 
 export function getArticleTitle(place: string, template: ArticleTemplate) {
