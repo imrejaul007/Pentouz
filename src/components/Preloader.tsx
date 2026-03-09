@@ -4,19 +4,30 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 export default function Preloader() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
-    // Start exit animation after 800ms
+    const hasSeenPreloader = sessionStorage.getItem("pentouz-preloader-seen") === "1";
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Skip preloader on repeat views and for reduced-motion users to improve perceived speed.
+    if (hasSeenPreloader || prefersReducedMotion) {
+      return;
+    }
+
+    setIsLoading(true);
+    sessionStorage.setItem("pentouz-preloader-seen", "1");
+
+    // Start exit animation quickly to avoid blocking interaction.
     const exitTimer = setTimeout(() => {
       setIsExiting(true);
-    }, 800);
+    }, 350);
 
-    // Complete hide after exit animation
+    // Complete hide after exit animation.
     const hideTimer = setTimeout(() => {
       setIsLoading(false);
-    }, 1400);
+    }, 650);
 
     return () => {
       clearTimeout(exitTimer);

@@ -38,7 +38,7 @@ export default function RootLayout({
         "@type": "Organization",
         name: "The Pentouz",
         url: withSiteUrl("/"),
-        logo: withSiteUrl("/logo-dark.png"),
+        logo: withSiteUrl("/logo-white.png"),
       },
       {
         "@type": "WebSite",
