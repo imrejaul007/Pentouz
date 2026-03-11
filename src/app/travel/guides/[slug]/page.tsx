@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import EditorialTrustBar from "@/components/EditorialTrustBar";
 import {
+  type GenericGuide,
   genericSurroundingGuides,
   getGenericGuide,
 } from "@/data/lavelleTravelContent";
@@ -12,6 +13,52 @@ import { lavelleSeoPages } from "@/data/lavelleSeoPages";
 import { withSiteUrl } from "@/lib/site";
 
 type Params = { slug: string };
+
+function getGuideIntentLabel(guide: GenericGuide) {
+  const query = `${guide.title} ${guide.subtitle} ${guide.keywords.join(" ")}`.toLowerCase();
+  if (query.includes("court") || query.includes("advocate") || query.includes("high court")) {
+    return "legal schedule";
+  }
+  if (query.includes("hospital") || query.includes("medical")) {
+    return "medical and support travel";
+  }
+  if (query.includes("airport") || query.includes("metro") || query.includes("station")) {
+    return "transit-heavy travel";
+  }
+  if (query.includes("business") || query.includes("executive") || query.includes("meeting")) {
+    return "business itinerary";
+  }
+  return "city exploration";
+}
+
+function buildGuideFaqs(guide: GenericGuide) {
+  const intent = getGuideIntentLabel(guide);
+  const keyword = guide.keywords[0] || `travel near ${guide.focusArea}`;
+
+  return [
+    {
+      question: `Is this guide useful for guests searching "${keyword}"?`,
+      answer: `Yes. The guide is structured for ${intent} and is mapped to realistic routing from a Lavelle Road stay.`,
+    },
+    {
+      question: `How early should I start a day planned around ${guide.focusArea}?`,
+      answer: `Start early on high-demand days and keep 20-40 minute transfer buffers between major stops around ${guide.focusArea}.`,
+    },
+    {
+      question: `Can I combine this ${guide.focusArea} guide with The Pentouz Lavelle Road booking?`,
+      answer:
+        "Yes. This page is designed to support direct Lavelle Road booking with practical location planning for both short and extended stays.",
+    },
+    {
+      question: `What should I prioritize first when planning near ${guide.focusArea}?`,
+      answer: guide.highlights[0] || "Prioritize one anchor stop first, then sequence supporting stops around time and distance efficiency.",
+    },
+    {
+      question: `Which traveler profile benefits most from this ${guide.focusArea} route?`,
+      answer: `Guests handling ${intent} generally get the best value when they use central positioning and pre-planned transit windows.`,
+    },
+  ];
+}
 
 export function generateStaticParams() {
   return genericSurroundingGuides.map((guide) => ({ slug: guide.slug }));
@@ -55,23 +102,7 @@ export default function GenericGuidePage({ params }: { params: Params }) {
       : lavelleSeoPages.slice(0, 6);
   const pageUrl = withSiteUrl(`/travel/guides/${guide.slug}`);
 
-  const faqItems = [
-    {
-      question: `What is the best way to plan a day around ${guide.focusArea}?`,
-      answer:
-        "Use a compact route plan with fixed anchor stops and time buffers instead of overloading one day with too many stops.",
-    },
-    {
-      question: "Is this guide suitable for short Bengaluru stays?",
-      answer:
-        "Yes. The structure is designed for short and extended trips, with practical sequencing you can adapt to your schedule.",
-    },
-    {
-      question: "Can I combine this guide with a Lavelle Road stay?",
-      answer:
-        "Yes. These guides are designed to pair with The Pentouz Lavelle Road as a central stay base for city movement.",
-    },
-  ];
+  const faqItems = buildGuideFaqs(guide);
 
   const jsonLd = {
     "@context": "https://schema.org",

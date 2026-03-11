@@ -46,7 +46,7 @@ export default function KeywordTravelHubPage({ params }: { params: Params }) {
 
   const articles = getKeywordHubArticles(keyword.slug);
   const crossLinks = getRelatedKeywordArticleLinks(keyword.slug, "where-to-stay");
-  const anchors = getNearbyAnchorsForKeyword(keyword.slug).slice(0, 3);
+  const anchors = (getNearbyAnchorsForKeyword(keyword.slug) || []).slice(0, 3);
   const pageUrl = withSiteUrl(`/travel/near/${keyword.slug}`);
   const jsonLd = {
     "@context": "https://schema.org",

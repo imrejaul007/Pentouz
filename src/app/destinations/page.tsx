@@ -76,7 +76,7 @@ export default function DestinationsPage() {
               Contact our concierge team to plan your perfect stay at any of our properties.
             </p>
             <Link
-              href="/#booking"
+              href="#booking"
               className="inline-flex items-center justify-center bg-brand-ink text-white py-5 px-16 text-label uppercase tracking-[0.2em] hover:bg-black transition-all duration-500 font-light"
             >
               Check Availability
@@ -136,7 +136,7 @@ function DestinationCard({ destination, index, reversed }: DestinationCardProps)
 
         {/* Features preview */}
         <div className="grid grid-cols-2 gap-4 mb-10">
-          {destination.features?.slice(0, 4).map((feature) => (
+          {destination.features.slice(0, 4).map((feature) => (
             <p key={feature} className="text-body-sm text-brand-muted flex items-center gap-2">
               <span className="w-1 h-1 bg-brand-accent rounded-full" />
               {feature}
@@ -145,7 +145,7 @@ function DestinationCard({ destination, index, reversed }: DestinationCardProps)
         </div>
 
         <Link
-          href={`/destinations/${destination.slug}`}
+          href="#property"
           className="inline-flex items-center gap-4 text-label uppercase tracking-[0.15em] text-brand-ink hover:text-brand-accent transition-colors duration-500 group"
         >
           <span>Explore Property</span>

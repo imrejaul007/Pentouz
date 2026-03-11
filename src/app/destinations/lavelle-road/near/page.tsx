@@ -6,6 +6,7 @@ import {
   lavelleSeoCategories,
   getLavelleSeoPagesByCategory,
   lavelleSeoPages,
+  getClusterSlugForCategory,
 } from "@/data/lavelleSeoPages";
 import { withSiteUrl } from "@/lib/site";
 
@@ -43,6 +44,9 @@ export default function LavelleNearHubPage() {
               <Link href="/travel" className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
                 Travel Content Hub
               </Link>
+              <Link href="/travel/clusters" className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
+                Intent Clusters
+              </Link>
               <a href="https://bookmystay.io/rooms/37853/2025-12-23/2025-12-24/2/0?utm_source=brandWebsite" target="_blank" rel="noopener noreferrer" className="bg-brand-gold text-white px-4 py-2 hover:bg-brand-goldLight transition-colors">
                 Book Lavelle Road
               </a>
@@ -56,7 +60,15 @@ export default function LavelleNearHubPage() {
               const pages = getLavelleSeoPagesByCategory(category);
               return (
                 <div key={category}>
-                  <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">{category}</h2>
+                  <div className="flex items-end justify-between gap-4 mb-6">
+                    <h2 className="font-display text-2xl sm:text-3xl font-light">{category}</h2>
+                    <Link
+                      href={`/travel/clusters/${getClusterSlugForCategory(category)}`}
+                      className="text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:text-brand-gold transition-colors"
+                    >
+                      Open Cluster
+                    </Link>
+                  </div>
                   <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
                     {pages.map((page) => (
                       <article key={page.slug} className="bg-white border border-brand-border p-5 sm:p-6 hover:shadow-lg transition-shadow">

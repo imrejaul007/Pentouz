@@ -101,18 +101,15 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
     notFound();
   }
 
-  const livingRooms = destination.livingRooms || destination.rooms?.map((room, i) => ({
+  const livingRooms = destination.livingRooms || destination.rooms.map((room, i) => ({
     name: room.name,
     size: "500 sq ft",
     description: room.description,
-    features: destination.amenities?.slice(0, 4) || [],
+    features: destination.amenities.slice(0, 4) || [],
     image: destination.gallery?.[i] || destination.image,
-    images: destination.gallery?.slice(i, i + 4) || [destination.image],
+    images: destination.gallery.slice(i, i + 4) || [destination.image],
   }));
-  const livingLocation =
-    (destination as typeof destination & {
-      livingLocation?: typeof destination.location;
-    }).livingLocation || destination.location;
+  const livingLocation = (destination.livingLocation || destination.location) as any;
   const livingIntro =
     (destination as typeof destination & {
       livingIntro?: string;
@@ -192,10 +189,10 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
               {/* Room quick selector - desktop only */}
               <div data-reveal className="hidden lg:block">
                 <p className="text-[10px] uppercase tracking-[0.2em] text-white/70 mb-4">
-                  Quick View: {livingRooms?.length} Room Types
+                  Quick View: {livingRooms.length} Room Types
                 </p>
                 <div className="flex gap-2">
-                  {livingRooms?.slice(0, 4).map((room, index) => (
+                  {livingRooms.slice(0, 4).map((room, index) => (
                     <button
                       key={room.name}
                       onClick={() => setSelectedRoom(index)}
@@ -259,7 +256,7 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
           </div>
 
           <div ref={roomsRef} className="space-y-16 sm:space-y-24 lg:space-y-32">
-            {livingRooms?.map((room, index) => (
+            {livingRooms.map((room, index) => (
               <div
                 key={room.name}
                 className={`room-section grid lg:grid-cols-2 gap-8 lg:gap-16 items-center`}
@@ -304,7 +301,7 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
 
                   {/* Features grid */}
                   <div data-room-reveal className="grid grid-cols-2 gap-3 mb-8">
-                    {room.features?.map((feature: string) => (
+                    {room.features.map((feature: string) => (
                       <span
                         key={feature}
                         className="flex items-center gap-2 text-xs sm:text-sm text-brand-muted"
@@ -372,7 +369,7 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
           </div>
 
           <div ref={amenitiesRef} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
-            {destination.amenities?.map((amenity) => {
+            {destination.amenities.map((amenity) => {
               const IconComponent = amenityIcons[amenity] || Check;
               return (
                 <div
@@ -445,15 +442,15 @@ export default function LivingPage({ params }: { params: { slug: string } }) {
                 <div className="group p-6 sm:p-8 bg-[#f8f7f5] hover:bg-brand-ink transition-colors duration-500">
                   <Building className="w-10 h-10 text-brand-accent group-hover:text-white mb-5" strokeWidth={1} />
                   <h3 className="font-display text-lg sm:text-xl font-light mb-2 group-hover:text-white transition-colors">
-                    {livingLocation.metro?.name || livingLocation.landmark?.name}
+                    {livingLocation.metro.name || livingLocation.landmark.name}
                   </h3>
                   <p className="text-sm text-brand-muted group-hover:text-white/60 transition-colors">
-                    {livingLocation.metro?.distance || livingLocation.landmark?.distance} away
+                    {livingLocation.metro.distance || livingLocation.landmark.distance} away
                   </p>
                   <div className="flex items-center gap-2 mt-4 pt-4 border-t border-brand-border group-hover:border-white/20 transition-colors">
                     <Clock className="w-4 h-4 text-brand-accent group-hover:text-white transition-colors" />
                     <p className="text-sm text-brand-body group-hover:text-white/80 transition-colors">
-                      {livingLocation.metro?.time || livingLocation.landmark?.time}
+                      {livingLocation.metro.time || livingLocation.landmark.time}
                     </p>
                   </div>
                 </div>

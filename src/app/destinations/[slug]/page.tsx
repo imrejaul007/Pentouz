@@ -259,7 +259,7 @@ export default function DestinationPage({
   const allGalleryImages = destination.gallery || [destination.image];
   const isLavelleRoad = destination.slug === "lavelle-road";
   const lavelleLegalSeo =
-    isLavelleRoad && "legalSeo" in destination ? destination.legalSeo : null;
+    isLavelleRoad && "legalSeo" in destination ? (destination.legalSeo as any) : undefined;
   const lavelleLegalJsonLd = isLavelleRoad
     ? {
         "@context": "https://schema.org",
@@ -275,7 +275,7 @@ export default function DestinationPage({
           postalCode: "560001",
           addressCountry: "IN",
         },
-        amenityFeature: destination.amenities?.map((item) => ({
+        amenityFeature: destination.amenities.map((item) => ({
           "@type": "LocationFeatureSpecification",
           name: item,
           value: true,
@@ -476,7 +476,7 @@ export default function DestinationPage({
                   </div>
                 ))}
               </div>
-              {lavelleLegalSeo?.keywords?.length ? (
+              {lavelleLegalSeo.keywords?.length ? (
                 <p className="mt-5 text-[11px] text-brand-muted">
                   Popular searches: {lavelleLegalSeo.keywords.join(" • ")}
                 </p>
@@ -665,7 +665,7 @@ export default function DestinationPage({
         </section>
 
         {/* Location & Transport */}
-        {destination.location && (
+        {(destination.location as any) && (
           <section
             ref={locationRef}
             className="py-16 sm:py-24 lg:py-32 bg-brand-cream"
@@ -681,68 +681,68 @@ export default function DestinationPage({
               </div>
 
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                {destination.location.airport && (
+                {(destination.location as any).airport && (
                   <div className="location-item bg-white p-6 sm:p-8 hover:shadow-lg transition-shadow duration-500">
                     <div className="w-12 h-12 bg-brand-gold/10 flex items-center justify-center mb-6">
                       <Plane className="w-6 h-6 text-brand-gold" />
                     </div>
                     <h3 className="font-display text-lg sm:text-xl font-light mb-2">
-                      {destination.location.airport.name}
+                      {(destination.location as any).airport.name}
                     </h3>
                     <div className="flex items-center gap-4 text-sm text-brand-muted">
                       <span className="flex items-center gap-1">
                         <MapPin className="w-4 h-4" />
-                        {destination.location.airport.distance}
+                        {(destination.location as any).airport.distance}
                       </span>
                       <span className="flex items-center gap-1">
                         <Clock className="w-4 h-4" />
-                        {destination.location.airport.time}
+                        {(destination.location as any).airport.time}
                       </span>
                     </div>
                   </div>
                 )}
 
-                {destination.location.railway && (
+                {(destination.location as any).railway && (
                   <div className="location-item bg-white p-6 sm:p-8 hover:shadow-lg transition-shadow duration-500">
                     <div className="w-12 h-12 bg-brand-gold/10 flex items-center justify-center mb-6">
                       <Train className="w-6 h-6 text-brand-gold" />
                     </div>
                     <h3 className="font-display text-lg sm:text-xl font-light mb-2">
-                      {destination.location.railway.name}
+                      {(destination.location as any).railway.name}
                     </h3>
                     <div className="flex items-center gap-4 text-sm text-brand-muted">
                       <span className="flex items-center gap-1">
                         <MapPin className="w-4 h-4" />
-                        {destination.location.railway.distance}
+                        {(destination.location as any).railway.distance}
                       </span>
                       <span className="flex items-center gap-1">
                         <Clock className="w-4 h-4" />
-                        {destination.location.railway.time}
+                        {(destination.location as any).railway.time}
                       </span>
                     </div>
                   </div>
                 )}
 
-                {(destination.location.landmark ||
-                  destination.location.metro) && (
+                {((destination.location as any).landmark ||
+                  (destination.location as any).metro) && (
                   <div className="location-item bg-white p-6 sm:p-8 hover:shadow-lg transition-shadow duration-500">
                     <div className="w-12 h-12 bg-brand-gold/10 flex items-center justify-center mb-6">
                       <Building2 className="w-6 h-6 text-brand-gold" />
                     </div>
                     <h3 className="font-display text-lg sm:text-xl font-light mb-2">
-                      {destination.location.landmark?.name ||
-                        destination.location.metro?.name}
+                      {(destination.location as any).landmark.name ||
+                        (destination.location as any).metro.name}
                     </h3>
                     <div className="flex items-center gap-4 text-sm text-brand-muted">
                       <span className="flex items-center gap-1">
                         <MapPin className="w-4 h-4" />
-                        {destination.location.landmark?.distance ||
-                          destination.location.metro?.distance}
+                        {(destination.location as any).landmark.distance ||
+                          (destination.location as any).metro.distance}
                       </span>
                       <span className="flex items-center gap-1">
                         <Clock className="w-4 h-4" />
-                        {destination.location.landmark?.time ||
-                          destination.location.metro?.time}
+                        {(destination.location as any).landmark.time ||
+                          (destination.location as any).metro.time}
                       </span>
                     </div>
                   </div>
@@ -781,7 +781,7 @@ export default function DestinationPage({
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-              {destination.features?.map((feature) => (
+              {destination.features.map((feature) => (
                 <div
                   key={feature}
                   className="feature-card group flex items-start gap-4 sm:gap-5 p-5 sm:p-6 lg:p-8 bg-brand-cream hover:bg-white hover:shadow-lg transition-all duration-500 border-l-2 border-transparent hover:border-brand-gold"
@@ -803,7 +803,7 @@ export default function DestinationPage({
 
             {/* Amenities tags - horizontal scroll on mobile */}
             <div className="flex flex-nowrap sm:flex-wrap justify-start sm:justify-center gap-3 sm:gap-4 mt-12 sm:mt-16 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide">
-              {destination.amenities?.map((amenity) => (
+              {destination.amenities.map((amenity) => (
                 <span
                   key={amenity}
                   className="flex-shrink-0 px-4 sm:px-6 py-2 sm:py-3 border border-brand-border text-[10px] sm:text-[11px] uppercase tracking-[0.1em] text-brand-muted hover:border-brand-gold hover:text-brand-gold transition-colors duration-300"
@@ -828,7 +828,7 @@ export default function DestinationPage({
             </div>
 
             <div ref={roomsRef} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {destination.rooms?.map((room, index) => (
+              {destination.rooms.map((room, index) => (
                 <Link
                   key={room.name}
                   href={`/destinations/${destination.slug}/living`}

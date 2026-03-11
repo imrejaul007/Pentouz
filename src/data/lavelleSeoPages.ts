@@ -14,6 +14,14 @@ export interface LavelleSeoPage {
   audience: string;
 }
 
+export interface LavelleSeoCluster {
+  slug: string;
+  category: LavelleSeoCategory;
+  title: string;
+  description: string;
+  primaryIntent: string;
+}
+
 export const lavelleSeoPages: readonly LavelleSeoPage[] = [
   { slug: "karnataka-high-court", place: "Karnataka High Court", keyword: "hotel near Karnataka High Court Bengaluru", category: "Legal & Courts", audience: "outstation advocates, litigants, and legal support teams" },
   { slug: "attara-kacheri", place: "Attara Kacheri", keyword: "hotel near Attara Kacheri Bangalore", category: "Legal & Courts", audience: "legal-history visitors and court attendees" },
@@ -87,6 +95,69 @@ export const lavelleSeoCategories: LavelleSeoCategory[] = [
   "Transport Hubs",
 ];
 
+const clusterSlugByCategory: Record<LavelleSeoCategory, string> = {
+  "Legal & Courts": "legal-courts",
+  "Government Offices": "government-offices",
+  "Business Districts": "business-districts",
+  "Healthcare & Services": "healthcare-services",
+  "Landmarks & Culture": "landmarks-culture",
+  "Transport Hubs": "transport-hubs",
+};
+
+const clusterMetaByCategory: Record<
+  LavelleSeoCategory,
+  Omit<LavelleSeoCluster, "slug" | "category">
+> = {
+  "Legal & Courts": {
+    title: "Legal and Court Stay Guides in Bengaluru",
+    description:
+      "Intent-driven pages for outstation advocates, legal teams, and litigants visiting court zones near central Bengaluru.",
+    primaryIntent: "legal-travel",
+  },
+  "Government Offices": {
+    title: "Government Office Stay Guides in Bengaluru",
+    description:
+      "Pages focused on official visits near Vidhana Soudha, administrative clusters, and documentation centers.",
+    primaryIntent: "official-travel",
+  },
+  "Business Districts": {
+    title: "Business District Stay Guides in Bengaluru",
+    description:
+      "High-intent city-center hotel pages for executives, consultants, and project teams attending meetings across key office corridors.",
+    primaryIntent: "corporate-travel",
+  },
+  "Healthcare & Services": {
+    title: "Healthcare and Service Travel Stay Guides",
+    description:
+      "Stay-planning pages for medical appointments, family attendants, and documentation-driven city visits.",
+    primaryIntent: "support-travel",
+  },
+  "Landmarks & Culture": {
+    title: "Landmark and Culture Stay Guides in Bengaluru",
+    description:
+      "Location pages for leisure and event travelers planning visits around museums, shopping zones, and heritage routes.",
+    primaryIntent: "leisure-travel",
+  },
+  "Transport Hubs": {
+    title: "Transport Hub Stay Guides in Bengaluru",
+    description:
+      "Connectivity-led pages for airport, metro, rail, and intercity transit travelers who need predictable central access.",
+    primaryIntent: "transit-travel",
+  },
+};
+
+export const lavelleSeoClusters: readonly LavelleSeoCluster[] = lavelleSeoCategories.map(
+  (category) => ({
+    slug: clusterSlugByCategory[category],
+    category,
+    ...clusterMetaByCategory[category],
+  })
+);
+
+export const lavelleSeoClusterBySlug = new Map(
+  lavelleSeoClusters.map((cluster) => [cluster.slug, cluster])
+);
+
 export function getLavelleSeoPage(slug: string) {
   return lavelleSeoPagesBySlug.get(slug);
 }
@@ -107,4 +178,12 @@ export function getRelatedLavelleSeoPages(slug: string, limit = 6) {
   );
 
   return [...sameCategory.slice(0, 4), ...crossCategory.slice(0, 4)].slice(0, limit);
+}
+
+export function getClusterSlugForCategory(category: LavelleSeoCategory) {
+  return clusterSlugByCategory[category];
+}
+
+export function getLavelleSeoCluster(slug: string) {
+  return lavelleSeoClusterBySlug.get(slug);
 }

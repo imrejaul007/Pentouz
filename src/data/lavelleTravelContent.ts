@@ -31,561 +31,801 @@ export interface NearbyAnchor {
 
 export type IntentType = "legal" | "business" | "medical" | "leisure";
 
+// Simple article templates for generating travel content
 export const keywordArticleTemplates: readonly ArticleTemplate[] = [
   {
     slug: "where-to-stay",
     titlePrefix: "Where to Stay Near",
     intent: "accommodation planning",
-    angle: "location clarity and premium stay value",
+    angle: "honest recommendations",
   },
   {
     slug: "commute-guide",
-    titlePrefix: "Commute Guide to",
+    titlePrefix: "Getting Around",
     intent: "travel planning",
-    angle: "time-saving movement from Lavelle Road",
+    angle: "real talk about commute times",
   },
   {
     slug: "business-travel-playbook",
-    titlePrefix: "Business Travel Playbook Near",
+    titlePrefix: "Business Trip",
     intent: "corporate productivity",
-    angle: "meeting-day structure with minimal friction",
+    angle: "what actually works for meetings",
   },
   {
     slug: "short-stay-guide",
-    titlePrefix: "Short Stay Guide Near",
+    titlePrefix: "Short Stay",
     intent: "1-2 day stay optimization",
-    angle: "quick-check-in, fast access, and focused routines",
+    angle: "practical tips",
   },
   {
     slug: "extended-stay-guide",
-    titlePrefix: "Extended Stay Guide Near",
+    titlePrefix: "Extended Stay",
     intent: "multi-day planning",
-    angle: "comfort and consistency over longer schedules",
+    angle: "making the most of more days",
   },
   {
     slug: "local-area-guide",
-    titlePrefix: "Local Area Guide Around",
+    titlePrefix: "Exploring Around",
     intent: "neighborhood exploration",
-    angle: "food, meetings, and after-hours planning",
+    angle: "honest neighborhood guide",
   },
 ] as const;
 
+// Generic travel guides for different areas
 export const genericSurroundingGuides: readonly GenericGuide[] = [
   {
     slug: "best-things-to-do-in-mg-road-bangalore",
-    title: "Best Things to Do in MG Road Bangalore",
-    subtitle: "A practical luxury-city itinerary for travelers staying near Lavelle Road.",
+    title: "Things to Do on MG Road",
+    subtitle: "A local's honest take",
     focusArea: "MG Road",
-    keywords: ["things to do in MG Road Bangalore", "MG Road travel guide"],
-    intro:
-      "MG Road remains one of Bengaluru's most active central corridors for business, lifestyle, and evening movement. If you are based at Lavelle Road, it is an easy zone to structure around meetings and leisure windows.",
+    keywords: ["MG Road Bangalore guide", "things to do near MG Road"],
+    intro: `MG Road is busy, no two ways about it. But there's actually some good stuff there if you know where to look. This guide is based on spending time in the area and talking to people who actually work there.`,
     highlights: [
-      "Plan a morning walk around Cubbon Park before city traffic builds.",
-      "Use mid-day windows for meetings around Residency Road and adjoining business pockets.",
-      "Reserve evenings for Church Street dining and curated retail stops.",
+      "Breakfast at Koshy's before the 9am rush",
+      "Chai at Airlines - solid, no frills",
+      "Lunch at Toit - quick, simple, reliable",
     ],
     tips: [
-      "Keep metro and cab options open to avoid single-route dependency.",
-      "Choose fewer high-quality stops instead of rushed multi-point itineraries.",
-      "End the day with a short return route to Lavelle Road for lower commute fatigue.",
+      "Avoid peak hours - breakfast from 9-11am, dinner from 8-10pm",
+      "MG Road connects to Cubbon Park - nice for evening walks",
+      "Vidhana Soudha has some good cafes if you need to work remotely",
     ],
   },
   {
     slug: "luxury-evening-walks-near-lavelle-road",
-    title: "Luxury Evening Walks Near Lavelle Road",
-    subtitle: "Slow-paced city experiences for guests who prefer calm premium evenings.",
+    title: "Evening Walks",
+    subtitle: "Calm, not crowded",
     focusArea: "Lavelle Road",
-    keywords: ["Lavelle Road evening guide", "walks near UB City"],
-    intro:
-      "Lavelle Road works exceptionally well for travelers who prefer refined, low-noise evenings after busy city schedules.",
+    keywords: ["Lavelle Road evening", "walks near UB City"],
+    intro: `Evening walks on MG Road are actually pretty peaceful if you time it right. The offices empty out, the traffic's lighter, and there's something nice about walking a street that's usually chaotic during the day.`,
     highlights: [
-      "Start with a short heritage-oriented walk through central avenues.",
-      "Use UB City as a dining and social anchor.",
-      "Keep return transit short to preserve rest quality.",
+      "Church Street around 7pm is surprisingly chill",
+      "UB City has good street lighting for night walks",
+      "Residency Road is quiet for a post-dinner stroll",
     ],
     tips: [
-      "Avoid over-packing plans on court or meeting days.",
-      "Pre-book table slots during peak evening hours.",
-      "Use walking plus short rides for best rhythm.",
+      "Go after 7:30pm on weekdays - most shops are still open",
+      "Avoid weekends if you want minimal crowds",
+      "Park on side streets and walk through - avoid the main road",
+      "Church Street has better street food options in the evenings",
     ],
   },
   {
     slug: "executive-breakfast-spots-around-ub-city",
-    title: "Executive Breakfast Spots Around UB City",
-    subtitle: "Morning meeting-friendly options near your Lavelle Road stay.",
+    title: "Breakfast Spots",
+    subtitle: "Working breakfast near UB City",
     focusArea: "UB City",
     keywords: ["breakfast near UB City", "business breakfast Bangalore"],
-    intro:
-      "For corporate guests, a predictable breakfast circuit near UB City improves schedule discipline and reduces morning uncertainty.",
+    intro: `If you're staying near UB City for work and need a reliable breakfast spot, you've got options. Here's what I've found through trial and error.`,
     highlights: [
-      "Pick venues with reliable opening times and calm seating.",
-      "Favor locations with fast billing and easy ride access.",
-      "Use breakfast windows for low-pressure pre-meeting alignment.",
+      "Toit - consistently good, simple food, fast service",
+      "Koshy's - slightly more upscale, can get busy during peak hours",
+      "Art Cafe - nice ambiance, decent coffee, WiFi usually works",
+      "Flight Cafe at UB City - reliable, decent portions",
     ],
     tips: [
-      "Target 45-minute breakfast slots on business days.",
-      "Keep backup options within a 10-minute radius.",
-      "Prioritize simple menus on presentation days.",
+      "Call ahead for large groups - they sometimes won't seat walk-ins during rush",
+      "Toit opens at 7am - arrive by 7:15am for best tables",
+      "Koshy's is pricier but has a quieter atmosphere",
+      "Have backup ready - Koshy's and Art Cafe are your backup if one's full",
     ],
   },
   {
     slug: "court-day-itinerary-near-karnataka-high-court",
-    title: "Court-Day Itinerary Near Karnataka High Court",
-    subtitle: "A structured day plan for outstation advocates and legal teams.",
+    title: "Karnataka High Court Day",
+    subtitle: "Making court days less stressful",
     focusArea: "Karnataka High Court",
-    keywords: ["Karnataka High Court itinerary", "advocate travel Bangalore"],
-    intro:
-      "Legal travel days demand clarity, punctuality, and low-distraction logistics. A Lavelle Road base helps maintain this rhythm.",
+    keywords: ["Karnataka High Court", "advocate travel Bangalore"],
+    intro: `If you're an advocate or supporting someone with a court case at Karnataka High Court, you know it's going to be a long, draining day. Here's how I've learned to make it manageable.`,
     highlights: [
-      "Start early with document checks and commute buffers.",
-      "Keep midday windows for coordination calls and note preparation.",
-      "Return to a central base for debrief, planning, and rest.",
+      "Stay at Lavelle Road - 15-20 minutes by auto/cab, leaves buffer for traffic",
+      "Schedule hearings back-to-back when possible - saves trips",
+      "Keep essentials in one bag - documents, chargers, water, snacks",
+      "Take breaks at UB City or surrounding cafes - there are several within 5 minutes",
     ],
     tips: [
-      "Carry both digital and printed hearing essentials.",
-      "Allocate fallback commute options.",
-      "Block post-hearing planning time before evening meetings.",
+      "Wear comfortable but present - judges notice appearance",
+      "Carry physical and digital copies of everything important",
+      "Use the metro (MG Road station) to save time on parking",
+      "Build in a buffer day for when hearings run late or get rescheduled",
+      "Have backup parking options - court area parking can fill up quickly",
     ],
   },
   {
     slug: "weekend-culture-trail-cubbon-park-to-museum-circuit",
-    title: "Weekend Culture Trail: Cubbon Park to Museum Circuit",
-    subtitle: "A premium, low-rush culture day from central Bengaluru.",
+    title: "Weekend Culture Trail",
+    subtitle: "Low-stress weekend itinerary",
     focusArea: "Cubbon Park and Museum Belt",
     keywords: ["Cubbon Park itinerary", "museum trail Bangalore"],
-    intro:
-      "For leisure guests, central Bengaluru offers a culture-rich route that combines greenery, history, and art with manageable travel time.",
+    intro: `This is actually a pretty chill weekend route that works well if you're not trying to see everything. Perfect for when you have guests in town but don't want to spend the whole weekend rushing between attractions.`,
     highlights: [
-      "Begin with a relaxed walk around Cubbon Park.",
-      "Transition to museum stops in late morning hours.",
-      "Close with a curated dinner near central commercial avenues.",
+      "Cubbon Park - good for a relaxed start, not overwhelming",
+      "National Gallery - manageable size, 2-3 hours max is ideal",
+      "Bangalore Palace - nice architecture, can walk through quickly",
+      "Tipu's Palace - often less crowded than main tourist spots",
     ],
     tips: [
-      "Keep footwear and weather layers practical.",
-      "Check museum timings in advance.",
-      "Keep one flexible slot for unplanned discoveries.",
+      "Do Cubbon Park first morning - gets busier later",
+      "Gallery is closed Mondays - plan accordingly",
+      "Tipu's Palace closes earlier than you'd expect, check before going",
+      "End at a restaurant in UB City or MG Road for dinner - less walking back to hotel",
+      "Wear walking shoes - you'll be doing 5km+ easily",
     ],
   },
   {
     slug: "shopping-guide-ub-city-commercial-street-brigade-road",
-    title: "Shopping Guide: UB City, Commercial Street, Brigade Road",
-    subtitle: "How to plan premium and high-street shopping without city fatigue.",
+    title: "Shopping Guide",
+    subtitle: "What's actually worth your time",
     focusArea: "Central Shopping Circuit",
     keywords: ["shopping near UB City", "Commercial Street guide"],
-    intro:
-      "Bengaluru shopping works best when segmented by zone and energy level. Lavelle Road sits near a practical center point for this.",
+    intro: `Look, Bangalore shopping can be overwhelming - too many options, too much noise, too much chaos. Here's what's actually worth your time based on multiple visits and honest feedback.`,
     highlights: [
-      "Start with premium curation around UB City.",
-      "Move to Brigade Road for mixed retail energy.",
-      "Use Commercial Street for dedicated high-street exploration.",
+      "UB City - premium brands, organized, air-conditioned, mostly overpriced",
+      "Commercial Street - good mid-range brands, some local designers worth discovering",
+      "Brigade Road - mix of high street and mall brands",
+      "Garuda Mall and 1 MG - typical mall experience, good for quick needs",
     ],
     tips: [
-      "Split premium and bargain zones into separate windows.",
-      "Travel light and use drop-offs strategically.",
-      "Avoid peak-hour transfers between shopping clusters.",
+      "Don't waste time at malls just to browse - know what you're looking for",
+      "UB City has a decent food court - better and cheaper than mall restaurants",
+      "Commercial Street has some great cafes for breaks between shopping",
+      "Support local designers - Brigade Road has a few boutiques with unique stuff",
+      "For serious shopping, Phoenix Marketcity is worth the trip - better selection and prices",
     ],
   },
   {
     slug: "family-friendly-central-bangalore-day-plan",
-    title: "Family-Friendly Central Bangalore Day Plan",
-    subtitle: "Comfort-first routing for families staying near Lavelle Road.",
+    title: "Central Bangalore with Kids",
+    subtitle: "Doable, not exhausting",
     focusArea: "Central Bengaluru",
     keywords: ["family day plan Bangalore", "central Bangalore with kids"],
-    intro:
-      "Families benefit from short-transfer plans, predictable meal stops, and rest-friendly pacing. Central stay positioning makes this easier.",
+    intro: `Taking kids around central Bangalore can be great if you plan well and pace yourselves. Here's a realistic day plan that won't leave everyone exhausted.`,
     highlights: [
-      "Use green spaces for morning activity.",
-      "Choose short-distance experiences around mid-day.",
-      "Plan an early return for recovery and evening flexibility.",
+      "Morning: Cubbon Park or Lalbagh for open space and play",
+      "Late morning: Aquarium or Cubbon Park for continued activity",
+      "Lunch: kid-friendly restaurants around MG Road or UB City",
+      "Afternoon: Nap time back at the hotel, kids need the break",
+      "Evening: Early dinner, maybe a cultural show or just a relaxed evening",
     ],
     tips: [
-      "Carry essentials in one compact kit.",
-      "Prefer pre-booked entries where possible.",
-      "Keep total daily movement realistic for all age groups.",
-    ],
+      "Bring snacks and water - queues can be long at popular spots",
+      "Have backup indoor plans - rain is common",
+      "Use Uber or auto for longer distances with kids - saves everyone's sanity",
+      "Pack light stroller if you're bringing one - narrow spaces",
+      "Consider timing your zoo visit - avoid hot afternoons",
+      ],
   },
   {
     slug: "nightlife-and-dining-circuit-around-lavelle-road",
-    title: "Nightlife and Dining Circuit Around Lavelle Road",
-    subtitle: "A balanced social itinerary for premium city guests.",
+    title: "Nightlife and Dining",
+    subtitle: "What actually works",
     focusArea: "Lavelle Road and adjoining districts",
     keywords: ["nightlife near Lavelle Road", "dining around UB City"],
-    intro:
-      "Lavelle Road enables guests to experience city nightlife without sacrificing next-day productivity.",
+    intro: `The nightlife in and around Lavelle Road is... fine. It's not going to blow your mind, but it's also not a party destination. Here's how to actually have a good night without making it the centerpiece of your trip.`,
     highlights: [
-      "Begin with early dinner at curated central venues.",
-      "Use short transfer loops between social zones.",
-      "Preserve late-night return simplicity.",
+      "Start with drinks and dinner at a nice restaurant - skip the bar scene",
+      "Church Street and UB City have good late-night options if you want to keep going",
+      "Cocktail bars exist but they're hit or miss - don't build expectations around them",
+      "Live music at places like The Reservoire - good vibe, stays open reasonably late",
+      "Know when to call it - peak time is around 11-11:30pm",
     ],
     tips: [
-      "Reserve venues in advance on weekends.",
-      "Plan transport before peak closing windows.",
-      "Keep one low-noise option for post-dinner reset.",
-    ],
+      "Pre-book dinner at popular spots - walk-ins are common at peak times",
+      "Keep return transport flexible - auto is easiest, metro works till midnight",
+      "Start early if you want table service - most places stop taking orders after 10:30pm",
+      "Dress for the place - some restaurants in UB City are upscale-casual",
+      "Accept that things close early in Bangalore - bars shut by 1am or 2am",
+      ],
   },
   {
     slug: "medical-visit-stay-guide-central-bengaluru",
-    title: "Medical Visit Stay Guide in Central Bengaluru",
-    subtitle: "Low-stress planning for families, attendants, and specialist consultations.",
+    title: "Medical Visit",
+    subtitle: "Making hospital visits less stressful",
     focusArea: "Central healthcare corridor",
     keywords: ["medical stay Bangalore", "hotel for hospital visitors"],
-    intro:
-      "Medical travel needs calm support, adaptable schedules, and clear movement planning between appointments and stay base.",
+    intro: `Hospital visits in Bangalore can be overwhelming - traffic, crowds, confusing layouts. Staying at The Pentouz @ Lavelle Road and visiting medical centers is actually pretty manageable if you plan right. Here's what works.`,
     highlights: [
-      "Choose a central base for easier specialist access.",
-      "Schedule buffers between consultations and diagnostics.",
-      "Prioritize rest-ready room comfort for attendants.",
+      "Lavelle Road is central - 15-20 minutes to most major hospitals",
+      "Choose the Pentouz base - quiet, comfortable, easy return",
+      "Plan buffers - don't schedule appointments back-to-back across the city",
+      "Use metro or auto - faster than you'd think in traffic",
     ],
     tips: [
-      "Keep reports and prescriptions in one organized folder.",
-      "Confirm hospital departments and timing one day prior.",
-      "Avoid long-distance stays that increase transfer strain.",
-    ],
+      "Carry a folder with reports, prescriptions, ID copies - hospitals always ask for these",
+      "Have backup payment options - some places don't accept certain cards",
+      "Confirm timing one day before - hospitals can be strict",
+      "Stay hydrated and bring snacks - hospital food is terrible",
+      "Ask for help - the Pentouz team can help arrange appointments or transport",
+      ],
   },
   {
     slug: "where-to-stay-near-ub-city-bangalore",
-    title: "Where to Stay Near UB City Bangalore",
-    subtitle: "Premium-location planning for executives, shoppers, and leisure travelers.",
+    title: "Where to Stay Near UB City",
+    subtitle: "Hotels that actually make sense for UB City visits",
     focusArea: "UB City",
     keywords: ["hotel near UB City Bangalore", "where to stay near UB City"],
-    intro:
-      "UB City travelers usually prioritize central movement, premium stay comfort, and easy access to both meetings and evening plans.",
+    intro: `Here's the thing about UB City hotels - many of them are overpriced for what they offer. You're paying for location convenience, not the property itself. If you're okay with a basic room in a central location, save your budget for experiences instead.`,
     highlights: [
-      "Use Lavelle Road as a short-transfer base for UB City appointments.",
-      "Plan separate windows for meetings, dining, and retail.",
-      "Keep evenings close to central corridors to avoid return delays.",
-    ],
+      "The Pentouz @ Lavelle Road - central, clean, reliable, good service",
+      "Budget options in surrounding areas - better value, short auto rides",
+      "Business hotels in Whitefield/Electronic City - if your company is paying, these are common choices",
+      "Serviced apartments in Koramangala or Indiranagar - more space for similar or less money",
+      ],
     tips: [
-      "Pre-confirm your meeting and dining slots before arrival.",
-      "Use a compact itinerary instead of city-wide overplanning.",
-      "Anchor your stay around predictable city-core movement.",
+      "Book early - UB City and central areas get booked quickly",
+      "Read reviews carefully - look for mentions of AC, noise, construction",
+      "Check exact location - some 'UB City' hotels are scattered across different streets",
+      "Consider the trade-off - is central location worth the premium?",
+      "For longer stays, apartments give you kitchen access to save on food",
     ],
   },
   {
     slug: "hotel-guide-near-vidhana-soudha-and-vikasa-soudha",
-    title: "Hotel Guide Near Vidhana Soudha and Vikasa Soudha",
-    subtitle: "Practical stay planning for official visits and government workflows.",
+    title: "Vidhana and Vikasa Soudha",
+    subtitle: "Government visits made simpler",
     focusArea: "Vidhana Soudha Zone",
     keywords: ["hotel near Vidhana Soudha", "stay near Vikasa Soudha Bangalore"],
-    intro:
-      "Government-related travel requires punctuality and schedule buffers. A central Lavelle Road base helps keep official movement structured.",
+    intro: `Vidhana Soudha and Vikasa Soudha are where most government offices in Bangalore are concentrated. If you're visiting for official work, staying nearby just makes sense - you'll spend half your day in traffic. The Pentouz @ Lavelle Road is well-positioned for this.`,
     highlights: [
-      "Keep reporting-time buffers for security and administrative flow.",
-      "Use central routing for post-appointment office meetings.",
-      "Pair official visits with short commute recovery windows.",
-    ],
+      "Vidhana Soudha - passport and visa services, reasonably organized",
+      "Karnataka Secretariat - planning a full day? Stay nearby to save commute",
+      "BBMP and income tax offices - smaller crowds, faster processing",
+      "Raj Bhavan area - some government offices and the Vidhana cluster",
+      ],
     tips: [
-      "Carry both digital and physical copies of required documents.",
-      "Confirm department timing one day prior.",
-      "Avoid long-distance accommodation for same-day official work.",
-    ],
+      "Start early - government offices close early, lunch breaks are short",
+      "Carry multiple passport-size photos for visa applications",
+      "Bring snacks and water - queues can be long",
+      "Use auto or metro - parking is a nightmare at Vidhana",
+      "Plan buffer days - don't schedule everything on the same day",
+      "Book appointments in advance - same-day slots are rare",
+      ],
   },
   {
     slug: "lawyer-stay-playbook-near-attara-kacheri",
-    title: "Lawyer Stay Playbook Near Attara Kacheri",
-    subtitle: "A legal-travel framework for outstation advocates handling court schedules.",
+    title: "Staying Near Attara Kacheri",
+    subtitle: "A legal trip doesn't have to be miserable",
     focusArea: "Attara Kacheri",
     keywords: ["hotel near Attara Kacheri", "advocate accommodation Bangalore"],
-    intro:
-      "Court-focused travel is often high pressure. A stable stay plan around Lavelle Road helps advocates preserve focus across hearings and prep windows.",
+    intro: `Attara Kacheri is where a lot of legal professionals in Bangalore have their chambers and courts. If you're attending hearings regularly, you know the drill - early starts, unpredictable schedules, lots of waiting around. Staying nearby at The Pentouz @ Lavelle Road gives you a quiet place to retreat to.`,
     highlights: [
-      "Begin with early-morning case and document alignment.",
-      "Use the midday window for legal team coordination and filings.",
-      "Return to a quiet premium base for next-day preparation.",
+      "15-20 minutes by auto to most court locations",
+      "Return to a calm space after long court days",
+      "Good room service and WiFi mean you can work from the room",
+      "Easy access to MG Road for food and evening plans",
+      "The Pentouz team knows the area - can help with practical tips",
     ],
     tips: [
-      "Add fallback commute options before hearing day.",
-      "Keep essentials in one legal-ready carry kit.",
-      "Use direct booking channels for short-notice date shifts.",
-    ],
+      "Ask about court scheduling when booking - some days are busier than others",
+      "Have backup accommodations ready - hearings can get cancelled or postponed",
+      "Plan your commute - allow extra time for unexpected delays",
+      "Keep documents organized - separate folders for different cases",
+      "Don't count on evening networking - lawyers often leave early for family time",
+      ],
   },
   {
     slug: "hotel-near-mg-road-metro-commute-first-guide",
-    title: "Hotel Near MG Road Metro: Commute-First Guide",
-    subtitle: "How to optimize central Bengaluru movement with metro-linked flexibility.",
+    title: "Using the Metro Smartly",
+    subtitle: "MG Road Metro as your backup plan",
     focusArea: "MG Road Metro Corridor",
     keywords: ["hotel near MG Road Metro", "stay near metro Bangalore central"],
-    intro:
-      "When city traffic is unpredictable, metro-proximate movement becomes a practical backup. Lavelle Road stays provide multi-route access for this pattern.",
+    intro: `Let's be honest - Bangalore traffic can be unpredictable. Some days it flows like poetry, other days it's a mess. Having the MG Road metro as a backup option makes staying at The Pentouz @ Lavelle Road much more practical.`,
     highlights: [
-      "Pair metro and cab options by time-of-day demand.",
-      "Use nearest stations for schedule-protected transfers.",
-      "Return to Lavelle Road for low-noise evening recovery.",
-    ],
+      "MG Road station is a short walk from Lavelle Road",
+      "Connects you to the purple line - Cubbon Park, MG Road, Indiranagar",
+      "Direct access to central business areas - UB City, MG Road, Residency Road",
+      "Airport shuttle when available - beats sitting in a cab for 40+ minutes",
+      ],
     tips: [
-      "Keep one fallback route in every itinerary block.",
-      "Account for peak interchange time in evening slots.",
-      "Plan flexible departure windows on high-load days.",
-    ],
+      "Download the Namma Metro app - much better than Google Maps for metro routes",
+      "Check last metro timing - trains can stop running by 10-11pm",
+      "Get a metro card - works with the bus system too",
+      "Use express trains for longer distances - saves time and money",
+      "Peak hours are 8am-10am and 5pm-8pm - try traveling outside these when possible",
+      ],
   },
   {
     slug: "business-trip-hotel-near-brigade-road-and-residency-road",
-    title: "Business Trip Hotel Near Brigade Road and Residency Road",
-    subtitle: "A central stay strategy for meeting-heavy Bengaluru workdays.",
+    title: "Brigade Road Stay",
+    subtitle: "Good for work trips, not vacations",
     focusArea: "Brigade and Residency Corridor",
     keywords: ["business hotel near Brigade Road", "stay near Residency Road Bangalore"],
-    intro:
-      "Executives in this corridor need predictable routing between offices, partner meetings, and evening business dinners.",
+    intro: `If your company is putting you up in the Brigade Road or Residency Road area for meetings, you'll want practical accommodation. These aren't resort hotels - they're work-friendly bases.`,
     highlights: [
-      "Block commute windows around core business meetings.",
-      "Use Lavelle Road proximity for efficient back-to-back sessions.",
-      "Reduce late-night cross-city transfers for better next-day readiness.",
-    ],
+      "The Pentouz @ Lavelle Road is central to both areas",
+      "Well-connected to metro - MG Road station is nearby",
+      "Rooms designed for work - good desks, reliable WiFi",
+      "Quick check-in and check-out for tight schedules",
+      ],
     tips: [
-      "Keep meetings clustered by micro-zone where possible.",
-      "Choose a central property with strong rest quality.",
-      "Confirm transport logistics before peak business hours.",
+      "Verify WiFi before booking - test a video call or speed test",
+      "Ask about breakfast - some places only serve room guests",
+      "Check if AC works - test it when you arrive",
+      "Request a room away from the elevator if you need quiet",
+      "Use the pool if available - good for unwinding after work",
+      "Establish housekeeping preferences - some places don't clean daily",
     ],
   },
   {
     slug: "premium-stay-near-cubbon-park-for-walk-and-work-routines",
-    title: "Premium Stay Near Cubbon Park for Walk-and-Work Routines",
-    subtitle: "Blend wellness mornings with productive central-city schedules.",
+    title: "Cubbon Park Base",
+    subtitle: "Mixing wellness with work",
     focusArea: "Cubbon Park",
     keywords: ["hotel near Cubbon Park", "premium stay central Bangalore"],
-    intro:
-      "Many guests want a city stay that supports both physical reset and high-focus daytime plans. Cubbon Park proximity helps create that balance.",
+    intro: `Cubbon Park is one of those places that actually justifies staying in a premium hotel like The Pentouz @ Lavelle Road. It's green, peaceful in the mornings, and you can walk or jog to clear your head before work. Then come back to a comfortable room.`,
     highlights: [
-      "Start the day with a short green-space walk.",
-      "Transition into central meetings without long transfers.",
-      "Close with an evening dining loop near Lavelle Road.",
-    ],
+      "Morning walks are genuinely peaceful - before the crowds arrive",
+      "Short auto/cab to work centers - UB City, Residency Road, MG Road areas",
+      "Evening walks when the park is lit up - completely different vibe",
+      "Penthouse rooms give you space to decompress if you're working remotely",
+      "Good restaurants nearby for breakfast or working lunches",
+      ],
     tips: [
-      "Keep morning routines simple and repeatable.",
-      "Avoid overloading the day with unnecessary stops.",
-      "Use central return plans to reduce decision fatigue.",
-    ],
-  },
-  {
-    slug: "hotel-near-bangalore-cantonment-for-outstation-arrivals",
-    title: "Hotel Near Bangalore Cantonment for Outstation Arrivals",
-    subtitle: "Rail-arrival planning for legal, business, and family travel.",
-    focusArea: "Bengaluru Cantonment Station",
-    keywords: ["hotel near Bangalore Cantonment", "stay near Bengaluru Cantonment station"],
-    intro:
-      "Rail-based arrivals need smooth transition into central stays. Lavelle Road is practical for travelers combining station access with city commitments.",
-    highlights: [
-      "Use direct transfer plans from station to stay.",
-      "Build a short reset window before first appointment.",
-      "Keep central routes open for follow-up meetings or errands.",
-    ],
-    tips: [
-      "Share arrival ETA with property before departure.",
-      "Carry priority documents in hand luggage.",
-      "Use location-first booking for same-day city movement.",
-    ],
-  },
-  {
-    slug: "stay-near-commercial-street-shopping-with-lavelle-base",
-    title: "Stay Near Commercial Street Shopping with a Lavelle Base",
-    subtitle: "How to enjoy high-street shopping without long commute fatigue.",
-    focusArea: "Commercial Street",
-    keywords: ["hotel near Commercial Street Bangalore", "shopping stay Bangalore"],
-    intro:
-      "Commercial Street visitors often combine shopping with meetings and evening plans. A Lavelle Road base keeps the day efficient.",
-    highlights: [
-      "Divide high-street and premium shopping into separate slots.",
-      "Use short-transfer returns between shopping legs.",
-      "Plan post-shopping rest before evening commitments.",
-    ],
-    tips: [
-      "Travel light and keep drop-off points pre-planned.",
-      "Avoid peak-hour movement across multiple shopping zones.",
-      "Use central booking for flexible city repositioning.",
-    ],
-  },
-  {
-    slug: "corporate-stay-near-manyata-tech-meetings-central-bangalore",
-    title: "Corporate Stay for Manyata-Tech Meetings from Central Bangalore",
-    subtitle: "A realistic central-stay approach for tech and partner meetings.",
-    focusArea: "Manyata and Tech Meeting Routes",
-    keywords: ["corporate hotel Bangalore central", "business stay near Manyata travel route"],
-    intro:
-      "Even when meetings happen in outer tech corridors, many travelers prefer central premium stays for evening quality and wider city access.",
-    highlights: [
-      "Start earlier for tech-corridor commute reliability.",
-      "Use Lavelle Road as your evening recovery and networking base.",
-      "Keep flexible buffers for cross-city return movement.",
-    ],
-    tips: [
-      "Cluster tech-side meetings into single route windows.",
-      "Avoid unnecessary midday location switches.",
-      "Use direct support channels for schedule changes.",
-    ],
-  },
-  {
-    slug: "weekend-luxury-itinerary-ub-city-cubbon-and-lavelle",
-    title: "Weekend Luxury Itinerary: UB City, Cubbon, and Lavelle",
-    subtitle: "A premium two-day plan for city guests who prefer quality over rush.",
-    focusArea: "Lavelle Central Loop",
-    keywords: ["luxury weekend Bangalore", "Lavelle Road itinerary"],
-    intro:
-      "This route is designed for guests who want a relaxed premium weekend with strong location value and low transfer stress.",
-    highlights: [
-      "Day 1: central dining, retail, and evening social route.",
-      "Day 2: morning green-space rhythm with cultural stops.",
-      "Keep both days anchored to a central Lavelle Road return.",
-    ],
-    tips: [
-      "Reserve key venues before weekend peak demand.",
-      "Prefer fewer premium experiences over rushed checklists.",
-      "Use late checkout options when travel timing allows.",
-    ],
+      "Go early (7-8am) if you want the park mostly to yourself",
+      "Weekend mornings are busier - plan accordingly",
+      "The park entrance can get chaotic on weekends - arrive through side gates",
+      "Keep evening light - mosquitoes can be bad near the lake",
+      "Use the hotel's gym if you want to maintain routines",
+      ],
   },
   {
     slug: "airport-to-lavelle-road-arrival-guide",
-    title: "Airport to Lavelle Road Arrival Guide",
-    subtitle: "Smart arrival planning for domestic and international guests.",
+    title: "Kempegowda Airport to Lavelle Road",
+    subtitle: "Getting there without the stress",
     focusArea: "Kempegowda Airport to city core",
     keywords: ["airport to Lavelle Road", "Bangalore arrival guide"],
-    intro:
-      "First-day planning affects the full trip experience. A clear airport-to-city route plan reduces stress and protects your schedule.",
+    intro: `The trip from Kempegowda Airport to central Bangalore doesn't have to be complicated, but it can be overwhelming if you're unprepared. Here's a straightforward guide to getting to The Pentouz @ Lavelle Road from the airport.`,
     highlights: [
-      "Choose transfer mode by arrival time and luggage profile.",
-      "Use a short reset window after check-in before meetings.",
-      "Align first appointment timing with realistic city entry.",
-    ],
+      "Pre-book your airport transfer - The Pentouz can arrange this reliably",
+      "Vayakara Cab or Uber - typically Rs 1,000-1,200 to city center",
+      "Meru or Aero Bus - cheaper option, takes longer",
+      "Airport shuttle services - sometimes included in hotel bookings",
+      ],
     tips: [
-      "Share ETA with the property before departure.",
-      "Carry essentials in cabin-access luggage.",
-      "Account for weather-driven traffic variability.",
-    ],
+      "Give yourself buffer - traffic can add 30-60 minutes during rush hours",
+      "Have the hotel address written down for the driver - locals appreciate this",
+      "Download offline maps - Google Maps may not work reliably in some areas",
+      "Keep your essentials in carry-on - baggage delays can ruin tight connections",
+      "Charge your phone beforehand - the airport has limited charging points",
+      "Monitor flight status before leaving - apps update in real-time",
+      ],
   },
-] as const;
+  {
+    slug: "stay-near-commercial-street-shopping-with-lavelle-base",
+    title: "Shopping from Lavelle Road",
+    subtitle: "Practical approach, not tourist trap",
+    focusArea: "Commercial Street",
+    keywords: ["shopping near UB City", "Commercial Street guide"],
+    intro: `Commercial Street can be overwhelming if you try to do everything in one go. The smart approach is to pair it with your Lavelle Road stay based. Do the focused shopping when you're fresh, then keep evenings relaxed.`,
+    highlights: [
+      "Morning shopping when Commercial Street is calm - fewer crowds",
+      "Evening dining at UB City or MG Road before shopping",
+      "Lavelle Road base for rest - drop off purchases and refresh",
+      "Church Street has upscale boutiques - good for gifts or personal treats",
+      ],
+    tips: [
+      "Wear comfortable shoes - you'll be walking a lot",
+      "Don't overplan - commercial Street has good repeat stores if you forget something",
+      "Use auto or valet parking - street parking can be a nightmare during festivals",
+      "Negotiate at fixed-price stores - especially at Church Street",
+      "Keep receipts - returns are easier at organized stores",
+      "Eat something light first - shopping on an empty stomach leads to bad decisions",
+      ],
+  },
+  {
+    slug: "corporate-stay-near-manyata-tech-meetings-central-bangalore",
+    title: "Manyata Tech Meetings",
+    subtitle: "Getting to and from tech companies",
+    focusArea: "Manyata and Tech Meeting Routes",
+    keywords: ["corporate hotel Bangalore central", "business stay near Manyata travel route"],
+    intro: `If you're coming to Manyata for meetings, you're probably wondering where to stay. The truth is that most tech companies put people in hotels in Outer Ring Road or Whitefield. Staying near The Pentouz @ Lavelle Road is actually more convenient - you're central and can get anywhere quickly.`,
+    highlights: [
+      "Central location - equal distance to Manyata, Whitefield, Electronic City",
+      "15-30 minutes to tech corridors by metro or cab",
+      "Well-connected to airport - faster for international departures",
+      "Rooms with work setup - good WiFi, desks for laptops",
+      "Evening dining nearby - UB City, Residency Road, Church Street",
+      ],
+    tips: [
+      "Test the WiFi speed in your room before important calls",
+      "Ask about early check-in - some properties release rooms by 11am",
+      "Use the metro - many tech companies are near MG Road station",
+      "Keep a backup ready - Outer Ring Road and Whitefield have more options",
+      "Plan buffer meals - traffic can be unpredictable in the evening",
+      "Use the hotel's laundry service - pack light for multi-day trips",
+      ],
+  },
+  {
+    slug: "weekend-luxury-itinerary-ub-city-cubbon-and-lavelle",
+    title: "Luxury Weekend",
+    subtitle: "Quality over quantity",
+    focusArea: "Lavelle Central Loop",
+    keywords: ["luxury weekend Bangalore", "Lavelle Road itinerary"],
+    intro: `A luxury weekend isn't about cramming in every attraction. It's about experiencing the city at your own pace. This itinerary works well - see what you think and adapt based on your interests.`,
+    highlights: [
+      "Friday evening: arrive, settle in, dinner at UB City or Church Street",
+      "Saturday: lazy breakfast, Cubbon Park and National Gallery, shopping on MG Road",
+      "Saturday evening: relaxed dinner, maybe a show or just drinks",
+      "Sunday morning: brunch at a nice spot, check out, head to airport",
+      ],
+    tips: [
+      "Make reservations in advance - weekend brunch spots get booked out",
+      "Build in buffer time between activities - rush kills the vibe",
+      "Be ready to change plans - if something's too crowded, move on",
+      "Keep some flexibility - you don't want to feel chained to a schedule",
+      "Sunday brunch can get busy - 11am-1pm is the rush",
+      "Leave time for last-minute shopping - airport runs are unpredictable",
+      ],
+  },
+];
 
-function hashSeed(input: string) {
-  let hash = 0;
-  for (let i = 0; i < input.length; i += 1) {
-    hash = (hash << 5) - hash + input.charCodeAt(i);
-    hash |= 0;
-  }
-  return Math.abs(hash);
+// Helper function to create article content for SEO pages
+function buildArticleContent(keywordSlug: string, articleSlug: string) {
+  const keyword = getLavelleSeoPage(keywordSlug);
+  if (!keyword) return null;
+
+  const template = keywordArticleTemplates.find((item) => item.slug === articleSlug);
+  if (!template) return null;
+
+  const nearbyGuide = genericSurroundingGuides.find((guide) => guide.slug === keywordSlug);
+  const anchors = buildCategoryAnchors(keyword.category, keyword.place);
+  const manualOverride = getManualArticleOverride(keywordSlug, articleSlug);
+
+  // Build anchor narrative for context
+  const anchorNarrative = anchors.length > 0
+    ? `You're close to ${anchors[0].name}${anchors.length > 1 ? ` and ${anchors.length - 1} other key locations` : ""}`
+    : "";
+
+  const baseParagraphs = manualOverride?.paragraphs || [
+    `If you're staying at The Pentouz @ Lavelle Road for ${keyword.place}, here's what to expect. The location is central, which means less time in traffic and more time for what actually matters to you.`,
+    `${keyword.place} visitors usually appreciate staying central - less travel time, more rest, easier logistics.`,
+    `This ${template.intent} guide is written for travelers who care about ${template.angle}.`,
+  ];
+
+  const paragraphs = manualOverride?.paragraphs || [
+    ...baseParagraphs,
+    `Practical tips: ${buildPracticalTips(keyword.place, getIntentTypeForKeyword(keywordSlug))}${anchorNarrative ? `. ${anchorNarrative}` : ""}.`,
+    `Why it works: ${buildWhyItWorks(template.intent)}.`,
+    `Local flavor: ${buildLocalFlavor(getIntentTypeForKeyword(keywordSlug))}.`,
+    `Things to know: ${buildThingsToKnow(keyword.place)}`,
+  ];
+
+  const bulletPoints = manualOverride?.bulletPoints || [
+    `Nearby anchors: ${anchors.map(a => a.name).join(" | ")}`,
+    `Supporting guide: ${nearbyGuide?.title || "The Pentouz Lavelle Road concierge can provide local recommendations."}`,
+  ];
+
+  const faqs = [
+    {
+      question: `How does this guide help ${template.intent} travelers?`,
+      answer: `It helps you ${template.intent} better by providing ${template.intent}-specific advice instead of generic Bangalore content. You'll save time and avoid common frustrations like traffic or overpriced stays.`,
+    },
+    {
+      question: `Is Lavelle Road actually ${template.intent} for ${keyword.audience}?`,
+      answer: `Yes, Lavelle Road is very ${template.intent} for ${keyword.audience}. The central location, reliable hospitality, and easy access to ${template.intent.toLowerCase()} needs make it a practical choice. You're not compromising on quality - you're optimizing for convenience.`,
+    },
+    {
+      question: `Can I combine this with other plans?`,
+      answer: `Definitely. This guide works great as a foundation, then you can layer in nearby experiences like ${anchors.map(a => a.name).join(", ")}. Just keep your base at The Pentouz and explore from there.`,
+    },
+  ];
+
+  return {
+    keyword,
+    template,
+    lead: baseParagraphs[0],
+    nearbyGuide,
+    anchors,
+    paragraphs,
+    bulletPoints,
+    faqs,
+  };
 }
 
-function pickVariant<T>(items: readonly T[], seed: number, offset = 0) {
-  return items[(seed + offset) % items.length];
+// Generate practical tips based on intent
+function buildPracticalTips(place: string, intent: string): string {
+  const tips: Record<string, string[]> = {
+    legal: [
+      "Start your day early - court proceedings can run late",
+      "Keep your phone charged - you'll need it",
+      "Carry physical and soft copies of important documents",
+      "Use metro for court visits - parking is scarce near courts",
+      "Pack a power bank for your phone",
+      "Bring snacks and water - court cafeteria food can be hit or miss",
+      "Plan buffer time between hearings - don't schedule back-to-back",
+    ],
+    business: [
+      "Test video calls before important meetings - WiFi can be unreliable",
+      "Arrive early for breakfast meetings - shows preparation",
+      "Use UB City meeting spots - good coffee and ambience",
+      "Keep backup accommodation - traffic is unpredictable",
+      "Book evening dinners in advance - popular spots fill up fast",
+      "Use the metro - it's faster than auto during rush hours",
+    ],
+    medical: [
+      "Bring all medical records - printed and soft copies",
+      "Confirm appointments one day before - no walk-ins",
+      "Plan transport in advance - allow extra time for delays",
+      "Stay at The Pentouz - easy return between consultations",
+      "Use metro or auto - both connect from Lavelle Road",
+      "Have backup payment - some government facilities only accept cash",
+      "Bring snacks - hospital food is unpredictable",
+    ],
+    leisure: [
+      "Start early to avoid crowds at popular spots",
+      "Check opening hours - many places have unexpected schedules",
+      "Carry cash - some small places don't accept cards",
+      "Use metro to reach farther areas - parking is limited in central areas",
+      "Pack light for city exploration - you'll walk a lot",
+      "Stay hydrated - Bangalore can get deceptively hot",
+      "Keep phone charged - you'll need it for maps or bookings",
+    ],
+  };
+
+  return tips[intent]?.join(" ") || tips.business?.join(" ") || "";
+}
+
+function buildWhyItWorks(intent: string): string {
+  switch (intent) {
+    case "accommodation planning":
+      return "Staying at Lavelle Road means you can walk to most meetings, dinners, and attractions. No more rushing across the city to catch a cab back to a far-flung hotel. You are saving time and energy while still staying somewhere nice.";
+    case "travel planning":
+      return "When you are based in Lavelle Road, you are using MG Road metro as your main artery. It connects you to the entire city efficiently. The layout is straightforward once you understand it - purple line for south, green line for north.";
+    case "corporate productivity":
+      return "The key to productive business trips in Bangalore is staying somewhere central but quiet. Lavelle Road gives you the former without the constant interruptions. You can work from your room, step out for meetings, and be back in your room for breaks without losing half a day to commuting.";
+    case "1-2 day stay optimization":
+      return "For a short 1-2 day trip, do not overbook yourself. Choose one neighborhood to explore deeply - MG Road for shopping, UB City for dining, or Cubbon Park for culture. The Pentouz at Lavelle Road gives you a comfortable base to return to after full days out.";
+    case "multi-day planning":
+      return "The biggest mistake people make on longer Bangalore trips is trying to stay in one location for the entire duration. Breaking up your stay between 2-3 different neighborhoods gives you a better sense of the city. Lavelle Road is perfect for 1-2 nights, then move to Whitefield for a different experience.";
+    default:
+      return "Lavelle Road is central location makes it easy to anchor longer Bangalore trips. You are never far from good food, transport options, or interesting things to do.";
+  }
+}
+
+function buildLocalFlavor(intent: string): string {
+  switch (intent) {
+    case "accommodation planning":
+      return "Bengaluru's food scene is incredible - from masala dosas at small restaurants to fine dining at places like Toit. When you're based at Lavelle Road, you have easy access to all of it. Try different cuisines each night - it's part of the fun of staying here.";
+    case "business":
+      return "Business in Bangalore happens over chai. It's where deals get made, where relationships are built. Staying at Lavelle Road puts you right in the middle of it - you're never more than an auto ride away from where the action is.";
+    case "medical":
+      return "The healthcare around Lavelle Road is world-class - Manipal Hospital, Apollo Hospitals, HCG Cancer Centre. Staying nearby means you can focus on your appointment knowing you're 5 minutes from your room if you need anything urgent.";
+    case "leisure":
+      return "Bangaloreans love their leisure time - evening walks at Cubbon Park, brunch at UB City, shopping at MG Road. When you're staying at Lavelle Road, you're already in the heart of it. You can enjoy all of this and simply walk back to your room when you're ready to call it a night.";
+    default:
+      return "Lavelle Road itself is pretty chill - nice restaurants, quiet evenings, and a relaxed vibe. You can enjoy the luxury without the chaos.";
+  }
+}
+
+function buildThingsToKnow(place: string): string {
+  const things: Record<string, string[]> = {
+    "Attara Kacheri": [
+      "Court hearings here often start late - don't schedule meetings for 9am thinking they'll start at 11",
+      "Nearby food options are limited - plan to eat at your hotel or carry from home",
+      "Auto/cab drivers here know the area well - they can recommend good lunch spots",
+      "The area around the court has some decent cafes - Attara Kacheri Metro is nearby",
+      "Parking is scarce - arrive early if you're driving",
+    ],
+    "Karnataka High Court": [
+      "This is the main high court - expect crowds, delays, and last-minute changes",
+      "Cases here can run all day - bring food and water",
+      "Nearby dining is basic - don't expect fancy restaurants",
+      "Auto/cab is the most reliable transport - metro can be crowded at peak hours",
+      "Lawyers often meet at nearby cafes - good for networking but can be busy",
+    ],
+    "UB City": [
+      "This is where the action is - malls, restaurants, bars, offices",
+      "MG Road connects you everywhere - purple line south, green line north",
+      "It gets busy during office hours - 7-9am and 5-7pm are peak",
+      "Parking is challenging - most buildings have paid parking",
+      "Auto/cab rates are higher due to business demand",
+      ],
+    "MG Road": [
+      "The main commercial and shopping street - lots of stores, restaurants, banks",
+      "Church Street and Residency Road extend the shopping options",
+      "UB City mall is good for quick needs, Church Street for more variety",
+      "MG Road Metro station is the main transport hub",
+      "The street food scene is decent - lots of chai points and quick bites",
+      ],
+    "Vidhana Soudha": [
+      "Government campus area - everything feels more formal and regulated",
+      "Restaurants close around 7pm - government offices close then",
+      "Dress code is casual but look professional - safe to wear formal attire",
+      "Metro here is Vidhana Soudha - connects you to other areas",
+      "The Secretariat area can be maze-like if you're not familiar - ask for help",
+      ],
+    "Vikasa Soudha": [
+      "Similar to Vidhana Soudha - government offices with similar culture",
+      "MG Road Metro is your lifeline - without it you're walking a lot or taking long cabs",
+      "Parking is marginally better here than at Vidhana Soudha",
+      "The whole Secretariat complex is walkable - if one office cancels, you can try another nearby",
+      ],
+  };
+
+  const placeThings = things[place] || [];
+  return placeThings.join(". ");
 }
 
 function buildCategoryAnchors(category: string, place: string): NearbyAnchor[] {
+  const anchors: NearbyAnchor[] = [];
+
   if (category === "Legal & Courts") {
-    return [
-      {
-        name: "Karnataka High Court Legal Belt",
-        type: "court",
-        whyItMatters: "Useful for hearing-day movement and legal office coordination.",
-      },
-      {
-        name: "Vidhana Soudha Administrative Zone",
-        type: "government",
-        whyItMatters: "Supports official documentation and related city errands.",
-      },
-      {
-        name: "MG Road Metro Corridor",
-        type: "transport",
-        whyItMatters: "Gives backup commute options when traffic patterns shift.",
-      },
-    ];
+    anchors.push({
+      name: "Karnataka High Court",
+      type: "court",
+      whyItMatters: "This is where major legal work happens in Bangalore - hearings, cases, and administrative work. Being based here makes it much easier to attend court sessions than commuting from other parts of the city.",
+    });
+    anchors.push({
+      name: "Attara Kacheri",
+      type: "court",
+      whyItMatters: "One of Bangalore's key courts - if you have business here, you'll find yourself here. Staying nearby reduces court day stress significantly.",
+    });
   }
 
   if (category === "Government Offices") {
-    return [
-      {
-        name: "Vidhana Soudha - Vikasa Soudha Cluster",
-        type: "government",
-        whyItMatters: "Central for ministry and administration-led appointments.",
-      },
-      {
-        name: "UB City - Lavelle Office Stretch",
-        type: "office",
-        whyItMatters: "Useful for consultant meetings after official visits.",
-      },
-      {
-        name: "Cubbon Park Metro Access",
-        type: "transport",
-        whyItMatters: "Adds flexible route planning on fixed-time appointment days.",
-      },
-    ];
+    anchors.push({
+      name: "Vidhana Soudha - Vikasa Soudha",
+      type: "government",
+      whyItMatters: "This is where most government departments are located - Secretariat, various directorates, commissions. If you're on an official visit, staying nearby is just practical.",
+    });
+    anchors.push({
+      name: "BBMP Head Office",
+      type: "government",
+      whyItMatters: "The head office of Bangalore Metropolitan Development Authority - you might need it for certain approvals.",
+    });
+    anchors.push({
+      name: "Karnataka Public Service Commission (KPSC)",
+      type: "government",
+      whyItMatters: "Public Service Commission office - often required for various government-related matters.",
+    });
+    anchors.push({
+      name: "Income Tax Office",
+      type: "government",
+      whyItMatters: "You might need to visit for tax-related matters - always good to have an office nearby.",
+    });
   }
 
   if (category === "Business Districts") {
-    return [
-      {
-        name: "UB City Commercial Core",
-        type: "office",
-        whyItMatters: "High concentration of executive meetings and premium dining.",
-      },
-      {
-        name: "MG Road - Residency Road Connector",
-        type: "office",
-        whyItMatters: "Strong corridor for back-to-back city business movement.",
-      },
-      {
-        name: "Bengaluru Cantonment Rail Link",
-        type: "transport",
-        whyItMatters: "Useful for outstation client and consultant arrivals.",
-      },
-    ];
+    anchors.push({
+      name: "UB City - Commercial Core",
+      type: "office",
+      whyItMatters: "This is where big business happens - corporate offices, multinational companies, tech companies. If you're here for meetings, staying nearby saves time.",
+    });
+    anchors.push({
+      name: "MG Road - Business Corridor",
+      type: "office",
+      whyItMatters: "The main business street - lots of corporate offices and banks. If you're working with government clients, this is a strategic location.",
+    });
+    anchors.push({
+      name: "Residency Road",
+      type: "office",
+      whyItMatters: "Connects MG Road to Whitefield and Electronic City - important if you're visiting multiple offices.",
+    });
   }
 
   if (category === "Healthcare & Services") {
-    return [
-      {
-        name: "Central Hospital Consultation Belt",
-        type: "service",
-        whyItMatters: "Reduces transfer strain for appointment-focused days.",
-      },
-      {
-        name: "Documentation and Service Office Zone",
-        type: "service",
-        whyItMatters: "Helps combine essential city tasks into one structured day.",
-      },
-      {
-        name: "MG Road Mobility Corridor",
-        type: "transport",
-        whyItMatters: "Provides route flexibility between appointments and stay.",
-      },
-    ];
+    anchors.push({
+      name: "Manipal Hospital",
+      type: "service",
+      whyItMatters: "One of Bangalore's major hospitals - if you have medical visits or family in town, you'll probably end up here.",
+    });
+    anchors.push({
+      name: "Bowring Hospital",
+      type: "service",
+      whyItMatters: "Good reputation for maternity and pediatrics - useful to know if you have kids.",
+    });
+    anchors.push({
+      name: "Apollo Hospitals",
+      type: "service",
+      whyItMatters: "Premium healthcare with international standards - good for specialized treatments.",
+    });
+    anchors.push({
+      name: "HCG Cancer Centre",
+      type: "service",
+      whyItMatters: "Specialized cancer care - if you or a family member needs this, it's a world-class facility.",
+    });
+    anchors.push({
+      name: "Vikrama Hospital",
+      type: "service",
+      whyItMatters: "Another major hospital - good for general care and consultations.",
+    });
+    anchors.push({
+      name: "Documentation and Service Offices",
+      type: "service",
+      whyItMatters: "Various service offices and documentation centers - you might need these for permits or paperwork.",
+    });
   }
 
   if (category === "Landmarks & Culture") {
-    return [
-      {
-        name: "Cubbon Park Culture Circuit",
-        type: "landmark",
-        whyItMatters: "Supports relaxed day pacing and short-distance cultural routing.",
-      },
-      {
-        name: "UB City Lifestyle District",
-        type: "landmark",
-        whyItMatters: "Ideal for dining, social evenings, and premium retail windows.",
-      },
-      {
-        name: "Church Street - Brigade Connector",
-        type: "landmark",
-        whyItMatters: "Useful for post-visit leisure and city atmosphere.",
-      },
-    ];
+    anchors.push({
+      name: "Cubbon Park",
+      type: "landmark",
+      whyItMatters: "Largest park in Bangalore - great for morning walks, and it connects to several other attractions.",
+    });
+    anchors.push({
+      name: "Lalbagh Botanical Garden",
+      type: "landmark",
+      whyItMatters: "Peaceful green space - good for a quiet break from the city.",
+    });
+    anchors.push({
+      name: "Bangalore Palace",
+      type: "landmark",
+      whyItMatters: "Historic palace, currently a museum - worth seeing once, especially if you're into history or architecture.",
+    });
+    anchors.push({
+      name: "Tipu Sultan's Summer Palace",
+      type: "landmark",
+      whyItMatters: "Another royal palace - beautiful grounds and interesting history.",
+    });
+    anchors.push({
+      name: "Government Museum",
+      type: "landmark",
+      whyItMatters: "Good place to learn about Karnataka's history and culture.",
+    });
+    anchors.push({
+      name: "National Gallery of Modern Art",
+      type: "landmark",
+      whyItMatters: "Modern art in a beautiful setting - worth an afternoon.",
+    });
+    anchors.push({
+      name: "Commercial Street",
+      type: "landmark",
+      whyItMatters: "The heritage shopping street - interesting architecture, good for people watching and window shopping.",
+    });
+    anchors.push({
+      name: "Church Street",
+      type: "landmark",
+      whyItMatters: "Another heritage street with temples and old buildings",
+    });
   }
 
-  return [
-    {
-      name: "MG Road Metro and Transit Band",
+  if (category === "Transport Hubs") {
+    anchors.push({
+      name: "MG Road Metro Station",
       type: "transport",
-      whyItMatters: "Offers predictable city access during peak-hour windows.",
-    },
-    {
-      name: "KSR and Cantonment Rail Connectors",
+      whyItMatters: "The main north-south metro line - connects you to the entire city.",
+    });
+    anchors.push({
+      name: "Cubbon Park Metro",
       type: "transport",
-      whyItMatters: "Supports intercity arrivals with central onward movement.",
-    },
-    {
-      name: `${place} City Access Corridor`,
+      whyItMatters: "Less busy than MG Road station, useful if you're going to Cubbon Park.",
+    });
+    anchors.push({
+      name: "KSR Bengaluru City Railway Station",
       type: "transport",
-      whyItMatters: "Keeps transfer planning flexible around schedule changes.",
-    },
-  ];
+      whyItMatters: "Main railway station - intercity and long-distance trains.",
+    });
+    anchors.push({
+      name: "Kempegowda Airport Shuttle Pick-up",
+      type: "transport",
+      whyItMatters: "If the hotel offers it, this is the most convenient way to get to the airport.",
+    });
+  }
+
+  return anchors;
 }
 
+// Helper functions
 function getKeywordSpecificAnchors(keywordSlug: string, place: string): NearbyAnchor[] | null {
   const map: Record<string, NearbyAnchor[]> = {
     "karnataka-high-court": [
@@ -597,54 +837,28 @@ function getKeywordSpecificAnchors(keywordSlug: string, place: string): NearbyAn
       {
         name: "Attara Kacheri",
         type: "court",
-        whyItMatters: "Historic legal landmark and court-visit reference point.",
+        whyItMatters: "Historic court, often referenced in legal circles.",
       },
+    ],
+    "attara-kacheri": [
+      {
+        name: "Attara Kacheri",
+        type: "court",
+        whyItMatters: "Similar to Karnataka High Court - another key court location.",
+      },
+    ],
+    "vidhana-soudha": [
       {
         name: "Vidhana Soudha",
         type: "government",
-        whyItMatters: "Important nearby administrative anchor for official tasks.",
-      },
-    ],
-    "ub-city": [
-      {
-        name: "UB City",
-        type: "landmark",
-        whyItMatters: "Premium business and lifestyle center near Lavelle Road.",
-      },
-      {
-        name: "Lavelle Road Commercial Stretch",
-        type: "office",
-        whyItMatters: "Useful for executive meetings and concierge-led city plans.",
-      },
-      {
-        name: "MG Road",
-        type: "landmark",
-        whyItMatters: "Adds shopping and transit flexibility to UB City itineraries.",
-      },
-    ],
-    "mg-road": [
-      {
-        name: "MG Road",
-        type: "landmark",
-        whyItMatters: "Core corridor for business and city access.",
-      },
-      {
-        name: "Church Street",
-        type: "landmark",
-        whyItMatters: "Dining and culture extension for evening planning.",
-      },
-      {
-        name: "MG Road Metro Station",
-        type: "transport",
-        whyItMatters: "Predictable fallback for central-route commute planning.",
+        whyItMatters: "Important nearby administrative anchor - many government departments.",
       },
     ],
   };
-
   return map[keywordSlug] || null;
 }
 
-export function getNearbyAnchorsForKeyword(keywordSlug: string) {
+export function getNearbyAnchorsForKeyword(keywordSlug: string): NearbyAnchor[] | null {
   const keyword = getLavelleSeoPage(keywordSlug);
   if (!keyword) return [];
 
@@ -664,9 +878,7 @@ export function getIntentTypeForKeyword(keywordSlug: string): IntentType {
     if (medicalSlugSignals.some((signal) => keyword.slug.includes(signal))) {
       return "medical";
     }
-    return "business";
   }
-
   return "business";
 }
 
@@ -676,100 +888,52 @@ export function getArticleTitle(place: string, template: ArticleTemplate) {
 
 export function getKeywordArticleNarrative(keywordSlug: string, articleSlug: string) {
   const keyword = getLavelleSeoPage(keywordSlug);
+  if (!keyword) return null;
+
   const template = keywordArticleTemplates.find((item) => item.slug === articleSlug);
+  if (!template) return null;
 
-  if (!keyword || !template) return null;
+  const nearbyGuide = genericSurroundingGuides[0];
+  const anchors = getNearbyAnchorsForKeyword(keywordSlug)?.slice(0, 3) || [];
 
-  const seed = hashSeed(`${keywordSlug}-${articleSlug}`);
-  const nearbyGuide = pickVariant(genericSurroundingGuides, seed);
-  const anchors = getNearbyAnchorsForKeyword(keywordSlug).slice(0, 3);
-  const manualOverride = getManualArticleOverride(keywordSlug, articleSlug);
-
-  const lead = pickVariant(
-    [
-      `If you are planning around ${keyword.place}, this guide helps you structure a practical premium-city stay without guesswork.`,
-      `${keyword.place} visitors usually prioritize time control, smooth transfers, and a stay base that supports both focus and recovery.`,
-      `This article is designed for travelers searching ${keyword.keyword}, with decision-ready insights instead of generic travel copy.`,
-    ],
-    seed,
-    1
-  );
-
-  const operationalLens = pickVariant(
-    [
-      "The strongest results come from reducing avoidable movement and protecting high-focus hours.",
-      "Better trip outcomes usually come from route clarity, not schedule overloading.",
-      "Decision quality improves when stay, commute, and appointment flow are planned together.",
-    ],
-    seed,
-    4
-  );
-
-  const serviceLens = pickVariant(
-    [
-      "Travelers value fast response, clean communication, and a room setup that supports recovery after city pressure.",
-      "Service consistency often matters more than discount-led decisions for this intent type.",
-      "A premium base becomes practical when plans include long days and variable timelines.",
-    ],
-    seed,
-    5
-  );
-
-  const anchorNarrative = anchors
-    .map((anchor) => `${anchor.name} (${anchor.whyItMatters})`)
-    .join("; ");
-
-  const activeLead = manualOverride?.lead || lead;
-  const baseParagraphs = manualOverride
-    ? manualOverride.paragraphs
-    : [
-        `${lead} The Pentouz @ Lavelle Road fits this intent by combining central positioning, refined room quality, and direct booking support for ${keyword.audience}.`,
-        `For ${template.intent}, travelers should evaluate location relevance first. ${template.angle} often impacts real trip outcomes more than short-term price differences. A central base allows better control across check-in, appointments, and evening planning.`,
-        `${operationalLens} Around ${keyword.place}, this is especially useful for ${keyword.audience} who need both productivity and low-friction city movement within the same day.`,
-      ];
+  const baseParagraphs = [
+    `If you are staying at The Pentouz @ Lavelle Road for ${keyword.place}, here is what to expect. The location is central, which means less time in traffic and more time for what actually matters to you.`,
+    `${keyword.place} visitors usually appreciate staying central - less travel time, more rest, easier logistics.`,
+    `This ${template.intent} guide is written for travelers who care about ${template.angle}.`,
+  ];
 
   const paragraphs = [
     ...baseParagraphs,
-    `Key surrounding anchors that improve practical planning include ${anchorNarrative}. Mapping your day around these touchpoints helps reduce transfer uncertainty and maintain schedule integrity.`,
-    `${serviceLens} Guests can combine this keyword-specific plan with nearby neighborhood experiences to improve overall trip value. We recommend pairing this route with our ${nearbyGuide.focusArea} guide for better day sequencing and lower commute fatigue.`,
+    `Practical tips: ${buildPracticalTips(keyword.place, getIntentTypeForKeyword(keywordSlug))}.`,
+    `Why it works: ${buildWhyItWorks(template.intent)}.`,
+    `Local flavor: ${buildLocalFlavor(getIntentTypeForKeyword(keywordSlug))}.`,
+    `Things to know: ${buildThingsToKnow(keyword.place)}`,
   ];
 
-  const bulletPoints = manualOverride
-    ? [
-        ...manualOverride.bulletPoints,
-        `Nearby anchors: ${anchors.map((anchor) => anchor.name).join(" | ")}`,
-        `Supporting guide: ${nearbyGuide.title}`,
-      ]
-    : [
-        `Primary keyword intent: ${keyword.keyword}`,
-        `Best suited for: ${keyword.audience}`,
-        `Stay strategy: use Lavelle Road as the central planning anchor`,
-        `Nearby anchors: ${anchors.map((anchor) => anchor.name).join(" | ")}`,
-        `Supporting guide: ${nearbyGuide.title}`,
-      ];
+  const bulletPoints = [
+    `Nearby anchors: ${anchors.map(a => a.name).join(" | ")}`,
+    `Supporting guide: ${nearbyGuide?.title || "The Pentouz Lavelle Road concierge can provide local recommendations."}`,
+  ];
 
   const faqs = [
     {
-      question: `How does this ${template.intent} guide help near ${keyword.place}?`,
-      answer:
-        `It gives a practical way to organize stay, commute, and day structure when your itinerary is centered around ${keyword.place}.`,
+      question: `How does this guide help ${template.intent} travelers?`,
+      answer: `It gives you a practical way to organize stay, commute, and day structure when your itinerary is centered around ${keyword.place}.`,
     },
     {
       question: `Is Lavelle Road suitable for ${keyword.audience}?`,
-      answer:
-        "Yes. Lavelle Road is a central premium zone that supports predictable movement across legal, corporate, and city-service routes.",
+      answer: `Yes. Lavelle Road is a central premium zone that supports predictable movement across legal, corporate, and city-service routes. You are paying for convenience, not luxury for the sake of it - and the value is real.`,
     },
     {
       question: `Can I combine this plan with nearby leisure or dining activities?`,
-      answer:
-        `Yes. For balanced city days, pair this route with nearby guides such as ${nearbyGuide.title.toLowerCase()}.`,
+      answer: `Yes. For balanced city days, pair this route with nearby guides such as ${nearbyGuide?.title?.toLowerCase() || "our MG Road guide"}.`,
     },
   ];
 
   return {
     keyword,
     template,
-    lead: activeLead,
+    lead: baseParagraphs[0],
     nearbyGuide,
     anchors,
     paragraphs,
@@ -804,17 +968,18 @@ export function getRelatedKeywordArticleLinks(keywordSlug: string, articleSlug: 
     .slice(0, 4)
     .map((item) => ({
       slug: keywordSlug,
-      article: item.slug,
+      article: articleSlug,
       titlePrefix: item.titlePrefix,
     }));
 
-  const crossKeyword = getRelatedLavelleSeoPages(keywordSlug, 2).map((item) => ({
-    slug: item.slug,
-    article: articleSlug,
-    titlePrefix:
-      keywordArticleTemplates.find((template) => template.slug === articleSlug)
-        ?.titlePrefix || "Guide Near",
-  }));
+  const crossKeyword = getRelatedLavelleSeoPages(keywordSlug, 2)
+    .map((item) => ({
+      slug: item.slug,
+      article: articleSlug,
+      titlePrefix:
+        keywordArticleTemplates.find((template) => template.slug === articleSlug)
+          ?.titlePrefix || "Guide Near",
+    }));
 
   return [...inCluster, ...crossKeyword];
 }

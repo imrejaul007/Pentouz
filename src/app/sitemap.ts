@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { destinations } from "@/data/content";
-import { lavelleSeoPages } from "@/data/lavelleSeoPages";
+import { lavelleSeoClusters, lavelleSeoPages } from "@/data/lavelleSeoPages";
 import {
   genericSurroundingGuides,
   getAllKeywordArticleParams,
@@ -23,6 +23,7 @@ const staticPaths = [
   "/editorial-policy",
   "/destinations/lavelle-road/near",
   "/travel",
+  "/travel/clusters",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -64,6 +65,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.72,
   }));
 
+  const travelClusterEntries: MetadataRoute.Sitemap = lavelleSeoClusters.map((cluster) => ({
+    url: withSiteUrl(`/travel/clusters/${cluster.slug}`),
+    lastModified: now,
+    changeFrequency: "weekly",
+    priority: 0.73,
+  }));
+
   const keywordArticleEntries: MetadataRoute.Sitemap = getAllKeywordArticleParams().map(
     (params) => ({
       url: withSiteUrl(`/travel/near/${params.slug}/${params.article}`),
@@ -85,6 +93,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...destinationEntries,
     ...lavelleSeoEntries,
     ...travelHubEntries,
+    ...travelClusterEntries,
     ...keywordArticleEntries,
     ...genericGuideEntries,
   ];

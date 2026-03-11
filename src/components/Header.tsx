@@ -270,6 +270,7 @@ export default function Header() {
                 { label: "Destinations", href: "/destinations" },
                 { label: "Lavelle Nearby SEO Hub", href: "/destinations/lavelle-road/near" },
                 { label: "Travel Hub", href: "/travel" },
+                { label: "Intent Clusters", href: "/travel/clusters" },
                 { label: "Experiences", href: "/experiences" },
                 { label: "Stories", href: "/stories" },
                 { label: "Contact", href: "/contact" },

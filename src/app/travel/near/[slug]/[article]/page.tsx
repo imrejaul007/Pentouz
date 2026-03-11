@@ -112,8 +112,6 @@ export default function KeywordArticlePage({ params }: { params: Params }) {
             <p className="mt-6 text-sm sm:text-base text-white/85 max-w-4xl leading-relaxed">
               {editorialArticleLead ? (
                 <>{editorialArticleLead}</>
-              ) : narrative.lead ? (
-                <>{narrative.lead}</>
               ) : (
                 <>
                   This article supports users searching <strong>{narrative.keyword.keyword}</strong>, with practical recommendations for {narrative.keyword.audience}.

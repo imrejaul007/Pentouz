@@ -8,6 +8,7 @@ import {
   genericSurroundingGuides,
   keywordArticleTemplates,
 } from "@/data/lavelleTravelContent";
+import { lavelleSeoClusters } from "@/data/lavelleSeoPages";
 import { withSiteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -56,9 +57,34 @@ export default function TravelHubPage() {
               <Link href="/destinations/lavelle-road" className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
                 Lavelle Property
               </Link>
+              <Link href="/travel/clusters" className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
+                Intent Clusters
+              </Link>
               <Link href="/destinations/lavelle-road/near" className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
                 50+ Keyword Pages
               </Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-14 sm:py-18 bg-white border-b border-brand-border">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-3">Intent Cluster Pages</h2>
+            <p className="text-sm sm:text-base text-brand-body max-w-4xl leading-relaxed mb-6">
+              Use cluster pages to navigate by traveler intent and pass internal authority into every keyword landing page.
+            </p>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+              {lavelleSeoClusters.map((cluster) => (
+                <article key={cluster.slug} className="border border-brand-border p-5 bg-[#f8f7f5] hover:shadow-lg transition-shadow">
+                  <p className="text-[10px] uppercase tracking-[0.15em] text-brand-gold mb-2">{cluster.primaryIntent}</p>
+                  <h3 className="font-display text-lg font-light mb-2">
+                    <Link href={`/travel/clusters/${cluster.slug}`} className="hover:text-brand-gold transition-colors">
+                      {cluster.title}
+                    </Link>
+                  </h3>
+                  <p className="text-sm text-brand-body">{cluster.description}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
