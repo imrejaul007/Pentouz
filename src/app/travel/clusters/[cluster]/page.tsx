@@ -17,8 +17,9 @@ export function generateStaticParams() {
   return lavelleSeoClusters.map((cluster) => ({ cluster: cluster.slug }));
 }
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
-  const cluster = getLavelleSeoCluster(params.cluster);
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
+  const { cluster: clusterSlug } = await params;
+  const cluster = getLavelleSeoCluster(clusterSlug);
   if (!cluster) return { title: "Cluster Not Found | The Pentouz Travel" };
 
   const path = `/travel/clusters/${cluster.slug}`;
@@ -36,8 +37,9 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
   };
 }
 
-export default function ClusterPage({ params }: { params: Params }) {
-  const cluster = getLavelleSeoCluster(params.cluster);
+export default async function ClusterPage({ params }: { params: Promise<Params> }) {
+  const { cluster: clusterSlug } = await params;
+  const cluster = getLavelleSeoCluster(clusterSlug);
   if (!cluster) notFound();
 
   const pages = getLavelleSeoPagesByCategory(cluster.category);

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check, X, Users, Bath, Home, Wifi, Coffee, Utensils, MapPin } from "lucide-react";
+import { Check, Users, Bath, Home, Wifi, Coffee, Utensils, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Room {
@@ -72,14 +72,14 @@ const rooms: Room[] = [
   },
 ];
 
-const allFeatures: { included: boolean; label: string }[] = [
-  { included: true, label: "High-Speed WiFi" },
-  { included: true, label: "Room Service" },
-  { included: true, label: "Kitchenette" },
-  { included: true, label: "En-suite Bathroom" },
-  { included: true, label: "Up to 2 Guests" },
-  { included: true, label: "Housekeeping" },
-  { included: true, label: "City Views" },
+const allFeatures: { icon: any; label: string }[] = [
+  { icon: Wifi, label: "High-Speed WiFi" },
+  { icon: Utensils, label: "Room Service" },
+  { icon: Coffee, label: "Kitchenette" },
+  { icon: Bath, label: "En-suite Bathroom" },
+  { icon: Users, label: "Up to 2 Guests" },
+  { icon: Home, label: "Housekeeping" },
+  { icon: MapPin, label: "City Views" },
 ];
 
 interface RoomComparisonProps {
@@ -122,99 +122,95 @@ export default function RoomComparison({ title = "Compare Our Rooms", subtitle }
         </div>
 
         <div className="overflow-x-auto -mx-4 sm:mx-0">
-          <div className="inline-block min-w-full">
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="border-b border-brand-border/30">
-                  <th className="text-left py-4 px-4 text-[10px] uppercase tracking-[0.15em] text-brand-muted font-medium">
-                    Room Type
-                  </th>
-                  <th className="text-left py-4 px-4 text-[10px] uppercase tracking-[0.15em] text-brand-muted font-medium">
-                    Size
-                  </th>
-                  <th className="text-left py-4 px-4 text-[10px] uppercase tracking-[0.15em] text-brand-muted font-medium">
-                    Bed Type
-                  </th>
-                  <th className="text-center py-4 px-4 text-[10px] uppercase tracking-[0.15em] text-brand-muted font-medium">
-                    Price
-                  </th>
-                  <th className="text-center py-4 px-4 text-[10px] uppercase tracking-[0.15em] text-brand-muted font-medium">
-                    Compare
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {rooms.map((room, index) => (
-                  <tr
-                    key={room.id}
-                    className={cn(
-                      "border-b border-brand-border/20 transition-colors duration-300",
-                      selectedRooms.includes(room.id) ? "bg-brand-gold/5" : ""
-                    )}
-                  >
-                    <td className="py-4 px-4">
-                      <div className="flex items-center gap-2">
-                        {selectedRooms.includes(room.id) ? (
-                          <Check className="w-4 h-4 text-brand-gold" strokeWidth={1.5} />
-                        ) : (
-                          <div className="w-4 h-4 rounded-full border-2 border-brand-border/30"></div>
-                        )}
-                      </div>
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="border-b border-brand-border/30">
+                <th className="text-left py-4 px-4 text-[10px] uppercase tracking-[0.15em] text-brand-muted font-medium w-1/3">
+                  Room Type
+                </th>
+                <th className="text-left py-4 px-4 text-[10px] uppercase tracking-[0.15em] text-brand-muted font-medium w-1/6">
+                  Size
+                </th>
+                <th className="text-left py-4 px-4 text-[10px] uppercase tracking-[0.15em] text-brand-muted font-medium w-1/6">
+                  Bed Type
+                </th>
+                <th className="text-center py-4 px-4 text-[10px] uppercase tracking-[0.15em] text-brand-muted font-medium w-1/6">
+                  Price
+                </th>
+                <th className="text-center py-4 px-4 text-[10px] uppercase tracking-[0.15em] text-brand-muted font-medium w-1/6">
+                  Compare
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {rooms.map((room) => (
+                <tr
+                  key={room.id}
+                  className={cn(
+                    "border-b border-brand-border/20 transition-colors duration-300",
+                    selectedRooms.includes(room.id) ? "bg-brand-gold/5" : ""
+                  )}
+                >
+                  <td className="py-4 px-4">
+                    <div className="flex items-start gap-3">
+                      {selectedRooms.includes(room.id) ? (
+                        <Check className="w-4 h-4 text-brand-gold mt-1 flex-shrink-0" strokeWidth={1.5} />
+                      ) : (
+                        <div className="w-4 h-4 rounded-full border-2 border-brand-border/30 mt-1 flex-shrink-0"></div>
+                      )}
                       <div>
                         <p className="font-display text-base font-light text-brand-ink mb-1">
                           {room.name}
                         </p>
                         <p className="text-sm text-brand-muted">{room.size}</p>
                       </div>
-                    </td>
-                    <td className="py-4 px-4">
-                      <p className="text-[10px] uppercase tracking-[0.15em] text-brand-muted mb-1">
-                        {room.bedType}
-                      </p>
-                    </td>
-                    <td className="py-4 px-4 text-center">
-                      <p className="text-2xl font-display font-light text-brand-accent">
-                          {room.price}
-                        </p>
-                      {room.perNight && (
-                        <p className="text-xs text-brand-muted">from {room.perNight}/night</p>
+                    </div>
+                  </td>
+                  <td className="py-4 px-4">
+                    <p className="text-sm text-brand-ink">
+                      {room.bedType}
+                    </p>
+                  </td>
+                  <td className="py-4 px-4">
+                    <p className="text-lg font-display font-light text-brand-accent">
+                      {room.price}
+                    </p>
+                    {room.perNight && (
+                      <p className="text-xs text-brand-muted">from {room.perNight}/night</p>
+                    )}
+                  </td>
+                  <td className="py-4 px-4 text-center">
+                    <button
+                      onClick={() => toggleRoom(room.id)}
+                      className={cn(
+                        "px-4 py-2 text-[10px] uppercase tracking-[0.15em] transition-all duration-300",
+                        selectedRooms.includes(room.id)
+                          ? "bg-brand-gold text-brand-ink"
+                          : "border border-brand-border text-brand-ink hover:border-brand-gold hover:text-brand-accent"
                       )}
-                    </td>
-                    <td className="py-4 px-4 text-center">
-                      <button
-                        onClick={() => toggleRoom(room.id)}
-                        className={cn(
-                          "px-4 py-2 text-[10px] uppercase tracking-[0.15em] transition-all duration-300",
-                          selectedRooms.includes(room.id)
-                            ? "bg-brand-gold text-brand-ink"
-                            : "border border-brand-border text-brand-ink hover:border-brand-gold hover:text-brand-accent"
-                        )}
-                      >
-                        {selectedRooms.includes(room.id) ? "Selected" : "Compare"}
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                    >
+                      {selectedRooms.includes(room.id) ? "Selected" : "Compare"}
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
 
         <div className="mt-12 pt-8 border-t border-brand-border/20">
-          <div className="max-w-container-xl mx-auto px-4 sm:px-6">
-            <h4 className="font-display text-lg font-light text-brand-ink mb-6">
-              Room Amenities
-            </h4>
-            <div className="flex flex-wrap gap-4">
-              {allFeatures.map((feature) => (
-                <div key={feature.label} className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-brand-linen border border-brand-border/30 flex items-center justify-center">
-                    <Wifi className="w-5 h-5 text-brand-accent" strokeWidth={1.5} />
-                  </div>
-                  <span className="text-sm text-brand-muted">{feature.label}</span>
+          <h4 className="font-display text-lg font-light text-brand-ink mb-6">
+            Included Amenities
+          </h4>
+          <div className="flex flex-wrap gap-4">
+            {allFeatures.map((feature) => (
+              <div key={feature.label} className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-brand-linen border border-brand-border/30 flex items-center justify-center flex-shrink-0">
+                  <feature.icon className="w-5 h-5 text-brand-accent" strokeWidth={1.5} />
                 </div>
-              ))}
-            </div>
+                <span className="text-sm text-brand-muted">{feature.label}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>

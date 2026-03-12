@@ -21,8 +21,9 @@ export function generateStaticParams() {
   return lavelleSeoPages.map((page) => ({ slug: page.slug }));
 }
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
-  const keyword = getLavelleSeoPage(params.slug);
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
+  const { slug } = await params;
+  const keyword = getLavelleSeoPage(slug);
   if (!keyword) return { title: "Travel Page Not Found | The Pentouz" };
 
   const title = `Travel Guides Near ${keyword.place} | The Pentouz Lavelle Road`;
@@ -39,8 +40,9 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
   };
 }
 
-export default function KeywordTravelHubPage({ params }: { params: Params }) {
-  const keyword = getLavelleSeoPage(params.slug);
+export default async function KeywordTravelHubPage({ params }: { params: Promise<Params> }) {
+  const { slug } = await params;
+  const keyword = getLavelleSeoPage(slug);
   if (!keyword) notFound();
   const editorial = getLavelleEditorialOverride(keyword.slug);
 

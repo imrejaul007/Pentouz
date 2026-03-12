@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Search, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const quickSearches = [
   { label: "Ooty", href: "/destinations/ooty" },
@@ -19,21 +20,17 @@ interface SearchBarProps {
 }
 
 export default function SearchBar({ placeholder = "Search properties, destinations, amenities..." }: SearchBarProps) {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (query.trim()) {
-      // Simple navigation - in production this would redirect to search page
-      alert(`Search for: ${query}`);
+      router.push(`/destinations?search=${encodeURIComponent(query)}`);
+      setIsOpen(false);
     }
   };
-
-  const handleQuickSearch = (term: string) => {
-    setQuery(term);
-    setIsOpen(false);
-    };
 
   const clearSearch = () => {
     setQuery("");
@@ -47,7 +44,7 @@ export default function SearchBar({ placeholder = "Search properties, destinatio
         onClick={() => setIsOpen(!isOpen)}
         className="hidden lg:flex items-center gap-3 px-4 py-3 bg-white/10 border border-brand-border/30 hover:border-brand-gold/50 hover:shadow-md transition-all duration-300"
       >
-        <Search className="w-5 h-5 text-brand-muted group-hover:text-brand-gold" strokeWidth={1.5} />
+        <Search className="w-5 h-5 text-brand-muted hover:text-brand-gold" strokeWidth={1.5} />
         <span className="text-sm text-brand-ink">Search</span>
       </button>
 
@@ -81,27 +78,23 @@ export default function SearchBar({ placeholder = "Search properties, destinatio
           </p>
           <div className="space-y-2">
             {quickSearches.map((item) => (
-              <button
+              <Link
                 key={item.label}
-                onClick={() => alert(`Navigating to: ${item.label} properties")}
-                className="flex items-center gap-3 w-full px-4 py-3 bg-brand-linen border border-brand-border/30 hover:border-brand-gold/50 hover:shadow-sm transition-all duration-300 text-left"
+                href={item.href}
+                onClick={() => setIsOpen(false)}
+                className="group flex items-center gap-3 w-full px-4 py-3 bg-brand-linen border border-brand-border/30 hover:border-brand-gold/50 hover:shadow-sm transition-all duration-300 text-left"
               >
                 <span className="flex-1 text-brand-ink group-hover:text-brand-accent">{item.label}</span>
                 <div className="w-8 h-[1px] bg-brand-gold/30 transition-all duration-500 group-hover:w-full"></div>
-              </button>
-                className="flex items-center gap-3 w-full px-4 py-3 bg-brand-linen border border-brand-border/30 hover:border-brand-gold/50 hover:shadow-sm transition-all duration-300 text-left"
-              >
-                <span className="flex-1 text-brand-ink group-hover:text-brand-accent">{item.label}</span>
-                <div className="w-8 h-[1px] bg-brand-gold/30 transition-all duration-500 group-hover:w-full"></div>
-              </button>
+              </Link>
             ))}
           </div>
         </div>
 
         {/* Search Form */}
-        <form onSubmit={handleSearch} className="px-6 py-6">
+        <form onSubmit={handleSearch} className="px-6 py-6 border-t border-brand-border/20">
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 w-5 h-5 text-brand-muted" strokeWidth={1.5} />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-brand-muted" strokeWidth={1.5} />
             <input
               type="text"
               value={query}
@@ -113,7 +106,7 @@ export default function SearchBar({ placeholder = "Search properties, destinatio
               <button
                 type="button"
                 onClick={clearSearch}
-                className="absolute right-4 top-1/2 p-1.5 text-brand-muted hover:text-brand-ink transition-colors duration-200"
+                className="absolute right-4 top-1/2 -translate-y-1/2 p-1.5 text-brand-muted hover:text-brand-ink transition-colors duration-200"
                 aria-label="Clear search"
               >
                 <X className="w-4 h-4" strokeWidth={1.5} />
@@ -123,7 +116,7 @@ export default function SearchBar({ placeholder = "Search properties, destinatio
           <button
             type="submit"
             disabled={!query.trim()}
-            className="w-full bg-brand-ink text-white py-3 pl-12 text-[11px] uppercase tracking-[0.2em] hover:bg-brand-accent disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 font-light"
+            className="w-full mt-4 bg-brand-ink text-white py-3 text-[11px] uppercase tracking-[0.2em] hover:bg-brand-accent disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 font-light"
           >
             Search Properties
           </button>
@@ -132,8 +125,8 @@ export default function SearchBar({ placeholder = "Search properties, destinatio
         {/* Results Preview (Desktop) */}
         {query.trim() && (
           <div className="px-6 py-4 border-t border-brand-border/20">
-            <p className="text-sm text-brand-muted">Showing results for: <strong>{query}</strong></p>
-            <div className="grid grid-cols-3 gap-4">
+            <p className="text-sm text-brand-muted mb-3">Showing results for: <strong>{query}</strong></p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <Link
                 href="/destinations/ooty"
                 onClick={() => setIsOpen(false)}

@@ -24,13 +24,14 @@ export function generateStaticParams() {
   return getAllKeywordArticleParams();
 }
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
-  const narrative = getKeywordArticleNarrative(params.slug, params.article);
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
+  const { slug, article } = await params;
+  const narrative = getKeywordArticleNarrative(slug, article);
   if (!narrative) return { title: "Travel Article Not Found | The Pentouz" };
 
   const title = `${getArticleTitle(narrative.keyword.place, narrative.template)} | The Pentouz Travel`;
   const description = `Travel article for ${narrative.keyword.keyword}, focused on ${narrative.template.intent} and practical stay planning near Lavelle Road.`;
-  const path = `/travel/near/${params.slug}/${params.article}`;
+  const path = `/travel/near/${slug}/${article}`;
 
   return {
     title,
@@ -55,20 +56,21 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
   };
 }
 
-export default function KeywordArticlePage({ params }: { params: Params }) {
-  const narrative = getKeywordArticleNarrative(params.slug, params.article);
+export default async function KeywordArticlePage({ params }: { params: Promise<Params> }) {
+  const { slug, article } = await params;
+  const narrative = getKeywordArticleNarrative(slug, article);
   if (!narrative) notFound();
 
-  const keyword = getLavelleSeoPage(params.slug);
+  const keyword = getLavelleSeoPage(slug);
   if (!keyword) notFound();
   const editorial = getLavelleEditorialOverride(keyword.slug);
-  const manualArticle = getManualArticleOverride(params.slug, params.article);
-  const intentType = getIntentTypeForKeyword(params.slug);
+  const manualArticle = getManualArticleOverride(slug, article);
+  const intentType = getIntentTypeForKeyword(slug);
   const editorialArticleLead = editorial?.articleLeadByType[
-    params.article as keyof typeof editorial.articleLeadByType
+    article as keyof typeof editorial.articleLeadByType
   ];
 
-  const relatedLinks = getRelatedKeywordArticleLinks(params.slug, params.article);
+  const relatedLinks = getRelatedKeywordArticleLinks(slug, article);
   const genericLinks = genericSurroundingGuides.slice(0, 4);
 
   const jsonLd = {
@@ -80,7 +82,7 @@ export default function KeywordArticlePage({ params }: { params: Params }) {
         description: `Travel guide for ${narrative.keyword.keyword}`,
         about: [narrative.keyword.place, narrative.template.intent, "Lavelle Road Bengaluru"],
         mentions: narrative.anchors.map((anchor) => anchor.name),
-        mainEntityOfPage: withSiteUrl(`/travel/near/${params.slug}/${params.article}`),
+        mainEntityOfPage: withSiteUrl(`/travel/near/${slug}/${article}`),
       },
       {
         "@type": "FAQPage",
@@ -119,10 +121,10 @@ export default function KeywordArticlePage({ params }: { params: Params }) {
               )}
             </p>
             <div className="mt-8 flex flex-wrap gap-3 text-[10px] sm:text-[11px] uppercase tracking-[0.15em]">
-              <Link href={`/travel/near/${params.slug}`} className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
+              <Link href={`/travel/near/${slug}`} className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
                 All Travel Guides
               </Link>
-              <Link href={`/destinations/lavelle-road/near/${params.slug}`} className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
+              <Link href={`/destinations/lavelle-road/near/${slug}`} className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
                 Location Guide
               </Link>
               <Link href="/destinations/lavelle-road" className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
@@ -243,8 +245,8 @@ export default function KeywordArticlePage({ params }: { params: Params }) {
             keyword={keyword.keyword}
             place={keyword.place}
             articleTitle={getArticleTitle(narrative.keyword.place, narrative.template)}
-            keywordSlug={params.slug}
-            articleSlug={params.article}
+            keywordSlug={slug}
+            articleSlug={article}
           />
         ) : null}
 

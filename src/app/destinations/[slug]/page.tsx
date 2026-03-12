@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, use } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -36,9 +36,10 @@ if (typeof window !== "undefined") {
 export default function DestinationPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const destination = destinations.find((d) => d.slug === params.slug);
+  const { slug } = use(params);
+  const destination = destinations.find((d) => d.slug === slug);
   const heroRef = useRef<HTMLElement>(null);
   const introRef = useRef<HTMLElement>(null);
   const statsRef = useRef<HTMLElement>(null);
@@ -251,7 +252,7 @@ export default function DestinationPage({
   }
 
   // Get next and previous destinations for navigation
-  const currentIndex = destinations.findIndex((d) => d.slug === params.slug);
+  const currentIndex = destinations.findIndex((d) => d.slug === slug);
   const prevDestination = destinations[currentIndex - 1];
   const nextDestination = destinations[currentIndex + 1];
 

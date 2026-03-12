@@ -31,8 +31,6 @@ const nextConfig = {
   },
   // Enable gzip compression
   compress: true,
-  // Optimize production build
-  swcMinify: true,
   // Reduce unused JavaScript
   modularizeImports: {
     "lucide-react": {

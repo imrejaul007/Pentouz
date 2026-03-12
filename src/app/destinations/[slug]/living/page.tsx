@@ -24,8 +24,9 @@ const amenityIcons: { [key: string]: any } = {
   "Parking": Car,
 };
 
-export default function LivingPage({ params }: { params: { slug: string } }) {
-  const destination = destinations.find((d) => d.slug === params.slug);
+export default async function LivingPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const destination = destinations.find((d) => d.slug === slug);
   const heroRef = useRef<HTMLElement>(null);
   const roomsRef = useRef<HTMLDivElement>(null);
   const amenitiesRef = useRef<HTMLDivElement>(null);

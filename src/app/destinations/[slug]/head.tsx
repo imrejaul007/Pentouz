@@ -1,8 +1,9 @@
 import { destinations } from "@/data/content";
 import { withSiteUrl } from "@/lib/site";
 
-export default function Head({ params }: { params: { slug: string } }) {
-  const destination = destinations.find((item) => item.slug === params.slug);
+export default async function Head({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const destination = destinations.find((item) => item.slug === slug);
   if (!destination) return null;
 
   const lavelleSeo =

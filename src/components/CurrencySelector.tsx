@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { ChevronDown, Globe } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const currencies = [
   { code: "INR", symbol: "₹", name: "Indian Rupee", flag: "🇮🇳" },

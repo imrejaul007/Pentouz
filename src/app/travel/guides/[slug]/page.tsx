@@ -64,8 +64,9 @@ export function generateStaticParams() {
   return genericSurroundingGuides.map((guide) => ({ slug: guide.slug }));
 }
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
-  const guide = getGenericGuide(params.slug);
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
+  const { slug } = await params;
+  const guide = getGenericGuide(slug);
   if (!guide) return { title: "Guide Not Found | The Pentouz Travel" };
 
   const path = `/travel/guides/${guide.slug}`;
@@ -87,8 +88,9 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
   };
 }
 
-export default function GenericGuidePage({ params }: { params: Params }) {
-  const guide = getGenericGuide(params.slug);
+export default async function GenericGuidePage({ params }: { params: Promise<Params> }) {
+  const { slug } = await params;
+  const guide = getGenericGuide(slug);
   if (!guide) notFound();
 
   const related = genericSurroundingGuides.filter((item) => item.slug !== guide.slug).slice(0, 6);
