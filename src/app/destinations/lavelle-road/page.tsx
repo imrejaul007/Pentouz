@@ -6,6 +6,7 @@ import { ArrowRight, Calendar, MapPin, Phone, Wifi, Coffee, ShieldCheck, Car, Ut
 import { destinations, contactInfo } from "@/data/content";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import StickyBookingCTA from "@/components/StickyBookingCTA";
 import { withSiteUrl } from "@/lib/site";
 
 
@@ -478,6 +479,12 @@ export default function LavelleRoadPage() {
           </div>
         </div>
       </section>
+
+      <StickyBookingCTA
+        bookingUrl={lavelleRoad?.bookingUrl || "https://bookmystay.io/rooms/37853/2025-12-23/2025-12-24/2/0?utm_source=brandWebsite"}
+        phone={contactInfo.phones[0]}
+        whatsapp={contactInfo.whatsapp}
+      />
 
       <Footer />
     </>

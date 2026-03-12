@@ -6,6 +6,7 @@ import { ArrowRight, Calendar, MapPin, Phone, Wifi, Coffee, ShieldCheck, Car, Ut
 import { destinations, contactInfo } from "@/data/content";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import StickyBookingCTA from "@/components/StickyBookingCTA";
 import { withSiteUrl } from "@/lib/site";
 
 
@@ -481,6 +482,12 @@ export default function IndiranagarPage() {
           </div>
         </div>
       </section>
+
+      <StickyBookingCTA
+        bookingUrl={indiranagar?.bookingUrl || "https://hotels.eglobe-solutions.com/pentouz/booking/hotels/the-pentouz-bangalore"}
+        phone={contactInfo.phones[0]}
+        whatsapp={contactInfo.whatsapp}
+      />
 
       <Footer />
     </>

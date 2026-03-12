@@ -6,6 +6,7 @@ import { ArrowRight, Calendar, MapPin, Phone, Wifi, Coffee, ShieldCheck, Car, Ut
 import { destinations, contactInfo } from "@/data/content";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import StickyBookingCTA from "@/components/StickyBookingCTA";
 import { withSiteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -469,6 +470,12 @@ export default function OotyPage() {
           </div>
         </div>
       </section>
+
+      <StickyBookingCTA
+        bookingUrl={ooty?.bookingUrl || "https://bookmystay.io/rooms/37853"}
+        phone={contactInfo.phones[0]}
+        whatsapp={contactInfo.whatsapp}
+      />
 
       <Footer />
     </>
