@@ -11,9 +11,9 @@ import {
 import { withSiteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Lavelle Road SEO Guide | Hotels Near Courts, Offices, Landmarks & Metro",
+  title: "Lavelle Road Location Guides | Hotels Near Courts, Offices, Landmarks & Metro",
   description:
-    "Explore all location-focused stay guides for The Pentouz Lavelle Road, including hotels near Karnataka High Court, UB City, MG Road, key offices, services, and major city landmarks.",
+    "Explore location guides for The Pentouz Lavelle Road, including hotels near Karnataka High Court, UB City, MG Road, key offices, services, and major city landmarks.",
   alternates: {
     canonical: withSiteUrl("/destinations/lavelle-road/near"),
   },
@@ -27,13 +27,13 @@ export default function LavelleNearHubPage() {
         <section className="bg-brand-ink text-white py-20 sm:py-24 lg:py-28">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
             <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-gold mb-4">
-              Lavelle Road Content Hub
+              Location Guides
             </p>
             <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light max-w-4xl">
-              Hotels Near Every Key <em className="italic">Bengaluru Destination</em>
+              Hotels Near Key <em className="italic">Bengaluru Destinations</em>
             </h1>
             <p className="mt-5 text-sm sm:text-base text-white/85 max-w-3xl leading-relaxed">
-              Browse 50+ location-focused guides designed for legal travelers, corporate guests,
+              Browse location guides designed for legal travelers, corporate guests,
               healthcare visitors, and city explorers searching for a premium stay near important
               courts, offices, transport hubs, and landmarks.
             </p>
@@ -45,7 +45,7 @@ export default function LavelleNearHubPage() {
                 Travel Content Hub
               </Link>
               <Link href="/travel/clusters" className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
-                Intent Clusters
+                Travel Guides
               </Link>
               <a href="https://bookmystay.io/rooms/37853/2025-12-23/2025-12-24/2/0?utm_source=brandWebsite" target="_blank" rel="noopener noreferrer" className="bg-brand-gold text-white px-4 py-2 hover:bg-brand-goldLight transition-colors">
                 Book Lavelle Road
@@ -66,7 +66,7 @@ export default function LavelleNearHubPage() {
                       href={`/travel/clusters/${getClusterSlugForCategory(category)}`}
                       className="text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:text-brand-gold transition-colors"
                     >
-                      Open Cluster
+                      View Guides
                     </Link>
                   </div>
                   <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
@@ -95,16 +95,17 @@ export default function LavelleNearHubPage() {
 
         <section className="py-14 sm:py-16 bg-white border-t border-brand-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <h2 className="font-display text-2xl sm:text-3xl font-light mb-4">Internal Linking Structure</h2>
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-4">About These Guides</h2>
             <p className="text-sm sm:text-base text-brand-body leading-relaxed max-w-4xl">
-              Every page in this hub links back to the Lavelle Road property page, links to related location guides,
-              and links to direct booking. This creates crawl depth, relevance, and topical authority around intent-based searches.
+              Each guide connects back to the Lavelle Road property page, includes related location suggestions,
+              and offers direct booking access. This helps you find the right stay based on your specific destination needs.
             </p>
             <p className="mt-4 text-sm sm:text-base text-brand-body leading-relaxed max-w-4xl">
-              We also link each keyword to a dedicated travel cluster with multiple supporting articles to build stronger topical authority.
+              Every destination also links to dedicated travel articles covering practical tips for getting around Bengaluru,
+              planning your stay, and exploring local areas.
             </p>
             <p className="mt-4 text-xs uppercase tracking-[0.15em] text-brand-muted">
-              Total indexed location pages: {lavelleSeoPages.length}
+              Total location guides: {lavelleSeoPages.length}
             </p>
             <Link href="/travel" className="inline-flex mt-5 text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:text-brand-gold transition-colors">
               Explore Travel Hub

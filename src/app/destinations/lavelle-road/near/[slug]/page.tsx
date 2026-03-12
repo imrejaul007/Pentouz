@@ -14,28 +14,28 @@ import { withSiteUrl } from "@/lib/site";
 
 const categoryCopy = {
   "Legal & Courts": {
-    pain: "Legal travel is usually date-sensitive and cannot afford delays from long commutes.",
-    fit: "Lavelle Road is preferred by legal professionals because it keeps court days structured, efficient, and less stressful.",
+    travelReason: "Legal proceedings often require early starts and follow-up visits across multiple days.",
+    whyLavelle: "Lavelle Road offers a convenient base near Bengaluru's courts with comfortable rooms for rest and document preparation.",
   },
   "Government Offices": {
-    pain: "Government appointments, documentation, and office meetings often run on rigid time windows.",
-    fit: "A central Lavelle Road stay helps reduce transfer uncertainty and gives flexible city access across the workday.",
+    travelReason: "Government appointments and documentation visits need reliable access and predictable timing.",
+    whyLavelle: "A central location on Lavelle Road helps reduce travel uncertainty and provides easy access to key administrative areas.",
   },
   "Business Districts": {
-    pain: "Business trips require predictable movement between meetings, dining, and evening networking zones.",
-    fit: "The Pentouz Lavelle Road is positioned for executives who want premium comfort with quick access to central Bengaluru business circuits.",
+    travelReason: "Business trips require smooth movement between meetings, dining, and evening networking.",
+    whyLavelle: "The Pentouz Lavelle Road offers premium comfort with quick access to UB City, MG Road, and central Bengaluru business areas.",
   },
   "Healthcare & Services": {
-    pain: "Medical and service-related travel often needs calm spaces, reliable support, and adaptable schedules.",
-    fit: "Lavelle Road offers an upscale, quieter base for attendants and families who need stability during city appointments.",
+    travelReason: "Medical visits and service appointments require calm spaces, reliable support, and flexible schedules.",
+    whyLavelle: "Lavelle Road provides an upscale, quieter base for visitors who need stability during city appointments.",
   },
   "Landmarks & Culture": {
-    pain: "Leisure travelers want a central, premium base that cuts travel time to key attractions.",
-    fit: "From Lavelle Road, guests can plan efficient sightseeing days while returning to a refined, peaceful stay environment.",
+    travelReason: "Leisure travelers want a premium base close to attractions with minimal travel time.",
+    whyLavelle: "From Lavelle Road, guests can efficiently visit Bengaluru's landmarks while returning to a refined, peaceful stay.",
   },
   "Transport Hubs": {
-    pain: "Transit-driven travelers need smooth arrivals, quick transfers, and a dependable city center anchor.",
-    fit: "The property supports short and extended itineraries with strong access to metro, rail, and airport routes.",
+    travelReason: "Transit-focused travelers need easy arrivals, quick transfers, and a dependable city center location.",
+    whyLavelle: "The property offers strong access to metro, rail, and airport routes for both short and extended stays.",
   },
 } as const;
 
@@ -64,9 +64,9 @@ function getPageNarrative(page: NonNullable<ReturnType<typeof getLavelleSeoPage>
 
   const introLead = pickVariant(
     [
-      "Guests searching this route usually want location certainty before they confirm a stay.",
-      "This keyword is intent-rich because travelers are choosing convenience over generic city stays.",
-      "Most users on this query are not browsing casually, they are solving a real schedule problem.",
+      `Finding the right hotel near ${page.place} comes down to convenience and comfort during your visit.`,
+      `When visiting ${page.place}, staying nearby makes your day-to-day plans much easier.`,
+      `For a trip to ${page.place}, location matters as much as room quality.`,
     ],
     seed,
     1
@@ -74,9 +74,9 @@ function getPageNarrative(page: NonNullable<ReturnType<typeof getLavelleSeoPage>
 
   const commuteAngle = pickVariant(
     [
-      `From Lavelle Road, guests can plan efficient travel windows around ${page.place} without over-stretching the day.`,
-      `Lavelle Road works as a strong base for visits to ${page.place}, especially when timing and reliability matter.`,
-      `For appointments and events near ${page.place}, central positioning helps reduce avoidable travel friction.`,
+      `From Lavelle Road, reaching ${page.place} is straightforward without stretching your day too thin.`,
+      `Lavelle Road serves as an excellent base for visits to ${page.place}, especially when timing matters.`,
+      `For appointments and events near ${page.place}, staying central helps reduce travel time.`,
     ],
     seed,
     2
@@ -84,47 +84,47 @@ function getPageNarrative(page: NonNullable<ReturnType<typeof getLavelleSeoPage>
 
   const qualityAngle = pickVariant(
     [
-      "Instead of choosing only by price, many guests prefer a premium base that supports rest, work, and responsive support.",
-      "Travelers in this segment often choose comfort and service consistency because schedules are hard to predict.",
-      "A premium stay with practical amenities becomes important when plans include long days and back-to-back commitments.",
+      "Beyond location, a comfortable stay with reliable support makes any trip more manageable.",
+      "When schedules are unpredictable, having a premium, dependable place to return to becomes valuable.",
+      "A well-located stay with practical amenities helps when plans include long days and consecutive commitments.",
     ],
     seed,
     3
   );
 
   const planningTips = [
-    `Confirm your ${page.place} reporting time in advance and keep a time buffer for city traffic variations.`,
-    "Use a central stay to split your day into high-focus appointments and low-stress recovery windows.",
-    "Keep key documents, device chargers, and meeting essentials organized the night before.",
-    "If your itinerary may extend, choose a room setup that supports both work calls and comfortable downtime.",
+    `Check reporting times at ${page.place} in advance and keep buffer for traffic variations.`,
+    "Use a central stay to split your day between appointments and rest.",
+    "Keep key documents, device chargers, and essentials organized the night before.",
+    "If your itinerary may extend, choose a room that supports both work and relaxation.",
   ];
 
   const longFormParagraphs = [
-    `Searching for ${page.keyword} usually means a guest already knows where they need to be and now needs the right stay partner. ${introLead} At The Pentouz @ Lavelle Road, this is addressed through a city-central location, refined room experience, and dependable hospitality support for time-sensitive travel days.`,
-    `${commuteAngle} This matters for ${page.audience}, who typically optimize for shorter transfers, easier day planning, and a reliable evening base. The property is also positioned near key commercial and dining corridors, so guests can complete obligations and still maintain schedule flexibility.`,
-    `${qualityAngle} That is why this page focuses on practical decision factors: location intent, stay comfort, service predictability, and direct booking access. When travelers compare options for ${page.place}, this balanced approach often leads to better outcomes than choosing a generic hotel listing.`,
+    `${introLead} At The Pentouz @ Lavelle Road, you get a city-central location, refined room experience, and dependable support for visits near ${page.place}.`,
+    `${commuteAngle} This works well for ${page.audience}, who typically want shorter commutes, easier planning, and a reliable evening base. The property is positioned near key commercial and dining corridors, so you can complete your day's tasks and still have flexibility.`,
+    `${qualityAngle} When choosing a hotel near ${page.place}, it helps to consider location, room comfort, service reliability, and easy booking. The Pentouz Lavelle Road is designed to provide all these practical advantages.`,
   ];
 
   const faqs: FaqItem[] = [
     {
-      question: `Is The Pentouz a good hotel near ${page.place}?`,
-      answer: `Yes. The Pentouz @ Lavelle Road is a strong fit for travelers who need central Bengaluru access for visits to ${page.place}, with premium rooms and practical booking support.`,
+      question: `Is The Pentouz convenient for visiting ${page.place}?`,
+      answer: `Yes. The Pentouz @ Lavelle Road is well-positioned for ${page.audience} who need access to ${page.place}, with premium rooms and direct booking support.`,
     },
     {
-      question: `Who usually books this stay for ${page.place}?`,
-      answer: `Most bookings come from ${page.audience} who want predictable city movement, responsive assistance, and a comfortable base for short or extended schedules.`,
+      question: `Who typically stays here when visiting ${page.place}?`,
+      answer: `Most bookings come from ${page.audience} who want central Bengaluru access, responsive assistance, and a comfortable base for their plans.`,
     },
     {
-      question: `Can I book directly for a visit near ${page.place}?`,
-      answer: "Yes. You can use the direct booking link on this page for faster reservation flow and property-specific support.",
+      question: `Can I book directly?`,
+      answer: "Yes. You can use the direct booking link on this page for faster reservations.",
     },
     {
-      question: `Is Lavelle Road suitable for business and appointment-focused travel?`,
-      answer: "Lavelle Road is one of Bengaluru's most practical central zones for travelers managing meetings, official work, and time-sensitive plans.",
+      question: `Is Lavelle Road well-connected for business and appointments?`,
+      answer: "Lavelle Road is one of Bengaluru's most practical central areas for managing meetings, official work, and time-sensitive visits.",
     },
     {
-      question: `What should I check before booking a hotel near ${page.place}?`,
-      answer: "Check location relevance, room comfort, flexible support, and how quickly you can reach key city corridors from the property.",
+      question: `What should I consider before booking?`,
+      answer: "Consider location proximity, room comfort, and how quickly you can reach key areas from the property.",
     },
   ];
 
@@ -154,13 +154,6 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
   return {
     title,
     description,
-    keywords: [
-      page.keyword,
-      `hotel near ${page.place}`,
-      "The Pentouz Lavelle Road",
-      "central Bangalore hotel",
-      "premium stay in Bengaluru",
-    ],
     alternates: {
       canonical: withSiteUrl(canonicalPath),
     },
@@ -270,9 +263,9 @@ export default function LavelleNearPlacePage({ params }: { params: Params }) {
                 <>{editorial.heroIntro}</>
               ) : (
                 <>
-                  If you are searching for <strong>{page.keyword}</strong>, The Pentouz @ Lavelle Road offers a premium,
-                  city-central stay for {page.audience}. This page is designed to help guests compare location intent,
-                  travel practicality, and stay quality before booking.
+                  If you're visiting {page.place}, The Pentouz @ Lavelle Road offers a premium,
+                  city-central stay for {page.audience}. This guide covers location benefits,
+                  travel planning, and booking options.
                 </>
               )}
             </p>
@@ -281,7 +274,7 @@ export default function LavelleNearPlacePage({ params }: { params: Params }) {
                 View Lavelle Property
               </Link>
               <Link href={`/travel/near/${page.slug}`} className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
-                6 Article Cluster
+                Travel Guides
               </Link>
               <Link href="/destinations/lavelle-road/living" className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
                 View Room Types
@@ -301,15 +294,12 @@ export default function LavelleNearPlacePage({ params }: { params: Params }) {
         <section className="py-14 sm:py-18 bg-white border-b border-brand-border">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 grid lg:grid-cols-2 gap-6">
             <article className="border border-brand-border p-6 sm:p-7">
-              <h2 className="font-display text-2xl font-light mb-4">Why This Search Intent Matters</h2>
-              <p className="text-sm sm:text-base text-brand-body leading-relaxed">{copy.pain}</p>
-              <p className="mt-4 text-sm sm:text-base text-brand-body leading-relaxed">
-                Guests using this keyword usually prioritize reliability, commute control, and responsive support from the stay team.
-              </p>
+              <h2 className="font-display text-2xl font-light mb-4">Why Location Matters</h2>
+              <p className="text-sm sm:text-base text-brand-body leading-relaxed">{copy.travelReason}</p>
             </article>
             <article className="border border-brand-border p-6 sm:p-7">
-              <h2 className="font-display text-2xl font-light mb-4">Why The Pentouz Lavelle Road Fits</h2>
-              <p className="text-sm sm:text-base text-brand-body leading-relaxed">{copy.fit}</p>
+              <h2 className="font-display text-2xl font-light mb-4">Why The Pentouz Lavelle Road</h2>
+              <p className="text-sm sm:text-base text-brand-body leading-relaxed">{copy.whyLavelle}</p>
               <p className="mt-4 text-sm sm:text-base text-brand-body leading-relaxed">
                 Our rooms support both short-notice trips and planned city schedules, with direct booking support and premium hospitality standards.
               </p>
@@ -319,11 +309,11 @@ export default function LavelleNearPlacePage({ params }: { params: Params }) {
 
         <section className="py-14 sm:py-18">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
-            <h2 className="font-display text-2xl sm:text-3xl font-light mb-5">Recommended Stay Plan for {page.place} Visitors</h2>
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-5">Planning Your Visit Near {page.place}</h2>
             <div className="bg-white border border-brand-border p-6 sm:p-8">
               <p className="text-sm sm:text-base text-brand-body leading-relaxed">
-                Start your day with a focused commute plan, complete your primary appointment near {page.place}, and return to Lavelle Road for recovery,
-                calls, or evening meetings. This location-first strategy works especially well for {page.audience}, who typically need both productivity and comfort
+                Start your day with a clear plan, complete your primary appointment near {page.place}, and return to Lavelle Road for rest,
+                calls, or evening meetings. This approach works especially well for {page.audience}, who typically need both productivity and comfort
                 in one stay experience.
               </p>
               <p className="mt-4 text-sm sm:text-base text-brand-body leading-relaxed">
@@ -337,7 +327,7 @@ export default function LavelleNearPlacePage({ params }: { params: Params }) {
         <section className="py-14 sm:py-18 bg-white border-y border-brand-border">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
             <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">
-              Human-Centered Guide: Staying Near {page.place}
+              What to Expect When Staying Near {page.place}
             </h2>
             <div className="space-y-4 text-sm sm:text-base text-brand-body leading-relaxed">
               {narrative.longFormParagraphs.map((paragraph, index) => (
@@ -350,7 +340,7 @@ export default function LavelleNearPlacePage({ params }: { params: Params }) {
         <section className="py-14 sm:py-18">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 grid lg:grid-cols-2 gap-6">
             <article className="bg-white border border-brand-border p-6 sm:p-7">
-              <h2 className="font-display text-2xl font-light mb-4">Pre-Arrival Planning Checklist</h2>
+              <h2 className="font-display text-2xl font-light mb-4">Planning Tips</h2>
               <ul className="space-y-3 text-sm sm:text-base text-brand-body leading-relaxed list-disc list-inside">
                 {narrative.planningTips.map((tip) => (
                   <li key={tip}>{tip}</li>
@@ -358,15 +348,14 @@ export default function LavelleNearPlacePage({ params }: { params: Params }) {
               </ul>
             </article>
             <article className="bg-white border border-brand-border p-6 sm:p-7">
-              <h2 className="font-display text-2xl font-light mb-4">Decision Factors That Improve Stay Quality</h2>
+              <h2 className="font-display text-2xl font-light mb-4">Choosing the Right Stay</h2>
               <p className="text-sm sm:text-base text-brand-body leading-relaxed">
-                For this keyword, travelers usually rank location relevance first, followed by room comfort, reliable communication,
-                and smooth booking flow. The Pentouz Lavelle Road is designed around these practical priorities rather than generic
-                one-size-fits-all positioning.
+                For visits near {page.place}, location proximity is usually the first priority, followed by room comfort, reliable communication,
+                and a smooth booking experience. The Pentouz Lavelle Road is designed around these practical priorities.
               </p>
               <p className="mt-4 text-sm sm:text-base text-brand-body leading-relaxed">
-                If your trip around {page.place} may involve schedule changes, choose a central base with easy access to core Bengaluru
-                routes. That flexibility often saves more time than short-term rate differences.
+                If your trip around {page.place} may involve schedule changes, choosing a central base with easy access to core Bengaluru
+                routes can save valuable time.
               </p>
             </article>
           </div>
@@ -375,17 +364,16 @@ export default function LavelleNearPlacePage({ params }: { params: Params }) {
         <section className="py-14 sm:py-18 bg-white border-y border-brand-border">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
             <h2 className="font-display text-2xl sm:text-3xl font-light mb-5">
-              Expand This Topic with Interconnected Travel Articles
+              Explore More Guides Near {page.place}
             </h2>
             <p className="text-sm sm:text-base text-brand-body leading-relaxed mb-6 max-w-4xl">
-              For broader keyword depth, this page is supported by a dedicated travel cluster covering commute guidance,
-              short-stay strategy, extended-stay planning, and local area utility around {page.place}.
+              Find additional travel guidance covering commute strategies, short-stay tips, extended-stay planning, and local area recommendations around {page.place}.
             </p>
             <Link href={`/travel/near/${page.slug}`} className="inline-flex mb-8 text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:text-brand-gold transition-colors">
-              Open Travel Cluster for {page.place}
+              View All Travel Guides
             </Link>
 
-            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Related Bengaluru Location Guides</h2>
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Related Bengaluru Locations</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {relatedPages.map((related) => (
                 <article key={related.slug} className="border border-brand-border p-5 hover:shadow-lg transition-shadow">
@@ -410,7 +398,7 @@ export default function LavelleNearPlacePage({ params }: { params: Params }) {
         <section className="py-16 sm:py-20 bg-brand-ink text-white">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-12 text-center">
             <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-light mb-5">
-              Booking a Stay Near {page.place}
+              Book Your Stay Near {page.place}
             </h2>
             <p className="text-sm sm:text-base text-white/85 max-w-3xl mx-auto leading-relaxed mb-8">
               The Pentouz @ Lavelle Road is built for central Bengaluru itineraries. If your trip includes {page.place}, book directly for faster assistance,

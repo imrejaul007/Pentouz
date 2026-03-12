@@ -7,9 +7,9 @@ import { lavelleSeoClusters, getLavelleSeoPagesByCategory } from "@/data/lavelle
 import { withSiteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Travel Intent Clusters | The Pentouz Bengaluru SEO Guides",
+  title: "Travel Guide Collections | The Pentouz Bengaluru",
   description:
-    "Explore intent-cluster landing pages for legal, government, business, healthcare, landmark, and transport search journeys near Lavelle Road.",
+    "Explore travel guide collections for legal, government, business, healthcare, landmark, and transport visitors near Lavelle Road.",
   alternates: {
     canonical: withSiteUrl("/travel/clusters"),
   },
@@ -23,14 +23,14 @@ export default function TravelClustersPage() {
         <section className="bg-brand-ink text-white py-20 sm:py-24 lg:py-28">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
             <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-gold mb-4">
-              The Pentouz Travel Architecture
+              Travel Guides
             </p>
             <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light max-w-4xl">
-              Search Intent Clusters for <em className="italic">Bengaluru Stay Demand</em>
+              Travel Collections for <em className="italic">Bengaluru Visitors</em>
             </h1>
             <p className="mt-6 text-sm sm:text-base text-white/85 max-w-4xl leading-relaxed">
-              These cluster pages group keyword pages by traveler intent. Each cluster links to dedicated location pages,
-              travel article hubs, and direct Lavelle Road conversion paths.
+              Browse travel guides organized by visitor type and purpose. Each collection links to dedicated location pages,
+              detailed articles, and booking options for Lavelle Road.
             </p>
           </div>
         </section>
@@ -41,19 +41,19 @@ export default function TravelClustersPage() {
               const count = getLavelleSeoPagesByCategory(cluster.category).length;
               return (
                 <article key={cluster.slug} className="bg-white border border-brand-border p-6 sm:p-7 hover:shadow-lg transition-shadow">
-                  <p className="text-[10px] uppercase tracking-[0.15em] text-brand-gold mb-2">{cluster.primaryIntent}</p>
+                  <p className="text-[10px] uppercase tracking-[0.15em] text-brand-gold mb-2">{cluster.category}</p>
                   <h2 className="font-display text-xl sm:text-2xl font-light mb-3">
                     <Link href={`/travel/clusters/${cluster.slug}`} className="hover:text-brand-gold transition-colors">
                       {cluster.title}
                     </Link>
                   </h2>
                   <p className="text-sm text-brand-body leading-relaxed">{cluster.description}</p>
-                  <p className="mt-4 text-[11px] uppercase tracking-[0.14em] text-brand-muted">{count} keyword pages</p>
+                  <p className="mt-4 text-[11px] uppercase tracking-[0.14em] text-brand-muted">{count} location guides</p>
                   <Link
                     href={`/travel/clusters/${cluster.slug}`}
                     className="inline-flex mt-4 text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:text-brand-gold transition-colors"
                   >
-                    Open Cluster
+                    View Guides
                   </Link>
                 </article>
               );

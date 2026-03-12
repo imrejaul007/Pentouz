@@ -26,7 +26,7 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
   if (!keyword) return { title: "Travel Page Not Found | The Pentouz" };
 
   const title = `Travel Guides Near ${keyword.place} | The Pentouz Lavelle Road`;
-  const description = `Explore ${keywordArticleTemplates.length} interlinked travel articles for ${keyword.keyword}, plus direct links to Lavelle Road stay and booking.`;
+  const description = `Explore ${keywordArticleTemplates.length} travel articles for ${keyword.keyword}, plus direct links to Lavelle Road stay and booking.`;
   const path = `/travel/near/${keyword.slug}`;
 
   return {
@@ -54,7 +54,7 @@ export default function KeywordTravelHubPage({ params }: { params: Params }) {
       {
         "@type": "CollectionPage",
         name: `Travel Guides Near ${keyword.place}`,
-        description: `Keyword travel hub for ${keyword.keyword}`,
+        description: `Travel guides for ${keyword.keyword}`,
         url: pageUrl,
       },
       {
@@ -91,7 +91,7 @@ export default function KeywordTravelHubPage({ params }: { params: Params }) {
         <section className="bg-brand-ink text-white py-20 sm:py-24 lg:py-28">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
             <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-gold mb-4">
-              Keyword Cluster Hub
+              Travel Guides
             </p>
             <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light max-w-4xl">
               Travel Guides Near <em className="italic">{keyword.place}</em>
@@ -101,14 +101,14 @@ export default function KeywordTravelHubPage({ params }: { params: Params }) {
                 <>{editorial.travelHubIntro}</>
               ) : (
                 <>
-                  Travel guides for visitors searching <strong>{keyword.keyword}</strong>. This hub contains practical articles for {keyword.audience},
-                  with internal links to the Lavelle Road property page, living page, booking page, and related locations.
+                  Practical travel guides for visitors searching <strong>{keyword.keyword}</strong>. This hub contains useful articles for {keyword.audience},
+                  with links to Lavelle Road property page, room types, booking, and related locations.
                 </>
               )}
             </p>
             <div className="mt-8 flex flex-wrap gap-3 text-[10px] sm:text-[11px] uppercase tracking-[0.15em]">
               <Link href={`/destinations/lavelle-road/near/${keyword.slug}`} className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
-                Keyword Landing Page
+                Location Guide
               </Link>
               <Link href="/destinations/lavelle-road" className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
                 Lavelle Property
@@ -123,7 +123,7 @@ export default function KeywordTravelHubPage({ params }: { params: Params }) {
         <section className="py-16 sm:py-20 bg-white border-b border-brand-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
             <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">
-              {articles.length} Interlinked Articles for This Keyword
+              Travel Articles
             </h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {articles.map((article) => (
@@ -142,7 +142,7 @@ export default function KeywordTravelHubPage({ params }: { params: Params }) {
 
         <section className="py-16 sm:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Priority Local Anchors</h2>
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Nearby Places to Visit</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {anchors.map((anchor) => (
                 <article key={anchor.name} className="border border-brand-border p-5 bg-white">
@@ -157,7 +157,7 @@ export default function KeywordTravelHubPage({ params }: { params: Params }) {
 
         <section className="py-16 sm:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Cross-Keyword Internal Links</h2>
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Related Destinations</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {crossLinks.map((link) => {
                 const relatedKeyword = getLavelleSeoPage(link.slug);
@@ -166,7 +166,7 @@ export default function KeywordTravelHubPage({ params }: { params: Params }) {
                   <article key={`${link.slug}-${link.article}`} className="border border-brand-border p-5 bg-white">
                     <h3 className="font-display text-lg font-light mb-2">
                       <Link href={`/travel/near/${link.slug}/${link.article}`} className="hover:text-brand-gold transition-colors">
-                        {getArticleTitle(relatedKeyword.place, { slug: link.article, titlePrefix: link.titlePrefix, intent: "travel intent", angle: "location value" })}
+                        {getArticleTitle(relatedKeyword.place, { slug: link.article, titlePrefix: link.titlePrefix, intent: "travel tips", angle: "location focus" })}
                       </Link>
                     </h3>
                     <p className="text-sm text-brand-body">{relatedKeyword.keyword}</p>

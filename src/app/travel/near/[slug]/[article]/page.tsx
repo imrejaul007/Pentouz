@@ -29,7 +29,7 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
   if (!narrative) return { title: "Travel Article Not Found | The Pentouz" };
 
   const title = `${getArticleTitle(narrative.keyword.place, narrative.template)} | The Pentouz Travel`;
-  const description = `Human-written travel article for ${narrative.keyword.keyword}, focused on ${narrative.template.intent} and practical stay planning near Lavelle Road.`;
+  const description = `Travel article for ${narrative.keyword.keyword}, focused on ${narrative.template.intent} and practical stay planning near Lavelle Road.`;
   const path = `/travel/near/${params.slug}/${params.article}`;
 
   return {
@@ -77,7 +77,7 @@ export default function KeywordArticlePage({ params }: { params: Params }) {
       {
         "@type": "Article",
         headline: getArticleTitle(narrative.keyword.place, narrative.template),
-        description: `Guide for ${narrative.keyword.keyword}`,
+        description: `Travel guide for ${narrative.keyword.keyword}`,
         about: [narrative.keyword.place, narrative.template.intent, "Lavelle Road Bengaluru"],
         mentions: narrative.anchors.map((anchor) => anchor.name),
         mainEntityOfPage: withSiteUrl(`/travel/near/${params.slug}/${params.article}`),
@@ -114,16 +114,16 @@ export default function KeywordArticlePage({ params }: { params: Params }) {
                 <>{editorialArticleLead}</>
               ) : (
                 <>
-                  This article supports users searching <strong>{narrative.keyword.keyword}</strong>, with practical recommendations for {narrative.keyword.audience}.
+                  This article provides practical recommendations for {narrative.keyword.audience} searching <strong>{narrative.keyword.keyword}</strong>.
                 </>
               )}
             </p>
             <div className="mt-8 flex flex-wrap gap-3 text-[10px] sm:text-[11px] uppercase tracking-[0.15em]">
               <Link href={`/travel/near/${params.slug}`} className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
-                This Keyword Hub
+                All Travel Guides
               </Link>
               <Link href={`/destinations/lavelle-road/near/${params.slug}`} className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
-                Keyword Landing
+                Location Guide
               </Link>
               <Link href="/destinations/lavelle-road" className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
                 Lavelle Property
@@ -143,7 +143,7 @@ export default function KeywordArticlePage({ params }: { params: Params }) {
         <section className="py-14 sm:py-18">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 grid lg:grid-cols-2 gap-6">
             <article className="bg-white border border-brand-border p-6 sm:p-7">
-              <h2 className="font-display text-2xl font-light mb-4">Core Decision Points</h2>
+              <h2 className="font-display text-2xl font-light mb-4">Key Considerations</h2>
               <ul className="space-y-3 text-sm sm:text-base text-brand-body leading-relaxed list-disc list-inside">
                 {narrative.bulletPoints.map((point) => (
                   <li key={point}>{point}</li>
@@ -151,11 +151,11 @@ export default function KeywordArticlePage({ params }: { params: Params }) {
               </ul>
             </article>
             <article className="bg-white border border-brand-border p-6 sm:p-7">
-              <h2 className="font-display text-2xl font-light mb-4">Surrounding Area Recommendation</h2>
+              <h2 className="font-display text-2xl font-light mb-4">Nearby Area Guide</h2>
               <h3 className="font-display text-xl font-light mb-2">{narrative.nearbyGuide.title}</h3>
               <p className="text-sm sm:text-base text-brand-body leading-relaxed">{narrative.nearbyGuide.subtitle}</p>
               <Link href={`/travel/guides/${narrative.nearbyGuide.slug}`} className="inline-flex mt-4 text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:text-brand-gold transition-colors">
-                Read Surrounding Guide
+                Read Nearby Guide
               </Link>
             </article>
           </div>
@@ -163,7 +163,7 @@ export default function KeywordArticlePage({ params }: { params: Params }) {
 
         <section className="py-14 sm:py-18 bg-white border-y border-brand-border">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
-            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Key Nearby Anchors for This Article</h2>
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Nearby Places</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {narrative.anchors.map((anchor) => (
                 <article key={anchor.name} className="border border-brand-border p-5 bg-[#f8f7f5]">
@@ -180,7 +180,7 @@ export default function KeywordArticlePage({ params }: { params: Params }) {
 
         <section className="py-14 sm:py-18 bg-white border-y border-brand-border">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
-            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Interconnected Articles</h2>
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Related Guides</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {relatedLinks.map((link) => {
                 const relatedKeyword = getLavelleSeoPage(link.slug);
@@ -202,7 +202,7 @@ export default function KeywordArticlePage({ params }: { params: Params }) {
 
         <section className="py-14 sm:py-18">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
-            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Generic Surrounding Content</h2>
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">More Travel Guides</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {genericLinks.map((guide) => (
                 <article key={guide.slug} className="border border-brand-border bg-white p-4">

@@ -19,7 +19,7 @@ export interface LavelleSeoCluster {
   category: LavelleSeoCategory;
   title: string;
   description: string;
-  primaryIntent: string;
+  travelPurpose: string;
 }
 
 export const lavelleSeoPages: readonly LavelleSeoPage[] = [
@@ -111,38 +111,38 @@ const clusterMetaByCategory: Record<
   "Legal & Courts": {
     title: "Legal and Court Stay Guides in Bengaluru",
     description:
-      "Intent-driven pages for outstation advocates, legal teams, and litigants visiting court zones near central Bengaluru.",
-    primaryIntent: "legal-travel",
+      "Stay guides for outstation advocates, legal teams, and litigants visiting court zones near central Bengaluru.",
+    travelPurpose: "legal-visits",
   },
   "Government Offices": {
     title: "Government Office Stay Guides in Bengaluru",
     description:
-      "Pages focused on official visits near Vidhana Soudha, administrative clusters, and documentation centers.",
-    primaryIntent: "official-travel",
+      "Pages for official visits near Vidhana Soudha, administrative clusters, and documentation centers.",
+    travelPurpose: "official-visits",
   },
   "Business Districts": {
     title: "Business District Stay Guides in Bengaluru",
     description:
-      "High-intent city-center hotel pages for executives, consultants, and project teams attending meetings across key office corridors.",
-    primaryIntent: "corporate-travel",
+      "City-center hotel pages for executives, consultants, and project teams attending meetings across key office corridors.",
+    travelPurpose: "business-trips",
   },
   "Healthcare & Services": {
     title: "Healthcare and Service Travel Stay Guides",
     description:
       "Stay-planning pages for medical appointments, family attendants, and documentation-driven city visits.",
-    primaryIntent: "support-travel",
+    travelPurpose: "medical-visits",
   },
   "Landmarks & Culture": {
     title: "Landmark and Culture Stay Guides in Bengaluru",
     description:
       "Location pages for leisure and event travelers planning visits around museums, shopping zones, and heritage routes.",
-    primaryIntent: "leisure-travel",
+    travelPurpose: "leisure-trips",
   },
   "Transport Hubs": {
     title: "Transport Hub Stay Guides in Bengaluru",
     description:
-      "Connectivity-led pages for airport, metro, rail, and intercity transit travelers who need predictable central access.",
-    primaryIntent: "transit-travel",
+      "Pages for airport, metro, rail, and intercity transit travelers who need predictable central access.",
+    travelPurpose: "transit-trips",
   },
 };
 

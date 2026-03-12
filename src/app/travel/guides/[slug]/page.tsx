@@ -17,13 +17,13 @@ type Params = { slug: string };
 function getGuideIntentLabel(guide: GenericGuide) {
   const query = `${guide.title} ${guide.subtitle} ${guide.keywords.join(" ")}`.toLowerCase();
   if (query.includes("court") || query.includes("advocate") || query.includes("high court")) {
-    return "legal schedule";
+    return "legal visits";
   }
   if (query.includes("hospital") || query.includes("medical")) {
     return "medical and support travel";
   }
   if (query.includes("airport") || query.includes("metro") || query.includes("station")) {
-    return "transit-heavy travel";
+    return "transit connections";
   }
   if (query.includes("business") || query.includes("executive") || query.includes("meeting")) {
     return "business itinerary";
@@ -37,25 +37,25 @@ function buildGuideFaqs(guide: GenericGuide) {
 
   return [
     {
-      question: `Is this guide useful for guests searching "${keyword}"?`,
-      answer: `Yes. The guide is structured for ${intent} and is mapped to realistic routing from a Lavelle Road stay.`,
+      question: `Is this guide useful for visiting "${keyword}"?`,
+      answer: `Yes. The guide covers practical planning for ${intent} with routing from a Lavelle Road stay.`,
     },
     {
       question: `How early should I start a day planned around ${guide.focusArea}?`,
-      answer: `Start early on high-demand days and keep 20-40 minute transfer buffers between major stops around ${guide.focusArea}.`,
+      answer: `Start early on busy days and keep 20-40 minute transfer buffers between major stops around ${guide.focusArea}.`,
     },
     {
       question: `Can I combine this ${guide.focusArea} guide with The Pentouz Lavelle Road booking?`,
       answer:
-        "Yes. This page is designed to support direct Lavelle Road booking with practical location planning for both short and extended stays.",
+        "Yes. This page supports direct Lavelle Road booking with practical location planning for both short and extended stays.",
     },
     {
       question: `What should I prioritize first when planning near ${guide.focusArea}?`,
-      answer: guide.highlights[0] || "Prioritize one anchor stop first, then sequence supporting stops around time and distance efficiency.",
+      answer: guide.highlights[0] || "Focus on one key stop first, then sequence supporting stops around time and distance efficiency.",
     },
     {
       question: `Which traveler profile benefits most from this ${guide.focusArea} route?`,
-      answer: `Guests handling ${intent} generally get the best value when they use central positioning and pre-planned transit windows.`,
+      answer: `Guests planning ${intent} get the best value when using central positioning and pre-planned transit windows.`,
     },
   ];
 }
@@ -159,7 +159,7 @@ export default function GenericGuidePage({ params }: { params: Params }) {
         <section className="bg-brand-ink text-white py-20 sm:py-24 lg:py-28">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
             <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-gold mb-4">
-              Surrounding Area Guide
+              Area Guide
             </p>
             <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light max-w-4xl">
               {guide.title}
@@ -184,7 +184,7 @@ export default function GenericGuidePage({ params }: { params: Params }) {
         <section className="py-14 sm:py-18 bg-white border-b border-brand-border">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 grid lg:grid-cols-2 gap-6">
             <article className="border border-brand-border p-6 sm:p-7">
-              <h2 className="font-display text-2xl font-light mb-4">What to Prioritize</h2>
+              <h2 className="font-display text-2xl font-light mb-4">Key Highlights</h2>
               <ul className="space-y-3 text-sm sm:text-base text-brand-body leading-relaxed list-disc list-inside">
                 {guide.highlights.map((item) => (
                   <li key={item}>{item}</li>
@@ -192,7 +192,7 @@ export default function GenericGuidePage({ params }: { params: Params }) {
               </ul>
             </article>
             <article className="border border-brand-border p-6 sm:p-7">
-              <h2 className="font-display text-2xl font-light mb-4">Execution Tips</h2>
+              <h2 className="font-display text-2xl font-light mb-4">Practical Tips</h2>
               <ul className="space-y-3 text-sm sm:text-base text-brand-body leading-relaxed list-disc list-inside">
                 {guide.tips.map((item) => (
                   <li key={item}>{item}</li>
@@ -204,7 +204,7 @@ export default function GenericGuidePage({ params }: { params: Params }) {
 
         <section className="py-14 sm:py-18">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
-            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Related Travel Articles</h2>
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Related Area Guides</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {related.map((item) => (
                 <article key={item.slug} className="bg-white border border-brand-border p-5 hover:shadow-lg transition-shadow">
@@ -224,7 +224,7 @@ export default function GenericGuidePage({ params }: { params: Params }) {
         {relatedKeywordPages.length > 0 ? (
           <section className="py-14 sm:py-18 bg-white border-y border-brand-border">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
-              <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Related Stay Keywords Near Lavelle Road</h2>
+              <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Related Stay Locations Near Lavelle Road</h2>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
                 {relatedKeywordPages.map((page) => (
                   <article key={page.slug} className="border border-brand-border p-5 bg-[#f8f7f5]">

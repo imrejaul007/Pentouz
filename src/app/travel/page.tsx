@@ -14,7 +14,7 @@ import { withSiteUrl } from "@/lib/site";
 export const metadata: Metadata = {
   title: "The Pentouz Travel | Bengaluru Guides Near Lavelle Road",
   description:
-    "Explore The Pentouz Travel hub with keyword-focused guides near courts, offices, landmarks, and transport hubs, plus surrounding area content around Lavelle Road.",
+    "Explore The Pentouz Travel hub with guides near courts, offices, landmarks, and transport hubs, plus surrounding area content around Lavelle Road.",
   alternates: {
     canonical: withSiteUrl("/travel"),
   },
@@ -36,16 +36,16 @@ export default function TravelHubPage() {
               Bengaluru Location & City Guides from <em className="italic">Lavelle Road</em>
             </h1>
             <p className="mt-6 text-sm sm:text-base text-white/85 max-w-4xl leading-relaxed">
-              This hub connects location-intent travel pages, surrounding neighborhood articles, and stay planning resources.
-              Every guide is internally linked to The Pentouz Lavelle Road property and booking pages.
+              This hub connects location-based travel pages, neighborhood guides, and stay planning resources.
+              Every guide links to The Pentouz Lavelle Road property and booking pages.
             </p>
             <div className="mt-8 grid sm:grid-cols-3 gap-3 sm:gap-4 max-w-3xl">
               <div className="border border-white/20 px-4 py-4">
-                <p className="text-[10px] uppercase tracking-[0.18em] text-brand-gold">Keyword Pages</p>
+                <p className="text-[10px] uppercase tracking-[0.18em] text-brand-gold">Location Guides</p>
                 <p className="mt-2 text-2xl font-display font-light">{lavelleSeoPages.length}+</p>
               </div>
               <div className="border border-white/20 px-4 py-4">
-                <p className="text-[10px] uppercase tracking-[0.18em] text-brand-gold">Cluster Articles</p>
+                <p className="text-[10px] uppercase tracking-[0.18em] text-brand-gold">Travel Articles</p>
                 <p className="mt-2 text-2xl font-display font-light">{totalKeywordArticles}+</p>
               </div>
               <div className="border border-white/20 px-4 py-4">
@@ -58,10 +58,10 @@ export default function TravelHubPage() {
                 Lavelle Property
               </Link>
               <Link href="/travel/clusters" className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
-                Intent Clusters
+                Travel Collections
               </Link>
               <Link href="/destinations/lavelle-road/near" className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
-                50+ Keyword Pages
+                50+ Location Guides
               </Link>
             </div>
           </div>
@@ -69,14 +69,14 @@ export default function TravelHubPage() {
 
         <section className="py-14 sm:py-18 bg-white border-b border-brand-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <h2 className="font-display text-2xl sm:text-3xl font-light mb-3">Intent Cluster Pages</h2>
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-3">Travel Collections</h2>
             <p className="text-sm sm:text-base text-brand-body max-w-4xl leading-relaxed mb-6">
-              Use cluster pages to navigate by traveler intent and pass internal authority into every keyword landing page.
+              Browse collections organized by visitor type and travel purpose.
             </p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {lavelleSeoClusters.map((cluster) => (
                 <article key={cluster.slug} className="border border-brand-border p-5 bg-[#f8f7f5] hover:shadow-lg transition-shadow">
-                  <p className="text-[10px] uppercase tracking-[0.15em] text-brand-gold mb-2">{cluster.primaryIntent}</p>
+                  <p className="text-[10px] uppercase tracking-[0.15em] text-brand-gold mb-2">{cluster.category}</p>
                   <h3 className="font-display text-lg font-light mb-2">
                     <Link href={`/travel/clusters/${cluster.slug}`} className="hover:text-brand-gold transition-colors">
                       {cluster.title}
@@ -91,9 +91,9 @@ export default function TravelHubPage() {
 
         <section className="py-14 sm:py-18 bg-white border-b border-brand-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <h2 className="font-display text-2xl sm:text-3xl font-light mb-3">Fast Links by Search Intent</h2>
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-3">Location Guides</h2>
             <p className="text-sm sm:text-base text-brand-body max-w-4xl leading-relaxed mb-6">
-              Jump directly into high-intent pages for legal travel, business schedules, transport planning, and local landmarks.
+              Quick access to location guides for legal visits, business trips, transport planning, and local landmarks.
             </p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {lavelleSeoPages.slice(0, 8).map((page) => (
@@ -112,10 +112,9 @@ export default function TravelHubPage() {
 
         <section className="py-16 sm:py-20 bg-white border-b border-brand-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <h2 className="font-display text-2xl sm:text-3xl font-light mb-3">Keyword Article Clusters</h2>
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-3">Travel Articles by Location</h2>
             <p className="text-sm sm:text-base text-brand-body max-w-4xl leading-relaxed mb-6">
-              For each core location keyword, we publish {keywordArticleTemplates.length} interlinked articles covering stay choice,
-              commute planning, short/extended travel, local area utility, and practical itinerary support.
+              For each destination, find detailed articles covering stay choices, commute planning, short and extended visits, local area utilities, and practical itinerary tips.
             </p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {lavelleSeoPages.slice(0, 18).map((page) => (
@@ -132,7 +131,7 @@ export default function TravelHubPage() {
             </div>
             <div className="mt-6">
               <Link href="/destinations/lavelle-road/near" className="text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:text-brand-gold transition-colors">
-                View All Keyword Locations
+                View All Location Guides
               </Link>
             </div>
           </div>
@@ -140,7 +139,7 @@ export default function TravelHubPage() {
 
         <section className="py-16 sm:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <h2 className="font-display text-2xl sm:text-3xl font-light mb-3">Surrounding Area Guides</h2>
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-3">Area Guides</h2>
             <p className="text-sm sm:text-base text-brand-body max-w-4xl leading-relaxed mb-6">
               Editorial guides for MG Road, UB City, Cubbon Park, legal-day itineraries, nightlife, shopping, and arrival planning.
             </p>
