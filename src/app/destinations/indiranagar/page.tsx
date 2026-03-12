@@ -2,57 +2,61 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Calendar, MapPin, Phone, Wifi, Coffee, ShieldCheck, Car, Utensils, Star, Home, Building2, Plane, Clock, CreditCard, Users } from "lucide-react";
+import { ArrowRight, Calendar, MapPin, Phone, Wifi, Coffee, ShieldCheck, Car, Utensils, Star, Home, Building, Plane, Clock, CreditCard, Users } from "lucide-react";
 import { destinations, contactInfo } from "@/data/content";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { withSiteUrl } from "@/lib/site";
 
+
 export const metadata: Metadata = {
-  title: "The Pentouz @ Lavelle Road | Luxury Studio Boutique Hotel Bangalore",
-  description: "Six exquisite studio rooms with panoramic city views on Bangalore's prestigious Lavelle Road. Walking distance to UB City, MG Road metro.",
+  title: "The Pentouz @ Indiranagar | Three Bedroom Penthouse Bangalore",
+  description: "Luxurious three-bedroom penthouse on 100 Feet Road, Indiranagar. Perfect for families, groups, and extended stays with private balconies.",
   alternates: {
-    canonical: withSiteUrl("/destinations/lavelle-road"),
+    canonical: withSiteUrl("/destinations/indiranagar"),
   },
 };
 
-const lavelleRoad = destinations.find(d => d.slug === "lavelle-road");
-if (!lavelleRoad) notFound();
+const indiranagar = destinations.find(d => d.slug === "indiranagar");
+if (!indiranagar) notFound();
 
 const distances = [
-  { icon: Plane, label: "Kempegowda International Airport", value: "35 km", time: "~45 min" },
-  { icon: Clock, label: "KSR Bengaluru City Junction", value: "5 km", time: "~15 min" },
-  { icon: Building2, label: "MG Road Metro Station", value: "1 km", time: "~5 min" },
+  { icon: Plane, label: "Kempegowda International Airport", value: "37 km", time: "~60 min" },
+  { icon: Clock, label: "KSR Bengaluru City Junction", value: "10 km", time: "~35 min" },
+  { icon: Building, label: "Indiranagar Metro Station", value: "1 km", time: "~5 min" },
 ];
 
 const nearbyAttractions = [
-  { name: "UB City", desc: "Luxury shopping, fine dining, and exclusive experiences", distance: "5 min walk" },
-  { name: "MG Road", desc: "Vibrant cafes, boutiques, and cultural attractions", distance: "10 min walk" },
-  { name: "Cubbon Park", desc: "Sprawling green space and botanical gardens", distance: "12 min drive" },
-  { name: "Vidhana Soudha", desc: "Seat of Karnataka government and landmark architecture", distance: "15 min drive" },
+  { name: "100 Feet Road", desc: "Vibrant dining and entertainment hub", distance: "2 min walk" },
+  { name: "Phoenix Marketcity", desc: "Premium shopping mall", distance: "5 min drive" },
+  { name: "Bangalore Golf Club", desc: "Historic golf course", distance: "8 min drive" },
+  { name: "Ulsoor Lake", desc: "Scenic lake for morning walks", distance: "10 min drive" },
 ];
 
 const amenities = [
-  { icon: Wifi, label: "High-Speed WiFi", desc: "Complimentary throughout property" },
+  { icon: Wifi, label: "High-Speed WiFi", desc: "Complimentary throughout" },
+  { icon: Utensils, label: "Kitchen", desc: "Ultra-modern facilities" },
   { icon: Coffee, label: "Room Service", desc: "Available on request" },
   { icon: ShieldCheck, label: "24/7 Security", desc: "Your safety first" },
   { icon: Car, label: "Valet Parking", desc: "Covered parking available" },
-  { icon: Utensils, label: "Kitchenette", desc: "In every studio" },
   { icon: Home, label: "Daily Housekeeping", desc: "Fresh daily service" },
-  { icon: Star, label: "Premium Views", desc: "Panoramic cityscape views" },
-  { icon: Users, label: "Spacious Studios", desc: "6 well-appointed rooms" },
+  { icon: Star, label: "City Views", desc: "From every balcony" },
+  { icon: Users, label: "Spacious", desc: "6,000 sq ft penthouse" },
 ];
 
 const highlights = [
-  { title: "Top Floor Studios", desc: "Six exclusive studios with panoramic views of Bangalore skyline" },
-  { title: "Prime Lavelle Road", desc: "Located on prestigious address in heart of upscale Bangalore" },
-  { title: "UB City Proximity", desc: "Short stroll to luxury shopping, dining, and entertainment" },
-  { title: "Business Ready", desc: "Ideal for executives, consultants, and extended stays" },
-  { title: "Quiet Retreat", desc: "Oasis of calm amidst vibrant urban energy" },
-  { title: "Metro Connected", desc: "1 km from MG Road Metro for city-wide access" },
+  { title: "Three Bedrooms", desc: "Each with private balcony and city views" },
+  { title: "Open Terrace", desc: "Perfect for gatherings and relaxation" },
+  { title: "Prime Location", desc: "100 Feet Road, Indiranagar" },
+  { title: "Family Friendly", desc: "Ideal for up to 6 guests" },
+  { title: "Modern Kitchen", desc: "Fully equipped for extended stays" },
+  { title: "Metro Connected", desc: "1 km from Indiranagar Metro" },
 ];
 
-export default function LavelleRoadPage() {
+export default function IndiranagarPage() {
+  const indiranagar = destinations.find(d => d.slug === "indiranagar");
+  if (!indiranagar) notFound();
+
   return (
     <>
       <Header />
@@ -61,8 +65,8 @@ export default function LavelleRoadPage() {
       <section className="relative h-screen min-h-[900px] overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src={lavelleRoad?.heroImage || "/lavelle-road/terrace-1.jpg"}
-            alt={lavelleRoad?.title || "The Pentouz @ Lavelle Road"}
+            src={indiranagar?.heroImage || "/indiranagar/living-room-5.jpg"}
+            alt={indiranagar?.title || "The Pentouz @ Indiranagar"}
             fill
             priority
             className="object-cover scale-110 animate-fade-in"
@@ -80,20 +84,20 @@ export default function LavelleRoadPage() {
                 The Pentouz Collection
               </p>
               <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-light text-white mb-6 leading-[0.9] tracking-tight animate-fade-up stagger-2">
-                Lavelle Road
+                Indiranagar
               </h1>
               <div className="w-24 h-px bg-brand-gold mb-8 animate-fade-up stagger-3" />
               <p className="text-xl lg:text-2xl text-white/90 mb-6 font-light animate-fade-up stagger-4">
-                Bangalore's Premier Boutique Hotel
+                Three Bedroom Penthouse
               </p>
               <p className="text-lg text-white/70 mb-12 font-light leading-relaxed max-w-2xl animate-fade-up stagger-5">
-                Six exquisitely designed studio rooms with panoramic city views. Located on prestigious Lavelle Road, moments from UB City and MG Road.
+                A luxurious three-bedroom penthouse in the heart of Indiranagar, crafted for families, groups, and business travelers seeking premium comfort.
               </p>
 
               {/* Booking CTAs */}
               <div className="flex flex-wrap gap-4 animate-fade-up stagger-5">
                 <Link
-                  href="https://bookmystay.io/rooms/37853"
+                  href={indiranagar?.bookingUrl || "https://hotels.eglobe-solutions.com/pentouz/booking/hotels/the-pentouz-bangalore"}
                   className="group relative bg-brand-gold text-brand-primary px-10 py-5 text-[11px] uppercase tracking-[0.2em] hover:bg-white transition-all duration-700 font-light"
                 >
                   <span className="relative z-10 flex items-center gap-3">
@@ -130,16 +134,16 @@ export default function LavelleRoadPage() {
                 The Property
               </p>
               <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-brand-ink mb-8 leading-tight">
-                Six Studios,
+                Penthouse Living,
                 <br />
-                <em className="italic font-extralight">Unforgettable Views</em>
+                <em className="italic font-extralight">Unmatched Comfort</em>
               </h2>
               <div className="w-16 h-px bg-brand-gold mb-8" />
               <p className="text-body-lg text-brand-body mb-6 leading-relaxed">
-                The Pentouz Lavelle Road boasts six exquisitely designed, spacious studio rooms located on the top floor, each offering stunning panoramic views of the cityscape. These well-appointed studios are thoughtfully curated to cater to the discerning traveler, combining elegance with modern comforts.
+                The Pentouz Indiranagar is a luxurious 3-bedroom penthouse nestled in one of Bangalore's most upscale neighborhoods. Each bedroom features a private balcony with vibrant city views, plush bedding, and tasteful decor.
               </p>
               <p className="text-body-lg text-brand-body leading-relaxed">
-                Whether you're in Bangalore for business or leisure, you'll find every detail tailored to enhance your stay. The open terrace offers perfect space for morning coffee or evening relaxation with the city lights as your backdrop.
+                The open terrace provides perfect space for gatherings, while the ultra-modern kitchen makes extended stays comfortable. Daily housekeeping ensures a pristine environment throughout your visit.
               </p>
 
               {/* Contact Box */}
@@ -181,8 +185,8 @@ export default function LavelleRoadPage() {
               <div className="relative aspect-[4/3] overflow-hidden mb-8">
                 <div className="absolute inset-0 border border-brand-border translate-x-3 translate-y-3" />
                 <Image
-                  src={lavelleRoad?.image || "/lavelle-road/facade-1.jpg"}
-                  alt={lavelleRoad?.title || "The Pentouz @ Lavelle Road"}
+                  src={indiranagar?.image || "/indiranagar/terrace-7.jpg"}
+                  alt={indiranagar?.title || "The Pentouz @ Indiranagar"}
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"
@@ -195,22 +199,22 @@ export default function LavelleRoadPage() {
                   Exact Location
                 </p>
                 <h3 className="font-display text-2xl lg:text-3xl font-light mb-4">
-                  The Pentouz Lavelle Road
+                  The Pentouz Indiranagar
                 </h3>
                 <p className="text-white/80 mb-6 font-light leading-relaxed">
-                  46, 6th Cross, Lavelle Road<br />
-                  Bangalore – 560001, India
+                  2022, 100 Feet Road, Indiranagar<br />
+                  Bangalore – 560038, India
                 </p>
                 <div className="w-16 h-px bg-brand-gold/50 mb-6" />
                 <p className="text-[10px] uppercase tracking-[0.35em] text-brand-gold mb-4 font-medium">
                   Coordinates
                 </p>
                 <p className="text-white/60 font-mono text-sm">
-                  12°58'18.2″N  77°35'58.9″E
+                  12°58'01.7″N  77°38'30.2″E
                 </p>
                 <div className="mt-8">
                   <Link
-                    href="https://maps.google.com/?q=12.971722,77.599697"
+                    href="https://maps.google.com/?q=12.9767,77.641"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.15em] text-brand-gold hover:text-white transition-colors duration-300"
@@ -272,11 +276,11 @@ export default function LavelleRoadPage() {
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-brand-ink mb-6 leading-tight">
               Explore
               <br />
-              <em className="italic font-extralight">Lavelle Road</em>
+              <em className="italic font-extralight">Indiranagar</em>
             </h2>
             <div className="w-24 h-px bg-brand-gold mx-auto" />
             <p className="text-body-lg text-brand-body max-w-3xl mx-auto leading-relaxed">
-              Lavelle Road is one of Bangalore's most coveted and sophisticated neighborhoods, offering the perfect blend of urban vibrancy and serene green spaces. Just a short stroll away lies luxurious UB City.
+              Indiranagar is one of Bangalore's most vibrant neighborhoods, offering an exciting mix of dining, shopping, and entertainment. From upscale restaurants to bustling cafes, everything you need is within reach.
             </p>
           </div>
 
@@ -386,17 +390,17 @@ export default function LavelleRoadPage() {
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-white mb-6 leading-tight">
               Explore
               <br />
-              <em className="italic font-extralight">Lavelle Road</em>
+              <em className="italic font-extralight">Indiranagar</em>
             </h2>
             <div className="w-24 h-px bg-brand-gold mx-auto" />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { href: "/destinations/lavelle-road/rooms", title: "Rooms", desc: "Six spacious studios with city views", image: "/lavelle-road/king-suite-1.jpg" },
-              { href: "/destinations/lavelle-road/experiences", title: "Experiences", desc: "Curated activities and discoveries", image: "/ooty/all/22._lawn.jpeg" },
-              { href: "/destinations/lavelle-road/gallery", title: "Gallery", desc: "Visual journey through property", image: "/lavelle-road/terrace-1.jpg" },
-              { href: "/travel/near/karnataka-high-court", title: "Legal District", desc: "Near Karnataka High Court", image: "/lavelle-road/facade-1.jpg" },
+              { href: "/destinations/indiranagar/living-100-feet", title: "Living", desc: "Penthouse details", image: "/indiranagar/living-room-5.jpg" },
+              { href: "/destinations/indiranagar/rooms", title: "Rooms", desc: "Three bedroom suites", image: "/indiranagar/terrace-7.jpg" },
+              { href: "/destinations/indiranagar/gallery", title: "Gallery", desc: "Visual journey", image: "/indiranagar/skyline-suite.jpg" },
+              { href: "/travel/near/indiranagar-100-feet-road", title: "Nearby", desc: "Local attractions", image: "/indiranagar/vista-room.jpg" },
             ].map((item, i) => (
               <Link
                 key={i}
@@ -453,15 +457,15 @@ export default function LavelleRoadPage() {
           <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-brand-ink mb-8 leading-tight">
             Ready for Your
             <br />
-            <em className="italic font-extralight">Lavelle Road</em> Experience?
+            <em className="italic font-extralight">Indiranagar</em> Experience?
           </h2>
           <div className="w-24 h-px bg-brand-gold mx-auto mb-12" />
           <p className="text-body-lg text-brand-body max-w-2xl mx-auto mb-12 leading-relaxed">
-            Let us curate your perfect Bangalore escape. Book now for an unforgettable stay in the heart of the city.
+            Book our spacious penthouse for an unforgettable Bangalore experience. Perfect for families, groups, and extended stays.
           </p>
           <div className="flex flex-wrap justify-center gap-6">
             <Link
-              href="https://bookmystay.io/rooms/37853"
+              href={indiranagar?.bookingUrl || "https://hotels.eglobe-solutions.com/pentouz/booking/hotels/the-pentouz-bangalore"}
               className="group relative inline-flex items-center justify-center bg-brand-primary text-white px-14 py-6 text-[11px] uppercase tracking-[0.2em] hover:bg-brand-gold transition-all duration-700 font-light"
             >
               <span className="relative z-10">Book Now</span>

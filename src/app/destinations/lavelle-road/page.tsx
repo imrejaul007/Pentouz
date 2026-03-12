@@ -8,6 +8,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { withSiteUrl } from "@/lib/site";
 
+
 export const metadata: Metadata = {
   title: "The Pentouz @ Lavelle Road | Luxury Studio Boutique Hotel Bangalore",
   description: "Six exquisite studio rooms with panoramic city views on Bangalore's prestigious Lavelle Road. Walking distance to UB City, MG Road metro.",
@@ -15,9 +16,6 @@ export const metadata: Metadata = {
     canonical: withSiteUrl("/destinations/lavelle-road"),
   },
 };
-
-const lavelleRoad = destinations.find(d => d.slug === "lavelle-road");
-if (!lavelleRoad) notFound();
 
 const distances = [
   { icon: Plane, label: "Kempegowda International Airport", value: "35 km", time: "~45 min" },
@@ -53,6 +51,9 @@ const highlights = [
 ];
 
 export default function LavelleRoadPage() {
+  const lavelleRoad = destinations.find(d => d.slug === "lavelle-road");
+  if (!lavelleRoad) notFound();
+
   return (
     <>
       <Header />

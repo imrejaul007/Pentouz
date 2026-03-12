@@ -316,7 +316,7 @@ export default function Header() {
                     </div>
                     <div>
                       <p className="text-[10px] uppercase tracking-[0.15em] text-brand-muted mb-1">
-                        {dest.location}
+                        {dest.subtitle}
                       </p>
                       <p className="text-base font-display font-light text-brand-ink group-hover:text-brand-gold transition-colors duration-300">
                         {dest.shortTitle}
