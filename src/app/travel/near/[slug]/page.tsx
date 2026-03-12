@@ -101,7 +101,7 @@ export default function KeywordTravelHubPage({ params }: { params: Params }) {
                 <>{editorial.travelHubIntro}</>
               ) : (
                 <>
-                  Built for users searching <strong>{keyword.keyword}</strong>. This hub contains multiple intent-focused articles for {keyword.audience},
+                  Travel guides for visitors searching <strong>{keyword.keyword}</strong>. This hub contains practical articles for {keyword.audience},
                   with internal links to the Lavelle Road property page, living page, booking page, and related locations.
                 </>
               )}

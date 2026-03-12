@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, MapPin, Mountain, Coffee, Train } from "lucide-react";
+import { ArrowRight, MapPin, Mountain, Coffee, Train, Clock } from "lucide-react";
 import { destinations } from "@/data/content";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -18,7 +18,6 @@ export const metadata: Metadata = {
 const ooty = destinations.find(d => d.slug === "ooty");
 if (!ooty) notFound();
 
-// Nearby attractions
 const nearbyAttractions = [
   {
     id: 1,
@@ -66,130 +65,147 @@ export default function OotyNearPage() {
   return (
     <>
       <Header />
-      <main className="bg-[#f8f7f5] min-h-screen">
-        {/* Hero Section */}
-        <section className="relative h-[50vh] min-h-[500px] bg-gradient-to-b from-black/80 via-brand-gold/50 to-black/40">
-          <div className="relative h-[40vh] overflow-hidden">
-            <Image
-              src="/ooty/view-24.jpeg"
-              alt="Ooty Hills"
-              fill
-              priority
-              className="absolute inset-0 h-full w-full object-cover"
-              sizes="(max-width: 1920px) 100vw, 50vw"
-            />
-            <div className="absolute inset-0 left-0 right-0 bottom-0 w-full h-full bg-gradient-to-t from-black/60 via-white/30 to-transparent">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 h-full flex flex-col justify-end items-end p-12">
-                <h1 className="font-display text-4xl lg:text-6xl xl:text-7xl font-light max-w-4xl mb-4 drop-shadow-lg">
-                  Explore Ooty
-                </h1>
-                <p className="text-lg text-white mb-6 leading-relaxed max-w-3xl">
-                  From mist-covered peaks to colonial heritage, discover the attractions that make Ooty a beloved hill station destination.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
 
-        {/* Nearby Attractions */}
-        <section className="py-20 bg-[#f8f7f5]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <div className="mb-12">
-              <h2 className="font-display text-3xl lg:text-4xl font-light mb-6 text-brand-accent">
-                Nearby Attractions
-              </h2>
-              <p className="text-base text-brand-body">
-                All attractions are accessible from The Pentouz @ Ooty. Ask our front desk for assistance with transportation.
+      {/* Full-Screen Hero */}
+      <section className="relative h-[60vh] min-h-[500px] overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/ooty/view-24.jpeg"
+            alt="Ooty Hills"
+            fill
+            priority
+            className="object-cover scale-105 animate-fade-in"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/80" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/40" />
+        </div>
+
+        <div className="relative h-full flex items-center">
+          <div className="max-w-container-xl mx-auto px-6 lg:px-12 w-full">
+            <div className="max-w-3xl">
+              <p className="text-[11px] uppercase tracking-[0.4em] text-brand-gold mb-6 animate-fade-up">
+                Discover Ooty
+              </p>
+              <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-light text-white mb-6 leading-tight animate-fade-up stagger-2">
+                Explore the
+                <br />
+                <em className="italic font-extralight">Nilgiris</em>
+              </h1>
+              <div className="w-24 h-px bg-brand-gold mb-8 animate-fade-up stagger-3" />
+              <p className="text-lg text-white/70 max-w-2xl font-light leading-relaxed animate-fade-up stagger-4">
+                From mist-covered peaks to colonial heritage, discover the attractions that make Ooty a beloved hill station destination.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {nearbyAttractions.map((attraction) => (
-                <div key={attraction.id} className="bg-white border border-brand-border overflow-hidden hover:shadow-lg">
-                  <div className="aspect-video relative">
+      {/* Nearby Attractions */}
+      <section className="py-section-xl bg-white">
+        <div className="max-w-container-xl mx-auto px-6 lg:px-12">
+          <div className="text-center mb-16">
+            <p className="text-[10px] uppercase tracking-[0.35em] text-brand-accent mb-6 font-medium">
+              Within Reach
+            </p>
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-brand-ink mb-6 leading-tight">
+              Nearby
+              <br />
+              <em className="italic">Attractions</em>
+            </h2>
+            <p className="text-body-lg text-brand-muted max-w-2xl mx-auto">
+              All attractions are accessible from The Pentouz @ Ooty. Ask our front desk for assistance with transportation.
+            </p>
+          </div>
+
+          <div className="space-y-8">
+            {nearbyAttractions.map((attraction, i) => (
+              <div key={attraction.id} className="group bg-white border border-brand-border hover:border-brand-gold/30 transition-all duration-700 overflow-hidden">
+                <div className="grid lg:grid-cols-2">
+                  <div className="relative aspect-[4/3] lg:aspect-auto lg:h-full">
                     <Image
                       src={attraction.image}
                       alt={attraction.name}
                       fill
-                      className="object-cover"
+                      className="object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   </div>
-                  <div className="p-6">
-                    <div className="flex items-start justify-between mb-3">
-                      <h3 className="font-display text-xl font-light text-brand-accent">{attraction.name}</h3>
-                      <div className="flex items-center gap-4 text-sm text-brand-muted">
-                        <span className="flex items-center gap-1"><MapPin className="w-4 h-4" /> {attraction.distance}</span>
-                        <span className="flex items-center gap-1"><Train className="w-4 h-4" /> {attraction.time}</span>
+                  <div className="p-10 lg:p-12 flex flex-col justify-center">
+                    <div className="flex items-start justify-between mb-6">
+                      <h3 className="font-display text-3xl lg:text-4xl font-light text-brand-accent">
+                        <em className="italic font-extralight">{attraction.name}</em>
+                      </h3>
+                      <span className="text-[10px] uppercase tracking-[0.2em] text-brand-muted">
+                        0{String(i + 1)}
+                      </span>
+                    </div>
+                    <div className="flex flex-wrap gap-8 mb-8">
+                      <div className="flex items-center gap-2">
+                        <MapPin className="w-5 h-5 text-brand-gold" />
+                        <span className="text-body-sm text-brand-muted">{attraction.distance}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Clock className="w-5 h-5 text-brand-gold" />
+                        <span className="text-body-sm text-brand-muted">{attraction.time}</span>
                       </div>
                     </div>
-                    <p className="text-sm text-brand-body leading-relaxed">
+                    <p className="text-body-lg text-brand-body leading-relaxed">
                       {attraction.description}
                     </p>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* CTA Section */}
-        <section className="py-20 bg-brand-ink text-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 text-center">
-            <p className="text-lg mb-8 max-w-3xl">
-              Ready to explore Ooty from The Pentouz?
-            </p>
-            <Link
-              href={ooty?.bookingUrl || "https://bookmystay.io/rooms/37853"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center bg-white text-brand-ink px-8 py-4 mt-6 hover:bg-brand-accent transition-all duration-500 font-light"
-            >
-              Book Your Stay
-            </Link>
+      {/* Booking CTA */}
+      <section className="py-section-xl bg-brand-primary">
+        <div className="max-w-container-xl mx-auto px-6 lg:px-12 text-center">
+          <p className="text-[10px] uppercase tracking-[0.35em] text-brand-gold mb-6 font-medium">
+            Begin Your Journey
+          </p>
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-white mb-8 leading-tight">
+            Ready to Explore
+            <br />
+            <em className="italic">Ooty</em>?
+          </h2>
+          <Link
+            href={ooty?.bookingUrl || "https://bookmystay.io/rooms/37853"}
+            className="group relative inline-flex items-center justify-center bg-white text-brand-primary px-12 py-5 text-[11px] uppercase tracking-[0.2em] hover:bg-brand-gold transition-all duration-700 font-light"
+          >
+            <span className="relative z-10">Book Your Stay</span>
+            <ArrowRight className="ml-3 w-5 h-5 transition-transform group-hover:translate-x-2 duration-500" />
+          </Link>
+        </div>
+      </section>
+
+      {/* Property Links */}
+      <section className="py-section-xl bg-white">
+        <div className="max-w-container-xl mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { href: "/destinations/ooty/rooms", title: "Rooms", desc: "Choose your perfect room" },
+              { href: "/destinations/ooty/experiences", title: "Experiences", desc: "Discover curated activities" },
+              { href: "/destinations/ooty", title: "Property", desc: "Back to overview" },
+            ].map((item, i) => (
+              <Link
+                key={i}
+                href={item.href}
+                className="group p-8 bg-brand-linen border border-brand-border hover:border-brand-gold/30 transition-all duration-700"
+              >
+                <ArrowRight className="w-6 h-6 text-brand-gold mb-6 transition-transform duration-700 group-hover:translate-x-2" />
+                <h3 className="font-display text-2xl font-light text-brand-ink mb-3">{item.title}</h3>
+                <p className="text-body-sm text-brand-muted">{item.desc}</p>
+              </Link>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Property Links */}
-        <section className="py-12 bg-brand-linen">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-              <Link
-                href="/destinations/ooty/rooms"
-                className="group flex items-start gap-4"
-              >
-                <ArrowRight className="w-5 h-5 text-brand-gold mt-1" />
-                <div className="flex-1">
-                  <h3 className="font-display text-xl font-light mb-2">Rooms</h3>
-                  <p className="text-brand-body text-sm">Choose your perfect room</p>
-                </div>
-              </Link>
-              <Link
-                href="/destinations/ooty/experiences"
-                className="group flex items-start gap-4"
-              >
-                <ArrowRight className="w-5 h-5 text-brand-gold mt-1" />
-                <div className="flex-1">
-                  <h3 className="font-display text-xl font-light mb-2">Experiences</h3>
-                  <p className="text-brand-body text-sm">Discover curated activities</p>
-                </div>
-              </Link>
-              <Link
-                href="/destinations/ooty"
-                className="group flex items-start gap-4"
-              >
-                <ArrowRight className="w-5 h-5 text-brand-gold mt-1" />
-                <div className="flex-1">
-                  <h3 className="font-display text-xl font-light mb-2">Back to Property</h3>
-                  <p className="text-brand-body text-sm">Property overview page</p>
-                </div>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        <Footer />
-      </main>
+      <Footer />
     </>
   );
 }
