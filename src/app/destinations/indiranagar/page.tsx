@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Calendar, MapPin, Phone, Wifi, Coffee, ShieldCheck, Car, Utensils, Star, Home, Building, Plane, Clock, CreditCard, Users } from "lucide-react";
+import { Calendar, MapPin, Phone, Wifi, Coffee, ShieldCheck, Car, Utensils, Home, Building, Plane, Clock, CreditCard } from "lucide-react";
 import { destinations, contactInfo } from "@/data/content";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -38,8 +38,8 @@ const amenities = [
   { icon: ShieldCheck, label: "24/7 Security", desc: "Your safety first" },
   { icon: Car, label: "Valet Parking", desc: "Covered parking available" },
   { icon: Home, label: "Daily Housekeeping", desc: "Fresh daily service" },
-  { icon: Star, label: "City Views", desc: "From every balcony" },
-  { icon: Users, label: "Spacious", desc: "6,000 sq ft penthouse" },
+  { icon: Wifi, label: "City Views", desc: "From every balcony" },
+  { icon: Wifi, label: "Spacious", desc: "6,000 sq ft penthouse" },
 ];
 
 const highlights = [
@@ -59,8 +59,8 @@ export default function IndiranagarPage() {
     <>
       <Header />
 
-      {/* Cinematic Full-Screen Hero */}
-      <section className="relative h-screen min-h-[900px] overflow-hidden bg-brand-ink">
+      {/* Full-Screen Hero - Minimal Text, Large Image */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-brand-ink">
         <div className="absolute inset-0 z-0">
           <Image
             src={indiranagar?.heroImage || "/indiranagar/living-room-5.jpg"}
@@ -70,178 +70,163 @@ export default function IndiranagarPage() {
             className="object-cover scale-105"
             sizes="100vw"
           />
-          {/* Elegant gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/15 to-black/45" />
         </div>
 
-        <div className="relative z-10 h-full flex items-center">
-          <div className="max-w-container-xl mx-auto px-4 sm:px-6 lg:px-16 w-full">
-            <div className="max-w-4xl">
-              <p className="text-[11px] uppercase tracking-[0.4em] text-brand-gold mb-4 font-medium">
-                The Pentouz
-              </p>
-              <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-light text-white leading-tight mb-6">
-                Indiranagar
-                <br />
-                <span className="font-extralight italic">Bengaluru</span>
-              </h1>
-              <p className="text-lg sm:text-xl text-white/80 max-w-2xl leading-relaxed mb-10 font-light">
-                A luxurious three-bedroom penthouse in the heart of Indiranagar, crafted for families, groups, and business travelers seeking premium comfort.
-              </p>
-              <div className="flex flex-col sm:flex-row items-center gap-4">
-                <Link
-                  href={indiranagar?.bookingUrl || "https://hotels.eglobe-solutions.com/pentouz/booking/hotels/the-pentouz-bangalore"}
-                  className="inline-flex items-center gap-3 bg-brand-gold text-brand-ink px-10 py-5 text-[11px] uppercase tracking-[0.2em] hover:bg-white hover:text-brand-ink transition-all duration-500 font-light"
-                >
-                  <Calendar className="w-5 h-5" />
-                  Book Your Stay
-                </Link>
-                <a
-                  href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
-                  className="inline-flex items-center gap-3 border border-white/30 text-white px-10 py-5 text-[11px] uppercase tracking-[0.2em] hover:border-brand-gold hover:bg-white/10 transition-all duration-500 font-light"
-                >
-                  <Phone className="w-5 h-5" />
-                  Contact Us
-                </a>
-              </div>
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-16 text-center">
+          <div className="space-y-6">
+            <p className="text-[10px] uppercase tracking-[0.5em] text-brand-gold">
+              Bangalore
+            </p>
+            <h1 className="font-display text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-light text-white leading-none tracking-tight">
+              Indiranagar
+            </h1>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+              <Link
+                href={indiranagar?.bookingUrl || "https://hotels.eglobe-solutions.com/pentouz/booking/hotels/the-pentouz-bangalore"}
+                className="group inline-flex items-center gap-3 bg-brand-gold text-brand-ink px-10 py-4 text-[10px] uppercase tracking-[0.25em] hover:bg-white transition-all duration-500 font-light"
+              >
+                <Calendar className="w-4 h-4" />
+                Reserve
+              </Link>
+              <a
+                href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
+                className="inline-flex items-center gap-3 border border-white/40 text-white px-10 py-4 text-[10px] uppercase tracking-[0.25em] hover:border-brand-gold hover:bg-white/10 transition-all duration-500 font-light"
+              >
+                <Phone className="w-4 h-4" />
+                Contact
+              </a>
             </div>
           </div>
         </div>
 
-        {/* Decorative Gold Line */}
-        <div className="absolute bottom-0 left-0 right-1/2 h-px bg-gradient-to-r from-brand-gold to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-gold/50 to-transparent" />
       </section>
 
-      {/* Introduction Section */}
-      <section className="py-section-2xl bg-white relative">
-        <div className="absolute top-0 left-1/2 w-24 h-px bg-brand-gold" />
+      {/* Introduction - Minimal Text */}
+      <section className="py-24 sm:py-32 lg:py-40 bg-white">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-16 text-center">
+          <p className="text-[10px] uppercase tracking-[0.4em] text-brand-accent mb-8">
+            The Property
+          </p>
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-brand-ink mb-8 leading-tight">
+            Penthouse Living,
+            <br />
+            <span className="italic font-extralight">Unmatched Comfort</span>
+          </h2>
+          <p className="text-base sm:text-lg text-brand-body leading-relaxed">
+            The Pentouz Indiranagar is a luxurious 3-bedroom penthouse nestled in one of Bangalore's most upscale neighborhoods. Each bedroom features a private balcony with vibrant city views, plush bedding, and tasteful decor.
+          </p>
+        </div>
+      </section>
+
+      {/* Full Width Image Section */}
+      <section className="relative h-[70vh] overflow-hidden bg-brand-ink">
+        <Image
+          src={indiranagar?.image || "/indiranagar/terrace-7.jpg"}
+          alt={indiranagar?.title || "The Pentouz @ Indiranagar"}
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+      </section>
+
+      {/* Location & Distance */}
+      <section className="py-24 sm:py-32 lg:py-40 bg-brand-linen">
         <div className="max-w-container-xl mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
             <div>
-              <p className="text-[10px] uppercase tracking-[0.35em] text-brand-accent mb-6 font-medium">
-                The Property
+              <p className="text-[10px] uppercase tracking-[0.4em] text-brand-accent mb-8">
+                Getting Here
               </p>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-brand-ink mb-8 leading-tight">
-                Penthouse Living,
+              <h2 className="font-display text-3xl sm:text-4xl font-light text-brand-ink mb-12 leading-tight">
+                Approximate
                 <br />
-                <em className="italic font-extralight">Unmatched Comfort</em>
+                <span className="italic font-extralight">Travel Time</span>
               </h2>
-              <p className="text-base sm:text-lg text-brand-body mb-6 leading-relaxed">
-                The Pentouz Indiranagar is a luxurious 3-bedroom penthouse nestled in one of Bangalore's most upscale neighborhoods. Each bedroom features a private balcony with vibrant city views, plush bedding, and tasteful decor.
-              </p>
-              <p className="text-base sm:text-lg text-brand-body leading-relaxed">
-                The open terrace provides the perfect space for gatherings, while the ultra-modern kitchen makes extended stays comfortable. Daily housekeeping ensures a pristine environment throughout your visit.
-              </p>
+              <div className="space-y-8">
+                {distances.map((item, i) => (
+                  <div key={i} className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-white border border-brand-border/30 flex items-center justify-center">
+                      <item.icon className="w-5 h-5 text-brand-accent" />
+                    </div>
+                    <div>
+                      <h3 className="font-display text-lg font-light text-brand-ink mb-1">
+                        {item.label}
+                      </h3>
+                      <p className="text-brand-muted text-sm">{item.value} • {item.time} by car</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <div className="relative aspect-[4/3] overflow-hidden">
-              <div className="absolute inset-0 border border-brand-border translate-x-3 translate-y-3 -z-10" />
-              <Image
-                src={indiranagar?.image || "/indiranagar/terrace-7.jpg"}
-                alt={indiranagar?.title || "The Pentouz @ Indiranagar"}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
+            <div>
+              <p className="text-[10px] uppercase tracking-[0.4em] text-brand-accent mb-8">
+                Location
+              </p>
+              <h2 className="font-display text-3xl sm:text-4xl font-light text-brand-ink mb-12 leading-tight">
+                2022, 100 Feet Road,
+                <br />
+                <span className="italic font-extralight">Indiranagar</span>
+              </h2>
+              <p className="text-base text-brand-body mb-8 leading-relaxed">
+                Bangalore – 560038, India
+              </p>
+              <Link
+                href="https://maps.google.com/?q=12.9767,77.641"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 text-brand-ink text-[10px] uppercase tracking-[0.25em] hover:text-brand-accent transition-colors duration-300"
+              >
+                <MapPin className="w-4 h-4" />
+                View on Map
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Distances Section */}
-      <section className="py-section-2xl bg-brand-linen relative overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-gold to-transparent" />
-        <div className="max-w-container-xl mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="text-center mb-16">
-            <p className="text-[10px] uppercase tracking-[0.35em] text-brand-accent mb-6 font-medium">
-              Getting Here
-            </p>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-brand-ink mb-6 leading-tight">
-              Approximate
-              <br />
-              <em className="italic font-extralight">Travel Time</em>
-            </h2>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {distances.map((item, i) => (
-              <div key={i} className="bg-white border border-brand-border/30 p-8 lg:p-10 text-center hover:shadow-xl hover:border-brand-gold/50 transition-all duration-500">
-                <div className="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-brand-linen border border-brand-gold/20">
-                  <item.icon className="w-7 h-7 text-brand-accent" />
-                </div>
-                <h3 className="font-display text-xl font-light text-brand-ink mb-3">
-                  {item.label}
-                </h3>
-                <p className="text-3xl lg:text-4xl font-display text-brand-accent mb-2">{item.value}</p>
-                <p className="text-sm text-brand-muted">{item.time} by car</p>
-              </div>
-            ))}
-          </div>
+      {/* Nearby Attractions - Full Width Cards */}
+      <section className="bg-white border-t border-brand-border/30">
+        <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-brand-border/30">
+          {nearbyAttractions.map((item, i) => (
+            <div key={i} className="group p-8 lg:p-12 hover:bg-brand-linen/50 transition-colors duration-500">
+              <MapPin className="w-5 h-5 text-brand-gold/40 mb-4" />
+              <h3 className="font-display text-lg font-light text-brand-ink mb-2">
+                {item.name}
+              </h3>
+              <p className="text-sm text-brand-muted mb-3 leading-relaxed">
+                {item.desc}
+              </p>
+              <p className="text-[10px] uppercase tracking-[0.2em] text-brand-accent">
+                {item.distance}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Nearby Attractions Section */}
-      <section className="py-section-2xl bg-white relative">
-        <div className="absolute top-0 left-1/2 w-24 h-px bg-brand-gold" />
+      {/* Amenities - Minimal Grid */}
+      <section className="py-24 sm:py-32 lg:py-40 bg-white">
         <div className="max-w-container-xl mx-auto px-4 sm:px-6 lg:px-16">
           <div className="text-center mb-16">
-            <p className="text-[10px] uppercase tracking-[0.35em] text-brand-accent mb-6 font-medium">
-              Neighborhood
-            </p>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-brand-ink mb-6 leading-tight">
-              Explore
-              <br />
-              <em className="italic font-extralight">Indiranagar</em>
-            </h2>
-            <p className="text-base text-brand-body max-w-3xl mx-auto leading-relaxed">
-              Indiranagar is one of Bangalore's most vibrant neighborhoods, offering an exciting mix of dining, shopping, and entertainment. From upscale restaurants to bustling cafes, everything you need is within reach.
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {nearbyAttractions.map((item, i) => (
-              <div key={i} className="group bg-brand-linen border border-brand-border/30 p-6 hover:border-brand-gold/50 transition-all duration-500 hover:shadow-xl">
-                <MapPin className="w-6 h-6 text-brand-gold/50 mb-4" />
-                <h3 className="font-display text-lg font-light text-brand-ink mb-2">
-                  {item.name}
-                </h3>
-                <p className="text-sm text-brand-muted mb-3">
-                  {item.desc}
-                </p>
-                <p className="text-[10px] uppercase tracking-[0.15em] text-brand-accent font-medium">
-                  {item.distance}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Amenities Section */}
-      <section className="py-section-2xl bg-brand-ink text-white relative">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-gold to-transparent" />
-        <div className="max-w-container-xl mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="text-center mb-16">
-            <p className="text-[10px] uppercase tracking-[0.35em] text-brand-gold mb-6 font-medium">
+            <p className="text-[10px] uppercase tracking-[0.4em] text-brand-accent mb-8">
               Amenities
             </p>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-6 leading-tight">
-              Everything You
-              <br />
-              <em className="italic font-extralight">Need</em>
+            <h2 className="font-display text-3xl sm:text-4xl font-light text-brand-ink leading-tight">
+              Everything You Need
             </h2>
           </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-12 gap-y-10">
             {amenities.map((amenity, i) => (
-              <div key={i} className="text-center group">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-white/5 border border-white/20 flex items-center justify-center group-hover:border-brand-gold/50 transition-all duration-500">
-                  <amenity.icon className="w-6 h-6 text-brand-gold" />
-                </div>
-                <p className="text-[10px] uppercase tracking-[0.15em] text-white/80 mb-1">
+              <div key={i} className="text-center">
+                <amenity.icon className="w-6 h-6 mx-auto mb-4 text-brand-gold/60" />
+                <p className="text-[10px] uppercase tracking-[0.2em] text-brand-ink mb-1">
                   {amenity.label}
                 </p>
-                <p className="text-sm text-white/60">
+                <p className="text-xs text-brand-muted">
                   {amenity.desc}
                 </p>
               </div>
@@ -250,197 +235,96 @@ export default function IndiranagarPage() {
         </div>
       </section>
 
-      {/* Highlights Section */}
-      <section className="py-section-2xl bg-white relative">
-        <div className="absolute top-0 left-1/2 w-24 h-px bg-brand-gold" />
-        <div className="max-w-container-xl mx-auto px-4 sm:px-6 lg:px-16">
+      {/* Highlights - Minimal List */}
+      <section className="py-24 sm:py-32 lg:py-40 bg-brand-linen">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-16">
           <div className="text-center mb-16">
-            <p className="text-[10px] uppercase tracking-[0.35em] text-brand-accent mb-6 font-medium">
+            <p className="text-[10px] uppercase tracking-[0.4em] text-brand-accent mb-8">
               Why Choose Us
             </p>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-brand-ink mb-6 leading-tight">
-              Property
-              <br />
-              <em className="italic font-extralight">Highlights</em>
+            <h2 className="font-display text-3xl sm:text-4xl font-light text-brand-ink leading-tight">
+              Property Highlights
             </h2>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div className="space-y-6">
             {highlights.map((item, i) => (
-              <div key={i} className="group p-8 lg:p-10 bg-brand-linen border border-brand-border/30 hover:border-brand-gold/50 transition-all duration-700 hover:shadow-xl">
-                <span className="font-display text-5xl text-brand-gold/10 block mb-4">
+              <div key={i} className="flex items-start gap-6">
+                <span className="flex-shrink-0 font-display text-2xl text-brand-gold/20">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <p className="text-base text-brand-ink mb-3 font-light">
-                  {item.title}
-                </p>
-                <p className="text-sm text-brand-muted leading-relaxed">
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Explore Section */}
-      <section className="py-section-2xl bg-brand-linen relative overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-gold to-transparent" />
-        <div className="max-w-container-xl mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="text-center mb-16">
-            <p className="text-[10px] uppercase tracking-[0.35em] text-brand-accent mb-6 font-medium">
-              Discover More
-            </p>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-brand-ink mb-6 leading-tight">
-              Explore
-              <br />
-              <em className="italic font-extralight">Indiranagar</em>
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { href: "/destinations/indiranagar/living-100-feet", title: "Living", desc: "Penthouse details", image: "/indiranagar/living-room-5.jpg" },
-              { href: "/destinations/indiranagar/rooms", title: "Rooms", desc: "Three bedroom suites", image: "/indiranagar/terrace-7.jpg" },
-              { href: "/destinations/indiranagar/gallery", title: "Gallery", desc: "Visual journey", image: "/indiranagar/skyline-suite.jpg" },
-              { href: "/travel/near/indiranagar-100-feet-road", title: "Nearby", desc: "Local attractions", image: "/indiranagar/vista-room.jpg" },
-            ].map((item, i) => (
-              <Link
-                key={i}
-                href={item.href}
-                className="group relative overflow-hidden bg-white border border-brand-border/30 hover:border-brand-gold/50 transition-all duration-700"
-              >
-                <div className="aspect-[3/4]">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="25vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent transition-opacity duration-500 group-hover:opacity-90" />
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                  <h3 className="font-display text-xl font-light mb-2">
+                <div>
+                  <h3 className="font-display text-lg font-light text-brand-ink mb-2">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-white/80 mb-4">
+                  <p className="text-sm text-brand-muted leading-relaxed">
                     {item.desc}
                   </p>
-                  <div className="flex items-center gap-2 text-brand-gold">
-                    <span className="text-[10px] uppercase tracking-[0.2em]">Discover</span>
-                    <ArrowRight className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-2" />
-                  </div>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="py-section-2xl bg-white relative">
-        <div className="absolute top-0 left-1/2 w-24 h-px bg-brand-gold" />
-        <div className="max-w-container-xl mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.35em] text-brand-accent mb-6 font-medium">
-                Contact & Reservations
-              </p>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-brand-ink mb-8 leading-tight">
-                Ready to
-                <br />
-                <em className="italic font-extralight">Book?</em>
-              </h2>
-              <p className="text-base text-brand-body mb-8 leading-relaxed">
-                Book our spacious penthouse for an unforgettable Bangalore experience. Perfect for families, groups, and extended stays.
-              </p>
-              <div className="space-y-4">
-                <a
-                  href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
-                  className="flex items-center gap-4 text-brand-ink hover:text-brand-accent transition-colors duration-300 group"
-                >
-                  <div className="w-12 h-12 rounded-full bg-brand-linen border border-brand-border/30 flex items-center justify-center group-hover:border-brand-gold/50 transition-all duration-500">
-                    <Phone className="w-5 h-5 text-brand-accent" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.15em] text-brand-muted mb-1">Phone</p>
-                    <p className="text-lg font-light">{contactInfo.phones[0]}</p>
-                  </div>
-                </a>
-                <a
-                  href={`mailto:${contactInfo.email}`}
-                  className="flex items-center gap-4 text-brand-ink hover:text-brand-accent transition-colors duration-300 group"
-                >
-                  <div className="w-12 h-12 rounded-full bg-brand-linen border border-brand-border/30 flex items-center justify-center group-hover:border-brand-gold/50 transition-all duration-500">
-                    <CreditCard className="w-5 h-5 text-brand-accent" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.15em] text-brand-muted mb-1">Email</p>
-                    <p className="text-lg font-light">{contactInfo.email}</p>
-                  </div>
-                </a>
+      {/* Explore - Image Cards */}
+      <section className="bg-white border-t border-brand-border/30">
+        <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-brand-border/30">
+          {[
+            { href: "/destinations/indiranagar/living-100-feet", title: "Living", subtitle: "Penthouse details", image: "/indiranagar/living-room-5.jpg" },
+            { href: "/destinations/indiranagar/rooms", title: "Rooms", subtitle: "Three bedroom suites", image: "/indiranagar/terrace-7.jpg" },
+            { href: "/destinations/indiranagar/gallery", title: "Gallery", subtitle: "Visual journey", image: "/indiranagar/skyline-suite.jpg" },
+            { href: "/travel/near/indiranagar-100-feet-road", title: "Area Guide", subtitle: "Local attractions", image: "/indiranagar/vista-room.jpg" },
+          ].map((item, i) => (
+            <Link
+              key={i}
+              href={item.href}
+              className="group relative aspect-[3/4] overflow-hidden"
+            >
+              <Image
+                src={item.image}
+                alt={item.title}
+                fill
+                className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                sizes="25vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent transition-opacity duration-500 group-hover:from-black/60" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-8 text-white">
+                <p className="text-[10px] uppercase tracking-[0.3em] text-brand-gold mb-2">
+                  {item.title}
+                </p>
+                <p className="text-sm text-white/80">
+                  {item.subtitle}
+                </p>
               </div>
-            </div>
-
-            <div className="bg-brand-ink p-8 lg:p-10 text-white">
-              <p className="text-[10px] uppercase tracking-[0.35em] text-brand-gold mb-6 font-medium">
-                Location
-              </p>
-              <h3 className="font-display text-2xl font-light mb-4">
-                The Pentouz Indiranagar
-              </h3>
-              <p className="text-white/80 mb-8 font-light leading-relaxed">
-                2022, 100 Feet Road, Indiranagar<br />
-                Bangalore – 560038, India
-              </p>
-              <div className="mb-8">
-                <p className="text-[10px] uppercase tracking-[0.35em] text-brand-gold mb-2 font-medium">Coordinates</p>
-                <p className="text-white/60 font-mono text-sm">12°58'01.7″N  77°38'30.2″E</p>
-              </div>
-              <Link
-                href="https://maps.google.com/?q=12.9767,77.641"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.15em] text-brand-gold hover:text-white transition-colors duration-300"
-              >
-                <MapPin className="w-5 h-5" />
-                Open in Google Maps
-              </Link>
-            </div>
-          </div>
+            </Link>
+          ))}
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-section-2xl bg-brand-ink text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-b from-transparent via-brand-gold/5 to-transparent" />
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-16 text-center relative">
-          <p className="text-[10px] uppercase tracking-[0.35em] text-brand-gold mb-6 font-medium">
+      {/* Contact - Minimal */}
+      <section className="py-24 sm:py-32 lg:py-40 bg-brand-ink text-white">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-16 text-center">
+          <p className="text-[10px] uppercase tracking-[0.4em] text-brand-gold mb-8">
             Reserve Your Stay
           </p>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-light mb-8 leading-tight">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light mb-8 leading-tight">
             Your Exceptional
             <br />
-            <em className="italic font-extralight">Indiranagar</em> Experience Awaits
+            <span className="italic font-extralight">Indiranagar Experience</span>
           </h2>
-          <p className="text-base text-white/80 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Experience The Pentouz difference — where every detail is crafted for discerning travelers who expect nothing less than extraordinary.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href={indiranagar?.bookingUrl || "https://hotels.eglobe-solutions.com/pentouz/booking/hotels/the-pentouz-bangalore"}
-              className="inline-flex items-center justify-center gap-3 bg-white text-brand-ink px-12 py-5 text-[11px] uppercase tracking-[0.2em] hover:bg-brand-gold transition-all duration-500 font-light"
+              className="inline-flex items-center gap-3 bg-brand-gold text-brand-ink px-10 py-4 text-[10px] uppercase tracking-[0.25em] hover:bg-white transition-all duration-500 font-light"
             >
               Book Now
-              <ArrowRight className="w-5 h-5" />
             </Link>
             <a
               href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
-              className="inline-flex items-center justify-center gap-3 border-2 border-white/30 text-white px-12 py-5 text-[11px] uppercase tracking-[0.2em] hover:border-brand-gold hover:bg-white/10 transition-all duration-500 font-light"
+              className="inline-flex items-center gap-3 border border-white/40 text-white px-10 py-4 text-[10px] uppercase tracking-[0.25em] hover:border-brand-gold hover:bg-white/10 transition-all duration-500 font-light"
             >
-              <Phone className="w-5 h-5" />
-              Call Us
+              <Phone className="w-4 h-4" />
+              Contact
             </a>
           </div>
         </div>
