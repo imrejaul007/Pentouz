@@ -1,10 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { destinations, contactInfo } from "@/data/content";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export default function HomePage() {
   return (
     <>
+      <Header />
       {/* Hero Section - Full Screen, Minimal Text, Large Image */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden bg-brand-ink">
         <div className="absolute inset-0 z-0">
@@ -207,6 +210,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <Footer />
     </>
   );
 }
