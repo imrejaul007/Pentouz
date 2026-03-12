@@ -117,7 +117,7 @@ export default function Footer() {
                     {dest.shortTitle}
                   </span>
                   <span className="text-sm sm:text-base text-white/60 block mt-1 font-light">
-                    {dest.location}
+                    {dest.subtitle}
                   </span>
                   <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-gradient-to-r from-brand-gold/30 via-brand-gold/10 to-transparent transition-all duration-500 group-hover:w-full" />
                 </Link>
