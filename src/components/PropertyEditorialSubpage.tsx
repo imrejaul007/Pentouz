@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Clock3, MapPin, Plane, Train, Car, Building2 } from "lucide-react";
