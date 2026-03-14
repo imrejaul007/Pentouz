@@ -1,572 +1,344 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { use, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowLeft, ArrowRight, MapPin, Clock, Plane, Train, Building, Check, Phone, Mail, Maximize2, Wifi, Car, Coffee } from "lucide-react";
+import { ArrowLeft, ArrowRight, Calendar, MapPin, Phone } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { destinations, contactInfo } from "@/data/content";
-import { killScrollTriggersByRoots } from "@/lib/scrollTrigger";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+type Destination = (typeof destinations)[number];
 
-const amenityIcons: { [key: string]: any } = {
-  "Free WiFi": Wifi,
-  "Mini Bar": Coffee,
-  "Nespresso": Coffee,
-  "Private Parking": Car,
-  "Parking": Car,
+type NormalizedRoom = {
+  name: string;
+  size: string;
+  description: string;
+  features: string[];
+  image: string;
+  images: string[];
 };
 
-export default async function LivingPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const destination = destinations.find((d) => d.slug === slug);
-  const heroRef = useRef<HTMLElement>(null);
-  const roomsRef = useRef<HTMLDivElement>(null);
-  const amenitiesRef = useRef<HTMLDivElement>(null);
-  const [selectedRoom, setSelectedRoom] = useState<number>(0);
+const livingThemes: Record<
+  string,
+  {
+    eyebrow: string;
+    heading: string;
+    summary: string;
+    palette: string;
+    panel: string;
+    accent: string;
+    notes: string[];
+  }
+> = {
+  "lavelle-road": {
+    eyebrow: "Lavelle Road Living",
+    heading: "Studio stays for city-center precision",
+    summary:
+      "Composed for business travel, legal schedules, and short central stays, Lavelle Road living is about clarity, privacy, and a polished boutique rhythm.",
+    palette: "bg-[#f6f1ea]",
+    panel: "bg-white border border-[#eadfce]",
+    accent: "text-brand-gold",
+    notes: ["Kitchenette-equipped studios", "Designed for shorter, sharper city itineraries", "Close to UB City, MG Road, and legal districts"],
+  },
+  indiranagar: {
+    eyebrow: "Indiranagar Living",
+    heading: "Penthouse scale with a residential sense of ease",
+    summary:
+      "Indiranagar living is larger, warmer, and more social. It is designed for families, longer stays, and guests who want room to gather without losing luxury.",
+    palette: "bg-[#f7f2ea]",
+    panel: "bg-white border border-[#eadfce]",
+    accent: "text-brand-accent",
+    notes: ["Three-bedroom penthouse layout", "Private balconies and open terrace", "Built for families, groups, and extended stays"],
+  },
+  ooty: {
+    eyebrow: "Ooty Living",
+    heading: "Rooms framed by hill air and slower mornings",
+    summary:
+      "Ooty living is softer and more atmospheric, shaped by cooler weather, landscape views, and a retreat mindset rather than city urgency.",
+    palette: "bg-[#f2efe7]",
+    panel: "bg-white border border-[#dde2d8]",
+    accent: "text-brand-gold",
+    notes: ["Retreat-led room experience", "Landscape-oriented stay rhythm", "A quieter Pentouz expression in the hills"],
+  },
+};
 
-  useEffect(() => {
-    if (!heroRef.current) return;
+function getTheme(slug: string) {
+  return livingThemes[slug] || livingThemes["lavelle-road"];
+}
 
-    gsap.fromTo(
-      heroRef.current.querySelectorAll("[data-reveal]"),
-      { y: 60, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1.2,
-        stagger: 0.15,
-        ease: "power3.out",
-        delay: 0.3,
-      }
-    );
-  }, []);
+function normalizeRooms(destination: Destination): NormalizedRoom[] {
+  if (destination.livingRooms && destination.livingRooms.length > 0) {
+    return destination.livingRooms.map((room) => ({
+      name: room.name,
+      size: room.size || "Signature layout",
+      description: room.description,
+      features: room.features || [],
+      image: room.image || destination.image,
+      images:
+        "images" in room && Array.isArray(room.images) && room.images.length > 0
+          ? room.images
+          : [room.image || destination.image],
+    }));
+  }
 
-  useEffect(() => {
-    if (!roomsRef.current) return;
+  return destination.rooms.map((room, index) => ({
+    name: room.name,
+    size: "Signature layout",
+    description: room.description,
+    features: destination.amenities.slice(0, 4),
+    image: room.image || destination.gallery[index] || destination.image,
+    images: destination.gallery.slice(index, index + 4).length > 0
+      ? destination.gallery.slice(index, index + 4)
+      : [room.image || destination.image],
+  }));
+}
 
-    const rooms = roomsRef.current.querySelectorAll(".room-section");
-    rooms.forEach((room) => {
-      gsap.fromTo(
-        room.querySelectorAll("[data-room-reveal]"),
-        { y: 60, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: room,
-            start: "top 75%",
-          },
-        }
-      );
-    });
-
-    if (amenitiesRef.current) {
-      gsap.fromTo(
-        amenitiesRef.current.children,
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.06,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: amenitiesRef.current,
-            start: "top 80%",
-          },
-        }
-      );
-    }
-
-    return () => {
-      killScrollTriggersByRoots([
-        heroRef.current,
-        roomsRef.current,
-        amenitiesRef.current,
-      ]);
-    };
-  }, []);
+export default function LivingPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params);
+  const destination = destinations.find((item) => item.slug === slug);
+  const [selectedRoom, setSelectedRoom] = useState(0);
 
   if (!destination) {
     notFound();
   }
 
-  const livingRooms = destination.livingRooms || destination.rooms.map((room, i) => ({
-    name: room.name,
-    size: "500 sq ft",
-    description: room.description,
-    features: destination.amenities.slice(0, 4) || [],
-    image: destination.gallery?.[i] || destination.image,
-    images: destination.gallery.slice(i, i + 4) || [destination.image],
-  }));
-  const livingLocation = (destination.livingLocation || destination.location) as any;
-  const livingIntro =
-    (destination as typeof destination & {
-      livingIntro?: string;
-    }).livingIntro ||
-    "Discover our collection of meticulously designed spaces, each offering a unique perspective on luxury living.";
-  const isLavelleRoad = destination.slug === "lavelle-road";
-  const getRoomPrimaryImage = (room: (typeof livingRooms)[number]) => {
-    if ("image" in room && room.image) return room.image;
-    if ("images" in room && Array.isArray(room.images) && room.images[0]) return room.images[0];
-    return destination.image;
-  };
-  const getRoomImages = (room: (typeof livingRooms)[number]) => {
-    if ("images" in room && Array.isArray(room.images) && room.images.length > 0) {
-      return room.images;
-    }
-    const primary = getRoomPrimaryImage(room);
-    return primary ? [primary] : [];
-  };
+  const theme = getTheme(destination.slug);
+  const rooms = useMemo(() => normalizeRooms(destination), [destination]);
+  const activeRoom = rooms[selectedRoom] || rooms[0];
+  const supportingImages = activeRoom.images.slice(1, 5);
+  const location = destination.livingLocation || destination.location;
 
   return (
     <>
       <Header />
+      <main className={theme.palette}>
+        <section className="relative min-h-[92svh] overflow-hidden bg-[#141210] text-white">
+          <div className="absolute inset-0">
+            <Image
+              src={activeRoom.image || destination.heroImage || destination.image}
+              alt={`Living at ${destination.title}`}
+              fill
+              priority
+              className="object-cover"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,8,8,0.20)_0%,rgba(8,8,8,0.16)_24%,rgba(8,8,8,0.62)_74%,rgba(8,8,8,0.84)_100%)]" />
+          </div>
 
-      {/* Hero Section - Enhanced with room preview */}
-      <section
-        ref={heroRef}
-        className="relative h-[70vh] sm:h-[80vh] min-h-[550px] flex items-end"
-      >
-        <Image
-          src={
-            (livingRooms?.[selectedRoom] && getRoomPrimaryImage(livingRooms[selectedRoom])) ||
-            destination.heroImage ||
-            destination.image
-          }
-          alt={`Living at ${destination.title}`}
-          fill
-          className="object-cover transition-all duration-1000"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/30" />
-
-        <div className="relative z-10 w-full px-4 sm:px-8 lg:px-12 pb-12 sm:pb-16 lg:pb-20">
-          <div className="max-w-7xl mx-auto">
+          <div className="relative max-w-container-2xl mx-auto px-4 sm:px-6 lg:px-16 pt-36 sm:pt-44 lg:pt-52 pb-16 sm:pb-20 min-h-[92svh] flex flex-col justify-end">
             <Link
-              data-reveal
               href={`/destinations/${destination.slug}`}
-              className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors mb-6"
+              className="mb-8 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-white/78 hover:text-brand-gold transition-colors"
             >
-              <ArrowLeft className="w-4 h-4" />
-              <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em]">
-                Back to {destination.shortTitle}
-              </span>
+              <ArrowLeft className="w-4 h-4" strokeWidth={1.4} />
+              Back to {destination.shortTitle}
             </Link>
 
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-end">
-              <div>
-                <div data-reveal className="flex items-center gap-2 mb-4">
-                  <MapPin className="w-4 h-4 text-brand-accent" />
-                  <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-white/80 drop-shadow-sm">
-                    {destination.subtitle}
-                  </p>
-                </div>
-                <h1
-                  data-reveal
-                  className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white mb-4"
-                >
-                  Living at <em className="italic">{destination.shortTitle}</em>
-                </h1>
-                <p
-                  data-reveal
-                  className="text-sm sm:text-base text-white/90 max-w-xl leading-relaxed"
-                >
-                  {livingIntro}
-                </p>
-              </div>
+            <p className={`text-[10px] uppercase tracking-[0.4em] mb-6 ${theme.accent}`}>{theme.eyebrow}</p>
+            <h1 className="max-w-5xl font-display text-[3.2rem] leading-[0.94] sm:text-[4.8rem] lg:text-[6.8rem] xl:text-[7.8rem] font-light">
+              {theme.heading}
+            </h1>
+            <p className="mt-8 max-w-2xl text-base sm:text-lg text-white/82 leading-relaxed">
+              {destination.livingIntro || theme.summary}
+            </p>
 
-              {/* Room quick selector - desktop only */}
-              <div data-reveal className="hidden lg:block">
-                <p className="text-[10px] uppercase tracking-[0.2em] text-white/70 mb-4">
-                  Quick View: {livingRooms.length} Room Types
-                </p>
-                <div className="flex gap-2">
-                  {livingRooms.slice(0, 4).map((room, index) => (
+            <div className="mt-10 flex flex-col sm:flex-row gap-4">
+              <a
+                href={destination.bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[11px] uppercase tracking-[0.2em] text-brand-ink transition-colors hover:bg-brand-gold hover:text-white"
+              >
+                <Calendar className="w-4 h-4" strokeWidth={1.4} />
+                Reserve This Stay
+              </a>
+              <a
+                href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
+                className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.2em] text-white/90 transition-colors hover:border-brand-gold hover:text-brand-gold"
+              >
+                Call Concierge
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white border-t border-[#e6dccf]">
+          <div className="max-w-container-2xl mx-auto px-4 sm:px-6 lg:px-16 py-16 sm:py-20 lg:py-24 grid gap-10 lg:grid-cols-[0.72fr_1.28fr] items-start">
+            <div>
+              <p className="text-[10px] uppercase tracking-[0.34em] text-brand-accent mb-5">Living Notes</p>
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light leading-tight">
+                Every room type is part of a more <em className="italic">intentional stay rhythm</em>
+              </h2>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-3">
+              {theme.notes.map((note) => (
+                <div key={note} className={theme.panel}>
+                  <div className="p-5">
+                    <p className="text-sm text-brand-body leading-relaxed">{note}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 sm:py-20 lg:py-24">
+          <div className="max-w-container-2xl mx-auto px-4 sm:px-6 lg:px-16 grid gap-8 lg:grid-cols-[0.42fr_0.58fr]">
+            <div className={theme.panel}>
+              <div className="p-6 sm:p-8 lg:p-10">
+                <p className="text-[10px] uppercase tracking-[0.3em] text-brand-gold mb-5">Room Types</p>
+                <div className="space-y-3">
+                  {rooms.map((room, index) => (
                     <button
                       key={room.name}
                       onClick={() => setSelectedRoom(index)}
-                      className={`relative w-20 h-20 overflow-hidden transition-all duration-300 ${
-                        selectedRoom === index ? "ring-2 ring-white" : "opacity-60 hover:opacity-100"
+                      className={`w-full text-left border px-4 py-4 transition-colors ${
+                        selectedRoom === index
+                          ? "border-brand-gold bg-[#f9f3e8]"
+                          : "border-brand-border bg-white hover:border-brand-gold/40"
                       }`}
                     >
-                      <Image
-                        src={getRoomPrimaryImage(room)}
-                        alt={room.name}
-                        fill
-                        className="object-cover"
-                      />
+                      <p className="font-display text-2xl font-light text-brand-ink">{room.name}</p>
+                      <p className="mt-1 text-[11px] uppercase tracking-[0.16em] text-brand-muted">{room.size}</p>
                     </button>
                   ))}
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {isLavelleRoad && (
-        <section className="py-12 sm:py-16 bg-brand-cream">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <div className="grid lg:grid-cols-2 gap-6">
-              <div className="bg-white p-6 sm:p-8 border border-brand-border">
-                <h2 className="font-display text-xl sm:text-2xl font-light mb-3">
-                  Rooms Designed for Court-Visit Schedules
-                </h2>
-                <p className="text-sm sm:text-base text-brand-body leading-relaxed">
-                  Ideal for outstation advocates attending hearings at the High Court of Karnataka, our studio formats offer reliable WiFi, practical workspaces, and easy city access.
-                </p>
+            <div className="grid gap-6">
+              <div className="relative aspect-[16/10] overflow-hidden bg-[#11100f]">
+                <Image
+                  src={activeRoom.image}
+                  alt={activeRoom.name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 58vw"
+                />
               </div>
-              <div className="bg-white p-6 sm:p-8 border border-brand-border">
-                <h3 className="font-display text-lg sm:text-xl font-light mb-3">
-                  Why Legal Travelers Choose Lavelle Road
-                </h3>
-                <ul className="space-y-2 text-sm text-brand-body">
-                  <li>Fast check-in support for short-notice legal travel</li>
-                  <li>Central location near High Court and legal offices</li>
-                  <li>Comfortable extended stays for multi-day hearings</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
 
-      {/* Room Types - Enhanced with better layout */}
-      <section className="py-16 sm:py-24 lg:py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-            <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-accent mb-4 sm:mb-6">
-              Accommodations
-            </p>
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light">
-              Choose Your <em className="italic">Space</em>
-            </h2>
-            <div className="w-16 h-px bg-brand-accent mx-auto mt-6 sm:mt-8" />
-          </div>
-
-          <div ref={roomsRef} className="space-y-16 sm:space-y-24 lg:space-y-32">
-            {livingRooms.map((room, index) => (
-              <div
-                key={room.name}
-                className={`room-section grid lg:grid-cols-2 gap-8 lg:gap-16 items-center`}
-              >
-                {/* Image - alternating sides */}
-                <div className={`relative group ${index % 2 === 1 ? "lg:order-2" : ""}`}>
-                  <div className="relative aspect-[4/3] sm:aspect-[3/2] overflow-hidden">
-                    <Image
-                      data-room-reveal
-                      src={getRoomPrimaryImage(room)}
-                      alt={room.name}
-                      fill
-                      className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
-                    {/* Size badge */}
-                    <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-3 py-2 flex items-center gap-2">
-                      <Maximize2 className="w-3 h-3 text-brand-accent" />
-                      <span className="text-[10px] uppercase tracking-[0.1em] text-brand-ink">
-                        {room.size}
-                      </span>
-                    </div>
-                  </div>
-                  {/* Decorative element */}
-                  <div className={`hidden sm:block absolute -bottom-4 ${index % 2 === 1 ? "-left-4" : "-right-4"} w-full h-full border border-brand-accent/20 -z-10`} />
-                </div>
-
-                {/* Content */}
-                <div className={`${index % 2 === 1 ? "lg:order-1" : ""}`}>
-                  <div data-room-reveal className="flex items-center gap-3 mb-4">
-                    <span className="font-display text-4xl sm:text-5xl text-brand-border/30">
-                      {String(index + 1).padStart(2, "0")}
+              <div className={theme.panel}>
+                <div className="p-6 sm:p-8 lg:p-10">
+                  <div className="flex flex-wrap items-center gap-4 mb-5">
+                    <h2 className="font-display text-3xl sm:text-4xl font-light text-brand-ink">{activeRoom.name}</h2>
+                    <span className="rounded-full border border-brand-border px-4 py-2 text-[10px] uppercase tracking-[0.18em] text-brand-muted">
+                      {activeRoom.size}
                     </span>
-                    <div className="w-8 h-px bg-brand-accent" />
                   </div>
-                  <h3 data-room-reveal className="font-display text-2xl sm:text-3xl lg:text-4xl font-light mb-4">
-                    {room.name}
-                  </h3>
-                  <p data-room-reveal className="text-sm sm:text-base text-brand-body leading-relaxed mb-6">
-                    {room.description}
-                  </p>
+                  <p className="text-base text-brand-body leading-relaxed">{activeRoom.description}</p>
 
-                  {/* Features grid */}
-                  <div data-room-reveal className="grid grid-cols-2 gap-3 mb-8">
-                    {room.features.map((feature: string) => (
-                      <span
-                        key={feature}
-                        className="flex items-center gap-2 text-xs sm:text-sm text-brand-muted"
-                      >
-                        <Check className="w-4 h-4 text-brand-accent flex-shrink-0" />
+                  <div className="mt-8 grid sm:grid-cols-2 gap-3">
+                    {activeRoom.features.map((feature) => (
+                      <div key={feature} className="border border-brand-border px-4 py-3 text-[11px] uppercase tracking-[0.16em] text-brand-muted">
                         {feature}
-                      </span>
+                      </div>
                     ))}
                   </div>
 
-                  {getRoomImages(room).length > 1 && (
-                    <div data-room-reveal className="grid grid-cols-4 gap-2 mb-8">
-                      {getRoomImages(room)
-                        .slice(1, 5)
-                        .map((img) => (
-                          <div key={img} className="relative aspect-square overflow-hidden">
-                            <Image
-                              src={img}
-                              alt={`${room.name} additional view`}
-                              fill
-                              className="object-cover"
-                              sizes="120px"
-                            />
-                          </div>
-                        ))}
-                    </div>
-                  )}
-
-                  <div data-room-reveal className="flex flex-wrap gap-3">
+                  <div className="mt-8 flex flex-col sm:flex-row gap-4">
                     <a
                       href={destination.bookingUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 bg-brand-ink text-white px-6 sm:px-8 py-3 sm:py-4 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] hover:bg-brand-accent transition-colors active:scale-95"
+                      className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-ink px-7 py-4 text-[11px] uppercase tracking-[0.18em] text-white transition-colors hover:bg-black"
                     >
                       Book This Room
-                      <ArrowRight className="w-4 h-4" />
+                      <ArrowRight className="w-4 h-4" strokeWidth={1.4} />
                     </a>
                     <a
                       href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
-                      className="inline-flex items-center gap-2 border border-brand-ink text-brand-ink px-6 sm:px-8 py-3 sm:py-4 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] hover:bg-brand-ink hover:text-white transition-colors"
+                      className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-ink px-7 py-4 text-[11px] uppercase tracking-[0.18em] text-brand-ink transition-colors hover:bg-brand-ink hover:text-white"
                     >
-                      <Phone className="w-4 h-4" />
+                      <Phone className="w-4 h-4" strokeWidth={1.4} />
                       Call to Inquire
                     </a>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Amenities - Enhanced grid */}
-      <section className="py-16 sm:py-24 lg:py-32 bg-[#f8f7f5]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="text-center mb-12 sm:mb-16">
-            <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-accent mb-4 sm:mb-6">
-              In-Room Amenities
-            </p>
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light">
-              The Essential <em className="italic">Comforts</em>
-            </h2>
-            <div className="w-16 h-px bg-brand-accent mx-auto mt-6 sm:mt-8" />
-          </div>
-
-          <div ref={amenitiesRef} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
-            {destination.amenities.map((amenity) => {
-              const IconComponent = amenityIcons[amenity] || Check;
-              return (
-                <div
-                  key={amenity}
-                  className="group text-center p-5 sm:p-6 bg-white hover:shadow-lg transition-all duration-500 border border-transparent hover:border-brand-accent"
-                >
-                  <div className="w-10 h-10 mx-auto mb-3 flex items-center justify-center bg-brand-accent/10 group-hover:bg-brand-accent transition-colors duration-500">
-                    <IconComponent className="w-5 h-5 text-brand-accent group-hover:text-white transition-colors duration-500" strokeWidth={1.5} />
-                  </div>
-                  <p className="text-xs sm:text-sm text-brand-body group-hover:text-brand-ink transition-colors">{amenity}</p>
+              {supportingImages.length > 0 ? (
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {supportingImages.map((image, index) => (
+                    <div key={`${image}-${index}`} className="relative aspect-square overflow-hidden">
+                      <Image
+                        src={image}
+                        alt={`${activeRoom.name} detail ${index + 1}`}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 50vw, 14vw"
+                      />
+                    </div>
+                  ))}
                 </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Location - Enhanced with better cards */}
-      {livingLocation && (
-        <section className="py-16 sm:py-24 lg:py-32 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <div className="text-center mb-12 sm:mb-16">
-              <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-accent mb-4 sm:mb-6">
-                Getting Here
-              </p>
-              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light">
-                Location & <em className="italic">Directions</em>
-              </h2>
-              <div className="w-16 h-px bg-brand-accent mx-auto mt-6 sm:mt-8" />
-            </div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {livingLocation.airport && (
-                <div className="group p-6 sm:p-8 bg-[#f8f7f5] hover:bg-brand-ink transition-colors duration-500">
-                  <Plane className="w-10 h-10 text-brand-accent group-hover:text-white mb-5" strokeWidth={1} />
-                  <h3 className="font-display text-lg sm:text-xl font-light mb-2 group-hover:text-white transition-colors">
-                    {livingLocation.airport.name}
-                  </h3>
-                  <p className="text-sm text-brand-muted group-hover:text-white/60 transition-colors">
-                    {livingLocation.airport.distance} away
-                  </p>
-                  <div className="flex items-center gap-2 mt-4 pt-4 border-t border-brand-border group-hover:border-white/20 transition-colors">
-                    <Clock className="w-4 h-4 text-brand-accent group-hover:text-white transition-colors" />
-                    <p className="text-sm text-brand-body group-hover:text-white/80 transition-colors">
-                      {livingLocation.airport.time}
-                    </p>
-                  </div>
-                </div>
-              )}
-
-              {livingLocation.railway && (
-                <div className="group p-6 sm:p-8 bg-[#f8f7f5] hover:bg-brand-ink transition-colors duration-500">
-                  <Train className="w-10 h-10 text-brand-accent group-hover:text-white mb-5" strokeWidth={1} />
-                  <h3 className="font-display text-lg sm:text-xl font-light mb-2 group-hover:text-white transition-colors">
-                    {livingLocation.railway.name}
-                  </h3>
-                  <p className="text-sm text-brand-muted group-hover:text-white/60 transition-colors">
-                    {livingLocation.railway.distance} away
-                  </p>
-                  <div className="flex items-center gap-2 mt-4 pt-4 border-t border-brand-border group-hover:border-white/20 transition-colors">
-                    <Clock className="w-4 h-4 text-brand-accent group-hover:text-white transition-colors" />
-                    <p className="text-sm text-brand-body group-hover:text-white/80 transition-colors">
-                      {livingLocation.railway.time}
-                    </p>
-                  </div>
-                </div>
-              )}
-
-              {(livingLocation.metro || livingLocation.landmark) && (
-                <div className="group p-6 sm:p-8 bg-[#f8f7f5] hover:bg-brand-ink transition-colors duration-500">
-                  <Building className="w-10 h-10 text-brand-accent group-hover:text-white mb-5" strokeWidth={1} />
-                  <h3 className="font-display text-lg sm:text-xl font-light mb-2 group-hover:text-white transition-colors">
-                    {livingLocation.metro.name || livingLocation.landmark.name}
-                  </h3>
-                  <p className="text-sm text-brand-muted group-hover:text-white/60 transition-colors">
-                    {livingLocation.metro.distance || livingLocation.landmark.distance} away
-                  </p>
-                  <div className="flex items-center gap-2 mt-4 pt-4 border-t border-brand-border group-hover:border-white/20 transition-colors">
-                    <Clock className="w-4 h-4 text-brand-accent group-hover:text-white transition-colors" />
-                    <p className="text-sm text-brand-body group-hover:text-white/80 transition-colors">
-                      {livingLocation.metro.time || livingLocation.landmark.time}
-                    </p>
-                  </div>
-                </div>
-              )}
+              ) : null}
             </div>
           </div>
         </section>
-      )}
 
-      {isLavelleRoad && (
-        <section className="py-14 sm:py-18 bg-white border-y border-brand-border">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-7">
-              <h2 className="font-display text-2xl sm:text-3xl font-light">
-                Explore Nearby Lavelle Road Search Pages
+        <section className="bg-white border-y border-[#e6dccf] py-16 sm:py-20">
+          <div className="max-w-container-2xl mx-auto px-4 sm:px-6 lg:px-16 grid gap-8 lg:grid-cols-[0.8fr_1.2fr] items-start">
+            <div>
+              <p className="text-[10px] uppercase tracking-[0.34em] text-brand-accent mb-5">Stay Context</p>
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light leading-tight">
+                Location still shapes how the room feels
               </h2>
-              <Link
-                href="/destinations/lavelle-road/near"
-                className="text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:text-brand-accent transition-colors"
-              >
-                View Full Location Hub
-              </Link>
             </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {[
-                { label: "Hotel Near Karnataka High Court", href: "/destinations/lavelle-road/near/karnataka-high-court" },
-                { label: "Hotel Near UB City", href: "/destinations/lavelle-road/near/ub-city" },
-                { label: "Hotel Near Vidhana Soudha", href: "/destinations/lavelle-road/near/vidhana-soudha" },
-                { label: "Hotel Near Cubbon Park", href: "/destinations/lavelle-road/near/cubbon-park" },
-                { label: "Hotel Near MG Road Metro Station", href: "/destinations/lavelle-road/near/mg-road-metro" },
-                { label: "Hotel Near KSR Railway Station", href: "/destinations/lavelle-road/near/ksr-railway-station" },
-              ].map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="border border-brand-border bg-[#f8f7f5] p-4 text-sm hover:bg-brand-ink hover:text-white transition-colors"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-
-            <div className="mt-8">
-              <p className="text-[10px] uppercase tracking-[0.2em] text-brand-muted mb-3">
-                Related Travel Guides
-              </p>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                {[
-                  { label: "Court-Day Itinerary Near Karnataka High Court", href: "/travel/guides/court-day-itinerary-near-karnataka-high-court" },
-                  { label: "Luxury Evening Walks Near Lavelle Road", href: "/travel/guides/luxury-evening-walks-near-lavelle-road" },
-                  { label: "Executive Breakfast Spots Around UB City", href: "/travel/guides/executive-breakfast-spots-around-ub-city" },
-                ].map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="border border-brand-border bg-white p-3 text-sm hover:bg-brand-ink hover:text-white transition-colors"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+            <div className="grid sm:grid-cols-3 gap-4">
+              <div className={theme.panel}>
+                <div className="p-5">
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-brand-gold mb-2">Airport</p>
+                  <p className="text-sm text-brand-body">{location.airport.name}</p>
+                  <p className="mt-1 text-xs text-brand-muted">{location.airport.distance} • {location.airport.time}</p>
+                </div>
+              </div>
+              <div className={theme.panel}>
+                <div className="p-5">
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-brand-gold mb-2">Rail</p>
+                  <p className="text-sm text-brand-body">{location.railway.name}</p>
+                  <p className="mt-1 text-xs text-brand-muted">{location.railway.distance} • {location.railway.time}</p>
+                </div>
+              </div>
+              <div className={theme.panel}>
+                <div className="p-5">
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-brand-gold mb-2">Local Anchor</p>
+                  <p className="text-sm text-brand-body">{location.metro?.name || destination.subtitle}</p>
+                  <p className="mt-1 text-xs text-brand-muted">
+                    {location.metro?.distance || "Central location"} {location.metro?.time ? `• ${location.metro.time}` : ""}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </section>
-      )}
 
-      {/* Contact CTA - Enhanced */}
-      <section className="py-16 sm:py-24 lg:py-32 bg-[#1a1a1a] relative overflow-hidden">
-        {/* Background pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }} />
-        </div>
-
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 text-center">
-          <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-accent mb-4 sm:mb-6">
-            Ready to Book?
-          </p>
-          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white mb-6">
-            Reserve Your <em className="italic">Stay</em>
-          </h2>
-          <p className="text-sm sm:text-base text-white/90 mb-10 max-w-2xl mx-auto">
-            Contact our reservations team for personalized assistance with your booking.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
-            <a
-              href={destination.bookingUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-white text-brand-ink px-8 sm:px-10 py-4 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] hover:bg-brand-accent hover:text-white transition-colors active:scale-95"
-            >
-              Book Online
-              <ArrowRight className="w-4 h-4" />
-            </a>
-            <a
-              href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
-              className="inline-flex items-center justify-center gap-2 border border-white/30 text-white px-8 sm:px-10 py-4 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] hover:bg-white/10 transition-colors"
-            >
-              <Phone className="w-4 h-4" />
-              {contactInfo.phones[0]}
-            </a>
+        <section className="bg-[#11100f] text-white py-16 sm:py-20 lg:py-24">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-16 text-center">
+            <p className="text-[10px] uppercase tracking-[0.34em] text-brand-gold mb-5">Finish the Journey</p>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light leading-tight">
+              The room is only the beginning of the stay
+            </h2>
+            <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+              <Link
+                href={`/destinations/${destination.slug}`}
+                className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.2em] text-white/90 transition-colors hover:border-brand-gold hover:text-brand-gold"
+              >
+                Return to Property Page
+              </Link>
+              <a
+                href={destination.bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[11px] uppercase tracking-[0.2em] text-brand-ink transition-colors hover:bg-brand-gold hover:text-white"
+              >
+                Reserve Now
+                <ArrowRight className="w-4 h-4" strokeWidth={1.4} />
+              </a>
+            </div>
           </div>
-
-          <div className="flex items-center justify-center gap-6 text-sm">
-            <a
-              href={`mailto:${contactInfo.email}`}
-              className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors"
-            >
-              <Mail className="w-4 h-4" />
-              {contactInfo.email}
-            </a>
-          </div>
-        </div>
-      </section>
-
+        </section>
+      </main>
       <Footer />
     </>
   );
