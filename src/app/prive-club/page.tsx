@@ -1,156 +1,39 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Crown, Star, Gift, Clock, Shield, ArrowRight, Check } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { killScrollTriggersByRoots } from "@/lib/scrollTrigger";
 import { submitLead } from "@/lib/leads";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
-const tiers = [
+const privileges = [
   {
-    name: "Silver",
-    description: "Begin your journey",
-    benefits: [
-      "10% off Best Available Rate",
-      "Early check-in (subject to availability)",
-      "Late checkout until 2pm",
-      "Welcome amenity on arrival",
-      "Complimentary WiFi upgrade",
-    ],
-    requirement: "Join for free",
+    title: "Priority assistance",
+    description: "Faster help with stay planning, room selection, and special requests.",
   },
   {
-    name: "Gold",
-    featured: true,
-    description: "Elevated experiences",
-    benefits: [
-      "15% off Best Available Rate",
-      "Guaranteed early check-in at 12pm",
-      "Late checkout until 4pm",
-      "Room upgrade (subject to availability)",
-      "Complimentary breakfast for two",
-      "Priority reservation access",
-      "Birthday celebration amenity",
-    ],
-    requirement: "After 10 nights",
+    title: "Celebration support",
+    description: "A better way to arrange birthdays, anniversaries, and intimate private moments.",
   },
   {
-    name: "Platinum",
-    description: "Ultimate recognition",
-    benefits: [
-      "20% off Best Available Rate",
-      "Guaranteed room upgrade",
-      "Flexible check-in/checkout",
-      "Suite upgrade (subject to availability)",
-      "Complimentary airport transfers",
-      "Personal concierge service",
-      "Exclusive event invitations",
-      "Annual wellness credit",
-    ],
-    requirement: "After 25 nights",
-  },
-];
-
-const benefits = [
-  {
-    icon: Crown,
-    title: "Exclusive Rates",
-    description: "Members enjoy preferential pricing across all properties, with additional savings as you progress through tiers.",
+    title: "Longer-stay guidance",
+    description: "Useful for guests who want more space, more privacy, or an extended city stay.",
   },
   {
-    icon: Clock,
-    title: "Flexible Stays",
-    description: "Early check-in and late checkout privileges let you make the most of every moment at The Pentouz.",
-  },
-  {
-    icon: Gift,
-    title: "Special Amenities",
-    description: "From welcome gifts to birthday celebrations, enjoy thoughtful touches that make your stay memorable.",
-  },
-  {
-    icon: Shield,
-    title: "Priority Access",
-    description: "Be first to know about new properties, special offers, and exclusive experiences available only to members.",
+    title: "First access to updates",
+    description: "Be the first to hear about new stays, quiet offers, and private Pentouz news.",
   },
 ];
 
 export default function PriveClubPage() {
-  const heroRef = useRef<HTMLElement>(null);
-  const benefitsRef = useRef<HTMLDivElement>(null);
-  const tiersRef = useRef<HTMLDivElement>(null);
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
-  useEffect(() => {
-    if (!heroRef.current) return;
-
-    gsap.fromTo(
-      heroRef.current.querySelectorAll("[data-reveal]"),
-      { y: 60, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1.2,
-        stagger: 0.15,
-        ease: "power3.out",
-        delay: 0.3,
-      }
-    );
-  }, []);
-
-  useEffect(() => {
-    if (benefitsRef.current) {
-      gsap.fromTo(
-        benefitsRef.current.children,
-        { y: 60, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.12,
-          ease: "power3.out",
-          scrollTrigger: { trigger: benefitsRef.current, start: "top 80%" },
-        }
-      );
-    }
-
-    if (tiersRef.current) {
-      gsap.fromTo(
-        tiersRef.current.children,
-        { y: 80, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.2,
-          stagger: 0.2,
-          ease: "power3.out",
-          scrollTrigger: { trigger: tiersRef.current, start: "top 80%" },
-        }
-      );
-    }
-
-    return () => {
-      killScrollTriggersByRoots([
-        heroRef.current,
-        benefitsRef.current,
-        tiersRef.current,
-      ]);
-    };
-  }, []);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setIsSubmitting(true);
     setStatus(null);
 
@@ -158,17 +41,14 @@ export default function PriveClubPage() {
       await submitLead({ type: "prive", email, website });
       setStatus({
         type: "success",
-        message: "Thanks for joining. We will email your membership details shortly.",
+        message: "Thanks. Your request has been received and our team will get back to you shortly.",
       });
       setEmail("");
       setWebsite("");
     } catch (error) {
       setStatus({
         type: "error",
-        message:
-          error instanceof Error
-            ? error.message
-            : "Could not submit your membership request.",
+        message: error instanceof Error ? error.message : "We could not submit your request right now.",
       });
     } finally {
       setIsSubmitting(false);
@@ -178,208 +58,117 @@ export default function PriveClubPage() {
   return (
     <>
       <Header />
-
-      {/* Hero Section */}
-      <section
-        ref={heroRef}
-        className="relative h-[60vh] sm:h-[70vh] min-h-[500px] flex items-center justify-center bg-[#1a1a1a]"
-      >
-        <Image
-          src="/indiranagar/living-room-5.jpg"
-          alt="Privé Club"
-          fill
-          className="object-cover opacity-40"
-          priority
-          placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIRAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBQYSIRMxQVH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAIDAQAAAAAAAAAAAAAAAAECAAMRIf/aAAwDAQACEQMRAD8Aq7fudw7V1C7ggaZraYYj8kpZYpEHJgQMFgTk5HBANaOdzWdxbW9y0M0Us0SSMhXkFLKCR/DSlKiazK0M7B4j/9k="
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-transparent to-black/40" />
-
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <div data-reveal className="flex items-center justify-center gap-2 mb-6">
-            <Crown className="w-5 h-5 sm:w-6 sm:h-6 text-brand-accent" strokeWidth={1} />
-            <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-white/80 drop-shadow-sm">
-              Membership Program
-            </span>
-          </div>
-          <h1 data-reveal className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white mb-6 drop-shadow-md">
-            The Pentouz <em className="italic">Privé</em> Club
-          </h1>
-          <p data-reveal className="text-sm sm:text-base lg:text-lg text-white/80 max-w-2xl mx-auto mb-8">
-            Join our exclusive membership program and unlock a world of privileges, personalized experiences, and extraordinary benefits at every stay.
-          </p>
-          <Link
-            data-reveal
-            href="#join"
-            className="inline-flex items-center gap-3 bg-white text-brand-ink px-8 py-4 text-[11px] sm:text-[12px] uppercase tracking-[0.15em] font-medium hover:bg-white/90 transition-colors active:scale-95"
-          >
-            Become a Member
-          </Link>
-        </div>
-      </section>
-
-      {/* Benefits Grid */}
-      <section className="py-16 sm:py-24 lg:py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="text-center mb-12 sm:mb-16">
-            <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-accent mb-4 sm:mb-6">
-              Member Benefits
-            </p>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light">
-              Why Join <em className="italic">Privé</em>
-            </h2>
+      <main className="bg-[#f7f1e7] text-brand-ink">
+        <section className="relative isolate overflow-hidden bg-[#17120e] text-white">
+          <div className="absolute inset-0">
+            <Image
+              src="/indiranagar/all/04._living_room_05._living_room.jpg"
+              alt="The Pentouz prive club"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover opacity-55"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,8,6,0.9)_0%,rgba(10,8,6,0.48)_44%,rgba(10,8,6,0.84)_100%)]" />
           </div>
 
-          <div ref={benefitsRef} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12">
-            {benefits.map((benefit) => (
-              <div key={benefit.title} className="text-center">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-6 border border-brand-border flex items-center justify-center">
-                  <benefit.icon className="w-6 sm:w-8 h-6 sm:h-8 text-brand-accent" strokeWidth={1} />
-                </div>
-                <h3 className="font-display text-lg sm:text-xl font-light mb-3">{benefit.title}</h3>
-                <p className="text-xs sm:text-sm text-brand-body leading-relaxed">
-                  {benefit.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Membership Tiers */}
-      <section className="py-16 sm:py-24 lg:py-32 bg-[#f8f7f5]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="text-center mb-12 sm:mb-16">
-            <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-accent mb-4 sm:mb-6">
-              Membership Tiers
-            </p>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light">
-              Choose Your <em className="italic">Journey</em>
-            </h2>
-          </div>
-
-          <div ref={tiersRef} className="grid lg:grid-cols-3 gap-6 sm:gap-8">
-            {tiers.map((tier) => (
-              <div
-                key={tier.name}
-                className={`relative bg-white p-6 sm:p-8 lg:p-10 ${
-                  tier.featured ? "ring-2 ring-brand-accent" : ""
-                }`}
-              >
-                {tier.featured && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-accent px-4 py-1 text-[9px] sm:text-[10px] uppercase tracking-[0.15em] text-white">
-                    Most Popular
-                  </div>
-                )}
-
-                <div className="text-center mb-8">
-                  <div className="flex items-center justify-center gap-1 mb-4">
-                    {[...Array(tier.name === "Silver" ? 1 : tier.name === "Gold" ? 2 : 3)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-4 h-4 text-brand-accent"
-                        fill="currentColor"
-                      />
-                    ))}
-                  </div>
-                  <h3 className="font-display text-2xl sm:text-3xl font-light mb-2">{tier.name}</h3>
-                  <p className="text-xs sm:text-sm text-brand-muted">{tier.description}</p>
-                </div>
-
-                <ul className="space-y-3 sm:space-y-4 mb-8">
-                  {tier.benefits.map((benefit) => (
-                    <li key={benefit} className="flex items-start gap-3 text-xs sm:text-sm text-brand-body">
-                      <Check className="w-4 h-4 text-brand-accent flex-shrink-0 mt-0.5" />
-                      <span>{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="pt-6 border-t border-brand-border">
-                  <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-brand-muted text-center">
-                    {tier.requirement}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Join Form */}
-      <section id="join" className="py-16 sm:py-24 lg:py-32 bg-[#1a1a1a]">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 text-center">
-          <Crown className="w-10 h-10 sm:w-12 sm:h-12 text-brand-accent mx-auto mb-6" strokeWidth={1} />
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-4">
-            Join Privé <em className="italic">Today</em>
-          </h2>
-          <p className="text-sm sm:text-base text-white/90 mb-10">
-            Membership is complimentary. Simply enter your email to get started and unlock exclusive benefits on your very first stay.
-          </p>
-
-          <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-            <div className="flex flex-col sm:flex-row gap-4">
-              <input
-                type="text"
-                name="website"
-                value={website}
-                onChange={(e) => setWebsite(e.target.value)}
-                className="hidden"
-                tabIndex={-1}
-                autoComplete="off"
-                aria-hidden="true"
-              />
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                required
-                className="flex-1 bg-white/10 border border-white/20 px-4 sm:px-6 py-3 sm:py-4 text-sm text-white placeholder:text-white/40 outline-none focus:border-white/50 transition-colors"
-              />
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="bg-white text-brand-ink px-6 sm:px-8 py-3 sm:py-4 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] font-medium hover:bg-white/90 transition-colors active:scale-95 whitespace-nowrap"
-              >
-                {isSubmitting ? "Submitting..." : "Join Now"}
-              </button>
-            </div>
-            <p className="text-[10px] sm:text-xs text-white/70 mt-4">
-              By joining, you agree to our Terms & Conditions and Privacy Policy.
-            </p>
-            {status && (
-              <p
-                className={`mt-3 text-xs ${
-                  status.type === "success" ? "text-green-300" : "text-red-300"
-                }`}
-              >
-                {status.message}
+          <div className="relative mx-auto max-w-[1480px] px-5 pb-20 pt-36 sm:px-8 lg:px-14 lg:pb-28 lg:pt-48">
+            <div className="max-w-4xl">
+              <p className="luxury-kicker text-white/70 animate-fade-in-up">The Pentouz Privé</p>
+              <h1 className="luxury-hero-title mt-6 text-white animate-fade-in-up [animation-delay:120ms]">
+                A more private line to The Pentouz.
+              </h1>
+              <p className="luxury-copy mt-8 max-w-2xl text-white/76 animate-fade-in-up [animation-delay:220ms]">
+                For guests who return often, travel for longer, or want a more personal level of attention before and during their stay.
               </p>
-            )}
-          </form>
-        </div>
-      </section>
+            </div>
+          </div>
+        </section>
 
-      {/* Questions */}
-      <section className="py-16 sm:py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-          <h2 className="font-display text-2xl sm:text-3xl font-light mb-4">
-            Have Questions?
-          </h2>
-          <p className="text-sm sm:text-base text-brand-body mb-8">
-            Our membership team is here to help you make the most of your Privé benefits.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-3 border border-brand-ink px-8 py-4 text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:bg-brand-ink hover:text-white transition-all"
-          >
-            <span>Contact Us</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </section>
+        <section className="bg-[#fbf7f0]">
+          <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28">
+            <div className="grid gap-10 lg:grid-cols-[0.76fr_1.24fr] lg:items-start">
+              <div className="animate-fade-in-up">
+                <p className="luxury-kicker text-brand-accent">For frequent guests</p>
+                <h2 className="luxury-section-title mt-5">A quieter, more considered guest relationship.</h2>
+              </div>
+              <div className="grid gap-6 md:grid-cols-2">
+                {privileges.map((item, index) => (
+                  <div key={item.title} className="luxury-panel bg-white animate-fade-in-up" style={{ animationDelay: `${100 + index * 90}ms` }}>
+                    <h3 className="font-display text-2xl font-light text-brand-ink">{item.title}</h3>
+                    <p className="mt-4 text-sm leading-7 text-brand-body">{item.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
 
+        <section id="join" className="bg-[#f3eadf]">
+          <div className="mx-auto grid max-w-[1480px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:px-14 lg:py-28">
+            <div className="animate-fade-in-up">
+              <p className="luxury-kicker text-brand-accent">Register interest</p>
+              <h2 className="luxury-section-title mt-5">Join the Pentouz guest list.</h2>
+              <p className="mt-6 max-w-xl text-base leading-8 text-brand-body sm:text-lg">
+                Share your email and our team will contact you with details. This is best suited for repeat guests, extended stays, and private stay planning.
+              </p>
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                <Link href="/contact" className="inline-flex items-center justify-center rounded-full border border-brand-border px-7 py-4 text-[11px] uppercase tracking-[0.22em] text-brand-ink transition-all duration-500 hover:-translate-y-0.5 hover:border-brand-gold hover:text-brand-gold">
+                  Contact Concierge
+                </Link>
+                <Link href="/destinations" className="inline-flex items-center justify-center rounded-full bg-brand-ink px-7 py-4 text-[11px] uppercase tracking-[0.22em] text-white transition-all duration-500 hover:-translate-y-0.5 hover:bg-brand-gold">
+                  View Properties
+                </Link>
+              </div>
+            </div>
+
+            <div className="luxury-panel bg-white animate-fade-in-up [animation-delay:180ms]">
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div>
+                  <label htmlFor="prive-email" className="text-[10px] uppercase tracking-[0.22em] text-brand-muted">
+                    Email address
+                  </label>
+                  <input
+                    id="prive-email"
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                    className="mt-3 w-full border border-brand-border bg-[#fcf8f1] px-4 py-4 text-sm text-brand-ink outline-none transition-colors duration-300 focus:border-brand-gold"
+                    placeholder="you@example.com"
+                  />
+                </div>
+
+                <div className="hidden">
+                  <label htmlFor="website">Website</label>
+                  <input
+                    id="website"
+                    type="text"
+                    value={website}
+                    onChange={(event) => setWebsite(event.target.value)}
+                    autoComplete="off"
+                    tabIndex={-1}
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="inline-flex w-full items-center justify-center rounded-full bg-brand-ink px-7 py-4 text-[11px] uppercase tracking-[0.22em] text-white transition-all duration-500 hover:-translate-y-0.5 hover:bg-brand-gold disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {isSubmitting ? "Submitting..." : "Request Access"}
+                </button>
+
+                {status ? (
+                  <p className={`text-sm ${status.type === "success" ? "text-[#356143]" : "text-[#8a3f30]"}`}>
+                    {status.message}
+                  </p>
+                ) : null}
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
       <Footer />
     </>
   );

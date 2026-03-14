@@ -1,373 +1,157 @@
-"use client";
-
-import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, Clock } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { killScrollTriggersByRoots } from "@/lib/scrollTrigger";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
-const featuredStory = {
-  title: "The Art of Slow Living",
-  subtitle: "A Philosophy",
-  excerpt:
-    "In a world that moves at relentless pace, The Pentouz offers a sanctuary where time takes on a different meaning. Discover how we've crafted spaces that invite you to pause, breathe, and truly live.",
-  image: "/indiranagar/living-room-5.jpg",
-  readTime: "8 min read",
-  category: "Philosophy",
-  slug: "art-of-slow-living",
+const feature = {
+  title: "A stay near Lavelle Road, shaped by the city around it.",
+  text: "From UB City and Cubbon Park to MG Road, the Lavelle Road address places guests close to the best-known parts of central Bangalore while still feeling quieter and more private once you return.",
+  image: "/lavelle-road/all/facade_1.jpg",
+  href: "/destinations/lavelle-road",
 };
 
 const stories = [
   {
-    title: "Behind the Design: Indiranagar",
-    subtitle: "Architecture",
-    excerpt:
-      "A conversation with our design team about creating an urban sanctuary that bridges tradition and contemporary luxury.",
-    image: "/indiranagar/terrace-7.jpg",
-    readTime: "6 min read",
-    category: "Design",
-    slug: "behind-design-indiranagar",
+    title: "Lavelle Road",
+    subtitle: "City address",
+    description: "A boutique stay for guests who want central access without giving up calm, privacy, and a more personal atmosphere.",
+    image: "/lavelle-road/all/restaurant_1.jpg",
+    href: "/destinations/lavelle-road",
   },
   {
-    title: "Culinary Journey: Local Flavors",
-    subtitle: "Gastronomy",
-    excerpt:
-      "Exploring the vibrant food scene of Bangalore through the eyes of our resident chef and his passion for local ingredients.",
-    image: "/ooty/restaurant-20.jpeg",
-    readTime: "5 min read",
-    category: "Culinary",
-    slug: "culinary-journey-local-flavors",
+    title: "Indiranagar",
+    subtitle: "Private living",
+    description: "For families, longer stays, and guests who prefer a residence-style experience with more room to settle in.",
+    image: "/indiranagar/all/04._living_room_05._living_room.jpg",
+    href: "/destinations/indiranagar",
   },
   {
-    title: "The Mountains Call: Ooty Retreat",
-    subtitle: "Destinations",
-    excerpt:
-      "Escape to the misty hills where tea plantations meet luxury, and every morning begins with panoramic views of the Nilgiris.",
-    image: "/ooty/view-24.jpeg",
-    readTime: "7 min read",
-    category: "Travel",
-    slug: "mountains-call-ooty",
+    title: "Ooty",
+    subtitle: "Retreat mood",
+    description: "Quiet landscapes, slower mornings, and a very different rhythm from the city.",
+    image: "/ooty/all/24._view.jpeg",
+    href: "/destinations/ooty",
   },
   {
-    title: "Wellness Rituals for Modern Life",
-    subtitle: "Well-being",
-    excerpt:
-      "Our spa director shares ancient Ayurvedic practices reimagined for today's wellness-conscious traveler.",
-    image: "/indiranagar/master-bath.jpg",
-    readTime: "6 min read",
-    category: "Wellness",
-    slug: "wellness-rituals-modern-life",
-  },
-  {
-    title: "Artisan Spotlight: Handcrafted Details",
-    subtitle: "Craftsmanship",
-    excerpt:
-      "Meet the local artisans whose handcrafted pieces bring warmth and authenticity to every corner of The Pentouz.",
-    image: "/indiranagar/dining-kitchen.jpg",
-    readTime: "5 min read",
-    category: "Artisans",
-    slug: "artisan-spotlight-handcrafted",
-  },
-  {
-    title: "A Day in Lavelle Road",
-    subtitle: "City Guide",
-    excerpt:
-      "From morning yoga to evening cocktails, discover the perfect itinerary for experiencing Bangalore's most prestigious address.",
-    image: "/indiranagar/skyline-suite.jpg",
-    readTime: "4 min read",
-    category: "Guide",
-    slug: "day-in-lavelle-road",
+    title: "Living at The Pentouz",
+    subtitle: "Room experience",
+    description: "Explore the suites, studios, terraces, and larger spaces that define the way each property feels.",
+    image: "/lavelle-road/all/9046_king_suite_1.jpg",
+    href: "/destinations/lavelle-road/living",
   },
 ];
 
-const categories = ["All", "Philosophy", "Design", "Culinary", "Travel", "Wellness", "Artisans", "Guide"];
-
 export default function StoriesPage() {
-  const heroRef = useRef<HTMLElement>(null);
-  const featuredRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!heroRef.current) return;
-
-    gsap.fromTo(
-      heroRef.current.querySelectorAll("[data-reveal]"),
-      { y: 60, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1.2,
-        stagger: 0.15,
-        ease: "power3.out",
-        delay: 0.3,
-      }
-    );
-  }, []);
-
-  useEffect(() => {
-    if (featuredRef.current) {
-      gsap.fromTo(
-        featuredRef.current,
-        { y: 60, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.2,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: featuredRef.current,
-            start: "top 85%",
-          },
-        }
-      );
-    }
-
-    if (gridRef.current) {
-      gsap.fromTo(
-        gridRef.current.children,
-        { y: 60, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: gridRef.current,
-            start: "top 80%",
-          },
-        }
-      );
-    }
-
-    return () => {
-      killScrollTriggersByRoots([
-        heroRef.current,
-        featuredRef.current,
-        gridRef.current,
-      ]);
-    };
-  }, []);
-
   return (
     <>
       <Header />
-
-      {/* Hero Section */}
-      <section
-        ref={heroRef}
-        className="relative h-[50vh] sm:h-[60vh] min-h-[400px] flex items-center justify-center bg-[#0a0a0a]"
-      >
-        <Image
-          src="/indiranagar/living-room-10.jpg"
-          alt="The Pentouz Stories"
-          fill
-          className="object-cover opacity-40"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-black/40" />
-
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <p
-            data-reveal
-            className="text-[10px] sm:text-[11px] uppercase tracking-[0.4em] text-brand-gold mb-4 sm:mb-6"
-          >
-            The Pentouz Journal
-          </p>
-          <h1
-            data-reveal
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white mb-6"
-          >
-            Stories & <em className="italic">Inspirations</em>
-          </h1>
-          <p
-            data-reveal
-            className="text-sm sm:text-base text-white/80 max-w-2xl mx-auto"
-          >
-            Explore the world of The Pentouz through curated stories of design,
-            culture, wellness, and the art of exceptional living.
-          </p>
-        </div>
-      </section>
-
-      {/* Category Filter */}
-      <section className="py-8 sm:py-12 bg-white border-b border-brand-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="flex justify-start sm:justify-center gap-4 sm:gap-8 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                className={`text-[10px] sm:text-[11px] uppercase tracking-[0.15em] pb-2 whitespace-nowrap transition-colors ${
-                  cat === "All"
-                    ? "text-brand-ink border-b-2 border-brand-gold"
-                    : "text-brand-muted hover:text-brand-ink"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Story */}
-      <section className="py-16 sm:py-24 lg:py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-          <div ref={featuredRef} className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-            {/* Image */}
-            <div className="relative aspect-[4/3] lg:aspect-[3/4] overflow-hidden">
-              <Image
-                src={featuredStory.image}
-                alt={featuredStory.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-              <div className="absolute top-4 left-4 sm:top-6 sm:left-6">
-                <span className="bg-brand-gold text-white px-3 sm:px-4 py-1.5 sm:py-2 text-[9px] sm:text-[10px] uppercase tracking-[0.15em]">
-                  Featured
-                </span>
-              </div>
-            </div>
-
-            {/* Content */}
-            <div className="lg:py-8">
-              <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-gold mb-4">
-                {featuredStory.category}
-              </p>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light mb-4">
-                {featuredStory.title}
-              </h2>
-              <p className="text-sm sm:text-base text-brand-muted italic mb-6">
-                {featuredStory.subtitle}
-              </p>
-              <div className="w-16 h-[2px] bg-brand-gold mb-6" />
-              <p className="text-sm sm:text-base text-brand-body leading-relaxed mb-8">
-                {featuredStory.excerpt}
-              </p>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-[10px] sm:text-[11px] text-brand-muted">
-                  <Clock className="w-4 h-4" />
-                  <span>{featuredStory.readTime}</span>
-                </div>
-                <Link
-                  href={`/stories/${featuredStory.slug}`}
-                  className="inline-flex items-center gap-3 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:text-brand-gold transition-colors group"
-                >
-                  <span>Read Story</span>
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stories Grid */}
-      <section className="py-16 sm:py-24 lg:py-32 bg-[#f8f7f5]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="text-center mb-12 sm:mb-16">
-            <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-gold mb-4">
-              Latest Stories
-            </p>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light">
-              From Our <em className="italic">Journal</em>
-            </h2>
-          </div>
-
-          <div ref={gridRef} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {stories.map((story) => (
-              <article key={story.slug} className="group bg-white">
-                {/* Image */}
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image
-                    src={story.image}
-                    alt={story.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                  <div className="absolute top-3 left-3 sm:top-4 sm:left-4">
-                    <span className="bg-white/90 backdrop-blur-sm px-2.5 sm:px-3 py-1 sm:py-1.5 text-[8px] sm:text-[9px] uppercase tracking-[0.15em] text-brand-ink">
-                      {story.category}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-5 sm:p-6 lg:p-8">
-                  <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-brand-gold mb-2">
-                    {story.subtitle}
-                  </p>
-                  <h3 className="font-display text-lg sm:text-xl lg:text-2xl font-light mb-3 group-hover:text-brand-gold transition-colors">
-                    {story.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-brand-body leading-relaxed mb-4 line-clamp-2">
-                    {story.excerpt}
-                  </p>
-                  <div className="flex items-center justify-between pt-4 border-t border-brand-border">
-                    <div className="flex items-center gap-2 text-[9px] sm:text-[10px] text-brand-muted">
-                      <Clock className="w-3.5 h-3.5" />
-                      <span>{story.readTime}</span>
-                    </div>
-                    <Link
-                      href={`/stories/${story.slug}`}
-                      className="inline-flex items-center gap-2 text-[9px] sm:text-[10px] uppercase tracking-[0.15em] text-brand-ink hover:text-brand-gold transition-colors group/link"
-                    >
-                      <span>Read</span>
-                      <ArrowRight className="w-3 h-3 transition-transform group-hover/link:translate-x-0.5" />
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          {/* Load More */}
-          <div className="text-center mt-12 sm:mt-16">
-            <button className="inline-flex items-center gap-3 border border-brand-ink px-8 sm:px-10 py-3.5 sm:py-4 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:bg-brand-ink hover:text-white transition-all">
-              Load More Stories
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Newsletter CTA */}
-      <section className="py-16 sm:py-24 bg-[#0a0a0a]">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 text-center">
-          <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.4em] text-brand-gold mb-4">
-            Stay Inspired
-          </p>
-          <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-light text-white mb-4">
-            Subscribe to Our Journal
-          </h2>
-          <p className="text-sm sm:text-base text-white/80 mb-8">
-            Receive our latest stories, travel inspirations, and exclusive offers directly to your inbox.
-          </p>
-          <form className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
-            <input
-              type="email"
-              placeholder="Your email address"
-              className="flex-1 bg-white/10 border border-white/20 px-5 py-3.5 text-sm text-white placeholder:text-white/50 outline-none focus:border-brand-gold transition-colors"
+      <main className="bg-[#f7f1e7] text-brand-ink">
+        <section className="relative isolate overflow-hidden bg-[#17120e] text-white">
+          <div className="absolute inset-0">
+            <Image
+              src="/indiranagar/all/tpi_pictures_low_res_terrace_7.jpg"
+              alt="The Pentouz stories"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover opacity-55"
             />
-            <button
-              type="submit"
-              className="bg-brand-gold text-white px-8 py-3.5 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] font-medium hover:bg-white hover:text-brand-ink transition-all"
-            >
-              Subscribe
-            </button>
-          </form>
-        </div>
-      </section>
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,8,6,0.9)_0%,rgba(10,8,6,0.48)_44%,rgba(10,8,6,0.84)_100%)]" />
+          </div>
 
+          <div className="relative mx-auto max-w-[1480px] px-5 pb-20 pt-36 sm:px-8 lg:px-14 lg:pb-28 lg:pt-48">
+            <div className="max-w-4xl">
+              <p className="luxury-kicker text-white/70 animate-fade-in-up">Discover The Pentouz</p>
+              <h1 className="luxury-hero-title mt-6 text-white animate-fade-in-up [animation-delay:120ms]">
+                Places, moods, and the feeling behind each stay.
+              </h1>
+              <p className="luxury-copy mt-8 max-w-2xl text-white/76 animate-fade-in-up [animation-delay:220ms]">
+                A closer look at the addresses, spaces, and atmospheres that shape the Pentouz experience.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#fbf7f0]">
+          <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28">
+            <div className="grid gap-8 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
+              <div className="relative min-h-[420px] overflow-hidden bg-white animate-fade-in-up">
+                <Image
+                  src={feature.image}
+                  alt={feature.title}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="animate-fade-in-up [animation-delay:160ms]">
+                <p className="luxury-kicker text-brand-accent">Featured stay story</p>
+                <h2 className="luxury-section-title mt-5">{feature.title}</h2>
+                <p className="mt-6 text-base leading-8 text-brand-body sm:text-lg">{feature.text}</p>
+                <div className="mt-8">
+                  <Link href={feature.href} className="inline-flex items-center justify-center rounded-full bg-brand-ink px-7 py-4 text-[11px] uppercase tracking-[0.22em] text-white transition-all duration-500 hover:-translate-y-0.5 hover:bg-brand-gold">
+                    Explore Lavelle Road
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#f3eadf]">
+          <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28">
+            <div className="max-w-3xl animate-fade-in-up">
+              <p className="luxury-kicker text-brand-accent">More from The Pentouz</p>
+              <h2 className="luxury-section-title mt-5">A simple guide to the stays and the way they feel.</h2>
+            </div>
+
+            <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+              {stories.map((story, index) => (
+                <Link
+                  key={story.title}
+                  href={story.href}
+                  className="group overflow-hidden bg-white shadow-[0_24px_80px_rgba(18,15,12,0.08)] transition-all duration-700 hover:-translate-y-2 animate-fade-in-up"
+                  style={{ animationDelay: `${120 + index * 100}ms` }}
+                >
+                  <div className="relative aspect-[4/5] overflow-hidden">
+                    <Image
+                      src={story.image}
+                      alt={story.title}
+                      fill
+                      sizes="(max-width: 1200px) 100vw, 25vw"
+                      className="object-cover transition-transform duration-[1400ms] group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-brand-accent">{story.subtitle}</p>
+                    <h3 className="mt-3 font-display text-3xl font-light leading-tight text-brand-ink">{story.title}</h3>
+                    <p className="mt-4 text-sm leading-7 text-brand-body">{story.description}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#17120e] text-white">
+          <div className="mx-auto grid max-w-[1480px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[1fr_auto] lg:px-14 lg:py-24">
+            <div>
+              <p className="luxury-kicker text-brand-gold">Continue exploring</p>
+              <h2 className="mt-5 font-display text-4xl font-light leading-tight text-white sm:text-5xl">
+                Start with the property that matches your trip.
+              </h2>
+              <p className="mt-6 max-w-2xl text-base leading-8 text-white/72 sm:text-lg">
+                See the rooms, location, and feel of each Pentouz stay before you book.
+              </p>
+            </div>
+            <div className="flex flex-col gap-4 lg:justify-end">
+              <Link href="/destinations" className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-brand-ink transition-all duration-500 hover:-translate-y-0.5 hover:bg-brand-gold hover:text-white">
+                View Properties
+              </Link>
+            </div>
+          </div>
+        </section>
+      </main>
       <Footer />
     </>
   );

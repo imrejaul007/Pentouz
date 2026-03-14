@@ -1,336 +1,168 @@
-"use client";
-
-import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { cn } from "@/lib/utils";
-import { galleryItems, galleryCategories, destinations } from "@/data/content";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
-const allGalleryItems = [
-  ...galleryItems.slice(0, 18),
-  ...destinations.flatMap((dest) =>
-    dest.gallery.slice(0, 8).map((img, i) => ({
-      image: img,
-      title: `${dest.shortTitle} - ${i + 1}`,
-      category: "Properties",
-    }))
-  ),
+const destinationMoments = [
+  {
+    name: "Lavelle Road",
+    title: "Boutique city luxury in the heart of Bangalore.",
+    href: "/destinations/lavelle-road",
+    image: "/lavelle-road/all/terrace_1.jpg",
+    detail: "A quieter address near UB City, MG Road, and the business core.",
+  },
+  {
+    name: "Indiranagar",
+    title: "A private penthouse made for longer, more relaxed stays.",
+    href: "/destinations/indiranagar",
+    image: "/indiranagar/all/04._living_room_05._living_room.jpg",
+    detail: "Large interiors, open terrace, and the energy of 100 Feet Road.",
+  },
+  {
+    name: "Ooty",
+    title: "Misty hills, quiet mornings, and a gentler pace of stay.",
+    href: "/destinations/ooty",
+    image: "/ooty/all/24._view.jpeg",
+    detail: "A hillside retreat with views, lawns, and a calmer rhythm.",
+  },
 ];
 
-const allCategories = ["All", ...galleryCategories.filter((c) => c !== "All"), "Properties"];
+const galleryFrames = [
+  { src: "/lavelle-road/all/facade_1.jpg", alt: "Lavelle Road facade", span: "lg:col-span-5" },
+  { src: "/lavelle-road/all/9042_king_suite_1.jpg", alt: "Lavelle Road king studio", span: "lg:col-span-3" },
+  { src: "/lavelle-road/all/reception_2.jpg", alt: "Lavelle Road reception", span: "lg:col-span-4" },
+  { src: "/indiranagar/all/tpi_pictures_low_res_terrace_7.jpg", alt: "Indiranagar terrace", span: "lg:col-span-4" },
+  { src: "/indiranagar/all/02._the_skyline_suite_08._the_skyline_suite_bathroom.jpg", alt: "Indiranagar suite bath", span: "lg:col-span-3" },
+  { src: "/indiranagar/all/05._dining_-_kitchen_02._kitchen.jpg", alt: "Indiranagar kitchen", span: "lg:col-span-5" },
+  { src: "/ooty/all/1._facade.jpeg", alt: "Ooty facade", span: "lg:col-span-5" },
+  { src: "/ooty/all/20._restaurant.jpeg", alt: "Ooty dining", span: "lg:col-span-3" },
+  { src: "/ooty/all/22._lawn.jpeg", alt: "Ooty lawn", span: "lg:col-span-4" },
+];
 
 export default function GalleryPage() {
-  const [filter, setFilter] = useState("All");
-  const [visibleCount, setVisibleCount] = useState(24);
-  const [lightbox, setLightbox] = useState<(typeof allGalleryItems)[0] | null>(null);
-  const heroRef = useRef<HTMLElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
-  const lightboxRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
-
-  const filteredGallery =
-    filter === "All"
-      ? allGalleryItems
-      : allGalleryItems.filter((item) => item.category === filter);
-  const displayedGallery = filteredGallery.slice(0, visibleCount);
-
-  const currentIndex = lightbox
-    ? filteredGallery.findIndex((item) => item.title === lightbox.title)
-    : -1;
-
-  // Hero animation
-  useEffect(() => {
-    if (!heroRef.current) return;
-
-    gsap.fromTo(
-      heroRef.current.querySelectorAll("[data-reveal]"),
-      { y: 60, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1.2,
-        stagger: 0.15,
-        ease: "power3.out",
-        delay: 0.3,
-      }
-    );
-  }, []);
-
-  // Grid animation
-  useEffect(() => {
-    if (!gridRef.current) return;
-
-    gsap.fromTo(
-      gridRef.current.children,
-      { y: 60, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        stagger: 0.08,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: gridRef.current,
-          start: "top 85%",
-        },
-      }
-    );
-  }, [filter]);
-
-  // Lightbox
-  useEffect(() => {
-    if (lightbox) {
-      document.body.style.overflow = "hidden";
-      if (lightboxRef.current && imageRef.current) {
-        gsap.fromTo(lightboxRef.current, { opacity: 0 }, { opacity: 1, duration: 0.4 });
-        gsap.fromTo(imageRef.current, { scale: 0.95, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, delay: 0.1 });
-      }
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [lightbox]);
-
-  const closeLightbox = () => {
-    if (lightboxRef.current && imageRef.current) {
-      gsap.to(imageRef.current, { scale: 0.95, opacity: 0, duration: 0.3 });
-      gsap.to(lightboxRef.current, { opacity: 0, duration: 0.3, delay: 0.1, onComplete: () => setLightbox(null) });
-    } else {
-      setLightbox(null);
-    }
-  };
-
-  const navigateLightbox = (direction: "prev" | "next") => {
-    if (currentIndex === -1) return;
-    const newIndex =
-      direction === "prev"
-        ? (currentIndex - 1 + filteredGallery.length) % filteredGallery.length
-        : (currentIndex + 1) % filteredGallery.length;
-    setLightbox(filteredGallery[newIndex]);
-  };
-
-  useEffect(() => {
-    if (!lightbox) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeLightbox();
-      if (e.key === "ArrowLeft") navigateLightbox("prev");
-      if (e.key === "ArrowRight") navigateLightbox("next");
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [lightbox, closeLightbox, navigateLightbox]);
-
   return (
     <>
       <Header />
-
-      {/* Hero Section */}
-      <section
-        ref={heroRef}
-        className="relative h-[50vh] sm:h-[60vh] min-h-[400px] flex items-center justify-center bg-[#1a1a1a]"
-      >
-        <Image
-          src="/indiranagar/living-room-5.jpg"
-          alt="Gallery"
-          fill
-          className="object-cover opacity-50"
-          priority
-          placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIRAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBQYSIRMxQVH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAIDAQAAAAAAAAAAAAAAAAECAAMRIf/aAAwDAQACEQMRAD8Aq7fudw7V1C7ggaZraYYj8kpZYpEHJgQMFgTk5HBANaOdzWdxbW9y0M0Us0SSMhXkFLKCR/DSlKiazK0M7B4j/9k="
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-transparent to-black/40" />
-
-        <div className="relative z-10 text-center px-4">
-          <p data-reveal className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-white/80 mb-4 sm:mb-6 drop-shadow-sm">
-            Visual Journey
-          </p>
-          <h1 data-reveal className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white drop-shadow-md">
-            Our <em className="italic">Gallery</em>
-          </h1>
-        </div>
-      </section>
-
-      <section className="py-16 sm:py-20 lg:py-24 bg-[#f7f3ed] border-y border-[#e5dccf]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="grid gap-4 lg:grid-cols-3">
-            {destinations.map((dest) => (
-              <Link
-                key={dest.slug}
-                href={`/destinations/${dest.slug}`}
-                className="group relative overflow-hidden bg-[#11100f] text-white"
-              >
-                <div className="relative aspect-[4/3]">
-                  <Image
-                    src={dest.heroImage || dest.image}
-                    alt={dest.title}
-                    fill
-                    className="object-cover transition-transform duration-1000 group-hover:scale-[1.03]"
-                    sizes="(max-width: 1024px) 100vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/10" />
-                </div>
-                <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
-                  <p className="text-[10px] uppercase tracking-[0.24em] text-brand-gold mb-2">{dest.subtitle}</p>
-                  <p className="font-display text-2xl sm:text-3xl font-light">{dest.shortTitle}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Gallery Section */}
-      <section className="py-16 sm:py-24 lg:py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
-            <p className="text-[10px] uppercase tracking-[0.3em] text-brand-accent mb-4">Curated Selection</p>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-brand-ink">
-              A more edited visual story
-            </h2>
-            <p className="mt-5 text-sm sm:text-base text-brand-body leading-relaxed">
-              We’ve reduced the gallery to a more selective set of frames so the photography feels intentional rather than crowded.
-            </p>
+      <main className="bg-[#f7f1e7] text-brand-ink">
+        <section className="relative isolate overflow-hidden bg-[#17120e] text-white">
+          <div className="absolute inset-0">
+            <Image
+              src="/lavelle-road/all/restaurant_4.jpg"
+              alt="The Pentouz gallery hero"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover opacity-60"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,8,6,0.88)_0%,rgba(10,8,6,0.46)_45%,rgba(10,8,6,0.78)_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(196,160,97,0.16),transparent_30%)]" />
           </div>
 
-          {/* Filter Tabs */}
-          <div className="flex justify-start sm:justify-center gap-4 sm:gap-8 lg:gap-12 mb-12 sm:mb-16 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide">
-            {allCategories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => {
-                  setFilter(cat);
-                  setVisibleCount(24);
-                }}
-                className={cn(
-                  "relative text-[10px] sm:text-[11px] uppercase tracking-[0.15em] pb-2 sm:pb-3 transition-all duration-500 whitespace-nowrap flex-shrink-0",
-                  filter === cat ? "text-brand-ink" : "text-brand-muted hover:text-brand-ink"
-                )}
-              >
-                {cat}
-                <span
-                  className={cn(
-                    "absolute bottom-0 left-0 right-0 h-[2px] bg-brand-ink transition-all duration-500",
-                    filter === cat ? "opacity-100" : "opacity-0"
-                  )}
-                />
-              </button>
-            ))}
+          <div className="relative mx-auto max-w-[1480px] px-5 pb-20 pt-36 sm:px-8 lg:px-14 lg:pb-28 lg:pt-48">
+            <div className="max-w-4xl">
+              <p className="luxury-kicker text-white/70 animate-fade-in-up">A closer look at The Pentouz</p>
+              <h1 className="luxury-hero-title mt-6 text-white animate-fade-in-up [animation-delay:120ms]">
+                Spaces shaped with warmth, privacy, and quiet luxury.
+              </h1>
+              <p className="luxury-copy mt-8 max-w-2xl text-white/76 animate-fade-in-up [animation-delay:220ms]">
+                From central Bangalore addresses to our hillside retreat in Ooty, every stay is designed around comfort, detail, and a stronger sense of place.
+              </p>
+            </div>
           </div>
+        </section>
 
-          {/* Gallery Grid */}
-          <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
-            {displayedGallery.map((item, i) => (
-              <button
-                key={`${item.title}-${i}`}
-                onClick={() => setLightbox(item)}
-                className={cn(
-                  "relative group overflow-hidden",
-                  i % 8 === 0 ? "sm:col-span-2 sm:row-span-2 aspect-square" : "aspect-[4/3]"
-                )}
-              >
-                {/* Loading placeholder */}
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-200 via-gray-100 to-gray-200 animate-shimmer bg-[length:200%_100%]" />
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  className="object-cover transition-transform duration-1000 group-hover:scale-110"
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/32 transition-colors duration-500 flex items-end">
-                  <div className="p-3 sm:p-6 translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 hidden sm:block">
-                    <p className="text-white font-display text-base sm:text-lg font-light mb-1">
-                      {item.title}
-                    </p>
-                    <p className="text-white/80 text-[9px] sm:text-[10px] uppercase tracking-[0.15em]">
-                      {item.category}
-                    </p>
+        <section className="bg-[#fbf7f0]">
+          <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28">
+            <div className="max-w-3xl animate-fade-in-up">
+              <p className="luxury-kicker text-brand-accent">The collection</p>
+              <h2 className="luxury-section-title mt-5">Three distinct stays, one signature of comfort.</h2>
+            </div>
+
+            <div className="mt-14 grid gap-6 lg:grid-cols-3">
+              {destinationMoments.map((item, index) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="group overflow-hidden bg-white shadow-[0_24px_80px_rgba(18,15,12,0.08)] transition-all duration-700 hover:-translate-y-2 animate-fade-in-up"
+                  style={{ animationDelay: `${120 + index * 100}ms` }}
+                >
+                  <div className="relative aspect-[4/5] overflow-hidden">
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 33vw"
+                      className="object-cover transition-transform duration-[1400ms] group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 p-7 text-white">
+                      <p className="text-[10px] uppercase tracking-[0.22em] text-brand-gold">{item.name}</p>
+                      <h3 className="mt-3 font-display text-3xl font-light leading-tight">{item.title}</h3>
+                      <p className="mt-4 text-sm leading-7 text-white/72">{item.detail}</p>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#f4ecdf]">
+          <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28">
+            <div className="grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
+              <div className="animate-fade-in-up">
+                <p className="luxury-kicker text-brand-accent">Inside the details</p>
+                <h2 className="luxury-section-title mt-5">The mood of each stay lives in the small things.</h2>
+              </div>
+              <p className="text-base leading-8 text-brand-body sm:text-lg animate-fade-in-up [animation-delay:160ms]">
+                Layered materials, calm lighting, generous room proportions, and better privacy shape the Pentouz experience. This gallery is kept simple on purpose, so the images can carry the feeling of the properties without clutter.
+              </p>
+            </div>
+
+            <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-12">
+              {galleryFrames.map((frame, index) => (
+                <div
+                  key={frame.src}
+                  className={`${frame.span} group relative overflow-hidden bg-white animate-fade-in-up`}
+                  style={{ animationDelay: `${index * 80}ms` }}
+                >
+                  <div className="relative aspect-[4/3] overflow-hidden lg:aspect-[5/4]">
+                    <Image
+                      src={frame.src}
+                      alt={frame.alt}
+                      fill
+                      sizes="(max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-[1400ms] group-hover:scale-[1.04]"
+                    />
                   </div>
                 </div>
-              </button>
-            ))}
-          </div>
-
-          {displayedGallery.length < filteredGallery.length && (
-            <div className="mt-10 sm:mt-14 flex justify-center">
-              <button
-                onClick={() => setVisibleCount((prev) => prev + 24)}
-                className="inline-flex items-center justify-center border border-brand-ink px-8 py-3 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:bg-brand-ink hover:text-white transition-all duration-300"
-              >
-                Load More Photos
-              </button>
+              ))}
             </div>
-          )}
-        </div>
-      </section>
+          </div>
+        </section>
 
-      {/* Lightbox */}
-      {lightbox && (
-        <div
-          ref={lightboxRef}
-          className="fixed inset-0 z-[100] bg-[#0a0a0a]/98 flex items-center justify-center"
-          onClick={closeLightbox}
-        >
-          <button
-            className="absolute top-4 sm:top-8 right-4 sm:right-8 flex items-center gap-4 text-white/80 hover:text-white transition-colors z-10"
-            onClick={closeLightbox}
-          >
-            <span className="text-[11px] uppercase tracking-[0.15em] hidden sm:inline">Close</span>
-            <div className="w-10 sm:w-12 h-10 sm:h-12 border border-white/20 flex items-center justify-center hover:border-white/50">
-              <X className="w-5 h-5" strokeWidth={1.5} />
+        <section className="bg-[#17120e] text-white">
+          <div className="mx-auto grid max-w-[1480px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[1fr_auto] lg:px-14 lg:py-24">
+            <div>
+              <p className="luxury-kicker text-brand-gold">Plan your stay</p>
+              <h2 className="mt-5 font-display text-4xl font-light leading-tight text-white sm:text-5xl">
+                Discover the property that fits your trip best.
+              </h2>
+              <p className="mt-6 max-w-2xl text-base leading-8 text-white/72 sm:text-lg">
+                Boutique city rooms on Lavelle Road, a private penthouse in Indiranagar, or a slower escape in Ooty.
+              </p>
             </div>
-          </button>
-
-          <button
-            className="absolute left-2 sm:left-12 top-1/2 -translate-y-1/2 w-10 sm:w-14 h-10 sm:h-14 border border-white/20 flex items-center justify-center hover:border-white/50 z-10"
-            onClick={(e) => { e.stopPropagation(); navigateLightbox("prev"); }}
-          >
-            <ChevronLeft className="w-5 sm:w-6 h-5 sm:h-6 text-white" strokeWidth={1} />
-          </button>
-
-          <button
-            className="absolute right-2 sm:right-12 top-1/2 -translate-y-1/2 w-10 sm:w-14 h-10 sm:h-14 border border-white/20 flex items-center justify-center hover:border-white/50 z-10"
-            onClick={(e) => { e.stopPropagation(); navigateLightbox("next"); }}
-          >
-            <ChevronRight className="w-5 sm:w-6 h-5 sm:h-6 text-white" strokeWidth={1} />
-          </button>
-
-          <div ref={imageRef} className="max-w-5xl max-h-[85vh] relative px-12 sm:px-20" onClick={(e) => e.stopPropagation()}>
-            <Image
-              src={lightbox.image}
-              alt={lightbox.title}
-              width={1400}
-              height={900}
-              className="object-contain max-h-[80vh] sm:max-h-[85vh] w-auto"
-              loading="eager"
-            />
+            <div className="flex flex-col gap-4 lg:justify-end">
+              <Link href="/destinations" className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-brand-ink transition-all duration-500 hover:-translate-y-0.5 hover:bg-brand-gold hover:text-white">
+                Explore Properties
+              </Link>
+              <Link href="/contact" className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-white/84 transition-all duration-500 hover:border-brand-gold hover:text-brand-gold">
+                Contact Concierge
+              </Link>
+            </div>
           </div>
-
-          <div className="absolute bottom-16 sm:bottom-12 left-1/2 -translate-x-1/2 text-center text-white px-4 w-full">
-            <p className="font-display text-lg sm:text-xl font-light mb-1">{lightbox.title}</p>
-            <p className="text-[9px] sm:text-[10px] text-white/70 uppercase tracking-[0.2em]">{lightbox.category}</p>
-          </div>
-
-          <div className="absolute bottom-16 sm:bottom-12 right-4 sm:right-12 text-white/50 text-[10px] sm:text-[11px] tracking-widest hidden sm:block">
-            <span className="text-white/80">{String(currentIndex + 1).padStart(2, "0")}</span>
-            <span className="mx-2">/</span>
-            <span>{String(filteredGallery.length).padStart(2, "0")}</span>
-          </div>
-        </div>
-      )}
-
+        </section>
+      </main>
       <Footer />
     </>
   );
