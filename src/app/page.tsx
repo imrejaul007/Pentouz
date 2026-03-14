@@ -1,216 +1,221 @@
 import Link from "next/link";
 import Image from "next/image";
-import { destinations, contactInfo } from "@/data/content";
+import { ArrowRight } from "lucide-react";
+import { contactInfo, destinations } from "@/data/content";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
+const editorialLinks = [
+  {
+    title: "Hotel Near Karnataka High Court",
+    href: "/destinations/lavelle-road/near/karnataka-high-court",
+    label: "Legal Travel",
+  },
+  {
+    title: "Best Things to Do in MG Road Bangalore",
+    href: "/travel/guides/best-things-to-do-in-mg-road-bangalore",
+    label: "City Journal",
+  },
+  {
+    title: "Lavelle Road Nearby Stay Guides",
+    href: "/destinations/lavelle-road/near",
+    label: "SEO Hub",
+  },
+];
+
 export default function HomePage() {
+  const [featured] = destinations;
+
   return (
     <>
       <Header />
-      {/* Hero Section - Full Screen, Minimal Text, Large Image */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-brand-ink">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/lavelle-road/terrace-1.jpg"
-            alt="The Pentouz Luxury Hotels"
-            fill
-            priority
-            className="object-cover scale-105"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/50" />
-        </div>
+      <main className="bg-[#f7f3ed]">
+        <section className="relative min-h-[100svh] overflow-hidden bg-[#171513] text-white">
+          <div className="absolute inset-0">
+            <Image
+              src={featured.heroImage || featured.image}
+              alt={featured.title}
+              fill
+              priority
+              className="object-cover"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,10,0.34)_0%,rgba(10,10,10,0.18)_20%,rgba(10,10,10,0.58)_75%,rgba(10,10,10,0.82)_100%)]" />
+          </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-16 text-center">
-          <div className="space-y-6">
-            <p className="text-[10px] uppercase tracking-[0.5em] text-brand-gold">
-              The Pentouz
-            </p>
-            <h1 className="font-display text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-light text-white leading-none tracking-tight">
-              Exceptional Living
-            </h1>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+          <div className="relative max-w-container-2xl mx-auto px-4 sm:px-6 lg:px-16 pt-36 sm:pt-44 lg:pt-52 pb-16 sm:pb-20 lg:pb-24 min-h-[100svh] flex flex-col justify-end">
+            <div className="max-w-5xl">
+              <p className="text-[10px] uppercase tracking-[0.45em] text-brand-gold mb-6">
+                The Pentouz Collection
+              </p>
+              <h1 className="font-display text-[3.2rem] leading-[0.92] sm:text-[4.8rem] lg:text-[7rem] xl:text-[8.2rem] font-light max-w-5xl">
+                Residences with a <em className="italic text-brand-gold">slower, richer rhythm</em>
+              </h1>
+              <p className="mt-8 max-w-2xl text-base sm:text-lg text-white/82 leading-relaxed">
+                Private penthouses, city studios, and hillside stays designed for guests who want location, calm, and a more personal sense of luxury.
+              </p>
+            </div>
+
+            <div className="mt-10 flex flex-col sm:flex-row gap-4">
               <Link
                 href="/destinations"
-                className="group inline-flex items-center gap-3 bg-brand-gold text-brand-ink px-10 py-4 text-[10px] uppercase tracking-[0.25em] hover:bg-white transition-all duration-500 font-light"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[11px] uppercase tracking-[0.2em] text-brand-ink transition-colors hover:bg-brand-gold hover:text-white"
               >
-                Explore
+                Explore Residences
+                <ArrowRight className="w-4 h-4" strokeWidth={1.4} />
               </Link>
               <a
                 href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
-                className="inline-flex items-center gap-3 border border-white/40 text-white px-10 py-4 text-[10px] uppercase tracking-[0.25em] hover:border-brand-gold hover:bg-white/10 transition-all duration-500 font-light"
+                className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.2em] text-white/90 transition-colors hover:border-brand-gold hover:text-brand-gold"
               >
-                Contact
+                Call Concierge
               </a>
             </div>
-          </div>
-        </div>
 
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-gold/50 to-transparent" />
-      </section>
-
-      {/* Properties Section - Full Width Cards, Minimal Text */}
-      <section className="bg-white">
-        <div className="grid grid-cols-1 lg:grid-cols-3 divide-x divide-white">
-          {destinations.map((dest) => (
-            <Link
-              key={dest.slug}
-              href={`/destinations/${dest.slug}`}
-              className="group relative h-[85vh] sm:h-[90vh] overflow-hidden"
-            >
-              <Image
-                src={dest.heroImage || dest.image}
-                alt={dest.title}
-                fill
-                className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                sizes="33vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 transition-opacity duration-500 group-hover:from-black/50" />
-
-              <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-12 text-white">
-                <p className="text-[10px] uppercase tracking-[0.4em] text-brand-gold mb-3">
-                  {dest.shortTitle}
-                </p>
-                <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light mb-2 leading-tight">
-                  {dest.title}
-                </h2>
-                <p className="text-sm text-white/70 max-w-sm leading-relaxed">
-                  {dest.subtitle}
-                </p>
+            <div className="mt-12 grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
+              <div className="border border-white/10 bg-white/[0.06] p-5 sm:p-6 backdrop-blur-sm">
+                <p className="text-[10px] uppercase tracking-[0.26em] text-brand-gold mb-3">{featured.subtitle}</p>
+                <p className="font-display text-2xl sm:text-3xl font-light mb-3">{featured.title}</p>
+                <p className="text-sm text-white/72 max-w-2xl">{featured.copy}</p>
               </div>
-
-              <div className="absolute inset-0 border-2 border-transparent group-hover:border-brand-gold/30 transition-all duration-500" />
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* Welcome Section - Minimal, Text Focused */}
-      <section className="py-24 sm:py-32 lg:py-40 bg-brand-linen">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-16 text-center">
-          <p className="text-[10px] uppercase tracking-[0.4em] text-brand-accent mb-8">
-            The Pentouz
-          </p>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-brand-ink mb-8 leading-tight">
-            Three Distinctive Properties,
-            <br />
-            <span className="italic font-extralight">One Standard of Excellence</span>
-          </h2>
-          <p className="text-base sm:text-lg text-brand-body leading-relaxed">
-            Each of our properties is thoughtfully designed to reflect its unique location while maintaining The Pentouz signature standards of elegance, comfort, and personalized service.
-          </p>
-        </div>
-      </section>
-
-      {/* Property Preview - Alternating Layout */}
-      {destinations.map((dest, index) => (
-        <section key={dest.slug} className="bg-white border-t border-brand-border/30">
-          <div className={`grid lg:grid-cols-2 ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
-            <div className="relative aspect-[4/3] lg:aspect-auto lg:h-[60vh] overflow-hidden">
-              <Image
-                src={dest.heroImage || dest.image}
-                alt={dest.title}
-                fill
-                className="object-cover transition-transform duration-1000 hover:scale-105"
-                sizes="50vw"
-              />
-            </div>
-            <div className="flex items-center justify-center p-12 lg:p-20">
-              <div className="max-w-lg">
-                <p className="text-[10px] uppercase tracking-[0.4em] text-brand-accent mb-4">
-                  {dest.shortTitle}
-                </p>
-                <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-brand-ink mb-6 leading-tight">
-                  {dest.title}
-                </h2>
-                <p className="text-base text-brand-body leading-relaxed mb-8">
-                  {dest.subtitle}
-                </p>
-                <Link
-                  href={`/destinations/${dest.slug}`}
-                  className="inline-flex items-center gap-3 text-brand-ink text-[10px] uppercase tracking-[0.25em] hover:text-brand-accent transition-colors duration-300"
-                >
-                  Discover
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
+              <div className="grid sm:grid-cols-3 gap-3">
+                {editorialLinks.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="border border-white/10 bg-black/20 px-4 py-5 hover:border-brand-gold/35 transition-colors"
+                  >
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-brand-gold mb-2">{item.label}</p>
+                    <p className="text-sm text-white/84 leading-relaxed">{item.title}</p>
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
         </section>
-      ))}
 
-      {/* Experience Section - Minimal Cards */}
-      <section className="py-24 sm:py-32 lg:py-40 bg-white">
-        <div className="max-w-container-xl mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="grid sm:grid-cols-3 gap-8 lg:gap-16">
-            <div className="text-center">
-              <div className="text-6xl sm:text-7xl font-display text-brand-gold/20 mb-4">
-                3
-              </div>
-              <h3 className="font-display text-xl font-light text-brand-ink mb-3">
-                Properties
-              </h3>
-              <p className="text-sm text-brand-muted leading-relaxed">
-                Across Bengaluru and Ooty
-              </p>
+        <section className="bg-[#f7f3ed] py-20 sm:py-24 lg:py-28 border-t border-[#e4dbcf]">
+          <div className="max-w-container-2xl mx-auto px-4 sm:px-6 lg:px-16 grid lg:grid-cols-[0.7fr_1.3fr] gap-10 lg:gap-16 items-start">
+            <div>
+              <p className="text-[10px] uppercase tracking-[0.35em] text-brand-accent mb-5">Our Point of View</p>
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light leading-tight">
+                Fewer statements. <br />
+                <em className="italic">More atmosphere.</em>
+              </h2>
             </div>
-            <div className="text-center">
-              <div className="text-6xl sm:text-7xl font-display text-brand-gold/20 mb-4">
-                24/7
-              </div>
-              <h3 className="font-display text-xl font-light text-brand-ink mb-3">
-                Support
-              </h3>
-              <p className="text-sm text-brand-muted leading-relaxed">
-                Dedicated assistance
+            <div className="grid sm:grid-cols-2 gap-6 text-brand-body">
+              <p className="text-base leading-relaxed">
+                The Pentouz should feel less like a directory of rooms and more like a collection of stays with distinct moods. The experience starts with stillness, material warmth, and confidence in the details.
               </p>
-            </div>
-            <div className="text-center">
-              <div className="text-6xl sm:text-7xl font-display text-brand-gold/20 mb-4">
-                100%
-              </div>
-              <h3 className="font-display text-xl font-light text-brand-ink mb-3">
-                Personalized
-              </h3>
-              <p className="text-sm text-brand-muted leading-relaxed">
-                Tailored experiences
+              <p className="text-base leading-relaxed">
+                Each property carries a different texture: central business elegance at Lavelle Road, residential scale and privacy in Indiranagar, and a softer retreat language in Ooty.
               </p>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA Section - Full Width Dark, Minimal */}
-      <section className="py-24 sm:py-32 lg:py-40 bg-brand-ink text-white">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-16 text-center">
-          <p className="text-[10px] uppercase tracking-[0.4em] text-brand-gold mb-8">
-            Begin Your Journey
-          </p>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light mb-8 leading-tight">
-            Your Exceptional
-            <br />
-            <span className="italic font-extralight">Stay Awaits</span>
-          </h2>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/destinations"
-              className="inline-flex items-center gap-3 bg-brand-gold text-brand-ink px-10 py-4 text-[10px] uppercase tracking-[0.25em] hover:bg-white transition-all duration-500 font-light"
-            >
-              Browse Properties
-            </Link>
-            <a
-              href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
-              className="inline-flex items-center gap-3 border border-white/40 text-white px-10 py-4 text-[10px] uppercase tracking-[0.25em] hover:border-brand-gold hover:bg-white/10 transition-all duration-500 font-light"
-            >
-              Contact Us
-            </a>
+        <section className="bg-white">
+          <div className="max-w-container-2xl mx-auto px-4 sm:px-6 lg:px-16 py-16 sm:py-20 lg:py-24 space-y-20 lg:space-y-24">
+            {destinations.map((dest, index) => (
+              <article
+                key={dest.slug}
+                className={index === 0 ? "grid gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:gap-12 items-end" : "grid gap-8 lg:grid-cols-2 lg:gap-12 items-center"}
+              >
+                <Link
+                  href={`/destinations/${dest.slug}`}
+                  className={index % 2 === 1 ? "lg:order-2" : ""}
+                >
+                  <div className={index === 0 ? "relative aspect-[16/10] overflow-hidden" : "relative aspect-[4/5] overflow-hidden"}>
+                    <Image
+                      src={dest.heroImage || dest.image}
+                      alt={dest.title}
+                      fill
+                      className="object-cover transition-transform duration-1000 hover:scale-[1.03]"
+                      sizes={index === 0 ? "(max-width: 1024px) 100vw, 60vw" : "(max-width: 1024px) 100vw, 50vw"}
+                    />
+                  </div>
+                </Link>
+
+                <div className={index % 2 === 1 ? "lg:order-1" : ""}>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-brand-accent mb-4">{dest.subtitle}</p>
+                  <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-brand-ink leading-tight">
+                    {dest.title}
+                  </h2>
+                  <p className="mt-6 text-base text-brand-body leading-relaxed max-w-xl">{dest.description}</p>
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    <Link
+                      href={`/destinations/${dest.slug}`}
+                      className="inline-flex items-center gap-2 rounded-full border border-brand-ink px-6 py-3 text-[11px] uppercase tracking-[0.18em] text-brand-ink transition-colors hover:bg-brand-ink hover:text-white"
+                    >
+                      Discover Residence
+                      <ArrowRight className="w-4 h-4" strokeWidth={1.4} />
+                    </Link>
+                    <a
+                      href={dest.bookingUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-[11px] uppercase tracking-[0.18em] text-brand-gold transition-colors hover:text-brand-ink"
+                    >
+                      Book Direct
+                    </a>
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
-        </div>
-      </section>
+        </section>
 
+        <section className="bg-[#11100f] text-white py-20 sm:py-24 lg:py-28">
+          <div className="max-w-container-2xl mx-auto px-4 sm:px-6 lg:px-16">
+            <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] items-start">
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.35em] text-brand-gold mb-4">Pentouz Journal</p>
+                <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light leading-tight">
+                  Stay pages, city guides, and location-led travel intent
+                </h2>
+              </div>
+              <div className="grid sm:grid-cols-3 gap-4">
+                {editorialLinks.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="border border-white/10 bg-white/[0.03] p-5 hover:border-brand-gold/35 transition-colors"
+                  >
+                    <p className="text-[10px] uppercase tracking-[0.24em] text-brand-gold mb-3">{item.label}</p>
+                    <p className="text-sm text-white/80 leading-relaxed">{item.title}</p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#efe7db] py-20 sm:py-24 lg:py-28">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-16 text-center">
+            <p className="text-[10px] uppercase tracking-[0.35em] text-brand-accent mb-5">Reservations</p>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-brand-ink leading-tight">
+              Begin with the residence that matches your pace
+            </h2>
+            <p className="mt-6 text-base sm:text-lg text-brand-body leading-relaxed">
+              We’ve kept the booking journey direct, whether you’re planning a legal visit, a business stay, a family trip, or a quieter weekend away.
+            </p>
+            <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+              <Link
+                href="/destinations"
+                className="inline-flex items-center justify-center rounded-full bg-brand-ink px-8 py-4 text-[11px] uppercase tracking-[0.2em] text-white transition-colors hover:bg-black"
+              >
+                View All Properties
+              </Link>
+              <a
+                href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
+                className="inline-flex items-center justify-center rounded-full border border-brand-ink px-8 py-4 text-[11px] uppercase tracking-[0.2em] text-brand-ink transition-colors hover:bg-brand-ink hover:text-white"
+              >
+                Call Concierge
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
       <Footer />
     </>
   );

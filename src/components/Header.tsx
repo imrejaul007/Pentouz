@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { X, Menu, Search, Phone, MapPin, Calendar } from "lucide-react";
+import { ArrowRight, Menu, Phone, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { contactInfo, destinations } from "@/data/content";
@@ -22,195 +22,172 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      setIsScrolled(scrollY > 50);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [isMenuOpen]);
-
-  useEffect(() => {
-    setIsMenuOpen(false);
-  }, [pathname]);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
 
   return (
     <>
-      {/* Cinematic Progress Line */}
-      <div
-        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-brand-gold/20 via-brand-gold to-brand-gold z-50"
-      />
+      <div className="fixed top-0 left-0 right-0 z-50 h-[1px] bg-gradient-to-r from-transparent via-brand-gold/70 to-transparent" />
 
-      {/* Glassmorphism Header Background */}
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-40 transition-all duration-500 ease-out",
           isScrolled
-            ? "bg-white/98 backdrop-blur-xl shadow-xl border-b border-brand-border"
-            : "bg-transparent"
+            ? "bg-[#f6f1ea]/95 backdrop-blur-xl border-b border-[#ddd2c1] shadow-[0_12px_40px_rgba(18,16,13,0.08)]"
+            : "bg-gradient-to-b from-black/45 via-black/18 to-transparent"
         )}
       >
-        <div
-          className="max-w-container-2xl mx-auto px-4 sm:px-6 lg:px-16 h-20 sm:h-24 flex items-center justify-between"
-        >
-          {/* Left - Logo & Quick Links (Desktop) */}
-          <div className="hidden lg:flex items-center gap-6 xl:gap-12">
-            <Link href="/" className="relative group" suppressHydrationWarning>
-              <Image
-                src="/logo-white.png"
-                alt="The Pentouz"
-                width={160}
-                height={45}
-                className="h-10 lg:h-12 w-auto transition-transform duration-500 group-hover:scale-105"
-                priority
-              />
-              <div className="absolute -bottom-3 left-1/2 w-0 h-[2px] bg-brand-gold transition-all duration-500 group-hover:w-full" />
-            </Link>
-
-            {/* Desktop Quick Links */}
-            <nav className="hidden sm:flex items-center gap-6">
-              {editorialNav.slice(0, 4).map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={cn(
-                    "relative px-4 py-2 text-[11px] uppercase tracking-[0.2em] font-light transition-all duration-300 group",
-                    isActive(link.href)
-                      ? "text-brand-ink"
-                      : isScrolled
-                        ? "text-brand-muted hover:text-brand-gold"
-                        : "text-white/90 hover:text-brand-gold"
-                  )}
-                  suppressHydrationWarning
-                >
-                  {link.label}
-                  {isActive(link.href) && (
-                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-brand-gold" />
-                  )}
-                </Link>
-              ))}
-            </nav>
-          </div>
-
-          {/* Center - Mobile Logo */}
-          <div className="flex lg:hidden items-center">
-            <Link href="/" className="relative group" suppressHydrationWarning>
-              <Image
-                src="/logo-white.png"
-                alt="The Pentouz"
-                width={120}
-                height={35}
-                className="h-9 w-auto transition-transform duration-500"
-                priority
-              />
-            </Link>
-          </div>
-
-          {/* Right - Mobile Menu Button & Desktop Actions */}
-          <div className="flex items-center gap-4">
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={cn(
-                "lg:hidden flex items-center gap-3 px-4 py-2.5 transition-all duration-300",
-                isScrolled
-                  ? "text-brand-ink hover:text-brand-gold"
-                  : "text-white hover:text-brand-gold"
-              )}
-              aria-label="Toggle menu"
-            >
-              <Menu className="w-5 h-5" strokeWidth={1.5} />
-              <span className="hidden sm:inline text-[11px] uppercase tracking-[0.15em] font-light">Menu</span>
-            </button>
-
-            {/* Desktop Booking Actions */}
-            <div className="hidden lg:flex items-center gap-4">
+        <div className={cn("hidden xl:block border-b", isScrolled ? "border-black/5" : "border-white/10")}>
+          <div className="max-w-container-2xl mx-auto px-6 lg:px-16 h-10 flex items-center justify-between">
+            <p className={cn("text-[10px] uppercase tracking-[0.3em]", isScrolled ? "text-brand-muted" : "text-white/68")}>
+              Luxury residences and boutique stays by The Pentouz
+            </p>
+            <div className="flex items-center gap-6">
+              <Link
+                href="/travel/guides/best-things-to-do-in-mg-road-bangalore"
+                className={cn("text-[10px] uppercase tracking-[0.22em] transition-colors", isScrolled ? "text-brand-muted hover:text-brand-gold" : "text-white/68 hover:text-brand-gold")}
+              >
+                City Journal
+              </Link>
               <a
                 href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
-                className={cn(
-                  "group flex items-center gap-2 px-5 py-2.5 transition-all duration-300 border",
-                  isScrolled
-                    ? "border-brand-border bg-brand-ink text-brand-ink hover:border-brand-gold hover:text-brand-gold"
-                    : "border-white/30 bg-white/10 text-white hover:border-brand-gold"
-                )}
+                className={cn("text-[10px] uppercase tracking-[0.22em] transition-colors", isScrolled ? "text-brand-muted hover:text-brand-gold" : "text-white/68 hover:text-brand-gold")}
               >
-                <Phone className="w-4 h-4" strokeWidth={1.5} />
-                <span className="text-[11px] uppercase tracking-[0.15em] font-light">{contactInfo.phones[0]}</span>
+                {contactInfo.phones[0]}
               </a>
-
-              <Link
-                href="/contact"
-                className={cn(
-                  "group flex items-center gap-2 px-5 py-2.5 transition-all duration-300 border",
-                  isScrolled
-                    ? "border-brand-border bg-brand-ink text-brand-ink hover:border-brand-gold hover:text-brand-gold"
-                    : "border-white/30 bg-white/10 text-white hover:border-brand-gold"
-                )}
-              >
-                <MapPin className="w-4 h-4" strokeWidth={1.5} />
-                <span className="text-[11px] uppercase tracking-[0.15em] font-light">Book Now</span>
-              </Link>
-
-              <Link
-                href="/destinations"
-                className={cn(
-                  "group flex items-center gap-2 px-5 py-2.5 transition-all duration-300 border",
-                  isScrolled
-                    ? "border-brand-border bg-brand-ink text-brand-ink hover:border-brand-gold hover:text-brand-gold"
-                    : "border-white/30 bg-white/10 text-white hover:border-brand-gold"
-                )}
-              >
-                <Calendar className="w-4 h-4" strokeWidth={1.5} />
-                <span className="text-[11px] uppercase tracking-[0.15em] font-light">Explore</span>
-              </Link>
             </div>
           </div>
         </div>
 
-        {/* Progress Line Bottom Accent */}
-        {isScrolled && (
-          <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-brand-gold/30 via-brand-gold/10 to-transparent" />
-        )}
-      </header>
+        <div className="max-w-container-2xl mx-auto px-4 sm:px-6 lg:px-16">
+          <div className="h-20 sm:h-24 lg:h-[5.5rem] flex items-center justify-between">
+            <div className="hidden lg:flex items-center gap-8 xl:gap-12">
+              <Link href="/" className="block" suppressHydrationWarning>
+                <p className={cn("mb-2 text-[10px] uppercase tracking-[0.34em]", isScrolled ? "text-brand-accent" : "text-white/60")}>
+                  The Pentouz
+                </p>
+                <Image
+                  src="/logo-white.png"
+                  alt="The Pentouz"
+                  width={168}
+                  height={48}
+                  className={cn("h-10 w-auto transition-all duration-500", isScrolled ? "invert" : "")}
+                  priority
+                />
+              </Link>
 
-      {/* Fullscreen Mobile Menu Overlay */}
-      <div
-        className={cn(
-          "fixed inset-0 z-[100] transition-all duration-500 ease-out overflow-hidden",
-          isMenuOpen
-            ? "opacity-100 visible bg-brand-ink/98"
-            : "opacity-0 invisible pointer-events-none bg-transparent"
-        )}
-      >
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-32 left-8 w-32 h-32 bg-brand-gold/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-32 right-8 w-40 h-40 bg-brand-gold/5 rounded-full blur-3xl" />
-        </div>
+              <nav className="flex items-center gap-2">
+                {editorialNav.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    suppressHydrationWarning
+                    className={cn(
+                      "rounded-full px-4 py-2 text-[11px] uppercase tracking-[0.18em] transition-all duration-300",
+                      isActive(link.href)
+                        ? isScrolled
+                          ? "bg-white text-brand-ink border border-[#ddd2c1]"
+                          : "bg-white/10 text-white border border-white/18"
+                        : isScrolled
+                          ? "text-brand-muted hover:text-brand-ink"
+                          : "text-white/82 hover:text-white"
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+            </div>
 
-        <div className="relative z-10 h-full flex flex-col">
-          {/* Mobile Menu Header */}
-          <div className="flex justify-between items-center px-6 py-6 border-b border-white/10">
-            <Link href="/" className="relative group flex-shrink-0" suppressHydrationWarning>
+            <Link href="/" className="flex lg:hidden items-center" suppressHydrationWarning>
               <Image
                 src="/logo-white.png"
                 alt="The Pentouz"
-                width={120}
-                height={35}
+                width={122}
+                height={36}
+                className={cn("h-9 w-auto transition-all duration-500", isScrolled ? "invert" : "")}
+                priority
+              />
+            </Link>
+
+            <div className="flex items-center gap-3 sm:gap-4">
+              <a
+                href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
+                className={cn(
+                  "hidden md:inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] transition-colors",
+                  isScrolled ? "text-brand-muted hover:text-brand-gold" : "text-white/82 hover:text-brand-gold"
+                )}
+              >
+                <Phone className="w-4 h-4" strokeWidth={1.4} />
+                Concierge
+              </a>
+
+              <Link
+                href="/destinations"
+                className={cn(
+                  "hidden lg:inline-flex items-center gap-2 rounded-full px-5 py-3 text-[11px] uppercase tracking-[0.18em] transition-all duration-300",
+                  isScrolled
+                    ? "bg-brand-ink text-white hover:bg-black"
+                    : "bg-white text-brand-ink hover:bg-brand-gold hover:text-white"
+                )}
+              >
+                Reserve
+                <ArrowRight className="w-4 h-4" strokeWidth={1.4} />
+              </Link>
+
+              <button
+                onClick={() => setIsMenuOpen((open) => !open)}
+                className={cn(
+                  "inline-flex items-center gap-3 rounded-full px-4 py-2.5 transition-all duration-300",
+                  isScrolled
+                    ? "border border-[#ddd2c1] text-brand-ink hover:border-brand-gold hover:text-brand-gold"
+                    : "border border-white/20 text-white hover:border-brand-gold hover:text-brand-gold"
+                )}
+                aria-label="Toggle menu"
+              >
+                <Menu className="w-5 h-5" strokeWidth={1.5} />
+                <span className="hidden sm:inline text-[11px] uppercase tracking-[0.15em] font-light">Menu</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {isScrolled ? (
+          <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-brand-gold/25 to-transparent" />
+        ) : null}
+      </header>
+
+      <div
+        className={cn(
+          "fixed inset-0 z-[100] transition-all duration-500 ease-out overflow-hidden",
+          isMenuOpen ? "opacity-100 visible bg-[#12110f]/98" : "opacity-0 invisible pointer-events-none bg-transparent"
+        )}
+      >
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-24 left-6 h-40 w-40 rounded-full bg-brand-gold/8 blur-3xl" />
+          <div className="absolute bottom-24 right-6 h-56 w-56 rounded-full bg-[#a28758]/10 blur-3xl" />
+        </div>
+
+        <div className="relative z-10 h-full flex flex-col">
+          <div className="flex justify-between items-center px-6 py-6 border-b border-white/10">
+            <Link href="/" className="flex-shrink-0" suppressHydrationWarning>
+              <Image
+                src="/logo-white.png"
+                alt="The Pentouz"
+                width={122}
+                height={36}
                 className="h-9 w-auto"
                 priority
               />
@@ -218,7 +195,7 @@ export default function Header() {
 
             <button
               onClick={() => setIsMenuOpen(false)}
-              className="flex items-center gap-4 text-white/90 hover:text-brand-gold transition-colors duration-300"
+              className="flex items-center gap-3 text-white/90 hover:text-brand-gold transition-colors"
               aria-label="Close menu"
             >
               <X className="w-6 h-6" strokeWidth={1.5} />
@@ -226,125 +203,96 @@ export default function Header() {
             </button>
           </div>
 
-          {/* Menu Content - Scrollable */}
-          <div className="flex-1 flex flex-col overflow-auto">
-            {/* Main Navigation */}
-            <nav className="flex-1 px-6 py-8 lg:py-12">
-              <p className="text-[10px] uppercase tracking-[0.3em] text-brand-gold mb-8 font-medium">
-                Navigate
-              </p>
-              <div className="space-y-2">
-                {[
-                  { label: "Home", href: "/" },
-                  ...editorialNav,
-                ].map((link, i) => (
+          <div className="flex-1 overflow-auto">
+            <div className="grid lg:grid-cols-[1.1fr_0.9fr] min-h-full">
+              <nav className="px-6 py-8 lg:px-12 lg:py-14 border-b lg:border-b-0 lg:border-r border-white/10">
+                <p className="text-[10px] uppercase tracking-[0.32em] text-brand-gold mb-8 font-medium">
+                  Navigate
+                </p>
+                <p className="max-w-md text-sm text-white/65 leading-relaxed mb-8">
+                  A quieter route through each residence, the city journal, and the Pentouz collection.
+                </p>
+
+                <div className="space-y-2">
+                  {[{ label: "Home", href: "/" }, ...editorialNav].map((link, i) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={cn(
+                        "flex items-center justify-between py-4 border-b transition-all duration-300",
+                        isActive(link.href) ? "border-brand-gold/50" : "border-white/10 hover:border-brand-gold/25"
+                      )}
+                      style={{
+                        opacity: isMenuOpen ? 1 : 0,
+                        transform: isMenuOpen ? "translateY(0)" : "translateY(20px)",
+                        transition: `all 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.06}s`,
+                      }}
+                    >
+                      <span className={cn("text-3xl sm:text-4xl font-display font-light transition-colors duration-300", isActive(link.href) ? "text-brand-gold" : "text-white/92")}>
+                        {link.label}
+                      </span>
+                      <ArrowRight className="w-5 h-5 text-white/40" strokeWidth={1.3} />
+                    </Link>
+                  ))}
+                </div>
+
+                <div className="mt-10 flex flex-wrap gap-3">
                   <Link
-                    key={link.href}
-                    href={link.href}
+                    href="/destinations"
                     onClick={() => setIsMenuOpen(false)}
-                    className={cn(
-                      "flex items-center justify-between py-4 px-6 border-b border-white/10 transition-all duration-300",
-                      isActive(link.href) ? "border-brand-gold bg-brand-gold/5" : "border-transparent hover:border-brand-gold/30"
-                    )}
-                    style={{
-                      opacity: isMenuOpen ? 1 : 0,
-                      transform: isMenuOpen ? "translateY(0)" : "translateY(20px)",
-                      transition: `all 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.08}s`,
-                    }}
+                    className="inline-flex items-center gap-2 rounded-full bg-white text-brand-ink px-5 py-3 text-[11px] uppercase tracking-[0.18em]"
                   >
-                    <span className={cn(
-                      "text-2xl lg:text-3xl font-display font-light group-hover:translate-x-1 transition-transform duration-300",
-                      isActive(link.href) ? "text-brand-gold" : "text-white/90 group-hover:text-brand-gold"
-                    )}>
-                      {link.label}
-                    </span>
+                    Reserve
                   </Link>
-                ))}
-              </div>
-            </nav>
-
-            {/* Destinations Quick Access */}
-            <div className="bg-white/5 border-t border-white/10 px-6 py-8 lg:py-12">
-              <p className="text-[10px] uppercase tracking-[0.3em] text-brand-ink mb-6 font-medium">
-                Our Properties
-              </p>
-              <div className="space-y-3">
-                {destinations.map((dest) => (
-                  <Link
-                    key={dest.slug}
-                    href={`/destinations/${dest.slug}`}
+                  <a
+                    href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
                     onClick={() => setIsMenuOpen(false)}
-                    className="group flex items-center gap-4 py-4 px-6 transition-all duration-300 hover:bg-brand-linen"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-[11px] uppercase tracking-[0.18em] text-white/85"
                   >
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 overflow-hidden rounded-full border-2 border-brand-border/30 flex-shrink-0">
-                      <Image
-                        src={dest.image}
-                        alt={dest.title}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-110"
-                        sizes="80px"
-                      />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-[10px] uppercase tracking-[0.15em] text-brand-muted mb-1">
-                        {dest.subtitle}
-                      </p>
-                      <p className="text-lg sm:text-xl font-display font-light text-brand-ink group-hover:text-brand-gold transition-colors duration-300">
-                        {dest.shortTitle}
-                      </p>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
+                    Call Concierge
+                  </a>
+                </div>
+              </nav>
 
-            {/* Contact Section */}
-            <div className="bg-brand-ink border-t border-white/10 px-6 py-8 lg:py-12">
-              <p className="text-[10px] uppercase tracking-[0.3em] text-brand-gold mb-6 font-medium">
-                Contact
-              </p>
-              <div className="space-y-4">
-                <a
-                  href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
-                  className="group flex items-center gap-4 text-white/80 hover:text-brand-gold transition-colors duration-300"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border border-white/20 flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-xs uppercase tracking-[0.2em] text-white/60 mb-1">Call Us</p>
-                    <p className="text-xl sm:text-2xl font-display font-light">{contactInfo.phones[0]}</p>
-                  </div>
-                </a>
-
-                <a
-                  href={`mailto:${contactInfo.email}`}
-                  className="group flex items-center gap-4 text-white/80 hover:text-brand-gold transition-colors duration-300"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border border-white/20 flex items-center justify-center flex-shrink-0">
-                    <Search className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-xs uppercase tracking-[0.2em] text-white/60 mb-1">Email Us</p>
-                    <p className="text-xl sm:text-2xl font-display font-light">{contactInfo.email}</p>
-                  </div>
-                </a>
-
-                <Link
-                  href="/contact"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="group flex items-center gap-4 text-white/80 hover:text-brand-gold transition-colors duration-300"
-                >
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border border-white/20 flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-xs uppercase tracking-[0.2em] text-white/60 mb-1">Contact Form</p>
-                    <p className="text-xl sm:text-2xl font-display font-light">Send Message</p>
-                  </div>
-                </Link>
+              <div className="px-6 py-8 lg:px-12 lg:py-14">
+                <p className="text-[10px] uppercase tracking-[0.32em] text-brand-gold mb-8 font-medium">
+                  Residences
+                </p>
+                <div className="space-y-4">
+                  {destinations.map((dest, index) => (
+                    <Link
+                      key={dest.slug}
+                      href={`/destinations/${dest.slug}`}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="group grid grid-cols-[92px_1fr] gap-4 items-center border border-white/10 bg-white/[0.03] p-3 hover:border-brand-gold/35 transition-colors"
+                      style={{
+                        opacity: isMenuOpen ? 1 : 0,
+                        transform: isMenuOpen ? "translateY(0)" : "translateY(20px)",
+                        transition: `all 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${0.28 + index * 0.06}s`,
+                      }}
+                    >
+                      <div className="relative h-24 overflow-hidden">
+                        <Image
+                          src={dest.heroImage || dest.image}
+                          alt={dest.title}
+                          fill
+                          className="object-cover transition-transform duration-700 group-hover:scale-105"
+                          sizes="92px"
+                        />
+                      </div>
+                      <div>
+                        <p className="text-[10px] uppercase tracking-[0.2em] text-white/55 mb-2">
+                          {dest.subtitle}
+                        </p>
+                        <p className="font-display text-2xl font-light text-white mb-2 group-hover:text-brand-gold transition-colors">
+                          {dest.shortTitle}
+                        </p>
+                        <p className="text-sm text-white/65 line-clamp-2">{dest.copy}</p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

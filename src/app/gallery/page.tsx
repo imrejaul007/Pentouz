@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -14,11 +15,10 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// Extended gallery with destination images
 const allGalleryItems = [
-  ...galleryItems,
+  ...galleryItems.slice(0, 18),
   ...destinations.flatMap((dest) =>
-    dest.gallery.map((img, i) => ({
+    dest.gallery.slice(0, 8).map((img, i) => ({
       image: img,
       title: `${dest.shortTitle} - ${i + 1}`,
       category: "Properties",
@@ -86,11 +86,6 @@ export default function GalleryPage() {
     );
   }, [filter]);
 
-  // Reset and progressively load images by filter
-  useEffect(() => {
-    setVisibleCount(24);
-  }, [filter]);
-
   // Lightbox
   useEffect(() => {
     if (lightbox) {
@@ -107,26 +102,23 @@ export default function GalleryPage() {
     };
   }, [lightbox]);
 
-  const closeLightbox = useCallback(() => {
+  const closeLightbox = () => {
     if (lightboxRef.current && imageRef.current) {
       gsap.to(imageRef.current, { scale: 0.95, opacity: 0, duration: 0.3 });
       gsap.to(lightboxRef.current, { opacity: 0, duration: 0.3, delay: 0.1, onComplete: () => setLightbox(null) });
     } else {
       setLightbox(null);
     }
-  }, []);
+  };
 
-  const navigateLightbox = useCallback(
-    (direction: "prev" | "next") => {
-      if (currentIndex === -1) return;
-      const newIndex =
-        direction === "prev"
-          ? (currentIndex - 1 + filteredGallery.length) % filteredGallery.length
-          : (currentIndex + 1) % filteredGallery.length;
-      setLightbox(filteredGallery[newIndex]);
-    },
-    [currentIndex, filteredGallery]
-  );
+  const navigateLightbox = (direction: "prev" | "next") => {
+    if (currentIndex === -1) return;
+    const newIndex =
+      direction === "prev"
+        ? (currentIndex - 1 + filteredGallery.length) % filteredGallery.length
+        : (currentIndex + 1) % filteredGallery.length;
+    setLightbox(filteredGallery[newIndex]);
+  };
 
   useEffect(() => {
     if (!lightbox) return;
@@ -169,15 +161,57 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      {/* Gallery Section */}
-      <section className="py-16 sm:py-24 lg:py-32 bg-white">
+      <section className="py-16 sm:py-20 lg:py-24 bg-[#f7f3ed] border-y border-[#e5dccf]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="grid gap-4 lg:grid-cols-3">
+            {destinations.map((dest) => (
+              <Link
+                key={dest.slug}
+                href={`/destinations/${dest.slug}`}
+                className="group relative overflow-hidden bg-[#11100f] text-white"
+              >
+                <div className="relative aspect-[4/3]">
+                  <Image
+                    src={dest.heroImage || dest.image}
+                    alt={dest.title}
+                    fill
+                    className="object-cover transition-transform duration-1000 group-hover:scale-[1.03]"
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/10" />
+                </div>
+                <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+                  <p className="text-[10px] uppercase tracking-[0.24em] text-brand-gold mb-2">{dest.subtitle}</p>
+                  <p className="font-display text-2xl sm:text-3xl font-light">{dest.shortTitle}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery Section */}
+      <section className="py-16 sm:py-24 lg:py-28 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
+            <p className="text-[10px] uppercase tracking-[0.3em] text-brand-accent mb-4">Curated Selection</p>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-brand-ink">
+              A more edited visual story
+            </h2>
+            <p className="mt-5 text-sm sm:text-base text-brand-body leading-relaxed">
+              We’ve reduced the gallery to a more selective set of frames so the photography feels intentional rather than crowded.
+            </p>
+          </div>
+
           {/* Filter Tabs */}
           <div className="flex justify-start sm:justify-center gap-4 sm:gap-8 lg:gap-12 mb-12 sm:mb-16 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide">
             {allCategories.map((cat) => (
               <button
                 key={cat}
-                onClick={() => setFilter(cat)}
+                onClick={() => {
+                  setFilter(cat);
+                  setVisibleCount(24);
+                }}
                 className={cn(
                   "relative text-[10px] sm:text-[11px] uppercase tracking-[0.15em] pb-2 sm:pb-3 transition-all duration-500 whitespace-nowrap flex-shrink-0",
                   filter === cat ? "text-brand-ink" : "text-brand-muted hover:text-brand-ink"
@@ -195,14 +229,14 @@ export default function GalleryPage() {
           </div>
 
           {/* Gallery Grid */}
-          <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4 lg:gap-6">
+          <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
             {displayedGallery.map((item, i) => (
               <button
                 key={`${item.title}-${i}`}
                 onClick={() => setLightbox(item)}
                 className={cn(
                   "relative group overflow-hidden",
-                  i % 7 === 0 ? "sm:col-span-2 sm:row-span-2 aspect-square" : "aspect-[4/3]"
+                  i % 8 === 0 ? "sm:col-span-2 sm:row-span-2 aspect-square" : "aspect-[4/3]"
                 )}
               >
                 {/* Loading placeholder */}
@@ -215,7 +249,7 @@ export default function GalleryPage() {
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-500 flex items-end">
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/32 transition-colors duration-500 flex items-end">
                   <div className="p-3 sm:p-6 translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 hidden sm:block">
                     <p className="text-white font-display text-base sm:text-lg font-light mb-1">
                       {item.title}

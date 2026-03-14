@@ -57,8 +57,11 @@ export default function DestinationPage({
 
   useEffect(() => {
     if (!heroRef.current) return;
+    const shouldAnimate =
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+      window.matchMedia("(min-width: 1024px)").matches;
+    if (!shouldAnimate) return;
 
-    // Hero animation
     gsap.fromTo(
       heroRef.current.querySelectorAll("[data-reveal]"),
       { y: 80, opacity: 0 },
@@ -72,7 +75,6 @@ export default function DestinationPage({
       }
     );
 
-    // Hero image parallax
     const heroImage = heroRef.current.querySelector(".hero-image");
     if (heroImage) {
       gsap.to(heroImage, {
@@ -89,10 +91,10 @@ export default function DestinationPage({
   }, []);
 
   useEffect(() => {
-    // Scroll listener for sticky CTA
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      setShowStickyCTA(scrollY > 600);
+      const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+      setShowStickyCTA(isDesktop && scrollY > 900);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -100,7 +102,11 @@ export default function DestinationPage({
   }, []);
 
   useEffect(() => {
-    // Stats counter animation
+    const shouldAnimate =
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+      window.matchMedia("(min-width: 1024px)").matches;
+    if (!shouldAnimate) return;
+
     if (statsRef.current) {
       const statNumbers = statsRef.current.querySelectorAll(".stat-number");
       gsap.fromTo(
@@ -120,7 +126,6 @@ export default function DestinationPage({
       );
     }
 
-    // Intro section parallax
     if (introRef.current) {
       const image = introRef.current.querySelector(".intro-image");
       const content = introRef.current.querySelectorAll("[data-intro]");
@@ -159,7 +164,6 @@ export default function DestinationPage({
       );
     }
 
-    // Features animation
     if (featuresRef.current) {
       const cards = featuresRef.current.querySelectorAll(".feature-card");
       gsap.fromTo(
@@ -179,7 +183,6 @@ export default function DestinationPage({
       );
     }
 
-    // Rooms animation
     if (roomsRef.current) {
       const cards = roomsRef.current.querySelectorAll(".room-card");
       gsap.fromTo(
@@ -200,7 +203,6 @@ export default function DestinationPage({
       );
     }
 
-    // Location section animation
     if (locationRef.current) {
       const items = locationRef.current.querySelectorAll(".location-item");
       gsap.fromTo(
@@ -220,7 +222,6 @@ export default function DestinationPage({
       );
     }
 
-    // Gallery horizontal scroll effect
     if (galleryRef.current) {
       gsap.to(galleryRef.current, {
         x: -200,
@@ -332,7 +333,6 @@ export default function DestinationPage({
         />
       ) : null}
       <main>
-        {/* Hero Section - Enhanced with property badge and rating */}
         <section
           ref={heroRef}
           className="relative h-[100svh] min-h-[600px] sm:min-h-[700px] overflow-hidden"
@@ -356,11 +356,10 @@ export default function DestinationPage({
 
           <div className="relative h-full flex flex-col justify-end text-white px-4 sm:px-8 lg:px-24 pb-20 sm:pb-28 lg:pb-32">
             <div className="max-w-7xl mx-auto w-full">
-              {/* Property Type Badge */}
               {propertyType && (
                 <div
                   data-reveal
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 mb-6"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-white/8 backdrop-blur-sm border border-white/12 mb-6"
                 >
                   <Building2 className="w-4 h-4 text-brand-gold" />
                   <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-white/90 font-light">
@@ -382,7 +381,6 @@ export default function DestinationPage({
                 {destination.title}
               </h1>
 
-              {/* Rating Display */}
               {rating && (
                 <div
                   data-reveal
@@ -416,7 +414,6 @@ export default function DestinationPage({
                 {destination.copy}
               </p>
 
-              {/* Quick action buttons */}
               <div
                 data-reveal
                 className="flex flex-wrap gap-3 sm:gap-4 mt-8 sm:mt-10"
@@ -486,10 +483,9 @@ export default function DestinationPage({
           </section>
         )}
 
-        {/* Property Stats Bar */}
         <section
           ref={statsRef}
-          className="py-8 sm:py-12 bg-brand-ink text-white border-b border-white/10"
+          className="py-8 sm:py-12 bg-[#efe7db] text-brand-ink border-b border-[#e3d8c9]"
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8">
@@ -502,7 +498,7 @@ export default function DestinationPage({
                       {rating}.0
                     </span>
                   </div>
-                  <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-white/80">
+                  <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-brand-muted">
                     Guest Rating
                   </p>
                 </div>
@@ -517,7 +513,7 @@ export default function DestinationPage({
                       {totalSize || totalRooms}
                     </span>
                   </div>
-                  <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-white/80">
+                  <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-brand-muted">
                     Property Size
                   </p>
                 </div>
@@ -532,7 +528,7 @@ export default function DestinationPage({
                       {capacity}
                     </span>
                   </div>
-                  <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-white/80">
+                  <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-brand-muted">
                     Capacity
                   </p>
                 </div>
@@ -546,7 +542,7 @@ export default function DestinationPage({
                       {reviews}+
                     </span>
                   </div>
-                  <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-white/80">
+                  <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-brand-muted">
                     Happy Guests
                   </p>
                 </div>
@@ -555,7 +551,6 @@ export default function DestinationPage({
           </div>
         </section>
 
-        {/* Ideal For Tags */}
         {idealFor && idealFor.length > 0 && (
           <section className="py-6 sm:py-8 bg-brand-cream border-b border-brand-border">
             <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
@@ -597,7 +592,6 @@ export default function DestinationPage({
           </section>
         )}
 
-        {/* Introduction - Enhanced with decorative elements */}
         <section
           ref={introRef}
           className="py-16 sm:py-24 lg:py-32 bg-white overflow-hidden"
@@ -657,7 +651,6 @@ export default function DestinationPage({
                     </div>
                   </div>
                 </div>
-                {/* Decorative frame */}
                 <div className="hidden sm:block absolute -bottom-6 -right-6 lg:-bottom-10 lg:-right-10 w-full h-full border border-brand-gold/20 -z-10" />
                 <div className="hidden sm:block absolute -bottom-3 -right-3 lg:-bottom-5 lg:-right-5 w-24 sm:w-32 h-24 sm:h-32 bg-brand-cream -z-10" />
               </div>
@@ -665,7 +658,6 @@ export default function DestinationPage({
           </div>
         </section>
 
-        {/* Location & Transport */}
         {(destination.location as any) && (
           <section
             ref={locationRef}
@@ -683,7 +675,7 @@ export default function DestinationPage({
 
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 {(destination.location as any).airport && (
-                  <div className="location-item bg-white p-6 sm:p-8 hover:shadow-lg transition-shadow duration-500">
+                  <div className="location-item bg-white p-6 sm:p-8 border border-brand-border">
                     <div className="w-12 h-12 bg-brand-gold/10 flex items-center justify-center mb-6">
                       <Plane className="w-6 h-6 text-brand-gold" />
                     </div>
@@ -704,7 +696,7 @@ export default function DestinationPage({
                 )}
 
                 {(destination.location as any).railway && (
-                  <div className="location-item bg-white p-6 sm:p-8 hover:shadow-lg transition-shadow duration-500">
+                  <div className="location-item bg-white p-6 sm:p-8 border border-brand-border">
                     <div className="w-12 h-12 bg-brand-gold/10 flex items-center justify-center mb-6">
                       <Train className="w-6 h-6 text-brand-gold" />
                     </div>
@@ -726,7 +718,7 @@ export default function DestinationPage({
 
                 {((destination.location as any).landmark ||
                   (destination.location as any).metro) && (
-                  <div className="location-item bg-white p-6 sm:p-8 hover:shadow-lg transition-shadow duration-500">
+                  <div className="location-item bg-white p-6 sm:p-8 border border-brand-border">
                     <div className="w-12 h-12 bg-brand-gold/10 flex items-center justify-center mb-6">
                       <Building2 className="w-6 h-6 text-brand-gold" />
                     </div>
@@ -769,7 +761,6 @@ export default function DestinationPage({
           </section>
         )}
 
-        {/* Features & Amenities - Enhanced card design */}
         <section ref={featuresRef} className="py-16 sm:py-24 lg:py-32 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
             <div className="text-center mb-12 sm:mb-16 lg:mb-20">
@@ -785,7 +776,7 @@ export default function DestinationPage({
               {destination.features.map((feature) => (
                 <div
                   key={feature}
-                  className="feature-card group flex items-start gap-4 sm:gap-5 p-5 sm:p-6 lg:p-8 bg-brand-cream hover:bg-white hover:shadow-lg transition-all duration-500 border-l-2 border-transparent hover:border-brand-gold"
+                  className="feature-card group flex items-start gap-4 sm:gap-5 p-5 sm:p-6 lg:p-8 bg-[#faf6f0] border border-[#ede3d7] transition-colors duration-500"
                 >
                   <div className="w-8 sm:w-10 h-8 sm:h-10 bg-brand-gold/10 flex items-center justify-center flex-shrink-0 group-hover:bg-brand-gold transition-colors duration-500">
                     <Check
@@ -816,7 +807,6 @@ export default function DestinationPage({
           </div>
         </section>
 
-        {/* Rooms / Suites - Enhanced with hover effects */}
         <section className="py-16 sm:py-24 lg:py-32 bg-[#f8f7f5]">
           <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
             <div className="text-center mb-12 sm:mb-16 lg:mb-20">
@@ -884,7 +874,6 @@ export default function DestinationPage({
           </div>
         </section>
 
-        {/* Gallery Strip - Enhanced with click to open */}
         <section className="py-8 sm:py-12 lg:py-16 bg-brand-ink overflow-hidden">
           <div
             ref={galleryRef}
@@ -1061,9 +1050,8 @@ export default function DestinationPage({
         </section>
       </main>
 
-      {/* Sticky Booking CTA */}
       <div
-        className={`fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-brand-border py-4 px-4 sm:px-8 transition-transform duration-500 ${
+        className={`fixed bottom-0 left-0 right-0 z-40 hidden lg:block bg-white border-t border-brand-border py-4 px-4 sm:px-8 transition-transform duration-500 ${
           showStickyCTA ? "translate-y-0" : "translate-y-full"
         }`}
       >
@@ -1094,7 +1082,6 @@ export default function DestinationPage({
         </div>
       </div>
 
-      {/* Lightbox Modal */}
       {lightboxOpen && (
         <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center">
           <button
