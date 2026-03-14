@@ -62,29 +62,21 @@ export default function Header() {
         className={cn(
           "fixed top-0 left-0 right-0 z-40 transition-all duration-500 ease-out",
           isScrolled
-            ? "bg-[#f6f1ea]/95 backdrop-blur-xl border-b border-[#ddd2c1] shadow-[0_12px_40px_rgba(18,16,13,0.08)]"
-            : "bg-gradient-to-b from-black/45 via-black/18 to-transparent"
+            ? "bg-[#f6f1ea]/96 backdrop-blur-xl border-b border-[#ddd2c1] shadow-[0_12px_40px_rgba(18,16,13,0.08)]"
+            : "bg-gradient-to-b from-black/38 via-black/12 to-transparent"
         )}
       >
-        <div className={cn("hidden xl:block border-b", isScrolled ? "border-black/5" : "border-white/10")}>
-          <div className="max-w-container-2xl mx-auto px-6 lg:px-16 h-10 flex items-center justify-between">
-            <p className={cn("text-[10px] uppercase tracking-[0.3em]", isScrolled ? "text-brand-muted" : "text-white/68")}>
-              Luxury residences and boutique stays by The Pentouz
+        <div className={cn("hidden xl:block border-b", isScrolled ? "border-black/5" : "border-white/8")}>
+          <div className="max-w-container-2xl mx-auto px-6 lg:px-16 h-9 flex items-center justify-between">
+            <p className={cn("text-[10px] tracking-[0.18em]", isScrolled ? "text-brand-muted" : "text-white/62")}>
+              Bengaluru and Ooty
             </p>
-            <div className="flex items-center gap-6">
-              <Link
-                href="/travel/guides/best-things-to-do-in-mg-road-bangalore"
-                className={cn("text-[10px] uppercase tracking-[0.22em] transition-colors", isScrolled ? "text-brand-muted hover:text-brand-gold" : "text-white/68 hover:text-brand-gold")}
-              >
-                Bangalore Notes
-              </Link>
-              <a
-                href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
-                className={cn("text-[10px] uppercase tracking-[0.22em] transition-colors", isScrolled ? "text-brand-muted hover:text-brand-gold" : "text-white/68 hover:text-brand-gold")}
-              >
-                {contactInfo.phones[0]}
-              </a>
-            </div>
+            <a
+              href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
+              className={cn("text-[10px] tracking-[0.18em] transition-colors", isScrolled ? "text-brand-muted hover:text-brand-gold" : "text-white/62 hover:text-brand-gold")}
+            >
+              {contactInfo.phones[0]}
+            </a>
           </div>
         </div>
 
@@ -105,18 +97,18 @@ export default function Header() {
                 />
               </Link>
 
-              <nav className="flex items-center gap-2">
+              <nav className="flex items-center gap-1">
                 {primaryNav.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
                     suppressHydrationWarning
                     className={cn(
-                      "rounded-full px-4 py-2 text-[11px] uppercase tracking-[0.18em] transition-all duration-300",
+                      "px-4 py-2 text-[11px] uppercase tracking-[0.18em] transition-all duration-300",
                       isActive(link.href)
                         ? isScrolled
-                          ? "bg-white text-brand-ink border border-[#ddd2c1]"
-                          : "bg-white/10 text-white border border-white/18"
+                          ? "text-brand-ink"
+                          : "text-white"
                         : isScrolled
                           ? "text-brand-muted hover:text-brand-ink"
                           : "text-white/82 hover:text-white"
@@ -154,10 +146,10 @@ export default function Header() {
               <Link
                 href="/destinations"
                 className={cn(
-                  "hidden lg:inline-flex items-center gap-2 rounded-full px-5 py-3 text-[11px] uppercase tracking-[0.18em] transition-all duration-300",
+                  "hidden lg:inline-flex items-center gap-2 border px-5 py-3 text-[11px] uppercase tracking-[0.18em] transition-all duration-300",
                   isScrolled
-                    ? "bg-brand-ink text-white hover:bg-black"
-                    : "bg-white text-brand-ink hover:bg-brand-gold hover:text-white"
+                    ? "border-brand-ink text-brand-ink hover:bg-brand-ink hover:text-white"
+                    : "border-white/24 text-white hover:border-brand-gold hover:text-brand-gold"
                 )}
               >
                 Reserve

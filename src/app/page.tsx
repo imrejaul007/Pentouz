@@ -82,53 +82,53 @@ export default function HomePage() {
         <section className="relative isolate min-h-[100svh] overflow-hidden bg-[#15120f] text-white">
           <div className="absolute inset-0">
             <Image
-              src="/indiranagar/all/04._living_room_05._living_room.jpg"
+              src="/lavelle-road/all/terrace_1.jpg"
               alt="The Pentouz luxury residences"
               fill
               priority
               sizes="100vw"
-              className="object-cover scale-[1.04] animate-[fade-in-up_1.4s_cubic-bezier(0.16,1,0.3,1)_forwards]"
+              className="object-cover scale-[1.02] animate-[fade-in-up_1.4s_cubic-bezier(0.16,1,0.3,1)_forwards]"
             />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,8,6,0.92)_0%,rgba(10,8,6,0.64)_38%,rgba(10,8,6,0.24)_72%,rgba(10,8,6,0.82)_100%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(196,160,97,0.14),transparent_28%)]" />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,8,6,0.18)_0%,rgba(10,8,6,0)_28%,rgba(10,8,6,0.78)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,8,6,0.82)_0%,rgba(10,8,6,0.44)_38%,rgba(10,8,6,0.14)_70%,rgba(10,8,6,0.72)_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(196,160,97,0.1),transparent_28%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,8,6,0.08)_0%,rgba(10,8,6,0)_28%,rgba(10,8,6,0.7)_100%)]" />
           </div>
 
           <div className="relative mx-auto flex min-h-[100svh] max-w-[1480px] flex-col justify-end px-5 pb-16 pt-36 sm:px-8 sm:pb-20 lg:px-14 lg:pb-24 lg:pt-48">
-            <div className="grid gap-10 xl:grid-cols-[1.08fr_0.92fr] xl:items-end">
+            <div className="grid gap-12 xl:grid-cols-[1fr_0.75fr] xl:items-end">
               <div className="max-w-5xl">
-                <p className="luxury-kicker text-white/72 animate-fade-in-up">Welcome to The Pentouz, where luxury meets exclusivity</p>
+                <p className="luxury-kicker text-white/70 animate-fade-in-up">The Pentouz</p>
                 <h1 className="luxury-hero-title mt-6 max-w-5xl text-white animate-fade-in-up [animation-delay:120ms]">
-                  The ultimate experience of <em className="italic text-brand-gold">luxury</em> and space.
+                  Distinct stays for guests who want privacy, space, and a quieter kind of luxury.
                 </h1>
-                <p className="luxury-copy mt-8 max-w-2xl text-white/76 animate-fade-in-up [animation-delay:220ms]">
-                  Private penthouses, boutique city stays, and hillside escapes shaped around privacy, elegance, and the feeling of arriving somewhere rare.
+                <p className="luxury-copy mt-8 max-w-2xl text-white/74 animate-fade-in-up [animation-delay:220ms]">
+                  Boutique city rooms on Lavelle Road, a private penthouse in Indiranagar, and a slower retreat in Ooty.
                 </p>
                 <div className="mt-10 flex flex-col gap-4 sm:flex-row animate-fade-in-up [animation-delay:320ms]">
                   <Link
                     href="/destinations"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-brand-ink transition-all duration-500 hover:-translate-y-0.5 hover:bg-brand-gold hover:text-white"
+                    className="inline-flex items-center justify-center gap-2 bg-white px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-brand-ink transition-all duration-500 hover:-translate-y-0.5 hover:bg-brand-gold hover:text-white"
                   >
-                    Explore Our Properties
+                    Explore Destinations
                     <ArrowRight className="h-4 w-4" strokeWidth={1.4} />
                   </Link>
                   <a
                     href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
-                    className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-white/88 transition-all duration-500 hover:-translate-y-0.5 hover:border-brand-gold hover:text-brand-gold"
+                    className="inline-flex items-center justify-center border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-white/88 transition-all duration-500 hover:-translate-y-0.5 hover:border-brand-gold hover:text-brand-gold"
                   >
                     Speak to Concierge
                   </a>
                 </div>
               </div>
 
-              <div className="animate-fade-in-up [animation-delay:420ms] xl:justify-self-end xl:max-w-[440px]">
-                <div className="luxury-panel border-white/15 bg-white/[0.08] text-white backdrop-blur-md">
-                  <p className="luxury-kicker text-white/58">Featured Residence</p>
+              <div className="animate-fade-in-up [animation-delay:420ms] xl:justify-self-end xl:max-w-[420px]">
+                <div className="border-t border-white/20 pt-6 text-white">
+                  <p className="luxury-kicker text-white/58">Featured Property</p>
                   <h2 className="mt-4 font-display text-3xl font-light leading-tight text-white sm:text-4xl">
                     {lavelle.title}
                   </h2>
                   <p className="mt-5 text-sm leading-7 text-white/72 sm:text-base">{lavelle.copy}</p>
-                  <div className="mt-8 grid gap-4 border-t border-white/10 pt-6 sm:grid-cols-3 sm:gap-3">
+                  <div className="mt-8 grid gap-4 sm:grid-cols-3 sm:gap-3">
                     <div>
                       <p className="text-[10px] uppercase tracking-[0.22em] text-brand-gold">Location</p>
                       <p className="mt-2 text-sm text-white/84">Lavelle Road</p>
@@ -141,6 +141,12 @@ export default function HomePage() {
                       <p className="text-[10px] uppercase tracking-[0.22em] text-brand-gold">Nearby</p>
                       <p className="mt-2 text-sm text-white/84">UB City, MG Road</p>
                     </div>
+                  </div>
+                  <div className="mt-8">
+                    <Link href="/destinations/lavelle-road" className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-white transition-colors hover:text-brand-gold">
+                      View Lavelle Road
+                      <ArrowRight className="h-4 w-4" strokeWidth={1.4} />
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -155,9 +161,9 @@ export default function HomePage() {
         >
           <div className="mx-auto grid max-w-[1480px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:px-14 lg:py-28">
             <div className={`transition-all duration-1000 ${visibleSections.intro ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
-              <p className="luxury-kicker text-brand-accent">Stay Where The Action Is</p>
+              <p className="luxury-kicker text-brand-accent">A Pentouz Stay</p>
               <h2 className="luxury-section-title mt-5 max-w-xl">
-                Prime locations, timeless comfort, and a more personal expression of luxury.
+                A more private, more personal way to stay in Bangalore and Ooty.
               </h2>
             </div>
             <div className={`space-y-6 text-base leading-8 text-brand-body sm:text-lg transition-all duration-1000 delay-150 ${visibleSections.intro ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
@@ -195,7 +201,7 @@ export default function HomePage() {
                 >
                   <div className="relative aspect-[4/5] overflow-hidden">
                     <Image
-                      src={destination.image}
+                      src={destination.heroImage || destination.image}
                       alt={destination.title}
                       fill
                       sizes="(max-width: 1200px) 100vw, 25vw"
@@ -209,11 +215,11 @@ export default function HomePage() {
                   </div>
                 </Link>
               ))}
-              <div className={`group overflow-hidden border border-dashed border-brand-border bg-[#efe7da] p-8 transition-all duration-700 hover:-translate-y-2 ${visibleSections.collection ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`} style={{ transitionDelay: `${destinations.length * 90}ms` }}>
-                <p className="text-[10px] uppercase tracking-[0.22em] text-brand-accent">Coming Soon</p>
-                <h3 className="mt-4 font-display text-4xl font-light leading-tight text-brand-ink">New destinations</h3>
+              <div className={`group overflow-hidden border border-brand-border bg-[#efe7da] p-8 transition-all duration-700 hover:-translate-y-2 ${visibleSections.collection ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`} style={{ transitionDelay: `${destinations.length * 90}ms` }}>
+                <p className="text-[10px] uppercase tracking-[0.22em] text-brand-accent">The Collection</p>
+                <h3 className="mt-4 font-display text-4xl font-light leading-tight text-brand-ink">Choose the stay that matches your trip.</h3>
                 <p className="mt-4 text-sm leading-7 text-brand-body">
-                  The collection continues to grow with carefully chosen addresses that match the Pentouz standard of privacy, comfort, and memorable design.
+                  Some guests need central access, some need a private residence, and some need a quieter retreat. Pentouz is built around that difference.
                 </p>
               </div>
             </div>
