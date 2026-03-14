@@ -2,340 +2,195 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Calendar, MapPin, Phone, Wifi, Coffee, ShieldCheck, Car, Utensils, Home, Building2, Plane, Clock, CreditCard } from "lucide-react";
+import { ArrowRight, Calendar, MapPin, Phone } from "lucide-react";
 import { destinations, contactInfo } from "@/data/content";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import StickyBookingCTA from "@/components/StickyBookingCTA";
 import { withSiteUrl } from "@/lib/site";
-
 
 export const metadata: Metadata = {
   title: "The Pentouz @ Lavelle Road | Luxury Studio Boutique Hotel Bangalore",
-  description: "Six exquisite studio rooms with panoramic city views on Bangalore's prestigious Lavelle Road. Walking distance to UB City, MG Road metro.",
+  description:
+    "Six refined studio suites on Bangalore's prestigious Lavelle Road, close to UB City, MG Road, and the High Court of Karnataka.",
   alternates: {
     canonical: withSiteUrl("/destinations/lavelle-road"),
   },
 };
 
-const distances = [
-  { icon: Plane, label: "Kempegowda International Airport", value: "35 km", time: "~45 min" },
-  { icon: Clock, label: "KSR Bengaluru City Junction", value: "5 km", time: "~15 min" },
-  { icon: Building2, label: "MG Road Metro Station", value: "1 km", time: "~5 min" },
+const reasons = [
+  "Walkable access to UB City, MG Road, and central Bengaluru's business core.",
+  "A strong base for advocates, consultants, and guests with precise schedules.",
+  "Fewer keys, quieter floors, and a more private boutique-hotel rhythm.",
 ];
 
-const nearbyAttractions = [
-  { name: "UB City", desc: "Luxury shopping, fine dining, and exclusive experiences", distance: "5 min walk" },
-  { name: "MG Road", desc: "Vibrant cafes, boutiques, and cultural attractions", distance: "10 min walk" },
-  { name: "Cubbon Park", desc: "Sprawling green space and botanical gardens", distance: "12 min drive" },
-  { name: "Vidhana Soudha", desc: "Seat of Karnataka government and landmark architecture", distance: "15 min drive" },
-];
-
-const amenities = [
-  { icon: Wifi, label: "High-Speed WiFi", desc: "Complimentary throughout property" },
-  { icon: Coffee, label: "Room Service", desc: "Available on request" },
-  { icon: ShieldCheck, label: "24/7 Security", desc: "Your safety first" },
-  { icon: Car, label: "Valet Parking", desc: "Covered parking available" },
-  { icon: Utensils, label: "Kitchenette", desc: "In every studio" },
-  { icon: Home, label: "Daily Housekeeping", desc: "Fresh daily service" },
-  { icon: Wifi, label: "Premium Views", desc: "Panoramic cityscape" },
-  { icon: Wifi, label: "Spacious Studios", desc: "6 well-appointed rooms" },
-];
-
-const highlights = [
-  { title: "Top Floor Studios", desc: "Six exclusive studios with panoramic views of Bangalore skyline" },
-  { title: "Prime Lavelle Road", desc: "Located on prestigious address in heart of upscale Bangalore" },
-  { title: "UB City Proximity", desc: "Short stroll to luxury shopping, dining, and entertainment" },
-  { title: "Business Ready", desc: "Ideal for executives, consultants, and extended stays" },
-  { title: "Quiet Retreat", desc: "Oasis of calm amidst vibrant urban energy" },
-  { title: "Metro Connected", desc: "1 km from MG Road Metro for city-wide access" },
+const anchors = [
+  "Karnataka High Court",
+  "UB City",
+  "MG Road Metro",
+  "Cubbon Park",
 ];
 
 export default function LavelleRoadPage() {
-  const lavelleRoad = destinations.find(d => d.slug === "lavelle-road");
-  if (!lavelleRoad) notFound();
+  const property = destinations.find((destination) => destination.slug === "lavelle-road");
+  if (!property) notFound();
 
   return (
     <>
       <Header />
+      <main className="bg-[#f6f1ea]">
+        <section className="relative min-h-[100svh] overflow-hidden bg-[#151311] text-white">
+          <div className="absolute inset-0">
+            <Image
+              src={property.heroImage || property.image}
+              alt={property.title}
+              fill
+              priority
+              className="object-cover"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,8,8,0.25)_0%,rgba(8,8,8,0.16)_24%,rgba(8,8,8,0.68)_76%,rgba(8,8,8,0.84)_100%)]" />
+          </div>
 
-      {/* Full-Screen Hero - Minimal Text, Large Image */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-brand-ink">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src={lavelleRoad?.heroImage || "/lavelle-road/terrace-1.jpg"}
-            alt={lavelleRoad?.title || "The Pentouz @ Lavelle Road"}
-            fill
-            priority
-            className="object-cover scale-105"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/15 to-black/45" />
-        </div>
-
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-16 text-center">
-          <div className="space-y-6">
-            <p className="text-[10px] uppercase tracking-[0.5em] text-brand-gold">
-              Bangalore
-            </p>
-            <h1 className="font-display text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-light text-white leading-none tracking-tight">
-              Lavelle Road
+          <div className="relative max-w-container-2xl mx-auto px-4 sm:px-6 lg:px-16 pt-40 sm:pt-48 lg:pt-56 pb-16 sm:pb-20 min-h-[100svh] flex flex-col justify-end">
+            <p className="text-[10px] uppercase tracking-[0.42em] text-brand-gold mb-6">Lavelle Road, Bengaluru</p>
+            <h1 className="max-w-5xl font-display text-[3.4rem] leading-[0.92] sm:text-[5rem] lg:text-[7.2rem] xl:text-[8.4rem] font-light">
+              A calmer address in the <em className="italic text-brand-gold">center of the city</em>
             </h1>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-              <Link
-                href="https://bookmystay.io/rooms/37853"
-                className="group inline-flex items-center gap-3 bg-brand-gold text-brand-ink px-10 py-4 text-[10px] uppercase tracking-[0.25em] hover:bg-white transition-all duration-500 font-light"
+            <p className="mt-8 max-w-2xl text-base sm:text-lg text-white/80 leading-relaxed">
+              Six studio accommodations composed for business travel, legal schedules, and guests who want a more private stay near Bengaluru&apos;s most important central corridors.
+            </p>
+
+            <div className="mt-10 flex flex-col sm:flex-row gap-4">
+              <a
+                href={property.bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[11px] uppercase tracking-[0.2em] text-brand-ink transition-colors hover:bg-brand-gold hover:text-white"
               >
-                <Calendar className="w-4 h-4" />
-                Reserve
+                <Calendar className="w-4 h-4" strokeWidth={1.4} />
+                Reserve Lavelle Road
+              </a>
+              <Link
+                href="/destinations/lavelle-road/living"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.2em] text-white/90 transition-colors hover:border-brand-gold hover:text-brand-gold"
+              >
+                View Room Types
               </Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white border-t border-[#e5dbc9]">
+          <div className="max-w-container-2xl mx-auto px-4 sm:px-6 lg:px-16 py-16 sm:py-20 lg:py-24 grid gap-10 lg:grid-cols-[0.7fr_1.3fr]">
+            <div>
+              <p className="text-[10px] uppercase tracking-[0.34em] text-brand-accent mb-5">Why It Works</p>
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light leading-tight">
+                Boutique scale with <em className="italic">central precision</em>
+              </h2>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-3">
+              {reasons.map((reason) => (
+                <div key={reason} className="border border-[#eee4d8] bg-[#faf6f0] p-5">
+                  <p className="text-sm text-brand-body leading-relaxed">{reason}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#f6f1ea] py-16 sm:py-20 lg:py-24">
+          <div className="max-w-container-2xl mx-auto px-4 sm:px-6 lg:px-16 grid gap-8 lg:grid-cols-[1.15fr_0.85fr] items-end">
+            <div className="relative aspect-[16/10] overflow-hidden">
+              <Image
+                src={property.gallery?.[1] || property.image}
+                alt={`${property.title} exterior`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 60vw"
+              />
+            </div>
+            <div className="bg-white border border-[#eadfce] p-6 sm:p-8 lg:p-10">
+              <p className="text-[10px] uppercase tracking-[0.3em] text-brand-gold mb-4">Location Value</p>
+              <h2 className="font-display text-3xl sm:text-4xl font-light text-brand-ink leading-tight">
+                Near the city&apos;s legal, cultural, and commercial anchors
+              </h2>
+              <div className="mt-6 flex flex-wrap gap-3">
+                {anchors.map((anchor) => (
+                  <span
+                    key={anchor}
+                    className="rounded-full border border-[#e7ddcf] px-4 py-2 text-[10px] uppercase tracking-[0.16em] text-brand-muted"
+                  >
+                    {anchor}
+                  </span>
+                ))}
+              </div>
+              <div className="mt-8 flex flex-col gap-3 text-sm text-brand-body">
+                <p className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-brand-gold" />
+                  {property.address}
+                </p>
+                <p className="flex items-center gap-2">
+                  <Phone className="w-4 h-4 text-brand-gold" />
+                  {contactInfo.phones[0]}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#11100f] text-white py-16 sm:py-20 lg:py-24">
+          <div className="max-w-container-2xl mx-auto px-4 sm:px-6 lg:px-16 grid gap-6 lg:grid-cols-[0.8fr_1.2fr] items-start">
+            <div>
+              <p className="text-[10px] uppercase tracking-[0.34em] text-brand-gold mb-4">Linked Guides</p>
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light leading-tight">
+                Built for high-intent central Bengaluru searches
+              </h2>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {[
+                { href: "/destinations/lavelle-road/near/karnataka-high-court", label: "Hotel Near Karnataka High Court" },
+                { href: "/destinations/lavelle-road/near/ub-city", label: "Hotel Near UB City" },
+                { href: "/travel/guides/court-day-itinerary-near-karnataka-high-court", label: "Court-Day Itinerary" },
+                { href: "/travel/clusters/legal-courts", label: "Legal Travel Cluster" },
+              ].map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="border border-white/10 bg-white/[0.03] p-5 hover:border-brand-gold/35 transition-colors"
+                >
+                  <p className="text-sm text-white/82 leading-relaxed">{item.label}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white py-16 sm:py-20 lg:py-24">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-16 text-center">
+            <p className="text-[10px] uppercase tracking-[0.34em] text-brand-accent mb-5">Book Direct</p>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-brand-ink leading-tight">
+              A refined studio stay, close to where the city matters most
+            </h2>
+            <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+              <a
+                href={property.bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-ink px-8 py-4 text-[11px] uppercase tracking-[0.2em] text-white transition-colors hover:bg-black"
+              >
+                Reserve Now
+                <ArrowRight className="w-4 h-4" strokeWidth={1.4} />
+              </a>
               <a
                 href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
-                className="inline-flex items-center gap-3 border border-white/40 text-white px-10 py-4 text-[10px] uppercase tracking-[0.25em] hover:border-brand-gold hover:bg-white/10 transition-all duration-500 font-light"
+                className="inline-flex items-center justify-center rounded-full border border-brand-ink px-8 py-4 text-[11px] uppercase tracking-[0.2em] text-brand-ink transition-colors hover:bg-brand-ink hover:text-white"
               >
-                <Phone className="w-4 h-4" />
-                Contact
+                Call Concierge
               </a>
             </div>
           </div>
-        </div>
-
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-gold/50 to-transparent" />
-      </section>
-
-      {/* Introduction - Minimal Text */}
-      <section className="py-24 sm:py-32 lg:py-40 bg-white">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-16 text-center">
-          <p className="text-[10px] uppercase tracking-[0.4em] text-brand-accent mb-8">
-            The Property
-          </p>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-brand-ink mb-8 leading-tight">
-            Six Studios,
-            <br />
-            <span className="italic font-extralight">Unforgettable Views</span>
-          </h2>
-          <p className="text-base sm:text-lg text-brand-body leading-relaxed">
-            The Pentouz Lavelle Road boasts six exquisitely designed, spacious studio rooms located on the top floor, each offering stunning panoramic views of the cityscape. These well-appointed studios are thoughtfully curated to cater to the discerning traveler, combining elegance with modern comforts.
-          </p>
-        </div>
-      </section>
-
-      {/* Full Width Image Section */}
-      <section className="relative h-[70vh] overflow-hidden bg-brand-ink">
-        <Image
-          src={lavelleRoad?.image || "/lavelle-road/facade-1.jpg"}
-          alt={lavelleRoad?.title || "The Pentouz @ Lavelle Road"}
-          fill
-          className="object-cover"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-      </section>
-
-      {/* Location & Distance */}
-      <section className="py-24 sm:py-32 lg:py-40 bg-brand-linen">
-        <div className="max-w-container-xl mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.4em] text-brand-accent mb-8">
-                Getting Here
-              </p>
-              <h2 className="font-display text-3xl sm:text-4xl font-light text-brand-ink mb-12 leading-tight">
-                Approximate
-                <br />
-                <span className="italic font-extralight">Travel Time</span>
-              </h2>
-              <div className="space-y-8">
-                {distances.map((item, i) => (
-                  <div key={i} className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-white border border-brand-border/30 flex items-center justify-center">
-                      <item.icon className="w-5 h-5 text-brand-accent" />
-                    </div>
-                    <div>
-                      <h3 className="font-display text-lg font-light text-brand-ink mb-1">
-                        {item.label}
-                      </h3>
-                      <p className="text-brand-muted text-sm">{item.value} • {item.time} by car</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.4em] text-brand-accent mb-8">
-                Location
-              </p>
-              <h2 className="font-display text-3xl sm:text-4xl font-light text-brand-ink mb-12 leading-tight">
-                46, 6th Cross,
-                <br />
-                <span className="italic font-extralight">Lavelle Road</span>
-              </h2>
-              <p className="text-base text-brand-body mb-8 leading-relaxed">
-                Bangalore – 560001, India
-              </p>
-              <Link
-                href="https://maps.google.com/?q=12.971722,77.599697"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 text-brand-ink text-[10px] uppercase tracking-[0.25em] hover:text-brand-accent transition-colors duration-300"
-              >
-                <MapPin className="w-4 h-4" />
-                View on Map
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Nearby Attractions - Full Width Cards */}
-      <section className="bg-white border-t border-brand-border/30">
-        <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-brand-border/30">
-          {nearbyAttractions.map((item, i) => (
-            <div key={i} className="group p-8 lg:p-12 hover:bg-brand-linen/50 transition-colors duration-500">
-              <MapPin className="w-5 h-5 text-brand-gold/40 mb-4" />
-              <h3 className="font-display text-lg font-light text-brand-ink mb-2">
-                {item.name}
-              </h3>
-              <p className="text-sm text-brand-muted mb-3 leading-relaxed">
-                {item.desc}
-              </p>
-              <p className="text-[10px] uppercase tracking-[0.2em] text-brand-accent">
-                {item.distance}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Amenities - Minimal Grid */}
-      <section className="py-24 sm:py-32 lg:py-40 bg-white">
-        <div className="max-w-container-xl mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="text-center mb-16">
-            <p className="text-[10px] uppercase tracking-[0.4em] text-brand-accent mb-8">
-              Amenities
-            </p>
-            <h2 className="font-display text-3xl sm:text-4xl font-light text-brand-ink leading-tight">
-              Everything You Need
-            </h2>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-12 gap-y-10">
-            {amenities.map((amenity, i) => (
-              <div key={i} className="text-center">
-                <amenity.icon className="w-6 h-6 mx-auto mb-4 text-brand-gold/60" />
-                <p className="text-[10px] uppercase tracking-[0.2em] text-brand-ink mb-1">
-                  {amenity.label}
-                </p>
-                <p className="text-xs text-brand-muted">
-                  {amenity.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Highlights - Minimal List */}
-      <section className="py-24 sm:py-32 lg:py-40 bg-brand-linen">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="text-center mb-16">
-            <p className="text-[10px] uppercase tracking-[0.4em] text-brand-accent mb-8">
-              Why Choose Us
-            </p>
-            <h2 className="font-display text-3xl sm:text-4xl font-light text-brand-ink leading-tight">
-              Property Highlights
-            </h2>
-          </div>
-          <div className="space-y-6">
-            {highlights.map((item, i) => (
-              <div key={i} className="flex items-start gap-6">
-                <span className="flex-shrink-0 font-display text-2xl text-brand-gold/20">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <div>
-                  <h3 className="font-display text-lg font-light text-brand-ink mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-brand-muted leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Explore - Image Cards */}
-      <section className="bg-white border-t border-brand-border/30">
-        <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-brand-border/30">
-          {[
-            { href: "/destinations/lavelle-road/rooms", title: "Rooms", subtitle: "Six spacious studios", image: "/lavelle-road/king-suite-1.jpg" },
-            { href: "/destinations/lavelle-road/experiences", title: "Experiences", subtitle: "Curated activities", image: "/ooty/all/22._lawn.jpeg" },
-            { href: "/destinations/lavelle-road/gallery", title: "Gallery", subtitle: "Visual journey", image: "/lavelle-road/terrace-1.jpg" },
-            { href: "/travel/near/karnataka-high-court", title: "Area Guide", subtitle: "Nearby attractions", image: "/lavelle-road/facade-1.jpg" },
-          ].map((item, i) => (
-            <Link
-              key={i}
-              href={item.href}
-              className="group relative aspect-[3/4] overflow-hidden"
-            >
-              <Image
-                src={item.image}
-                alt={item.title}
-                fill
-                className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                sizes="25vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent transition-opacity duration-500 group-hover:from-black/60" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-8 text-white">
-                <p className="text-[10px] uppercase tracking-[0.3em] text-brand-gold mb-2">
-                  {item.title}
-                </p>
-                <p className="text-sm text-white/80">
-                  {item.subtitle}
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* Contact - Minimal */}
-      <section className="py-24 sm:py-32 lg:py-40 bg-brand-ink text-white">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-16 text-center">
-          <p className="text-[10px] uppercase tracking-[0.4em] text-brand-gold mb-8">
-            Reserve Your Stay
-          </p>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light mb-8 leading-tight">
-            Your Exceptional
-            <br />
-            <span className="italic font-extralight">Lavelle Road Experience</span>
-          </h2>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="https://bookmystay.io/rooms/37853"
-              className="inline-flex items-center gap-3 bg-brand-gold text-brand-ink px-10 py-4 text-[10px] uppercase tracking-[0.25em] hover:bg-white transition-all duration-500 font-light"
-            >
-              Book Now
-            </Link>
-            <a
-              href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
-              className="inline-flex items-center gap-3 border border-white/40 text-white px-10 py-4 text-[10px] uppercase tracking-[0.25em] hover:border-brand-gold hover:bg-white/10 transition-all duration-500 font-light"
-            >
-              <Phone className="w-4 h-4" />
-              Contact
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <StickyBookingCTA
-        bookingUrl={lavelleRoad?.bookingUrl || "https://bookmystay.io/rooms/37853/2025-12-23/2025-12-24/2/0?utm_source=brandWebsite"}
-        phone={contactInfo.phones[0]}
-        whatsapp={contactInfo.whatsapp}
-      />
-
+        </section>
+      </main>
       <Footer />
     </>
   );
