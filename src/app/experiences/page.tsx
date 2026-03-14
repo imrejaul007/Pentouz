@@ -33,16 +33,16 @@ const experienceStories = [
 
 const standards = [
   {
-    title: "No generic activity list",
-    description: "Pentouz experiences should feel specific to the property and location, not like copied hospitality filler.",
+    title: "Location first",
+    description: "Each experience should feel true to the property and its surroundings, not like a copied hotel list.",
   },
   {
     title: "Useful luxury",
     description: "A great experience may be a private terrace evening, a well-timed dinner reservation, or a stay built cleanly around a packed day.",
   },
   {
-    title: "Editorial, not over-programmed",
-    description: "The site should guide guests toward the right mood and itinerary rather than pretending every property is a resort.",
+    title: "Simple and refined",
+    description: "The experience should feel natural and well judged rather than over-planned or over-described.",
   },
 ];
 
@@ -62,10 +62,10 @@ export default function ExperiencesPage() {
             <div className="max-w-4xl">
               <p className="luxury-kicker text-white/72">Experiences</p>
               <h1 className="luxury-hero-title mt-6 max-w-4xl text-white">
-                Pentouz experiences begin with the property itself, then extend into the right version of the city or landscape.
+                The best Pentouz experiences begin with the stay itself, then open into the right version of the city or landscape.
               </h1>
               <p className="luxury-copy mt-8 max-w-2xl text-white/76">
-                The collection does not need an overbuilt activity menu to feel luxurious. It needs the right experience language for each address: city precision at Lavelle Road, private penthouse living in Indiranagar, and scenic quiet in Ooty.
+                Each property offers a different rhythm: city ease at Lavelle Road, private penthouse living in Indiranagar, and scenic quiet in Ooty.
               </p>
             </div>
           </div>
@@ -120,7 +120,7 @@ export default function ExperiencesPage() {
               Let the stay and the itinerary support each other.
             </h2>
             <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/68 sm:text-lg">
-              Pentouz works best when guests can move from inspiration into a direct booking or concierge conversation without leaving the tone of the brand.
+              Move from browsing into a direct booking or concierge conversation without losing the calm tone of the brand.
             </p>
             <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
               <Link href="/destinations" className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-brand-ink transition-colors hover:bg-brand-gold hover:text-white">

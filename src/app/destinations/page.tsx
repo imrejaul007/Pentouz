@@ -11,100 +11,128 @@ export const metadata = {
     "Explore The Pentouz collection across Bengaluru and Ooty, from city studios to private penthouse living and hillside retreats.",
 };
 
+const collectionNotes = [
+  "Lavelle Road brings central Bangalore access with a calmer boutique feel.",
+  "Indiranagar offers a true private penthouse stay with more room to settle in.",
+  "Ooty slows everything down with landscape, air, and retreat atmosphere.",
+];
+
+const collectionLinks = [
+  {
+    title: "Gallery",
+    href: "/gallery",
+    text: "Browse the strongest images across the collection.",
+  },
+  {
+    title: "Experiences",
+    href: "/experiences",
+    text: "See how each stay connects to its location and mood.",
+  },
+  {
+    title: "Contact",
+    href: "/contact",
+    text: "Speak directly with the reservations team.",
+  },
+];
+
 export default function DestinationsPage() {
   return (
     <>
       <Header />
-      <main className="bg-[#f7f3ed]">
-        <section className="relative min-h-[92svh] overflow-hidden bg-[#161311] text-white">
+      <main className="bg-[#f7f1e7] text-brand-ink">
+        <section className="relative isolate min-h-[100svh] overflow-hidden bg-[#161310] text-white">
           <div className="absolute inset-0">
             <Image
-              src="/indiranagar/living-room-10.jpg"
-              alt="The Pentouz destinations"
+              src="/lavelle-road/all/terrace_1.jpg"
+              alt="The Pentouz collection"
               fill
               priority
               className="object-cover"
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,8,8,0.22)_0%,rgba(8,8,8,0.16)_24%,rgba(8,8,8,0.62)_74%,rgba(8,8,8,0.84)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,8,6,0.9)_0%,rgba(10,8,6,0.5)_40%,rgba(10,8,6,0.82)_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(196,160,97,0.15),transparent_32%)]" />
           </div>
 
-          <div className="relative max-w-container-2xl mx-auto px-4 sm:px-6 lg:px-16 pt-36 sm:pt-44 lg:pt-52 pb-16 sm:pb-20 min-h-[92svh] flex flex-col justify-end">
-            <p className="text-[10px] uppercase tracking-[0.42em] text-brand-gold mb-6">The Pentouz Collection</p>
-            <h1 className="max-w-5xl font-display text-[3.2rem] leading-[0.92] sm:text-[4.8rem] lg:text-[6.8rem] xl:text-[7.8rem] font-light">
-              Three stays, each with its own <em className="italic text-brand-gold">pace and character</em>
-            </h1>
-            <p className="mt-8 max-w-2xl text-base sm:text-lg text-white/82 leading-relaxed">
-              The collection is not built around repetition. Each destination has a different mood, from central city precision to penthouse privacy to hillside retreat.
-            </p>
-          </div>
-        </section>
+          <div className="relative mx-auto flex min-h-[100svh] max-w-[1480px] flex-col justify-end px-5 pb-16 pt-36 sm:px-8 sm:pb-20 lg:px-14 lg:pb-24 lg:pt-48">
+            <div className="grid gap-10 xl:grid-cols-[1.02fr_0.98fr] xl:items-end">
+              <div className="max-w-5xl">
+                <p className="luxury-kicker text-white/72 animate-fade-in-up">The Pentouz Collection</p>
+                <h1 className="luxury-hero-title mt-6 max-w-5xl text-white animate-fade-in-up [animation-delay:120ms]">
+                  Stays with their own mood, their own setting, and their own reason to choose them.
+                </h1>
+                <p className="luxury-copy mt-8 max-w-2xl text-white/76 animate-fade-in-up [animation-delay:220ms]">
+                  The collection is intentionally small. Each property is meant to feel distinct, from boutique city stay to private penthouse to quieter hillside retreat.
+                </p>
+              </div>
 
-        <section className="bg-white border-t border-[#e7ddcf]">
-          <div className="max-w-container-2xl mx-auto px-4 sm:px-6 lg:px-16 py-16 sm:py-20 lg:py-24 grid gap-10 lg:grid-cols-[0.72fr_1.28fr] items-start">
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.34em] text-brand-accent mb-5">Collection Notes</p>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light leading-tight">
-                A smaller, more edited portfolio of stays
-              </h2>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-3">
-              {[
-                "Lavelle Road for business, legal, and central Bengaluru access.",
-                "Indiranagar for larger residential comfort and longer city stays.",
-                "Ooty for softer retreat energy, landscape, and altitude.",
-              ].map((note) => (
-                <div key={note} className="border border-[#eee4d8] bg-[#faf6f0] p-5">
-                  <p className="text-sm text-brand-body leading-relaxed">{note}</p>
+              <div className="xl:justify-self-end xl:max-w-[430px] animate-fade-in-up [animation-delay:320ms]">
+                <div className="luxury-panel border-white/15 bg-white/[0.08] text-white backdrop-blur-md">
+                  <p className="luxury-kicker text-white/58">Collection Notes</p>
+                  <div className="mt-6 space-y-5">
+                    {collectionNotes.map((note) => (
+                      <p key={note} className="border-b border-white/10 pb-5 text-sm leading-7 text-white/72 last:border-b-0 last:pb-0">
+                        {note}
+                      </p>
+                    ))}
+                  </div>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="bg-[#f7f3ed]">
-          <div className="max-w-container-2xl mx-auto px-4 sm:px-6 lg:px-16 py-16 sm:py-20 lg:py-24 space-y-20 lg:space-y-24">
+        <section className="bg-[#fbf7f0]">
+          <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28 space-y-20 lg:space-y-24">
             {destinations.map((destination, index) => (
               <article
                 key={destination.slug}
-                className={`grid gap-8 lg:gap-12 items-center ${index % 2 === 1 ? "lg:grid-cols-[0.86fr_1.14fr]" : "lg:grid-cols-[1.14fr_0.86fr]"}`}
+                className={`grid gap-8 lg:gap-14 items-center ${index % 2 === 1 ? "lg:grid-cols-[0.9fr_1.1fr]" : "lg:grid-cols-[1.1fr_0.9fr]"}`}
               >
                 <Link
                   href={`/destinations/${destination.slug}`}
                   className={index % 2 === 1 ? "lg:order-2" : ""}
                 >
-                  <div className="relative aspect-[16/10] overflow-hidden bg-[#11100f]">
-                    <Image
-                      src={destination.heroImage || destination.image}
-                      alt={destination.title}
-                      fill
-                      className="object-cover transition-transform duration-1000 hover:scale-[1.03]"
-                      sizes="(max-width: 1024px) 100vw, 55vw"
-                    />
+                  <div className="group relative overflow-hidden bg-[#11100f] shadow-[0_30px_90px_rgba(18,15,12,0.12)]">
+                    <div className="relative aspect-[16/11] overflow-hidden lg:aspect-[5/4]">
+                      <Image
+                        src={destination.heroImage || destination.image}
+                        alt={destination.title}
+                        fill
+                        className="object-cover transition-transform duration-[1400ms] group-hover:scale-[1.04]"
+                        sizes="(max-width: 1024px) 100vw, 55vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+                    </div>
                   </div>
                 </Link>
 
                 <div className={index % 2 === 1 ? "lg:order-1" : ""}>
-                  <p className="text-[10px] uppercase tracking-[0.34em] text-brand-accent mb-4">
-                    {destination.subtitle}
-                  </p>
-                  <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-brand-ink leading-tight">
+                  <p className="luxury-kicker text-brand-accent">{destination.subtitle}</p>
+                  <h2 className="mt-5 font-display text-4xl font-light leading-tight text-brand-ink sm:text-5xl lg:text-6xl">
                     {destination.title}
                   </h2>
-                  <p className="mt-6 text-base text-brand-body leading-relaxed max-w-xl">
-                    {destination.description}
+                  <p className="mt-6 max-w-xl text-base leading-8 text-brand-body sm:text-lg">
+                    {destination.copy}
                   </p>
                   <div className="mt-8 flex flex-wrap gap-3">
+                    {destination.features.slice(0, 3).map((feature) => (
+                      <span key={feature} className="rounded-full border border-brand-border px-4 py-2 text-[10px] uppercase tracking-[0.14em] text-brand-muted">
+                        {feature}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="mt-10 flex flex-wrap gap-4">
                     <Link
                       href={`/destinations/${destination.slug}`}
-                      className="inline-flex items-center gap-2 rounded-full bg-brand-ink px-6 py-3 text-[11px] uppercase tracking-[0.18em] text-white transition-colors hover:bg-black"
+                      className="inline-flex items-center gap-2 rounded-full bg-brand-ink px-7 py-4 text-[11px] uppercase tracking-[0.2em] text-white transition-all duration-500 hover:-translate-y-0.5 hover:bg-black"
                     >
-                      Explore Residence
+                      Explore Property
                       <ArrowRight className="w-4 h-4" strokeWidth={1.4} />
                     </Link>
                     <Link
                       href={`/destinations/${destination.slug}/living`}
-                      className="inline-flex items-center gap-2 rounded-full border border-brand-ink px-6 py-3 text-[11px] uppercase tracking-[0.18em] text-brand-ink transition-colors hover:bg-brand-ink hover:text-white"
+                      className="inline-flex items-center gap-2 rounded-full border border-brand-ink px-7 py-4 text-[11px] uppercase tracking-[0.2em] text-brand-ink transition-all duration-500 hover:-translate-y-0.5 hover:bg-brand-ink hover:text-white"
                     >
                       View Living
                     </Link>
@@ -115,34 +143,21 @@ export default function DestinationsPage() {
           </div>
         </section>
 
-        <section className="bg-[#11100f] text-white py-16 sm:py-20 lg:py-24">
-          <div className="max-w-container-2xl mx-auto px-4 sm:px-6 lg:px-16 grid gap-4 sm:grid-cols-3">
-            {[
-              {
-                title: "Travel Journal",
-                href: "/travel",
-                text: "Location-led content and city guides built around the collection.",
-              },
-              {
-                title: "Gallery",
-                href: "/gallery",
-                text: "A more edited visual sequence across all Pentouz properties.",
-              },
-              {
-                title: "Contact Reservations",
-                href: "/contact",
-                text: "Speak with the team directly to choose the right stay.",
-              },
-            ].map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="border border-white/10 bg-white/[0.03] p-6 hover:border-brand-gold/35 transition-colors"
-              >
-                <p className="font-display text-2xl font-light text-white mb-3">{item.title}</p>
-                <p className="text-sm text-white/70 leading-relaxed">{item.text}</p>
-              </Link>
-            ))}
+        <section className="bg-[#17120e] text-white">
+          <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-24">
+            <div className="grid gap-5 md:grid-cols-3">
+              {collectionLinks.map((item, index) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="border border-white/10 bg-white/[0.04] p-6 transition-all duration-500 hover:-translate-y-1 hover:border-brand-gold/40 animate-fade-in-up"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <p className="font-display text-3xl font-light text-white">{item.title}</p>
+                  <p className="mt-4 text-sm leading-7 text-white/70">{item.text}</p>
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
       </main>

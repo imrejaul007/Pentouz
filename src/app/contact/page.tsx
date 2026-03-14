@@ -74,10 +74,10 @@ export default function ContactPage() {
             <div className="max-w-4xl">
               <p className="luxury-kicker text-white/72">Contact Pentouz</p>
               <h1 className="luxury-hero-title mt-6 max-w-4xl text-white">
-                Reservations, longer stays, and concierge requests should feel direct from the first message.
+                Reservations, longer stays, and concierge requests should feel effortless from the first message.
               </h1>
               <p className="luxury-copy mt-8 max-w-2xl text-white/76">
-                Use the contact form for booking help, group or extended stays, property guidance, and custom requests. We&apos;ve kept the page simpler so it feels closer to a concierge conversation than a generic inquiry form.
+                Use the contact form for booking help, group or extended stays, property guidance, and custom requests. The page is kept simple so it feels closer to a direct concierge conversation.
               </p>
             </div>
           </div>
@@ -140,6 +140,9 @@ export default function ContactPage() {
             <h2 className="mt-5 font-display text-4xl font-light leading-tight text-brand-ink sm:text-5xl">
               Tell us what kind of stay you need.
             </h2>
+            <p className="mt-5 max-w-2xl text-sm leading-7 text-brand-body">
+              Share your dates, property preference, and any special requests. We’ll guide you to the right Pentouz stay.
+            </p>
             <form onSubmit={handleSubmit} className="mt-10 space-y-7">
               <input
                 type="text"
