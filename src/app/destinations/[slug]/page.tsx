@@ -260,8 +260,6 @@ export default function DestinationPage({
   // Get all gallery images
   const allGalleryImages = destination.gallery || [destination.image];
   const isLavelleRoad = destination.slug === "lavelle-road";
-  const lavelleLegalSeo =
-    isLavelleRoad && "legalSeo" in destination ? (destination.legalSeo as any) : undefined;
   const lavelleLegalJsonLd = isLavelleRoad
     ? {
         "@context": "https://schema.org",
@@ -381,31 +379,6 @@ export default function DestinationPage({
                 {destination.title}
               </h1>
 
-              {rating && (
-                <div
-                  data-reveal
-                  className="flex items-center gap-4 mb-6 sm:mb-8"
-                >
-                  <div className="flex items-center gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`w-4 h-4 ${
-                          i < rating
-                            ? "text-brand-gold fill-brand-gold"
-                            : "text-white/50"
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  {reviews && (
-                    <span className="text-sm text-white/80">
-                      {reviews} Reviews
-                    </span>
-                  )}
-                </div>
-              )}
-
               <div data-reveal className="w-16 sm:w-20 h-px bg-brand-gold mb-6 sm:mb-8" />
               <p
                 data-reveal
@@ -413,6 +386,25 @@ export default function DestinationPage({
               >
                 {destination.copy}
               </p>
+
+              <div data-reveal className="mt-8 grid max-w-3xl gap-4 sm:grid-cols-3">
+                {[
+                  propertyType ? { label: "Stay", value: propertyType } : null,
+                  capacity ? { label: "Capacity", value: capacity } : null,
+                  destination.location?.metro
+                    ? { label: "Nearby", value: destination.location.metro.name }
+                    : destination.location?.airport
+                      ? { label: "Access", value: destination.location.airport.time }
+                      : null,
+                ]
+                  .filter(Boolean)
+                  .map((item) => (
+                    <div key={item!.label} className="border border-white/15 bg-white/8 px-5 py-5 backdrop-blur-sm">
+                      <p className="text-[10px] uppercase tracking-[0.22em] text-white/55">{item!.label}</p>
+                      <p className="mt-3 text-sm leading-6 text-white/90">{item!.value}</p>
+                    </div>
+                  ))}
+              </div>
 
               <div
                 data-reveal
@@ -447,41 +439,6 @@ export default function DestinationPage({
             </div>
           </div>
         </section>
-
-        {isLavelleRoad && (
-          <section className="py-14 sm:py-20 lg:py-24 bg-brand-cream">
-            <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
-              <div className="max-w-4xl">
-                <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-gold mb-4 font-light">
-                  Court Access
-                </p>
-                <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-light mb-5">
-                  Trusted Stay for <em className="italic">Outstation Advocates</em> Near High Court of Karnataka
-                </h2>
-                <p className="text-sm sm:text-base text-brand-body leading-relaxed mb-6">
-                  Built for legal professionals visiting Bengaluru for hearings, appeals, and trial preparation, The Pentouz Lavelle Road combines central court access, reliable short-notice stays, and business-friendly comfort.
-                </p>
-              </div>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-                {[
-                  "Quick access to High Court of Karnataka and central legal district",
-                  "Fast check-in support for short-notice court schedules",
-                  "Stable high-speed WiFi and workspace-friendly studio layout",
-                  "Longer-stay flexibility for multi-day hearings",
-                ].map((item) => (
-                  <div key={item} className="bg-white p-5 border border-brand-border">
-                    <p className="text-xs sm:text-sm text-brand-body leading-relaxed">{item}</p>
-                  </div>
-                ))}
-              </div>
-              {lavelleLegalSeo.keywords?.length ? (
-                <p className="mt-5 text-[11px] text-brand-muted">
-                  Popular searches: {lavelleLegalSeo.keywords.join(" • ")}
-                </p>
-              ) : null}
-            </div>
-          </section>
-        )}
 
         <section
           ref={statsRef}
@@ -566,27 +523,6 @@ export default function DestinationPage({
                     {item}
                   </span>
                 ))}
-              </div>
-
-              <div className="mt-8">
-                <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-brand-muted mb-3">
-                  Related Travel Guides
-                </p>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                  {[
-                    { label: "Court-Day Itinerary Near Karnataka High Court", href: "/travel/guides/court-day-itinerary-near-karnataka-high-court" },
-                    { label: "Best Things to Do in MG Road Bangalore", href: "/travel/guides/best-things-to-do-in-mg-road-bangalore" },
-                    { label: "Airport to Lavelle Road Arrival Guide", href: "/travel/guides/airport-to-lavelle-road-arrival-guide" },
-                  ].map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="border border-brand-border bg-white p-3 text-sm hover:bg-brand-ink hover:text-white transition-colors"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
               </div>
             </div>
           </section>
@@ -773,7 +709,7 @@ export default function DestinationPage({
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-              {destination.features.map((feature) => (
+              {destination.features.slice(0, 6).map((feature) => (
                 <div
                   key={feature}
                   className="feature-card group flex items-start gap-4 sm:gap-5 p-5 sm:p-6 lg:p-8 bg-[#faf6f0] border border-[#ede3d7] transition-colors duration-500"
@@ -795,7 +731,7 @@ export default function DestinationPage({
 
             {/* Amenities tags - horizontal scroll on mobile */}
             <div className="flex flex-nowrap sm:flex-wrap justify-start sm:justify-center gap-3 sm:gap-4 mt-12 sm:mt-16 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide">
-              {destination.amenities.map((amenity) => (
+              {destination.amenities.slice(0, 8).map((amenity) => (
                 <span
                   key={amenity}
                   className="flex-shrink-0 px-4 sm:px-6 py-2 sm:py-3 border border-brand-border text-[10px] sm:text-[11px] uppercase tracking-[0.1em] text-brand-muted hover:border-brand-gold hover:text-brand-gold transition-colors duration-300"
@@ -908,50 +844,6 @@ export default function DestinationPage({
             })}
           </div>
         </section>
-
-        {isLavelleRoad && (
-          <section className="py-16 sm:py-20 bg-white border-y border-brand-border">
-            <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
-              <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-8 sm:mb-10">
-                <div>
-                  <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-gold mb-3">
-                    Nearby Guide Collection
-                  </p>
-                  <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-light">
-                    Lavelle Road Nearby <em className="italic">Stay Guides</em>
-                  </h2>
-                </div>
-                <Link
-                  href="/destinations/lavelle-road/near"
-                  className="text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:text-brand-gold transition-colors"
-                >
-                  View All 50+ Pages
-                </Link>
-              </div>
-
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-                {[
-                  { label: "Hotel Near Karnataka High Court", href: "/destinations/lavelle-road/near/karnataka-high-court" },
-                  { label: "Hotel Near UB City", href: "/destinations/lavelle-road/near/ub-city" },
-                  { label: "Hotel Near MG Road", href: "/destinations/lavelle-road/near/mg-road" },
-                  { label: "Hotel Near Vidhana Soudha", href: "/destinations/lavelle-road/near/vidhana-soudha" },
-                  { label: "Hotel Near Cubbon Park", href: "/destinations/lavelle-road/near/cubbon-park" },
-                  { label: "Hotel Near Chinnaswamy Stadium", href: "/destinations/lavelle-road/near/chinnaswamy-stadium" },
-                  { label: "Hotel Near MG Road Metro", href: "/destinations/lavelle-road/near/mg-road-metro" },
-                  { label: "Hotel Near KSR Railway Station", href: "/destinations/lavelle-road/near/ksr-railway-station" },
-                ].map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="bg-[#f8f7f5] border border-brand-border p-4 text-sm hover:bg-brand-ink hover:text-white transition-colors"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
 
         {/* Booking CTA - Enhanced design */}
         <section className="py-16 sm:py-24 lg:py-32 bg-brand-ink text-white relative overflow-hidden">

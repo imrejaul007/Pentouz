@@ -107,7 +107,7 @@ export default function PropertyEditorialSubpage({
             <div className="absolute inset-0 bg-gradient-to-t from-[#0f0d0a]/90 via-transparent to-[#0f0d0a]/20" />
           </div>
 
-          <div className="relative mx-auto flex min-h-[78vh] max-w-7xl items-end px-6 pb-16 pt-40 sm:px-8 lg:px-12 lg:pb-24">
+          <div className="relative mx-auto flex min-h-[84vh] max-w-[1480px] items-end px-6 pb-16 pt-40 sm:px-8 lg:px-14 lg:pb-24">
             <div className="max-w-4xl">
               <p className="mb-6 text-[11px] uppercase tracking-[0.42em] text-[#d6b06a]">{eyebrow}</p>
               <h1 className="max-w-3xl font-display text-5xl font-light leading-[0.92] text-white sm:text-6xl lg:text-7xl">
@@ -127,7 +127,7 @@ export default function PropertyEditorialSubpage({
         </section>
 
         <section className="border-b border-black/5 bg-[#fbf7f0]">
-          <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:px-12 lg:py-24">
+          <div className="mx-auto grid max-w-[1480px] gap-12 px-6 py-20 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:px-14 lg:py-24">
             <div>
               <p className="text-[11px] uppercase tracking-[0.38em] text-brand-accent">Overview</p>
               <h2 className="mt-6 max-w-2xl font-display text-4xl font-light leading-tight text-brand-ink sm:text-5xl">
@@ -146,12 +146,12 @@ export default function PropertyEditorialSubpage({
         </section>
 
         {accessItems?.length ? (
-          <section className="mx-auto max-w-7xl px-6 py-18 sm:px-8 lg:px-12 lg:py-20">
+          <section className="mx-auto max-w-[1480px] px-6 py-18 sm:px-8 lg:px-14 lg:py-20">
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
               {accessItems.map((item) => {
                 const Icon = accessIcons[item.icon || "pin"];
                 return (
-                  <div key={item.label} className="border border-black/8 bg-white px-6 py-6 shadow-[0_20px_60px_rgba(15,13,10,0.05)]">
+                  <div key={item.label} className="border border-black/8 bg-white px-6 py-6 shadow-[0_20px_60px_rgba(15,13,10,0.05)] transition-all duration-500 hover:-translate-y-1">
                     <div className="flex items-center gap-3 text-brand-accent">
                       <Icon className="h-5 w-5" />
                       <p className="text-[10px] uppercase tracking-[0.22em]">{item.label}</p>
@@ -167,10 +167,10 @@ export default function PropertyEditorialSubpage({
 
         {features?.length ? (
           <section className="bg-[#1a1611] text-white">
-            <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-12 lg:py-18">
+            <div className="mx-auto max-w-[1480px] px-6 py-16 sm:px-8 lg:px-14 lg:py-18">
               <div className="grid gap-6 md:grid-cols-3">
                 {features.map((feature) => (
-                  <div key={feature.title} className="border border-white/10 px-6 py-7">
+                    <div key={feature.title} className="border border-white/10 px-6 py-7 transition-all duration-500 hover:border-brand-gold/40 hover:bg-white/[0.02]">
                     <p className="text-[10px] uppercase tracking-[0.24em] text-[#d6b06a]">Signature Detail</p>
                     <h3 className="mt-4 font-display text-2xl font-light text-white">{feature.title}</h3>
                     <p className="mt-4 text-sm leading-7 text-white/70">{feature.description}</p>
@@ -181,22 +181,27 @@ export default function PropertyEditorialSubpage({
           </section>
         ) : null}
 
-        <section className="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
+        <section className="mx-auto max-w-[1480px] px-6 py-20 sm:px-8 lg:px-14 lg:py-24">
           <div className="max-w-3xl">
             <p className="text-[11px] uppercase tracking-[0.38em] text-brand-accent">Signature Spaces</p>
             <h2 className="mt-5 font-display text-4xl font-light leading-tight text-brand-ink sm:text-5xl">{cardsTitle}</h2>
             <p className="mt-6 text-base leading-8 text-brand-body sm:text-lg">{cardsIntro}</p>
           </div>
 
-          <div className="mt-14 grid gap-8 lg:grid-cols-2">
+          <div className="mt-14 grid gap-8 lg:grid-cols-12">
             {cards.map((card, index) => (
-              <article key={`${card.title}-${index}`} className="overflow-hidden border border-black/8 bg-white shadow-[0_24px_80px_rgba(15,13,10,0.06)]">
-                <div className="relative aspect-[4/3] overflow-hidden">
+              <article
+                key={`${card.title}-${index}`}
+                className={`overflow-hidden border border-black/8 bg-white shadow-[0_24px_80px_rgba(15,13,10,0.06)] transition-all duration-700 hover:-translate-y-1 ${
+                  index === 0 ? "lg:col-span-7" : "lg:col-span-5"
+                }`}
+              >
+                <div className={`relative overflow-hidden ${index === 0 ? "aspect-[16/10]" : "aspect-[4/3]"}`}>
                   <Image
                     src={card.image}
                     alt={card.title}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-[1400ms] hover:scale-[1.03]"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent" />
@@ -225,11 +230,16 @@ export default function PropertyEditorialSubpage({
 
         {galleryStrip?.length ? (
           <section className="border-y border-black/5 bg-[#fbf7f0]">
-            <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-12 lg:py-18">
+            <div className="mx-auto max-w-[1480px] px-6 py-16 sm:px-8 lg:px-14 lg:py-18">
               <div className="grid gap-5 md:grid-cols-3">
                 {galleryStrip.map((card, index) => (
-                  <div key={`${card.title}-${index}`} className="group overflow-hidden border border-black/8 bg-white">
-                    <div className="relative aspect-[1/1.08] overflow-hidden">
+                  <div
+                    key={`${card.title}-${index}`}
+                    className={`group overflow-hidden border border-black/8 bg-white transition-all duration-700 hover:-translate-y-1 ${
+                      index === 0 ? "md:col-span-2" : ""
+                    }`}
+                  >
+                    <div className={`relative overflow-hidden ${index === 0 ? "aspect-[16/9]" : "aspect-[1/1.08]"}`}>
                       <Image
                         src={card.image}
                         alt={card.title}
