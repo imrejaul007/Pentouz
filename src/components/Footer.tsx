@@ -4,9 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { contactInfo, destinations } from "@/data/content";
 
-const editorialLinks = [
+const footerLinks = [
   { label: "Destinations", href: "/destinations" },
-  { label: "Travel", href: "/travel" },
+  { label: "Guides", href: "/travel" },
   { label: "Experiences", href: "/experiences" },
   { label: "Stories", href: "/stories" },
   { label: "About", href: "/about" },
@@ -62,7 +62,7 @@ export default function Footer() {
             <div>
               <p className="text-[10px] uppercase tracking-[0.35em] text-brand-gold mb-5">Navigate</p>
               <nav className="space-y-4">
-                {editorialLinks.map((link) => (
+                {footerLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
@@ -105,7 +105,6 @@ export default function Footer() {
             <Link href="/privacy-policy" className="hover:text-brand-gold transition-colors">Privacy</Link>
             <Link href="/terms" className="hover:text-brand-gold transition-colors">Terms</Link>
             <Link href="/contact" className="hover:text-brand-gold transition-colors">Contact</Link>
-            <Link href="/editorial-policy" className="hover:text-brand-gold transition-colors">Editorial</Link>
           </div>
         </div>
       </div>

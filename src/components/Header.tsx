@@ -10,7 +10,7 @@ import { contactInfo, destinations } from "@/data/content";
 
 const editorialNav = [
   { label: "Destinations", href: "/destinations" },
-  { label: "Travel", href: "/travel" },
+  { label: "Guides", href: "/travel" },
   { label: "Experiences", href: "/experiences" },
   { label: "Stories", href: "/stories" },
   { label: "Contact", href: "/contact" },
@@ -59,7 +59,7 @@ export default function Header() {
                 href="/travel/guides/best-things-to-do-in-mg-road-bangalore"
                 className={cn("text-[10px] uppercase tracking-[0.22em] transition-colors", isScrolled ? "text-brand-muted hover:text-brand-gold" : "text-white/68 hover:text-brand-gold")}
               >
-                City Journal
+                Bengaluru Guide
               </Link>
               <a
                 href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
@@ -210,7 +210,7 @@ export default function Header() {
                   Navigate
                 </p>
                 <p className="max-w-md text-sm text-white/65 leading-relaxed mb-8">
-                  A quieter route through each residence, the city journal, and the Pentouz collection.
+                  A quieter route through each residence, our city guide, and the Pentouz collection.
                 </p>
 
                 <div className="space-y-2">

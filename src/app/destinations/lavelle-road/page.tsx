@@ -141,9 +141,9 @@ export default function LavelleRoadPage() {
         <section className="bg-[#11100f] text-white py-16 sm:py-20 lg:py-24">
           <div className="max-w-container-2xl mx-auto px-4 sm:px-6 lg:px-16 grid gap-6 lg:grid-cols-[0.8fr_1.2fr] items-start">
             <div>
-              <p className="text-[10px] uppercase tracking-[0.34em] text-brand-gold mb-4">Linked Guides</p>
+              <p className="text-[10px] uppercase tracking-[0.34em] text-brand-gold mb-4">Nearby Highlights</p>
               <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light leading-tight">
-                Built for high-intent central Bengaluru searches
+                Discover the places that shape the Lavelle Road stay
               </h2>
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
@@ -151,7 +151,7 @@ export default function LavelleRoadPage() {
                 { href: "/destinations/lavelle-road/near/karnataka-high-court", label: "Hotel Near Karnataka High Court" },
                 { href: "/destinations/lavelle-road/near/ub-city", label: "Hotel Near UB City" },
                 { href: "/travel/guides/court-day-itinerary-near-karnataka-high-court", label: "Court-Day Itinerary" },
-                { href: "/travel/clusters/legal-courts", label: "Legal Travel Cluster" },
+                { href: "/travel/clusters/legal-courts", label: "Court District Guide" },
               ].map((item) => (
                 <Link
                   key={item.href}

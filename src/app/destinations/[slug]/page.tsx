@@ -453,7 +453,7 @@ export default function DestinationPage({
             <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
               <div className="max-w-4xl">
                 <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-gold mb-4 font-light">
-                  Legal Travel
+                  Court Access
                 </p>
                 <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-light mb-5">
                   Trusted Stay for <em className="italic">Outstation Advocates</em> Near High Court of Karnataka
@@ -915,7 +915,7 @@ export default function DestinationPage({
               <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-8 sm:mb-10">
                 <div>
                   <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-gold mb-3">
-                    SEO Location Hub
+                    Nearby Guide Collection
                   </p>
                   <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-light">
                     Lavelle Road Nearby <em className="italic">Stay Guides</em>

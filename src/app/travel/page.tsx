@@ -12,7 +12,7 @@ import { lavelleSeoClusters } from "@/data/lavelleSeoPages";
 import { withSiteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "The Pentouz Travel | Bengaluru Guides Near Lavelle Road",
+  title: "The Pentouz Guides | Bengaluru Near Lavelle Road",
   description:
     "Explore The Pentouz Travel hub with guides near courts, offices, landmarks, and transport hubs, plus surrounding area content around Lavelle Road.",
   alternates: {
@@ -58,7 +58,7 @@ export default function TravelHubPage() {
                 Lavelle Property
               </Link>
               <Link href="/travel/clusters" className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
-                Travel Collections
+                Guide Collections
               </Link>
               <Link href="/destinations/lavelle-road/near" className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
                 50+ Location Guides
@@ -69,9 +69,9 @@ export default function TravelHubPage() {
 
         <section className="py-14 sm:py-18 bg-white border-b border-brand-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <h2 className="font-display text-2xl sm:text-3xl font-light mb-3">Travel Collections</h2>
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-3">Guide Collections</h2>
             <p className="text-sm sm:text-base text-brand-body max-w-4xl leading-relaxed mb-6">
-              Browse collections organized by visitor type and travel purpose.
+              Browse guides organized by destination type and city purpose.
             </p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {lavelleSeoClusters.map((cluster) => (
@@ -112,7 +112,7 @@ export default function TravelHubPage() {
 
         <section className="py-16 sm:py-20 bg-white border-b border-brand-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <h2 className="font-display text-2xl sm:text-3xl font-light mb-3">Travel Articles by Location</h2>
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-3">Local Articles by Location</h2>
             <p className="text-sm sm:text-base text-brand-body max-w-4xl leading-relaxed mb-6">
               For each destination, find detailed articles covering stay choices, commute planning, short and extended visits, local area utilities, and practical itinerary tips.
             </p>
@@ -141,7 +141,7 @@ export default function TravelHubPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
             <h2 className="font-display text-2xl sm:text-3xl font-light mb-3">Area Guides</h2>
             <p className="text-sm sm:text-base text-brand-body max-w-4xl leading-relaxed mb-6">
-              Editorial guides for MG Road, UB City, Cubbon Park, legal-day itineraries, nightlife, shopping, and arrival planning.
+              Guides for MG Road, UB City, Cubbon Park, court-day itineraries, nightlife, shopping, and arrival planning.
             </p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {genericSurroundingGuides.map((guide) => (

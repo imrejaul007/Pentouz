@@ -20,11 +20,11 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { cluster: clusterSlug } = await params;
   const cluster = getLavelleSeoCluster(clusterSlug);
-  if (!cluster) return { title: "Cluster Not Found | The Pentouz Travel" };
+  if (!cluster) return { title: "Guide Collection Not Found | The Pentouz Guides" };
 
   const path = `/travel/clusters/${cluster.slug}`;
   return {
-    title: `${cluster.title} | The Pentouz Travel`,
+    title: `${cluster.title} | The Pentouz Guides`,
     description: cluster.description,
     alternates: {
       canonical: withSiteUrl(path),

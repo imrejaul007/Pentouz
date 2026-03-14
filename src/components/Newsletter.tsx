@@ -67,7 +67,7 @@ export default function Newsletter() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           }`}
         >
-          Stay Inspired
+          Stay in Touch
         </p>
 
         {/* Divider */}
@@ -85,8 +85,7 @@ export default function Newsletter() {
           }`}
           style={{ transitionDelay: "200ms" }}
         >
-          Join our editorial journey. Receive stories, insights, and exclusive
-          invitations from The Pentouz.
+          Receive occasional updates, offers, and invitations from The Pentouz.
         </p>
 
         {/* Form */}

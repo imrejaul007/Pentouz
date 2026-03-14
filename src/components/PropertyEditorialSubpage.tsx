@@ -129,7 +129,7 @@ export default function PropertyEditorialSubpage({
         <section className="border-b border-black/5 bg-[#fbf7f0]">
           <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:px-12 lg:py-24">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.38em] text-brand-accent">Editorial Note</p>
+              <p className="text-[11px] uppercase tracking-[0.38em] text-brand-accent">Overview</p>
               <h2 className="mt-6 max-w-2xl font-display text-4xl font-light leading-tight text-brand-ink sm:text-5xl">
                 {narrativeTitle}
               </h2>
@@ -183,7 +183,7 @@ export default function PropertyEditorialSubpage({
 
         <section className="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
           <div className="max-w-3xl">
-            <p className="text-[11px] uppercase tracking-[0.38em] text-brand-accent">Curated Selection</p>
+            <p className="text-[11px] uppercase tracking-[0.38em] text-brand-accent">Signature Spaces</p>
             <h2 className="mt-5 font-display text-4xl font-light leading-tight text-brand-ink sm:text-5xl">{cardsTitle}</h2>
             <p className="mt-6 text-base leading-8 text-brand-body sm:text-lg">{cardsIntro}</p>
           </div>
@@ -252,7 +252,7 @@ export default function PropertyEditorialSubpage({
 
         <section className="bg-[#1a1611] text-white">
           <div className="mx-auto max-w-5xl px-6 py-18 text-center sm:px-8 lg:px-12 lg:py-24">
-            <p className="text-[11px] uppercase tracking-[0.38em] text-[#d6b06a]">Stay With Pentouz</p>
+            <p className="text-[11px] uppercase tracking-[0.38em] text-[#d6b06a]">Reservations</p>
             <h2 className="mt-6 font-display text-4xl font-light leading-tight text-white sm:text-5xl lg:text-6xl">{ctaTitle}</h2>
             <p className="mx-auto mt-7 max-w-2xl text-base leading-8 text-white/72 sm:text-lg">{ctaBody}</p>
             <div className="mt-10">

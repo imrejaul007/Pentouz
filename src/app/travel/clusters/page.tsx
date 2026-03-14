@@ -7,7 +7,7 @@ import { lavelleSeoClusters, getLavelleSeoPagesByCategory } from "@/data/lavelle
 import { withSiteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Travel Guide Collections | The Pentouz Bengaluru",
+  title: "Guide Collections | The Pentouz Bengaluru",
   description:
     "Explore travel guide collections for legal, government, business, healthcare, landmark, and transport visitors near Lavelle Road.",
   alternates: {
@@ -26,7 +26,7 @@ export default function TravelClustersPage() {
               Travel Guides
             </p>
             <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light max-w-4xl">
-              Travel Collections for <em className="italic">Bengaluru Visitors</em>
+              Guide Collections for <em className="italic">Bengaluru Visitors</em>
             </h1>
             <p className="mt-6 text-sm sm:text-base text-white/85 max-w-4xl leading-relaxed">
               Browse travel guides organized by visitor type and purpose. Each collection links to dedicated location pages,

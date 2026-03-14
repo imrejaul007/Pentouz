@@ -90,7 +90,7 @@ export default function AboutPage() {
                 Pentouz began with the idea that premium accommodation should not be loud to feel luxurious. A well-positioned address, thoughtful interiors, clean service, and a more residential sense of privacy often create a stronger impression than excess styling ever could.
               </p>
               <p>
-                That philosophy now informs every part of the collection. Lavelle Road serves high-intent business and legal travel with a calmer boutique tone. Indiranagar offers rare penthouse scale in one of Bangalore&apos;s most social neighborhoods. Ooty softens the experience into a retreat built around air, view, and slower time.
+                That philosophy now informs every part of the collection. Lavelle Road serves business and court-related stays with a calmer boutique tone. Indiranagar offers rare penthouse scale in one of Bangalore&apos;s most social neighborhoods. Ooty softens the experience into a retreat built around air, view, and slower time.
               </p>
               <p>
                 The result is a brand that should feel refined, useful, and specific to place. Pentouz is strongest when the guest immediately understands why this stay belongs in this location and why it fits the way they want to travel.

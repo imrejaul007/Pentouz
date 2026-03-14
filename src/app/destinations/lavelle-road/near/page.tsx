@@ -42,10 +42,10 @@ export default function LavelleNearHubPage() {
                 Lavelle Property Page
               </Link>
               <Link href="/travel" className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
-                Travel Content Hub
+                Bengaluru Guidebook
               </Link>
               <Link href="/travel/clusters" className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
-                Travel Guides
+                Guide Collections
               </Link>
               <a href="https://bookmystay.io/rooms/37853/2025-12-23/2025-12-24/2/0?utm_source=brandWebsite" target="_blank" rel="noopener noreferrer" className="bg-brand-gold text-white px-4 py-2 hover:bg-brand-goldLight transition-colors">
                 Book Lavelle Road
@@ -108,7 +108,7 @@ export default function LavelleNearHubPage() {
               Total location guides: {lavelleSeoPages.length}
             </p>
             <Link href="/travel" className="inline-flex mt-5 text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:text-brand-gold transition-colors">
-              Explore Travel Hub
+              Explore Bengaluru Guides
             </Link>
           </div>
         </section>
