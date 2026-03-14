@@ -35,10 +35,10 @@ export default function Footer() {
               />
             </Link>
             <h2 className="mt-8 font-display text-3xl sm:text-4xl lg:text-5xl font-light leading-tight max-w-3xl">
-              A quieter expression of <em className="italic text-brand-gold">luxury hospitality</em>
+              Distinct stays shaped around privacy, comfort, and a finer pace of travel.
             </h2>
             <p className="mt-6 max-w-2xl text-sm sm:text-base text-white/70 leading-relaxed">
-              Thoughtfully composed stays in Bengaluru and Ooty, designed around privacy, location, and a more personal rhythm of travel.
+              Thoughtfully composed stays in Bengaluru and Ooty, designed for guests who value space, location, and a more personal way to stay.
             </p>
 
             <div className="mt-10 grid gap-4 sm:grid-cols-3">
@@ -76,7 +76,7 @@ export default function Footer() {
             </div>
 
             <div>
-              <p className="text-[10px] uppercase tracking-[0.35em] text-brand-gold mb-5">Reservations</p>
+              <p className="text-[10px] uppercase tracking-[0.35em] text-brand-gold mb-5">Concierge</p>
               <div className="space-y-3 text-sm text-white/72">
                 <p>{contactInfo.address}</p>
                 <p>{contactInfo.city}</p>

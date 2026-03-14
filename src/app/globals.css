@@ -54,6 +54,10 @@ p {
     letter-spacing: -0.028em;
   }
 
+  .luxury-subtitle {
+    @apply text-sm uppercase tracking-[0.24em] text-brand-accent sm:text-[11px];
+  }
+
   .luxury-copy {
     @apply text-base leading-8 sm:text-lg;
   }
@@ -62,6 +66,10 @@ p {
     @apply border px-5 py-5 sm:px-6 sm:py-6;
     border-color: rgba(18, 15, 12, 0.08);
     box-shadow: 0 22px 70px rgba(18, 15, 12, 0.06);
+  }
+
+  .luxury-shell-section {
+    @apply mx-auto max-w-[1480px] px-5 sm:px-8 lg:px-14;
   }
 }
 

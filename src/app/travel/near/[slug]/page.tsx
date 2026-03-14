@@ -93,27 +93,26 @@ export default async function KeywordTravelHubPage({ params }: { params: Promise
         <section className="bg-brand-ink text-white py-20 sm:py-24 lg:py-28">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
             <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-gold mb-4">
-              Travel Guides
+              Nearby Notes
             </p>
             <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light max-w-4xl">
-              Travel Guides Near <em className="italic">{keyword.place}</em>
+              Staying Near <em className="italic">{keyword.place}</em>
             </h1>
             <p className="mt-6 text-sm sm:text-base text-white/85 max-w-4xl leading-relaxed">
               {editorial ? (
                 <>{editorial.travelHubIntro}</>
               ) : (
                 <>
-                  Practical travel guides for visitors searching <strong>{keyword.keyword}</strong>. This hub contains useful articles for {keyword.audience},
-                  with links to Lavelle Road property page, room types, booking, and related locations.
+                  Practical notes for guests looking at <strong>{keyword.keyword}</strong>. This page brings together useful reading, nearby places, and direct access to The Pentouz Lavelle Road.
                 </>
               )}
             </p>
             <div className="mt-8 flex flex-wrap gap-3 text-[10px] sm:text-[11px] uppercase tracking-[0.15em]">
               <Link href={`/destinations/lavelle-road/near/${keyword.slug}`} className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
-                Location Guide
+                Stay Page
               </Link>
               <Link href="/destinations/lavelle-road" className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
-                Lavelle Property
+                Lavelle Road
               </Link>
               <a href="https://bookmystay.io/rooms/37853/2025-12-23/2025-12-24/2/0?utm_source=brandWebsite" target="_blank" rel="noopener noreferrer" className="bg-brand-gold text-white px-4 py-2 hover:bg-brand-goldLight transition-colors">
                 Book Now
@@ -125,7 +124,7 @@ export default async function KeywordTravelHubPage({ params }: { params: Promise
         <section className="py-16 sm:py-20 bg-white border-b border-brand-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
             <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">
-              Travel Articles
+              Useful Reading
             </h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {articles.map((article) => (
@@ -144,7 +143,7 @@ export default async function KeywordTravelHubPage({ params }: { params: Promise
 
         <section className="py-16 sm:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Nearby Places to Visit</h2>
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Nearby Places</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {anchors.map((anchor) => (
                 <article key={anchor.name} className="border border-brand-border p-5 bg-white">
@@ -159,7 +158,7 @@ export default async function KeywordTravelHubPage({ params }: { params: Promise
 
         <section className="py-16 sm:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Related Destinations</h2>
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">More Nearby Reading</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {crossLinks.map((link) => {
                 const relatedKeyword = getLavelleSeoPage(link.slug);

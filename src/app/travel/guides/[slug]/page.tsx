@@ -161,7 +161,7 @@ export default async function GenericGuidePage({ params }: { params: Promise<Par
         <section className="bg-brand-ink text-white py-20 sm:py-24 lg:py-28">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
             <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-gold mb-4">
-              Area Guide
+              Bangalore Notes
             </p>
             <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light max-w-4xl">
               {guide.title}
@@ -171,10 +171,10 @@ export default async function GenericGuidePage({ params }: { params: Promise<Par
             </p>
             <div className="mt-8 flex flex-wrap gap-3 text-[10px] sm:text-[11px] uppercase tracking-[0.15em]">
               <Link href="/travel" className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
-                Travel Hub
+                Bangalore Notes
               </Link>
               <Link href="/destinations/lavelle-road" className="border border-white/35 px-4 py-2 hover:bg-white hover:text-brand-ink transition-colors">
-                Lavelle Property
+                Lavelle Road
               </Link>
               <a href="https://bookmystay.io/rooms/37853/2025-12-23/2025-12-24/2/0?utm_source=brandWebsite" target="_blank" rel="noopener noreferrer" className="bg-brand-gold text-white px-4 py-2 hover:bg-brand-goldLight transition-colors">
                 Book Now
@@ -186,7 +186,7 @@ export default async function GenericGuidePage({ params }: { params: Promise<Par
         <section className="py-14 sm:py-18 bg-white border-b border-brand-border">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 grid lg:grid-cols-2 gap-6">
             <article className="border border-brand-border p-6 sm:p-7">
-              <h2 className="font-display text-2xl font-light mb-4">Key Highlights</h2>
+              <h2 className="font-display text-2xl font-light mb-4">Highlights</h2>
               <ul className="space-y-3 text-sm sm:text-base text-brand-body leading-relaxed list-disc list-inside">
                 {guide.highlights.map((item) => (
                   <li key={item}>{item}</li>
@@ -194,7 +194,7 @@ export default async function GenericGuidePage({ params }: { params: Promise<Par
               </ul>
             </article>
             <article className="border border-brand-border p-6 sm:p-7">
-              <h2 className="font-display text-2xl font-light mb-4">Practical Tips</h2>
+              <h2 className="font-display text-2xl font-light mb-4">Before You Go</h2>
               <ul className="space-y-3 text-sm sm:text-base text-brand-body leading-relaxed list-disc list-inside">
                 {guide.tips.map((item) => (
                   <li key={item}>{item}</li>
@@ -206,7 +206,7 @@ export default async function GenericGuidePage({ params }: { params: Promise<Par
 
         <section className="py-14 sm:py-18">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
-            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Related Area Guides</h2>
+            <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">More City Notes</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {related.map((item) => (
                 <article key={item.slug} className="bg-white border border-brand-border p-5 hover:shadow-lg transition-shadow">
@@ -226,7 +226,7 @@ export default async function GenericGuidePage({ params }: { params: Promise<Par
         {relatedKeywordPages.length > 0 ? (
           <section className="py-14 sm:py-18 bg-white border-y border-brand-border">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
-              <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Related Stay Locations Near Lavelle Road</h2>
+              <h2 className="font-display text-2xl sm:text-3xl font-light mb-6">Nearby Stay Pages</h2>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
                 {relatedKeywordPages.map((page) => (
                   <article key={page.slug} className="border border-brand-border p-5 bg-[#f8f7f5]">

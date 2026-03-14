@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { contactInfo, destinations } from "@/data/content";
 
-const editorialNav = [
+const primaryNav = [
   { label: "Destinations", href: "/destinations" },
   { label: "Guides", href: "/travel" },
   { label: "Experiences", href: "/experiences" },
@@ -32,6 +32,23 @@ export default function Header() {
     return () => {
       document.body.style.overflow = "";
     };
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isMenuOpen]);
 
   const isActive = (href: string) =>
@@ -59,7 +76,7 @@ export default function Header() {
                 href="/travel/guides/best-things-to-do-in-mg-road-bangalore"
                 className={cn("text-[10px] uppercase tracking-[0.22em] transition-colors", isScrolled ? "text-brand-muted hover:text-brand-gold" : "text-white/68 hover:text-brand-gold")}
               >
-                Bengaluru Guide
+                Bangalore Notes
               </Link>
               <a
                 href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
@@ -89,7 +106,7 @@ export default function Header() {
               </Link>
 
               <nav className="flex items-center gap-2">
-                {editorialNav.map((link) => (
+                {primaryNav.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
@@ -158,7 +175,7 @@ export default function Header() {
                 aria-label="Toggle menu"
               >
                 <Menu className="w-5 h-5" strokeWidth={1.5} />
-                <span className="hidden sm:inline text-[11px] uppercase tracking-[0.15em] font-light">Menu</span>
+                <span className="hidden sm:inline text-[11px] uppercase tracking-[0.15em] font-light">Explore</span>
               </button>
             </div>
           </div>
@@ -214,7 +231,7 @@ export default function Header() {
                 </p>
 
                 <div className="space-y-2">
-                  {[{ label: "Home", href: "/" }, ...editorialNav].map((link, i) => (
+                  {[{ label: "Home", href: "/" }, ...primaryNav].map((link, i) => (
                     <Link
                       key={link.href}
                       href={link.href}
@@ -243,7 +260,7 @@ export default function Header() {
                     onClick={() => setIsMenuOpen(false)}
                     className="inline-flex items-center gap-2 rounded-full bg-white text-brand-ink px-5 py-3 text-[11px] uppercase tracking-[0.18em]"
                   >
-                    Reserve
+                    Book Stay
                   </Link>
                   <a
                     href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
