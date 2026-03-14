@@ -1,426 +1,142 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, MapPin, Check, Star, Building2 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { relatedProperties, destinations } from "@/data/content";
-import { killScrollTriggersByRoots } from "@/lib/scrollTrigger";
+import { destinations, relatedProperties } from "@/data/content";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+const collectionNotes = [
+  {
+    title: "Flagship Pentouz stays",
+    description: "These are the properties where the brand language is strongest and most differentiated: Lavelle Road, Indiranagar, and Ooty.",
+  },
+  {
+    title: "Useful companion inventory",
+    description: "The wider collection supports practical city demand across Bangalore, but the presentation should still stay clean and premium.",
+  },
+  {
+    title: "Direct, trust-building discovery",
+    description: "The collection page should help guests understand the offer quickly rather than forcing them through dense card grids and generic feature labels.",
+  },
+];
 
 export default function CollectionPage() {
-  const heroRef = useRef<HTMLElement>(null);
-  const propertiesRef = useRef<HTMLDivElement>(null);
-  const pentouzRef = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
-  const [hoveredProperty, setHoveredProperty] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!heroRef.current) return;
-
-    gsap.fromTo(
-      heroRef.current.querySelectorAll("[data-reveal]"),
-      { y: 60, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1.2,
-        stagger: 0.15,
-        ease: "power3.out",
-        delay: 0.3,
-      }
-    );
-  }, []);
-
-  useEffect(() => {
-    // Stats counter animation
-    if (statsRef.current) {
-      const stats = statsRef.current.querySelectorAll(".stat-number");
-      stats.forEach((stat) => {
-        gsap.fromTo(
-          stat,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: stat,
-              start: "top 85%",
-            },
-          }
-        );
-      });
-    }
-
-    if (pentouzRef.current) {
-      const cards = pentouzRef.current.querySelectorAll(".property-card");
-      gsap.fromTo(
-        cards,
-        { y: 80, opacity: 0, scale: 0.95 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 1.2,
-          stagger: 0.2,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: pentouzRef.current,
-            start: "top 75%",
-          },
-        }
-      );
-    }
-
-    if (propertiesRef.current) {
-      const cards = propertiesRef.current.querySelectorAll(".partner-card");
-      gsap.fromTo(
-        cards,
-        { y: 60, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.15,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: propertiesRef.current,
-            start: "top 75%",
-          },
-        }
-      );
-    }
-
-    return () => {
-      killScrollTriggersByRoots([
-        heroRef.current,
-        propertiesRef.current,
-        pentouzRef.current,
-        statsRef.current,
-      ]);
-    };
-  }, []);
-
   return (
     <>
       <Header />
-
-      {/* Hero Section - Enhanced with better visual hierarchy */}
-      <section
-        ref={heroRef}
-        className="relative h-[70vh] sm:h-[80vh] min-h-[550px] flex items-center justify-center"
-      >
-        {/* Loading placeholder */}
-        <div className="absolute inset-0 video-placeholder" />
-        <Image
-          src="/indiranagar/living-room-5.jpg"
-          alt="The Collection"
-          fill
-          className="object-cover"
-          priority
-          placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIRAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBQYSIRMxQVH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAIDAQAAAAAAAAAAAAAAAAECAAMRIf/aAAwDAQACEQMRAD8Aq7fudw7V1C7ggaZraYYj8kpZYpEHJgQMFgTk5HBANaOdzWdxbW9y0M0Us0SSMhXkFLKCR/DSlKiazK0M7B4j/9k="
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
-
-        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-          <div data-reveal className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-8 h-px bg-brand-accent" />
-            <Building2 className="w-5 h-5 text-brand-accent" strokeWidth={1} />
-            <div className="w-8 h-px bg-brand-accent" />
+      <main className="bg-[#f8f2e8] text-brand-ink">
+        <section className="relative isolate overflow-hidden text-white">
+          <div className="absolute inset-0">
+            <Image src="/lavelle-road/all/facade_1.jpg" alt="The Pentouz collection" fill priority className="object-cover" sizes="100vw" />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(11,9,7,0.9)_0%,rgba(11,9,7,0.58)_40%,rgba(11,9,7,0.24)_75%,rgba(11,9,7,0.72)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,9,7,0.16)_0%,rgba(11,9,7,0)_32%,rgba(11,9,7,0.78)_100%)]" />
           </div>
-          <p
-            data-reveal
-            className="text-[10px] sm:text-[11px] uppercase tracking-[0.4em] text-white/80 mb-4 sm:mb-6 drop-shadow-sm"
-          >
-            Our Properties
-          </p>
-          <h1
-            data-reveal
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light text-white mb-6 drop-shadow-md"
-          >
-            The <em className="italic">Collection</em>
-          </h1>
-          <p
-            data-reveal
-            className="text-sm sm:text-base lg:text-lg text-white/90 max-w-2xl mx-auto leading-relaxed"
-          >
-            Discover our portfolio of distinctive properties, each offering a unique blend of comfort, convenience, and character.
-          </p>
 
-          {/* Scroll hint */}
-          <div data-reveal className="mt-12 sm:mt-16">
-            <div className="w-px h-16 bg-white/20 mx-auto relative overflow-hidden">
-              <div className="w-full h-8 bg-white/50 animate-pulse" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-12 sm:py-16 bg-[#1a1a1a]">
-        <div ref={statsRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 text-center">
-            <div>
-              <p className="stat-number font-display text-3xl sm:text-4xl lg:text-5xl text-white font-light mb-2">
-                7+
-              </p>
-              <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-white/80">
-                Properties
-              </p>
-            </div>
-            <div>
-              <p className="stat-number font-display text-3xl sm:text-4xl lg:text-5xl text-white font-light mb-2">
-                3
-              </p>
-              <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-white/80">
-                Cities
-              </p>
-            </div>
-            <div>
-              <p className="stat-number font-display text-3xl sm:text-4xl lg:text-5xl text-white font-light mb-2">
-                15+
-              </p>
-              <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-white/80">
-                Years Experience
-              </p>
-            </div>
-            <div>
-              <p className="stat-number font-display text-3xl sm:text-4xl lg:text-5xl text-white font-light mb-2">
-                98%
-              </p>
-              <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-white/80">
-                Guest Satisfaction
+          <div className="relative mx-auto flex min-h-[78vh] max-w-[1440px] items-end px-5 pb-16 pt-40 sm:px-8 lg:px-14 lg:pb-24">
+            <div className="max-w-4xl">
+              <p className="luxury-kicker text-white/72">The Collection</p>
+              <h1 className="luxury-hero-title mt-6 max-w-4xl text-white">
+                A portfolio of city stays and retreat addresses with different reasons to be chosen.
+              </h1>
+              <p className="luxury-copy mt-8 max-w-2xl text-white/76">
+                The Pentouz collection works best when it is presented as a set of distinct hospitality products, not one repeated format. That difference is what makes the flagship properties feel premium and the wider collection feel purposeful.
               </p>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* The Pentouz Properties - Enhanced with featured styling */}
-      <section className="py-16 sm:py-24 lg:py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <Star className="w-4 h-4 text-brand-accent" fill="currentColor" />
-              <Star className="w-4 h-4 text-brand-accent" fill="currentColor" />
-              <Star className="w-4 h-4 text-brand-accent" fill="currentColor" />
-            </div>
-            <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-accent mb-4 sm:mb-6">
-              Signature Collection
-            </p>
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light">
-              The Pentouz <em className="italic">Properties</em>
-            </h2>
-            <div className="w-16 h-px bg-brand-accent mx-auto mt-6 sm:mt-8" />
-            <p className="text-sm sm:text-base text-brand-body mt-6 max-w-2xl mx-auto">
-              Our flagship luxury residences, offering unparalleled experiences in Bangalore and Ooty.
-            </p>
+        <section className="border-b border-black/5 bg-[#fdf9f3]">
+          <div className="mx-auto grid max-w-[1440px] gap-8 px-5 py-18 sm:px-8 lg:grid-cols-3 lg:px-14 lg:py-24">
+            {collectionNotes.map((note) => (
+              <div key={note.title} className="border-l border-brand-gold/35 pl-5">
+                <h2 className="font-display text-3xl font-light leading-tight text-brand-ink">{note.title}</h2>
+                <p className="mt-4 text-base leading-8 text-brand-body">{note.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-[1440px] px-5 py-18 sm:px-8 lg:px-14 lg:py-24">
+          <div className="max-w-3xl">
+            <p className="luxury-kicker text-brand-accent">Pentouz Collection</p>
+            <h2 className="luxury-section-title mt-5">Flagship stays with the clearest brand identity.</h2>
           </div>
 
-          <div ref={pentouzRef} className="grid md:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
+          <div className="mt-14 space-y-12 lg:space-y-16">
             {destinations.map((destination, index) => (
-              <Link
-                key={destination.slug}
-                href={`/destinations/${destination.slug}`}
-                className="property-card group block"
-                onMouseEnter={() => setHoveredProperty(destination.slug)}
-                onMouseLeave={() => setHoveredProperty(null)}
-              >
-                <div className="relative aspect-[3/4] overflow-hidden mb-6">
-                  {/* Loading placeholder */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-200 via-gray-100 to-gray-200 animate-shimmer bg-[length:200%_100%]" />
-                  <Image
-                    src={destination.image}
-                    alt={destination.title}
-                    fill
-                    className={`object-cover transition-all duration-1000 ${
-                      hoveredProperty === destination.slug ? "scale-110" : "scale-100"
-                    }`}
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    placeholder="blur"
-                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIRAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBQYSIRMxQVH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAIDAQAAAAAAAAAAAAAAAAECAAMRIf/aAAwDAQACEQMRAD8Aq7fudw7V1C7ggaZraYYj8kpZYpEHJgQMFgTk5HBANaOdzWdxbW9y0M0Us0SSMhXkFLKCR/DSlKiazK0M7B4j/9k="
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <article key={destination.slug} className={index === 1 ? "grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center" : "grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center"}>
+                <Link href={`/destinations/${destination.slug}`} className={index === 1 ? "lg:order-2" : ""}>
+                  <div className={index === 0 ? "relative aspect-[16/10] overflow-hidden" : "relative aspect-[4/5] overflow-hidden"}>
+                    <Image src={destination.heroImage || destination.image} alt={destination.title} fill className="object-cover transition-transform duration-1000 hover:scale-[1.02]" sizes={index === 0 ? "(max-width: 1024px) 100vw, 58vw" : "(max-width: 1024px) 100vw, 48vw"} />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+                  </div>
+                </Link>
 
-                  {/* Featured badge for first property */}
-                  {index === 0 && (
-                    <div className="absolute top-4 left-4 bg-brand-accent text-white px-3 py-1 text-[9px] uppercase tracking-[0.15em]">
-                      Featured
+                <div className={index === 1 ? "lg:order-1" : ""}>
+                  <p className="luxury-kicker text-brand-accent">{destination.subtitle}</p>
+                  <h3 className="mt-5 font-display text-4xl font-light leading-tight text-brand-ink sm:text-5xl">{destination.title}</h3>
+                  <p className="mt-6 text-base leading-8 text-brand-body sm:text-lg">{destination.description}</p>
+                  <div className="mt-8 grid gap-4 sm:grid-cols-3">
+                    <div className="luxury-panel bg-white/75">
+                      <p className="text-[10px] uppercase tracking-[0.22em] text-brand-accent">Property</p>
+                      <p className="mt-3 text-sm text-brand-ink">{destination.propertyType || destination.shortTitle}</p>
                     </div>
-                  )}
-
-                  {/* Bottom content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
-                    <div className="flex items-center gap-2 mb-3">
-                      <MapPin className="w-3 h-3 text-brand-accent" />
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/90 drop-shadow-sm">
-                        {destination.subtitle}
-                      </p>
+                    <div className="luxury-panel bg-white/75">
+                      <p className="text-[10px] uppercase tracking-[0.22em] text-brand-accent">Signature</p>
+                      <p className="mt-3 text-sm text-brand-ink">{destination.features[0]}</p>
                     </div>
-                    <h3 className="font-display text-lg sm:text-xl lg:text-2xl font-light text-white mb-2 drop-shadow-md">
-                      {destination.title}
-                    </h3>
-
-                    {/* Reveal on hover */}
-                    <div className={`overflow-hidden transition-all duration-500 ${
-                      hoveredProperty === destination.slug ? "max-h-24 opacity-100" : "max-h-0 opacity-0"
-                    }`}>
-                      <p className="text-xs text-white/90 mt-2 line-clamp-2">
-                        {destination.copy}
-                      </p>
+                    <div className="luxury-panel bg-white/75">
+                      <p className="text-[10px] uppercase tracking-[0.22em] text-brand-accent">Best Fit</p>
+                      <p className="mt-3 text-sm text-brand-ink">{destination.idealFor?.[0] || "Luxury stay"}</p>
                     </div>
                   </div>
-
-                  {/* Hover overlay button */}
-                  <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${
-                    hoveredProperty === destination.slug ? "opacity-100" : "opacity-0"
-                  }`}>
-                    <span className="bg-white text-brand-ink px-6 py-3 text-[10px] uppercase tracking-[0.15em] transform transition-transform duration-500 group-hover:scale-100 scale-90">
-                      Explore Property
-                    </span>
+                  <div className="mt-8 flex flex-wrap gap-4">
+                    <Link href={`/destinations/${destination.slug}`} className="inline-flex items-center gap-2 rounded-full border border-brand-ink px-6 py-3 text-[11px] uppercase tracking-[0.2em] text-brand-ink transition-colors hover:bg-brand-ink hover:text-white">
+                      View Residence
+                      <ArrowRight className="h-4 w-4" strokeWidth={1.4} />
+                    </Link>
+                    <a href={destination.bookingUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full px-2 py-3 text-[11px] uppercase tracking-[0.2em] text-brand-gold transition-colors hover:text-brand-ink">
+                      Book Direct
+                    </a>
                   </div>
                 </div>
-
-                {/* Mobile-visible content */}
-                <div className="sm:hidden">
-                  <p className="text-xs text-brand-body line-clamp-2 mb-3">
-                    {destination.copy}
-                  </p>
-                  <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.15em] text-brand-accent">
-                    <span>Explore</span>
-                    <ArrowRight className="w-3 h-3" />
-                  </div>
-                </div>
-              </Link>
+              </article>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Divider with quote */}
-      <section className="py-16 sm:py-24 bg-[#f8f7f5]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-          <div className="text-brand-border/30 text-6xl sm:text-8xl font-display leading-none mb-4">
-            &ldquo;
-          </div>
-          <blockquote className="font-display text-xl sm:text-2xl lg:text-3xl font-light italic text-brand-ink leading-relaxed">
-            Every property in our collection tells a unique story of craftsmanship, comfort, and care.
-          </blockquote>
-          <div className="w-12 h-px bg-brand-accent mx-auto mt-8" />
-        </div>
-      </section>
+        <section className="bg-[#171411] text-white">
+          <div className="mx-auto max-w-[1440px] px-5 py-18 sm:px-8 lg:px-14 lg:py-24">
+            <div className="max-w-3xl">
+              <p className="luxury-kicker text-brand-gold">Extended Portfolio</p>
+              <h2 className="mt-5 font-display text-4xl font-light leading-tight text-white sm:text-5xl lg:text-6xl">
+                Additional Bangalore stays for practical travel demand.
+              </h2>
+              <p className="mt-6 max-w-2xl text-base leading-8 text-white/68 sm:text-lg">
+                These properties support the wider Pentouz ecosystem across Bangalore. They should still feel carefully presented, but without competing with the flagship brand story.
+              </p>
+            </div>
 
-      {/* Related Properties - Enhanced card design */}
-      <section className="py-16 sm:py-24 lg:py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-            <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-accent mb-4 sm:mb-6">
-              Partner Properties
-            </p>
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light">
-              Extended <em className="italic">Collection</em>
-            </h2>
-            <div className="w-16 h-px bg-brand-accent mx-auto mt-6 sm:mt-8" />
-            <p className="text-sm sm:text-base text-brand-body mt-6 max-w-2xl mx-auto">
-              Comfortable accommodations across Bangalore for business and leisure travelers.
-            </p>
-          </div>
-
-          <div ref={propertiesRef} className="grid sm:grid-cols-2 gap-6 sm:gap-8">
-            {relatedProperties.map((property) => (
-              <a
-                key={property.slug}
-                href={property.bookingUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="partner-card group bg-[#f8f7f5] flex flex-col sm:flex-row overflow-hidden hover:shadow-xl transition-all duration-500"
-              >
-                <div className="relative aspect-[4/3] sm:aspect-auto sm:w-2/5 flex-shrink-0 overflow-hidden">
-                  {/* Loading placeholder */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-200 via-gray-100 to-gray-200 animate-shimmer bg-[length:200%_100%]" />
-                  <Image
-                    src={property.image}
-                    alt={property.name}
-                    fill
-                    className="object-cover transition-transform duration-1000 group-hover:scale-110"
-                    sizes="(max-width: 640px) 100vw, 40vw"
-                    placeholder="blur"
-                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIRAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBQYSIRMxQVH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAIDAQAAAAAAAAAAAAAAAAECAAMRIf/aAAwDAQACEQMRAD8Aq7fudw7V1C7ggaZraYYj8kpZYpEHJgQMFgTk5HBANaOdzWdxbW9y0M0Us0SSMhXkFLKCR/DSlKiazK0M7B4j/9k="
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
-                </div>
-                <div className="p-5 sm:p-6 lg:p-8 flex flex-col justify-center bg-white flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <MapPin className="w-3 h-3 text-brand-accent" />
-                    <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-brand-muted">
-                      {property.location}
-                    </p>
+            <div className="mt-14 grid gap-6 md:grid-cols-2">
+              {relatedProperties.map((property) => (
+                <a key={property.slug} href={property.bookingUrl} target="_blank" rel="noopener noreferrer" className="overflow-hidden border border-white/10 bg-white/[0.04] transition hover:-translate-y-1 hover:border-brand-gold/35">
+                  <div className="grid sm:grid-cols-[0.42fr_0.58fr]">
+                    <div className="relative aspect-[4/3] overflow-hidden sm:aspect-auto sm:h-full">
+                      <Image src={property.image} alt={property.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 40vw" />
+                    </div>
+                    <div className="px-6 py-6">
+                      <p className="text-[10px] uppercase tracking-[0.22em] text-brand-gold">Partner Property</p>
+                      <h3 className="mt-4 font-display text-3xl font-light text-white">{property.name}</h3>
+                      <p className="mt-3 text-sm text-white/64">{property.location}</p>
+                      <p className="mt-4 text-sm leading-7 text-white/68">{property.description}</p>
+                    </div>
                   </div>
-                  <h3 className="font-display text-lg sm:text-xl font-light mb-2 sm:mb-3 group-hover:text-brand-accent transition-colors duration-300">
-                    {property.name}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-brand-body mb-4 line-clamp-2">
-                    {property.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {property.features.slice(0, 3).map((feature) => (
-                      <span
-                        key={feature}
-                        className="text-[9px] sm:text-[10px] uppercase tracking-[0.1em] text-brand-muted flex items-center gap-1"
-                      >
-                        <Check className="w-3 h-3 text-brand-accent" />
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.15em] text-brand-accent mt-auto">
-                    <span>View Property</span>
-                    <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-1" />
-                  </div>
-                </div>
-              </a>
-            ))}
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* CTA - Enhanced */}
-      <section className="py-16 sm:py-24 lg:py-32 bg-[#1a1a1a] text-white relative overflow-hidden">
-        {/* Background pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }} />
-        </div>
-
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 text-center">
-          <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-accent mb-4 sm:mb-6">
-            Personalized Service
-          </p>
-          <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-light mb-4 sm:mb-6">
-            Looking for Something <em className="italic">Special</em>?
-          </h2>
-          <p className="text-sm sm:text-base text-white/90 mb-8 sm:mb-10 max-w-xl mx-auto">
-            Our dedicated team can help you find the perfect property tailored to your unique needs and preferences.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-3 bg-white text-brand-ink px-8 sm:px-10 py-4 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] hover:bg-brand-accent hover:text-white transition-all duration-500 active:scale-95"
-          >
-            <span>Contact Us</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </section>
-
+        </section>
+      </main>
       <Footer />
     </>
   );

@@ -1,347 +1,132 @@
-"use client";
-
-import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, Utensils, Leaf, Star, Users, Gift, MapPin } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { killScrollTriggersByRoots } from "@/lib/scrollTrigger";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
-const experienceCategories = [
+const experienceStories = [
   {
-    icon: Utensils,
-    title: "Culinary Journeys",
-    subtitle: "Private Dining",
+    title: "Lavelle Road city rhythm",
+    subtitle: "Business and legal travel, handled with polish",
     description:
-      "From intimate in-suite dinners crafted by private chefs to curated food tours through local markets, every meal becomes a discovery.",
-    image: "/ooty/restaurant-20.jpeg",
-    features: ["Private chef experiences", "Wine pairing dinners", "Local food tours", "Cooking classes"],
+      "Lavelle Road experiences should feel grounded in real Bangalore movement: early hearing days, UB City dinners, MG Road access, and the ability to return to a room that still feels private and composed.",
+    image: "/lavelle-road/all/restaurant_2.jpg",
+    href: "/destinations/lavelle-road/experiences",
   },
   {
-    icon: Leaf,
-    title: "Wellness & Rejuvenation",
-    subtitle: "Spa & Wellness",
+    title: "Indiranagar penthouse living",
+    subtitle: "Private gatherings, terrace time, and longer stays",
     description:
-      "Discover inner peace through personalized wellness programs, from traditional Ayurvedic treatments to contemporary spa therapies.",
-    image: "/indiranagar/master-bath.jpg",
-    features: ["Ayurvedic treatments", "Yoga sessions", "Meditation retreats", "Wellness consultations"],
+      "Indiranagar is strongest when the stay itself becomes part of the experience. The terrace, living room, and dining core support family time, hosted evenings, and a more residential luxury mood.",
+    image: "/indiranagar/all/06._terrace_01._terrace.jpg",
+    href: "/destinations/indiranagar/experiences",
   },
   {
-    icon: MapPin,
-    title: "Local Discoveries",
-    subtitle: "Curated Tours",
+    title: "Ooty retreat atmosphere",
+    subtitle: "Scenic pace, quiet mornings, and softer travel",
     description:
-      "Explore hidden gems and cultural treasures with our expertly curated tours, designed to reveal the authentic spirit of each destination.",
-    image: "/ooty/view-24.jpeg",
-    features: ["Heritage walks", "Art gallery visits", "Tea garden tours", "Temple & culture tours"],
-  },
-  {
-    icon: Star,
-    title: "Bespoke Celebrations",
-    subtitle: "Special Occasions",
-    description:
-      "Whether it's an intimate anniversary or a milestone birthday, we craft celebrations that exceed expectations and create lasting memories.",
-    image: "/indiranagar/terrace-7.jpg",
-    features: ["Anniversary packages", "Birthday celebrations", "Proposal setups", "Family gatherings"],
+      "In Ooty, the best experiences are often the simplest: breakfast with hillside light, time on the lawn, scenic outings, and returning to a room that still feels part of the getaway.",
+    image: "/ooty/all/22._lawn.jpeg",
+    href: "/destinations/ooty/experiences",
   },
 ];
 
-const privilegeFeatures = [
+const standards = [
   {
-    icon: Gift,
-    title: "Complimentary Upgrades",
-    description: "Room upgrades based on availability at check-in",
+    title: "No generic activity list",
+    description: "Pentouz experiences should feel specific to the property and location, not like copied hospitality filler.",
   },
   {
-    icon: Star,
-    title: "Early Check-in & Late Check-out",
-    description: "Flexible timing to suit your schedule",
+    title: "Useful luxury",
+    description: "A great experience may be a private terrace evening, a well-timed dinner reservation, or a stay built cleanly around a packed day.",
   },
   {
-    icon: Users,
-    title: "Priority Reservations",
-    description: "First access to new properties and exclusive events",
-  },
-  {
-    icon: Utensils,
-    title: "Dining Credits",
-    description: "Complimentary dining experiences during your stay",
+    title: "Editorial, not over-programmed",
+    description: "The site should guide guests toward the right mood and itinerary rather than pretending every property is a resort.",
   },
 ];
 
 export default function ExperiencesPage() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const categoriesRef = useRef<HTMLDivElement>(null);
-  const privilegeRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Hero animation
-    if (heroRef.current) {
-      const elements = heroRef.current.querySelectorAll("[data-hero-reveal]");
-      gsap.fromTo(
-        elements,
-        { y: 80, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.4,
-          ease: "power3.out",
-          stagger: 0.15,
-          delay: 0.3,
-        }
-      );
-    }
-
-    // Categories animation
-    if (categoriesRef.current) {
-      const cards = categoriesRef.current.querySelectorAll(".experience-card");
-      cards.forEach((card, i) => {
-        gsap.fromTo(
-          card,
-          { y: 80, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1.2,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: card,
-              start: "top 85%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      });
-    }
-
-    // Privilege section
-    if (privilegeRef.current) {
-      const elements = privilegeRef.current.querySelectorAll("[data-reveal]");
-      elements.forEach((el) => {
-        gsap.fromTo(
-          el,
-          { y: 40, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: el,
-              start: "top 85%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      });
-    }
-
-    return () => {
-      killScrollTriggersByRoots([
-        heroRef.current,
-        categoriesRef.current,
-        privilegeRef.current,
-      ]);
-    };
-  }, []);
-
   return (
     <>
       <Header />
-      <main>
-        {/* Hero Section */}
-        <section className="relative h-[80vh] min-h-[700px]">
+      <main className="bg-[#f8f2e8] text-brand-ink">
+        <section className="relative isolate overflow-hidden text-white">
           <div className="absolute inset-0">
-            <Image
-              src="/indiranagar/living-room-10.jpg"
-              alt="Pentouz Experiences"
-              fill
-              priority
-              className="object-cover"
-              sizes="100vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/30" />
+            <Image src="/ooty/all/21._restaurant.jpeg" alt="Pentouz experiences" fill priority className="object-cover" sizes="100vw" />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(12,10,8,0.9)_0%,rgba(12,10,8,0.58)_42%,rgba(12,10,8,0.24)_75%,rgba(12,10,8,0.7)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,10,8,0.15)_0%,rgba(12,10,8,0)_30%,rgba(12,10,8,0.8)_100%)]" />
           </div>
 
-          <div
-            ref={heroRef}
-            className="relative h-full flex flex-col justify-end items-center text-center text-white px-8 pb-32"
-          >
-            <p data-hero-reveal className="text-overline uppercase tracking-[0.4em] text-white/80 mb-6 font-light drop-shadow-sm">
-              Signature Experiences
-            </p>
-            <h1 data-hero-reveal className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light max-w-5xl mb-8 drop-shadow-md">
-              Moments That <em className="italic">Become</em> Memories
-            </h1>
-            <div data-hero-reveal className="w-20 h-px bg-white/50 mb-8" />
-            <p data-hero-reveal className="text-lg text-white/90 max-w-2xl font-light leading-relaxed">
-              Curated experiences designed to enrich your stay and create unforgettable moments
-            </p>
-          </div>
-        </section>
-
-        {/* Introduction */}
-        <section className="py-32 lg:py-40 bg-white">
-          <div className="max-w-container-lg mx-auto px-8 lg:px-20 text-center">
-            <p className="text-overline uppercase tracking-[0.3em] text-brand-accent mb-8 font-light">
-              Beyond Accommodation
-            </p>
-            <p className="font-display text-display-sm lg:text-display-md font-light max-w-4xl mx-auto mb-10 text-balance">
-              At The Pentouz, we believe that extraordinary experiences transform a stay into a journey.
-              Every detail is thoughtfully curated to create moments of wonder, connection, and joy.
-            </p>
-            <div className="w-16 h-px bg-brand-accent mx-auto" />
-          </div>
-        </section>
-
-        {/* Experience Categories */}
-        <section ref={categoriesRef} className="py-24 lg:py-40 bg-brand-cream">
-          <div className="max-w-container-2xl mx-auto px-8 lg:px-24">
-            <div className="space-y-32 lg:space-y-48">
-              {experienceCategories.map((category, index) => (
-                <ExperienceCard
-                  key={category.title}
-                  category={category}
-                  index={index}
-                  reversed={index % 2 === 1}
-                />
-              ))}
+          <div className="relative mx-auto flex min-h-[78vh] max-w-[1440px] items-end px-5 pb-16 pt-40 sm:px-8 lg:px-14 lg:pb-24">
+            <div className="max-w-4xl">
+              <p className="luxury-kicker text-white/72">Experiences</p>
+              <h1 className="luxury-hero-title mt-6 max-w-4xl text-white">
+                Pentouz experiences begin with the property itself, then extend into the right version of the city or landscape.
+              </h1>
+              <p className="luxury-copy mt-8 max-w-2xl text-white/76">
+                The collection does not need an overbuilt activity menu to feel luxurious. It needs the right experience language for each address: city precision at Lavelle Road, private penthouse living in Indiranagar, and scenic quiet in Ooty.
+              </p>
             </div>
           </div>
         </section>
 
-        {/* Pentouz Privé Section */}
-        <section className="relative min-h-[90vh]">
-          <div className="absolute inset-0">
-            <Image
-              src="/indiranagar/skyline-suite.jpg"
-              alt="Pentouz Privé"
-              fill
-              className="object-cover"
-              sizes="100vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/50" />
-          </div>
-
-          <div ref={privilegeRef} className="relative py-32 lg:py-48">
-            <div className="max-w-container-xl mx-auto px-8 lg:px-20">
-              <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-                {/* Content */}
-                <div>
-                  <p data-reveal className="text-overline uppercase tracking-[0.4em] text-white/80 mb-6 font-light drop-shadow-sm">
-                    Exclusive Membership
-                  </p>
-                  <h2 data-reveal className="font-display text-display-sm lg:text-display-md font-light text-white mb-8 drop-shadow-md">
-                    Pentouz <em className="italic">Privé</em>
-                  </h2>
-                  <div data-reveal className="w-16 h-px bg-white/50 mb-10" />
-                  <p data-reveal className="text-body-lg text-white/90 leading-relaxed mb-8">
-                    Join our exclusive membership program and unlock a world of privileges.
-                    Pentouz Privé members enjoy preferential rates, room upgrades, and access
-                    to invitation-only experiences.
-                  </p>
-                  <p data-reveal className="text-body-lg text-white/90 leading-relaxed mb-12">
-                    Whether you&apos;re a frequent traveler or planning a special occasion,
-                    Privé membership elevates every stay into something extraordinary.
-                  </p>
-
-                  {/* Features Grid */}
-                  <div data-reveal className="grid grid-cols-2 gap-8 mb-12">
-                    {privilegeFeatures.map((feature) => (
-                      <div key={feature.title} className="flex gap-4">
-                        <div className="flex-shrink-0">
-                          <feature.icon className="w-5 h-5 text-brand-accent" />
-                        </div>
-                        <div>
-                          <p className="text-body-sm text-white font-light mb-1">
-                            {feature.title}
-                          </p>
-                          <p className="text-caption text-white/80">
-                            {feature.description}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <Link
-                    data-reveal
-                    href="/contact"
-                    className="inline-flex items-center justify-center border border-white/40 text-white py-4 px-10 text-label uppercase tracking-[0.2em] hover:bg-white hover:text-brand-ink transition-all duration-500 font-light"
-                  >
-                    Inquire About Membership
-                  </Link>
-                </div>
-
-                {/* Decorative Card */}
-                <div data-reveal className="hidden lg:block">
-                  <div className="glass-dark p-12 lg:p-16">
-                    <p className="text-overline uppercase tracking-[0.4em] text-white/70 mb-6 font-light">
-                      Member Benefits
-                    </p>
-                    <ul className="space-y-5">
-                      <li className="flex items-center gap-4 text-body-md text-white/90">
-                        <span className="w-2 h-2 bg-brand-accent rounded-full" />
-                        15% savings on all bookings
-                      </li>
-                      <li className="flex items-center gap-4 text-body-md text-white/90">
-                        <span className="w-2 h-2 bg-brand-accent rounded-full" />
-                        Complimentary airport transfers
-                      </li>
-                      <li className="flex items-center gap-4 text-body-md text-white/90">
-                        <span className="w-2 h-2 bg-brand-accent rounded-full" />
-                        Priority spa reservations
-                      </li>
-                      <li className="flex items-center gap-4 text-body-md text-white/90">
-                        <span className="w-2 h-2 bg-brand-accent rounded-full" />
-                        Exclusive event invitations
-                      </li>
-                      <li className="flex items-center gap-4 text-body-md text-white/90">
-                        <span className="w-2 h-2 bg-brand-accent rounded-full" />
-                        Dedicated concierge line
-                      </li>
-                      <li className="flex items-center gap-4 text-body-md text-white/90">
-                        <span className="w-2 h-2 bg-brand-accent rounded-full" />
-                        Birthday & anniversary surprises
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+        <section className="border-b border-black/5 bg-[#fdf9f3]">
+          <div className="mx-auto grid max-w-[1440px] gap-8 px-5 py-18 sm:px-8 lg:grid-cols-3 lg:px-14 lg:py-24">
+            {standards.map((item) => (
+              <div key={item.title} className="border-l border-brand-gold/35 pl-5">
+                <h2 className="font-display text-3xl font-light leading-tight text-brand-ink">{item.title}</h2>
+                <p className="mt-4 text-base leading-8 text-brand-body">{item.description}</p>
               </div>
-            </div>
+            ))}
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-32 lg:py-40 bg-white">
-          <div className="max-w-4xl mx-auto px-8 text-center">
-            <p className="text-overline uppercase tracking-[0.3em] text-brand-accent mb-6 font-light">
-              Plan Your Experience
-            </p>
-            <h2 className="font-display text-display-sm lg:text-display-md font-light mb-8">
-              Let Us <em className="italic">Curate</em> Your Stay
+        <section className="mx-auto max-w-[1440px] px-5 py-18 sm:px-8 lg:px-14 lg:py-24">
+          <div className="max-w-3xl">
+            <p className="luxury-kicker text-brand-accent">Property Experiences</p>
+            <h2 className="luxury-section-title mt-5">Three different stays, three different kinds of luxury time.</h2>
+          </div>
+
+          <div className="mt-14 space-y-12 lg:space-y-16">
+            {experienceStories.map((story, index) => (
+              <article key={story.title} className={index === 1 ? "grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center" : "grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-center"}>
+                <Link href={story.href} className={index === 1 ? "lg:order-2" : ""}>
+                  <div className="relative aspect-[16/10] overflow-hidden lg:aspect-[4/5]">
+                    <Image src={story.image} alt={story.title} fill className="object-cover transition-transform duration-1000 hover:scale-[1.02]" sizes="(max-width: 1024px) 100vw, 50vw" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+                  </div>
+                </Link>
+                <div className={index === 1 ? "lg:order-1" : ""}>
+                  <p className="luxury-kicker text-brand-accent">{story.subtitle}</p>
+                  <h3 className="mt-5 font-display text-4xl font-light leading-tight text-brand-ink sm:text-5xl">{story.title}</h3>
+                  <p className="mt-6 text-base leading-8 text-brand-body sm:text-lg">{story.description}</p>
+                  <div className="mt-8">
+                    <Link href={story.href} className="inline-flex items-center gap-2 rounded-full border border-brand-ink px-6 py-3 text-[11px] uppercase tracking-[0.2em] text-brand-ink transition-colors hover:bg-brand-ink hover:text-white">
+                      View Property Experiences
+                      <ArrowRight className="h-4 w-4" strokeWidth={1.4} />
+                    </Link>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="bg-[#161310] text-white">
+          <div className="mx-auto max-w-5xl px-5 py-18 text-center sm:px-8 lg:px-14 lg:py-24">
+            <p className="luxury-kicker text-brand-gold">Reservations and Concierge</p>
+            <h2 className="mt-5 font-display text-4xl font-light leading-tight text-white sm:text-5xl lg:text-6xl">
+              Let the stay and the itinerary support each other.
             </h2>
-            <p className="text-body-lg text-brand-body mb-12 max-w-2xl mx-auto">
-              Our concierge team is ready to design a bespoke experience tailored to your preferences.
+            <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/68 sm:text-lg">
+              Pentouz works best when guests can move from inspiration into a direct booking or concierge conversation without leaving the tone of the brand.
             </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Link
-                href="/#booking"
-                className="inline-flex items-center justify-center bg-brand-ink text-white py-5 px-12 text-label uppercase tracking-[0.2em] hover:bg-black transition-all duration-500 font-light"
-              >
-                Check Availability
+            <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+              <Link href="/destinations" className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-brand-ink transition-colors hover:bg-brand-gold hover:text-white">
+                Explore Stays
               </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center border border-brand-ink text-brand-ink py-5 px-12 text-label uppercase tracking-[0.2em] hover:bg-brand-ink hover:text-white transition-all duration-500 font-light"
-              >
+              <Link href="/contact" className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-white transition-colors hover:border-brand-gold hover:text-brand-gold">
                 Contact Concierge
               </Link>
             </div>
@@ -350,82 +135,5 @@ export default function ExperiencesPage() {
       </main>
       <Footer />
     </>
-  );
-}
-
-interface ExperienceCardProps {
-  category: (typeof experienceCategories)[0];
-  index: number;
-  reversed: boolean;
-}
-
-function ExperienceCard({ category, index, reversed }: ExperienceCardProps) {
-  const Icon = category.icon;
-
-  return (
-    <div
-      className={`experience-card grid lg:grid-cols-2 gap-16 lg:gap-24 items-center ${
-        reversed ? "" : ""
-      }`}
-    >
-      {/* Image */}
-      <div className={`relative ${reversed ? "lg:order-2" : ""}`}>
-        <div className="aspect-[4/3] relative overflow-hidden">
-          <Image
-            src={category.image}
-            alt={category.title}
-            fill
-            className="object-cover transition-transform duration-1000 hover:scale-105"
-            sizes="(max-width: 1024px) 100vw, 50vw"
-          />
-        </div>
-        {/* Number badge */}
-        <div className="absolute -bottom-8 -right-8 lg:-bottom-12 lg:-right-12 w-24 h-24 lg:w-32 lg:h-32 bg-white flex items-center justify-center shadow-subtle">
-          <span className="font-display text-4xl lg:text-5xl text-brand-border">
-            {String(index + 1).padStart(2, "0")}
-          </span>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className={`${reversed ? "lg:order-1" : ""} lg:py-8`}>
-        <div className="flex items-center gap-4 mb-6">
-          <div className="w-12 h-12 border border-brand-border flex items-center justify-center">
-            <Icon className="w-5 h-5 text-brand-accent" />
-          </div>
-          <p className="text-overline uppercase tracking-[0.2em] text-brand-accent font-light">
-            {category.subtitle}
-          </p>
-        </div>
-        <h2 className="font-display text-display-sm lg:text-display-md font-light mb-6">
-          {category.title}
-        </h2>
-        <div className="w-16 h-px bg-brand-accent mb-8" />
-        <p className="text-body-lg text-brand-body mb-10 leading-relaxed">
-          {category.description}
-        </p>
-
-        {/* Features */}
-        <div className="grid grid-cols-2 gap-4 mb-10">
-          {category.features.map((feature) => (
-            <p
-              key={feature}
-              className="text-body-sm text-brand-muted flex items-center gap-3"
-            >
-              <span className="w-1.5 h-1.5 bg-brand-accent rounded-full" />
-              {feature}
-            </p>
-          ))}
-        </div>
-
-        <Link
-          href="/contact"
-          className="inline-flex items-center gap-4 text-label uppercase tracking-[0.15em] text-brand-ink hover:text-brand-accent transition-colors duration-500 group"
-        >
-          <span>Inquire Now</span>
-          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2 duration-500" />
-        </Link>
-      </div>
-    </div>
   );
 }

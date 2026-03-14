@@ -1,310 +1,164 @@
-"use client";
-
-import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { killScrollTriggersByRoots } from "@/lib/scrollTrigger";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+const principles = [
+  {
+    title: "Location with purpose",
+    description:
+      "Pentouz chooses addresses that already carry weight: Lavelle Road for legal and business travel, Indiranagar for private city living, and Ooty for scenic retreat value.",
+  },
+  {
+    title: "Hospitality without noise",
+    description:
+      "The brand should feel polished and deeply looked after, but never over-performed. Quiet confidence is part of the product.",
+  },
+  {
+    title: "Useful luxury",
+    description:
+      "Large rooms, private terraces, work-ready layouts, and direct booking clarity matter more than decorative excess.",
+  },
+  {
+    title: "Distinctive stays",
+    description:
+      "Each property should feel unmistakably itself, not like a duplicated website experience with a different address pasted in.",
+  },
+];
+
+const brandNotes = [
+  {
+    title: "Lavelle Road",
+    body: "A central Bangalore address designed for advocates, executives, and guests who want premium proximity to the High Court, UB City, MG Road, and the civic core.",
+    image: "/lavelle-road/all/reception_2.jpg",
+  },
+  {
+    title: "Indiranagar",
+    body: "A large private penthouse that feels more like an elevated residence than a conventional hotel product, with strong appeal for families, groups, and longer urban stays.",
+    image: "/indiranagar/all/04._living_room_05._living_room.jpg",
+  },
+  {
+    title: "Ooty",
+    body: "A softer, slower retreat expression built around view, weather, lawns, and the emotional comfort expected from a premium hill-stay experience.",
+    image: "/ooty/all/24._view.jpeg",
+  },
+];
 
 export default function AboutPage() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const storyRef = useRef<HTMLDivElement>(null);
-  const valuesRef = useRef<HTMLDivElement>(null);
-  const teamRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Hero text animation
-    if (heroRef.current) {
-      const heroElements = heroRef.current.querySelectorAll("[data-hero-reveal]");
-      gsap.fromTo(
-        heroElements,
-        { y: 80, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.4,
-          ease: "power3.out",
-          stagger: 0.15,
-          delay: 0.3,
-        }
-      );
-    }
-
-    // Story section animation
-    if (storyRef.current) {
-      const storyElements = storyRef.current.querySelectorAll("[data-reveal]");
-      storyElements.forEach((el) => {
-        gsap.fromTo(
-          el,
-          { y: 60, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1.2,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: el,
-              start: "top 85%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      });
-    }
-
-    // Values cards stagger animation
-    if (valuesRef.current) {
-      const cards = valuesRef.current.querySelectorAll(".value-card");
-      gsap.fromTo(
-        cards,
-        { y: 50, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: "power3.out",
-          stagger: 0.12,
-          scrollTrigger: {
-            trigger: valuesRef.current,
-            start: "top 75%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    }
-
-    // Team section animation
-    if (teamRef.current) {
-      gsap.fromTo(
-        teamRef.current.querySelectorAll("[data-reveal]"),
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: "power3.out",
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: teamRef.current,
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    }
-
-    return () => {
-      killScrollTriggersByRoots([
-        heroRef.current,
-        storyRef.current,
-        valuesRef.current,
-        teamRef.current,
-      ]);
-    };
-  }, []);
-
   return (
     <>
       <Header />
-      <main>
-        {/* Hero Section */}
-        <section className="relative h-[80vh] min-h-[700px]">
+      <main className="bg-[#f8f2e8] text-brand-ink">
+        <section className="relative isolate overflow-hidden text-white">
           <div className="absolute inset-0">
             <Image
-              src="/indiranagar/living-room-5.jpg"
-              alt="The Pentouz Story"
+              src="/indiranagar/all/04._living_room_03._living_room.jpg"
+              alt="The Pentouz brand story"
               fill
               priority
               className="object-cover"
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/30" />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(12,10,8,0.9)_0%,rgba(12,10,8,0.56)_40%,rgba(12,10,8,0.25)_75%,rgba(12,10,8,0.7)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,10,8,0.12)_0%,rgba(12,10,8,0)_35%,rgba(12,10,8,0.75)_100%)]" />
           </div>
 
-          <div
-            ref={heroRef}
-            className="relative h-full flex flex-col justify-end items-center text-center text-white px-8 pb-32"
-          >
-            <p data-hero-reveal className="text-overline uppercase tracking-[0.4em] text-white/80 mb-6 font-light drop-shadow-sm">
-              Our Story
-            </p>
-            <h1 data-hero-reveal className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light max-w-4xl mb-8 drop-shadow-md">
-              A Legacy of <em className="italic">Refined</em> Hospitality
-            </h1>
-            <div data-hero-reveal className="w-20 h-px bg-white/50 mb-8" />
-            <p data-hero-reveal className="text-lg text-white/90 max-w-2xl font-light leading-relaxed">
-              Where every stay becomes a cherished memory, and every guest becomes family
-            </p>
-          </div>
-        </section>
-
-        {/* Story Section */}
-        <section ref={storyRef} className="py-32 lg:py-48 bg-white">
-          <div className="max-w-container-xl mx-auto px-8 lg:px-20">
-            <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-              {/* Image */}
-              <div data-reveal className="relative">
-                <div className="aspect-[4/5] relative overflow-hidden">
-                  <Image
-                    src="/indiranagar/terrace-7.jpg"
-                    alt="Pentouz Heritage"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                </div>
-                {/* Decorative element */}
-                <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-brand-cream -z-10" />
-              </div>
-
-              {/* Content */}
-              <div className="lg:py-8">
-                <p data-reveal className="text-overline uppercase tracking-[0.3em] text-brand-accent mb-6 font-light">
-                  The Beginning
-                </p>
-                <h2 data-reveal className="font-display text-display-sm lg:text-display-md font-light mb-8">
-                  Born from a <em className="italic">Vision</em>
-                </h2>
-                <div data-reveal className="w-16 h-px bg-brand-accent mb-10" />
-                <div data-reveal className="space-y-6 text-body-lg text-brand-body leading-relaxed">
-                  <p>
-                    The Pentouz was born from a simple yet profound vision: to create spaces where
-                    travelers could experience the warmth of Indian hospitality wrapped in contemporary luxury.
-                  </p>
-                  <p>
-                    Founded in Bangalore, our journey began with a single residence that quickly became
-                    known for its exceptional service and thoughtful design. Today, we curate three
-                    distinctive properties across Bangalore and Ooty, each telling its own unique story.
-                  </p>
-                  <p>
-                    Our name, derived from the Greek word for home, reflects our core belief that
-                    every guest deserves a sanctuary—a place where they can truly belong.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Philosophy Section */}
-        <section className="py-32 lg:py-48 bg-brand-cream">
-          <div className="max-w-container-lg mx-auto px-8 lg:px-20 text-center">
-            <p data-reveal className="text-overline uppercase tracking-[0.3em] text-brand-accent mb-8 font-light">
-              Our Philosophy
-            </p>
-            <blockquote data-reveal className="font-display text-display-sm lg:text-display-md font-light max-w-4xl mx-auto mb-10 text-balance italic">
-              &ldquo;We believe that true luxury lies not in opulence, but in the thoughtful details
-              that make a moment memorable.&rdquo;
-            </blockquote>
-            <div data-reveal className="w-16 h-px bg-brand-accent mx-auto" />
-          </div>
-        </section>
-
-        {/* Values Section */}
-        <section ref={valuesRef} className="py-32 lg:py-48 bg-white">
-          <div className="max-w-container-2xl mx-auto px-8 lg:px-24">
-            {/* Header */}
-            <div className="text-center mb-20 lg:mb-28">
-              <p className="text-overline uppercase tracking-[0.3em] text-brand-accent mb-6 font-light">
-                What We Stand For
+          <div className="relative mx-auto flex min-h-[82vh] max-w-[1440px] items-end px-5 pb-16 pt-40 sm:px-8 lg:px-14 lg:pb-24">
+            <div className="max-w-4xl">
+              <p className="luxury-kicker text-white/72">About Pentouz</p>
+              <h1 className="luxury-hero-title mt-6 max-w-4xl text-white">
+                Pentouz was built to feel more personal than a hotel, and more polished than a rental.
+              </h1>
+              <p className="luxury-copy mt-8 max-w-2xl text-white/76">
+                The brand sits in the space between private residence and premium hospitality. That is why the strongest Pentouz stays rely on room scale, calm atmosphere, and strong city or landscape positioning rather than generic luxury promises.
               </p>
-              <h2 className="font-display text-display-md lg:text-display-lg font-light">
-                Our Core <em className="italic">Values</em>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-b border-black/5 bg-[#fdf9f3]">
+          <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-18 sm:px-8 lg:grid-cols-[0.78fr_1.22fr] lg:px-14 lg:py-24">
+            <div>
+              <p className="luxury-kicker text-brand-accent">Brand Story</p>
+              <h2 className="luxury-section-title mt-5 max-w-xl">
+                A boutique hospitality brand shaped around how guests actually travel.
               </h2>
-              <div className="w-16 h-px bg-brand-accent mx-auto mt-10" />
+            </div>
+            <div className="space-y-6 text-base leading-8 text-brand-body sm:text-lg">
+              <p>
+                Pentouz began with the idea that premium accommodation should not be loud to feel luxurious. A well-positioned address, thoughtful interiors, clean service, and a more residential sense of privacy often create a stronger impression than excess styling ever could.
+              </p>
+              <p>
+                That philosophy now informs every part of the collection. Lavelle Road serves high-intent business and legal travel with a calmer boutique tone. Indiranagar offers rare penthouse scale in one of Bangalore&apos;s most social neighborhoods. Ooty softens the experience into a retreat built around air, view, and slower time.
+              </p>
+              <p>
+                The result is a brand that should feel refined, useful, and specific to place. Pentouz is strongest when the guest immediately understands why this stay belongs in this location and why it fits the way they want to travel.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-[1440px] px-5 py-18 sm:px-8 lg:px-14 lg:py-24">
+          <div className="max-w-3xl">
+            <p className="luxury-kicker text-brand-accent">What Matters</p>
+            <h2 className="luxury-section-title mt-5">The principles that make the brand feel premium.</h2>
+          </div>
+
+          <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {principles.map((principle) => (
+              <article key={principle.title} className="luxury-panel bg-white/80">
+                <p className="text-[10px] uppercase tracking-[0.24em] text-brand-accent">Pentouz Standard</p>
+                <h3 className="mt-4 font-display text-3xl font-light leading-tight text-brand-ink">{principle.title}</h3>
+                <p className="mt-5 text-sm leading-7 text-brand-body">{principle.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="bg-[#161310] text-white">
+          <div className="mx-auto max-w-[1440px] px-5 py-18 sm:px-8 lg:px-14 lg:py-24">
+            <div className="max-w-3xl">
+              <p className="luxury-kicker text-brand-gold">Property Character</p>
+              <h2 className="mt-5 font-display text-4xl font-light leading-tight text-white sm:text-5xl lg:text-6xl">
+                One brand, three clearly different hospitality moods.
+              </h2>
             </div>
 
-            {/* Values Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
-              {values.map((value, i) => (
-                <div key={value.title} className="value-card text-center group">
-                  <div className="mb-8">
-                    <span className="font-display text-display-md text-brand-border group-hover:text-brand-accent transition-colors duration-700">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
+            <div className="mt-14 grid gap-8 lg:grid-cols-3">
+              {brandNotes.map((note) => (
+                <article key={note.title} className="overflow-hidden border border-white/10 bg-white/[0.03]">
+                  <div className="relative aspect-[4/5] overflow-hidden">
+                    <Image src={note.image} alt={note.title} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 33vw" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                   </div>
-                  <div className="w-12 h-px bg-brand-border mx-auto mb-8 group-hover:w-20 group-hover:bg-brand-accent transition-all duration-700" />
-                  <h3 className="font-display text-heading-lg font-light mb-4">
-                    {value.title}
-                  </h3>
-                  <p className="text-body-md text-brand-body leading-relaxed">
-                    {value.description}
-                  </p>
-                </div>
+                  <div className="px-6 py-6">
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-brand-gold">Signature Mood</p>
+                    <h3 className="mt-4 font-display text-3xl font-light text-white">{note.title}</h3>
+                    <p className="mt-4 text-sm leading-7 text-white/68">{note.body}</p>
+                  </div>
+                </article>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Commitment Section */}
-        <section className="relative min-h-[80vh]">
-          <div className="absolute inset-0">
-            <Image
-              src="/indiranagar/master-bath.jpg"
-              alt="Luxury Experience"
-              fill
-              className="object-cover"
-              sizes="100vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
-          </div>
-
-          <div ref={teamRef} className="relative h-full flex items-center py-32 lg:py-48">
-            <div className="max-w-container-xl mx-auto px-8 lg:px-20">
-              <div className="max-w-2xl">
-                <p data-reveal className="text-overline uppercase tracking-[0.3em] text-white/80 mb-6 font-light drop-shadow-sm">
-                  Our Commitment
-                </p>
-                <h2 data-reveal className="font-display text-display-sm lg:text-display-md font-light text-white mb-8 drop-shadow-md">
-                  Excellence in <em className="italic">Every</em> Detail
-                </h2>
-                <div data-reveal className="w-16 h-px bg-white/50 mb-10" />
-                <p data-reveal className="text-body-lg text-white/90 leading-relaxed mb-8">
-                  From the thread count of our linens to the aroma that greets you at the door,
-                  every element of The Pentouz experience is meticulously curated. Our dedicated
-                  team works tirelessly to anticipate your needs before you even express them.
-                </p>
-                <p data-reveal className="text-body-lg text-white/90 leading-relaxed mb-12">
-                  We don&apos;t just provide accommodation; we craft experiences that linger in
-                  your memory long after you&apos;ve returned home.
-                </p>
-                <Link
-                  data-reveal
-                  href="/destinations"
-                  className="inline-flex items-center justify-center border border-white/40 text-white py-4 px-10 text-label uppercase tracking-[0.2em] hover:bg-white hover:text-brand-ink transition-all duration-500 font-light"
-                >
-                  Explore Our Properties
-                </Link>
-              </div>
+        <section className="bg-[#ede2d1]">
+          <div className="mx-auto max-w-5xl px-5 py-18 text-center sm:px-8 lg:px-14 lg:py-24">
+            <p className="luxury-kicker text-brand-accent">Stay With Pentouz</p>
+            <h2 className="luxury-section-title mt-5">See how the brand translates across the collection.</h2>
+            <p className="mt-6 text-base leading-8 text-brand-body sm:text-lg">
+              The clearest way to understand Pentouz is to move through the properties themselves. Each one now carries its own story, booking path, and visual tone.
+            </p>
+            <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+              <Link href="/destinations" className="inline-flex items-center justify-center rounded-full bg-brand-ink px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-white transition-colors hover:bg-black">
+                Explore Properties
+              </Link>
+              <Link href="/contact" className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-ink px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-brand-ink transition-colors hover:bg-brand-ink hover:text-white">
+                Contact Concierge
+                <ArrowRight className="h-4 w-4" strokeWidth={1.4} />
+              </Link>
             </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="py-32 lg:py-40 bg-brand-linen">
-          <div className="max-w-4xl mx-auto px-8 text-center">
-            <p className="text-overline uppercase tracking-[0.3em] text-brand-accent mb-6 font-light">
-              Join Our Journey
-            </p>
-            <h2 className="font-display text-display-sm lg:text-display-md font-light mb-8">
-              Experience The <em className="italic">Pentouz</em> Difference
-            </h2>
-            <p className="text-body-lg text-brand-body mb-12 max-w-2xl mx-auto">
-              Discover why discerning travelers choose The Pentouz for their most memorable stays.
-            </p>
-            <Link
-              href="/#booking"
-              className="inline-flex items-center justify-center bg-brand-ink text-white py-5 px-16 text-label uppercase tracking-[0.2em] hover:bg-black transition-all duration-500 font-light"
-            >
-              Book Your Stay
-            </Link>
           </div>
         </section>
       </main>
@@ -312,26 +166,3 @@ export default function AboutPage() {
     </>
   );
 }
-
-const values = [
-  {
-    title: "Authenticity",
-    description:
-      "We honor local traditions while embracing modern comfort, creating experiences that are genuine and rooted in culture.",
-  },
-  {
-    title: "Excellence",
-    description:
-      "Every detail matters. From design to service, we pursue perfection in all that we do.",
-  },
-  {
-    title: "Warmth",
-    description:
-      "True hospitality comes from the heart. We treat every guest as family, creating lasting connections.",
-  },
-  {
-    title: "Sustainability",
-    description:
-      "We are committed to responsible practices that preserve the beauty of our destinations for future generations.",
-  },
-];

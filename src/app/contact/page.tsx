@@ -1,26 +1,15 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { MapPin, Phone, Mail, Clock, ArrowRight } from "lucide-react";
+import { ArrowRight, Clock, Mail, MapPin, Phone } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { contactInfo, destinations } from "@/data/content";
-import { killScrollTriggersByRoots } from "@/lib/scrollTrigger";
 import { submitLead } from "@/lib/leads";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 export default function ContactPage() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const formRef = useRef<HTMLDivElement>(null);
-  const locationsRef = useRef<HTMLDivElement>(null);
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -29,80 +18,9 @@ export default function ContactPage() {
     subject: "",
     message: "",
   });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [website, setWebsite] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
-
-  useEffect(() => {
-    // Hero animation
-    if (heroRef.current) {
-      const elements = heroRef.current.querySelectorAll("[data-hero-reveal]");
-      gsap.fromTo(
-        elements,
-        { y: 80, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.4,
-          ease: "power3.out",
-          stagger: 0.15,
-          delay: 0.3,
-        }
-      );
-    }
-
-    // Form section animation
-    if (formRef.current) {
-      const elements = formRef.current.querySelectorAll("[data-reveal]");
-      elements.forEach((el) => {
-        gsap.fromTo(
-          el,
-          { y: 50, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: el,
-              start: "top 85%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      });
-    }
-
-    // Locations stagger
-    if (locationsRef.current) {
-      const cards = locationsRef.current.querySelectorAll(".location-card");
-      gsap.fromTo(
-        cards,
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power3.out",
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: locationsRef.current,
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    }
-
-    return () => {
-      killScrollTriggersByRoots([
-        heroRef.current,
-        formRef.current,
-        locationsRef.current,
-      ]);
-    };
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -120,22 +38,12 @@ export default function ContactPage() {
         type: "success",
         message: "Thank you. Our concierge team will respond within 24 hours.",
       });
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        property: "",
-        subject: "",
-        message: "",
-      });
+      setFormData({ name: "", email: "", phone: "", property: "", subject: "", message: "" });
       setWebsite("");
     } catch (error) {
       setStatus({
         type: "error",
-        message:
-          error instanceof Error
-            ? error.message
-            : "Could not send your message. Please try again.",
+        message: error instanceof Error ? error.message : "Could not send your message. Please try again.",
       });
     } finally {
       setIsSubmitting(false);
@@ -154,327 +62,173 @@ export default function ContactPage() {
   return (
     <>
       <Header />
-      <main>
-        {/* Hero Section */}
-        <section className="relative h-[70vh] min-h-[600px]">
+      <main className="bg-[#f8f2e8] text-brand-ink">
+        <section className="relative isolate overflow-hidden text-white">
           <div className="absolute inset-0">
-            <Image
-              src="/lavelle-road/reception-1.jpg"
-              alt="Contact The Pentouz"
-              fill
-              priority
-              className="object-cover"
-              sizes="100vw"
-              placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIRAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBQYSIRMxQVH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAIDAQAAAAAAAAAAAAAAAAECAAMRIf/aAAwDAQACEQMRAD8Aq7fudw7V1C7ggaZraYYj8kpZYpEHJgQMFgTk5HBANaOdzWdxbW9y0M0Us0SSMhXkFLKCR/DSlKiazK0M7B4j/9k="
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/30" />
+            <Image src="/lavelle-road/all/reception_1.jpg" alt="Contact The Pentouz" fill priority className="object-cover" sizes="100vw" />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(12,10,8,0.9)_0%,rgba(12,10,8,0.58)_42%,rgba(12,10,8,0.24)_75%,rgba(12,10,8,0.7)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,10,8,0.16)_0%,rgba(12,10,8,0)_30%,rgba(12,10,8,0.8)_100%)]" />
           </div>
 
-          <div
-            ref={heroRef}
-            className="relative h-full flex flex-col justify-end items-center text-center text-white px-8 pb-24"
-          >
-            <p data-hero-reveal className="text-overline uppercase tracking-[0.4em] text-white/80 mb-6 font-light drop-shadow-sm">
-              Get in Touch
-            </p>
-            <h1 data-hero-reveal className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light max-w-4xl mb-8 drop-shadow-md">
-              We&apos;re Here to <em className="italic">Assist</em>
-            </h1>
-            <div data-hero-reveal className="w-20 h-px bg-white/50 mb-8" />
-            <p data-hero-reveal className="text-lg text-white/90 max-w-2xl font-light">
-              Our concierge team is available around the clock to ensure your experience is exceptional
-            </p>
+          <div className="relative mx-auto flex min-h-[76vh] max-w-[1440px] items-end px-5 pb-16 pt-40 sm:px-8 lg:px-14 lg:pb-24">
+            <div className="max-w-4xl">
+              <p className="luxury-kicker text-white/72">Contact Pentouz</p>
+              <h1 className="luxury-hero-title mt-6 max-w-4xl text-white">
+                Reservations, longer stays, and concierge requests should feel direct from the first message.
+              </h1>
+              <p className="luxury-copy mt-8 max-w-2xl text-white/76">
+                Use the contact form for booking help, group or extended stays, property guidance, and custom requests. We&apos;ve kept the page simpler so it feels closer to a concierge conversation than a generic inquiry form.
+              </p>
+            </div>
           </div>
         </section>
 
-        {/* Contact Form & Info Section */}
-        <section ref={formRef} className="py-32 lg:py-48 bg-white">
-          <div className="max-w-container-2xl mx-auto px-8 lg:px-24">
-            <div className="grid lg:grid-cols-5 gap-16 lg:gap-24">
-              {/* Contact Info */}
-              <div className="lg:col-span-2">
-                <p data-reveal className="text-overline uppercase tracking-[0.3em] text-brand-accent mb-6 font-light">
-                  Contact Details
-                </p>
-                <h2 data-reveal className="font-display text-display-sm lg:text-display-md font-light mb-8">
-                  Reach <em className="italic">Us</em>
-                </h2>
-                <div data-reveal className="w-16 h-px bg-brand-accent mb-12" />
-
-                <div data-reveal className="space-y-10">
-                  {/* Address */}
-                  <div className="flex gap-6">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 border border-brand-border flex items-center justify-center">
-                        <MapPin className="w-5 h-5 text-brand-accent" />
-                      </div>
-                    </div>
-                    <div>
-                      <p className="text-label uppercase tracking-[0.15em] text-brand-muted mb-2">
-                        Headquarters
-                      </p>
-                      <p className="text-body-md text-brand-body leading-relaxed">
-                        {contactInfo.address}
-                        <br />
-                        {contactInfo.city}
-                      </p>
-                    </div>
+        <section className="mx-auto grid max-w-[1440px] gap-12 px-5 py-18 sm:px-8 lg:grid-cols-[0.72fr_1.28fr] lg:px-14 lg:py-24">
+          <div>
+            <p className="luxury-kicker text-brand-accent">Concierge Details</p>
+            <h2 className="luxury-section-title mt-5">Reach the reservations team directly.</h2>
+            <div className="mt-10 space-y-6">
+              <div className="luxury-panel bg-white/80">
+                <div className="flex items-start gap-4">
+                  <MapPin className="mt-1 h-5 w-5 text-brand-accent" />
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-brand-accent">Head Office</p>
+                    <p className="mt-3 text-sm leading-7 text-brand-body">{contactInfo.address}<br />{contactInfo.city}</p>
                   </div>
-
-                  {/* Phone */}
-                  <div className="flex gap-6">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 border border-brand-border flex items-center justify-center">
-                        <Phone className="w-5 h-5 text-brand-accent" />
-                      </div>
-                    </div>
-                    <div>
-                      <p className="text-label uppercase tracking-[0.15em] text-brand-muted mb-2">
-                        Reservations
-                      </p>
+                </div>
+              </div>
+              <div className="luxury-panel bg-white/80">
+                <div className="flex items-start gap-4">
+                  <Phone className="mt-1 h-5 w-5 text-brand-accent" />
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-brand-accent">Reservations</p>
+                    <div className="mt-3 space-y-1">
                       {contactInfo.phones.map((phone) => (
-                        <a
-                          key={phone}
-                          href={`tel:${phone.replace(/\s/g, "")}`}
-                          className="block text-body-md text-brand-body hover:text-brand-accent transition-colors"
-                        >
+                        <a key={phone} href={`tel:${phone.replace(/\s/g, "")}`} className="block text-sm leading-7 text-brand-body transition-colors hover:text-brand-accent">
                           {phone}
                         </a>
                       ))}
                     </div>
                   </div>
-
-                  {/* Email */}
-                  <div className="flex gap-6">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 border border-brand-border flex items-center justify-center">
-                        <Mail className="w-5 h-5 text-brand-accent" />
-                      </div>
-                    </div>
-                    <div>
-                      <p className="text-label uppercase tracking-[0.15em] text-brand-muted mb-2">
-                        Email
-                      </p>
-                      <a
-                        href={`mailto:${contactInfo.email}`}
-                        className="text-body-md text-brand-body hover:text-brand-accent transition-colors"
-                      >
-                        {contactInfo.email}
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* Hours */}
-                  <div className="flex gap-6">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 border border-brand-border flex items-center justify-center">
-                        <Clock className="w-5 h-5 text-brand-accent" />
-                      </div>
-                    </div>
-                    <div>
-                      <p className="text-label uppercase tracking-[0.15em] text-brand-muted mb-2">
-                        Concierge Hours
-                      </p>
-                      <p className="text-body-md text-brand-body">
-                        Available 24/7
-                      </p>
-                    </div>
+                </div>
+              </div>
+              <div className="luxury-panel bg-white/80">
+                <div className="flex items-start gap-4">
+                  <Mail className="mt-1 h-5 w-5 text-brand-accent" />
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-brand-accent">Email</p>
+                    <a href={`mailto:${contactInfo.email}`} className="mt-3 block text-sm leading-7 text-brand-body transition-colors hover:text-brand-accent">
+                      {contactInfo.email}
+                    </a>
                   </div>
                 </div>
               </div>
-
-              {/* Contact Form */}
-              <div data-reveal className="lg:col-span-3 bg-brand-cream p-10 lg:p-16">
-                <p className="text-overline uppercase tracking-[0.3em] text-brand-accent mb-6 font-light">
-                  Send a Message
-                </p>
-                <h3 className="font-display text-heading-xl font-light mb-8">
-                  How Can We Help?
-                </h3>
-                <div className="w-12 h-px bg-brand-accent mb-10" />
-
-                <form onSubmit={handleSubmit} className="space-y-8">
-                  <input
-                    type="text"
-                    name="website"
-                    value={website}
-                    onChange={(e) => setWebsite(e.target.value)}
-                    className="hidden"
-                    tabIndex={-1}
-                    autoComplete="off"
-                    aria-hidden="true"
-                  />
-                  <div className="grid md:grid-cols-2 gap-8">
-                    <div>
-                      <label className="text-caption uppercase tracking-[0.15em] text-brand-muted block mb-3">
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        className="w-full bg-white border-b border-brand-border py-4 px-4 outline-none focus:border-brand-accent transition-colors text-body-md"
-                        placeholder="Your name"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-caption uppercase tracking-[0.15em] text-brand-muted block mb-3">
-                        Email Address *
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        className="w-full bg-white border-b border-brand-border py-4 px-4 outline-none focus:border-brand-accent transition-colors text-body-md"
-                        placeholder="your@email.com"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-8">
-                    <div>
-                      <label className="text-caption uppercase tracking-[0.15em] text-brand-muted block mb-3">
-                        Phone Number
-                      </label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className="w-full bg-white border-b border-brand-border py-4 px-4 outline-none focus:border-brand-accent transition-colors text-body-md"
-                        placeholder="+91 98765 43210"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-caption uppercase tracking-[0.15em] text-brand-muted block mb-3">
-                        Property Interest
-                      </label>
-                      <select
-                        name="property"
-                        value={formData.property}
-                        onChange={handleChange}
-                        className="w-full bg-white border-b border-brand-border py-4 px-4 outline-none focus:border-brand-accent transition-colors text-body-md appearance-none cursor-pointer"
-                      >
-                        <option value="">Select property</option>
-                        {destinations.map((dest) => (
-                          <option key={dest.slug} value={dest.slug}>
-                            {dest.subtitle}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
+              <div className="luxury-panel bg-white/80">
+                <div className="flex items-start gap-4">
+                  <Clock className="mt-1 h-5 w-5 text-brand-accent" />
                   <div>
-                    <label className="text-caption uppercase tracking-[0.15em] text-brand-muted block mb-3">
-                      Subject *
-                    </label>
-                    <input
-                      type="text"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      required
-                      className="w-full bg-white border-b border-brand-border py-4 px-4 outline-none focus:border-brand-accent transition-colors text-body-md"
-                      placeholder="How can we help you?"
-                    />
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-brand-accent">Response Window</p>
+                    <p className="mt-3 text-sm leading-7 text-brand-body">Concierge team available 24/7. Most inquiries receive a response within 24 hours.</p>
                   </div>
-
-                  <div>
-                    <label className="text-caption uppercase tracking-[0.15em] text-brand-muted block mb-3">
-                      Message *
-                    </label>
-                    <textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      rows={5}
-                      className="w-full bg-white border-b border-brand-border py-4 px-4 outline-none focus:border-brand-accent transition-colors text-body-md resize-none"
-                      placeholder="Tell us more about your inquiry..."
-                    />
-                  </div>
-
-                  <div className="pt-4">
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="inline-flex items-center justify-center bg-brand-ink text-white py-5 px-16 text-label uppercase tracking-[0.2em] hover:bg-black transition-all duration-500 font-light disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {isSubmitting ? "Sending..." : "Send Message"}
-                    </button>
-                    {status && (
-                      <p
-                        className={`mt-4 text-xs ${
-                          status.type === "success" ? "text-green-700" : "text-red-700"
-                        }`}
-                      >
-                        {status.message}
-                      </p>
-                    )}
-                  </div>
-                </form>
+                </div>
               </div>
             </div>
           </div>
+
+          <div className="luxury-panel bg-[#fcf8f1] sm:px-8 sm:py-8 lg:px-10 lg:py-10">
+            <p className="luxury-kicker text-brand-accent">Send an Inquiry</p>
+            <h2 className="mt-5 font-display text-4xl font-light leading-tight text-brand-ink sm:text-5xl">
+              Tell us what kind of stay you need.
+            </h2>
+            <form onSubmit={handleSubmit} className="mt-10 space-y-7">
+              <input
+                type="text"
+                name="website"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+                className="hidden"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+              />
+
+              <div className="grid gap-6 md:grid-cols-2">
+                <label className="block">
+                  <span className="text-[10px] uppercase tracking-[0.22em] text-brand-muted">Full Name *</span>
+                  <input type="text" name="name" value={formData.name} onChange={handleChange} required className="mt-3 w-full border-b border-brand-border bg-white px-0 py-4 text-sm outline-none transition-colors focus:border-brand-accent" placeholder="Your name" />
+                </label>
+                <label className="block">
+                  <span className="text-[10px] uppercase tracking-[0.22em] text-brand-muted">Email *</span>
+                  <input type="email" name="email" value={formData.email} onChange={handleChange} required className="mt-3 w-full border-b border-brand-border bg-white px-0 py-4 text-sm outline-none transition-colors focus:border-brand-accent" placeholder="your@email.com" />
+                </label>
+              </div>
+
+              <div className="grid gap-6 md:grid-cols-2">
+                <label className="block">
+                  <span className="text-[10px] uppercase tracking-[0.22em] text-brand-muted">Phone Number</span>
+                  <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="mt-3 w-full border-b border-brand-border bg-white px-0 py-4 text-sm outline-none transition-colors focus:border-brand-accent" placeholder="+91 98765 43210" />
+                </label>
+                <label className="block">
+                  <span className="text-[10px] uppercase tracking-[0.22em] text-brand-muted">Property Interest</span>
+                  <select name="property" value={formData.property} onChange={handleChange} className="mt-3 w-full appearance-none border-b border-brand-border bg-white px-0 py-4 text-sm outline-none transition-colors focus:border-brand-accent">
+                    <option value="">Select property</option>
+                    {destinations.map((dest) => (
+                      <option key={dest.slug} value={dest.slug}>
+                        {dest.subtitle}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+
+              <label className="block">
+                <span className="text-[10px] uppercase tracking-[0.22em] text-brand-muted">Subject *</span>
+                <input type="text" name="subject" value={formData.subject} onChange={handleChange} required className="mt-3 w-full border-b border-brand-border bg-white px-0 py-4 text-sm outline-none transition-colors focus:border-brand-accent" placeholder="How can we help you?" />
+              </label>
+
+              <label className="block">
+                <span className="text-[10px] uppercase tracking-[0.22em] text-brand-muted">Message *</span>
+                <textarea name="message" value={formData.message} onChange={handleChange} required rows={5} className="mt-3 w-full resize-none border-b border-brand-border bg-white px-0 py-4 text-sm outline-none transition-colors focus:border-brand-accent" placeholder="Tell us more about your inquiry, dates, or preferences..." />
+              </label>
+
+              <div className="pt-2">
+                <button type="submit" disabled={isSubmitting} className="inline-flex items-center justify-center rounded-full bg-brand-ink px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-white transition-colors hover:bg-black disabled:cursor-not-allowed disabled:opacity-50">
+                  {isSubmitting ? "Sending..." : "Send Inquiry"}
+                </button>
+                {status ? (
+                  <p className={`mt-4 text-sm ${status.type === "success" ? "text-green-700" : "text-red-700"}`}>
+                    {status.message}
+                  </p>
+                ) : null}
+              </div>
+            </form>
+          </div>
         </section>
 
-        {/* Locations Section */}
-        <section ref={locationsRef} className="py-32 lg:py-48 bg-brand-linen">
-          <div className="max-w-container-2xl mx-auto px-8 lg:px-24">
-            {/* Header */}
-            <div className="text-center mb-20">
-              <p className="text-overline uppercase tracking-[0.3em] text-brand-accent mb-6 font-light">
-                Our Properties
-              </p>
-              <h2 className="font-display text-display-md lg:text-display-lg font-light">
-                Visit <em className="italic">Us</em>
+        <section className="bg-[#161310] text-white">
+          <div className="mx-auto max-w-[1440px] px-5 py-18 sm:px-8 lg:px-14 lg:py-24">
+            <div className="max-w-3xl">
+              <p className="luxury-kicker text-brand-gold">Choose a Property</p>
+              <h2 className="mt-5 font-display text-4xl font-light leading-tight text-white sm:text-5xl lg:text-6xl">
+                If you already know the stay, you can go straight to the property page.
               </h2>
-              <div className="w-16 h-px bg-brand-accent mx-auto mt-10" />
             </div>
-
-            {/* Location Cards */}
-            <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+            <div className="mt-14 grid gap-6 md:grid-cols-3">
               {destinations.map((dest) => (
-                <div
-                  key={dest.slug}
-                  className="location-card group bg-white p-8 lg:p-10 hover:shadow-card transition-shadow duration-500"
-                >
-                  <div className="aspect-video relative overflow-hidden mb-8">
-                    {/* Loading placeholder */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-gray-200 via-gray-100 to-gray-200 animate-shimmer bg-[length:200%_100%]" />
-                    <Image
-                      src={dest.image}
-                      alt={dest.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      placeholder="blur"
-                      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIRAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBQYSIRMxQVH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAIDAQAAAAAAAAAAAAAAAAECAAMRIf/aAAwDAQACEQMRAD8Aq7fudw7V1C7ggaZraYYj8kpZYpEHJgQMFgTk5HBANaOdzWdxbW9y0M0Us0SSMhXkFLKCR/DSlKiazK0M7B4j/9k="
-                    />
+                <Link key={dest.slug} href={`/destinations/${dest.slug}`} className="overflow-hidden border border-white/10 bg-white/[0.04] transition hover:-translate-y-1 hover:border-brand-gold/35">
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <Image src={dest.image} alt={dest.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
                   </div>
-                  <p className="text-overline uppercase tracking-[0.2em] text-brand-accent mb-3 font-light">
-                    {dest.subtitle}
-                  </p>
-                  <h3 className="font-display text-heading-lg font-light mb-4">
-                    {dest.shortTitle}
-                  </h3>
-                  <p className="text-body-sm text-brand-body mb-6 line-clamp-2">
-                    {dest.copy}
-                  </p>
-                  <Link
-                    href={`/destinations/${dest.slug}`}
-                    className="inline-flex items-center gap-3 text-caption uppercase tracking-[0.15em] text-brand-ink hover:text-brand-accent transition-colors group/link"
-                  >
-                    <span>View Property</span>
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
-                  </Link>
-                </div>
+                  <div className="px-6 py-6">
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-brand-gold">{dest.subtitle}</p>
+                    <h3 className="mt-4 font-display text-3xl font-light text-white">{dest.shortTitle}</h3>
+                    <p className="mt-4 text-sm leading-7 text-white/68">{dest.copy}</p>
+                    <div className="mt-6 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-white">
+                      View Property
+                      <ArrowRight className="h-4 w-4" strokeWidth={1.4} />
+                    </div>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>
