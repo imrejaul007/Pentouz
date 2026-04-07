@@ -13,10 +13,9 @@ const lavelleQueenImages = lavelleImageSet.filter((path) =>
 const lavelleSuperiorImages = lavelleImageSet.filter((path) =>
   /9045_/i.test(path)
 );
-const lavelleCommonImages = lavelleImageSet.filter((path) =>
-  /(facade|entrance|reception|restaurant|terrace|patio|parking|lift|staircase)/i.test(
-    path
-  )
+
+const lavelleThreeBedroomImages = lavelleImageSet.filter((path) =>
+  /9045_|9046_|9047_/i.test(path)
 );
 
 // Destinations / Properties - Extended data
@@ -73,11 +72,6 @@ export const destinations = [
         name: "Superior Studio",
         description: "450 sq. ft. studio with twin beds, kitchenette, and refined interiors.",
         image: "/lavelle-road/superior-suite-1.jpg",
-      },
-      {
-        name: "King Superior Studio",
-        description: "500 sq. ft. studio with king bed, premium furnishings, kitchenette, and panoramic city views.",
-        image: "/lavelle-road/king-suite-1.jpg",
       },
       {
         name: "Three Bedroom Unit",
@@ -140,20 +134,12 @@ export const destinations = [
         images: lavelleSuperiorImages,
       },
       {
-        name: "King Superior Studio",
-        size: "500 sq ft",
-        description: 'A premium king-bed studio with superior furnishings, kitchenette, refrigerator, microwave oven, work desk, Smart 55" TV, high-speed WiFi, air conditioning, and a generously appointed bathroom with panoramic city views.',
-        features: ["King Bed", "Premium Furnishings", 'Smart 55" TV', "City Views"],
-        image: lavelleKingImages[1] || lavelleKingImages[0] || "/lavelle-road/king-suite-1.jpg",
-        images: lavelleKingImages,
-      },
-      {
         name: "Three Bedroom Unit",
         size: "1,400 sq ft",
         description: "An expansive three-bedroom unit that combines one Superior Studio and two King Studios. Ideal for families, groups, or business travelers who want both privacy and shared comfort.",
         features: ["Up to 6 Guests", "3 Bedroom Combination", "City Views", "Extended-Stay Ready"],
-        image: lavelleCommonImages[0] || "/lavelle-road/terrace-1.jpg",
-        images: lavelleCommonImages,
+        image: lavelleThreeBedroomImages[0] || "/lavelle-road/terrace-1.jpg",
+        images: lavelleThreeBedroomImages,
       }
     ]
   },
