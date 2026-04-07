@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { Calendar, Phone, MessageCircle, X } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -48,13 +47,15 @@ export default function StickyBookingCTA({ bookingUrl, phone, whatsapp }: Sticky
 
       <div className="max-w-container-xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4 sm:gap-8">
         {/* Book Now */}
-        <Link
+        <a
           href={bookingUrl}
+          target="_blank"
+          rel="noopener noreferrer"
           className="group flex items-center gap-3 bg-brand-gold text-brand-primary px-6 py-3 text-[10px] uppercase tracking-[0.2em] hover:bg-white transition-all duration-300 font-light"
         >
           <Calendar className="w-5 h-5" />
           <span>Book Now</span>
-        </Link>
+        </a>
 
         {/* Call */}
         <a

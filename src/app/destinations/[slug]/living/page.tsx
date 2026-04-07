@@ -37,7 +37,7 @@ const livingThemes: Record<
     eyebrow: "Living at Lavelle Road",
     heading: "Beautifully designed studio rooms with panoramic city views.",
     summary:
-      "The Pentouz Lavelle Road offers six elegantly designed top-floor studio accommodations, each balancing space, privacy, and refined comfort in Bangalore's premier neighborhood.",
+      "The Pentouz Lavelle Road offers elegantly designed top-floor studio accommodations, each balancing space, privacy, and refined comfort in Bangalore's premier neighborhood.",
     introLabel: "Studio Collection",
     roomLabel: "Studio Types",
     notes: [

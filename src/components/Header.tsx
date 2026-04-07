@@ -13,6 +13,7 @@ const primaryNav = [
   { label: "Guides", href: "/travel" },
   { label: "Experiences", href: "/experiences" },
   { label: "Stories", href: "/stories" },
+  { label: "Privé Club", href: "/prive-club" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -140,8 +141,10 @@ export default function Header() {
                 Concierge
               </a>
 
-              <Link
-                href="/destinations"
+              <a
+                href="https://bookmystay.io/rooms/37853/2025-12-23/2025-12-24/2/0?utm_source=brandWebsite"
+                target="_blank"
+                rel="noopener noreferrer"
                 className={cn(
                   "hidden lg:inline-flex items-center gap-2 border px-5 py-3 text-[11px] uppercase tracking-[0.18em] transition-all duration-300",
                   isScrolled
@@ -149,9 +152,9 @@ export default function Header() {
                     : "border-white text-white hover:border-brand-gold hover:text-brand-gold"
                 )}
               >
-                Reserve
+                Book Now
                 <ArrowRight className="w-4 h-4" strokeWidth={1.4} />
-              </Link>
+              </a>
 
               <button
                 onClick={() => setIsMenuOpen((open) => !open)}
@@ -244,13 +247,15 @@ export default function Header() {
                 </div>
 
                 <div className="mt-10 flex flex-wrap gap-3">
-                  <Link
-                    href="/destinations"
+                  <a
+                    href="https://bookmystay.io/rooms/37853/2025-12-23/2025-12-24/2/0?utm_source=brandWebsite"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={() => setIsMenuOpen(false)}
                     className="inline-flex items-center gap-2 rounded-full bg-white text-brand-ink px-5 py-3 text-[11px] uppercase tracking-[0.18em]"
                   >
-                    Book Stay
-                  </Link>
+                    Book Now
+                  </a>
                   <a
                     href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
                     onClick={() => setIsMenuOpen(false)}

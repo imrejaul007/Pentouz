@@ -2,15 +2,22 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { contactInfo, destinations } from "@/data/content";
+import { Instagram, Facebook, MessageCircle } from "lucide-react";
+import { contactInfo, destinations, socialLinks } from "@/data/content";
 
 const footerLinks = [
   { label: "Destinations", href: "/destinations" },
   { label: "Guides", href: "/travel" },
   { label: "Experiences", href: "/experiences" },
-  { label: "Stories", href: "/stories" },
+  { label: "Privé Club", href: "/prive-club" },
   { label: "About", href: "/about" },
 ];
+
+const socialIcons: Record<string, React.ComponentType<{ className?: string; strokeWidth?: number }>> = {
+  Instagram,
+  Facebook,
+  WhatsApp: MessageCircle,
+};
 
 export default function Footer() {
   return (
@@ -55,6 +62,28 @@ export default function Footer() {
                   </p>
                 </Link>
               ))}
+            </div>
+
+            {/* Social Media */}
+            <div className="mt-10">
+              <p className="text-[10px] uppercase tracking-[0.35em] text-brand-gold mb-4">Follow Us</p>
+              <div className="flex items-center gap-4">
+                {socialLinks.map((social) => {
+                  const Icon = socialIcons[social.label];
+                  return (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={social.label}
+                      className="flex items-center justify-center w-9 h-9 border border-white/15 text-white/60 hover:border-brand-gold hover:text-brand-gold transition-colors"
+                    >
+                      {Icon && <Icon className="w-4 h-4" strokeWidth={1.5} />}
+                    </a>
+                  );
+                })}
+              </div>
             </div>
           </div>
 

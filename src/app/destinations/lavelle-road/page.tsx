@@ -11,7 +11,7 @@ import { withSiteUrl } from "@/lib/site";
 export const metadata: Metadata = {
   title: "The Pentouz @ Lavelle Road | Luxury Studio Boutique Hotel Bangalore",
   description:
-    "Six refined studio suites on Bangalore's prestigious Lavelle Road, close to UB City, MG Road, and the High Court of Karnataka.",
+    "Refined studio suites on Bangalore's prestigious Lavelle Road, close to UB City, MG Road, and the High Court of Karnataka.",
   alternates: {
     canonical: withSiteUrl("/destinations/lavelle-road"),
   },
@@ -25,14 +25,14 @@ const travelStats = [
 
 const amenities = [
   "High-Speed WiFi",
-  "Smart TV",
+  'Smart 55" TV',
   "Air Conditioning",
   "Kitchenette",
   "Refrigerator",
   "Microwave Oven",
   "Work Desk",
   "Daily Housekeeping",
-  "Open Terrace",
+  "Open Roof-Top Terrace",
   "Covered Car Parking",
   "Lift Access",
   "24-Hour Front Desk",
@@ -91,9 +91,9 @@ export default function LavelleRoadPage() {
             </div>
             <div className="animate-fade-in-up animate-delay-200">
               <p className="luxury-kicker text-brand-accent">Living</p>
-              <h2 className="luxury-section-title mt-5">Six beautifully designed studio rooms with panoramic city views.</h2>
+              <h2 className="luxury-section-title mt-5">Beautifully designed studio rooms with panoramic city views.</h2>
               <p className="mt-6 text-base leading-8 text-brand-body sm:text-lg">
-                The Pentouz Lavelle Road boasts six exquisitely designed, spacious studio rooms located on the top floor, each offering stunning panoramic views of the cityscape. These well-appointed studios are thoughtfully curated to cater to the discerning traveler, combining elegance with modern comforts.
+                The Pentouz Lavelle Road boasts exquisitely designed, spacious studio rooms located on the top floor, each offering stunning panoramic views of the cityscape. These well-appointed studios are thoughtfully curated to cater to the discerning traveler, combining elegance with modern comforts.
               </p>
               <p className="mt-5 text-base leading-8 text-brand-body sm:text-lg">
                 Whether you&apos;re in Bangalore for business or leisure, you&apos;ll find every detail tailored to enhance your stay.

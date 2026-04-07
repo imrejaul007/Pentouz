@@ -22,15 +22,151 @@ const lavelleCommonImages = lavelleImageSet.filter((path) =>
 // Destinations / Properties - Extended data
 export const destinations = [
   {
+    slug: "lavelle-road",
+    subtitle: "Lavelle Road, Bangalore",
+    title: "The Pentouz @ Lavelle Road",
+    shortTitle: "Lavelle Road",
+    copy: "Perched in Bangalore's prestigious Lavelle Road, The Pentouz offers an elegant blend of tranquility, sophistication, and city convenience.",
+    description: "The Pentouz Lavelle Road boasts exquisitely designed, spacious studio rooms located on the top floor, each offering panoramic city views. Thoughtfully curated for discerning travelers, every studio balances timeless elegance with modern comfort. Set in one of Bangalore's most coveted neighborhoods and just a short stroll from UB City, this address places luxury dining, shopping, and culture right at your doorstep.",
+    image: "/lavelle-road/facade-1.jpg",
+    heroImage: "/lavelle-road/terrace-1.jpg",
+    propertyType: "Boutique Hotel",
+    totalRooms: "Studio Rooms",
+    rating: 4,
+    reviews: 12,
+    capacity: "Up to 6 guests",
+    address: "46, 6th Cross, Lavelle Road, Bangalore – 560001, India",
+    features: [
+      "Spacious top-floor studio rooms",
+      "Panoramic city views",
+      "Prime Lavelle Road location near UB City",
+      "24-hour front desk and concierge",
+      "Open Roof-Top Terrace",
+      "Covered car parking"
+    ],
+    amenities: [
+      "High-Speed WiFi",
+      'Smart 55" TV',
+      "Air Conditioning",
+      "Kitchenette",
+      "Refrigerator",
+      "Microwave Oven",
+      "Work Desk",
+      "Daily Housekeeping",
+      "Open Roof-Top Terrace",
+      "Covered Car Parking",
+      "Lift Access",
+      "24-Hour Front Desk",
+    ],
+    rooms: [
+      {
+        name: "Queen Studio",
+        description: '450 sq. ft. studio with queen bed, kitchenette, Smart 55" TV, and elegant bath.',
+        image: "/lavelle-road/queen-suite-1.jpg",
+      },
+      {
+        name: "King Studio",
+        description: "475 sq. ft. studio with king bed, kitchenette, work desk, and city views.",
+        image: "/lavelle-road/king-suite-1.jpg",
+      },
+      {
+        name: "Superior Studio",
+        description: "450 sq. ft. studio with twin beds, kitchenette, and refined interiors.",
+        image: "/lavelle-road/superior-suite-1.jpg",
+      },
+      {
+        name: "King Superior Studio",
+        description: "500 sq. ft. studio with king bed, premium furnishings, kitchenette, and panoramic city views.",
+        image: "/lavelle-road/king-suite-1.jpg",
+      },
+      {
+        name: "Three Bedroom Unit",
+        description: "Combined Superior + two King Studios, ~1,400 sq. ft., ideal for up to six guests.",
+        image: "/lavelle-road/terrace-1.jpg",
+      },
+    ],
+    gallery: [...lavelleImageSet],
+    bookingUrl: "https://bookmystay.io/rooms/37853/2025-12-23/2025-12-24/2/0?utm_source=brandWebsite",
+    coordinates: { lat: 12.9716, lng: 77.5946 },
+    idealFor: ["Business Travelers", "Couples", "Solo Travelers", "Weekend Getaways"],
+    location: {
+      airport: { name: "Kempegowda International Airport", distance: "35 km", time: "55 minutes" },
+      railway: { name: "KSR Bengaluru City Junction", distance: "5 km", time: "15 minutes" },
+      metro: { name: "MG Road Metro Station", distance: "1 km", time: "5 minutes" },
+    },
+    livingIntro:
+      "The Pentouz @ Lavelle Road offers elegantly designed top-floor studio accommodations, each balancing space, privacy, and refined comfort in Bangalore's premier neighborhood.",
+    legalSeo: {
+      title:
+        "Hotel Near High Court of Karnataka for Outstation Advocates | The Pentouz Lavelle Road",
+      description:
+        "Business-friendly hotel near the High Court of Karnataka, ideal for outstation advocates in Bengaluru. Stay close to court access, UB City, and central legal districts.",
+      keywords: [
+        "hotel near Bangalore High Court",
+        "hotel near High Court of Karnataka",
+        "outstation advocates accommodation Bengaluru",
+        "lawyers hotel stay Bangalore",
+        "Lavelle Road hotel for court hearings",
+      ],
+    },
+    livingLocation: {
+      airport: { name: "Kempegowda International Airport", distance: "37 km", time: "60 minutes" },
+      railway: { name: "KSR Bengaluru City Junction", distance: "10 km", time: "35 minutes" },
+      metro: { name: "MG Road Metro Station", distance: "1 km", time: "5 minutes" },
+    },
+    livingRooms: [
+      {
+        name: "Queen Studio",
+        size: "450 sq ft",
+        description: 'A refined queen-bed studio with kitchenette, refrigerator, microwave oven, work desk, Smart 55" TV, high-speed WiFi, air conditioning, spacious wardrobes, and a beautifully designed bathroom.',
+        features: ["Queen Bed", "Kitchenette", "Work Desk", 'Smart 55" TV'],
+        image: lavelleQueenImages[0] || "/lavelle-road/queen-suite-1.jpg",
+        images: lavelleQueenImages,
+      },
+      {
+        name: "King Studio",
+        size: "475 sq ft",
+        description: 'A luxurious king-bed studio with kitchenette, refrigerator, microwave oven, dedicated work desk, Smart 55" TV, high-speed WiFi, air conditioning, spacious wardrobes, and an elegantly designed bathroom.',
+        features: ["King Bed", "Kitchenette", "Work Desk", "High-Speed WiFi"],
+        image: lavelleKingImages[0] || "/lavelle-road/king-suite-1.jpg",
+        images: lavelleKingImages,
+      },
+      {
+        name: "Superior Studio",
+        size: "450 sq ft",
+        description: 'A stylish twin-bed studio with kitchenette, refrigerator, microwave oven, work desk, Smart 55" TV, high-speed WiFi, air conditioning, and premium bathroom design.',
+        features: ["Twin Beds", "Kitchenette", "Work Desk", "High-Speed WiFi"],
+        image: lavelleSuperiorImages[0] || "/lavelle-road/superior-suite-1.jpg",
+        images: lavelleSuperiorImages,
+      },
+      {
+        name: "King Superior Studio",
+        size: "500 sq ft",
+        description: 'A premium king-bed studio with superior furnishings, kitchenette, refrigerator, microwave oven, work desk, Smart 55" TV, high-speed WiFi, air conditioning, and a generously appointed bathroom with panoramic city views.',
+        features: ["King Bed", "Premium Furnishings", 'Smart 55" TV', "City Views"],
+        image: lavelleKingImages[1] || lavelleKingImages[0] || "/lavelle-road/king-suite-1.jpg",
+        images: lavelleKingImages,
+      },
+      {
+        name: "Three Bedroom Unit",
+        size: "1,400 sq ft",
+        description: "An expansive three-bedroom unit that combines one Superior Studio and two King Studios. Ideal for families, groups, or business travelers who want both privacy and shared comfort.",
+        features: ["Up to 6 Guests", "3 Bedroom Combination", "City Views", "Extended-Stay Ready"],
+        image: lavelleCommonImages[0] || "/lavelle-road/terrace-1.jpg",
+        images: lavelleCommonImages,
+      }
+    ]
+  },
+  {
     slug: "indiranagar",
     subtitle: "Indiranagar, Bangalore",
-    title: "THE PENTOUZ @ 100 Feet Road",
+    title: "The Pentouz @ 100 Feet Road",
     shortTitle: "Indiranagar",
     copy: "A luxurious three-bedroom penthouse in the heart of Indiranagar, crafted for families, groups, and business travelers seeking premium comfort.",
     description: "The Pentouz Indiranagar is a luxurious 3-bedroom penthouse nestled in one of Bangalore's most upscale neighborhoods. This exclusive residence blends comfort, elegance, and convenience with spacious interiors and thoughtfully designed living areas. Each bedroom features a private balcony with vibrant city views, plush bedding, ample storage, and tasteful decor for a serene and elevated stay.",
     image: "/indiranagar/terrace-7.jpg",
     heroImage: "/indiranagar/living-room-5.jpg",
-    propertyType: "THREE BEDROOM PENTHOUSE",
+    propertyType: "Three Bedroom Penthouse",
     totalSize: "6,000 sq ft",
     rating: 5,
     reviews: 4,
@@ -39,7 +175,7 @@ export const destinations = [
     features: [
       "Three-bedroom private penthouse",
       "Private balcony in each bedroom",
-      "Open terrace and city views",
+      "Open Roof-Top Terrace and city views",
       "Ultra-modern kitchen",
       "Daily housekeeping",
       "Covered car parking",
@@ -55,7 +191,7 @@ export const destinations = [
       "Wifi & Internet",
       "State-Of-Art Entertainment",
       "Spacious Balconies",
-      "Open Terrace",
+      "Open Roof-Top Terrace",
       "Covered Car Parking",
       "Transport Services",
       "Airport Pick-up Service",
@@ -95,10 +231,10 @@ export const destinations = [
     },
     livingRooms: [
       {
-        name: "THREE BEDROOM PENTHOUSE",
+        name: "Three Bedroom Penthouse",
         size: "6,000 sq ft",
-        description: "A spacious full-floor penthouse with three bedrooms, private balconies, elegant living and dining spaces, an ultra-modern kitchen, and an open terrace for memorable gatherings.",
-        features: ["3 Bedrooms", "Private Balconies", "Open Terrace", "Ultra-modern Kitchen"],
+        description: "A spacious full-floor penthouse with three bedrooms, private balconies, elegant living and dining spaces, an ultra-modern kitchen, and an open roof-top terrace for memorable gatherings.",
+        features: ["3 Bedrooms", "Private Balconies", "Open Roof-Top Terrace", "Ultra-modern Kitchen"],
         image: "/indiranagar/living-room-5.jpg"
       },
       {
@@ -125,132 +261,9 @@ export const destinations = [
     ]
   },
   {
-    slug: "lavelle-road",
-    subtitle: "Lavelle Road, Bangalore",
-    title: "THE PENTOUZ @ Lavelle Road",
-    shortTitle: "Lavelle Road",
-    copy: "Perched in Bangalore's prestigious Lavelle Road, The Pentouz offers an elegant blend of tranquility, sophistication, and city convenience.",
-    description: "The Pentouz Lavelle Road boasts six exquisitely designed, spacious studio rooms located on the top floor, each offering panoramic city views. Thoughtfully curated for discerning travelers, every studio balances timeless elegance with modern comfort. Set in one of Bangalore's most coveted neighborhoods and just a short stroll from UB City, this address places luxury dining, shopping, and culture right at your doorstep.",
-    image: "/lavelle-road/facade-1.jpg",
-    heroImage: "/lavelle-road/terrace-1.jpg",
-    propertyType: "BOTIQUE HOTEL",
-    totalRooms: "6 Studio Rooms",
-    rating: 4,
-    reviews: 12,
-    capacity: "Up to 6 guests",
-    address: "46, 6th Cross, Lavelle Road, Bangalore – 560001, India",
-    features: [
-      "Six spacious top-floor studio rooms",
-      "Panoramic city views",
-      "Prime Lavelle Road location near UB City",
-      "24-hour front desk and concierge",
-      "Open terrace",
-      "Covered car parking"
-    ],
-    amenities: [
-      "High-Speed WiFi",
-      "Smart TV",
-      "Air Conditioning",
-      "Kitchenette",
-      "Refrigerator",
-      "Microwave Oven",
-      "Work Desk",
-      "Daily Housekeeping",
-      "Open Terrace",
-      "Covered Car Parking",
-      "Lift Access",
-      "24-Hour Front Desk",
-    ],
-    rooms: [
-      {
-        name: "KING STUDIO",
-        description: "475 sq. ft. studio with king bed, kitchenette, work desk, and city views.",
-        image: "/lavelle-road/king-suite-1.jpg",
-      },
-      {
-        name: "QUEEN STUDIO",
-        description: "450 sq. ft. studio with queen bed, kitchenette, smart TV, and elegant bath.",
-        image: "/lavelle-road/queen-suite-1.jpg",
-      },
-      {
-        name: "SUPERIOR STUDIO",
-        description: "450 sq. ft. studio with twin beds, kitchenette, and refined interiors.",
-        image: "/lavelle-road/superior-suite-1.jpg",
-      },
-      {
-        name: "THREE BEDROOM UNIT",
-        description: "Combined Superior + two King Studios, ~1,400 sq. ft., ideal for up to six guests.",
-        image: "/lavelle-road/terrace-1.jpg",
-      },
-    ],
-    gallery: [...lavelleImageSet],
-    bookingUrl: "https://bookmystay.io/rooms/37853/2025-12-23/2025-12-24/2/0?utm_source=brandWebsite",
-    coordinates: { lat: 12.9716, lng: 77.5946 },
-    idealFor: ["Business Travelers", "Couples", "Solo Travelers", "Weekend Getaways"],
-    location: {
-      airport: { name: "Kempegowda International Airport", distance: "35 km", time: "55 minutes" },
-      railway: { name: "KSR Bengaluru City Junction", distance: "5 km", time: "15 minutes" },
-      metro: { name: "MG Road Metro Station", distance: "1 km", time: "5 minutes" },
-    },
-    livingIntro:
-      "The Pentouz @ Lavelle Road offers six elegantly designed top-floor studio accommodations, each balancing space, privacy, and refined comfort in Bangalore's premier neighborhood.",
-    legalSeo: {
-      title:
-        "Hotel Near High Court of Karnataka for Outstation Advocates | The Pentouz Lavelle Road",
-      description:
-        "Business-friendly hotel near the High Court of Karnataka, ideal for outstation advocates in Bengaluru. Stay close to court access, UB City, and central legal districts.",
-      keywords: [
-        "hotel near Bangalore High Court",
-        "hotel near High Court of Karnataka",
-        "outstation advocates accommodation Bengaluru",
-        "lawyers hotel stay Bangalore",
-        "Lavelle Road hotel for court hearings",
-      ],
-    },
-    livingLocation: {
-      airport: { name: "Kempegowda International Airport", distance: "37 km", time: "60 minutes" },
-      railway: { name: "KSR Bengaluru City Junction", distance: "10 km", time: "35 minutes" },
-      metro: { name: "MG Road Metro Station", distance: "1 km", time: "5 minutes" },
-    },
-    livingRooms: [
-      {
-        name: "KING STUDIO",
-        size: "475 sq ft",
-        description: "A luxurious king-bed studio with kitchenette, refrigerator, microwave oven, dedicated work desk, smart TV, high-speed WiFi, air conditioning, spacious wardrobes, and an elegantly designed bathroom.",
-        features: ["King Bed", "Kitchenette", "Work Desk", "High-Speed WiFi"],
-        image: lavelleKingImages[0] || "/lavelle-road/king-suite-1.jpg",
-        images: lavelleKingImages,
-      },
-      {
-        name: "QUEEN STUDIO",
-        size: "450 sq ft",
-        description: "A refined queen-bed studio with kitchenette, refrigerator, microwave oven, work desk, smart TV, high-speed WiFi, air conditioning, spacious wardrobes, and a beautifully designed bathroom.",
-        features: ["Queen Bed", "Kitchenette", "Work Desk", "Smart TV"],
-        image: lavelleQueenImages[0] || "/lavelle-road/queen-suite-1.jpg",
-        images: lavelleQueenImages,
-      },
-      {
-        name: "SUPERIOR STUDIO",
-        size: "450 sq ft",
-        description: "A stylish twin-bed studio with kitchenette, refrigerator, microwave oven, work desk, smart TV, high-speed WiFi, air conditioning, and premium bathroom design.",
-        features: ["Twin Beds", "Kitchenette", "Work Desk", "High-Speed WiFi"],
-        image: lavelleSuperiorImages[0] || "/lavelle-road/superior-suite-1.jpg",
-        images: lavelleSuperiorImages,
-      },
-      {
-        name: "THREE BEDROOM UNIT",
-        size: "1,400 sq ft",
-        description: "An expansive three-bedroom unit that combines one Superior Studio and two King Studios. Ideal for families, groups, or business travelers who want both privacy and shared comfort.",
-        features: ["Up to 6 Guests", "3 Bedroom Combination", "City Views", "Extended-Stay Ready"],
-        image: lavelleCommonImages[0] || "/lavelle-road/terrace-1.jpg",
-        images: lavelleCommonImages,
-      }
-    ]
-  },
-  {
     slug: "ooty",
     subtitle: "Elk Hill, Ooty",
-    title: "THE PENTOUZ Windsor Heights",
+    title: "The Pentouz Windsor Heights",
     shortTitle: "Ooty",
     copy: "A mountain retreat where tea gardens meet misty mornings. Embrace the serenity of the Nilgiris.",
     description: "Escape to the misty hills of the Nilgiris at The Pentouz Windsor Heights. Surrounded by lush tea gardens and colonial charm, our Ooty property offers a tranquil retreat from the ordinary. Whether you're seeking contemplation, celebration, or creative inspiration, the serene mountain setting provides the perfect backdrop for an unforgettable stay.",
@@ -482,13 +495,20 @@ export const navLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
+// Social media links
+export const socialLinks = [
+  { label: "Instagram", href: "https://www.instagram.com/pentouz" },
+  { label: "Facebook", href: "https://www.facebook.com/pentouz" },
+  { label: "WhatsApp", href: "https://wa.me/918884449930" },
+];
+
 // Contact info
 export const contactInfo = {
   address: "46, 6th Cross, Lavelle Road",
   city: "Bangalore - 560001, India",
   phones: ["+91 888 444 9930", "+91 8970 298 300"],
   email: "sales@pentouz.com",
-  whatsapp: "+918970298300",
+  whatsapp: "+918884449930",
 };
 
 // Gallery categories
@@ -496,9 +516,3 @@ export const galleryCategories = ["All", "Bedroom", "Terrace", "Lifestyle"];
 
 // Hero image
 export const heroImage = "/indiranagar/living-room-10.jpg";
-
-// Living section image
-export const livingImage = "/indiranagar/master-bath.jpg";
-
-// Offers background image
-export const offersBackgroundImage = "/lavelle-road/reception-1.jpg";
