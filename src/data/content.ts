@@ -516,3 +516,6 @@ export const galleryCategories = ["All", "Bedroom", "Terrace", "Lifestyle"];
 
 // Hero image
 export const heroImage = "/indiranagar/living-room-10.jpg";
+
+// Living feature image
+export const livingImage = "/lavelle-road/terrace-1.jpg";
