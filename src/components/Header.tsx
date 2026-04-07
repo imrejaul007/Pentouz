@@ -84,7 +84,7 @@ export default function Header() {
           <div className="h-20 sm:h-24 lg:h-[5.5rem] flex items-center justify-between">
             <div className="hidden lg:flex items-center gap-8 xl:gap-12">
               <Link href="/" className="block" suppressHydrationWarning>
-                <p className={cn("mb-2 text-[10px] uppercase tracking-[0.34em]", isScrolled ? "text-brand-accent" : "text-white/60")}>
+                <p className={cn("mb-2 text-[10px] uppercase tracking-[0.34em]", isScrolled ? "text-brand-accent" : "text-white")}>
                   The Pentouz
                 </p>
                 <Image
@@ -111,7 +111,7 @@ export default function Header() {
                           : "text-white"
                         : isScrolled
                           ? "text-brand-muted hover:text-brand-ink"
-                          : "text-white/82 hover:text-white"
+                          : "text-white hover:text-white"
                     )}
                   >
                     {link.label}
@@ -136,7 +136,7 @@ export default function Header() {
                 href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
                 className={cn(
                   "hidden md:inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] transition-colors",
-                  isScrolled ? "text-brand-muted hover:text-brand-gold" : "text-white/82 hover:text-brand-gold"
+                  isScrolled ? "text-brand-muted hover:text-brand-gold" : "text-white hover:text-brand-gold"
                 )}
               >
                 <Phone className="w-4 h-4" strokeWidth={1.4} />
@@ -149,7 +149,7 @@ export default function Header() {
                   "hidden lg:inline-flex items-center gap-2 border px-5 py-3 text-[11px] uppercase tracking-[0.18em] transition-all duration-300",
                   isScrolled
                     ? "border-brand-ink text-brand-ink hover:bg-brand-ink hover:text-white"
-                    : "border-white/24 text-white hover:border-brand-gold hover:text-brand-gold"
+                    : "border-white text-white hover:border-brand-gold hover:text-brand-gold"
                 )}
               >
                 Reserve
@@ -162,7 +162,7 @@ export default function Header() {
                   "inline-flex items-center gap-3 rounded-full px-4 py-2.5 transition-all duration-300",
                   isScrolled
                     ? "border border-[#ddd2c1] text-brand-ink hover:border-brand-gold hover:text-brand-gold"
-                    : "border border-white/20 text-white hover:border-brand-gold hover:text-brand-gold"
+                    : "border border-white text-white hover:border-brand-gold hover:text-brand-gold"
                 )}
                 aria-label="Toggle menu"
               >
