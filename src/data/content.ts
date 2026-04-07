@@ -486,7 +486,7 @@ export const navLinks = [
 export const contactInfo = {
   address: "46, 6th Cross, Lavelle Road",
   city: "Bangalore - 560001, India",
-  phones: ["+91 8970 298 300", "+91 888 444 9930"],
+  phones: ["+91 888 444 9930", "+91 8970 298 300"],
   email: "sales@pentouz.com",
   whatsapp: "+918970298300",
 };

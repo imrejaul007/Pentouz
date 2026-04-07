@@ -68,12 +68,12 @@ export default function Header() {
       >
         <div className={cn("hidden xl:block border-b", isScrolled ? "border-black/5" : "border-white/8")}>
           <div className="max-w-container-2xl mx-auto px-6 lg:px-16 h-9 flex items-center justify-between">
-            <p className={cn("text-[10px] tracking-[0.18em]", isScrolled ? "text-brand-muted" : "text-white/62")}>
+            <p className={cn("text-[10px] tracking-[0.18em]", isScrolled ? "text-brand-muted" : "text-white")}>
               Bengaluru and Ooty
             </p>
             <a
               href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
-              className={cn("text-[10px] tracking-[0.18em] transition-colors", isScrolled ? "text-brand-muted hover:text-brand-gold" : "text-white/62 hover:text-brand-gold")}
+              className={cn("text-[10px] tracking-[0.18em] transition-colors", isScrolled ? "text-brand-muted hover:text-brand-gold" : "text-white hover:text-brand-gold")}
             >
               {contactInfo.phones[0]}
             </a>
