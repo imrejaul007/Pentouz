@@ -7,7 +7,7 @@ import { contactInfo, destinations, socialLinks } from "@/data/content";
 
 const footerLinks = [
   { label: "Destinations", href: "/destinations" },
-  { label: "Guides", href: "/travel" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Experiences", href: "/experiences" },
   { label: "Privé Club", href: "/prive-club" },
   { label: "About", href: "/about" },

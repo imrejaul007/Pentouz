@@ -10,7 +10,7 @@ import { contactInfo, destinations } from "@/data/content";
 
 const primaryNav = [
   { label: "Destinations", href: "/destinations" },
-  { label: "Guides", href: "/travel" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Experiences", href: "/experiences" },
   { label: "Stories", href: "/stories" },
   { label: "Privé Club", href: "/prive-club" },
