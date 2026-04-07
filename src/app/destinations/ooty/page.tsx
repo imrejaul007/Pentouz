@@ -177,7 +177,7 @@ export default function OotyPage() {
               </h2>
             </div>
             <div className="luxury-panel border-white/12 bg-white/[0.05] text-white">
-              <p className="text-sm leading-7 text-white/72">THE PENTOUZ WINDSOR HEIGHTS<br />Elk Hill, Ooty, Tamil Nadu, India.</p>
+              <p className="text-sm leading-7 text-white/72">The Pentouz Windsor Heights<br />Elk Hill, Ooty, Tamil Nadu, India.</p>
               <p className="mt-6 text-sm leading-7 text-white/82">Email: {contactInfo.email}</p>
               <div className="mt-6 flex items-center gap-3 text-sm text-white/82">
                 <Phone className="h-4 w-4 text-brand-gold" />

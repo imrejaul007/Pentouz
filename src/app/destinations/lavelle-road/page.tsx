@@ -181,7 +181,7 @@ export default function LavelleRoadPage() {
               </h2>
             </div>
             <div className="luxury-panel border-white/12 bg-white/[0.05] text-white">
-              <p className="text-sm leading-7 text-white/72">THE PENTOUZ LAVELLE ROAD<br />46, 6th Cross, Lavelle Road, Bangalore – 560001. India.</p>
+              <p className="text-sm leading-7 text-white/72">The Pentouz @ Lavelle Road<br />46, 6th Cross, Lavelle Road, Bangalore – 560001. India.</p>
               <p className="mt-6 text-sm leading-7 text-white/82">Email: {contactInfo.email}</p>
               <div className="mt-6 space-y-2 text-sm text-white/82">
                 <a href={`tel:${contactInfo.phones[1].replace(/\s/g, "")}`} className="block transition-colors hover:text-brand-gold">{contactInfo.phones[1]}</a>

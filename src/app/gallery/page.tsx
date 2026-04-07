@@ -16,7 +16,7 @@ const destinationMoments = [
     title: "A private penthouse made for longer, more relaxed stays.",
     href: "/destinations/indiranagar",
     image: "/indiranagar/all/04._living_room_05._living_room.jpg",
-    detail: "Large interiors, open terrace, and the energy of 100 Feet Road.",
+    detail: "Large interiors, open roof-top terrace, and the energy of 100 Feet Road.",
   },
   {
     name: "Ooty",

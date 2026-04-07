@@ -34,7 +34,7 @@ const amenities = [
   "Wifi & Internet",
   "State-Of-Art Entertainment",
   "Spacious Balconies",
-  "Open Terrace",
+  "Open Roof-Top Terrace",
   "Covered Car Parking",
 ];
 
@@ -181,7 +181,7 @@ export default function IndiranagarPage() {
               </h2>
             </div>
             <div className="luxury-panel border-white/12 bg-white/[0.05] text-white">
-              <p className="text-sm leading-7 text-white/72">THE PENTOUZ 100 FEET ROAD<br />2022, 100 Feet Road, Indiranagar, Bangalore – 560038. India.</p>
+              <p className="text-sm leading-7 text-white/72">The Pentouz @ 100 Feet Road<br />2022, 100 Feet Road, Indiranagar, Bangalore – 560038. India.</p>
               <p className="mt-6 text-sm leading-7 text-white/82">Email: {contactInfo.email}</p>
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <a href={property.bookingUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-brand-ink transition-all duration-500 hover:bg-brand-gold hover:text-white">
