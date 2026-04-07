@@ -17,10 +17,20 @@ const primaryNav = [
   { label: "Contact", href: "/contact" },
 ];
 
+function getBookingUrl() {
+  const fmt = (d: Date) => d.toISOString().split("T")[0];
+  const checkin = new Date();
+  checkin.setDate(checkin.getDate() + 1);
+  const checkout = new Date();
+  checkout.setDate(checkout.getDate() + 2);
+  return `https://bookmystay.io/rooms/37853/${fmt(checkin)}/${fmt(checkout)}/2/0?utm_source=brandWebsite`;
+}
+
 export default function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const bookingUrl = getBookingUrl();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 40);
@@ -142,7 +152,7 @@ export default function Header() {
               </a>
 
               <a
-                href="https://bookmystay.io/rooms/37853/2025-12-23/2025-12-24/2/0?utm_source=brandWebsite"
+                href={bookingUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
@@ -248,7 +258,7 @@ export default function Header() {
 
                 <div className="mt-10 flex flex-wrap gap-3">
                   <a
-                    href="https://bookmystay.io/rooms/37853/2025-12-23/2025-12-24/2/0?utm_source=brandWebsite"
+                    href={bookingUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setIsMenuOpen(false)}
