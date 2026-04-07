@@ -84,9 +84,6 @@ export default function Header() {
           <div className="h-20 sm:h-24 lg:h-[5.5rem] flex items-center justify-between">
             <div className="hidden lg:flex items-center gap-8 xl:gap-12">
               <Link href="/" className="block" suppressHydrationWarning>
-                <p className={cn("mb-2 text-[10px] uppercase tracking-[0.34em]", isScrolled ? "text-brand-accent" : "text-white")}>
-                  The Pentouz
-                </p>
                 <Image
                   src="/logo-white.png"
                   alt="The Pentouz"
