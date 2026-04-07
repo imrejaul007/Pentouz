@@ -13,7 +13,7 @@ const footerLinks = [
   { label: "About", href: "/about" },
 ];
 
-const socialIcons: Record<string, React.ComponentType<{ className?: string; strokeWidth?: number }>> = {
+const socialIcons: Record<string, React.ElementType> = {
   Instagram,
   Facebook,
   WhatsApp: MessageCircle,
