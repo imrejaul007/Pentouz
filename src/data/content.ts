@@ -4,19 +4,32 @@ import {
   ootyImageSet,
 } from "./propertyImageSets";
 
-const lavelleKingImages = lavelleImageSet.filter((path) =>
-  /9042_|9046_|9047_/i.test(path)
-);
-const lavelleQueenImages = lavelleImageSet.filter((path) =>
-  /9041_|9043_/i.test(path)
-);
-const lavelleSuperiorImages = lavelleImageSet.filter((path) =>
-  /9045_/i.test(path)
-);
+// Sort helper: room photos (lower numbers) before bathroom/detail photos (higher numbers)
+function sortRoomImages(images: readonly string[]): string[] {
+  return [...images].sort((a, b) => {
+    const num = (p: string) => {
+      const m = p.match(/_(\d+)\.[^.]+$/);
+      return m ? parseInt(m[1]) : 99;
+    };
+    // Group by room prefix first, then by photo number
+    const prefix = (p: string) => p.replace(/_\d+\.[^.]+$/, "");
+    if (prefix(a) !== prefix(b)) return a.localeCompare(b);
+    return num(a) - num(b);
+  });
+}
 
-const lavelleThreeBedroomImages = lavelleImageSet.filter((path) =>
+const lavelleQueenImages = sortRoomImages(lavelleImageSet.filter((path) =>
+  /9041_|9043_/i.test(path)
+));
+const lavelleKingImages = sortRoomImages(lavelleImageSet.filter((path) =>
+  /9042_|9046_|9047_/i.test(path)
+));
+const lavelleSuperiorImages = sortRoomImages(lavelleImageSet.filter((path) =>
+  /9045_/i.test(path)
+));
+const lavelleThreeBedroomImages = sortRoomImages(lavelleImageSet.filter((path) =>
   /9045_|9046_|9047_/i.test(path)
-);
+));
 
 // Destinations / Properties - Extended data
 export const destinations = [
@@ -61,22 +74,22 @@ export const destinations = [
       {
         name: "Queen Studio",
         description: '450 sq. ft. studio with queen bed, kitchenette, Smart 55" TV, and elegant bath.',
-        image: "/lavelle-road/queen-suite-1.jpg",
+        image: "/lavelle-road/all/9041_queen_suite_1.jpg",
       },
       {
         name: "King Studio",
         description: "475 sq. ft. studio with king bed, kitchenette, work desk, and city views.",
-        image: "/lavelle-road/king-suite-1.jpg",
+        image: "/lavelle-road/all/9042_king_suite_1.jpg",
       },
       {
         name: "Superior Studio",
         description: "450 sq. ft. studio with twin beds, kitchenette, and refined interiors.",
-        image: "/lavelle-road/superior-suite-1.jpg",
+        image: "/lavelle-road/all/9045_superior_suite_1.jpg",
       },
       {
         name: "Three Bedroom Unit",
         description: "Combined Superior + two King Studios, ~1,400 sq. ft., ideal for up to six guests.",
-        image: "/lavelle-road/terrace-1.jpg",
+        image: "/lavelle-road/all/9045_superior_suite_1.jpg",
       },
     ],
     gallery: [...lavelleImageSet],
