@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Montserrat, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import Preloader from "@/components/Preloader";
+import SmoothScroll from "@/components/SmoothScroll";
+import ScrollProgress from "@/components/ScrollProgress";
 import { withSiteUrl } from "@/lib/site";
 
 const bodyFont = Montserrat({
@@ -84,12 +86,17 @@ export default function RootLayout({
           Skip to main content
         </a>
 
+        <div className="noise-overlay" aria-hidden="true" />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }}
         />
         <Preloader />
-        {children}
+        <SmoothScroll>
+          <ScrollProgress />
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );

@@ -8,9 +8,9 @@ module.exports = {
           // Ultra minimal luxury palette
           primary: "#0a0a0a",
           primaryHover: "#000000",
-          accent: "#8a7968",
+          accent: "#8b7659",
           accentLight: "#a69484",
-          gold: "#c9a962",
+          gold: "#c3a061",
           goldLight: "#d4b978",
 
           // Text hierarchy

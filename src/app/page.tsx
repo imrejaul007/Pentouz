@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, MapPin, Phone } from "lucide-react";
@@ -74,12 +76,88 @@ export default function HomePage() {
     sectionRefs.current[id] = element;
   };
 
+  const heroBgRef = useRef<HTMLDivElement>(null);
+  const heroTextRef = useRef<HTMLDivElement>(null);
+
+  // Hero parallax + word reveal
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Word-by-word reveal for headline
+    const headline = document.querySelector(".hero-headline");
+    if (headline) {
+      const words = headline.textContent?.split(" ") || [];
+      headline.innerHTML = words
+        .map(
+          (w) =>
+            `<span class="word-reveal-inline overflow-hidden inline-block"><span class="word-inner inline-block">${w}</span></span>`
+        )
+        .join(" ");
+
+      const wordEls = headline.querySelectorAll(".word-inner");
+      gsap.fromTo(
+        wordEls,
+        { y: "110%", opacity: 0 },
+        {
+          y: "0%",
+          opacity: 1,
+          duration: 0.7,
+          stagger: 0.06,
+          ease: "power3.out",
+          delay: 0.3,
+        }
+      );
+    }
+
+    // Parallax on hero background
+    if (heroBgRef.current) {
+      gsap.to(heroBgRef.current, {
+        yPercent: 25,
+        ease: "none",
+        scrollTrigger: {
+          trigger: "section:first-of-type",
+          start: "top top",
+          end: "bottom top",
+          scrub: 1.2,
+        },
+      });
+    }
+
+    // Subtle text parallax (moves slower than background)
+    if (heroTextRef.current) {
+      gsap.to(heroTextRef.current, {
+        yPercent: -12,
+        ease: "none",
+        scrollTrigger: {
+          trigger: "section:first-of-type",
+          start: "top top",
+          end: "bottom top",
+          scrub: 2,
+        },
+      });
+    }
+
+    return () => {
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+    };
+  }, []);
+
   return (
     <>
       <Header />
       <main className="bg-[#f6efe5] text-brand-ink overflow-hidden">
+        <style jsx>{`
+          .word-reveal-inline {
+            display: inline-block;
+            overflow: hidden;
+          }
+          .word-inner {
+            display: inline-block;
+          }
+        `}</style>
         <section className="relative isolate min-h-[100svh] overflow-hidden bg-[#15120f] text-white">
-          <div className="absolute inset-0">
+          <div ref={heroBgRef} className="absolute inset-0 will-change-transform">
             <Image
               src="/lavelle-road/all/terrace_1.jpg"
               alt="The Pentouz luxury residences"
@@ -93,11 +171,11 @@ export default function HomePage() {
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,8,6,0.08)_0%,rgba(10,8,6,0)_28%,rgba(10,8,6,0.7)_100%)]" />
           </div>
 
-          <div className="relative mx-auto flex min-h-[100svh] max-w-[1480px] flex-col justify-end px-5 pb-16 pt-36 sm:px-8 sm:pb-20 lg:px-14 lg:pb-24 lg:pt-48">
+          <div ref={heroTextRef} className="relative mx-auto flex min-h-[100svh] max-w-[1480px] flex-col justify-end px-5 pb-16 pt-36 sm:px-8 sm:pb-20 lg:px-14 lg:pb-24 lg:pt-48 will-change-transform">
             <div className="grid gap-12 xl:grid-cols-[1fr_0.75fr] xl:items-end">
               <div className="max-w-5xl">
                 <p className="luxury-kicker text-white/70 animate-fade-in-up">The Pentouz</p>
-                <h1 className="luxury-hero-title mt-6 max-w-5xl text-white animate-fade-in-up [animation-delay:120ms]">
+                <h1 className="luxury-hero-title hero-headline mt-6 max-w-5xl text-white animate-fade-in-up [animation-delay:120ms]">
                   Distinct stays for guests who want privacy, space, and a quieter kind of luxury.
                 </h1>
                 <p className="luxury-copy mt-8 max-w-2xl text-white/74 animate-fade-in-up [animation-delay:220ms]">
@@ -156,16 +234,21 @@ export default function HomePage() {
         <section
           ref={setSectionRef("intro")}
           data-section-id="intro"
-          className="border-t border-[#e4d8c8] bg-[#f6efe5]"
+          className="relative border-t border-[#e4d8c8] bg-[#f6efe5]"
         >
-          <div className="mx-auto grid max-w-[1480px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:px-14 lg:py-28">
-            <div className={`transition-all duration-1000 ${visibleSections.intro ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
-              <p className="luxury-kicker text-brand-accent">A Pentouz Stay</p>
+          <span className="absolute -top-8 left-0 text-[12rem] sm:text-[16rem] lg:text-[20rem] font-display font-light text-brand-gold/[0.04] select-none pointer-events-none leading-none">01</span>
+          <div className="mx-auto grid max-w-[1480px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[1fr_1fr] lg:gap-0 lg:px-14 lg:py-28">
+            <div className={`relative lg:pr-16 transition-all duration-1000 ${visibleSections.intro ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+              <div className="editorial-divider-left" />
+              <p className="chapter-label text-brand-accent">A Pentouz Stay</p>
               <h2 className="luxury-section-title mt-5 max-w-xl">
                 A more private, more personal way to stay in Bangalore and Ooty.
               </h2>
             </div>
-            <div className={`space-y-6 text-base leading-8 text-brand-body sm:text-lg transition-all duration-1000 delay-150 ${visibleSections.intro ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+            <div className="relative hidden lg:block">
+              <div className="absolute inset-y-0 left-0 w-px bg-brand-gold/20" />
+            </div>
+            <div className={`lg:pl-16 space-y-6 text-base leading-8 text-brand-body sm:text-lg transition-all duration-1000 delay-150 ${visibleSections.intro ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
               <p>
                 The Pentouz, where luxury meets exclusivity. Situated in prime locations across Bangalore and beyond, our boutique accommodations offer the perfect blend of elegance, privacy, and convenience.
               </p>
@@ -182,10 +265,12 @@ export default function HomePage() {
         <section
           ref={setSectionRef("collection")}
           data-section-id="collection"
-          className="bg-[#fbf7f0]"
+          className="relative bg-[#fbf7f0]"
         >
+          <span className="absolute -top-8 left-0 text-[12rem] sm:text-[16rem] lg:text-[20rem] font-display font-light text-brand-gold/[0.04] select-none pointer-events-none leading-none">02</span>
           <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28">
-            <div className={`max-w-3xl transition-all duration-1000 ${visibleSections.collection ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+            <div className={`relative max-w-3xl transition-all duration-1000 ${visibleSections.collection ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+              <div className="absolute -inset-8 -z-10 bg-[radial-gradient(ellipse_at_top_left,rgba(196,160,97,0.06),transparent_60%)]" />
               <p className="luxury-kicker text-brand-accent">Extraordinary Accommodations</p>
               <h2 className="luxury-section-title mt-5">Our properties</h2>
             </div>
@@ -195,7 +280,7 @@ export default function HomePage() {
                 <Link
                   key={destination.slug}
                   href={`/destinations/${destination.slug}`}
-                  className={`group overflow-hidden bg-white shadow-[0_24px_80px_rgba(18,15,12,0.06)] transition-all duration-700 hover:-translate-y-2 ${visibleSections.collection ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+                  className={`border-animate group overflow-hidden bg-white shadow-[0_24px_80px_rgba(18,15,12,0.06)] transition-all duration-700 hover:-translate-y-2 ${visibleSections.collection ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
                   style={{ transitionDelay: `${index * 90}ms` }}
                 >
                   <div className="relative aspect-[4/5] overflow-hidden">
@@ -207,6 +292,9 @@ export default function HomePage() {
                       className="object-cover transition-transform duration-[1400ms] group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                      <span className="text-[11px] uppercase tracking-[0.22em] text-white">View Property <ArrowRight className="ml-1 inline h-4 w-4" strokeWidth={1.4} /></span>
+                    </div>
                     <div className="absolute inset-x-0 bottom-0 p-6 text-white">
                       <p className="text-[10px] uppercase tracking-[0.22em] text-brand-gold">{destination.subtitle}</p>
                       <h3 className="mt-3 font-display text-3xl font-light leading-tight text-white">{destination.shortTitle}</h3>
@@ -214,7 +302,7 @@ export default function HomePage() {
                   </div>
                 </Link>
               ))}
-              <div className={`group overflow-hidden border border-brand-border bg-[#efe7da] p-8 transition-all duration-700 hover:-translate-y-2 ${visibleSections.collection ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`} style={{ transitionDelay: `${destinations.length * 90}ms` }}>
+              <div className={`group overflow-hidden border border-brand-border bg-[#f0e8d8] p-8 transition-all duration-700 hover:-translate-y-2 ${visibleSections.collection ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`} style={{ transitionDelay: `${destinations.length * 90}ms` }}>
                 <p className="text-[10px] uppercase tracking-[0.22em] text-brand-accent">The Collection</p>
                 <h3 className="mt-4 font-display text-4xl font-light leading-tight text-brand-ink">Choose the stay that matches your trip.</h3>
                 <p className="mt-4 text-sm leading-7 text-brand-body">
@@ -228,10 +316,12 @@ export default function HomePage() {
         <section
           ref={setSectionRef("experiences")}
           data-section-id="experiences"
-          className="bg-[#161310] text-white"
+          className="relative bg-[#161310] text-white"
         >
+          <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-brand-gold/5 blur-3xl animate-pulse pointer-events-none" />
+          <span className="absolute -top-8 left-0 text-[12rem] sm:text-[16rem] lg:text-[20rem] font-display font-light text-brand-gold/[0.04] select-none pointer-events-none leading-none">03</span>
           <div className="mx-auto grid max-w-[1480px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[0.78fr_1.22fr] lg:px-14 lg:py-28">
-            <div className={`transition-all duration-1000 ${visibleSections.experiences ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+            <div className={`relative py-12 transition-all duration-1000 ${visibleSections.experiences ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
               <p className="luxury-kicker text-brand-gold">Enjoy the best moment of life</p>
               <h2 className="mt-5 font-display text-4xl font-light leading-tight text-white sm:text-5xl lg:text-6xl">
                 Experience the luxury
@@ -245,7 +335,7 @@ export default function HomePage() {
                 For a serene retreat, head to Ooty, where lush tea gardens, misty hills, and tranquil lakes await. Enjoy scenic drives, nature trails, and cozy stays in charming surroundings. Whether you crave the energy of the city or the calm of the hills, The Pentouz promises unforgettable moments.
               </p>
               <div className="mt-8">
-                <Link href="/experiences" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-[11px] uppercase tracking-[0.2em] text-white transition-all duration-500 hover:border-brand-gold hover:text-brand-gold">
+                <Link href="/experiences" className="btn-shimmer inline-flex items-center gap-2 rounded-full border border-brand-gold/30 bg-brand-gold/10 px-6 py-3 text-[11px] uppercase tracking-[0.2em] text-white transition-all duration-500 hover:border-brand-gold hover:text-brand-gold">
                   Start Exploring
                   <ArrowRight className="h-4 w-4" strokeWidth={1.4} />
                 </Link>
@@ -257,8 +347,10 @@ export default function HomePage() {
         <section
           ref={setSectionRef("gatherings")}
           data-section-id="gatherings"
-          className="bg-[#f7f0e5]"
+          className="relative bg-[#f7f0e5]"
         >
+          <div className="absolute inset-0 opacity-[0.015] pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")' }} />
+          <span className="absolute -top-8 left-0 text-[12rem] sm:text-[16rem] lg:text-[20rem] font-display font-light text-brand-gold/[0.04] select-none pointer-events-none leading-none">04</span>
           <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28">
             <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
               <div className={`transition-all duration-1000 ${visibleSections.gatherings ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
@@ -274,12 +366,14 @@ export default function HomePage() {
                 {testimonials.map((testimonial, index) => (
                   <article
                     key={`${testimonial.name}-${index}`}
-                    className={`luxury-panel bg-white transition-all duration-1000 hover:-translate-y-1 ${visibleSections.gatherings ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+                    className={`group luxury-panel relative bg-white transition-all duration-1000 hover:-translate-y-1 hover:border-t-2 hover:border-brand-gold ${visibleSections.gatherings ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
                     style={{ transitionDelay: `${index * 100}ms` }}
                   >
-                    <p className="text-brand-gold text-sm tracking-[0.2em]">★★★★★</p>
-                    <p className="mt-5 text-sm leading-7 text-brand-body">&ldquo;{testimonial.quote}&rdquo;</p>
-                    <div className="mt-6 border-t border-brand-border pt-4">
+                    <div className="quote-mark relative pl-8 pr-4 pt-6">
+                      <span className="absolute left-0 top-4 text-5xl font-display text-brand-gold/20 leading-none select-none">&ldquo;</span>
+                    </div>
+                    <p className="mt-2 px-6 text-base leading-7 italic text-brand-body">{testimonial.quote}</p>
+                    <div className="mt-6 border-t border-brand-border px-6 pb-6 pt-4">
                       <p className="font-display text-2xl font-light text-brand-ink">{testimonial.name}</p>
                       {testimonial.location && (
                         <p className="mt-1 text-[10px] tracking-[0.15em] text-brand-muted">{testimonial.location}</p>
@@ -307,8 +401,9 @@ export default function HomePage() {
         <section
           ref={setSectionRef("city")}
           data-section-id="city"
-          className="bg-white"
+          className="relative bg-white"
         >
+          <span className="absolute -top-8 left-0 text-[12rem] sm:text-[16rem] lg:text-[20rem] font-display font-light text-brand-gold/[0.04] select-none pointer-events-none leading-none">05</span>
           <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28">
             <div className={`max-w-3xl transition-all duration-1000 ${visibleSections.city ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
               <p className="luxury-kicker text-brand-accent">Local Tours & Activities</p>
@@ -327,15 +422,15 @@ export default function HomePage() {
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
                   <div className="relative aspect-[4/3] overflow-hidden">
-                    <Image src={moment.image} alt={moment.title} fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover transition-transform duration-[1400ms] group-hover:scale-105" />
+                    <Image src={moment.image} alt={moment.title} fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover scale-90 transition-all duration-[1400ms] group-hover:scale-100 group-hover:[clip-path:inset(0_0_0_0)]" />
                   </div>
                   <div className="p-6">
                     <p className="text-[10px] uppercase tracking-[0.22em] text-brand-accent">{moment.eyebrow}</p>
-                    <h3 className="mt-4 font-display text-3xl font-light text-brand-ink">{moment.title}</h3>
+                    <h3 className="city-card-title mt-4 font-display text-3xl font-light text-brand-ink transition-all duration-500">{moment.title}</h3>
                     <p className="mt-4 text-sm leading-7 text-brand-body">{moment.description}</p>
-                    <div className="mt-6 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-brand-ink transition-colors group-hover:text-brand-gold">
+                    <div className="city-discover-link mt-6 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-brand-ink transition-all duration-500 group-hover:gap-4 group-hover:text-brand-gold">
                       Discover More
-                      <ArrowRight className="h-4 w-4" strokeWidth={1.4} />
+                      <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" strokeWidth={1.4} />
                     </div>
                   </div>
                 </Link>

@@ -1,117 +1,186 @@
 "use client";
-
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { gsap } from "gsap";
 
+type CursorState = "default" | "link" | "image" | "text" | "click";
+
 export default function CustomCursor() {
-  const cursorRef = useRef<HTMLDivElement>(null);
-  const cursorDotRef = useRef<HTMLDivElement>(null);
-  const [isHovering, setIsHovering] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const ringRef = useRef<HTMLDivElement>(null);
+  const dotRef = useRef<HTMLDivElement>(null);
+  const [state, setState] = useState<CursorState>("default");
+  const [visible, setVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(true);
+  const mousePos = useRef({ x: 0, y: 0 });
+  const ringPos = useRef({ x: 0, y: 0 });
+  const rafRef = useRef<number>(0);
+
+  const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+
+  // Magnetic button effect — buttons with magnetic-btn class pull toward cursor within 60px
+  const applyMagneticEffect = useCallback(() => {
+    const magneticBtns = document.querySelectorAll(".magnetic-btn");
+    magneticBtns.forEach((btn) => {
+      const el = btn as HTMLElement;
+      const rect = el.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const dx = mousePos.current.x - centerX;
+      const dy = mousePos.current.y - centerY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist < 60) {
+        const strength = (1 - dist / 60) * 0.4;
+        const offsetX = dx * strength;
+        const offsetY = dy * strength;
+        gsap.to(el, {
+          x: offsetX,
+          y: offsetY,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      } else {
+        gsap.to(el, {
+          x: 0,
+          y: 0,
+          duration: 0.5,
+          ease: "elastic.out(1, 0.5)",
+        });
+      }
+    });
+  }, []);
 
   useEffect(() => {
-    // Check if mobile/touch device
     const checkMobile = () => {
-      setIsMobile(window.matchMedia("(max-width: 1024px)").matches || "ontouchstart" in window);
+      setIsMobile(window.innerWidth < 1024 || "ontouchstart" in window);
     };
-
     checkMobile();
     window.addEventListener("resize", checkMobile);
-
     if (isMobile) return;
 
-    const cursor = cursorRef.current;
-    const cursorDot = cursorDotRef.current;
-    if (!cursor || !cursorDot) return;
+    const ring = ringRef.current;
+    const dot = dotRef.current;
+    if (!ring || !dot) return;
 
-    // Mouse move handler
-    const onMouseMove = (e: MouseEvent) => {
-      setIsVisible(true);
+    // Smooth ring follow with RAF
+    const animate = () => {
+      ringPos.current.x = lerp(ringPos.current.x, mousePos.current.x, 0.12);
+      ringPos.current.y = lerp(ringPos.current.y, mousePos.current.y, 0.12);
+      gsap.set(ring, { x: ringPos.current.x, y: ringPos.current.y });
+      gsap.set(dot, { x: mousePos.current.x, y: mousePos.current.y });
+      rafRef.current = requestAnimationFrame(animate);
+    };
+    rafRef.current = requestAnimationFrame(animate);
 
-      gsap.to(cursor, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.5,
-        ease: "power3.out",
-      });
-
-      gsap.to(cursorDot, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.1,
-        ease: "power2.out",
-      });
+    // Mouse tracking
+    const onMove = (e: MouseEvent) => {
+      mousePos.current = { x: e.clientX, y: e.clientY };
+      setVisible(true);
+      applyMagneticEffect();
     };
 
-    // Hover handlers for interactive elements
-    const onMouseEnter = () => setIsHovering(true);
-    const onMouseLeave = () => setIsHovering(false);
+    // State detection
+    const onEnter = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest(".magnetic-btn")) {
+        setState("link");
+      } else if (target.matches('a, button, [role="button"], input, select, textarea, label, [data-cursor="link"]')) {
+        setState("link");
+      } else if (target.matches('img, [data-cursor="image"], .group, [data-cursor="image"] *')) {
+        setState("image");
+      } else if (target.matches("p, h1, h2, h3, h4, h5, h6, span, [data-cursor='text']")) {
+        setState("text");
+      }
+    };
 
-    // Add event listeners
-    document.addEventListener("mousemove", onMouseMove);
+    const onLeave = () => setState("default");
+    const onMouseLeaveWin = () => setVisible(false);
+    const onMouseEnterWin = () => setVisible(true);
 
-    // Add hover listeners to interactive elements
-    const interactiveElements = document.querySelectorAll(
-      'a, button, [role="button"], input, select, textarea, [data-cursor-hover]'
-    );
+    // Click pulse
+    const onMouseDown = () => {
+      setState("click");
+      gsap.to(ring, { scale: 0.8, duration: 0.1, ease: "power2.out" });
+      gsap.to(ring, { scale: 1.3, duration: 0.3, ease: "elastic.out(1, 0.5)", delay: 0.1 });
+    };
+    const onMouseUp = () => {
+      gsap.to(ring, { scale: 1, duration: 0.2 });
+      setState("default");
+    };
 
-    interactiveElements.forEach((el) => {
-      el.addEventListener("mouseenter", onMouseEnter);
-      el.addEventListener("mouseleave", onMouseLeave);
-    });
-
-    // Hide cursor when leaving window
-    const onMouseLeaveWindow = () => setIsVisible(false);
-    const onMouseEnterWindow = () => setIsVisible(true);
-
-    document.addEventListener("mouseleave", onMouseLeaveWindow);
-    document.addEventListener("mouseenter", onMouseEnterWindow);
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseenter", onMouseEnterWin);
+    document.addEventListener("mouseleave", onMouseLeaveWin);
+    document.addEventListener("mouseover", onEnter);
+    document.addEventListener("mouseout", onLeave);
+    document.addEventListener("mousedown", onMouseDown);
+    document.addEventListener("mouseup", onMouseUp);
 
     return () => {
-      document.removeEventListener("mousemove", onMouseMove);
-      document.removeEventListener("mouseleave", onMouseLeaveWindow);
-      document.removeEventListener("mouseenter", onMouseEnterWindow);
+      cancelAnimationFrame(rafRef.current);
+      document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseenter", onMouseEnterWin);
+      document.removeEventListener("mouseleave", onMouseLeaveWin);
+      document.removeEventListener("mouseover", onEnter);
+      document.removeEventListener("mouseout", onLeave);
+      document.removeEventListener("mousedown", onMouseDown);
+      document.removeEventListener("mouseup", onMouseUp);
       window.removeEventListener("resize", checkMobile);
-
-      interactiveElements.forEach((el) => {
-        el.removeEventListener("mouseenter", onMouseEnter);
-        el.removeEventListener("mouseleave", onMouseLeave);
-      });
     };
-  }, [isMobile]);
+  }, [isMobile, applyMagneticEffect]);
 
-  // Don't render on mobile
   if (isMobile) return null;
+
+  const isText = state === "text";
+  const isImage = state === "image";
+  const isClick = state === "click";
+  const isLink = state === "link";
 
   return (
     <>
-      {/* Outer ring */}
+      {/* Ring */}
       <div
-        ref={cursorRef}
+        ref={ringRef}
         aria-hidden="true"
-        className={`fixed top-0 left-0 w-10 h-10 pointer-events-none z-[9999] mix-blend-difference transition-transform duration-300 ${
-          isVisible ? "opacity-100" : "opacity-0"
-        } ${isHovering ? "scale-150" : "scale-100"}`}
+        className={`fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference transition-all duration-300 ${
+          visible ? "opacity-100" : "opacity-0"
+        } ${isText ? "opacity-0" : ""}`}
         style={{ transform: "translate(-50%, -50%)" }}
       >
         <div
-          className={`w-full h-full rounded-full border transition-all duration-300 ${
-            isHovering ? "border-white bg-white/10" : "border-white/50"
+          className={`rounded-full border-2 transition-all duration-300 flex items-center justify-center ${
+            isImage
+              ? "w-12 h-12 border-brand-gold/60"
+              : isLink
+              ? "w-14 h-14 border-brand-gold bg-brand-gold/10"
+              : isClick
+              ? "w-12 h-12 border-brand-gold bg-brand-gold/20"
+              : "w-10 h-10 border-white/50"
           }`}
-        />
+        >
+          {/* Crosshair for images */}
+          {isImage && (
+            <div className="relative w-5 h-5">
+              <div className="absolute left-1/2 top-0 bottom-0 w-px bg-brand-gold/70 -translate-x-1/2" />
+              <div className="absolute top-1/2 left-0 right-0 h-px bg-brand-gold/70 -translate-y-1/2" />
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* Inner dot */}
+      {/* Dot - hidden on text/over elements */}
       <div
-        ref={cursorDotRef}
+        ref={dotRef}
         aria-hidden="true"
-        className={`fixed top-0 left-0 w-1.5 h-1.5 pointer-events-none z-[9999] mix-blend-difference transition-opacity duration-300 ${
-          isVisible ? "opacity-100" : "opacity-0"
-        } ${isHovering ? "opacity-0" : "opacity-100"}`}
+        className={`fixed top-0 left-0 pointer-events-none z-[9999] transition-opacity duration-200 ${
+          visible ? "opacity-100" : "opacity-0"
+        } ${isText ? "opacity-0" : ""}`}
         style={{ transform: "translate(-50%, -50%)" }}
       >
-        <div className="w-full h-full rounded-full bg-white" />
+        <div
+          className={`rounded-full bg-white transition-all duration-200 ${
+            isImage ? "w-0 h-0" : "w-1.5 h-1.5"
+          }`}
+        />
       </div>
     </>
   );
