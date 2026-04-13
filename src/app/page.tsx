@@ -267,21 +267,35 @@ export default function HomePage() {
                   Make your memorable get-togethers a reality.
                 </h2>
                 <p className="luxury-copy mt-6 text-brand-body">
-                  Turn your celebrations into an unforgettable experience at our stunning destinations. Whether you’re looking for a private space with beautiful views or a vast terrace for intimate parties, we have the perfect setting.
+                  Turn your celebrations into an unforgettable experience at our stunning destinations. Whether you&apos;re looking for a private space with beautiful views or a vast terrace for intimate parties, we have the perfect setting.
                 </p>
               </div>
               <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-                {testimonials.slice(0, 3).map((testimonial, index) => (
+                {testimonials.map((testimonial, index) => (
                   <article
                     key={`${testimonial.name}-${index}`}
                     className={`luxury-panel bg-white transition-all duration-1000 hover:-translate-y-1 ${visibleSections.gatherings ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
                     style={{ transitionDelay: `${index * 100}ms` }}
                   >
                     <p className="text-brand-gold text-sm tracking-[0.2em]">★★★★★</p>
-                    <p className="mt-5 text-sm leading-7 text-brand-body">“{testimonial.quote}”</p>
+                    <p className="mt-5 text-sm leading-7 text-brand-body">&ldquo;{testimonial.quote}&rdquo;</p>
                     <div className="mt-6 border-t border-brand-border pt-4">
                       <p className="font-display text-2xl font-light text-brand-ink">{testimonial.name}</p>
-                      <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-brand-muted">{testimonial.source}</p>
+                      {testimonial.location && (
+                        <p className="mt-1 text-[10px] tracking-[0.15em] text-brand-muted">{testimonial.location}</p>
+                      )}
+                      {testimonial.sourceUrl ? (
+                        <a
+                          href={testimonial.sourceUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-1 inline-block text-[10px] uppercase tracking-[0.2em] text-brand-accent hover:text-brand-gold transition-colors duration-300"
+                        >
+                          {testimonial.source} →
+                        </a>
+                      ) : (
+                        <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-brand-muted">{testimonial.source}</p>
+                      )}
                     </div>
                   </article>
                 ))}

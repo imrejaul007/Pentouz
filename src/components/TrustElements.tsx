@@ -1,24 +1,43 @@
 "use client";
 
 import React from "react";
-import { Award, Globe, ShieldCheck, CheckCircle, TrendingUp, Star } from "lucide-react";
-
-interface Award {
-  year: string;
-  name: string;
-  icon: React.ElementType;
-}
+import { ShieldCheck, CheckCircle, Star, ExternalLink } from "lucide-react";
 
 interface PressLogo {
   name: string;
   url: string;
 }
 
-const awards: Award[] = [
-  { year: "2024", name: "Excellence in Hospitality", icon: Award },
-  { year: "2023", name: "Best Luxury Hotel", icon: TrendingUp },
-  { year: "2023", name: "Traveler's Choice", icon: Globe },
-  { year: "2022", name: "Outstanding Service", icon: Star },
+interface PlatformBadge {
+  name: string;
+  rating: string;
+  count: string;
+  url: string;
+  color: string;
+}
+
+const platformBadges: PlatformBadge[] = [
+  {
+    name: "Booking.com",
+    rating: "8.8",
+    count: "Review score",
+    url: "https://www.booking.com/hotel/pentouz-lavelle-road.html",
+    color: "#003580",
+  },
+  {
+    name: "TripAdvisor",
+    rating: "4.5",
+    count: "Reviews",
+    url: "https://www.tripadvisor.com/Hotel_Review-g297628-d25270496-Reviews-The_Pentouz-Bengaluru_Bangalore_Karnataka.html",
+    color: "#34E0A1",
+  },
+  {
+    name: "Google",
+    rating: "4.6",
+    count: "Stars",
+    url: "https://maps.google.com/reviews",
+    color: "#4285F4",
+  },
 ];
 
 const pressLogos: PressLogo[] = [
@@ -34,7 +53,7 @@ interface TrustElementsProps {
   subtitle?: string;
 }
 
-export default function TrustElements({ title = "Awards & Recognition", subtitle }: TrustElementsProps) {
+export default function TrustElements({ title = "Guest Ratings & Reviews", subtitle }: TrustElementsProps) {
   return (
     <section className="py-section-xl bg-brand-linen relative overflow-hidden">
       {/* Decorative Elements */}
@@ -45,7 +64,7 @@ export default function TrustElements({ title = "Awards & Recognition", subtitle
         {/* Header */}
         <div className="text-center mb-16">
           <p className="text-[10px] uppercase tracking-[0.35em] text-brand-accent mb-6 font-medium">
-            Awards & Recognition
+            Guest Ratings & Reviews
           </p>
           <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-brand-ink mb-6 leading-tight">
             {title}
@@ -58,22 +77,78 @@ export default function TrustElements({ title = "Awards & Recognition", subtitle
           <div className="w-24 h-px bg-brand-gold mx-auto mb-12"></div>
         </div>
 
-        {/* Awards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-16">
-          {awards.map((award) => (
-            <div key={award.year} className="text-center group p-6 lg:p-8 bg-white border border-brand-border/30 hover:border-brand-gold/50 hover:shadow-lg transition-all duration-500">
-              <div className="w-16 h-16 rounded-full bg-brand-linen border border-brand-border/30 flex items-center justify-center mb-4">
-                <award.icon className="w-8 h-8 text-brand-gold" strokeWidth={1.5} />
+        {/* Platform Rating Badges */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-16">
+          {platformBadges.map((badge) => (
+            <a
+              key={badge.name}
+              href={badge.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block text-center p-6 lg:p-8 bg-white border border-brand-border/30 hover:border-brand-gold/50 hover:shadow-lg transition-all duration-500 relative"
+            >
+              <div className="flex flex-col items-center gap-4">
+                <div
+                  className="w-16 h-16 rounded-full flex items-center justify-center text-white font-bold text-lg"
+                  style={{ backgroundColor: badge.color }}
+                >
+                  {badge.rating}
+                </div>
+                <div>
+                  <div className="flex items-center justify-center gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-3.5 h-3.5 ${i < Math.round(parseFloat(badge.rating)) ? "text-brand-gold fill-brand-gold" : "text-brand-border"}`}
+                        strokeWidth={1.5}
+                      />
+                    ))}
+                  </div>
+                  <p className="text-xl font-display font-light text-brand-ink mt-2">
+                    {badge.name}
+                  </p>
+                  <p className="text-[10px] uppercase tracking-[0.15em] text-brand-muted mt-1">
+                    {badge.count}
+                  </p>
+                </div>
+                <ExternalLink className="w-4 h-4 text-brand-muted group-hover:text-brand-gold transition-colors duration-300" strokeWidth={1.5} />
               </div>
-              <p className="text-[10px] uppercase tracking-[0.15em] text-brand-muted mb-2">
-                {award.year}
-              </p>
-              <h3 className="text-xl font-display font-light text-brand-ink mb-1">
-                {award.name}
-              </h3>
-              <div className="w-12 h-[1px] bg-brand-gold/30 transition-all duration-500 group-hover:w-full"></div>
-            </div>
+              <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-brand-gold transition-all duration-500 group-hover:w-full"></div>
+            </a>
           ))}
+        </div>
+
+        {/* Review Prompt */}
+        <div className="text-center mb-16">
+          <p className="text-sm text-brand-muted">
+            Stayed with us?{" "}
+            <a
+              href="https://maps.google.com/reviews"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-accent underline underline-offset-2 hover:text-brand-gold transition-colors duration-300"
+            >
+              Leave a review on Google
+            </a>
+            {", "}
+            <a
+              href="https://www.booking.com/hotel/pentouz-lavelle-road.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-accent underline underline-offset-2 hover:text-brand-gold transition-colors duration-300"
+            >
+              Booking.com
+            </a>
+            , or{" "}
+            <a
+              href="https://www.tripadvisor.com/Hotel_Review-g297628-d25270496-Reviews-The_Pentouz-Bengaluru_Bangalore_Karnataka.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-accent underline underline-offset-2 hover:text-brand-gold transition-colors duration-300"
+            >
+              TripAdvisor
+            </a>
+          </p>
         </div>
 
         {/* Press Coverage */}
@@ -93,7 +168,7 @@ export default function TrustElements({ title = "Awards & Recognition", subtitle
                 href={logo.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block text-center p-8 bg-white border border-brand-border/30 hover:border-brand-gold/50 hover:shadow-xl transition-all duration-500"
+                className="group block text-center p-8 bg-white border border-brand-border/30 hover:border-brand-gold/50 hover:shadow-xl transition-all duration-500 relative"
               >
                 <span className="text-lg font-medium text-brand-ink group-hover:text-brand-gold transition-colors duration-300">
                   {logo.name}

@@ -89,6 +89,7 @@ export default function CustomCursor() {
       {/* Outer ring */}
       <div
         ref={cursorRef}
+        aria-hidden="true"
         className={`fixed top-0 left-0 w-10 h-10 pointer-events-none z-[9999] mix-blend-difference transition-transform duration-300 ${
           isVisible ? "opacity-100" : "opacity-0"
         } ${isHovering ? "scale-150" : "scale-100"}`}
@@ -104,6 +105,7 @@ export default function CustomCursor() {
       {/* Inner dot */}
       <div
         ref={cursorDotRef}
+        aria-hidden="true"
         className={`fixed top-0 left-0 w-1.5 h-1.5 pointer-events-none z-[9999] mix-blend-difference transition-opacity duration-300 ${
           isVisible ? "opacity-100" : "opacity-0"
         } ${isHovering ? "opacity-0" : "opacity-100"}`}
@@ -111,15 +113,6 @@ export default function CustomCursor() {
       >
         <div className="w-full h-full rounded-full bg-white" />
       </div>
-
-      {/* Hide default cursor */}
-      <style jsx global>{`
-        @media (min-width: 1025px) {
-          * {
-            cursor: none !important;
-          }
-        }
-      `}</style>
     </>
   );
 }

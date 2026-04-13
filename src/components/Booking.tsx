@@ -19,6 +19,7 @@ export default function Booking() {
   const [website, setWebsite] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
+  const [dateError, setDateError] = useState("");
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -76,6 +77,28 @@ export default function Booking() {
       setIsSubmitting(false);
     }
   };
+
+  const isDatesValid = formData.checkIn && formData.checkOut && formData.checkOut > formData.checkIn;
+
+  const handleCheckInChange = (value: string) => {
+    setFormData((prev) => ({ ...prev, checkIn: value }));
+    if (formData.checkOut && value && formData.checkOut <= value) {
+      setDateError("Check-out must be after check-in");
+    } else {
+      setDateError("");
+    }
+  };
+
+  const handleCheckOutChange = (value: string) => {
+    setFormData((prev) => ({ ...prev, checkOut: value }));
+    if (formData.checkIn && value && value <= formData.checkIn) {
+      setDateError("Check-out must be after check-in");
+    } else {
+      setDateError("");
+    }
+  };
+
+  const isSubmitDisabled = isSubmitting || !isDatesValid;
 
   return (
     <section
@@ -168,9 +191,7 @@ export default function Booking() {
                 <input
                   type="date"
                   value={formData.checkIn}
-                  onChange={(e) =>
-                    setFormData({ ...formData, checkIn: e.target.value })
-                  }
+                  onChange={(e) => handleCheckInChange(e.target.value)}
                   className="w-full bg-white/5 border border-white/20 pl-11 pr-4 py-4 text-sm text-white outline-none focus:border-brand-gold transition-colors [color-scheme:dark]"
                   required
                 />
@@ -187,9 +208,7 @@ export default function Booking() {
                 <input
                   type="date"
                   value={formData.checkOut}
-                  onChange={(e) =>
-                    setFormData({ ...formData, checkOut: e.target.value })
-                  }
+                  onChange={(e) => handleCheckOutChange(e.target.value)}
                   className="w-full bg-white/5 border border-white/20 pl-11 pr-4 py-4 text-sm text-white outline-none focus:border-brand-gold transition-colors [color-scheme:dark]"
                   required
                 />
@@ -224,13 +243,18 @@ export default function Booking() {
           <div className="text-center">
             <button
               type="submit"
-              disabled={isSubmitting}
-              className="inline-flex items-center justify-center gap-3 bg-brand-gold text-white px-10 sm:px-14 py-4 sm:py-5 text-[10px] sm:text-[11px] uppercase tracking-[0.2em] font-medium hover:bg-white hover:text-brand-ink transition-all duration-500"
+              disabled={isSubmitDisabled}
+              className="inline-flex items-center justify-center gap-3 bg-brand-gold text-white px-10 sm:px-14 py-4 sm:py-5 text-[10px] sm:text-[11px] uppercase tracking-[0.2em] font-medium hover:bg-white hover:text-brand-ink transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-brand-gold disabled:hover:text-white"
             >
               <span>{isSubmitting ? "Submitting..." : "Check Availability"}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
+          {dateError && (
+            <p className="mt-4 text-center text-xs text-red-300">
+              {dateError}
+            </p>
+          )}
           {status && (
             <p
               className={`mt-6 text-center text-xs ${

@@ -24,6 +24,29 @@ export const metadata: Metadata = {
   title: "The Pentouz | Luxury Residences & Suites",
   description:
     "Luxury residences and suites by The Pentouz across Bangalore and Ooty. Reserve bespoke stays with concierge hospitality and lifestyle experiences.",
+  openGraph: {
+    title: "The Pentouz | Luxury Residences & Suites",
+    description:
+      "Luxury residences and suites by The Pentouz across Bangalore and Ooty. Reserve bespoke stays with concierge hospitality and lifestyle experiences.",
+    url: withSiteUrl("/"),
+    siteName: "The Pentouz",
+    images: [
+      {
+        url: withSiteUrl("/og-image.jpg"),
+        width: 1200,
+        height: 630,
+        alt: "The Pentouz | Luxury Residences & Suites",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Pentouz | Luxury Residences & Suites",
+    description:
+      "Luxury residences and suites by The Pentouz across Bangalore and Ooty. Reserve bespoke stays with concierge hospitality and lifestyle experiences.",
+    images: [withSiteUrl("/og-image.jpg")],
+  },
 };
 
 export default function RootLayout({
@@ -53,6 +76,14 @@ export default function RootLayout({
       <body
         className={`${bodyFont.variable} ${displayFont.variable} antialiased bg-white text-brand-ink`}
       >
+        {/* Skip to main content for keyboard users */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[99999] focus:rounded-full focus:bg-brand-gold focus:px-6 focus:py-3 focus:text-[11px] focus:uppercase focus:tracking-[0.18em] focus:text-brand-ink focus:shadow-lg focus:outline-none"
+        >
+          Skip to main content
+        </a>
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }}

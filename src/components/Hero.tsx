@@ -26,10 +26,8 @@ export default function Hero() {
     return () => cancelAnimationFrame(raf);
   }, []);
 
-  useEffect(() => {
-    const videoTimer = setTimeout(() => setVideoStarted(true), 2500);
-    return () => clearTimeout(videoTimer);
-  }, []);
+  // Video loads only on user interaction — never auto-triggered.
+  // This eliminates the 28MB background download on initial page load.
 
   return (
     <section className="relative h-[100svh] min-h-[600px] sm:min-h-[700px] lg:min-h-[800px] overflow-hidden">
@@ -59,9 +57,10 @@ export default function Hero() {
           quality={90}
         />
 
-        {/* Video Background */}
-        {videoStarted && (
+        {/* Video Background — only loads on user interaction, never on mobile/slow connections */}
+        {shouldPlayVideo && (
           <video
+            preload="none"
             autoPlay
             loop
             muted={isMuted}
@@ -81,10 +80,13 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40" />
       </div>
 
-      {/* Sound Toggle */}
+      {/* Sound Toggle — also triggers video load on first interaction */}
       {shouldPlayVideo && (
         <button
-          onClick={() => setIsMuted(!isMuted)}
+          onClick={() => {
+            if (!videoStarted) setVideoStarted(true);
+            setIsMuted(!isMuted);
+          }}
           className="absolute bottom-6 sm:bottom-8 right-4 sm:right-8 z-20 w-10 h-10 sm:w-12 sm:h-12 border border-white/40 flex items-center justify-center text-white hover:text-brand-gold hover:border-brand-gold transition-all duration-300 backdrop-blur-sm bg-black/20"
           aria-label={isMuted ? "Unmute video" : "Mute video"}
         >

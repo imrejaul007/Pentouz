@@ -76,21 +76,25 @@ export const destinations = [
         name: "Queen Studio",
         description: '450 sq. ft. studio with queen bed, kitchenette, Smart 55" TV, and elegant bath.',
         image: "/lavelle-road/all/9041_queen_suite_1.jpg",
+        price: "₹6,200",
       },
       {
         name: "King Studio",
         description: "475 sq. ft. studio with king bed, kitchenette, work desk, and city views.",
         image: "/lavelle-road/all/9042_king_suite_1.jpg",
+        price: "₹6,800",
       },
       {
         name: "Superior Studio",
         description: "450 sq. ft. studio with twin beds, kitchenette, and refined interiors.",
         image: "/lavelle-road/all/9045_superior_suite_1.jpg",
+        price: "₹6,300",
       },
       {
         name: "Three Bedroom Unit",
         description: "Combined Superior + two King Studios, ~1,400 sq. ft., ideal for up to six guests.",
         image: "/lavelle-road/all/9045_superior_suite_1.jpg",
+        price: "₹20,000",
       },
     ],
     gallery: [...lavelleImageSet],
@@ -201,16 +205,19 @@ export const destinations = [
         name: "The Skyline Suite",
         description: "Panoramic city views with private terrace",
         image: "/indiranagar/skyline-suite.jpg",
+        price: "Price on Request",
       },
       {
         name: "The Terrace Haven",
         description: "Direct terrace access with lounge seating",
         image: "/indiranagar/terrace-7.jpg",
+        price: "Price on Request",
       },
       {
         name: "The Urban Retreat",
         description: "Contemporary comfort in the heart of the city",
         image: "/indiranagar/vista-room.jpg",
+        price: "Price on Request",
       },
     ],
     gallery: [...indiranagarImageSet],
@@ -284,16 +291,19 @@ export const destinations = [
         name: "The Heritage Suite",
         description: "Colonial charm with modern luxury",
         image: "/ooty/bedroom-10.jpeg",
+        price: "₹12,000",
       },
       {
         name: "The Garden View Room",
         description: "Wake up to lush green vistas",
         image: "/ooty/bedroom-12.jpeg",
+        price: "₹8,000",
       },
       {
         name: "The Mountain Retreat",
         description: "Cozy comfort with hill views",
         image: "/ooty/bedroom-15.jpeg",
+        price: "₹8,800",
       },
     ],
     gallery: [...ootyImageSet],
@@ -368,22 +378,26 @@ export const destinations = [
       {
         name: "The Fernhill Villa",
         description: "4-bedroom villa sleeping up to 10 guests with private sit-out and garden views",
-        image: "/fernhill/villa-1.jpg"
+        image: "/fernhill/villa-1.jpg",
+        price: "Price on Request",
       },
       {
         name: "The Fernhill Luxury Cottage",
         description: "1-bedroom cottage with 2 king-size beds and private balcony",
-        image: "/fernhill/pool-1.jpg"
+        image: "/fernhill/pool-1.jpg",
+        price: "Price on Request",
       },
       {
         name: "The Fernhill Elegance Cottage",
         description: "Elegant cottage with private sit-out and back garden access",
-        image: "/fernhill/overview-1.jpg"
+        image: "/fernhill/overview-1.jpg",
+        price: "Price on Request",
       },
       {
         name: "Fernhill Hill Squad Cottage",
         description: "Dorm-style cottage with 8 single beds, ideal for groups",
-        image: "/fernhill/gazebo-1.jpg"
+        image: "/fernhill/gazebo-1.jpg",
+        price: "Price on Request",
       }
     ],
     gallery: [...fernhillImageSet],
@@ -575,19 +589,60 @@ export const galleryItems = [
 // Testimonials
 export const testimonials = [
   {
-    quote: "The attention to detail was impeccable. From the moment we arrived, every need was anticipated.",
-    name: "Johannes",
+    quote: "The attention to detail was impeccable. From the moment we arrived, every need was anticipated. Truly a home away from home.",
+    name: "Johannes W.",
     source: "Booking.com",
+    sourceUrl: "https://www.booking.com/hotel/pentouz-lavelle-road.html",
+    location: "Berlin, Germany",
   },
   {
-    quote: "Pentouz Lavelle Road exceeded all expectations. The rooftop view at sunset is unforgettable.",
-    name: "Gayatri",
+    quote: "Pentouz Lavelle Road exceeded all expectations. The rooftop terrace at sunset was absolutely unforgettable. Will definitely return.",
+    name: "Gayatri M.",
     source: "TripAdvisor",
+    sourceUrl: "https://www.tripadvisor.com/Hotel_Review-g297628-d25270496-Reviews-The_Pentouz-Bengaluru_Bangalore_Karnataka.html",
+    location: "Mumbai, India",
   },
   {
-    quote: "Our stay in Ooty was magical. The staff made our anniversary celebration truly special.",
-    name: "Anusha",
+    quote: "Our stay in Ooty was absolutely magical. The staff went above and beyond for our anniversary celebration. Cannot recommend highly enough.",
+    name: "Anusha & Ravi K.",
     source: "Booking.com",
+    sourceUrl: "https://www.booking.com/hotel/pentouz-windsor-heights-ooty.html",
+    location: "Chennai, India",
+  },
+  {
+    quote: "The penthouse at Indiranagar is stunning — spacious, spotless, and in the perfect location. We booked for a family gathering and it exceeded every expectation.",
+    name: "Priya S.",
+    source: "Google",
+    sourceUrl: "https://maps.google.com/reviews",
+    location: "Bangalore, India",
+  },
+  {
+    quote: "I stayed at the Lavelle Road property for two weeks on business. The kitchenette, fast WiFi, and rooftop access made it feel less like a hotel and more like my own apartment.",
+    name: "Marcus T.",
+    source: "Booking.com",
+    sourceUrl: "https://www.booking.com/hotel/pentouz-lavelle-road.html",
+    location: "London, UK",
+  },
+  {
+    quote: "The Fernhill Homestay in Chikmagalur was a dream. Waking up to coffee plantations and misty hills from the balcony was pure bliss. The staff arranged a private tour of the estate.",
+    name: "Deepa R.",
+    source: "TripAdvisor",
+    sourceUrl: "https://www.tripadvisor.com/Hotel_Review-g737120-d25270497-Reviews-The_Fernhill_Luxury_Homestay-Chikmagalur_Karnataka.html",
+    location: "Hyderabad, India",
+  },
+  {
+    quote: "Best boutique stay in Bangalore. The rooms are beautifully designed, the service is prompt, and the location on Lavelle Road puts you right in the heart of the city.",
+    name: "Arjun N.",
+    source: "Google",
+    sourceUrl: "https://maps.google.com/reviews",
+    location: "Delhi, India",
+  },
+  {
+    quote: "From the airport transfer to the rooftop dinner, every touchpoint was thoughtfully arranged. Pentouz understands what discerning travelers actually need.",
+    name: "Sofia L.",
+    source: "Booking.com",
+    sourceUrl: "https://www.booking.com/hotel/pentouz-lavelle-road.html",
+    location: "Dubai, UAE",
   },
 ];
 

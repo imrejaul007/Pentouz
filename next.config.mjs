@@ -22,15 +22,14 @@ const nextConfig = {
         hostname: "cozystay.loftocean.com",
       },
     ],
-    // Performance optimizations - reduced for memory
+    // Performance optimizations
     formats: ["image/webp"],
     minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
     deviceSizes: [640, 828, 1200, 1920],
     imageSizes: [32, 64, 128, 256],
-    // Limit concurrent image optimization to reduce memory
     dangerouslyAllowSVG: false,
-    // Serve local images directly in production to avoid optimizer timeouts on Render
-    unoptimized: true,
+    // Enable Next.js image optimization (requires sharp)
+    unoptimized: false,
   },
   // Enable gzip compression
   compress: true,

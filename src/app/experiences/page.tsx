@@ -1,8 +1,19 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { withSiteUrl } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Experiences | The Pentouz",
+  description:
+    "Discover the experiences that define each Pentouz stay: city ease at Lavelle Road, private penthouse living in Indiranagar, and scenic quiet in Ooty.",
+  alternates: {
+    canonical: withSiteUrl("/experiences"),
+  },
+};
 
 const experienceStories = [
   {

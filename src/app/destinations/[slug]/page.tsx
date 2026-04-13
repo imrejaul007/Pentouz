@@ -9,16 +9,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   ArrowLeft,
   ArrowRight,
-  Check,
   MapPin,
   Phone,
   Bed,
   Star,
   Users,
   Maximize2,
-  Clock,
-  Plane,
-  Train,
   Building2,
   X,
   ChevronLeft,
@@ -26,6 +22,9 @@ import {
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import RoomGallery from "@/components/RoomGallery";
+import LocationSection from "@/components/LocationSection";
+import AmenitiesGrid from "@/components/AmenitiesGrid";
 import { destinations, contactInfo } from "@/data/content";
 import { killScrollTriggersByRoots } from "@/lib/scrollTrigger";
 
@@ -52,7 +51,7 @@ interface Destination {
   address?: string;
   features?: string[];
   amenities?: string[];
-  rooms?: { name: string; description?: string; image?: string }[];
+  rooms?: { name: string; description?: string; image?: string; price?: string }[];
   gallery?: readonly string[];
   bookingUrl?: string;
   coordinates?: { lat: number; lng: number };
@@ -94,10 +93,7 @@ export default function DestinationPage({
   const heroRef = useRef<HTMLElement>(null);
   const introRef = useRef<HTMLElement>(null);
   const statsRef = useRef<HTMLElement>(null);
-  const featuresRef = useRef<HTMLElement>(null);
-  const roomsRef = useRef<HTMLDivElement>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
-  const locationRef = useRef<HTMLElement>(null);
 
   // Lightbox state
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -215,64 +211,6 @@ export default function DestinationPage({
       );
     }
 
-    if (featuresRef.current) {
-      const cards = featuresRef.current.querySelectorAll(".feature-card");
-      gsap.fromTo(
-        cards,
-        { y: 60, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.08,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: featuresRef.current,
-            start: "top 75%",
-          },
-        }
-      );
-    }
-
-    if (roomsRef.current) {
-      const cards = roomsRef.current.querySelectorAll(".room-card");
-      gsap.fromTo(
-        cards,
-        { y: 80, opacity: 0, scale: 0.95 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 1,
-          stagger: 0.15,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: roomsRef.current,
-            start: "top 75%",
-          },
-        }
-      );
-    }
-
-    if (locationRef.current) {
-      const items = locationRef.current.querySelectorAll(".location-item");
-      gsap.fromTo(
-        items,
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: locationRef.current,
-            start: "top 80%",
-          },
-        }
-      );
-    }
-
     if (galleryRef.current) {
       gsap.to(galleryRef.current, {
         x: -200,
@@ -292,10 +230,7 @@ export default function DestinationPage({
         heroRef.current,
         introRef.current,
         statsRef.current,
-        featuresRef.current,
-        roomsRef.current,
         galleryRef.current,
-        locationRef.current,
       ] as (HTMLElement | null)[]);
       /* eslint-enable react-hooks/exhaustive-deps */
     };
@@ -649,220 +584,20 @@ export default function DestinationPage({
         </section>
 
         {dest.location && (
-          <section
-            ref={locationRef}
-            className="py-16 sm:py-24 lg:py-32 bg-brand-cream"
-          >
-            <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
-              <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-                <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-gold mb-4 sm:mb-6 font-light">
-                  Location
-                </p>
-                <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-light">
-                  Getting <em className="italic">Here</em>
-                </h2>
-              </div>
-
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                {(dest.location).airport && (
-                  <div className="location-item bg-white p-6 sm:p-8 border border-brand-border">
-                    <div className="w-12 h-12 bg-brand-gold/10 flex items-center justify-center mb-6">
-                      <Plane className="w-6 h-6 text-brand-gold" />
-                    </div>
-                    <h3 className="font-display text-lg sm:text-xl font-light mb-2">
-                      {(dest.location).airport.name}
-                    </h3>
-                    <div className="flex items-center gap-4 text-sm text-brand-muted">
-                      <span className="flex items-center gap-1">
-                        <MapPin className="w-4 h-4" />
-                        {(dest.location).airport.distance}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-4 h-4" />
-                        {(dest.location).airport.time}
-                      </span>
-                    </div>
-                  </div>
-                )}
-
-                {(dest.location).railway && (
-                  <div className="location-item bg-white p-6 sm:p-8 border border-brand-border">
-                    <div className="w-12 h-12 bg-brand-gold/10 flex items-center justify-center mb-6">
-                      <Train className="w-6 h-6 text-brand-gold" />
-                    </div>
-                    <h3 className="font-display text-lg sm:text-xl font-light mb-2">
-                      {(dest.location).railway.name}
-                    </h3>
-                    <div className="flex items-center gap-4 text-sm text-brand-muted">
-                      <span className="flex items-center gap-1">
-                        <MapPin className="w-4 h-4" />
-                        {(dest.location).railway.distance}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-4 h-4" />
-                        {(dest.location).railway.time}
-                      </span>
-                    </div>
-                  </div>
-                )}
-
-                {(dest.location?.landmark ||
-                  dest.location?.metro) && (
-                  <div className="location-item bg-white p-6 sm:p-8 border border-brand-border">
-                    <div className="w-12 h-12 bg-brand-gold/10 flex items-center justify-center mb-6">
-                      <Building2 className="w-6 h-6 text-brand-gold" />
-                    </div>
-                    <h3 className="font-display text-lg sm:text-xl font-light mb-2">
-                      {dest.location?.landmark?.name ||
-                        dest.location?.metro?.name}
-                    </h3>
-                    <div className="flex items-center gap-4 text-sm text-brand-muted">
-                      <span className="flex items-center gap-1">
-                        <MapPin className="w-4 h-4" />
-                        {dest.location?.landmark?.distance ||
-                          dest.location?.metro?.distance}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-4 h-4" />
-                        {dest.location?.landmark?.time ||
-                          dest.location?.metro?.time}
-                      </span>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Map Link */}
-              {coordinates && (
-                <div className="text-center mt-10 sm:mt-12">
-                  <a
-                    href={`https://www.google.com/maps?q=${coordinates.lat},${coordinates.lng}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.15em] text-brand-gold hover:text-brand-goldLight transition-colors"
-                  >
-                    <MapPin className="w-4 h-4" />
-                    View on Google Maps
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
-                </div>
-              )}
-            </div>
-          </section>
+          <LocationSection location={dest.location} coordinates={coordinates} />
         )}
 
-        <section ref={featuresRef} className="py-16 sm:py-24 lg:py-32 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
-            <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-              <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-gold mb-4 sm:mb-6 font-light">
-                Features
-              </p>
-              <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-light">
-                Refined <em className="italic">Amenities</em>
-              </h2>
-            </div>
+        <AmenitiesGrid
+          features={destination.features}
+          amenities={destination.amenities}
+        />
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-              {destination.features.slice(0, 6).map((feature) => (
-                <div
-                  key={feature}
-                  className="feature-card group flex items-start gap-4 sm:gap-5 p-5 sm:p-6 lg:p-8 bg-[#faf6f0] border border-[#ede3d7] transition-colors duration-500"
-                >
-                  <div className="w-8 sm:w-10 h-8 sm:h-10 bg-brand-gold/10 flex items-center justify-center flex-shrink-0 group-hover:bg-brand-gold transition-colors duration-500">
-                    <Check
-                      className="w-4 h-4 text-brand-gold group-hover:text-white transition-colors duration-500"
-                      strokeWidth={2}
-                    />
-                  </div>
-                  <div>
-                    <p className="text-sm sm:text-base text-brand-ink font-light">
-                      {feature}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Amenities tags - horizontal scroll on mobile */}
-            <div className="flex flex-nowrap sm:flex-wrap justify-start sm:justify-center gap-3 sm:gap-4 mt-12 sm:mt-16 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide">
-              {destination.amenities.slice(0, 8).map((amenity) => (
-                <span
-                  key={amenity}
-                  className="flex-shrink-0 px-4 sm:px-6 py-2 sm:py-3 border border-brand-border text-[10px] sm:text-[11px] uppercase tracking-[0.1em] text-brand-muted hover:border-brand-gold hover:text-brand-gold transition-colors duration-300"
-                >
-                  {amenity}
-                </span>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="py-16 sm:py-24 lg:py-32 bg-[#f8f7f5]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
-            <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-              <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-brand-gold mb-4 sm:mb-6 font-light">
-                Accommodations
-              </p>
-              <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-light">
-                Our <em className="italic">Suites</em>
-              </h2>
-            </div>
-
-            <div ref={roomsRef} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {destination.rooms.map((room, index) => (
-                <Link
-                  key={room.name}
-                  href={`/destinations/${destination.slug}/living`}
-                  className="room-card group block bg-white"
-                >
-                  <div className="aspect-[4/3] relative overflow-hidden">
-                    {/* Loading placeholder */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-gray-200 via-gray-100 to-gray-200 animate-shimmer bg-[length:200%_100%]" />
-                    <Image
-                      src={
-                        ("image" in room ? room.image : undefined) ||
-                        destination.gallery?.[index] ||
-                        destination.image
-                      }
-                      alt={room.name}
-                      fill
-                      className="object-cover transition-transform duration-1000 group-hover:scale-110"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      placeholder="blur"
-                      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIRAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBQYSIRMxQVH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAIDAQAAAAAAAAAAAAAAAAECAAMRIf/aAAwDAQACEQMRAD8Aq7fudw7V1C7ggaZraYYj8kpZYpEHJgQMFgTk5HBANaOdzWdxbW9y0M0Us0SSMhXkFLKCR/DSlKiazK0M7B4j/9k="
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    {/* View button overlay */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                      <span className="bg-white text-brand-ink px-6 py-3 text-[10px] uppercase tracking-[0.15em]">
-                        View Details
-                      </span>
-                    </div>
-                  </div>
-                  <div className="p-5 sm:p-6">
-                    <h3 className="font-display text-lg sm:text-xl lg:text-2xl font-light mb-2 group-hover:text-brand-gold transition-colors duration-300">
-                      {room.name}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-brand-muted">
-                      {room.description}
-                    </p>
-                  </div>
-                </Link>
-              ))}
-            </div>
-
-            {/* View All Rooms Link */}
-            <div className="text-center mt-12 sm:mt-16">
-              <Link
-                href={`/destinations/${destination.slug}/living`}
-                className="inline-flex items-center gap-3 border border-brand-ink px-8 sm:px-10 py-3 sm:py-4 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:bg-brand-ink hover:text-white transition-all duration-500 active:scale-95"
-              >
-                <span>View All Living Options</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-        </section>
+        <RoomGallery
+          rooms={destination.rooms}
+          destinationSlug={destination.slug}
+          gallery={destination.gallery}
+          fallbackImage={destination.image}
+        />
 
         <section className="py-8 sm:py-12 lg:py-16 bg-brand-ink overflow-hidden">
           <div

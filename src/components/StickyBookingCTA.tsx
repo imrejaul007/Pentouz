@@ -71,7 +71,7 @@ export default function StickyBookingCTA({ bookingUrl, phone, whatsapp }: Sticky
           href={`https://wa.me/${whatsappNumber.replace(/\D/g, "")}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden sm:flex items-center gap-3 bg-green-600 text-white px-6 py-3 text-[10px] uppercase tracking-[0.2em] hover:bg-green-700 transition-all duration-300 font-light"
+          className="flex items-center gap-3 bg-green-600 text-white px-6 py-3 text-[10px] uppercase tracking-[0.2em] hover:bg-green-700 transition-all duration-300 font-light"
         >
           <MessageCircle className="w-5 h-5" />
           <span>WhatsApp</span>

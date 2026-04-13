@@ -1,9 +1,20 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { destinations, relatedProperties } from "@/data/content";
+import { withSiteUrl } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "The Collection | The Pentouz",
+  description:
+    "Explore the Pentouz collection of luxury city stays and retreat addresses: Lavelle Road, Indiranagar, Ooty, and extended partner properties.",
+  alternates: {
+    canonical: withSiteUrl("/collection"),
+  },
+};
 
 const collectionNotes = [
   {

@@ -1,11 +1,19 @@
-"use client";
-
-import { useState } from "react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { submitLead } from "@/lib/leads";
+import { withSiteUrl } from "@/lib/site";
+import PriveForm from "./PriveForm";
+
+export const metadata: Metadata = {
+  title: "Prive Club | The Pentouz",
+  description:
+    "Join The Pentouz Prive guest list for priority assistance, celebration support, longer-stay guidance, and first access to new Pentouz stays and offers.",
+  alternates: {
+    canonical: withSiteUrl("/prive-club"),
+  },
+};
 
 const privileges = [
   {
@@ -27,34 +35,6 @@ const privileges = [
 ];
 
 export default function PriveClubPage() {
-  const [email, setEmail] = useState("");
-  const [website, setWebsite] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [status, setStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setIsSubmitting(true);
-    setStatus(null);
-
-    try {
-      await submitLead({ type: "prive", email, website });
-      setStatus({
-        type: "success",
-        message: "Thanks. Your request has been received and our team will get back to you shortly.",
-      });
-      setEmail("");
-      setWebsite("");
-    } catch (error) {
-      setStatus({
-        type: "error",
-        message: error instanceof Error ? error.message : "We could not submit your request right now.",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
     <>
       <Header />
@@ -74,7 +54,7 @@ export default function PriveClubPage() {
 
           <div className="relative mx-auto max-w-[1480px] px-5 pb-20 pt-36 sm:px-8 lg:px-14 lg:pb-28 lg:pt-48">
             <div className="max-w-4xl">
-              <p className="luxury-kicker text-white/70 animate-fade-in-up">The Pentouz Privé</p>
+              <p className="luxury-kicker text-white/70 animate-fade-in-up">The Pentouz Prive</p>
               <h1 className="luxury-hero-title mt-6 text-white animate-fade-in-up [animation-delay:120ms]">
                 A more private line to The Pentouz.
               </h1>
@@ -122,50 +102,7 @@ export default function PriveClubPage() {
               </div>
             </div>
 
-            <div className="luxury-panel bg-white animate-fade-in-up [animation-delay:180ms]">
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div>
-                  <label htmlFor="prive-email" className="text-[10px] uppercase tracking-[0.22em] text-brand-muted">
-                    Email address
-                  </label>
-                  <input
-                    id="prive-email"
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
-                    className="mt-3 w-full border border-brand-border bg-[#fcf8f1] px-4 py-4 text-sm text-brand-ink outline-none transition-colors duration-300 focus:border-brand-gold"
-                    placeholder="you@example.com"
-                  />
-                </div>
-
-                <div className="hidden">
-                  <label htmlFor="website">Website</label>
-                  <input
-                    id="website"
-                    type="text"
-                    value={website}
-                    onChange={(event) => setWebsite(event.target.value)}
-                    autoComplete="off"
-                    tabIndex={-1}
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="inline-flex w-full items-center justify-center rounded-full bg-brand-ink px-7 py-4 text-[11px] uppercase tracking-[0.22em] text-white transition-all duration-500 hover:-translate-y-0.5 hover:bg-brand-gold disabled:cursor-not-allowed disabled:opacity-60"
-                >
-                  {isSubmitting ? "Submitting..." : "Request Access"}
-                </button>
-
-                {status ? (
-                  <p className={`text-sm ${status.type === "success" ? "text-[#356143]" : "text-[#8a3f30]"}`}>
-                    {status.message}
-                  </p>
-                ) : null}
-              </form>
-            </div>
+            <PriveForm />
           </div>
         </section>
       </main>

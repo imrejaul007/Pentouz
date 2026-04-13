@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Menu, Phone, X } from "lucide-react";
+import { ArrowRight, Menu, Phone, X, MessageCircle } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { contactInfo, destinations } from "@/data/content";
@@ -88,6 +88,15 @@ export default function Header() {
               className={cn("text-[10px] tracking-[0.18em] transition-colors", isScrolled ? "text-brand-muted hover:text-brand-gold" : "text-white hover:text-brand-gold")}
             >
               {contactInfo.phones[0]}
+            </a>
+            <a
+              href={contactInfo.whatsapp ? `https://wa.me/${contactInfo.whatsapp.replace(/\+/g, "")}` : "https://wa.me/918884449930"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn("text-[10px] tracking-[0.18em] transition-colors flex items-center gap-1", isScrolled ? "text-brand-muted hover:text-green-600" : "text-white hover:text-green-400")}
+            >
+              <MessageCircle className="w-3 h-3" strokeWidth={1.4} />
+              WhatsApp
             </a>
           </div>
         </div>

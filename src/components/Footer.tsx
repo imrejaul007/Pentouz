@@ -123,6 +123,44 @@ export default function Footer() {
                 </a>
               </div>
             </div>
+
+            {/* Newsletter */}
+            <div>
+              <p className="text-[10px] uppercase tracking-[0.35em] text-brand-gold mb-4">Newsletter</p>
+              <p className="text-sm text-white/60 mb-4 leading-relaxed">
+                Occasional updates on new properties, exclusive offers, and travel inspiration.
+              </p>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const form = e.currentTarget;
+                  const email = (form.elements.namedItem("email") as HTMLInputElement)?.value;
+                  if (email) {
+                    const btn = form.querySelector("button");
+                    if (btn) {
+                      btn.textContent = "Subscribed";
+                      btn.disabled = true;
+                      btn.classList.add("opacity-60", "cursor-not-allowed");
+                    }
+                  }
+                }}
+                className="flex flex-col gap-3"
+              >
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="your@email.com"
+                  required
+                  className="w-full bg-white/5 border border-white/15 px-4 py-3 text-sm text-white placeholder:text-white/30 focus:border-brand-gold/60 focus:outline-none focus:bg-white/[0.07] transition-colors rounded-none"
+                />
+                <button
+                  type="submit"
+                  className="w-full bg-brand-gold text-[#11100f] px-4 py-3 text-[10px] uppercase tracking-[0.22em] font-medium hover:bg-white transition-colors"
+                >
+                  Subscribe
+                </button>
+              </form>
+            </div>
           </div>
         </div>
 

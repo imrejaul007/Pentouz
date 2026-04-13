@@ -1,7 +1,18 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { withSiteUrl } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Stories | The Pentouz",
+  description:
+    "A closer look at the addresses, spaces, and atmospheres that shape the Pentouz experience across Lavelle Road, Indiranagar, and Ooty.",
+  alternates: {
+    canonical: withSiteUrl("/stories"),
+  },
+};
 
 const feature = {
   title: "A stay near Lavelle Road, shaped by the city around it.",
@@ -17,6 +28,9 @@ const stories = [
     description: "A boutique stay for guests who want central access without giving up calm, privacy, and a more personal atmosphere.",
     image: "/lavelle-road/all/restaurant_1.jpg",
     href: "/destinations/lavelle-road",
+    category: "Property",
+    date: "2025-11-12",
+    author: "The Pentouz",
   },
   {
     title: "Indiranagar",
@@ -24,6 +38,9 @@ const stories = [
     description: "For families, longer stays, and guests who prefer a residence-style experience with more room to settle in.",
     image: "/indiranagar/all/04._living_room_05._living_room.jpg",
     href: "/destinations/indiranagar",
+    category: "Property",
+    date: "2025-10-08",
+    author: "The Pentouz",
   },
   {
     title: "Ooty",
@@ -31,13 +48,99 @@ const stories = [
     description: "Quiet landscapes, slower mornings, and a very different rhythm from the city.",
     image: "/ooty/all/24._view.jpeg",
     href: "/destinations/ooty",
+    category: "Property",
+    date: "2025-09-20",
+    author: "The Pentouz",
   },
   {
-    title: "Living at The Pentouz",
-    subtitle: "Room experience",
-    description: "Explore the suites, studios, terraces, and larger spaces that define the way each property feels.",
-    image: "/lavelle-road/all/9046_king_suite_1.jpg",
+    title: "Fernhill",
+    subtitle: "Coffee country",
+    description: "A luxury homestay in Chikmagalur's plantation heart — swimming pool, bonfire evenings, and the smell of fresh coffee every morning.",
+    image: "/fernhill/facade-1.jpg",
+    href: "/destinations/fernhill",
+    category: "Property",
+    date: "2025-08-14",
+    author: "The Pentouz",
+  },
+  {
+    title: "The King Studio at Lavelle Road",
+    subtitle: "Room story",
+    description: "A close look at the 475 sq. ft. King Studio — kitchenette, work desk, city views, and the kind of quiet that city hotels rarely offer.",
+    image: "/lavelle-road/all/9042_king_suite_1.jpg",
     href: "/destinations/lavelle-road/living",
+    category: "Rooms",
+    date: "2025-11-01",
+    author: "The Pentouz",
+  },
+  {
+    title: "The Three-Bedroom Penthouse",
+    subtitle: "Extended stay",
+    description: "When you need more room to breathe — the 6,000 sq. ft. Indiranagar penthouse and what makes it ideal for families and longer visits.",
+    image: "/indiranagar/all/tpi_pictures_low_res_terrace_7.jpg",
+    href: "/destinations/indiranagar/living",
+    category: "Rooms",
+    date: "2025-10-22",
+    author: "The Pentouz",
+  },
+  {
+    title: "A Weekend in the Nilgiris",
+    subtitle: "Travel guide",
+    description: "From Ooty Lake to the botanical gardens and the narrow-gauge toy train — how to spend two unhurried days in the Nilgiris.",
+    image: "/ooty/all/01._facade_1.jpeg",
+    href: "/destinations/ooty",
+    category: "Travel Guide",
+    date: "2025-09-05",
+    author: "The Pentouz",
+  },
+  {
+    title: "Coffee Plantations of Chikmagalur",
+    subtitle: "Travel guide",
+    description: "What to see, drink, and do around the estates — a practical guide to Chikmagalur's best coffee country trails and viewpoints.",
+    image: "/fernhill/pool-1.jpg",
+    href: "/destinations/fernhill",
+    category: "Travel Guide",
+    date: "2025-08-30",
+    author: "The Pentouz",
+  },
+  {
+    title: "Why Lavelle Road Is the Best Address in Bangalore",
+    subtitle: "City guide",
+    description: "UB City, Cubbon Park, and MG Road — all within a 10-minute walk. The case for choosing Lavelle Road as your Bangalore base.",
+    image: "/lavelle-road/terrace-1.jpg",
+    href: "/destinations/lavelle-road",
+    category: "City Guide",
+    date: "2025-10-15",
+    author: "The Pentouz",
+  },
+  {
+    title: "The Art of the Extended Stay",
+    subtitle: "Lifestyle",
+    description: "When a stay shifts from days to weeks, what matters changes. Space, kitchen, quiet, and the rhythm of a neighborhood that feels like home.",
+    image: "/indiranagar/all/01._living_room_02._living_room.jpg",
+    href: "/destinations/indiranagar",
+    category: "Lifestyle",
+    date: "2025-09-28",
+    author: "The Pentouz",
+  },
+  {
+    title: "Planning a Court Visit to Bangalore",
+    subtitle: "Travel guide",
+    description: "A practical guide for outstation advocates — routing from Lavelle Road, nearby accommodation options, and what makes a multi-day stay comfortable.",
+    image: "/lavelle-road/reception-1.jpg",
+    href: "/destinations/lavelle-road",
+    category: "Travel Guide",
+    date: "2025-07-18",
+    author: "The Pentouz",
+  },
+  {
+    title: "The Prive Club Experience",
+    subtitle: "Membership",
+    description: "Priority access, complimentary upgrades, and the kind of attention that turns a good stay into a lasting relationship. Inside Prive by The Pentouz.",
+    image: "/indiranagar/skyline-suite.jpg",
+    href: "/prive-club",
+    category: "Lifestyle",
+    date: "2025-06-10",
+    author: "The Pentouz",
   },
 ];
 

@@ -1,8 +1,19 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { withSiteUrl } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "About | The Pentouz",
+  description:
+    "The Pentouz brand story: boutique luxury hospitality shaped around how guests actually travel, with stays in Lavelle Road, Indiranagar, Ooty, and Chikmagalur.",
+  alternates: {
+    canonical: withSiteUrl("/about"),
+  },
+};
 
 const principles = [
   {
