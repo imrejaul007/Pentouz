@@ -46,7 +46,7 @@ const brandNotes = [
   {
     title: "Fernhill",
     body: "A warm luxury homestay in Chikmagalur's coffee country. Gardens, plantation views, and the unhurried pace of the Western Ghats make it ideal for families, groups, and contemplative getaways.",
-    image: "/ooty/all/22._lawn.jpeg",
+    image: "/fernhill/overview-1.jpg",
   },
 ];
 

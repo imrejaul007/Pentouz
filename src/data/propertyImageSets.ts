@@ -172,7 +172,19 @@ export const ootyImageSet = [
 ] as const;
 
 // Fern Hill Resorts — Chikmagalur
-// Upload images to public/fernhill/all/, public/fernhill/villa/, etc.
 export const fernhillImageSet = [
-  // Add image paths after uploading to public/fernhill/
+  "/fernhill/facade-1.jpg",
+  "/fernhill/view-1.jpg",
+  "/fernhill/villa-1.jpg",
+  "/fernhill/pool-1.jpg",
+  "/fernhill/restaurant-1.jpg",
+  "/fernhill/dining-1.jpg",
+  "/fernhill/night-1.jpg",
+  "/fernhill/gazebo-1.jpg",
+  "/fernhill/fireplace-1.jpg",
+  "/fernhill/playarea-1.jpg",
+  "/fernhill/kids-1.jpg",
+  "/fernhill/side-1.jpg",
+  "/fernhill/topview-1.jpg",
+  "/fernhill/overview-1.jpg",
 ] as const;
