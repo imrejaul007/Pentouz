@@ -8,7 +8,7 @@ const principles = [
   {
     title: "Location with purpose",
     description:
-      "Pentouz chooses addresses that already carry weight: Lavelle Road for legal and business travel, Indiranagar for private city living, and Ooty for scenic retreat value.",
+      "Pentouz chooses addresses that already carry weight: Lavelle Road for legal and business travel, Indiranagar for private city living, Ooty for scenic retreat value, and Chikmagalur for immersive coffee-country warmth.",
   },
   {
     title: "Hospitality without noise",
@@ -42,6 +42,11 @@ const brandNotes = [
     title: "Ooty",
     body: "A softer, slower retreat expression built around view, weather, lawns, and the emotional comfort expected from a premium hill-stay experience.",
     image: "/ooty/all/24._view.jpeg",
+  },
+  {
+    title: "Fernhill",
+    body: "A warm luxury homestay in Chikmagalur's coffee country. Gardens, plantation views, and the unhurried pace of the Western Ghats make it ideal for families, groups, and contemplative getaways.",
+    image: "/ooty/all/22._lawn.jpeg",
   },
 ];
 
@@ -90,7 +95,7 @@ export default function AboutPage() {
                 Pentouz began with the idea that premium accommodation should not be loud to feel luxurious. A well-positioned address, thoughtful interiors, clean service, and a more residential sense of privacy often create a stronger impression than excess styling ever could.
               </p>
               <p>
-                That philosophy now informs every part of the collection. Lavelle Road serves business and court-related stays with a calmer boutique tone. Indiranagar offers rare penthouse scale in one of Bangalore&apos;s most social neighborhoods. Ooty softens the experience into a retreat built around air, view, and slower time.
+                That philosophy now informs every part of the collection. Lavelle Road serves business and court-related stays with a calmer boutique tone. Indiranagar offers rare penthouse scale in one of Bangalore&apos;s most social neighborhoods. Ooty softens the experience into a retreat built around air, view, and slower time. Fernhill anchors it all with the warmth of a private homestay in Chikmagalur&apos;s coffee country.
               </p>
               <p>
                 The result is a brand that should feel refined, useful, and specific to place. Pentouz is strongest when the guest immediately understands why this stay belongs in this location and why it fits the way they want to travel.
@@ -121,11 +126,11 @@ export default function AboutPage() {
             <div className="max-w-3xl">
               <p className="luxury-kicker text-brand-gold">Property Character</p>
               <h2 className="mt-5 font-display text-4xl font-light leading-tight text-white sm:text-5xl lg:text-6xl">
-                One brand, three clearly different hospitality moods.
+                One brand, four clearly different hospitality moods.
               </h2>
             </div>
 
-            <div className="mt-14 grid gap-8 lg:grid-cols-3">
+            <div className="mt-14 grid gap-8 lg:grid-cols-4">
               {brandNotes.map((note) => (
                 <article key={note.title} className="overflow-hidden border border-white/10 bg-white/[0.03]">
                   <div className="relative aspect-[4/5] overflow-hidden">

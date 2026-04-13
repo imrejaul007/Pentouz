@@ -480,6 +480,7 @@ export const genericSurroundingGuides: readonly GenericGuide[] = [
 ];
 
 // Helper function to create article content for SEO pages
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- Intended for future use
 function buildArticleContent(keywordSlug: string, articleSlug: string) {
   const keyword = getLavelleSeoPage(keywordSlug);
   if (!keyword) return null;
@@ -488,7 +489,7 @@ function buildArticleContent(keywordSlug: string, articleSlug: string) {
   if (!template) return null;
 
   const nearbyGuide = genericSurroundingGuides.find((guide) => guide.slug === keywordSlug);
-  const anchors = buildCategoryAnchors(keyword.category, keyword.place);
+  const anchors = buildCategoryAnchors(keyword.category);
   const manualOverride = getManualArticleOverride(keywordSlug, articleSlug);
 
   // Build anchor narrative for context
@@ -666,7 +667,7 @@ function buildThingsToKnow(place: string): string {
   return placeThings.join(". ");
 }
 
-function buildCategoryAnchors(category: string, place: string): NearbyAnchor[] {
+function buildCategoryAnchors(category: string): NearbyAnchor[] {
   const anchors: NearbyAnchor[] = [];
 
   if (category === "Legal & Courts") {
@@ -826,7 +827,7 @@ function buildCategoryAnchors(category: string, place: string): NearbyAnchor[] {
 }
 
 // Helper functions
-function getKeywordSpecificAnchors(keywordSlug: string, place: string): NearbyAnchor[] | null {
+function getKeywordSpecificAnchors(keywordSlug: string): NearbyAnchor[] | null {
   const map: Record<string, NearbyAnchor[]> = {
     "karnataka-high-court": [
       {
@@ -862,8 +863,8 @@ export function getNearbyAnchorsForKeyword(keywordSlug: string): NearbyAnchor[] 
   const keyword = getLavelleSeoPage(keywordSlug);
   if (!keyword) return [];
 
-  const specific = getKeywordSpecificAnchors(keywordSlug, keyword.place);
-  return specific || buildCategoryAnchors(keyword.category, keyword.place);
+  const specific = getKeywordSpecificAnchors(keywordSlug);
+  return specific || buildCategoryAnchors(keyword.category);
 }
 
 export function getIntentTypeForKeyword(keywordSlug: string): IntentType {

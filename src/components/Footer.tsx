@@ -45,7 +45,7 @@ export default function Footer() {
               Distinct stays shaped around privacy, comfort, and a finer pace of travel.
             </h2>
             <p className="mt-6 max-w-2xl text-sm sm:text-base text-white/70 leading-relaxed">
-              Thoughtfully composed stays in Bengaluru and Ooty, designed for guests who value space, location, and a more personal way to stay.
+              Thoughtfully composed stays in Bengaluru, Chikmagalur and Ooty, designed for guests who value space, location, and a more personal way to stay.
             </p>
 
             <div className="mt-10 grid gap-4 sm:grid-cols-3">

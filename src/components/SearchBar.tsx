@@ -10,6 +10,7 @@ const quickSearches = [
   { label: "Ooty", href: "/destinations/ooty" },
   { label: "Lavelle Road", href: "/destinations/lavelle-road" },
   { label: "Indiranagar", href: "/destinations/indiranagar" },
+  { label: "Fernhill", href: "/destinations/fernhill" },
   { label: "Penthouse", href: "/destinations/indiranagar" },
   { label: "Suites", href: "/destinations" },
   { label: "Meeting Rooms", href: "/destinations" },
@@ -126,7 +127,7 @@ export default function SearchBar({ placeholder = "Search properties, destinatio
         {query.trim() && (
           <div className="px-6 py-4 border-t border-brand-border/20">
             <p className="text-sm text-brand-muted mb-3">Showing results for: <strong>{query}</strong></p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <Link
                 href="/destinations/ooty"
                 onClick={() => setIsOpen(false)}
@@ -150,6 +151,14 @@ export default function SearchBar({ placeholder = "Search properties, destinatio
               >
                 <span className="text-lg font-display font-light text-brand-ink group-hover:text-brand-accent">Indiranagar</span>
                 <p className="text-sm text-brand-muted mt-1">3-Bedroom Penthouse</p>
+              </Link>
+              <Link
+                href="/destinations/fernhill"
+                onClick={() => setIsOpen(false)}
+                className="group bg-white border border-brand-border/30 p-4 hover:border-brand-gold/50 hover:shadow-md transition-all duration-300"
+              >
+                <span className="text-lg font-display font-light text-brand-ink group-hover:text-brand-accent">Fernhill</span>
+                <p className="text-sm text-brand-muted mt-1">Coffee Country Retreat</p>
               </Link>
             </div>
           </div>

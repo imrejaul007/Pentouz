@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ChevronDown, Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -12,21 +12,20 @@ const currencies = [
 
 export default function CurrencySelector() {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedCurrency, setSelectedCurrency] = useState("INR");
-
-  useEffect(() => {
-    const savedCurrency = localStorage.getItem("selectedCurrency");
-    if (savedCurrency && currencies.find(c => c.code === savedCurrency)) {
-      setSelectedCurrency(savedCurrency);
+  const [selectedCurrency, setSelectedCurrency] = useState(() => {
+    if (typeof window !== "undefined") {
+      const savedCurrency = localStorage.getItem("selectedCurrency");
+      if (savedCurrency && currencies.find(c => c.code === savedCurrency)) {
+        return savedCurrency;
+      }
     }
-  }, []);
+    return "INR";
+  });
 
   const handleCurrencySelect = (currency: string) => {
     setSelectedCurrency(currency);
     localStorage.setItem("selectedCurrency", currency);
   };
-
-  const selected = currencies.find(c => c.code === selectedCurrency);
 
   return (
     <div className="relative">

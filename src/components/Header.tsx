@@ -46,6 +46,7 @@ export default function Header() {
   }, [isMenuOpen]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Closing menu on route change is intentional UX
     setIsMenuOpen(false);
   }, [pathname]);
 
@@ -80,7 +81,7 @@ export default function Header() {
         <div className={cn("hidden xl:block border-b", isScrolled ? "border-black/5" : "border-white/8")}>
           <div className="max-w-container-2xl mx-auto px-6 lg:px-16 h-9 flex items-center justify-between">
             <p className={cn("text-[10px] tracking-[0.18em]", isScrolled ? "text-brand-muted" : "text-white")}>
-              Bengaluru and Ooty
+              Bengaluru, Chikmagalur and Ooty
             </p>
             <a
               href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}

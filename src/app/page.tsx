@@ -35,8 +35,7 @@ const cityMoments = [
   },
 ];
 
-const sectionIds = ["intro", "collection", "experiences", "gatherings", "city"] as const;
-type SectionId = (typeof sectionIds)[number];
+type SectionId = "intro" | "collection" | "experiences" | "gatherings" | "city";
 
 function useRevealSections() {
   const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({ hero: true });

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Users, Bath, Home, Wifi, Coffee, Utensils, MapPin } from "lucide-react";
+import { Check, Users, Bath, Home, Wifi, Coffee, Utensils, MapPin, LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Room {
@@ -72,7 +72,7 @@ const rooms: Room[] = [
   },
 ];
 
-const allFeatures: { icon: any; label: string }[] = [
+const allFeatures: { icon: LucideIcon; label: string }[] = [
   { icon: Wifi, label: "High-Speed WiFi" },
   { icon: Utensils, label: "Room Service" },
   { icon: Coffee, label: "Kitchenette" },
@@ -109,9 +109,7 @@ export default function RoomComparison({ title = "Compare Our Rooms", subtitle }
             Room Comparison
           </p>
           <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-brand-ink mb-6 leading-tight">
-            Find Your Perfect
-            <br />
-            <em className="italic font-extralight">Accommodation</em>
+            {title}
           </h2>
           {subtitle && (
             <p className="text-body-lg text-brand-body max-w-2xl mx-auto leading-relaxed">

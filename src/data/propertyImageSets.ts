@@ -170,3 +170,9 @@ export const ootyImageSet = [
   "/ooty/all/8._corridor.jpeg",
   "/ooty/all/9._corridor.jpeg",
 ] as const;
+
+// Fern Hill Resorts — Chikmagalur
+// Upload images to public/fernhill/all/, public/fernhill/villa/, etc.
+export const fernhillImageSet = [
+  // Add image paths after uploading to public/fernhill/
+] as const;

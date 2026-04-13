@@ -265,7 +265,7 @@ export default async function LavelleNearPlacePage({ params }: { params: Promise
                 <>{editorial.heroIntro}</>
               ) : (
                 <>
-                  If you're visiting {page.place}, The Pentouz @ Lavelle Road offers a premium,
+                  If you&apos;re visiting {page.place}, The Pentouz @ Lavelle Road offers a premium,
                   city-central stay for {page.audience}. This guide covers location benefits,
                   travel planning, and booking options.
                 </>

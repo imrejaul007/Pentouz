@@ -125,7 +125,7 @@ export function initScrollAnimations() {
   gsap.registerPlugin(ScrollTrigger);
 
   // Fade up animations
-  gsap.utils.toArray("[data-reveal='fade-up']").forEach((element: any) => {
+  gsap.utils.toArray<Element>("[data-reveal='fade-up']").forEach((element) => {
     gsap.from(element, {
       y: 60,
       opacity: 0,
@@ -140,7 +140,7 @@ export function initScrollAnimations() {
   });
 
   // Fade in animations
-  gsap.utils.toArray("[data-reveal='fade']").forEach((element: any) => {
+  gsap.utils.toArray<Element>("[data-reveal='fade']").forEach((element) => {
     gsap.from(element, {
       opacity: 0,
       duration: 1,
@@ -154,7 +154,7 @@ export function initScrollAnimations() {
   });
 
   // Scale animations
-  gsap.utils.toArray("[data-reveal='scale']").forEach((element: any) => {
+  gsap.utils.toArray<Element>("[data-reveal='scale']").forEach((element) => {
     gsap.from(element, {
       scale: 0.95,
       opacity: 0,
@@ -169,7 +169,7 @@ export function initScrollAnimations() {
   });
 
   // Stagger animations for children
-  gsap.utils.toArray("[data-reveal='stagger']").forEach((container: any) => {
+  gsap.utils.toArray<Element>("[data-reveal='stagger']").forEach((container) => {
     const children = container.children;
     gsap.from(children, {
       y: 40,
@@ -186,7 +186,7 @@ export function initScrollAnimations() {
   });
 
   // Line reveal animations
-  gsap.utils.toArray("[data-reveal='line']").forEach((element: any) => {
+  gsap.utils.toArray<Element>("[data-reveal='line']").forEach((element) => {
     gsap.from(element, {
       scaleX: 0,
       transformOrigin: "left center",

@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, MapPin, Coffee, Mountain } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { destinations } from "@/data/content";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -17,31 +17,6 @@ export const metadata: Metadata = {
 
 const indiranagar = destinations.find(d => d.slug === "indiranagar");
 if (!indiranagar) notFound();
-
-// Nearby attractions
-const nearbyAttractions = [
-  {
-    id: 1,
-    name: "UB City & MG Road",
-    distance: "5-10 min walk",
-    description: "Premium shopping and dining at UB City Mall. Start walks after 7pm for a calmer atmosphere.",
-    image: "/experiences/ub-city-1.jpg",
-  },
-  {
-    id: 2,
-    name: "Cubbon Park",
-    distance: "15 min walk",
-    description: "Peaceful morning strolls through this historic park. Perfect for sunrise walks.",
-    image: "/experiences/cubbon-1.jpg",
-  },
-  {
-    id: 3,
-    name: "Bangalore Palace",
-    distance: "20 min drive",
-    description: "Heritage tour of this architectural marvel. Book in advance as spots fill quickly.",
-    image: "/experiences/palace-1.jpg",
-  },
-];
 
 export default function IndiranagarNearPage() {
   return (

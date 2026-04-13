@@ -97,16 +97,10 @@ export function StatSkeleton() {
   );
 }
 
-// Image with blur placeholder
-export function ImageWithPlaceholder({
-  src,
-  alt,
-  fill = false,
-  className = "",
-  sizes,
-  priority = false,
-  onLoad,
-}: {
+// Image with blur placeholder — props kept for future full implementation
+export function ImageWithPlaceholder(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- Kept for future implementation
+  _props: {
   src: string;
   alt: string;
   fill?: boolean;

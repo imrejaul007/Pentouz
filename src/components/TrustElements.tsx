@@ -1,11 +1,12 @@
 "use client";
 
+import React from "react";
 import { Award, Globe, ShieldCheck, CheckCircle, TrendingUp, Star } from "lucide-react";
 
 interface Award {
   year: string;
   name: string;
-  icon: any;
+  icon: React.ElementType;
 }
 
 interface PressLogo {

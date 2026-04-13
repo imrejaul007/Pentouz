@@ -33,6 +33,57 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+// Extended type covering all optional properties used in this page
+interface Destination {
+  slug: string;
+  subtitle: string;
+  title: string;
+  shortTitle: string;
+  copy?: string;
+  description?: string;
+  image?: string;
+  heroImage?: string;
+  propertyType?: string;
+  totalRooms?: string;
+  totalSize?: string;
+  rating?: number;
+  reviews?: number;
+  capacity?: string;
+  address?: string;
+  features?: string[];
+  amenities?: string[];
+  rooms?: { name: string; description?: string; image?: string }[];
+  gallery?: readonly string[];
+  bookingUrl?: string;
+  coordinates?: { lat: number; lng: number };
+  idealFor?: string[];
+  location?: {
+    airport?: { name: string; distance: string; time: string };
+    railway?: { name: string; distance: string; time: string };
+    metro?: { name: string; distance: string; time: string };
+    landmark?: { name: string; distance: string; time: string };
+  };
+  livingIntro?: string;
+  livingLocation?: {
+    airport?: { name: string; distance: string; time: string };
+    railway?: { name: string; distance: string; time: string };
+    metro?: { name: string; distance: string; time: string };
+  };
+  livingRooms?: {
+    name: string;
+    size?: string;
+    description?: string;
+    features?: string[];
+    image?: string;
+    images?: string[];
+  }[];
+  legalSeo?: {
+    title?: string;
+    description?: string;
+    keywords?: string[];
+  };
+}
+
 export default function DestinationPage({
   params,
 }: {
@@ -236,6 +287,7 @@ export default function DestinationPage({
     }
 
     return () => {
+      /* eslint-disable react-hooks/exhaustive-deps */
       killScrollTriggersByRoots([
         heroRef.current,
         introRef.current,
@@ -244,7 +296,8 @@ export default function DestinationPage({
         roomsRef.current,
         galleryRef.current,
         locationRef.current,
-      ]);
+      ] as (HTMLElement | null)[]);
+      /* eslint-enable react-hooks/exhaustive-deps */
     };
   }, []);
 
@@ -312,14 +365,15 @@ export default function DestinationPage({
   };
 
   // Type-safe property access helpers
-  const propertyType = (destination as any).propertyType;
-  const rating = (destination as any).rating;
-  const reviews = (destination as any).reviews;
-  const totalSize = (destination as any).totalSize;
-  const totalRooms = (destination as any).totalRooms;
-  const capacity = (destination as any).capacity;
-  const idealFor = (destination as any).idealFor as string[] | undefined;
-  const coordinates = (destination as any).coordinates;
+  const dest = destination as Destination;
+  const propertyType = dest.propertyType;
+  const rating = dest.rating;
+  const reviews = dest.reviews;
+  const totalSize = dest.totalSize;
+  const totalRooms = dest.totalRooms;
+  const capacity = dest.capacity;
+  const idealFor = dest.idealFor;
+  const coordinates = dest.coordinates;
 
   return (
     <>
@@ -594,7 +648,7 @@ export default function DestinationPage({
           </div>
         </section>
 
-        {(destination.location as any) && (
+        {dest.location && (
           <section
             ref={locationRef}
             className="py-16 sm:py-24 lg:py-32 bg-brand-cream"
@@ -610,68 +664,68 @@ export default function DestinationPage({
               </div>
 
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                {(destination.location as any).airport && (
+                {(dest.location).airport && (
                   <div className="location-item bg-white p-6 sm:p-8 border border-brand-border">
                     <div className="w-12 h-12 bg-brand-gold/10 flex items-center justify-center mb-6">
                       <Plane className="w-6 h-6 text-brand-gold" />
                     </div>
                     <h3 className="font-display text-lg sm:text-xl font-light mb-2">
-                      {(destination.location as any).airport.name}
+                      {(dest.location).airport.name}
                     </h3>
                     <div className="flex items-center gap-4 text-sm text-brand-muted">
                       <span className="flex items-center gap-1">
                         <MapPin className="w-4 h-4" />
-                        {(destination.location as any).airport.distance}
+                        {(dest.location).airport.distance}
                       </span>
                       <span className="flex items-center gap-1">
                         <Clock className="w-4 h-4" />
-                        {(destination.location as any).airport.time}
+                        {(dest.location).airport.time}
                       </span>
                     </div>
                   </div>
                 )}
 
-                {(destination.location as any).railway && (
+                {(dest.location).railway && (
                   <div className="location-item bg-white p-6 sm:p-8 border border-brand-border">
                     <div className="w-12 h-12 bg-brand-gold/10 flex items-center justify-center mb-6">
                       <Train className="w-6 h-6 text-brand-gold" />
                     </div>
                     <h3 className="font-display text-lg sm:text-xl font-light mb-2">
-                      {(destination.location as any).railway.name}
+                      {(dest.location).railway.name}
                     </h3>
                     <div className="flex items-center gap-4 text-sm text-brand-muted">
                       <span className="flex items-center gap-1">
                         <MapPin className="w-4 h-4" />
-                        {(destination.location as any).railway.distance}
+                        {(dest.location).railway.distance}
                       </span>
                       <span className="flex items-center gap-1">
                         <Clock className="w-4 h-4" />
-                        {(destination.location as any).railway.time}
+                        {(dest.location).railway.time}
                       </span>
                     </div>
                   </div>
                 )}
 
-                {((destination.location as any).landmark ||
-                  (destination.location as any).metro) && (
+                {(dest.location?.landmark ||
+                  dest.location?.metro) && (
                   <div className="location-item bg-white p-6 sm:p-8 border border-brand-border">
                     <div className="w-12 h-12 bg-brand-gold/10 flex items-center justify-center mb-6">
                       <Building2 className="w-6 h-6 text-brand-gold" />
                     </div>
                     <h3 className="font-display text-lg sm:text-xl font-light mb-2">
-                      {(destination.location as any).landmark.name ||
-                        (destination.location as any).metro.name}
+                      {dest.location?.landmark?.name ||
+                        dest.location?.metro?.name}
                     </h3>
                     <div className="flex items-center gap-4 text-sm text-brand-muted">
                       <span className="flex items-center gap-1">
                         <MapPin className="w-4 h-4" />
-                        {(destination.location as any).landmark.distance ||
-                          (destination.location as any).metro.distance}
+                        {dest.location?.landmark?.distance ||
+                          dest.location?.metro?.distance}
                       </span>
                       <span className="flex items-center gap-1">
                         <Clock className="w-4 h-4" />
-                        {(destination.location as any).landmark.time ||
-                          (destination.location as any).metro.time}
+                        {dest.location?.landmark?.time ||
+                          dest.location?.metro?.time}
                       </span>
                     </div>
                   </div>

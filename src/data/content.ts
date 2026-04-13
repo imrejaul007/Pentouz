@@ -2,6 +2,7 @@ import {
   indiranagarImageSet,
   lavelleImageSet,
   ootyImageSet,
+  fernhillImageSet,
 } from "./propertyImageSets";
 
 // Sort helper: room photos (lower numbers) before bathroom/detail photos (higher numbers)
@@ -326,6 +327,110 @@ export const destinations = [
       }
     ]
   },
+  {
+    slug: "fernhill",
+    subtitle: "Chikmagalur, Karnataka",
+    title: "The Fernhill Luxury Homestay",
+    shortTitle: "Fernhill",
+    copy: "A tranquil luxury homestay in the heart of Chikmagalur's coffee country. Misty hills, lush plantations, and warm hospitality await.",
+    description: "The Fernhill Luxury Homestay is an intimate retreat nestled in the Western Ghats of Chikmagalur, Karnataka. Surrounded by sprawling coffee plantations and misty hills, this property offers the kind of serene, off-grid experience that makes you wish you'd booked for longer. Whether you're seeking contemplative solitude, a romantic getaway, or quality time with loved ones, Fernhill delivers with charm, comfort, and a genuine sense of place.",
+    image: "/ooty/facade-1.jpeg",
+    heroImage: "/ooty/view-24.jpeg",
+    propertyType: "Luxury Homestay",
+    totalRooms: "4 Accommodations",
+    rating: 4,
+    reviews: 0,
+    capacity: "Up to 10 guests",
+    address: "Fernhill Estate, Chikmagalur, Karnataka, India",
+    features: [
+      "Swimming pool",
+      "Private sit-out areas and gardens",
+      "In-house dining with local cuisine",
+      "Bonfire and music system",
+      "Indoor games and kids play area",
+      "Free WiFi and parking"
+    ],
+    amenities: [
+      "Swimming Pool",
+      "Free WiFi",
+      "Free Parking",
+      "Air Conditioning",
+      "Smart Android TV",
+      "Coffee & Tea Facilities",
+      "In-room Dining",
+      "Daily Housekeeping",
+      "Bonfire Area",
+      "Private Gardens",
+      "Indoor Games",
+      "Kids Play Area"
+    ],
+    rooms: [
+      {
+        name: "The Fernhill Villa",
+        description: "4-bedroom villa sleeping up to 10 guests with private sit-out and garden views",
+        image: "/ooty/bedroom-10.jpeg"
+      },
+      {
+        name: "The Fernhill Luxury Cottage",
+        description: "1-bedroom cottage with 2 king-size beds and private balcony",
+        image: "/ooty/bedroom-12.jpeg"
+      },
+      {
+        name: "The Fernhill Elegance Cottage",
+        description: "Elegant cottage with private sit-out and back garden access",
+        image: "/ooty/bedroom-15.jpeg"
+      },
+      {
+        name: "Fernhill Hill Squad Cottage",
+        description: "Dorm-style cottage with 8 single beds, ideal for groups",
+        image: "/ooty/lawn-22.jpeg"
+      }
+    ],
+    gallery: [...fernhillImageSet],
+    bookingUrl: "https://api.whatsapp.com/send?phone=919353486686",
+    coordinates: { lat: 13.3166, lng: 75.7720 },
+    idealFor: ["Families", "Groups", "Couples", "Coffee Country Retreats"],
+    location: {
+      airport: { name: "Mangalore International Airport", distance: "130 km", time: "3 hours" },
+      railway: { name: "Chikmagalur Railway Station", distance: "12 km", time: "30 minutes" }
+    },
+    livingIntro:
+      "The Fernhill Luxury Homestay offers four distinct accommodations, each thoughtfully designed for comfort and character in the Chikmagalur hills.",
+    livingLocation: {
+      airport: { name: "Mangalore International Airport", distance: "130 km", time: "3 hours" },
+      railway: { name: "Chikmagalur Railway Station", distance: "12 km", time: "30 minutes" }
+    },
+    livingRooms: [
+      {
+        name: "The Fernhill Villa",
+        size: "2,650 sq ft",
+        description: "An expansive four-bedroom villa with a cascade falls sit-out area, separate living room, en-suite bathrooms, and a private courtyard. Ideal for large families or groups of up to 10 guests.",
+        features: ["4 Bedrooms", "Up to 10 Guests", "Cascade Falls Sit-out", "Private Courtyard", "Living Room"],
+        image: "/ooty/bedroom-10.jpeg"
+      },
+      {
+        name: "The Fernhill Luxury Cottage",
+        size: "560 sq ft (380 + 180 balcony)",
+        description: "A cozy one-bedroom cottage featuring two king-size beds, a private sit-out area, and views of the surrounding gardens and hills.",
+        features: ["2 King Beds", "Private Balcony", "Sit-out Area", "Garden Views"],
+        image: "/ooty/bedroom-12.jpeg"
+      },
+      {
+        name: "The Fernhill Elegance Cottage",
+        size: "560 sq ft (380 + 180 balcony)",
+        description: "An elegant cottage with two king-size beds, private sit-out, and direct access to the back garden — perfect for those who love being close to nature.",
+        features: ["2 King Beds", "Back Garden Access", "Private Sit-out", "Hill Views"],
+        image: "/ooty/bedroom-15.jpeg"
+      },
+      {
+        name: "Fernhill Hill Squad Cottage",
+        size: "960 sq ft (515 + 445 balcony)",
+        description: "A spacious dorm-style cottage with eight single beds and a large private balcony. Designed for groups, friends, or corporate retreats seeking comfort in the hills.",
+        features: ["8 Single Beds", "Large Private Balcony", "Group-Friendly", "Indoor Games"],
+        image: "/ooty/lawn-22.jpeg"
+      }
+    ]
+  },
 ];
 
 // Related Properties - The Collection
@@ -381,6 +486,10 @@ export const living = [
   {
     title: "Living @ Ooty",
     copy: "Escape to misty hills and timeless charm. Perfect for contemplation, celebration, or creative retreat.",
+  },
+  {
+    title: "Living @ Fernhill",
+    copy: "Coffee-scented mornings and star-lit evenings in Chikmagalur's heart. A homestay made for lingering.",
   },
 ];
 

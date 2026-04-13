@@ -15,6 +15,7 @@ const collectionNotes = [
   "Lavelle Road brings central Bangalore access with a calmer boutique feel.",
   "Indiranagar offers a true private penthouse stay with more room to settle in.",
   "Ooty slows everything down with landscape, air, and retreat atmosphere.",
+  "Fernhill anchors the collection with the warmth of a private homestay in Chikmagalur's coffee country.",
 ];
 
 const collectionLinks = [

@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, MapPin, Mountain, Coffee, Train, Clock, Navigation, Camera } from "lucide-react";
+import { ArrowRight, MapPin, Mountain, Coffee, Train, Clock, Navigation } from "lucide-react";
 import { destinations } from "@/data/content";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";

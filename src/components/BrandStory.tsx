@@ -93,10 +93,10 @@ export default function BrandStory() {
               style={{ transitionDelay: "500ms" }}
             >
               <p>
-                Three distinctive residences, each telling its own story of luxury,
+                Four distinctive residences, each telling its own story of luxury,
                 heritage, and the pursuit of perfection. From the vibrant heart of
-                Bangalore to the serene hills of Ooty, The Pentouz represents a new
-                chapter in Indian hospitality.
+                Bangalore to the serene hills of Ooty and the coffee plantations of
+                Chikmagalur, The Pentouz represents a new chapter in Indian hospitality.
               </p>
               <p>
                 Every space we create is a canvas for extraordinary experiences.

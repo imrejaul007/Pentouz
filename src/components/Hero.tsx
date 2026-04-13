@@ -13,27 +13,21 @@ export default function Hero() {
   const [videoStarted, setVideoStarted] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [isReady, setIsReady] = useState(false);
-  const [shouldPlayVideo, setShouldPlayVideo] = useState(false);
+  const [shouldPlayVideo] = useState(() => {
+    if (typeof window === "undefined") return false;
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+    return mq.matches && !reduced.matches && !saveData;
+  });
 
   useEffect(() => {
-    requestAnimationFrame(() => {
-      setIsReady(true);
-    });
+    const raf = requestAnimationFrame(() => setIsReady(true));
+    return () => cancelAnimationFrame(raf);
+  }, []);
 
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
-    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
-
-    if (!(isDesktop && !prefersReducedMotion && !saveData)) {
-      return;
-    }
-
-    setShouldPlayVideo(true);
-
-    const videoTimer = setTimeout(() => {
-      setVideoStarted(true);
-    }, 2500);
-
+  useEffect(() => {
+    const videoTimer = setTimeout(() => setVideoStarted(true), 2500);
     return () => clearTimeout(videoTimer);
   }, []);
 

@@ -10,6 +10,7 @@ const collectionTaglines: Record<string, string> = {
   indiranagar: "The Urban Sanctuary",
   "lavelle-road": "The Address",
   ooty: "The Mountain Retreat",
+  fernhill: "The Coffee Country Retreat",
 };
 
 export default function Collections() {
@@ -58,7 +59,7 @@ export default function Collections() {
             }`}
             style={{ transitionDelay: "100ms" }}
           >
-            Three Stories,
+            Four Stories,
             <br />
             <em className="italic text-brand-gold">Infinite</em> Memories
           </h2>
@@ -71,7 +72,7 @@ export default function Collections() {
         </div>
 
         {/* Collection Cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-10">
           {destinations.map((property, index) => (
             <Link
               key={property.slug}
