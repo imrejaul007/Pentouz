@@ -57,7 +57,7 @@ export default function PentouzHillsidePage() {
         <section className="relative isolate min-h-[100svh] overflow-hidden bg-[#1a1410] text-white">
           <div className="absolute inset-0">
             <Image
-              src="/fernhill/facade-1.jpg"
+              src="/fernhill/view-1.jpg"
               alt={property.title}
               fill
               priority
@@ -95,7 +95,7 @@ export default function PentouzHillsidePage() {
           <div className="mx-auto grid max-w-[1480px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:px-14 lg:py-28 lg:items-center">
             <div className="animate-fade-in-up">
               <div className="relative aspect-[4/5] overflow-hidden shadow-[0_24px_80px_rgba(18,15,12,0.08)]">
-                <Image src="/fernhill/overview-1.jpg" alt="The Pentouz Hillside living" fill className="object-cover transition-transform duration-[1400ms] hover:scale-105" sizes="(max-width: 1024px) 100vw, 44vw" />
+                <Image src="/fernhill/topview-1.jpg" alt="The Pentouz Hillside living" fill className="object-cover transition-transform duration-[1400ms] hover:scale-105" sizes="(max-width: 1024px) 100vw, 44vw" />
               </div>
             </div>
             <div className="animate-fade-in-up animate-delay-200">
@@ -227,11 +227,11 @@ export default function PentouzHillsidePage() {
             <div className="grid gap-6 lg:grid-cols-3">
               {[
                 "/fernhill/pool-1.jpg",
-                "/fernhill/restaurant-1.jpg",
-                "/fernhill/villa-1.jpg",
-                "/fernhill/view-1.jpg",
                 "/fernhill/dining-1.jpg",
                 "/fernhill/night-1.jpg",
+                "/fernhill/fireplace-1.jpg",
+                "/fernhill/kids-1.jpg",
+                "/fernhill/topview-1.jpg",
               ].map((image, index) => (
                 <div key={image} className="relative aspect-[4/5] overflow-hidden shadow-[0_24px_80px_rgba(18,15,12,0.06)]">
                   <Image

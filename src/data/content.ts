@@ -384,13 +384,13 @@ export const destinations = [
       {
         name: "The Hillside Cottage",
         description: "1-bedroom cottage with 2 king-size beds and private balcony",
-        image: "/fernhill/pool-1.jpg",
+        image: "/fernhill/fireplace-1.jpg",
         price: "Price on Request",
       },
       {
         name: "The Elegance Cottage",
         description: "Elegant cottage with private sit-out and back garden access",
-        image: "/fernhill/overview-1.jpg",
+        image: "/fernhill/side-1.jpg",
         price: "Price on Request",
       },
       {
@@ -409,7 +409,7 @@ export const destinations = [
       railway: { name: "Chikmagalur Railway Station", distance: "12 km", time: "30 minutes" }
     },
     livingIntro:
-      "The Fernhill Luxury Homestay offers four distinct accommodations, each thoughtfully designed for comfort and character in the Chikmagalur hills.",
+      "The Pentouz Hillside offers four distinct accommodations, each thoughtfully designed for comfort and character in the Chikmagalur hills.",
     livingLocation: {
       airport: { name: "Mangalore International Airport", distance: "130 km", time: "3 hours" },
       railway: { name: "Chikmagalur Railway Station", distance: "12 km", time: "30 minutes" }
@@ -427,14 +427,14 @@ export const destinations = [
         size: "560 sq ft (380 + 180 balcony)",
         description: "A cozy one-bedroom cottage featuring two king-size beds, a private sit-out area, and views of the surrounding gardens and hills.",
         features: ["2 King Beds", "Private Balcony", "Sit-out Area", "Garden Views"],
-        image: "/fernhill/pool-1.jpg"
+        image: "/fernhill/fireplace-1.jpg"
       },
       {
         name: "The Elegance Cottage",
         size: "560 sq ft (380 + 180 balcony)",
         description: "An elegant cottage with two king-size beds, private sit-out, and direct access to the back garden — perfect for those who love being close to nature.",
         features: ["2 King Beds", "Back Garden Access", "Private Sit-out", "Hill Views"],
-        image: "/fernhill/overview-1.jpg"
+        image: "/fernhill/topview-1.jpg"
       },
       {
         name: "The Hill Squad Cottage",

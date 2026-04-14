@@ -171,7 +171,7 @@ export const ootyImageSet = [
   "/ooty/all/9._corridor.jpeg",
 ] as const;
 
-// Fern Hill Resorts — Chikmagalur
+// The Pentouz Hillside — Chikmagalur
 export const fernhillImageSet = [
   "/fernhill/facade-1.jpg",
   "/fernhill/view-1.jpg",
