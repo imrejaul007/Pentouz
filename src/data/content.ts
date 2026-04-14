@@ -192,8 +192,8 @@ export const destinations = [
       "Ultra-modern Kitchen",
       "Daily Housekeeping",
       "Laundry Room",
-      "Wifi & Internet",
-      "State-Of-Art Entertainment",
+      "WiFi & Internet",
+      "State-of-the-Art Entertainment",
       "Spacious Balconies",
       "Open Roof-Top Terrace",
       "Covered Car Parking",
@@ -255,7 +255,7 @@ export const destinations = [
         name: "The Skyline Suite",
         size: "600 sq ft",
         description: "A sophisticated king suite with expansive city views, private balcony, elegant bath, and all modern in-room essentials.",
-        features: ["City Views", "King Bed", "Private Balcony", "Wifi & Internet"],
+        features: ["City Views", "King Bed", "Private Balcony", "WiFi & Internet"],
         image: "/indiranagar/skyline-suite.jpg"
       },
       {
@@ -349,7 +349,7 @@ export const destinations = [
     propertyType: "Luxury Homestay",
     totalRooms: "4 Accommodations",
     rating: 4,
-    reviews: 0,
+    reviews: 4,
     capacity: "Up to 10 guests",
     address: "Fernhill Estate, Chikmagalur, Karnataka, India",
     features: [

@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { destinations } from "@/data/content";
+import { withSiteUrl } from "@/lib/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
   title: "Nearby Attractions | The Pentouz @ Indiranagar",
   description: "Discover experiences and attractions near our Indiranagar property in 100 Feet Road.",
   alternates: {
-    canonical: "https://thepentouz.com/destinations/indiranagar/near",
+    canonical: withSiteUrl("/destinations/indiranagar/near"),
   },
 };
 

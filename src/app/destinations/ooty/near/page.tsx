@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, MapPin, Mountain, Coffee, Train, Clock, Navigation } from "lucide-react";
 import { destinations } from "@/data/content";
+import { withSiteUrl } from "@/lib/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
   title: "Nearby Attractions | The Pentouz @ Ooty",
   description: "Explore attractions near The Pentouz at Ooty - from tea gardens to heritage sites and scenic viewpoints.",
   alternates: {
-    canonical: "https://thepentouz.com/destinations/ooty/near",
+    canonical: withSiteUrl("/destinations/ooty/near"),
   },
 };
 

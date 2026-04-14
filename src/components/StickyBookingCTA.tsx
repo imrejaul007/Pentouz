@@ -45,24 +45,24 @@ export default function StickyBookingCTA({ bookingUrl, phone, whatsapp }: Sticky
         <X className="w-4 h-4" />
       </button>
 
-      <div className="max-w-container-xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4 sm:gap-8">
+      <div className="max-w-container-xl mx-auto px-3 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-8">
         {/* Book Now */}
         <a
           href={bookingUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex items-center gap-3 bg-brand-gold text-brand-primary px-6 py-3 text-[10px] uppercase tracking-[0.2em] hover:bg-white transition-all duration-300 font-light"
+          className="group flex items-center justify-center gap-2 sm:gap-3 bg-brand-gold text-brand-primary px-4 sm:px-6 py-2.5 sm:py-3 text-[10px] uppercase tracking-[0.2em] hover:bg-white transition-all duration-300 font-light flex-1 sm:flex-none"
         >
-          <Calendar className="w-5 h-5" />
+          <Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
           <span>Book Now</span>
         </a>
 
         {/* Call */}
         <a
           href={`tel:${phone.replace(/\s/g, "")}`}
-          className="group flex items-center gap-3 border border-brand-border px-6 py-3 text-[10px] uppercase tracking-[0.2em] text-brand-ink hover:border-brand-gold hover:text-brand-accent transition-all duration-300 font-light"
+          className="hidden sm:flex items-center gap-2 sm:gap-3 border border-brand-border px-4 sm:px-6 py-2.5 sm:py-3 text-[10px] uppercase tracking-[0.2em] text-brand-ink hover:border-brand-gold hover:text-brand-accent transition-all duration-300 font-light"
         >
-          <Phone className="w-5 h-5" />
+          <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
           <span>Call</span>
         </a>
 
@@ -71,9 +71,9 @@ export default function StickyBookingCTA({ bookingUrl, phone, whatsapp }: Sticky
           href={`https://wa.me/${whatsappNumber.replace(/\D/g, "")}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-3 bg-green-600 text-white px-6 py-3 text-[10px] uppercase tracking-[0.2em] hover:bg-green-700 transition-all duration-300 font-light"
+          className="flex items-center justify-center gap-2 sm:gap-3 bg-green-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 text-[10px] uppercase tracking-[0.2em] hover:bg-green-700 transition-all duration-300 font-light flex-1 sm:flex-none"
         >
-          <MessageCircle className="w-5 h-5" />
+          <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
           <span>WhatsApp</span>
         </a>
       </div>

@@ -172,7 +172,7 @@ export default function HomePage() {
           </div>
 
           <div ref={heroTextRef} className="relative mx-auto flex min-h-[100svh] max-w-[1480px] flex-col justify-end px-5 pb-16 pt-36 sm:px-8 sm:pb-20 lg:px-14 lg:pb-24 lg:pt-48 will-change-transform">
-            <div className="grid gap-12 xl:grid-cols-[1fr_0.75fr] xl:items-end">
+            <div className="grid gap-12 lg:grid-cols-[1fr_0.75fr] lg:items-end">
               <div className="max-w-5xl">
                 <p className="luxury-kicker text-white/70 animate-fade-in-up">The Pentouz</p>
                 <h1 className="luxury-hero-title hero-headline mt-6 max-w-5xl text-white animate-fade-in-up [animation-delay:120ms]">
@@ -236,7 +236,7 @@ export default function HomePage() {
           data-section-id="intro"
           className="relative border-t border-[#e4d8c8] bg-[#f6efe5]"
         >
-          <span className="absolute -top-8 left-0 text-[12rem] sm:text-[16rem] lg:text-[20rem] font-display font-light text-brand-gold/[0.04] select-none pointer-events-none leading-none">01</span>
+          <span aria-hidden="true" className="absolute -top-8 left-0 hidden sm:block text-[6rem] sm:text-[10rem] lg:text-[16rem] font-display font-light text-brand-gold/[0.04] select-none pointer-events-none leading-none">01</span>
           <div className="mx-auto grid max-w-[1480px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[1fr_1fr] lg:gap-0 lg:px-14 lg:py-28">
             <div className={`relative lg:pr-16 transition-all duration-1000 ${visibleSections.intro ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
               <div className="editorial-divider-left" />
@@ -267,7 +267,7 @@ export default function HomePage() {
           data-section-id="collection"
           className="relative bg-[#fbf7f0]"
         >
-          <span className="absolute -top-8 left-0 text-[12rem] sm:text-[16rem] lg:text-[20rem] font-display font-light text-brand-gold/[0.04] select-none pointer-events-none leading-none">02</span>
+          <span aria-hidden="true" className="absolute -top-8 left-0 hidden sm:block text-[6rem] sm:text-[10rem] lg:text-[16rem] font-display font-light text-brand-gold/[0.04] select-none pointer-events-none leading-none">02</span>
           <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28">
             <div className={`relative max-w-3xl transition-all duration-1000 ${visibleSections.collection ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
               <div className="absolute -inset-8 -z-10 bg-[radial-gradient(ellipse_at_top_left,rgba(196,160,97,0.06),transparent_60%)]" />
@@ -319,7 +319,7 @@ export default function HomePage() {
           className="relative bg-[#161310] text-white"
         >
           <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-brand-gold/5 blur-3xl animate-pulse pointer-events-none" />
-          <span className="absolute -top-8 left-0 text-[12rem] sm:text-[16rem] lg:text-[20rem] font-display font-light text-brand-gold/[0.04] select-none pointer-events-none leading-none">03</span>
+          <span aria-hidden="true" className="absolute -top-8 left-0 hidden sm:block text-[6rem] sm:text-[10rem] lg:text-[16rem] font-display font-light text-brand-gold/[0.04] select-none pointer-events-none leading-none">03</span>
           <div className="mx-auto grid max-w-[1480px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[0.78fr_1.22fr] lg:px-14 lg:py-28">
             <div className={`relative py-12 transition-all duration-1000 ${visibleSections.experiences ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
               <p className="luxury-kicker text-brand-gold">Enjoy the best moment of life</p>
@@ -350,7 +350,7 @@ export default function HomePage() {
           className="relative bg-[#f7f0e5]"
         >
           <div className="absolute inset-0 opacity-[0.015] pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")' }} />
-          <span className="absolute -top-8 left-0 text-[12rem] sm:text-[16rem] lg:text-[20rem] font-display font-light text-brand-gold/[0.04] select-none pointer-events-none leading-none">04</span>
+          <span aria-hidden="true" className="absolute -top-8 left-0 hidden sm:block text-[6rem] sm:text-[10rem] lg:text-[16rem] font-display font-light text-brand-gold/[0.04] select-none pointer-events-none leading-none">04</span>
           <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28">
             <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
               <div className={`transition-all duration-1000 ${visibleSections.gatherings ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
@@ -403,7 +403,7 @@ export default function HomePage() {
           data-section-id="city"
           className="relative bg-white"
         >
-          <span className="absolute -top-8 left-0 text-[12rem] sm:text-[16rem] lg:text-[20rem] font-display font-light text-brand-gold/[0.04] select-none pointer-events-none leading-none">05</span>
+          <span aria-hidden="true" className="absolute -top-8 left-0 hidden sm:block text-[6rem] sm:text-[10rem] lg:text-[16rem] font-display font-light text-brand-gold/[0.04] select-none pointer-events-none leading-none">05</span>
           <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28">
             <div className={`max-w-3xl transition-all duration-1000 ${visibleSections.city ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
               <p className="luxury-kicker text-brand-accent">Local Tours & Activities</p>
@@ -422,7 +422,7 @@ export default function HomePage() {
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
                   <div className="relative aspect-[4/3] overflow-hidden">
-                    <Image src={moment.image} alt={moment.title} fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover scale-90 transition-all duration-[1400ms] group-hover:scale-100 group-hover:[clip-path:inset(0_0_0_0)]" />
+                    <Image src={moment.image} alt={moment.title} fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover transition-transform duration-[1400ms] group-hover:scale-105" />
                   </div>
                   <div className="p-6">
                     <p className="text-[10px] uppercase tracking-[0.22em] text-brand-accent">{moment.eyebrow}</p>

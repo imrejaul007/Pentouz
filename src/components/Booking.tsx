@@ -2,11 +2,13 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { Calendar, Users, MapPin, ArrowRight } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Users, MapPin, ArrowRight } from "lucide-react";
 import { destinations } from "@/data/content";
 import { submitLead } from "@/lib/leads";
 
 export default function Booking() {
+  const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -60,11 +62,13 @@ export default function Booking() {
 
       setStatus({
         type: "success",
-        message: "Availability request sent. Redirecting to booking details...",
+        message: "Availability request sent. Our team will be in touch shortly.",
       });
 
       const redirectUrl = selectedProperty?.bookingUrl || "/contact";
-      window.location.assign(redirectUrl);
+      setTimeout(() => {
+        router.push(redirectUrl);
+      }, 2500);
     } catch (error) {
       setStatus({
         type: "error",
@@ -186,13 +190,19 @@ export default function Booking() {
               <label className="block text-[10px] uppercase tracking-[0.2em] text-white/60 mb-3">
                 Check In
               </label>
-              <div className="relative">
-                <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+              <div className="relative group">
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40 group-focus-within:text-brand-gold transition-colors pointer-events-none z-10">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4">
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <path d="M16 2v4M8 2v4M3 10h18" />
+                  </svg>
+                </div>
                 <input
                   type="date"
                   value={formData.checkIn}
                   onChange={(e) => handleCheckInChange(e.target.value)}
-                  className="w-full bg-white/5 border border-white/20 pl-11 pr-4 py-4 text-sm text-white outline-none focus:border-brand-gold transition-colors [color-scheme:dark]"
+                  min={new Date().toISOString().split("T")[0]}
+                  className="w-full bg-white/5 border border-white/20 pl-11 pr-4 py-4 text-sm text-white outline-none focus:border-brand-gold focus:bg-white/[0.08] transition-all [color-scheme:dark] cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:right-4 [&::-webkit-calendar-picker-indicator]:top-1/2 [&::-webkit-calendar-picker-indicator]:-translate-y-1/2 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:invert [&::-webkit-calendar-picker-indicator]:opacity-60"
                   required
                 />
               </div>
@@ -203,13 +213,19 @@ export default function Booking() {
               <label className="block text-[10px] uppercase tracking-[0.2em] text-white/60 mb-3">
                 Check Out
               </label>
-              <div className="relative">
-                <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+              <div className="relative group">
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40 group-focus-within:text-brand-gold transition-colors pointer-events-none z-10">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4">
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <path d="M16 2v4M8 2v4M3 10h18" />
+                  </svg>
+                </div>
                 <input
                   type="date"
                   value={formData.checkOut}
                   onChange={(e) => handleCheckOutChange(e.target.value)}
-                  className="w-full bg-white/5 border border-white/20 pl-11 pr-4 py-4 text-sm text-white outline-none focus:border-brand-gold transition-colors [color-scheme:dark]"
+                  min={formData.checkIn || new Date().toISOString().split("T")[0]}
+                  className="w-full bg-white/5 border border-white/20 pl-11 pr-4 py-4 text-sm text-white outline-none focus:border-brand-gold focus:bg-white/[0.08] transition-all [color-scheme:dark] cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:right-4 [&::-webkit-calendar-picker-indicator]:top-1/2 [&::-webkit-calendar-picker-indicator]:-translate-y-1/2 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:invert [&::-webkit-calendar-picker-indicator]:opacity-60"
                   required
                 />
               </div>
@@ -229,7 +245,7 @@ export default function Booking() {
                   }
                   className="w-full bg-white/5 border border-white/20 pl-11 pr-4 py-4 text-sm text-white appearance-none cursor-pointer outline-none focus:border-brand-gold transition-colors"
                 >
-                  {[1, 2, 3, 4, 5, 6].map((num) => (
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
                     <option key={num} value={num} className="bg-brand-ink">
                       {num} {num === 1 ? "Guest" : "Guests"}
                     </option>

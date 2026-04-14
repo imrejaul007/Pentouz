@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSiteUrl } from "@/lib/site";
 import PropertyEditorialSubpage from "@/components/PropertyEditorialSubpage";
 import { propertyEditorialContent } from "@/data/propertyEditorialContent";
 
@@ -6,7 +7,7 @@ export const metadata: Metadata = {
   title: "Gallery | The Pentouz",
   description: propertyEditorialContent["indiranagar"]["gallery"].intro,
   alternates: {
-    canonical: "https://thepentouz.com/destinations/indiranagar/gallery",
+    canonical: withSiteUrl("/destinations/indiranagar/gallery"),
   },
 };
 

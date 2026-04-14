@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { withSiteUrl } from "@/lib/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -20,9 +21,13 @@ export default function GalleryPage() {
       <main className="bg-[#f7f1e7] text-brand-ink">
         {/* Hero */}
         <section className="relative isolate overflow-hidden bg-[#17120e] text-white">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "url('/lavelle-road/all/restaurant_4.jpg')" }}
+          <Image
+            src="/lavelle-road/all/restaurant_4.jpg"
+            alt="The Pentouz Gallery"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,8,6,0.88)_0%,rgba(10,8,6,0.46)_45%,rgba(10,8,6,0.78)_100%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(196,160,97,0.16),transparent_30%)]" />
