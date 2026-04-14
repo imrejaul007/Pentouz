@@ -53,7 +53,7 @@ const stories = [
     author: "The Pentouz",
   },
   {
-    title: "Fernhill",
+    title: "Pentouz Hillside",
     subtitle: "Coffee country",
     description: "A luxury homestay in Chikmagalur's plantation heart — swimming pool, bonfire evenings, and the smell of fresh coffee every morning.",
     image: "/fernhill/facade-1.jpg",

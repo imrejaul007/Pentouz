@@ -338,12 +338,12 @@ export const destinations = [
     ]
   },
   {
-    slug: "fernhill",
+    slug: "pentouz-hillside",
     subtitle: "Chikmagalur, Karnataka",
-    title: "The Fernhill Luxury Homestay",
-    shortTitle: "Fernhill",
+    title: "The Pentouz Hillside",
+    shortTitle: "Pentouz Hillside",
     copy: "A tranquil luxury homestay in the heart of Chikmagalur's coffee country. Misty hills, lush plantations, and warm hospitality await.",
-    description: "The Fernhill Luxury Homestay is an intimate retreat nestled in the Western Ghats of Chikmagalur, Karnataka. Surrounded by sprawling coffee plantations and misty hills, this property offers the kind of serene, off-grid experience that makes you wish you'd booked for longer. Whether you're seeking contemplative solitude, a romantic getaway, or quality time with loved ones, Fernhill delivers with charm, comfort, and a genuine sense of place.",
+    description: "The Pentouz Hillside is an intimate retreat nestled in the Western Ghats of Chikmagalur, Karnataka. Surrounded by sprawling coffee plantations and misty hills, this property offers the kind of serene, off-grid experience that makes you wish you'd booked for longer. Whether you're seeking contemplative solitude, a romantic getaway, or quality time with loved ones, Pentouz Hillside delivers with charm, comfort, and a genuine sense of place.",
     image: "/fernhill/facade-1.jpg",
     heroImage: "/fernhill/view-1.jpg",
     propertyType: "Luxury Homestay",
@@ -351,7 +351,7 @@ export const destinations = [
     rating: 4,
     reviews: 4,
     capacity: "Up to 10 guests",
-    address: "Fernhill Estate, Chikmagalur, Karnataka, India",
+    address: "The Pentouz Hillside,  Chikmagalur, Karnataka, India",
     features: [
       "Swimming pool",
       "Private sit-out areas and gardens",
@@ -376,25 +376,25 @@ export const destinations = [
     ],
     rooms: [
       {
-        name: "The Fernhill Villa",
+        name: "The Hillside Villa",
         description: "4-bedroom villa sleeping up to 10 guests with private sit-out and garden views",
         image: "/fernhill/villa-1.jpg",
         price: "Price on Request",
       },
       {
-        name: "The Fernhill Luxury Cottage",
+        name: "The Hillside Cottage",
         description: "1-bedroom cottage with 2 king-size beds and private balcony",
         image: "/fernhill/pool-1.jpg",
         price: "Price on Request",
       },
       {
-        name: "The Fernhill Elegance Cottage",
+        name: "The Elegance Cottage",
         description: "Elegant cottage with private sit-out and back garden access",
         image: "/fernhill/overview-1.jpg",
         price: "Price on Request",
       },
       {
-        name: "Fernhill Hill Squad Cottage",
+        name: "The Hill Squad Cottage",
         description: "Dorm-style cottage with 8 single beds, ideal for groups",
         image: "/fernhill/gazebo-1.jpg",
         price: "Price on Request",
@@ -416,28 +416,28 @@ export const destinations = [
     },
     livingRooms: [
       {
-        name: "The Fernhill Villa",
+        name: "The Hillside Villa",
         size: "2,650 sq ft",
         description: "An expansive four-bedroom villa with a cascade falls sit-out area, separate living room, en-suite bathrooms, and a private courtyard. Ideal for large families or groups of up to 10 guests.",
         features: ["4 Bedrooms", "Up to 10 Guests", "Cascade Falls Sit-out", "Private Courtyard", "Living Room"],
         image: "/fernhill/villa-1.jpg"
       },
       {
-        name: "The Fernhill Luxury Cottage",
+        name: "The Hillside Cottage",
         size: "560 sq ft (380 + 180 balcony)",
         description: "A cozy one-bedroom cottage featuring two king-size beds, a private sit-out area, and views of the surrounding gardens and hills.",
         features: ["2 King Beds", "Private Balcony", "Sit-out Area", "Garden Views"],
         image: "/fernhill/pool-1.jpg"
       },
       {
-        name: "The Fernhill Elegance Cottage",
+        name: "The Elegance Cottage",
         size: "560 sq ft (380 + 180 balcony)",
         description: "An elegant cottage with two king-size beds, private sit-out, and direct access to the back garden — perfect for those who love being close to nature.",
         features: ["2 King Beds", "Back Garden Access", "Private Sit-out", "Hill Views"],
         image: "/fernhill/overview-1.jpg"
       },
       {
-        name: "Fernhill Hill Squad Cottage",
+        name: "The Hill Squad Cottage",
         size: "960 sq ft (515 + 445 balcony)",
         description: "A spacious dorm-style cottage with eight single beds and a large private balcony. Designed for groups, friends, or corporate retreats seeking comfort in the hills.",
         features: ["8 Single Beds", "Large Private Balcony", "Group-Friendly", "Indoor Games"],
@@ -502,7 +502,7 @@ export const living = [
     copy: "Escape to misty hills and timeless charm. Perfect for contemplation, celebration, or creative retreat.",
   },
   {
-    title: "Living @ Fernhill",
+    title: "Living @ Pentouz Hillside",
     copy: "Coffee-scented mornings and star-lit evenings in Chikmagalur's heart. A homestay made for lingering.",
   },
 ];
@@ -624,7 +624,7 @@ export const testimonials = [
     location: "London, UK",
   },
   {
-    quote: "The Fernhill Homestay in Chikmagalur was a dream. Waking up to coffee plantations and misty hills from the balcony was pure bliss. The staff arranged a private tour of the estate.",
+    quote: "The Pentouz Hillside in Chikmagalur was a dream. Waking up to coffee plantations and misty hills from the balcony was pure bliss. The staff arranged a private tour of the estate.",
     name: "Deepa R.",
     source: "TripAdvisor",
     sourceUrl: "https://www.tripadvisor.com/Hotel_Review-g737120-d25270497-Reviews-The_Fernhill_Luxury_Homestay-Chikmagalur_Karnataka.html",

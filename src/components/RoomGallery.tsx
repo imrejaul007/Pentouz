@@ -116,7 +116,7 @@ export default function RoomGallery({
                 </p>
                 {"price" in room && room.price && (
                   <div className="flex items-center gap-2">
-                    {destinationSlug === "fernhill" ? (
+                    {destinationSlug === "pentouz-hillside" ? (
                       <a
                         href="https://wa.me/918884449930"
                         target="_blank"

@@ -10,7 +10,7 @@ const collectionTaglines: Record<string, string> = {
   indiranagar: "The Urban Sanctuary",
   "lavelle-road": "The Address",
   ooty: "The Mountain Retreat",
-  fernhill: "The Coffee Country Retreat",
+  "pentouz-hillside": "The Coffee Country Retreat",
 };
 
 export default function Collections() {

@@ -10,7 +10,7 @@ const quickSearches = [
   { label: "Ooty", href: "/destinations/ooty" },
   { label: "Lavelle Road", href: "/destinations/lavelle-road" },
   { label: "Indiranagar", href: "/destinations/indiranagar" },
-  { label: "Fernhill", href: "/destinations/fernhill" },
+  { label: "Pentouz Hillside", href: "/destinations/pentouz-hillside" },
   { label: "Penthouse", href: "/destinations/indiranagar" },
   { label: "Suites", href: "/destinations" },
   { label: "Meeting Rooms", href: "/destinations" },
@@ -153,11 +153,11 @@ export default function SearchBar({ placeholder = "Search properties, destinatio
                 <p className="text-sm text-brand-muted mt-1">3-Bedroom Penthouse</p>
               </Link>
               <Link
-                href="/destinations/fernhill"
+                href="/destinations/pentouz-hillside"
                 onClick={() => setIsOpen(false)}
                 className="group bg-white border border-brand-border/30 p-4 hover:border-brand-gold/50 hover:shadow-md transition-all duration-300"
               >
-                <span className="text-lg font-display font-light text-brand-ink group-hover:text-brand-accent">Fernhill</span>
+                <span className="text-lg font-display font-light text-brand-ink group-hover:text-brand-accent">Hillside</span>
                 <p className="text-sm text-brand-muted mt-1">Coffee Country Retreat</p>
               </Link>
             </div>
