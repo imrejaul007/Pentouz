@@ -12,9 +12,9 @@ const primaryNav = [
   { label: "Destinations", href: "/destinations" },
   { label: "Gallery", href: "/gallery" },
   { label: "Experiences", href: "/experiences" },
-  { label: "Stories", href: "/stories" },
+  { label: "Offers", href: "/offers" },
   { label: "Privé Club", href: "/prive-club" },
-  { label: "Contact", href: "/contact" },
+  { label: "About", href: "/about" },
 ];
 
 function getBookingUrl() {

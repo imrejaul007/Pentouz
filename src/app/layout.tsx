@@ -4,6 +4,7 @@ import "./globals.css";
 import Preloader from "@/components/Preloader";
 import SmoothScroll from "@/components/SmoothScroll";
 import ScrollProgress from "@/components/ScrollProgress";
+import PageTransition from "@/components/PageTransition";
 import { withSiteUrl } from "@/lib/site";
 
 const bodyFont = Montserrat({
@@ -48,6 +49,10 @@ export const metadata: Metadata = {
     description:
       "Luxury residences and suites by The Pentouz across Bangalore and Ooty. Reserve bespoke stays with concierge hospitality and lifestyle experiences.",
     images: [withSiteUrl("/og-image.jpg")],
+  },
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
   },
 };
 
@@ -95,7 +100,9 @@ export default function RootLayout({
         <Preloader />
         <SmoothScroll>
           <ScrollProgress />
-          {children}
+          <PageTransition>
+            {children}
+          </PageTransition>
         </SmoothScroll>
       </body>
     </html>

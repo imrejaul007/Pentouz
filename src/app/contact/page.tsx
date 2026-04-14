@@ -46,6 +46,23 @@ export default function ContactPage() {
           <div>
             <p className="luxury-kicker text-brand-accent">Concierge Details</p>
             <h2 className="luxury-section-title mt-5">Reach the reservations team directly.</h2>
+
+            <div className="mt-8 overflow-hidden border border-brand-border/50">
+              <iframe
+                src={`https://www.google.com/maps?q=${encodeURIComponent(`${contactInfo.address}, ${contactInfo.city}`)}&output=embed&z=15&t=m`}
+                width="100%"
+                height="280"
+                style={{ border: 0, filter: "sepia(20%) saturate(80%) brightness(95%)" }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="The Pentouz location on Google Maps"
+                className="w-full"
+              />
+            </div>
+            <p className="mt-3 text-[10px] uppercase tracking-[0.16em] text-brand-muted/70">
+              {contactInfo.address}, {contactInfo.city}
+            </p>
             <div className="mt-10 space-y-6">
               <div className="luxury-panel bg-white/80">
                 <div className="flex items-start gap-4">
@@ -53,6 +70,15 @@ export default function ContactPage() {
                   <div>
                     <p className="text-[10px] uppercase tracking-[0.22em] text-brand-accent">Head Office</p>
                     <p className="mt-3 text-sm leading-7 text-brand-body">{contactInfo.address}<br />{contactInfo.city}</p>
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${contactInfo.address}, ${contactInfo.city}`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-3 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-brand-gold hover:text-brand-accent transition-colors"
+                    >
+                      Open in Maps
+                      <ArrowRight className="h-3 w-3" strokeWidth={1.4} />
+                    </a>
                   </div>
                 </div>
               </div>
