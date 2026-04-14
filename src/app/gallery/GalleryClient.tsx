@@ -16,7 +16,7 @@ type GalleryItem = {
 function categorize(path: string): string {
   const p = path.toLowerCase();
   if (/bathroom|bath/.test(p)) return "Bathroom";
-  if (/bedroom|suite|king|queen|superior|cottage|villa_four|four_bed/.test(p)) return "Bedroom";
+  if (/bedroom|suite|king|queen|superior|cottage|villa_four|four_bed|villa|squad|eight_bed/.test(p)) return "Bedroom";
   if (/terrace|balcony|patio|lawn|sit-out|balcony|courtyard/.test(p)) return "Terrace & Outdoor";
   if (/living_room|living/.test(p)) return "Living Room";
   if (/kitchen|dining/.test(p)) return "Kitchen & Dining";
@@ -78,6 +78,7 @@ const CATEGORIES = [
   "Facade",
   "Views",
   "Common Areas",
+  "Other",
 ];
 
 export default function GalleryClient() {
