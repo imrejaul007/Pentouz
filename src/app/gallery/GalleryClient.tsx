@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState, useMemo, useEffect } from "react";
-import { lavelleImageSet, indiranagarImageSet, ootyImageSet } from "@/data/propertyImageSets";
+import { lavelleImageSet, indiranagarImageSet, ootyImageSet, fernhillImageSet } from "@/data/propertyImageSets";
 
 const PAGE_SIZE = 12;
 
@@ -16,14 +16,15 @@ type GalleryItem = {
 function categorize(path: string): string {
   const p = path.toLowerCase();
   if (/bathroom|bath/.test(p)) return "Bathroom";
-  if (/bedroom|suite|king|queen|superior/.test(p)) return "Bedroom";
-  if (/terrace|balcony|patio|lawn/.test(p)) return "Terrace & Outdoor";
+  if (/bedroom|suite|king|queen|superior|cottage|villa_four|four_bed/.test(p)) return "Bedroom";
+  if (/terrace|balcony|patio|lawn|sit-out|balcony|courtyard/.test(p)) return "Terrace & Outdoor";
   if (/living_room|living/.test(p)) return "Living Room";
   if (/kitchen|dining/.test(p)) return "Kitchen & Dining";
   if (/restaurant/.test(p)) return "Restaurant";
   if (/reception/.test(p)) return "Reception";
-  if (/facade/.test(p)) return "Facade";
-  if (/view/.test(p)) return "Views";
+  if (/facade|exterior|front_view|side_view/.test(p)) return "Facade";
+  if (/view|top_view|night|property_top|overview/.test(p)) return "Views";
+  if (/games_room|swimming_pool|pool|play_area|kids|garden|fireplace|gazebo|tea_coffee/.test(p)) return "Common Areas";
   if (/entrance|lift|parking|staircase/.test(p)) return "Common Areas";
   return "Other";
 }
@@ -54,9 +55,16 @@ const ootyItems: GalleryItem[] = ootyImageSet.map((src) => ({
   alt: makeAlt(src, "Ooty"),
 }));
 
-const allItems: GalleryItem[] = [...lavelleItems, ...indiranagarItems, ...ootyItems];
+const fernhillItems: GalleryItem[] = fernhillImageSet.map((src) => ({
+  src,
+  location: "Pentouz Hillside",
+  category: categorize(src),
+  alt: makeAlt(src, "Pentouz Hillside"),
+}));
 
-const LOCATIONS = ["All", "Lavelle Road", "Indiranagar", "Ooty"];
+const allItems: GalleryItem[] = [...lavelleItems, ...indiranagarItems, ...ootyItems, ...fernhillItems];
+
+const LOCATIONS = ["All", "Lavelle Road", "Indiranagar", "Ooty", "Pentouz Hillside"];
 
 const CATEGORIES = [
   "All",

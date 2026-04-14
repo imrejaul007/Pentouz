@@ -8,7 +8,7 @@ import GalleryClient from "./GalleryClient";
 export const metadata: Metadata = {
   title: "Gallery | The Pentouz",
   description:
-    "Browse the full image collection across all Pentouz properties: Lavelle Road, Indiranagar, and Ooty. Filter by location or room category.",
+    "Browse the full image collection across all Pentouz properties: Lavelle Road, Indiranagar, Ooty, and Pentouz Hillside. Filter by location or room category.",
   alternates: {
     canonical: withSiteUrl("/gallery"),
   },
@@ -22,7 +22,7 @@ export default function GalleryPage() {
         {/* Hero */}
         <section className="relative isolate overflow-hidden bg-[#17120e] text-white">
           <Image
-            src="/lavelle-road/all/restaurant_4.jpg"
+            src="/fernhill/all/59_property_top_view.jpg"
             alt="The Pentouz Gallery"
             fill
             priority
@@ -38,7 +38,7 @@ export default function GalleryPage() {
                 Every space, every property — the full collection.
               </h1>
               <p className="luxury-copy mt-8 max-w-2xl text-white/76">
-                Browse all images across Lavelle Road, Indiranagar, and Ooty. Filter by location or category.
+                Browse all images across Lavelle Road, Indiranagar, Ooty, and Pentouz Hillside. Filter by location or category.
               </p>
             </div>
           </div>

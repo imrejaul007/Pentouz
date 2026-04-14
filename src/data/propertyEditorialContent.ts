@@ -4,12 +4,13 @@ import type { PropertyEditorialPageProps } from "@/components/PropertyEditorialS
 const lavelle = destinations.find((destination) => destination.slug === "lavelle-road");
 const indiranagar = destinations.find((destination) => destination.slug === "indiranagar");
 const ooty = destinations.find((destination) => destination.slug === "ooty");
+const fernhill = destinations.find((destination) => destination.slug === "pentouz-hillside");
 
-if (!lavelle || !indiranagar || !ooty) {
+if (!lavelle || !indiranagar || !ooty || !fernhill) {
   throw new Error("Destination data missing for editorial property subpages");
 }
 
-type PropertySlug = "lavelle-road" | "indiranagar" | "ooty";
+type PropertySlug = "lavelle-road" | "indiranagar" | "ooty" | "pentouz-hillside";
 type SectionSlug = "rooms" | "gallery" | "location" | "experiences";
 
 const commonExploreLinks: Record<PropertySlug, PropertyEditorialPageProps["exploreLinks"]> = {
@@ -30,6 +31,12 @@ const commonExploreLinks: Record<PropertySlug, PropertyEditorialPageProps["explo
     { href: "/destinations/ooty/living", title: "Living", description: "View the room-led retreat story with hillside atmosphere and calmer pacing." },
     { href: "/destinations/ooty/gallery", title: "Gallery", description: "See the curated visual edit of facade, lawns, reception, dining, and valley views." },
     { href: "/contact", title: "Reservations", description: "Reach the team for getaway planning, family stays, and special-occasion travel." },
+  ],
+  "pentouz-hillside": [
+    { href: "/destinations/pentouz-hillside", title: "Property Overview", description: "Return to the Pentouz Hillside main page and booking overview." },
+    { href: "/destinations/pentouz-hillside/living", title: "Living", description: "Explore the four distinct accommodations and the homestay atmosphere." },
+    { href: "/destinations/pentouz-hillside/gallery", title: "Gallery", description: "Browse the visual edit of villa, cottages, pool, restaurant, and common areas." },
+    { href: "/contact", title: "Reservations", description: "Reach the team for family retreats, group bookings, and coffee country getaways." },
   ],
 };
 
@@ -497,6 +504,130 @@ export const propertyEditorialContent: Record<PropertySlug, Record<SectionSlug, 
       ctaHref: ooty.bookingUrl,
       ctaLabel: "Explore Ooty Stay",
       exploreLinks: commonExploreLinks.ooty,
+    },
+  },
+  "pentouz-hillside": {
+    rooms: {
+      eyebrow: "Pentouz Hillside Rooms",
+      title: "Four distinct accommodations in Chikmagalur's coffee country.",
+      intro: "The Pentouz Hillside offers four accommodation options ranging from a four-bedroom villa to a dorm-style cottage. Each is designed to blend rustic character with modern comfort, set within the Western Ghats.",
+      heroImage: "/fernhill/villa/51_villa.jpg",
+      heroAlt: "The Pentouz Hillside Villa in Chikmagalur",
+      stats: [
+        { label: "Accommodations", value: "4 units" },
+        { label: "Capacity", value: "Up to 10 guests" },
+        { label: "Setting", value: "Coffee country retreat" },
+      ],
+      narrativeTitle: "The accommodation range is the property's strongest differentiator.",
+      narrativeBody: "Pentouz Hillside stands out from conventional homestays by offering four genuinely different accommodation types — each with its own character, scale, and ideal guest profile. That range is what makes the property compelling across solo travellers, couples, families, and large groups.",
+      cardsTitle: "Four accommodations, each designed for a different kind of stay.",
+      cardsIntro: "The room offering at Pentouz Hillside is built around genuine variety. Each unit has its own architectural character and target guest, so the booking decision can be made on fit rather than compromise.",
+      cards: [
+        { title: "The Pentouz Hillside Villa", eyebrow: "2,650 sq ft", meta: "Up to 10 guests", image: "/fernhill/villa/51_villa.jpg", description: "The four-bedroom villa is the flagship. Separate living room, en-suite bathrooms, kitchenette, and a cascade falls sit-out area make it ideal for families and large groups seeking a private homestay experience.", points: ["4 Bedrooms", "Living Room", "Kitchenette", "Cascade Sit-out"] },
+        { title: "The Pentouz Hillside Luxury Cottage", eyebrow: "380 sqft + 180 sqft Balcony", meta: "Up to 4 guests", image: "/fernhill/cottage/16_cottage.jpg", description: "A spacious one-bedroom cottage with two king-size beds, large glass windows, private sit-out area, and private balcony. Contemporary design with a rustic touch.", points: ["2 King Beds", "Private Balcony", "Sit-out Area", "Garden Views"] },
+        { title: "The Pentouz Hillside Elegance Cottage", eyebrow: "380 sqft + 180 sqft Balcony", meta: "Up to 4 guests", image: "/fernhill/elegance/31_garden_cottage.jpg", description: "An elegant cottage with back garden access, two king-size beds, private sit-out, and direct connection to the outdoors. Best for guests who want to be close to nature.", points: ["2 King Beds", "Back Garden", "Private Sit-out", "Hill Views"] },
+        { title: "The Pentouz Hillside Squad Cottage", eyebrow: "515 sqft + 445 sqft Balcony", meta: "Up to 8 guests", image: "/fernhill/squad/25_eight_bedded_room.jpg", description: "A dorm-style cottage with eight single beds and a large private balcony. Designed for groups, friends, and corporate retreats who want comfort in the hills.", points: ["8 Single Beds", "445 sqft Balcony", "Group-Friendly", "En-suite Bathroom"] },
+      ],
+      ctaTitle: "Choose the accommodation that fits your group.",
+      ctaBody: "Each unit books independently. WhatsApp the team to check availability and plan the right fit for your Chikmagalur stay.",
+      ctaHref: fernhill.bookingUrl,
+      ctaLabel: "Enquire About Availability",
+      exploreLinks: commonExploreLinks["pentouz-hillside"],
+    },
+    gallery: {
+      eyebrow: "Pentouz Hillside Gallery",
+      title: "A visual walkthrough of villa, cottages, pool, and coffee country life.",
+      intro: "The Pentouz Hillside gallery captures the texture of a Chikmagalur homestay — warm interiors, open-air moments, and the unhurried rhythm of the Western Ghats. Red laterite walls, misty mornings, and a pool that reflects the hills.",
+      heroImage: "/fernhill/all/03_exterior.jpg",
+      heroAlt: "The Pentouz Hillside exterior in Chikmagalur",
+      stats: [
+        { label: "Visual Focus", value: "Accommodations and grounds" },
+        { label: "Setting", value: "Chikmagalur coffee country" },
+        { label: "Best For", value: "Previewing the homestay stay" },
+      ],
+      narrativeTitle: "Photography should make the reader want to pack before they've finished reading.",
+      narrativeBody: "The Pentouz Hillside is a visual property. The laterite architecture, garden settings, and pool area photograph naturally well. The gallery should lean into those moments while also giving enough interior context to build confidence across all four accommodation types.",
+      quote: "The hills make the photography easy. Our job is to choose the right sequence, not to add more frames.",
+      cardsTitle: "The images doing the most work for the booking decision.",
+      cardsIntro: "These frames establish the setting, show the accommodation range, and confirm that the homestay has genuine comfort beneath its rustic character.",
+      cards: [
+        { title: "The Grounds", eyebrow: "Setting and Arrival", image: "/fernhill/all/57_front_view.jpg", description: "The exterior and arrival sequence should establish immediately that this is a premium rural property — not a standard homestay.", points: ["Coffee country setting", "Laterite architecture", "Garden arrival"] },
+        { title: "The Villa", eyebrow: "Signature Accommodation", image: "/fernhill/villa/51_villa.jpg", description: "The four-bedroom villa leads the accommodation story. It needs enough interior frames to show the living room, bedroom scale, and courtyard character.", points: ["4 bedrooms", "Living room", "Cascade sit-out"] },
+        { title: "The Cottages", eyebrow: "Intimate Stay Options", image: "/fernhill/cottage/16_cottage.jpg", description: "The cottage interiors show the warm, contemporary-rustic balance that makes the rooms comfortable without losing their character.", points: ["King-size beds", "Private sit-out", "Garden views"] },
+        { title: "Pool and Grounds", eyebrow: "Open-Air Life", image: "/fernhill/all/44_swimming_pool.jpg", description: "The swimming pool is the defining common area for Pentouz Hillside. These frames should convey the open-air leisure that separates a homestay from a conventional hotel.", points: ["Swimming pool", "Hillside views", "Outdoor leisure"] },
+      ],
+      galleryStrip: [
+        { title: "Dining Atmosphere", eyebrow: "In-House Kitchen", description: "Local cuisine and in-room dining are part of the homestay experience.", image: "/fernhill/all/54_dining.jpg" },
+        { title: "Games Room", eyebrow: "Indoor Leisure", description: "Evening and rainy-day options keep groups engaged on property.", image: "/fernhill/all/41_games_room.jpg" },
+        { title: "Night Time", eyebrow: "Bonfire Mood", description: "Evenings at Pentouz Hillside have a different pace — bonfire, music, and the quiet of the hills.", image: "/fernhill/all/60_night_view.jpg" },
+      ],
+      ctaTitle: "See the property, then plan the coffee country stay.",
+      ctaBody: "Pentouz Hillside works best when guests arrive knowing the accommodation mix and atmosphere. The gallery is the last step before that booking decision.",
+      ctaHref: fernhill.bookingUrl,
+      ctaLabel: "Enquire About Pentouz Hillside",
+      exploreLinks: commonExploreLinks["pentouz-hillside"],
+    },
+    location: {
+      eyebrow: "Pentouz Hillside Location",
+      title: "A Chikmagalur retreat in the heart of Karnataka's coffee country.",
+      intro: "The Pentouz Hillside is set in the Western Ghats near Chikmagalur town, surrounded by coffee plantations and misty hills.",
+      heroImage: "/fernhill/all/59_property_top_view.jpg",
+      heroAlt: "Pentouz Hillside property overview",
+      stats: [
+        { label: "Setting", value: "Western Ghats, Chikmagalur" },
+        { label: "Nearest Station", value: "Chikmagalur Railway Station" },
+        { label: "Nearest Airport", value: "Mangalore International Airport" },
+      ],
+      narrativeTitle: "The setting is the property.",
+      narrativeBody: "Pentouz Hillside derives most of its appeal from its location — the Western Ghats, coffee plantations, and the cooler hill climate. The location content should reinforce that this is a genuine retreat from city life.",
+      accessItems: [
+        { label: "Airport", value: fernhill.location.airport.name, note: `${fernhill.location.airport.distance} | ${fernhill.location.airport.time}`, icon: "plane" },
+        { label: "Railway", value: fernhill.location.railway.name, note: `${fernhill.location.railway.distance} | ${fernhill.location.railway.time}`, icon: "train" },
+        { label: "Address", value: fernhill.address, note: "Chikmagalur, Karnataka — Western Ghats", icon: "pin" },
+      ],
+      cardsTitle: "What makes the location special.",
+      cardsIntro: "The Western Ghats setting gives Pentouz Hillside its character. These anchors help guests understand what surrounds the property.",
+      cards: [
+        { title: "Coffee Plantations", eyebrow: "Surrounding Landscape", meta: "The defining backdrop", image: "/fernhill/all/57_front_view.jpg", description: "Chikmagalur is Karnataka's primary coffee-growing region. The plantations surrounding Pentouz Hillside are part of the stay experience, not just a scenic backdrop.", points: ["Coffee estates", "Plantation walks", "Authentic regional setting"] },
+        { title: "Western Ghats", eyebrow: "Natural Setting", meta: "A biodiversity hotspot", image: "/fernhill/all/50_top_view.jpg", description: "The Western Ghats provide a cool climate, forest views, and a sense of remoteness that makes the homestay feel genuinely disconnected from city life.", points: ["Misty hills", "Forest views", "Cool climate"] },
+        { title: "Chikmagalur Town", eyebrow: "Nearby Access", meta: "12 km from property", image: "/fernhill/all/58_side_view.jpg", description: "The nearest town offers local markets, small cafes, and access to additional sight-seeing options without being close enough to urbanise the retreat.", points: ["Local markets", "Cafe access", "Sight-seeing base"] },
+      ],
+      ctaTitle: "Plan the drive and the stay together.",
+      ctaBody: "The journey into the hills is part of the Pentouz Hillside experience. Most guests travel from Bangalore or Mangalore — both routes offer scenic approaches.",
+      ctaHref: fernhill.bookingUrl,
+      ctaLabel: "Enquire About the Stay",
+      exploreLinks: commonExploreLinks["pentouz-hillside"],
+    },
+    experiences: {
+      eyebrow: "Pentouz Hillside Experiences",
+      title: "Bonfire evenings, pool days, and the unhurried pace of coffee country.",
+      intro: "Pentouz Hillside is a destination property. The experience is built around being present — mornings with fresh coffee, afternoons by the pool, and evenings around the bonfire.",
+      heroImage: "/fernhill/all/44_swimming_pool.jpg",
+      heroAlt: "Pentouz Hillside pool and grounds",
+      stats: [
+        { label: "Experience Style", value: "Leisure and nature retreat" },
+        { label: "Best Seasons", value: "Monsoon through winter" },
+        { label: "Group Character", value: "Family, couples, and groups" },
+      ],
+      narrativeTitle: "The experience at Pentouz Hillside is built around three moments: morning, afternoon, and evening.",
+      narrativeBody: "Morning coffee on the sit-out watching the mist lift from the hills. An afternoon by the pool with the sounds of the forest. An evening bonfire with music, conversation, and the stars above. That rhythm is what guests return for.",
+      features: [
+        { title: "Bonfire and Fire Camp", description: "Evening fire camp is the social anchor of Pentouz Hillside. Indoor and outdoor fire options with a music system make for memorable evenings in the hills." },
+        { title: "Swimming Pool", description: "The pool area is the primary daytime gathering space. Set against hillside views, it works as both a leisure spot and a social hub for groups." },
+        { title: "Indoor Games", description: "A games room keeps groups entertained during evening hours or rainy afternoons. A practical feature that adds genuine value for longer stays." },
+      ],
+      cardsTitle: "The experiences that define the stay.",
+      cardsIntro: "Beyond the accommodation, Pentouz Hillside offers a set of on-property experiences that make the retreat feel complete without needing to leave the property.",
+      cards: [
+        { title: "Bonfire Evenings", eyebrow: "Night Time", meta: "Fire camp with music", image: "/fernhill/all/60_night_view.jpg", description: "Evening fire camp is the social centrepiece of Pentouz Hillside. Whether indoors or under the open sky, the bonfire creates the atmosphere that guests associate with the property.", points: ["Outdoor fire pit", "Music system", "Stargazing"] },
+        { title: "Pool and Grounds", eyebrow: "Daytime Leisure", meta: "Swimming pool with hill views", image: "/fernhill/all/44_swimming_pool.jpg", description: "The swimming pool is set against the hillside backdrop, making it both a practical amenity and a defining visual of the property. Ideal for afternoon leisure.", points: ["Swimming pool", "Hill views", "Sun loungers"] },
+        { title: "Coffee Experience", eyebrow: "Morning Ritual", meta: "Freshly brewed local coffee", image: "/fernhill/all/26_tea_coffee.jpg", description: "Waking up to fresh coffee in Chikmagalur is part of the stay. The in-room coffee and tea facilities, combined with the plantation setting, reinforce the region's identity.", points: ["In-room coffee", "Plantation tours", "Local brew"] },
+      ],
+      ctaTitle: "Plan the coffee country retreat.",
+      ctaBody: "WhatsApp the team to discuss group bookings, seasonal availability, and special arrangements for your Pentouz Hillside stay.",
+      ctaHref: fernhill.bookingUrl,
+      ctaLabel: "Enquire About Pentouz Hillside",
+      exploreLinks: commonExploreLinks["pentouz-hillside"],
     },
   },
 };
