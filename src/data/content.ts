@@ -342,20 +342,21 @@ export const destinations = [
     subtitle: "Chikmagalur, Karnataka",
     title: "The Pentouz Hillside",
     shortTitle: "Pentouz Hillside",
-    copy: "A tranquil luxury homestay in the heart of Chikmagalur's coffee country. Misty hills, lush plantations, and warm hospitality await.",
-    description: "The Pentouz Hillside is an intimate retreat nestled in the Western Ghats of Chikmagalur, Karnataka. Surrounded by sprawling coffee plantations and misty hills, this property offers the kind of serene, off-grid experience that makes you wish you'd booked for longer. Whether you're seeking contemplative solitude, a romantic getaway, or quality time with loved ones, Pentouz Hillside delivers with charm, comfort, and a genuine sense of place.",
-    image: "/fernhill/facade-1.jpg",
-    heroImage: "/fernhill/view-1.jpg",
+    copy: "Experience the serenity and luxury by the fernhill homestay — a tranquil escape amidst Chikmagalur's coffee country.",
+    description: "Nestled amidst the Western Ghats of Chikmagalur, The Pentouz Hillside offers a serene escape with luxurious accommodations and personalized service. Features spacious rooms with modern amenities, an on-site restaurant serving local cuisine, serene gardens, and a swimming pool. Red hand-cut laterite blocks, earthy hues, and dark woods create a distinctive coffee town ambience. Whether you're seeking contemplative solitude, a romantic getaway, or quality time with loved ones, Pentouz Hillside delivers with charm, comfort, and a genuine sense of place.",
+    image: "/fernhill/all/03_exterior.jpg",
+    heroImage: "/fernhill/all/59_property_top_view.jpg",
     propertyType: "Luxury Homestay",
     totalRooms: "4 Accommodations",
     rating: 4,
     reviews: 4,
     capacity: "Up to 10 guests",
-    address: "The Pentouz Hillside,  Chikmagalur, Karnataka, India",
+    address: "The Pentouz Hillside, Chikmagalur, Karnataka, India",
     features: [
       "Swimming pool",
+      "On-site restaurant with local cuisine",
+      "Fire camp — indoor and outdoor with music",
       "Private sit-out areas and gardens",
-      "In-house dining with local cuisine",
       "Bonfire and music system",
       "Indoor games and kids play area",
       "Free WiFi and parking"
@@ -369,41 +370,45 @@ export const destinations = [
       "Coffee & Tea Facilities",
       "In-room Dining",
       "Daily Housekeeping",
+      "Evening Turndown Service",
       "Bonfire Area",
       "Private Gardens",
       "Indoor Games",
-      "Kids Play Area"
+      "Kids Play Area",
+      "Wardrobe",
+      "Hair Dryer",
+      "Iron on Request"
     ],
     rooms: [
       {
-        name: "The Hillside Villa",
-        description: "4-bedroom villa sleeping up to 10 guests with private sit-out and garden views",
-        image: "/fernhill/villa-1.jpg",
+        name: "The Pentouz Hillside Villa",
+        description: "Stylish yet traditional 4-bedroom villa with living room and kitchenette. Sleeps up to 10 guests with cascade falls sit-out area and private courtyard.",
+        image: "/fernhill/villa/51_villa.jpg",
         price: "Price on Request",
       },
       {
-        name: "The Hillside Cottage",
-        description: "1-bedroom cottage with 2 king-size beds and private balcony",
-        image: "/fernhill/fireplace-1.jpg",
+        name: "The Pentouz Hillside Luxury Cottage",
+        description: "Spacious 1-bedroom cottage with 2 king-size beds, private sit-out area, and 180 sqft private balcony.",
+        image: "/fernhill/cottage/16_cottage.jpg",
         price: "Price on Request",
       },
       {
-        name: "The Elegance Cottage",
-        description: "Elegant cottage with private sit-out and back garden access",
-        image: "/fernhill/side-1.jpg",
+        name: "The Pentouz Hillside Elegance Cottage",
+        description: "Elegant 1-bedroom cottage with 2 king-size beds, private sit-out area, 180 sqft balcony, and direct back garden access.",
+        image: "/fernhill/elegance/31_garden_cottage.jpg",
         price: "Price on Request",
       },
       {
-        name: "The Hill Squad Cottage",
-        description: "Dorm-style cottage with 8 single beds, ideal for groups",
-        image: "/fernhill/gazebo-1.jpg",
+        name: "The Pentouz Hillside Squad Cottage",
+        description: "Spacious dorm-style cottage with 8 single beds, 515 sqft interior and 445 sqft private balcony. Ideal for groups and corporate retreats.",
+        image: "/fernhill/squad/25_eight_bedded_room.jpg",
         price: "Price on Request",
       }
     ],
     gallery: [...fernhillImageSet],
     bookingUrl: "https://wa.me/918884449930",
     coordinates: { lat: 13.3166, lng: 75.7720 },
-    idealFor: ["Families", "Groups", "Couples", "Coffee Country Retreats"],
+    idealFor: ["Families", "Groups", "Couples", "Coffee Country Retreats", "Corporate Retreats"],
     location: {
       airport: { name: "Mangalore International Airport", distance: "130 km", time: "3 hours" },
       railway: { name: "Chikmagalur Railway Station", distance: "12 km", time: "30 minutes" }
@@ -416,32 +421,32 @@ export const destinations = [
     },
     livingRooms: [
       {
-        name: "The Hillside Villa",
+        name: "The Pentouz Hillside Villa",
         size: "2,650 sq ft",
-        description: "An expansive four-bedroom villa with a cascade falls sit-out area, separate living room, en-suite bathrooms, and a private courtyard. Ideal for large families or groups of up to 10 guests.",
-        features: ["4 Bedrooms", "Up to 10 Guests", "Cascade Falls Sit-out", "Private Courtyard", "Living Room"],
-        image: "/fernhill/villa-1.jpg"
+        description: "Stylish yet traditional, reflective of modern architecture at its luxurious best. Red hand-cut laterite blocks, earthy hues, and dark woods create a coffee town ambience. Separate living room, bedroom, en-suite bathroom, and private courtyard with cascade falls sit-out area. Ideal for large families or groups of up to 10 guests.",
+        features: ["4 Bedrooms", "Living Room", "Kitchenette", "Up to 10 Guests", "Cascade Falls Sit-out", "Private Courtyard", "En-suite Bathrooms"],
+        image: "/fernhill/villa/51_villa.jpg"
       },
       {
-        name: "The Hillside Cottage",
-        size: "560 sq ft (380 + 180 balcony)",
-        description: "A cozy one-bedroom cottage featuring two king-size beds, a private sit-out area, and views of the surrounding gardens and hills.",
-        features: ["2 King Beds", "Private Balcony", "Sit-out Area", "Garden Views"],
-        image: "/fernhill/fireplace-1.jpg"
+        name: "The Pentouz Hillside Luxury Cottage",
+        size: "380 sqft + 180 sqft Balcony",
+        description: "Spacious rooms fuse contemporary design with rustic touch. Large glass windows and doors open out to private sit-out area. Bedroom with en-suite bathroom and courtyard. Two king-size beds sleeping up to 4 guests.",
+        features: ["2 King Beds", "Up to 4 Guests", "Private Sit-out Area", "180 sqft Private Balcony", "En-suite Bathroom", "Courtyard"],
+        image: "/fernhill/cottage/16_cottage.jpg"
       },
       {
-        name: "The Elegance Cottage",
-        size: "560 sq ft (380 + 180 balcony)",
-        description: "An elegant cottage with two king-size beds, private sit-out, and direct access to the back garden — perfect for those who love being close to nature.",
-        features: ["2 King Beds", "Back Garden Access", "Private Sit-out", "Hill Views"],
-        image: "/fernhill/topview-1.jpg"
+        name: "The Pentouz Hillside Elegance Cottage",
+        size: "380 sqft + 180 sqft Balcony",
+        description: "Feel the elegance in every inch. Walk into private space with back garden. Large windows allow sunshine into the living area. Two king-size beds with en-suite bathroom, courtyard, and direct back garden access — perfect for those who love being close to nature.",
+        features: ["2 King Beds", "Up to 4 Guests", "Back Garden Access", "Private Sit-out Area", "180 sqft Private Balcony", "En-suite Bathroom"],
+        image: "/fernhill/elegance/31_garden_cottage.jpg"
       },
       {
-        name: "The Hill Squad Cottage",
-        size: "960 sq ft (515 + 445 balcony)",
-        description: "A spacious dorm-style cottage with eight single beds and a large private balcony. Designed for groups, friends, or corporate retreats seeking comfort in the hills.",
-        features: ["8 Single Beds", "Large Private Balcony", "Group-Friendly", "Indoor Games"],
-        image: "/fernhill/gazebo-1.jpg"
+        name: "The Pentouz Hillside Squad Cottage",
+        size: "515 sqft + 445 sqft Balcony",
+        description: "Spacious 515 sqft cottage elegantly blends nature with modern opulence. Ideal for groups and corporate retreats. Eight single beds with en-suite bathroom, courtyard, and a large 445 sqft private balcony.",
+        features: ["8 Single Beds", "Up to 8 Guests", "445 sqft Private Balcony", "Group-Friendly", "En-suite Bathroom", "Courtyard"],
+        image: "/fernhill/squad/25_eight_bedded_room.jpg"
       }
     ]
   },

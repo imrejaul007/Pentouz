@@ -57,7 +57,7 @@ const brandNotes = [
   {
     title: "Pentouz Hillside",
     body: "A warm luxury homestay in Chikmagalur's coffee country. Gardens, plantation views, and the unhurried pace of the Western Ghats make it ideal for families, groups, and contemplative getaways.",
-    image: "/fernhill/overview-1.jpg",
+    image: "/fernhill/all/63_overview.jpg",
   },
 ];
 
