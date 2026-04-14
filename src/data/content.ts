@@ -401,7 +401,7 @@ export const destinations = [
       }
     ],
     gallery: [...fernhillImageSet],
-    bookingUrl: "https://api.whatsapp.com/send?phone=919353486686",
+    bookingUrl: "https://wa.me/918884449930",
     coordinates: { lat: 13.3166, lng: 75.7720 },
     idealFor: ["Families", "Groups", "Couples", "Coffee Country Retreats"],
     location: {
