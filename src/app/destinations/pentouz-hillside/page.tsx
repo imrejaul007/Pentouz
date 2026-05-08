@@ -39,10 +39,10 @@ const amenities = [
 ];
 
 const roomPrices: Record<string, string> = {
-  "The Pentouz Hillside Villa": "₹15,000",
-  "The Pentouz Hillside Luxury Cottage": "₹12,000",
-  "The Pentouz Hillside Elegance Cottage": "₹8,000",
-  "The Pentouz Hillside Squad Cottage": "₹5,500",
+  "Entire Homestay with Private Pool": "₹1,20,000",
+  "Ultra-Luxurious Four Bedroom Villa": "₹50,000",
+  "Luxury Cottage with Private Garden": "₹16,000",
+  "Luxury 8 Beds Squad Cottage": "₹30,000",
 };
 
 export default function PentouzHillsidePage() {

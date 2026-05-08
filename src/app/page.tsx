@@ -242,7 +242,7 @@ export default function HomePage() {
               <div className="editorial-divider-left" />
               <p className="chapter-label text-brand-accent">A Pentouz Stay</p>
               <h2 className="luxury-section-title mt-5 max-w-xl">
-                A more private, more personal way to stay in Bangalore and Ooty.
+                A more private, more personal way to stay in Bangalore, Chikmagalur, and Ooty.
               </h2>
             </div>
             <div className="relative hidden lg:block">

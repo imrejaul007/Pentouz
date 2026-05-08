@@ -74,18 +74,18 @@ export default function Header() {
         className={cn(
           "fixed top-0 left-0 right-0 z-40 transition-all duration-500 ease-out",
           isScrolled
-            ? "bg-[#f6f1ea]/96 backdrop-blur-xl border-b border-[#ddd2c1] shadow-[0_12px_40px_rgba(18,16,13,0.08)]"
-            : "bg-gradient-to-b from-black/38 via-black/12 to-transparent"
+            ? "bg-[#1a1510]/98 backdrop-blur-xl border-b border-[#2a2218] shadow-[0_12px_40px_rgba(18,16,13,0.12)]"
+            : "bg-[#12100d]/92"
         )}
       >
-        <div className={cn("hidden xl:block border-b", isScrolled ? "border-black/5" : "border-white/8")}>
+        <div className="hidden xl:block border-b border-white/8">
           <div className="max-w-container-2xl mx-auto px-6 lg:px-16 h-9 flex items-center justify-between">
-            <p className={cn("text-[10px] tracking-[0.18em]", isScrolled ? "text-brand-muted" : "text-white")}>
+            <p className="text-[10px] tracking-[0.18em] text-white/70">
               Bengaluru, Chikmagalur and Ooty
             </p>
             <a
               href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
-              className={cn("text-[10px] tracking-[0.18em] transition-colors", isScrolled ? "text-brand-muted hover:text-brand-gold" : "text-white hover:text-brand-gold")}
+              className="text-[10px] tracking-[0.18em] transition-colors text-white/70 hover:text-brand-gold"
             >
               {contactInfo.phones[0]}
             </a>
@@ -93,7 +93,7 @@ export default function Header() {
               href={contactInfo.whatsapp ? `https://wa.me/${contactInfo.whatsapp.replace(/\+/g, "")}` : "https://wa.me/918884449930"}
               target="_blank"
               rel="noopener noreferrer"
-              className={cn("text-[10px] tracking-[0.18em] transition-colors flex items-center gap-1", isScrolled ? "text-brand-muted hover:text-green-600" : "text-white hover:text-green-400")}
+              className="text-[10px] tracking-[0.18em] transition-colors flex items-center gap-1 text-white/70 hover:text-green-400"
             >
               <MessageCircle className="w-3 h-3" strokeWidth={1.4} />
               WhatsApp
@@ -110,7 +110,7 @@ export default function Header() {
                   alt="The Pentouz"
                   width={168}
                   height={48}
-                  className={cn("h-10 w-auto transition-all duration-500", isScrolled ? "invert" : "")}
+                  className="h-10 w-auto"
                   priority
                 />
               </Link>
@@ -124,12 +124,8 @@ export default function Header() {
                     className={cn(
                       "px-4 py-2 text-[11px] uppercase tracking-[0.18em] transition-all duration-300",
                       isActive(link.href)
-                        ? isScrolled
-                          ? "text-brand-ink"
-                          : "text-white"
-                        : isScrolled
-                          ? "text-brand-muted hover:text-brand-ink"
-                          : "text-white hover:text-white"
+                        ? "text-brand-gold"
+                        : "text-white/85 hover:text-white"
                     )}
                   >
                     {link.label}
@@ -144,7 +140,7 @@ export default function Header() {
                 alt="The Pentouz"
                 width={122}
                 height={36}
-                className={cn("h-9 w-auto transition-all duration-500", isScrolled ? "invert" : "")}
+                className="h-9 w-auto"
                 priority
               />
             </Link>
@@ -152,10 +148,7 @@ export default function Header() {
             <div className="flex items-center gap-3 sm:gap-4">
               <a
                 href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
-                className={cn(
-                  "hidden md:inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] transition-colors",
-                  isScrolled ? "text-brand-muted hover:text-brand-gold" : "text-white hover:text-brand-gold"
-                )}
+                className="hidden md:inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] transition-colors text-white/85 hover:text-brand-gold"
               >
                 <Phone className="w-4 h-4" strokeWidth={1.4} />
                 Concierge
@@ -165,12 +158,7 @@ export default function Header() {
                 href={bookingUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={cn(
-                  "hidden lg:inline-flex items-center gap-2 border px-5 py-3 text-[11px] uppercase tracking-[0.18em] transition-all duration-300",
-                  isScrolled
-                    ? "border-brand-ink text-brand-ink hover:bg-brand-ink hover:text-white"
-                    : "border-white text-white hover:border-brand-gold hover:text-brand-gold"
-                )}
+                className="hidden lg:inline-flex items-center gap-2 border border-white/30 text-white px-5 py-3 text-[11px] uppercase tracking-[0.18em] transition-all duration-300 hover:border-brand-gold hover:text-brand-gold"
               >
                 Book Now
                 <ArrowRight className="w-4 h-4" strokeWidth={1.4} />
@@ -178,12 +166,7 @@ export default function Header() {
 
               <button
                 onClick={() => setIsMenuOpen((open) => !open)}
-                className={cn(
-                  "inline-flex items-center gap-3 rounded-full px-4 py-2.5 transition-all duration-300",
-                  isScrolled
-                    ? "border border-[#ddd2c1] text-brand-ink hover:border-brand-gold hover:text-brand-gold"
-                    : "border border-white text-white hover:border-brand-gold hover:text-brand-gold"
-                )}
+                className="inline-flex items-center gap-3 rounded-full px-4 py-2.5 border border-white/20 text-white transition-all duration-300 hover:border-brand-gold hover:text-brand-gold"
                 aria-label="Toggle menu"
               >
                 <Menu className="w-5 h-5" strokeWidth={1.5} />

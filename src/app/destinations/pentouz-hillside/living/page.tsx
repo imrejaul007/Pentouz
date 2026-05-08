@@ -3,7 +3,6 @@
 import { use, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Calendar, Phone } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -11,99 +10,25 @@ import { destinations, contactInfo } from "@/data/content";
 
 type Destination = (typeof destinations)[number];
 
-type NormalizedRoom = {
-  name: string;
-  size: string;
-  description: string;
-  features: string[];
-  image: string;
-  images: string[];
+const pentouzHillsideLivingTheme = {
+  eyebrow: "Living at The Pentouz Hillside Chikmagalur",
+  heading: "Four distinct accommodations in Karnataka's coffee country.",
+  summary:
+    "The Pentouz Hillside offers four unique accommodations, from a full private pool homestay to a cozy dorm-style cottage, each designed for comfort in the Chikmagalur hills.",
+  introLabel: "Accommodation Collection",
+  roomLabel: "Stay Options",
+  notes: [
+    "Private pool option",
+    "Four-bedroom villa",
+    "Garden-accessible cottages",
+    "Group-friendly dorm",
+  ],
+  featureTitle: "Coffee Country Living",
+  featureBody:
+    "Pentouz Hillside is built around the unhurried rhythm of Chikmagalur — misty mornings, poolside afternoons, and bonfire evenings under the stars.",
 };
 
-const livingThemes: Record<
-  string,
-  {
-    eyebrow: string;
-    heading: string;
-    summary: string;
-    introLabel: string;
-    roomLabel: string;
-    notes: string[];
-    featureTitle: string;
-    featureBody: string;
-  }
-> = {
-  "lavelle-road": {
-    eyebrow: "Living at Lavelle Road",
-    heading: "Beautifully designed studio rooms with panoramic city views.",
-    summary:
-      "The Pentouz Lavelle Road offers elegantly designed top-floor studio accommodations, each balancing space, privacy, and refined comfort in Bangalore's premier neighborhood.",
-    introLabel: "Studio Collection",
-    roomLabel: "Studio Types",
-    notes: [
-      "Top-floor boutique living",
-      "Panoramic city outlook",
-      "Kitchenette-equipped stays",
-      "Refined for business and leisure",
-    ],
-    featureTitle: "The Essential In-Room Amenities",
-    featureBody:
-      "Every studio is designed to blend elegance and practicality, offering the comforts needed for a polished city stay in the heart of Bangalore.",
-  },
-  indiranagar: {
-    eyebrow: "Living at Indiranagar",
-    heading: "A spacious penthouse designed for comfort, privacy, and longer stays.",
-    summary:
-      "The centerpiece of The Pentouz Indiranagar is its thoughtfully designed penthouse with three well-appointed bedrooms, private balconies, and inviting shared spaces that feel warm, generous, and elevated.",
-    introLabel: "Penthouse Living",
-    roomLabel: "Private Suites",
-    notes: [
-      "Three-bedroom private penthouse",
-      "Open terrace and balconies",
-      "Ultra-modern kitchen",
-      "Ideal for families and groups",
-    ],
-    featureTitle: "What Makes The Pentouz Indiranagar Special",
-    featureBody:
-      "This is not a standard room stay. It is a full residential-style experience, with enough space to gather, unwind, work, cook, and stay in comfort for longer periods.",
-  },
-  ooty: {
-    eyebrow: "Living at Ooty",
-    heading: "Rooms shaped by hill air, quiet mornings, and scenic views.",
-    summary:
-      "The Ooty rooms are designed around atmosphere and comfort, creating a slower, more restorative rhythm that fits the hills naturally.",
-    introLabel: "Retreat Living",
-    roomLabel: "Room Types",
-    notes: [
-      "Scenic retreat atmosphere",
-      "Soft and quiet interiors",
-      "Landscape-led stay rhythm",
-      "Comfort for slower escapes",
-    ],
-    featureTitle: "A Softer Living Experience",
-    featureBody:
-      "In Ooty, the room becomes part of the reason you travelled. The mood is calmer, more scenic, and more naturally restorative.",
-  },
-  "pentouz-hillside": {
-    eyebrow: "Living at Hillside Chikmagalur",
-    heading: "Four distinct accommodations in Karnataka's coffee country.",
-    summary:
-      "The Pentouz Hillside offers four unique accommodations, from a full private pool homestay to a cozy dorm-style cottage, each designed for comfort in the Chikmagalur hills.",
-    introLabel: "Accommodation Collection",
-    roomLabel: "Stay Options",
-    notes: [
-      "Private pool option",
-      "Four-bedroom villa",
-      "Garden-accessible cottages",
-      "Group-friendly dorm",
-    ],
-    featureTitle: "Coffee Country Living",
-    featureBody:
-      "Pentouz Hillside is built around the unhurried rhythm of Chikmagalur — misty mornings, poolside afternoons, and bonfire evenings under the stars.",
-  },
-};
-
-function normalizeRooms(destination: Destination): NormalizedRoom[] {
+function normalizeRooms(destination: Destination) {
   if (destination.livingRooms && destination.livingRooms.length > 0) {
     return destination.livingRooms.map((room) => ({
       name: room.name,
@@ -130,14 +55,11 @@ function normalizeRooms(destination: Destination): NormalizedRoom[] {
   }));
 }
 
-export default function LivingPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = use(params);
-  const destination = destinations.find((item) => item.slug === slug);
+export default function PentouzHillsideLivingPage() {
+  const destination = destinations.find((item) => item.slug === "pentouz-hillside")!;
   const [selectedRoom, setSelectedRoom] = useState(0);
 
-  if (!destination) notFound();
-
-  const theme = livingThemes[destination.slug] || livingThemes["lavelle-road"];
+  const theme = pentouzHillsideLivingTheme;
   const rooms = useMemo(() => normalizeRooms(destination), [destination]);
   const activeRoom = rooms[selectedRoom] || rooms[0];
   const supportingImages = activeRoom.images.slice(1, 5);
@@ -174,7 +96,7 @@ export default function LivingPage({ params }: { params: Promise<{ slug: string 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <a href={destination.bookingUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-brand-ink transition-all duration-500 hover:-translate-y-0.5 hover:bg-brand-gold hover:text-white">
                 <Calendar className="h-4 w-4" strokeWidth={1.4} />
-                Book Now
+                Enquire Now
               </a>
               <a href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`} className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-white transition-all duration-500 hover:-translate-y-0.5 hover:border-brand-gold hover:text-brand-gold">
                 Call Concierge
@@ -281,7 +203,7 @@ export default function LivingPage({ params }: { params: Promise<{ slug: string 
                   Back to Property
                 </Link>
                 <a href={destination.bookingUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-brand-ink transition-all duration-500 hover:bg-brand-gold hover:text-white">
-                  Book Now
+                  Enquire Now
                 </a>
               </div>
             </div>

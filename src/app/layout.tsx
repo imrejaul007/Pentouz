@@ -26,11 +26,11 @@ const displayFont = Cormorant_Garamond({
 export const metadata: Metadata = {
   title: "The Pentouz | Luxury Residences & Suites",
   description:
-    "Luxury residences and suites by The Pentouz across Bangalore and Ooty. Reserve bespoke stays with concierge hospitality and lifestyle experiences.",
+    "Luxury residences and suites by The Pentouz across Bangalore, Chikmagalur, and Ooty. Reserve bespoke stays with concierge hospitality and lifestyle experiences.",
   openGraph: {
     title: "The Pentouz | Luxury Residences & Suites",
     description:
-      "Luxury residences and suites by The Pentouz across Bangalore and Ooty. Reserve bespoke stays with concierge hospitality and lifestyle experiences.",
+      "Luxury residences and suites by The Pentouz across Bangalore, Chikmagalur, and Ooty. Reserve bespoke stays with concierge hospitality and lifestyle experiences.",
     url: withSiteUrl("/"),
     siteName: "The Pentouz",
     images: [
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "The Pentouz | Luxury Residences & Suites",
     description:
-      "Luxury residences and suites by The Pentouz across Bangalore and Ooty. Reserve bespoke stays with concierge hospitality and lifestyle experiences.",
+      "Luxury residences and suites by The Pentouz across Bangalore, Chikmagalur, and Ooty. Reserve bespoke stays with concierge hospitality and lifestyle experiences.",
     images: [withSiteUrl("/og-image.jpg")],
   },
   icons: {

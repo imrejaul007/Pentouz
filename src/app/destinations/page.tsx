@@ -8,14 +8,14 @@ import { destinations } from "@/data/content";
 export const metadata = {
   title: "Destinations | The Pentouz",
   description:
-    "Explore The Pentouz collection across Bengaluru and Ooty, from city studios to private penthouse living and hillside retreats.",
+    "Explore The Pentouz collection across Bengaluru, Chikmagalur, and Ooty, from city studios to private penthouse living and hillside retreats.",
 };
 
 const collectionNotes = [
   "Lavelle Road brings central Bangalore access with a calmer boutique feel.",
   "Indiranagar offers a true private penthouse stay with more room to settle in.",
+  "The Pentouz Hillside Chikmagalur anchors the collection with the warmth of a private homestay in coffee country.",
   "Ooty slows everything down with landscape, air, and retreat atmosphere.",
-  "Fernhill anchors the collection with the warmth of a private homestay in Chikmagalur's coffee country.",
 ];
 
 const collectionLinks = [

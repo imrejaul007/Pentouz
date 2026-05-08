@@ -33,6 +33,14 @@ const experienceStories = [
     href: "/destinations/indiranagar/experiences",
   },
   {
+    title: "Chikmagalur coffee country",
+    subtitle: "Coffee plantations, misty hills, and serene escapes",
+    description:
+      "In Chikmagalur, the best experiences are about slowing down: morning coffee on the balcony overlooking plantations, afternoons by the pool, evenings around the bonfire, and star-lit nights in the hills.",
+    image: "/fernhill/all/50_top_view.jpg",
+    href: "/destinations/pentouz-hillside/experiences",
+  },
+  {
     title: "Ooty retreat atmosphere",
     subtitle: "Scenic pace, quiet mornings, and softer travel",
     description:
@@ -96,29 +104,29 @@ export default function ExperiencesPage() {
         <section className="mx-auto max-w-[1440px] px-5 py-18 sm:px-8 lg:px-14 lg:py-24">
           <div className="max-w-3xl">
             <p className="luxury-kicker text-brand-accent">Property Experiences</p>
-            <h2 className="luxury-section-title mt-5">Three different stays, three different kinds of luxury time.</h2>
+            <h2 className="luxury-section-title mt-5">Four distinct stays, four unique ways to experience luxury.</h2>
           </div>
 
-          <div className="mt-14 space-y-12 lg:space-y-16">
+          <div className="mt-14 grid gap-8 md:grid-cols-2">
             {experienceStories.map((story, index) => (
-              <article key={story.title} className={index === 1 ? "grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center" : "grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-center"}>
-                <Link href={story.href} className={index === 1 ? "lg:order-2" : ""}>
-                  <div className="relative aspect-[16/10] overflow-hidden lg:aspect-[4/5]">
-                    <Image src={story.image} alt={story.title} fill className="object-cover transition-transform duration-1000 hover:scale-[1.02]" sizes="(max-width: 1024px) 100vw, 50vw" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+              <article key={story.title} className="group">
+                <Link href={story.href}>
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <Image src={story.image} alt={story.title} fill className="object-cover transition-transform duration-1000 group-hover:scale-[1.03]" sizes="(max-width: 768px) 100vw, 50vw" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                    <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
+                      <p className="text-[10px] uppercase tracking-[0.22em] text-brand-gold mb-2">{story.subtitle}</p>
+                      <h3 className="font-display text-2xl font-light leading-tight">{story.title}</h3>
+                    </div>
+                  </div>
+                  <div className="bg-white p-6">
+                    <p className="text-sm leading-relaxed text-brand-body line-clamp-2">{story.description}</p>
+                    <div className="mt-4 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-brand-ink transition-colors group-hover:gap-3 group-hover:text-brand-gold">
+                      View Experiences
+                      <ArrowRight className="h-4 w-4" strokeWidth={1.4} />
+                    </div>
                   </div>
                 </Link>
-                <div className={index === 1 ? "lg:order-1" : ""}>
-                  <p className="luxury-kicker text-brand-accent">{story.subtitle}</p>
-                  <h3 className="mt-5 font-display text-4xl font-light leading-tight text-brand-ink sm:text-5xl">{story.title}</h3>
-                  <p className="mt-6 text-base leading-8 text-brand-body sm:text-lg">{story.description}</p>
-                  <div className="mt-8">
-                    <Link href={story.href} className="inline-flex items-center gap-2 rounded-full border border-brand-ink px-6 py-3 text-[11px] uppercase tracking-[0.2em] text-brand-ink transition-colors hover:bg-brand-ink hover:text-white">
-                      View Property Experiences
-                      <ArrowRight className="h-4 w-4" strokeWidth={1.4} />
-                    </Link>
-                  </div>
-                </div>
               </article>
             ))}
           </div>

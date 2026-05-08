@@ -8,7 +8,7 @@ import { withSiteUrl } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Stories | The Pentouz",
   description:
-    "A closer look at the addresses, spaces, and atmospheres that shape the Pentouz experience across Lavelle Road, Indiranagar, and Ooty.",
+    "A closer look at the addresses, spaces, and atmospheres that shape the Pentouz experience across Lavelle Road, Indiranagar, Chikmagalur, and Ooty.",
   alternates: {
     canonical: withSiteUrl("/stories"),
   },
@@ -57,7 +57,7 @@ const stories = [
     subtitle: "Coffee country",
     description: "A luxury homestay in Chikmagalur's plantation heart — swimming pool, bonfire evenings, and the smell of fresh coffee every morning.",
     image: "/fernhill/all/03_exterior.jpg",
-    href: "/destinations/fernhill",
+    href: "/destinations/pentouz-hillside",
     category: "Property",
     date: "2025-08-14",
     author: "The Pentouz",
@@ -97,7 +97,7 @@ const stories = [
     subtitle: "Travel guide",
     description: "What to see, drink, and do around the estates — a practical guide to Chikmagalur's best coffee country trails and viewpoints.",
     image: "/fernhill/all/50_top_view.jpg",
-    href: "/destinations/fernhill",
+    href: "/destinations/pentouz-hillside",
     category: "Travel Guide",
     date: "2025-08-30",
     author: "The Pentouz",

@@ -37,7 +37,7 @@ export const destinations = [
   {
     slug: "lavelle-road",
     subtitle: "Lavelle Road, Bangalore",
-    title: "The Pentouz @ Lavelle Road",
+    title: "The Pentouz Lavelle Road",
     shortTitle: "Lavelle Road",
     copy: "Perched in Bangalore's prestigious Lavelle Road, The Pentouz offers an elegant blend of tranquility, sophistication, and city convenience.",
     description: "The Pentouz Lavelle Road boasts exquisitely designed, spacious studio rooms located on the top floor, each offering panoramic city views. Thoughtfully curated for discerning travelers, every studio balances timeless elegance with modern comfort. Set in one of Bangalore's most coveted neighborhoods and just a short stroll from UB City, this address places luxury dining, shopping, and culture right at your doorstep.",
@@ -163,8 +163,8 @@ export const destinations = [
   },
   {
     slug: "indiranagar",
-    subtitle: "Indiranagar, Bangalore",
-    title: "The Pentouz @ 100 Feet Road",
+    subtitle: "100 Feet Road, Indiranagar, Bangalore",
+    title: "The Pentouz 100 Feet Road, Indiranagar",
     shortTitle: "Indiranagar",
     copy: "A luxurious three-bedroom penthouse in the heart of Indiranagar, crafted for families, groups, and business travelers seeking premium comfort.",
     description: "The Pentouz Indiranagar is a luxurious 3-bedroom penthouse nestled in one of Bangalore's most upscale neighborhoods. This exclusive residence blends comfort, elegance, and convenience with spacious interiors and thoughtfully designed living areas. Each bedroom features a private balcony with vibrant city views, plush bedding, ample storage, and tasteful decor for a serene and elevated stay.",
@@ -269,8 +269,8 @@ export const destinations = [
   },
   {
     slug: "ooty",
-    subtitle: "Elk Hill, Ooty",
-    title: "The Pentouz Windsor Heights",
+    subtitle: "Windsor Heights, Ooty",
+    title: "The Pentouz Windsor Heights Ooty",
     shortTitle: "Ooty",
     copy: "A mountain retreat where tea gardens meet misty mornings. Embrace the serenity of the Nilgiris.",
     description: "Escape to the misty hills of the Nilgiris at The Pentouz Windsor Heights. Surrounded by lush tea gardens and colonial charm, our Ooty property offers a tranquil retreat from the ordinary. Whether you're seeking contemplation, celebration, or creative inspiration, the serene mountain setting provides the perfect backdrop for an unforgettable stay.",
@@ -339,10 +339,10 @@ export const destinations = [
   },
   {
     slug: "pentouz-hillside",
-    subtitle: "Chikmagalur, Karnataka",
-    title: "The Pentouz Hillside",
-    shortTitle: "Pentouz Hillside",
-    copy: "Experience the serenity and luxury by the fernhill homestay — a tranquil escape amidst Chikmagalur's coffee country.",
+    subtitle: "Hillside, Chikmagalur, Karnataka",
+    title: "The Pentouz Hillside Chikmagalur",
+    shortTitle: "Chikmagalur",
+    copy: "Experience the serenity and luxury by The Pentouz Hillside Chikmagalur — a tranquil escape amidst Chikmagalur's coffee country.",
     description: "Nestled amidst the Western Ghats of Chikmagalur, The Pentouz Hillside offers a serene escape with luxurious accommodations and personalized service. Features spacious rooms with modern amenities, an on-site restaurant serving local cuisine, serene gardens, and a swimming pool. Red hand-cut laterite blocks, earthy hues, and dark woods create a distinctive coffee town ambience. Whether you're seeking contemplative solitude, a romantic getaway, or quality time with loved ones, Pentouz Hillside delivers with charm, comfort, and a genuine sense of place.",
     image: "/fernhill/all/03_exterior.jpg",
     heroImage: "/fernhill/all/59_property_top_view.jpg",
@@ -381,28 +381,28 @@ export const destinations = [
     ],
     rooms: [
       {
-        name: "The Pentouz Hillside Villa",
+        name: "Entire Homestay with Private Pool",
+        description: "The complete luxury homestay experience with private pool, multiple bedrooms, living areas, and exclusive access to all amenities. Perfect for large families or groups seeking complete privacy.",
+        image: "/fernhill/villa/51_villa.jpg",
+        price: "₹1,20,000",
+      },
+      {
+        name: "Ultra-Luxurious Four Bedroom Villa",
         description: "Stylish yet traditional 4-bedroom villa with living room and kitchenette. Sleeps up to 10 guests with cascade falls sit-out area and private courtyard.",
         image: "/fernhill/villa/51_villa.jpg",
-        price: "Price on Request",
+        price: "₹50,000",
       },
       {
-        name: "The Pentouz Hillside Luxury Cottage",
-        description: "Spacious 1-bedroom cottage with 2 king-size beds, private sit-out area, and 180 sqft private balcony.",
+        name: "Luxury Cottage with Private Garden",
+        description: "Spacious cottage with 2 king-size beds, private sit-out area, 180 sqft private balcony, and direct back garden access.",
         image: "/fernhill/cottage/16_cottage.jpg",
-        price: "Price on Request",
+        price: "₹16,000",
       },
       {
-        name: "The Pentouz Hillside Elegance Cottage",
-        description: "Elegant 1-bedroom cottage with 2 king-size beds, private sit-out area, 180 sqft balcony, and direct back garden access.",
-        image: "/fernhill/elegance/31_garden_cottage.jpg",
-        price: "Price on Request",
-      },
-      {
-        name: "The Pentouz Hillside Squad Cottage",
+        name: "Luxury 8 Beds Squad Cottage",
         description: "Spacious dorm-style cottage with 8 single beds, 515 sqft interior and 445 sqft private balcony. Ideal for groups and corporate retreats.",
         image: "/fernhill/squad/25_eight_bedded_room.jpg",
-        price: "Price on Request",
+        price: "₹30,000",
       }
     ],
     gallery: [...fernhillImageSet],
@@ -421,28 +421,28 @@ export const destinations = [
     },
     livingRooms: [
       {
-        name: "The Pentouz Hillside Villa",
+        name: "Entire Homestay with Private Pool",
+        size: "Full Property",
+        description: "The complete luxury homestay experience. Private pool, multiple bedrooms, living and dining areas, kitchen, and exclusive access to all property amenities. Perfect for large families, groups, or those seeking complete privacy and space.",
+        features: ["Private Pool", "Multiple Bedrooms", "Full Kitchen", "All Amenities", "Complete Privacy", "Up to 12 Guests"],
+        image: "/fernhill/villa/51_villa.jpg"
+      },
+      {
+        name: "Ultra-Luxurious Four Bedroom Villa",
         size: "2,650 sq ft",
-        description: "Stylish yet traditional, reflective of modern architecture at its luxurious best. Red hand-cut laterite blocks, earthy hues, and dark woods create a coffee town ambience. Separate living room, bedroom, en-suite bathroom, and private courtyard with cascade falls sit-out area. Ideal for large families or groups of up to 10 guests.",
+        description: "Stylish yet traditional, reflective of modern architecture at its luxurious best. Red hand-cut laterite blocks, earthy hues, and dark woods create a coffee town ambience. Separate living room, bedrooms, en-suite bathrooms, and private courtyard with cascade falls sit-out area. Ideal for large families or groups of up to 10 guests.",
         features: ["4 Bedrooms", "Living Room", "Kitchenette", "Up to 10 Guests", "Cascade Falls Sit-out", "Private Courtyard", "En-suite Bathrooms"],
         image: "/fernhill/villa/51_villa.jpg"
       },
       {
-        name: "The Pentouz Hillside Luxury Cottage",
+        name: "Luxury Cottage with Private Garden",
         size: "380 sqft + 180 sqft Balcony",
-        description: "Spacious rooms fuse contemporary design with rustic touch. Large glass windows and doors open out to private sit-out area. Bedroom with en-suite bathroom and courtyard. Two king-size beds sleeping up to 4 guests.",
-        features: ["2 King Beds", "Up to 4 Guests", "Private Sit-out Area", "180 sqft Private Balcony", "En-suite Bathroom", "Courtyard"],
+        description: "Spacious rooms fuse contemporary design with rustic touch. Large glass windows and doors open out to private sit-out area and direct back garden access. Bedroom with en-suite bathroom. Two king-size beds sleeping up to 4 guests.",
+        features: ["2 King Beds", "Up to 4 Guests", "Private Garden Access", "Private Sit-out Area", "180 sqft Private Balcony", "En-suite Bathroom"],
         image: "/fernhill/cottage/16_cottage.jpg"
       },
       {
-        name: "The Pentouz Hillside Elegance Cottage",
-        size: "380 sqft + 180 sqft Balcony",
-        description: "Feel the elegance in every inch. Walk into private space with back garden. Large windows allow sunshine into the living area. Two king-size beds with en-suite bathroom, courtyard, and direct back garden access — perfect for those who love being close to nature.",
-        features: ["2 King Beds", "Up to 4 Guests", "Back Garden Access", "Private Sit-out Area", "180 sqft Private Balcony", "En-suite Bathroom"],
-        image: "/fernhill/elegance/31_garden_cottage.jpg"
-      },
-      {
-        name: "The Pentouz Hillside Squad Cottage",
+        name: "Luxury 8 Beds Squad Cottage",
         size: "515 sqft + 445 sqft Balcony",
         description: "Spacious 515 sqft cottage elegantly blends nature with modern opulence. Ideal for groups and corporate retreats. Eight single beds with en-suite bathroom, courtyard, and a large 445 sqft private balcony.",
         features: ["8 Single Beds", "Up to 8 Guests", "445 sqft Private Balcony", "Group-Friendly", "En-suite Bathroom", "Courtyard"],
