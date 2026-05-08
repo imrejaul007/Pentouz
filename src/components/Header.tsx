@@ -184,7 +184,7 @@ export default function Header() {
       <div
         className={cn(
           "fixed inset-0 z-[100] transition-all duration-500 ease-out overflow-hidden",
-          isMenuOpen ? "opacity-100 visible bg-[#12110f]/98" : "opacity-0 invisible pointer-events-none bg-transparent"
+          isMenuOpen ? "opacity-100 visible bg-[#1a1815]" : "opacity-0 invisible pointer-events-none bg-transparent"
         )}
       >
         <div className="absolute inset-0 overflow-hidden pointer-events-none">

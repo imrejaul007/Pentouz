@@ -201,6 +201,13 @@ export const fernhillImageSet = [
   "/fernhill/cottage/22_cottage.jpg",
   "/fernhill/cottage/23_cottage.jpg",
   "/fernhill/cottage/24_cottage.jpg",
+  // Elegance (Garden Cottages)
+  "/fernhill/elegance/31_garden_cottage.jpg",
+  "/fernhill/elegance/32_garden_cottage.jpg",
+  "/fernhill/elegance/33_garden_cottage.jpg",
+  "/fernhill/elegance/34_garden_cottage.jpg",
+  "/fernhill/elegance/35_garden_cottage.jpg",
+  "/fernhill/elegance/36_garden_cottage.jpg",
   // Squad (Eight Bedded Room)
   "/fernhill/squad/25_eight_bedded_room.jpg",
   // Amenities
@@ -209,13 +216,6 @@ export const fernhillImageSet = [
   "/fernhill/all/28_bathroom.jpg",
   "/fernhill/all/29_bathroom.jpg",
   "/fernhill/all/30_bathroom.jpg",
-  // Elegance (Garden Cottages)
-  "/fernhill/elegance/31_garden_cottage.jpg",
-  "/fernhill/elegance/32_garden_cottage.jpg",
-  "/fernhill/elegance/33_garden_cottage.jpg",
-  "/fernhill/elegance/34_garden_cottage.jpg",
-  "/fernhill/elegance/35_garden_cottage.jpg",
-  "/fernhill/elegance/36_garden_cottage.jpg",
   // Restaurant
   "/fernhill/all/37_restaurant.jpg",
   "/fernhill/all/38_restaurant.jpg",

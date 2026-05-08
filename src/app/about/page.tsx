@@ -40,24 +40,24 @@ const principles = [
 
 const brandNotes = [
   {
-    title: "Lavelle Road",
+    title: "The Pentouz Lavelle Road",
     body: "A central Bangalore address designed for advocates, executives, and guests who want premium proximity to the High Court, UB City, MG Road, and the civic core.",
     image: "/lavelle-road/all/reception_2.jpg",
   },
   {
-    title: "Indiranagar",
+    title: "The Pentouz 100 Feet Road, Indiranagar",
     body: "A large private penthouse that feels more like an elevated residence than a conventional hotel product, with strong appeal for families, groups, and longer urban stays.",
     image: "/indiranagar/all/04._living_room_05._living_room.jpg",
   },
   {
-    title: "Ooty",
-    body: "A softer, slower retreat expression built around view, weather, lawns, and the emotional comfort expected from a premium hill-stay experience.",
-    image: "/ooty/all/24._view.jpeg",
-  },
-  {
-    title: "Pentouz Hillside",
+    title: "The Pentouz Hillside Chikmagalur",
     body: "A warm luxury homestay in Chikmagalur's coffee country. Gardens, plantation views, and the unhurried pace of the Western Ghats make it ideal for families, groups, and contemplative getaways.",
     image: "/fernhill/all/63_overview.jpg",
+  },
+  {
+    title: "The Pentouz Windsor Heights Ooty",
+    body: "A softer, slower retreat expression built around view, weather, lawns, and the emotional comfort expected from a premium hill-stay experience.",
+    image: "/ooty/all/24._view.jpeg",
   },
 ];
 
