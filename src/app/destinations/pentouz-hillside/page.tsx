@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import NearAttractions from "@/components/NearAttractions";
 import { destinations, contactInfo } from "@/data/content";
 import { withSiteUrl } from "@/lib/site";
 
@@ -246,6 +247,14 @@ export default function PentouzHillsidePage() {
             </div>
           </div>
         </section>
+
+        {/* Nearby Attractions */}
+        <NearAttractions
+          title="Explore Chikmagalur"
+          subtitle="From misty peaks to cascading waterfalls, discover the best attractions near The Pentouz Hillside."
+          maxItems={6}
+          showFilter={true}
+        />
 
         {/* Booking */}
         <section className="bg-[#1c241c] text-white">

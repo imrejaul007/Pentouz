@@ -632,7 +632,7 @@ export const testimonials = [
     quote: "The Pentouz Hillside in Chikmagalur was a dream. Waking up to coffee plantations and misty hills from the balcony was pure bliss. The staff arranged a private tour of the estate.",
     name: "Deepa R.",
     source: "TripAdvisor",
-    sourceUrl: "https://www.tripadvisor.com/Hotel_Review-g737120-d25270497-Reviews-The_Fernhill_Luxury_Homestay-Chikmagalur_Karnataka.html",
+    sourceUrl: "https://www.tripadvisor.com/Hotel_Review-g737120-d25270497-Reviews-The_Pentouz_Hillside-Chikmagalur_Karnataka.html",
     location: "Hyderabad, India",
   },
   {
