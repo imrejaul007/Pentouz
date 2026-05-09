@@ -3,12 +3,50 @@ import Image from "next/image";
 import { withSiteUrl } from "@/lib/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import HeroSlider from "@/components/HeroSlider";
 import GalleryClient from "./GalleryClient";
 
+const heroImages = [
+  "/fernhill/all/59_property_top_view.jpg",
+  "/indiranagar/all/04._living_room_05._living_room.jpg",
+  "/lavelle-road/all/facade_1.jpg",
+  "/ooty/all/24._view.jpeg",
+];
+
 export const metadata: Metadata = {
-  title: "Gallery | The Pentouz",
+  title: "Gallery | The Pentouz Collection",
   description:
-    "Browse the full image collection across all Pentouz properties: Lavelle Road, Indiranagar, Ooty, and Pentouz Hillside. Filter by location or room category.",
+    "Browse the full image collection across all Pentouz properties: The Pentouz Lavelle Road, Indiranagar, Chikmagalur, and Ooty. Filter by location or room category.",
+  keywords: [
+    "The Pentouz gallery",
+    "luxury accommodation photos",
+    "penthouse images",
+    "boutique hotel gallery",
+    "Chikmagalur homestay photos",
+    "Ooty retreat images",
+  ],
+  openGraph: {
+    title: "Gallery | The Pentouz Collection",
+    description:
+      "Browse the full image collection across all Pentouz properties. Filter by location or room category.",
+    url: withSiteUrl("/gallery"),
+    siteName: "The Pentouz",
+    images: [
+      {
+        url: withSiteUrl("/og-image.jpg"),
+        width: 1200,
+        height: 630,
+        alt: "The Pentouz - Property Gallery",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Gallery | The Pentouz Collection",
+    description:
+      "Browse the full image collection across all Pentouz properties.",
+  },
   alternates: {
     canonical: withSiteUrl("/gallery"),
   },
@@ -21,23 +59,14 @@ export default function GalleryPage() {
       <main className="bg-[#f7f1e7] text-brand-ink">
         {/* Hero */}
         <section className="relative isolate overflow-hidden bg-[#17120e] text-white">
-          <Image
-            src="/fernhill/all/59_property_top_view.jpg"
-            alt="The Pentouz Gallery"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,8,6,0.88)_0%,rgba(10,8,6,0.46)_45%,rgba(10,8,6,0.78)_100%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(196,160,97,0.16),transparent_30%)]" />
-          <div className="relative mx-auto max-w-[1480px] px-5 pb-20 pt-36 sm:px-8 lg:px-14 lg:pb-28 lg:pt-48">
+          <HeroSlider images={heroImages} alt="The Pentouz Gallery" />
+          <div className="relative mx-auto max-w-[1480px] px-5 pb-24 pt-48 sm:px-8 lg:px-14">
             <div className="max-w-4xl">
-              <p className="luxury-kicker text-white/70">A closer look at The Pentouz</p>
-              <h1 className="luxury-hero-title mt-6 text-white">
+              <p className="text-[10px] uppercase tracking-[0.32em] text-brand-gold mb-4">A closer look at The Pentouz</p>
+              <h1 className="font-display text-[2rem] font-light leading-[1] text-white sm:text-[3rem] md:text-[4rem] lg:text-[5rem]">
                 Every space, every property — the full collection.
               </h1>
-              <p className="luxury-copy mt-8 max-w-2xl text-white/76">
+              <p className="mt-6 text-base leading-7 text-white/78 max-w-2xl">
                 Browse all images across Lavelle Road, Indiranagar, Ooty, and Pentouz Hillside. Filter by location or category.
               </p>
             </div>

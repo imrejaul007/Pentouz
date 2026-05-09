@@ -5,18 +5,59 @@ import { ArrowRight } from "lucide-react";
 import { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import HeroSlider from "@/components/HeroSlider";
 import NearAttractions from "@/components/NearAttractions";
 import { destinations, contactInfo } from "@/data/content";
 import { withSiteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "The Pentouz Hillside | Chikmagalur Coffee Country Retreat",
+  title: "The Pentouz Hillside Chikmagalur | Coffee Country Retreat",
   description:
-    "An intimate luxury homestay in Chikmagalur's coffee country. Surrounded by misty hills, lush plantations, swimming pool, bonfire, and warm hospitality.",
+    "Luxury homestay in Chikmagalur's coffee country. Pool, bonfire, plantations, and warm hospitality. Perfect for families and retreats.",
+  keywords: [
+    "The Pentouz Hillside Chikmagalur",
+    "luxury homestay Chikmagalur",
+    "coffee country accommodation",
+    "Chikmagalur swimming pool",
+    "boutique stay Karnataka",
+    "coffee plantation retreat",
+  ],
+  openGraph: {
+    title: "The Pentouz Hillside Chikmagalur | Coffee Country Retreat",
+    description:
+      "An intimate luxury homestay in Chikmagalur's coffee country. Surrounded by misty hills, lush plantations, swimming pool, bonfire, and warm hospitality.",
+    url: withSiteUrl("/destinations/pentouz-hillside"),
+    siteName: "The Pentouz",
+    images: [
+      {
+        url: withSiteUrl("/og-image.jpg"),
+        width: 1200,
+        height: 630,
+        alt: "The Pentouz Hillside Chikmagalur - Coffee Country Retreat",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Pentouz Hillside Chikmagalur | Coffee Country Retreat",
+    description:
+      "Luxury homestay in Chikmagalur's coffee country with pool, bonfire, and plantations.",
+  },
   alternates: {
     canonical: withSiteUrl("/destinations/pentouz-hillside"),
   },
 };
+
+const heroImages = [
+  "/fernhill/all/59_property_top_view.jpg",
+  "/fernhill/all/44_swimming_pool.jpg",
+  "/fernhill/all/50_top_view.jpg",
+  "/fernhill/all/03_exterior.jpg",
+  "/fernhill/all/60_night_view.jpg",
+  "/fernhill/all/55_fireplace.jpg",
+  "/fernhill/villa/51_villa.jpg",
+];
 
 const travelStats = [
   { title: "Mangalore International Airport", distance: "130 kms", time: "3 hrs" },
@@ -55,48 +96,35 @@ export default function PentouzHillsidePage() {
       <Header />
       <main className="bg-[#f5f0e8] text-brand-ink overflow-hidden">
         {/* Hero */}
-        <section className="relative isolate min-h-[100svh] overflow-hidden bg-[#1a1410] text-white">
-          <div className="absolute inset-0">
-            <Image
-              src="/fernhill/all/59_property_top_view.jpg"
-              alt={property.title}
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover scale-[1.03] animate-[fade-in-up_1.5s_cubic-bezier(0.16,1,0.3,1)_forwards]"
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(18,14,10,0.92)_0%,rgba(18,14,10,0.58)_42%,rgba(18,14,10,0.2)_76%,rgba(18,14,10,0.84)_100%)]" />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(18,14,10,0.12)_0%,rgba(18,14,10,0)_30%,rgba(18,14,10,0.78)_100%)]" />
-          </div>
-
-          <div className="relative mx-auto flex min-h-[100svh] max-w-[1480px] flex-col justify-end px-5 pb-16 pt-36 sm:px-8 sm:pb-20 lg:px-14 lg:pb-24 lg:pt-48">
-            <div className="max-w-5xl">
-              <p className="luxury-kicker text-white/72 animate-fade-in-up">Chikmagalur, Karnataka</p>
-              <h1 className="luxury-hero-title mt-6 max-w-5xl text-white animate-fade-in-up [animation-delay:120ms]">
+        <HeroSlider images={heroImages} alt={property.title}>
+          <div className="mx-auto flex min-h-[100svh] max-w-[1480px] flex-col justify-end px-5 pb-24 pt-48 sm:px-8 lg:px-14">
+            <div className="max-w-4xl">
+              <p className="text-[10px] uppercase tracking-[0.32em] text-brand-gold mb-4 animate-fade-in-up">Chikmagalur, Karnataka</p>
+              <h1 className="font-display text-[2rem] font-light leading-[1] sm:text-[3rem] md:text-[4rem] lg:text-[5rem] text-white animate-fade-in-up [animation-delay:120ms]">
                 Wake up in Karnataka&apos;s <em className="italic text-brand-gold">coffee country</em>, wrapped in mist and green.
               </h1>
-              <p className="luxury-copy mt-8 max-w-3xl text-white/78 animate-fade-in-up [animation-delay:220ms]">
-                The Pentouz Hillside is an intimate retreat in the Western Ghats of Chikmagalur, surrounded by sprawling coffee plantations and misty hills. Whether you seek contemplative solitude, a romantic escape, or quality time with loved ones, Pentouz Hillside delivers with charm, comfort, and a genuine sense of place.
+              <p className="mt-6 text-base leading-7 text-white/78 max-w-2xl animate-fade-in-up [animation-delay:220ms]">
+                The Pentouz Hillside is an intimate retreat in the Western Ghats of Chikmagalur, surrounded by sprawling coffee plantations and misty hills.
               </p>
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row animate-fade-in-up [animation-delay:320ms]">
-                <a href={property.bookingUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-brand-ink transition-all duration-500 hover:-translate-y-0.5 hover:bg-brand-gold hover:text-white">
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row animate-fade-in-up [animation-delay:320ms]">
+                <a href={property.bookingUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-[11px] uppercase tracking-[0.18em] text-brand-ink transition-all duration-500 hover:bg-brand-gold hover:text-white">
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" strokeWidth={0}><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 5.99 4.388 10.954 10.125 11.854V24h3.75v-1.146C18.612 22.954 24 18 24 12c0-6.627-5.373-12-12-12zm0 19.25c-4.347 0-8-2.953-8-7.25 0-2.015.776-3.87 2.106-5.303L12 1.875l5.894 4.822A8.255 8.255 0 0 1 20 12.25c0 4.297-3.653 7.25-8 7.25z"/></svg>
                   Enquire on WhatsApp
                 </a>
-                <Link href="/destinations/pentouz-hillside/living" className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-white transition-all duration-500 hover:-translate-y-0.5 hover:border-brand-gold hover:text-brand-gold">
+                <Link href="/destinations/pentouz-hillside/living" className="inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-3 text-[11px] uppercase tracking-[0.18em] text-white transition-all duration-500 hover:border-brand-gold hover:text-brand-gold">
                   Explore Living
                 </Link>
               </div>
             </div>
           </div>
-        </section>
+        </HeroSlider>
 
         {/* Living */}
         <section className="bg-white border-t border-[#e0d6c8]">
           <div className="mx-auto grid max-w-[1480px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:px-14 lg:py-28 lg:items-center">
             <div className="animate-fade-in-up">
               <div className="relative aspect-[4/5] overflow-hidden shadow-[0_24px_80px_rgba(18,15,12,0.08)]">
-                <Image src="/fernhill/all/50_top_view.jpg" alt="The Pentouz Hillside living" fill className="object-cover transition-transform duration-[1400ms] hover:scale-105" sizes="(max-width: 1024px) 100vw, 44vw" />
+                <Image src="/fernhill/all/50_top_view.jpg" alt="The Pentouz Hillside living" fill priority className="object-cover transition-transform duration-[1400ms] hover:scale-105" sizes="(max-width: 1024px) 100vw, 44vw" />
               </div>
             </div>
             <div className="animate-fade-in-up animate-delay-200">
@@ -137,6 +165,7 @@ export default function PentouzHillsidePage() {
                       src={room.image}
                       alt={room.name}
                       fill
+                      priority={index === 0}
                       className="object-cover transition-transform duration-[1400ms] hover:scale-105"
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     />
@@ -239,6 +268,7 @@ export default function PentouzHillsidePage() {
                     src={image}
                     alt={`The Pentouz Hillside ${index + 1}`}
                     fill
+                    priority={index === 0}
                     className="object-cover transition-transform duration-[1400ms] hover:scale-105"
                     sizes="(max-width: 1024px) 100vw, 33vw"
                   />

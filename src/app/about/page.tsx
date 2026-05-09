@@ -4,12 +4,50 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import HeroSlider from "@/components/HeroSlider";
 import { withSiteUrl } from "@/lib/site";
+
+const heroImages = [
+  "/indiranagar/all/04._living_room_03._living_room.jpg",
+  "/fernhill/all/63_overview.jpg",
+  "/lavelle-road/all/reception_2.jpg",
+  "/ooty/all/24._view.jpeg",
+];
 
 export const metadata: Metadata = {
   title: "About | The Pentouz",
   description:
-    "The Pentouz brand story: boutique luxury hospitality shaped around how guests actually travel, with stays in Lavelle Road, Indiranagar, Ooty, and Chikmagalur.",
+    "The Pentouz brand story: boutique luxury hospitality shaped around how guests actually travel. Properties include The Pentouz Lavelle Road, Indiranagar, Hillside Chikmagalur, and Windsor Heights Ooty.",
+  keywords: [
+    "about The Pentouz",
+    "The Pentouz brand story",
+    "boutique luxury hospitality",
+    "luxury accommodation brand",
+    "The Pentouz properties",
+    "pentouz history",
+  ],
+  openGraph: {
+    title: "About | The Pentouz",
+    description:
+      "The Pentouz brand story: boutique luxury hospitality shaped around how guests actually travel.",
+    url: withSiteUrl("/about"),
+    siteName: "The Pentouz",
+    images: [
+      {
+        url: withSiteUrl("/og-image.jpg"),
+        width: 1200,
+        height: 630,
+        alt: "About The Pentouz - Brand Story",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About | The Pentouz",
+    description:
+      "The Pentouz brand story: boutique luxury hospitality.",
+  },
   alternates: {
     canonical: withSiteUrl("/about"),
   },
@@ -67,26 +105,15 @@ export default function AboutPage() {
       <Header />
       <main className="bg-[#f8f2e8] text-brand-ink">
         <section className="relative isolate overflow-hidden text-white">
-          <div className="absolute inset-0">
-            <Image
-              src="/indiranagar/all/04._living_room_03._living_room.jpg"
-              alt="The Pentouz brand story"
-              fill
-              priority
-              className="object-cover"
-              sizes="100vw"
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(12,10,8,0.9)_0%,rgba(12,10,8,0.56)_40%,rgba(12,10,8,0.25)_75%,rgba(12,10,8,0.7)_100%)]" />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,10,8,0.12)_0%,rgba(12,10,8,0)_35%,rgba(12,10,8,0.75)_100%)]" />
-          </div>
+          <HeroSlider images={heroImages} alt="About Pentouz" />
 
-          <div className="relative mx-auto flex min-h-[82vh] max-w-[1440px] items-end px-5 pb-16 pt-40 sm:px-8 lg:px-14 lg:pb-24">
+          <div className="relative mx-auto max-w-[1440px] px-5 pb-24 pt-48 sm:px-8 lg:px-14">
             <div className="max-w-4xl">
-              <p className="luxury-kicker text-white/72">About Pentouz</p>
-              <h1 className="luxury-hero-title mt-6 max-w-4xl text-white">
+              <p className="text-[10px] uppercase tracking-[0.32em] text-brand-gold mb-4">About Pentouz</p>
+              <h1 className="font-display text-[2rem] font-light leading-[1] text-white sm:text-[3rem] md:text-[4rem] lg:text-[5rem]">
                 Pentouz was built to feel more personal than a hotel, and more polished than a rental.
               </h1>
-              <p className="luxury-copy mt-8 max-w-2xl text-white/76">
+              <p className="mt-6 text-base leading-7 text-white/78 max-w-2xl">
                 The brand sits in the space between private residence and premium hospitality. That is why the strongest Pentouz stays rely on room scale, calm atmosphere, and strong city or landscape positioning rather than generic luxury promises.
               </p>
             </div>

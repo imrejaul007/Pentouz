@@ -5,6 +5,7 @@ import { ArrowRight, Calendar } from "lucide-react";
 import { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import HeroSlider from "@/components/HeroSlider";
 import { destinations, contactInfo } from "@/data/content";
 import { withSiteUrl } from "@/lib/site";
 
@@ -42,44 +43,40 @@ export default function IndiranagarPage() {
   const property = destinations.find((destination) => destination.slug === "indiranagar");
   if (!property) notFound();
 
+  const heroImages = [
+    "/indiranagar/all/06._terrace_05._terrace..jpg",
+    "/indiranagar/all/04._living_room_01._living_room.jpg",
+    "/indiranagar/all/04._living_room_03._living_room.jpg",
+    "/indiranagar/all/06._terrace_01._terrace.jpg",
+  ];
+
   return (
     <>
       <Header />
       <main className="bg-[#f7f0e5] text-brand-ink overflow-hidden">
         <section className="relative isolate min-h-[100svh] overflow-hidden bg-[#15120f] text-white">
-          <div className="absolute inset-0">
-            <Image
-              src="/indiranagar/all/06._terrace_05._terrace..jpg"
-              alt={property.title}
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover scale-[1.03] animate-[fade-in-up_1.5s_cubic-bezier(0.16,1,0.3,1)_forwards]"
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,8,6,0.92)_0%,rgba(10,8,6,0.62)_42%,rgba(10,8,6,0.22)_76%,rgba(10,8,6,0.82)_100%)]" />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,8,6,0.16)_0%,rgba(10,8,6,0)_30%,rgba(10,8,6,0.78)_100%)]" />
-          </div>
-
-          <div className="relative mx-auto flex min-h-[100svh] max-w-[1480px] flex-col justify-end px-5 pb-16 pt-36 sm:px-8 sm:pb-20 lg:px-14 lg:pb-24 lg:pt-48">
-            <div className="max-w-5xl">
-              <p className="luxury-kicker text-white/72 animate-fade-in-up">100 Feet Road, Indiranagar</p>
-              <h1 className="luxury-hero-title mt-6 max-w-5xl text-white animate-fade-in-up [animation-delay:120ms]">
-                A private <em className="italic text-brand-gold">three-bedroom penthouse</em> in one of Bengaluru&apos;s most vibrant neighborhoods.
-              </h1>
-              <p className="luxury-copy mt-8 max-w-3xl text-white/78 animate-fade-in-up [animation-delay:220ms]">
-                The Pentouz Indiranagar, a luxurious 3-bedroom penthouse nestled in the heart of one of Bangalore&apos;s most upscale neighborhoods. This exclusive property offers an exquisite blend of comfort, elegance, and convenience, making it the ideal destination for families, groups, or business travelers seeking a premium experience.
-              </p>
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row animate-fade-in-up [animation-delay:320ms]">
-                <a href={property.bookingUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-brand-ink transition-all duration-500 hover:-translate-y-0.5 hover:bg-brand-gold hover:text-white">
-                  <Calendar className="h-4 w-4" strokeWidth={1.4} />
-                  Book Now
-                </a>
-                <Link href="/destinations/indiranagar/living" className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-white transition-all duration-500 hover:-translate-y-0.5 hover:border-brand-gold hover:text-brand-gold">
-                  Explore Living
-                </Link>
+          <HeroSlider images={heroImages} alt={property.title}>
+            <div className="relative mx-auto flex min-h-[100svh] max-w-[1480px] flex-col justify-end px-5 pb-24 pt-48 sm:px-8 sm:pb-20 lg:px-14 lg:pb-24">
+              <div className="max-w-5xl">
+                <p className="text-[10px] uppercase tracking-[0.32em] text-brand-gold mb-4 animate-fade-in-up">100 Feet Road, Indiranagar</p>
+                <h1 className="font-display text-[2rem] font-light leading-[1] sm:text-[3rem] md:text-[4rem] lg:text-[5rem] mt-6 max-w-5xl text-white animate-fade-in-up [animation-delay:120ms]">
+                  A private <em className="italic text-brand-gold">three-bedroom penthouse</em> in one of Bengaluru&apos;s most vibrant neighborhoods.
+                </h1>
+                <p className="mt-6 text-base leading-7 text-white/78 max-w-2xl animate-fade-in-up [animation-delay:220ms]">
+                  The Pentouz Indiranagar, a luxurious 3-bedroom penthouse nestled in the heart of one of Bangalore&apos;s most upscale neighborhoods. This exclusive property offers an exquisite blend of comfort, elegance, and convenience, making it the ideal destination for families, groups, or business travelers seeking a premium experience.
+                </p>
+                <div className="mt-10 flex flex-col gap-4 sm:flex-row animate-fade-in-up [animation-delay:320ms]">
+                  <a href={property.bookingUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-brand-ink transition-all duration-500 hover:-translate-y-0.5 hover:bg-brand-gold hover:text-white">
+                    <Calendar className="h-4 w-4" strokeWidth={1.4} />
+                    Book Now
+                  </a>
+                  <Link href="/destinations/indiranagar/living" className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-white transition-all duration-500 hover:-translate-y-0.5 hover:border-brand-gold hover:text-brand-gold">
+                    Explore Living
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
+          </HeroSlider>
         </section>
 
         <section className="bg-white border-t border-[#e5d9c9]">

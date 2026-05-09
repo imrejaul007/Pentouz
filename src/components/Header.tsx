@@ -74,8 +74,8 @@ export default function Header() {
         className={cn(
           "fixed top-0 left-0 right-0 z-40 transition-all duration-500 ease-out",
           isScrolled
-            ? "bg-[#1a1510]/98 backdrop-blur-xl border-b border-[#2a2218] shadow-[0_12px_40px_rgba(18,16,13,0.12)]"
-            : "bg-[#12100d]/92"
+            ? "bg-[#1a1815]/98 backdrop-blur-xl border-b border-[#2a2218] shadow-[0_12px_40px_rgba(18,16,13,0.12)]"
+            : "bg-[#1a1815]/92"
         )}
       >
         <div className="hidden xl:block border-b border-white/8">
@@ -188,8 +188,8 @@ export default function Header() {
         )}
       >
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-24 left-6 h-40 w-40 rounded-full bg-brand-gold/8 blur-3xl" />
-          <div className="absolute bottom-24 right-6 h-56 w-56 rounded-full bg-[#a28758]/10 blur-3xl" />
+          <div className="absolute top-24 left-6 h-32 w-32 rounded-full bg-brand-gold/5" />
+          <div className="absolute bottom-24 right-6 h-40 w-40 rounded-full bg-[#a28758]/8" />
         </div>
 
         <div className="relative z-10 h-full flex flex-col">
@@ -273,36 +273,36 @@ export default function Header() {
                 <p className="text-[10px] uppercase tracking-[0.32em] text-brand-gold mb-8 font-medium">
                   Residences
                 </p>
-                <div className="space-y-4">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-4">
                   {destinations.map((dest, index) => (
                     <Link
                       key={dest.slug}
                       href={`/destinations/${dest.slug}`}
                       onClick={() => setIsMenuOpen(false)}
-                      className="group grid grid-cols-[92px_1fr] gap-4 items-center border border-white/10 bg-white/[0.03] p-3 hover:border-brand-gold/35 transition-colors"
+                      className="group grid grid-cols-[80px_1fr] sm:grid-cols-[92px_1fr] gap-3 sm:gap-4 items-center border border-white/10 bg-white/[0.03] p-2.5 sm:p-3 hover:border-brand-gold/35 transition-colors"
                       style={{
                         opacity: isMenuOpen ? 1 : 0,
                         transform: isMenuOpen ? "translateY(0)" : "translateY(20px)",
                         transition: `all 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${0.28 + index * 0.06}s`,
                       }}
                     >
-                      <div className="relative h-24 overflow-hidden">
+                      <div className="relative h-16 sm:h-24 overflow-hidden">
                         <Image
                           src={dest.heroImage || dest.image}
                           alt={dest.title}
                           fill
                           className="object-cover transition-transform duration-700 group-hover:scale-105"
-                          sizes="92px"
+                          sizes="(min-width: 640px) 92px, 80px"
                         />
                       </div>
                       <div>
-                        <p className="text-[10px] uppercase tracking-[0.2em] text-white/55 mb-2">
+                        <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-white/55 mb-1 sm:mb-2">
                           {dest.subtitle}
                         </p>
-                        <p className="font-display text-2xl font-light text-white mb-2 group-hover:text-brand-gold transition-colors">
-                          {dest.shortTitle}
+                        <p className="font-display text-lg sm:text-2xl font-light text-white mb-1 sm:mb-2 group-hover:text-brand-gold transition-colors">
+                          {dest.title}
                         </p>
-                        <p className="text-sm text-white/65 line-clamp-2">{dest.copy}</p>
+                        <p className="text-xs sm:text-sm text-white/65 line-clamp-2 hidden sm:block">{dest.copy}</p>
                       </div>
                     </Link>
                   ))}

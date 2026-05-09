@@ -424,7 +424,7 @@ export const destinations = [
         name: "Entire Homestay with Private Pool",
         size: "Full Property",
         description: "The complete luxury homestay experience. Private pool, multiple bedrooms, living and dining areas, kitchen, and exclusive access to all property amenities. Perfect for large families, groups, or those seeking complete privacy and space.",
-        features: ["Private Pool", "Multiple Bedrooms", "Full Kitchen", "All Amenities", "Complete Privacy", "Up to 12 Guests"],
+        features: ["Private Pool", "Multiple Bedrooms", "Full Kitchen", "All Amenities", "Complete Privacy", "Up to 34 Guests"],
         image: "/fernhill/villa/51_villa.jpg"
       },
       {

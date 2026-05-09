@@ -5,8 +5,16 @@ import { ArrowRight, Phone } from "lucide-react";
 import { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import HeroSlider from "@/components/HeroSlider";
 import { destinations, contactInfo } from "@/data/content";
 import { withSiteUrl } from "@/lib/site";
+
+const heroImages = [
+  "/ooty/all/1._facade.jpeg",
+  "/ooty/all/3._facade.jpeg",
+  "/ooty/all/22._lawn.jpeg",
+  "/ooty/all/24._view.jpeg",
+];
 
 export const metadata: Metadata = {
   title: "The Pentouz @ Ooty | Windsor Heights Nilgiri Hills",
@@ -43,39 +51,28 @@ export default function OotyPage() {
       <Header />
       <main className="bg-[#eff1ea] text-brand-ink overflow-hidden">
         <section className="relative isolate min-h-[100svh] overflow-hidden bg-[#121612] text-white">
-          <div className="absolute inset-0">
-            <Image
-              src="/ooty/all/24._view.jpeg"
-              alt={property.title}
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover scale-[1.03] animate-[fade-in-up_1.5s_cubic-bezier(0.16,1,0.3,1)_forwards]"
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,14,10,0.9)_0%,rgba(9,14,10,0.56)_40%,rgba(9,14,10,0.18)_74%,rgba(9,14,10,0.76)_100%)]" />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,14,10,0.14)_0%,rgba(9,14,10,0)_30%,rgba(9,14,10,0.78)_100%)]" />
-          </div>
-
-          <div className="relative mx-auto flex min-h-[100svh] max-w-[1480px] flex-col justify-end px-5 pb-16 pt-36 sm:px-8 sm:pb-20 lg:px-14 lg:pb-24 lg:pt-48">
-            <div className="max-w-5xl">
-              <p className="luxury-kicker text-white/72 animate-fade-in-up">Elk Hill, Ooty</p>
-              <h1 className="luxury-hero-title mt-6 max-w-5xl text-white animate-fade-in-up [animation-delay:120ms]">
-                A quieter Pentouz stay, shaped by <em className="italic text-brand-gold">mist, hills, and stillness</em>.
-              </h1>
-              <p className="luxury-copy mt-8 max-w-3xl text-white/78 animate-fade-in-up [animation-delay:220ms]">
-                Escape to the misty hills of the Nilgiris at The Pentouz Windsor Heights, Ooty. Surrounded by lush tea gardens and steeped in colonial charm, this property offers a tranquil retreat from the ordinary and a softer, more scenic expression of the Pentouz experience.
-              </p>
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row animate-fade-in-up [animation-delay:320ms]">
-                <Link href="/contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-brand-ink transition-all duration-500 hover:-translate-y-0.5 hover:bg-brand-gold hover:text-white">
-                  Contact Reservations
-                  <ArrowRight className="h-4 w-4" strokeWidth={1.4} />
-                </Link>
-                <Link href="/destinations/ooty/living" className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-white transition-all duration-500 hover:-translate-y-0.5 hover:border-brand-gold hover:text-brand-gold">
-                  Explore Living
-                </Link>
+          <HeroSlider images={heroImages} alt={property.title}>
+            <div className="relative mx-auto flex min-h-[100svh] max-w-[1480px] flex-col justify-end px-5 pb-24 pt-48 sm:px-8 sm:pb-20 lg:px-14 lg:pb-24 lg:pt-48">
+              <div className="max-w-5xl">
+                <p className="text-[10px] uppercase tracking-[0.32em] text-brand-gold mb-4 animate-fade-in-up">Elk Hill, Ooty</p>
+                <h1 className="font-display text-[2rem] font-light leading-[1] sm:text-[3rem] md:text-[4rem] lg:text-[5rem] max-w-5xl text-white animate-fade-in-up [animation-delay:120ms]">
+                  A quieter Pentouz stay, shaped by <em className="italic text-brand-gold">mist, hills, and stillness</em>.
+                </h1>
+                <p className="mt-6 text-base leading-7 text-white/78 max-w-2xl animate-fade-in-up [animation-delay:220ms]">
+                  Escape to the misty hills of the Nilgiris at The Pentouz Windsor Heights, Ooty. Surrounded by lush tea gardens and steeped in colonial charm, this property offers a tranquil retreat from the ordinary and a softer, more scenic expression of the Pentouz experience.
+                </p>
+                <div className="mt-10 flex flex-col gap-4 sm:flex-row animate-fade-in-up [animation-delay:320ms]">
+                  <Link href="/contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-brand-ink transition-all duration-500 hover:-translate-y-0.5 hover:bg-brand-gold hover:text-white">
+                    Contact Reservations
+                    <ArrowRight className="h-4 w-4" strokeWidth={1.4} />
+                  </Link>
+                  <Link href="/destinations/ooty/living" className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-white transition-all duration-500 hover:-translate-y-0.5 hover:border-brand-gold hover:text-brand-gold">
+                    Explore Living
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
+          </HeroSlider>
         </section>
 
         <section className="bg-white border-t border-[#dbe1d7]">

@@ -4,12 +4,50 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import HeroSlider from "@/components/HeroSlider";
 import { withSiteUrl } from "@/lib/site";
+
+const heroImages = [
+  "/ooty/all/21._restaurant.jpeg",
+  "/fernhill/all/50_top_view.jpg",
+  "/indiranagar/all/tpi_pictures_low_res_terrace_7.jpg",
+  "/lavelle-road/all/restaurant_1.jpg",
+];
 
 export const metadata: Metadata = {
   title: "Experiences | The Pentouz",
   description:
-    "Discover the experiences that define each Pentouz stay: city ease at Lavelle Road, private penthouse living in Indiranagar, and scenic quiet in Ooty.",
+    "Discover curated experiences at each Pentouz property: city access at Lavelle Road, penthouse living in Indiranagar, coffee country in Chikmagalur, and scenic retreats in Ooty.",
+  keywords: [
+    "The Pentouz experiences",
+    "luxury travel experiences",
+    "Bangalore curated stays",
+    "Chikmagalur activities",
+    "Ooty travel experiences",
+    "penthouse living",
+  ],
+  openGraph: {
+    title: "Experiences | The Pentouz",
+    description:
+      "Discover curated experiences at each Pentouz property: city access, penthouse living, coffee country, and scenic retreats.",
+    url: withSiteUrl("/experiences"),
+    siteName: "The Pentouz",
+    images: [
+      {
+        url: withSiteUrl("/og-image.jpg"),
+        width: 1200,
+        height: 630,
+        alt: "The Pentouz - Curated Experiences",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Experiences | The Pentouz",
+    description:
+      "Discover curated experiences at each Pentouz property.",
+  },
   alternates: {
     canonical: withSiteUrl("/experiences"),
   },
@@ -71,20 +109,16 @@ export default function ExperiencesPage() {
       <Header />
       <main className="bg-[#f8f2e8] text-brand-ink">
         <section className="relative isolate overflow-hidden text-white">
-          <div className="absolute inset-0">
-            <Image src="/ooty/all/21._restaurant.jpeg" alt="Pentouz experiences" fill priority className="object-cover" sizes="100vw" />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(12,10,8,0.9)_0%,rgba(12,10,8,0.58)_42%,rgba(12,10,8,0.24)_75%,rgba(12,10,8,0.7)_100%)]" />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,10,8,0.15)_0%,rgba(12,10,8,0)_30%,rgba(12,10,8,0.8)_100%)]" />
-          </div>
+          <HeroSlider images={heroImages} alt="Pentouz experiences" />
 
-          <div className="relative mx-auto flex min-h-[78vh] max-w-[1440px] items-end px-5 pb-16 pt-40 sm:px-8 lg:px-14 lg:pb-24">
+          <div className="relative mx-auto max-w-[1440px] px-5 pb-24 pt-48 sm:px-8 lg:px-14">
             <div className="max-w-4xl">
-              <p className="luxury-kicker text-white/72">Experiences</p>
-              <h1 className="luxury-hero-title mt-6 max-w-4xl text-white">
+              <p className="text-[10px] uppercase tracking-[0.32em] text-brand-gold mb-4">Experiences</p>
+              <h1 className="font-display text-[2rem] font-light leading-[1] text-white sm:text-[3rem] md:text-[4rem] lg:text-[5rem]">
                 The best Pentouz experiences begin with the stay itself, then open into the right version of the city or landscape.
               </h1>
-              <p className="luxury-copy mt-8 max-w-2xl text-white/76">
-                Each property offers a different rhythm: city ease at Lavelle Road, private penthouse living in Indiranagar, and scenic quiet in Ooty.
+              <p className="mt-6 text-base leading-7 text-white/78 max-w-2xl">
+                Each property offers a different rhythm: city ease at Lavelle Road, private penthouse living in Indiranagar, coffee country escapes in Chikmagalur, and scenic quiet in Ooty.
               </p>
             </div>
           </div>
@@ -107,21 +141,27 @@ export default function ExperiencesPage() {
             <h2 className="luxury-section-title mt-5">Four distinct stays, four unique ways to experience luxury.</h2>
           </div>
 
-          <div className="mt-14 grid gap-8 md:grid-cols-2">
+          <div className="mt-14 grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-10">
             {experienceStories.map((story, index) => (
-              <article key={story.title} className="group">
-                <Link href={story.href}>
-                  <div className="relative aspect-[4/3] overflow-hidden">
-                    <Image src={story.image} alt={story.title} fill className="object-cover transition-transform duration-1000 group-hover:scale-[1.03]" sizes="(max-width: 768px) 100vw, 50vw" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                    <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-                      <p className="text-[10px] uppercase tracking-[0.22em] text-brand-gold mb-2">{story.subtitle}</p>
-                      <h3 className="font-display text-2xl font-light leading-tight">{story.title}</h3>
+              <article key={story.title} className="group flex flex-col">
+                <Link href={story.href} className="flex flex-col h-full">
+                  <div className="relative aspect-[16/10] overflow-hidden bg-[#e8e4de]">
+                    <Image
+                      src={story.image}
+                      alt={story.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                    <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6 text-white">
+                      <p className="text-[10px] uppercase tracking-[0.25em] text-brand-gold mb-2">{story.subtitle}</p>
+                      <h3 className="font-display text-xl sm:text-2xl font-light leading-tight">{story.title}</h3>
                     </div>
                   </div>
-                  <div className="bg-white p-6">
-                    <p className="text-sm leading-relaxed text-brand-body line-clamp-2">{story.description}</p>
-                    <div className="mt-4 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-brand-ink transition-colors group-hover:gap-3 group-hover:text-brand-gold">
+                  <div className="flex-1 bg-white p-5 sm:p-6 flex flex-col justify-between min-h-[140px]">
+                    <p className="text-sm leading-relaxed text-brand-body line-clamp-3">{story.description}</p>
+                    <div className="mt-4 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-brand-ink transition-all duration-300 group-hover:gap-3 group-hover:text-brand-gold">
                       View Experiences
                       <ArrowRight className="h-4 w-4" strokeWidth={1.4} />
                     </div>

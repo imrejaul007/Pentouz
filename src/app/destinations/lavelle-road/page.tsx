@@ -5,8 +5,15 @@ import { ArrowRight, Calendar } from "lucide-react";
 import { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import HeroSlider from "@/components/HeroSlider";
 import { destinations, contactInfo } from "@/data/content";
 import { withSiteUrl } from "@/lib/site";
+
+const heroImages = [
+  "/lavelle-road/facade-2.jpg",
+  "/lavelle-road/entrance-1.jpg",
+  "/lavelle-road/entrance-2.jpg",
+];
 
 export const metadata: Metadata = {
   title: "The Pentouz @ Lavelle Road | Luxury Studio Boutique Hotel Bangalore",
@@ -46,27 +53,14 @@ export default function LavelleRoadPage() {
     <>
       <Header />
       <main className="bg-[#f7f0e5] text-brand-ink overflow-hidden">
-        <section className="relative isolate min-h-[100svh] overflow-hidden bg-[#15120f] text-white">
-          <div className="absolute inset-0">
-            <Image
-              src="/lavelle-road/all/facade_2.jpg"
-              alt={property.title}
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover scale-[1.03] animate-[fade-in-up_1.5s_cubic-bezier(0.16,1,0.3,1)_forwards]"
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,8,6,0.92)_0%,rgba(10,8,6,0.62)_42%,rgba(10,8,6,0.22)_76%,rgba(10,8,6,0.82)_100%)]" />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,8,6,0.16)_0%,rgba(10,8,6,0)_30%,rgba(10,8,6,0.78)_100%)]" />
-          </div>
-
-          <div className="relative mx-auto flex min-h-[100svh] max-w-[1480px] flex-col justify-end px-5 pb-16 pt-36 sm:px-8 sm:pb-20 lg:px-14 lg:pb-24 lg:pt-48">
+        <HeroSlider images={heroImages} alt={property.title}>
+          <div className="mx-auto flex min-h-[100svh] max-w-[1480px] flex-col justify-end px-5 pb-24 pt-48 text-white sm:px-8 lg:px-14">
             <div className="max-w-5xl">
-              <p className="luxury-kicker text-white/72 animate-fade-in-up">Lavelle Road, Bangalore</p>
-              <h1 className="luxury-hero-title mt-6 max-w-5xl text-white animate-fade-in-up [animation-delay:120ms]">
+              <p className="text-[10px] uppercase tracking-[0.32em] text-brand-gold mb-4 animate-fade-in-up">Lavelle Road, Bangalore</p>
+              <h1 className="font-display text-[2rem] font-light leading-[1] text-white animate-fade-in-up sm:text-[3rem] md:text-[4rem] lg:text-[5rem] [animation-delay:120ms]">
                 Boutique luxury in one of Bengaluru&apos;s most <em className="italic text-brand-gold">prestigious</em> neighborhoods.
               </h1>
-              <p className="luxury-copy mt-8 max-w-3xl text-white/78 animate-fade-in-up [animation-delay:220ms]">
+              <p className="mt-6 text-base leading-7 text-white/78 max-w-2xl animate-fade-in-up [animation-delay:220ms]">
                 Perched in the heart of Bangalore&apos;s prestigious Lavelle Road, The Pentouz offers an unparalleled blend of tranquility and sophistication. Nestled amidst one of the city&apos;s most coveted neighborhoods, it provides an oasis of peace while keeping you connected to the vibrancy of urban life.
               </p>
               <div className="mt-10 flex flex-col gap-4 sm:flex-row animate-fade-in-up [animation-delay:320ms]">
@@ -80,7 +74,7 @@ export default function LavelleRoadPage() {
               </div>
             </div>
           </div>
-        </section>
+        </HeroSlider>
 
         <section className="bg-white border-t border-[#e5d9c9]">
           <div className="mx-auto grid max-w-[1480px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:px-14 lg:py-28 lg:items-center">

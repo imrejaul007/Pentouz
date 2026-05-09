@@ -3,7 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import HeroSlider from "@/components/HeroSlider";
 import { withSiteUrl } from "@/lib/site";
+
+const heroImages = [
+  "/indiranagar/all/tpi_pictures_low_res_terrace_7.jpg",
+  "/fernhill/all/03_exterior.jpg",
+  "/lavelle-road/all/facade_1.jpg",
+  "/ooty/all/01._facade_1.jpeg",
+];
 
 export const metadata: Metadata = {
   title: "Stories | The Pentouz",
@@ -150,25 +158,15 @@ export default function StoriesPage() {
       <Header />
       <main className="bg-[#f7f1e7] text-brand-ink">
         <section className="relative isolate overflow-hidden bg-[#17120e] text-white">
-          <div className="absolute inset-0">
-            <Image
-              src="/indiranagar/all/tpi_pictures_low_res_terrace_7.jpg"
-              alt="The Pentouz stories"
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover opacity-55"
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,8,6,0.9)_0%,rgba(10,8,6,0.48)_44%,rgba(10,8,6,0.84)_100%)]" />
-          </div>
+          <HeroSlider images={heroImages} alt="The Pentouz stories" />
 
-          <div className="relative mx-auto max-w-[1480px] px-5 pb-20 pt-36 sm:px-8 lg:px-14 lg:pb-28 lg:pt-48">
+          <div className="relative mx-auto max-w-[1480px] px-5 pb-24 pt-48 sm:px-8 lg:px-14">
             <div className="max-w-4xl">
-              <p className="luxury-kicker text-white/70 animate-fade-in-up">Discover The Pentouz</p>
-              <h1 className="luxury-hero-title mt-6 text-white animate-fade-in-up [animation-delay:120ms]">
+              <p className="text-[10px] uppercase tracking-[0.32em] text-brand-gold mb-4">Discover The Pentouz</p>
+              <h1 className="font-display text-[2rem] font-light leading-[1] text-white sm:text-[3rem] md:text-[4rem] lg:text-[5rem]">
                 Places, moods, and the feeling behind each stay.
               </h1>
-              <p className="luxury-copy mt-8 max-w-2xl text-white/76 animate-fade-in-up [animation-delay:220ms]">
+              <p className="mt-6 text-base leading-7 text-white/78 max-w-2xl">
                 A closer look at the addresses, spaces, and atmospheres that shape the Pentouz experience.
               </p>
             </div>

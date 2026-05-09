@@ -24,31 +24,66 @@ const displayFont = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "The Pentouz | Luxury Residences & Suites",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://thepentouz.com"),
+  title: {
+    default: "The Pentouz | Luxury Residences & Suites",
+    template: "%s | The Pentouz",
+  },
   description:
     "Luxury residences and suites by The Pentouz across Bangalore, Chikmagalur, and Ooty. Reserve bespoke stays with concierge hospitality and lifestyle experiences.",
+  keywords: [
+    "luxury accommodation Bangalore",
+    "boutique hotel Lavelle Road",
+    "penthouse stay Indiranagar",
+    "Chikmagalur homestay",
+    "Ooty retreat",
+    "The Pentouz",
+    "luxury suites India",
+  ],
+  authors: [{ name: "The Pentouz" }],
+  creator: "The Pentouz",
+  publisher: "The Pentouz",
   openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: withSiteUrl("/"),
+    siteName: "The Pentouz",
     title: "The Pentouz | Luxury Residences & Suites",
     description:
       "Luxury residences and suites by The Pentouz across Bangalore, Chikmagalur, and Ooty. Reserve bespoke stays with concierge hospitality and lifestyle experiences.",
-    url: withSiteUrl("/"),
-    siteName: "The Pentouz",
     images: [
       {
         url: withSiteUrl("/og-image.jpg"),
         width: 1200,
         height: 630,
-        alt: "The Pentouz | Luxury Residences & Suites",
+        alt: "The Pentouz - Luxury Residences & Suites",
       },
     ],
-    type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "The Pentouz | Luxury Residences & Suites",
     description:
-      "Luxury residences and suites by The Pentouz across Bangalore, Chikmagalur, and Ooty. Reserve bespoke stays with concierge hospitality and lifestyle experiences.",
+      "Luxury residences and suites by The Pentouz across Bangalore, Chikmagalur, and Ooty.",
     images: [withSiteUrl("/og-image.jpg")],
+    creator: "@thepentouz",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: withSiteUrl("/"),
+    languages: {
+      "en-IN": "en-IN",
+    },
   },
   icons: {
     icon: "/favicon.svg",
