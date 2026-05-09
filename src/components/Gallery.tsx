@@ -196,6 +196,7 @@ export default function Gallery() {
                 className="object-cover transition-transform duration-1000 group-hover:scale-110"
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 loading="lazy"
+                quality={80}
               />
 
               {/* Hover overlay */}
@@ -288,6 +289,9 @@ export default function Gallery() {
               height={900}
               className="object-contain max-h-[80vh] sm:max-h-[85vh] w-auto"
               loading="eager"
+              sizes="90vw"
+              quality={90}
+              fetchPriority="high"
             />
           </div>
 

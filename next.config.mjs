@@ -21,12 +21,22 @@ const nextConfig = {
         protocol: "https",
         hostname: "cozystay.loftocean.com",
       },
+      {
+        protocol: "https",
+        hostname: "upload.wikimedia.org",
+      },
+      {
+        protocol: "https",
+        hostname: "commons.wikimedia.org",
+      },
     ],
     // Performance optimizations
-    formats: ["image/webp"],
+    formats: ["image/webp", "image/avif"],
     minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
-    deviceSizes: [640, 828, 1200, 1920],
-    imageSizes: [32, 64, 128, 256],
+    // Device sizes optimized for site breakpoints (mobile, tablet, desktop, large desktop)
+    deviceSizes: [640, 750, 828, 1080, 1200, 1440, 1920, 2048],
+    // Image sizes for thumbnails and small containers
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     dangerouslyAllowSVG: false,
     // Enable Next.js image optimization (requires sharp)
     unoptimized: false,

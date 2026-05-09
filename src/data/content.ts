@@ -32,6 +32,20 @@ const lavelleThreeBedroomImages = sortRoomImages(lavelleImageSet.filter((path) =
   /9045_|9046_|9047_/i.test(path)
 ));
 
+// Pentouz Hillside image sets by room type
+const hillsideVillaImages = sortRoomImages(fernhillImageSet.filter((path) =>
+  /fernhill\/villa\//i.test(path)
+));
+const hillsideCottageImages = sortRoomImages(fernhillImageSet.filter((path) =>
+  /fernhill\/cottage\//i.test(path)
+));
+const hillsideSquadImages = sortRoomImages(fernhillImageSet.filter((path) =>
+  /fernhill\/squad\//i.test(path)
+));
+const hillsidePoolImages = sortRoomImages(fernhillImageSet.filter((path) =>
+  /fernhill\/all\/(44_|45_|46_|47_|48_|49_|52_)/i.test(path)
+));
+
 // Destinations / Properties - Extended data
 export const destinations = [
   {
@@ -424,29 +438,33 @@ export const destinations = [
         name: "Entire Homestay with Private Pool",
         size: "Full Property",
         description: "The complete luxury homestay experience. Private pool, multiple bedrooms, living and dining areas, kitchen, and exclusive access to all property amenities. Perfect for large families, groups, or those seeking complete privacy and space.",
-        features: ["Private Pool", "Multiple Bedrooms", "Full Kitchen", "All Amenities", "Complete Privacy", "Up to 34 Guests"],
-        image: "/fernhill/villa/51_villa.jpg"
+        features: ["Private Pool", "Multiple Bedrooms", "Full Kitchen", "All Amenities", "Complete Privacy", "Up to 12 Guests"],
+        image: hillsidePoolImages[0] || "/fernhill/all/44_swimming_pool.jpg",
+        images: [...hillsidePoolImages, ...hillsideVillaImages],
       },
       {
         name: "Ultra-Luxurious Four Bedroom Villa",
         size: "2,650 sq ft",
         description: "Stylish yet traditional, reflective of modern architecture at its luxurious best. Red hand-cut laterite blocks, earthy hues, and dark woods create a coffee town ambience. Separate living room, bedrooms, en-suite bathrooms, and private courtyard with cascade falls sit-out area. Ideal for large families or groups of up to 10 guests.",
         features: ["4 Bedrooms", "Living Room", "Kitchenette", "Up to 10 Guests", "Cascade Falls Sit-out", "Private Courtyard", "En-suite Bathrooms"],
-        image: "/fernhill/villa/51_villa.jpg"
+        image: hillsideVillaImages[0] || "/fernhill/villa/51_villa.jpg",
+        images: hillsideVillaImages,
       },
       {
         name: "Luxury Cottage with Private Garden",
         size: "380 sqft + 180 sqft Balcony",
         description: "Spacious rooms fuse contemporary design with rustic touch. Large glass windows and doors open out to private sit-out area and direct back garden access. Bedroom with en-suite bathroom. Two king-size beds sleeping up to 4 guests.",
         features: ["2 King Beds", "Up to 4 Guests", "Private Garden Access", "Private Sit-out Area", "180 sqft Private Balcony", "En-suite Bathroom"],
-        image: "/fernhill/cottage/16_cottage.jpg"
+        image: hillsideCottageImages[0] || "/fernhill/cottage/16_cottage.jpg",
+        images: hillsideCottageImages,
       },
       {
         name: "Luxury 8 Beds Squad Cottage",
         size: "515 sqft + 445 sqft Balcony",
         description: "Spacious 515 sqft cottage elegantly blends nature with modern opulence. Ideal for groups and corporate retreats. Eight single beds with en-suite bathroom, courtyard, and a large 445 sqft private balcony.",
         features: ["8 Single Beds", "Up to 8 Guests", "445 sqft Private Balcony", "Group-Friendly", "En-suite Bathroom", "Courtyard"],
-        image: "/fernhill/squad/25_eight_bedded_room.jpg"
+        image: hillsideSquadImages[0] || "/fernhill/squad/25_eight_bedded_room.jpg",
+        images: hillsideSquadImages,
       }
     ]
   },

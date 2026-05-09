@@ -16,7 +16,7 @@ export const chikmagalurAttractions: Attraction[] = [
       "Experience the heart of Karnataka's coffee country with guided tours through lush arabica and robusta plantations. Learn about coffee processing from bean to cup, enjoy fresh brews amidst the estates, and stroll through aromatic plantations shrouded in morning mist.",
     distance: "Walk from property",
     category: "Nature",
-    image: "/fernhill/all/50_top_view.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Polyculture_shade_coffee_Chikmagalur.jpg",
     highlights: [
       "Guided estate walks",
       "Coffee tasting sessions",
@@ -30,7 +30,7 @@ export const chikmagalurAttractions: Attraction[] = [
       "The highest peak in Karnataka at 1,930 meters, Mullayanagiri offers breathtaking panoramic views of the Western Ghats. Popular among trekkers and nature lovers, the summit rewards visitors with sweeping vistas of valleys, coffee plantations, and on clear days, even the distant Arabian Sea.",
     distance: "22 kms",
     category: "Adventure",
-    image: "/fernhill/all/03_exterior.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/8/81/Mullayanagiri_Panoromic.jpg",
     highlights: [
       "Trekking to summit",
       "Panoramic viewpoints",
@@ -44,7 +44,7 @@ export const chikmagalurAttractions: Attraction[] = [
       "Named after the Sufi saint Baba Budan, this historic hill range is a significant pilgrimage site and trekker's paradise. The region features the famous Dattatreya Peetha, dramatic cliff faces, and the confluence of three rivers visible from the summit. The winding trails through shola forests are unforgettable.",
     distance: "18 kms",
     category: "Heritage",
-    image: "/fernhill/all/57_front_view.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/2/25/Sun_set_as_seen_from_Datta_peeta_-_panoramio.jpg",
     highlights: [
       "Sacred pilgrimage site",
       "Trekking trails",
@@ -58,7 +58,7 @@ export const chikmagalurAttractions: Attraction[] = [
       "Nestled within a coffee plantation, Hebbe Falls cascades down in two stages — the big Hebbe and the smaller, more intimate Chemake. The falls are accessed via a scenic drive followed by a short trek through aromatic coffee estates, making the journey as memorable as the destination.",
     distance: "35 kms",
     category: "Nature",
-    image: "/fernhill/all/48_swimming_pool.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/a/ad/Hebbe_falls%2C_Chikmagalur%2C_Karnataka.jpg",
     highlights: [
       "Two-tiered waterfall",
       "Coffee plantation setting",
@@ -72,7 +72,7 @@ export const chikmagalurAttractions: Attraction[] = [
       "Often called the 'Kashmir of Karnataka,' Kemmanagundi is a serene hill station known for its lush gardens, misty hills, and waterfalls. The Rajiv Gandhi National Park offers wildlife encounters, while the Hebbe Falls and Kalhatti Falls provide spectacular natural beauty. Ideal for a day trip from Pentouz Hillside.",
     distance: "55 kms",
     category: "Nature",
-    image: "/fernhill/all/06_exterior.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/8/85/Kemmanagundi_Hill_Station_-_panoramio.jpg",
     highlights: [
       "Terraced gardens",
       "Kalhatti Falls viewpoint",
@@ -86,7 +86,7 @@ export const chikmagalurAttractions: Attraction[] = [
       "A sprawling reservoir surrounded by forested hills, Bhadra offers boating, wildlife watching, and serene sunset views. The Bhadra Wildlife Sanctuary nearby is home to tigers, leopards, and over 200 species of birds. Perfect for a peaceful day immersed in nature.",
     distance: "40 kms",
     category: "Nature",
-    image: "/fernhill/all/59_property_top_view.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/7/75/Evening_at_Bhadra_Reservoir_-_panoramio.jpg",
     highlights: [
       "Boating on reservoir",
       "Wildlife sanctuary",
@@ -100,7 +100,7 @@ export const chikmagalurAttractions: Attraction[] = [
       "The charming hill town of Chikmagalur, meaning 'younger daughter's place,' is the gateway to Karnataka's coffee country. Explore local markets, visit the historic Jama Masjid, pick up fresh coffee beans, and sample local cuisine at traditional eateries. Just 30 minutes from Pentouz Hillside.",
     distance: "12 kms",
     category: "Food",
-    image: "/fernhill/all/37_restaurant.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Chikkamagaluru_%2839452%29.jpg",
     highlights: [
       "Local coffee markets",
       "Traditional cuisine",
@@ -114,7 +114,7 @@ export const chikmagalurAttractions: Attraction[] = [
       "A favorite among visitors, Sunrise Point offers spectacular views as the first golden rays illuminate the misty valleys and coffee plantations below. Located near the town, it's the perfect early morning excursion to witness Chikmagalur's legendary morning fog slowly lifting to reveal the stunning landscape.",
     distance: "15 kms",
     category: "Nature",
-    image: "/fernhill/all/60_night_view.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/9/94/Mullayanagiri.JPG",
     highlights: [
       "Spectacular sunrise views",
       "Morning mist vistas",
@@ -128,7 +128,7 @@ export const chikmagalurAttractions: Attraction[] = [
       "Also known as Buttermilk Falls, Jhari is a stunning multi-tiered waterfall that appears like buttermilk cascading down rocky slopes, especially during monsoon season. Surrounded by dense forests, the waterfall creates a magical atmosphere with its continuous flow and serene natural pool perfect for a refreshing dip.",
     distance: "28 kms",
     category: "Nature",
-    image: "/fernhill/all/46_swimming_pool.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Jhari_Falls.jpg",
     highlights: [
       "Multi-tiered cascade",
       "Buttermilk appearance",
@@ -142,7 +142,7 @@ export const chikmagalurAttractions: Attraction[] = [
       "A picturesque village in the Baba Budan Giri range, Aldur is renowned for its spectacular mountain vistas and tea and coffee plantations. The winding roads leading here offer dramatic views, and the town serves as a perfect base for exploring nearby trails while enjoying the peaceful rhythm of plantation life.",
     distance: "20 kms",
     category: "Nature",
-    image: "/fernhill/all/58_side_view.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/1/12/Manikyadhara.JPG",
     highlights: [
       "Mountain panorama",
       "Tea and coffee estates",

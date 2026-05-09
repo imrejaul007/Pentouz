@@ -54,7 +54,8 @@ export default function Hero() {
             videoStarted ? (videoLoaded ? "opacity-0" : "opacity-100") : "opacity-100"
           }`}
           sizes="100vw"
-          quality={90}
+          quality={85}
+          fetchPriority="high"
         />
 
         {/* Video Background — only loads on user interaction, never on mobile/slow connections */}
