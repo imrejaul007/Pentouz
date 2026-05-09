@@ -8,6 +8,7 @@ import { ArrowLeft, ArrowRight, Calendar, Phone } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { destinations, contactInfo } from "@/data/content";
+import { generatePageSchemas } from "@/lib/schema";
 
 type Destination = (typeof destinations)[number];
 
@@ -142,9 +143,21 @@ export default function LivingPage({ params }: { params: Promise<{ slug: string 
   const activeRoom = rooms[selectedRoom] || rooms[0];
   const supportingImages = activeRoom.images.slice(1, 5);
 
+  // Generate Living page schema for AI search engines
+  const livingSchema = generatePageSchemas({
+    type: "living",
+    slug: destination.slug,
+    propertyName: destination.title,
+  });
+
   return (
     <>
       <Header />
+      {/* Schema.org structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(livingSchema) }}
+      />
       <main className="bg-[#f7f0e5] text-brand-ink overflow-hidden">
         <section className="relative isolate min-h-[100svh] overflow-hidden bg-[#15120f] text-white">
           <div className="absolute inset-0">

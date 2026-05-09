@@ -7,7 +7,9 @@ import { ArrowRight, MapPin, Phone } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroSlider from "@/components/HeroSlider";
+import FAQ from "@/components/FAQ";
 import { contactInfo, destinations, testimonials } from "@/data/content";
+import { homepageFAQs } from "@/lib/schema";
 
 const heroImages = [
   "/lavelle-road/all/terrace_1.jpg",
@@ -177,9 +179,10 @@ export default function HomePage() {
                       src={destination.heroImage || destination.image}
                       alt={destination.title}
                       fill
-                      priority={index === 0}
-                      sizes="(max-width: 1200px) 100vw, 25vw"
+                      priority={index < 2} // Only preload first 2 images
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                       className="object-cover transition-transform duration-[1400ms] group-hover:scale-105"
+                      loading={index < 2 ? "eager" : "lazy"}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-500 group-hover:opacity-100">
@@ -311,7 +314,14 @@ export default function HomePage() {
                   className="group overflow-hidden bg-[#f8f2e8] shadow-[0_24px_80px_rgba(18,15,12,0.05)] transition-all duration-700 hover:-translate-y-2"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden">
-                    <Image src={moment.image} alt={moment.title} fill priority={index === 0} sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover transition-transform duration-[1400ms] group-hover:scale-105" />
+                    <Image
+                      src={moment.image}
+                      alt={moment.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-[1400ms] group-hover:scale-105"
+                      loading="lazy"
+                    />
                   </div>
                   <div className="p-6">
                     <p className="text-[10px] uppercase tracking-[0.22em] text-brand-accent">{moment.eyebrow}</p>
@@ -376,6 +386,14 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        {/* FAQ Section - AI Search Optimized */}
+        <FAQ
+          items={homepageFAQs}
+          title="Questions About Your Stay"
+          subtitle="Everything you need to know"
+          theme="light"
+        />
       </main>
       <Footer />
     </>

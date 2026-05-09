@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import { contactInfo, destinations } from "@/data/content";
 import { withSiteUrl } from "@/lib/site";
 import ContactForm from "./ContactForm";
+import { generatePageSchemas } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Contact | The Pentouz",
@@ -18,9 +19,17 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+  // Generate Contact page schema for AI search engines
+  const contactSchema = generatePageSchemas({ type: "contact" });
+
   return (
     <>
       <Header />
+      {/* Schema.org structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
+      />
       <main className="bg-[#f8f2e8] text-brand-ink">
         <section className="relative isolate overflow-hidden text-white">
           <div className="absolute inset-0">

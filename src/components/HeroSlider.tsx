@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
 type HeroSliderProps = {
@@ -17,40 +17,66 @@ export default function HeroSlider({
   overlayClassName = "",
 }: HeroSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Preload first image before starting slider
+  useEffect(() => {
+    if (images.length === 0) return;
+
+    const firstImage = new window.Image();
+    firstImage.src = images[0];
+    firstImage.onload = () => setIsLoaded(true);
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [images]);
 
   useEffect(() => {
-    if (images.length <= 1) return;
+    // Only start auto-rotation after first image is loaded
+    if (!isLoaded || images.length <= 1) return;
 
-    const interval = setInterval(() => {
+    intervalRef.current = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
     }, 5000);
 
-    return () => clearInterval(interval);
-  }, [images.length]);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [images.length, isLoaded]);
 
   if (images.length === 0) return null;
 
   return (
     <div className="relative isolate min-h-[100svh] overflow-hidden bg-[#15120f]">
-      {images.map((image, index) => (
-        <div
-          key={image}
-          className={`absolute inset-0 transition-opacity duration-[1500ms] ${
-            index === currentIndex ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          <Image
-            src={image}
-            alt={`${alt} - Image ${index + 1}`}
-            fill
-            priority={index === 0}
-            sizes="100vw"
-            quality={85}
-            className="object-cover"
-            fetchPriority={index === 0 ? "high" : "low"}
-          />
-        </div>
-      ))}
+      {images.map((image, index) => {
+        const isFirst = index === 0;
+        const shouldPreload = isFirst;
+
+        return (
+          <div
+            key={image}
+            className={`absolute inset-0 transition-opacity duration-[1500ms] ${
+              index === currentIndex ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <Image
+              src={image}
+              alt={`${alt} - Image ${index + 1}`}
+              fill
+              priority={shouldPreload}
+              sizes="100vw"
+              quality={85}
+              className="object-cover"
+              fetchPriority={isFirst ? "high" : "low"}
+              loading={isFirst ? "eager" : "lazy"}
+              placeholder={isFirst ? "blur" : undefined}
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAYH/8QAIhAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBRIhMRNBUWH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAMBAQEAAAAAAAAAAAAAAAECAwAREv/aAAwDAQACEQMRAD8AzfS+o6Lp2g6fbR3NrFeXUjS3DSR8nkLHgcD4AA6xnP8pqVvU+katdS2+lQ6fLaxM0ckkUZDOVOCcHyB1nWvW9N02O9uHSxtkdpXZlES4BJPgY1p0rT7P+MWf0j/ZPtsmf/9k="
+            />
+          </div>
+        );
+      })}
 
       <div
         className={`absolute inset-0 bg-[linear-gradient(90deg,rgba(10,8,6,0.88)_0%,rgba(10,8,6,0.44)_38%,rgba(10,8,6,0.14)_70%,rgba(10,8,6,0.72)_100%)] ${overlayClassName}`}

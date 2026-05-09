@@ -5,7 +5,9 @@ import { ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroSlider from "@/components/HeroSlider";
+import FAQ from "@/components/FAQ";
 import { withSiteUrl } from "@/lib/site";
+import { generatePageSchemas } from "@/lib/schema";
 
 const heroImages = [
   "/indiranagar/all/04._living_room_03._living_room.jpg",
@@ -100,9 +102,17 @@ const brandNotes = [
 ];
 
 export default function AboutPage() {
+  // Generate About page schema for AI search engines
+  const aboutSchema = generatePageSchemas({ type: "about" });
+
   return (
     <>
       <Header />
+      {/* Schema.org structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }}
+      />
       <main className="bg-[#f8f2e8] text-brand-ink">
         <section className="relative isolate overflow-hidden text-white">
           <HeroSlider images={heroImages} alt="About Pentouz" />
@@ -204,6 +214,35 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+
+        {/* FAQ Section - AI Search Optimized */}
+        <FAQ
+          items={[
+            {
+              question: "What is The Pentouz brand philosophy?",
+              answer:
+                "The Pentouz was built on the idea that premium accommodation should not be loud to feel luxurious. A well-positioned address, thoughtful interiors, clean service, and a more residential sense of privacy create a stronger impression than excess styling.",
+            },
+            {
+              question: "How many properties does The Pentouz have?",
+              answer:
+                "The Pentouz currently operates four properties: The Pentouz Lavelle Road (Bangalore city center), The Pentouz Indiranagar (Bangalore's vibrant neighborhood), The Pentouz Hillside Chikmagalur (coffee country retreat), and The Pentouz Windsor Heights Ooty (mountain escape).",
+            },
+            {
+              question: "What makes each Pentouz property unique?",
+              answer:
+                "Each Pentouz property has a distinct character. Lavelle Road serves business and court-related stays. Indiranagar offers rare penthouse scale. Hillside Chikmagalur anchors the collection with warmth and natural beauty. Ooty provides a softer, slower retreat experience.",
+            },
+            {
+              question: "Does The Pentouz offer direct booking benefits?",
+              answer:
+                "Direct booking through the website or concierge team typically offers the best rates, personalized service, and flexibility for special requests. The Privé Club membership provides additional benefits including priority reservations and exclusive offers.",
+            },
+          ]}
+          title="About The Pentouz"
+          subtitle="Brand Insights"
+          theme="light"
+        />
       </main>
       <Footer />
     </>

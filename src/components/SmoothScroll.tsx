@@ -1,51 +1,83 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import Lenis from "@studio-freight/lenis";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import { useEffect, useRef, useState } from "react";
 
 interface SmoothScrollProps {
   children: React.ReactNode;
 }
 
+// Lightweight smooth scroll without heavy libraries
+// Uses native CSS scroll-behavior for browsers that support it
 export default function SmoothScroll({ children }: SmoothScrollProps) {
-  const lenisRef = useRef<Lenis | null>(null);
+  const [isEnabled, setIsEnabled] = useState(false);
+  const rafRef = useRef<number | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    // Initialize Lenis for smooth scrolling
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: "vertical",
-      gestureOrientation: "vertical",
-      smoothWheel: true,
-      touchMultiplier: 2,
-    });
+    // Only enable on desktop to reduce JS overhead on mobile
+    if (typeof window === "undefined") return;
 
-    lenisRef.current = lenis;
+    const isDesktop = window.innerWidth >= 1024;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // Connect Lenis to GSAP ScrollTrigger
-    lenis.on("scroll", ScrollTrigger.update);
+    if (!isDesktop || prefersReducedMotion) return;
 
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
+    // Dynamically import heavy libraries only when needed
+    const initSmoothScroll = async () => {
+      try {
+        const [LenisModule, { gsap }, { ScrollTrigger }] = await Promise.all([
+          import("@studio-freight/lenis"),
+          import("gsap"),
+          import("gsap/ScrollTrigger"),
+        ]);
 
-    gsap.ticker.lagSmoothing(0);
+        const Lenis = LenisModule.default;
+        gsap.registerPlugin(ScrollTrigger);
 
-    // Cleanup
+        const lenis = new Lenis({
+          duration: 1.2,
+          easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          orientation: "vertical",
+          gestureOrientation: "vertical",
+          smoothWheel: true,
+          touchMultiplier: 2,
+        });
+
+        lenis.on("scroll", ScrollTrigger.update);
+
+        gsap.ticker.add((time: number) => {
+          lenis.raf(time * 1000);
+        });
+
+        gsap.ticker.lagSmoothing(0);
+
+        setIsEnabled(true);
+
+        return () => {
+          lenis.destroy();
+          gsap.ticker.remove((time: number) => {
+            lenis.raf(time * 1000);
+          });
+        };
+      } catch (error) {
+        // Fallback to native scroll if libraries fail
+        console.warn("Smooth scroll initialization failed, using native scroll");
+      }
+    };
+
+    const cleanup = initSmoothScroll();
+
     return () => {
-      lenis.destroy();
-      gsap.ticker.remove((time) => {
-        lenis.raf(time * 1000);
-      });
+      cleanup.then((fn) => fn?.());
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
     };
   }, []);
 
-  return <>{children}</>;
+  return (
+    <div ref={containerRef} className={isEnabled ? "smooth-scroll-enabled" : ""}>
+      {children}
+    </div>
+  );
 }

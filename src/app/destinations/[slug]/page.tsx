@@ -27,6 +27,7 @@ import LocationSection from "@/components/LocationSection";
 import AmenitiesGrid from "@/components/AmenitiesGrid";
 import { destinations, contactInfo } from "@/data/content";
 import { killScrollTriggersByRoots } from "@/lib/scrollTrigger";
+import { generatePageSchemas, getPropertyHotelSchema } from "@/lib/schema";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -247,35 +248,18 @@ export default function DestinationPage({
 
   // Get all gallery images
   const allGalleryImages = destination.gallery || [destination.image];
-  const isLavelleRoad = destination.slug === "lavelle-road";
-  const lavelleLegalJsonLd = isLavelleRoad
-    ? {
-        "@context": "https://schema.org",
-        "@type": "Hotel",
-        name: destination.title,
-        description: destination.description,
-        image: destination.heroImage || destination.image,
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: destination.address || "46, 6th Cross, Lavelle Road",
-          addressLocality: "Bengaluru",
-          addressRegion: "Karnataka",
-          postalCode: "560001",
-          addressCountry: "IN",
-        },
-        amenityFeature: destination.amenities.map((item) => ({
-          "@type": "LocationFeatureSpecification",
-          name: item,
-          value: true,
-        })),
-        areaServed: "Outstation advocates and legal professionals visiting High Court of Karnataka",
-      }
-    : null;
   const stripImages = allGalleryImages.slice(0, 8);
   const galleryStripImages =
     stripImages.length > 0 && stripImages.length <= 4
       ? [...stripImages, ...stripImages]
       : stripImages;
+
+  // Generate comprehensive property schema for AI search engines
+  const propertySchema = generatePageSchemas({
+    type: "destination",
+    slug: destination.slug,
+    propertyName: destination.title,
+  });
 
   // Lightbox handlers
   const openLightbox = (index: number) => {
@@ -313,12 +297,11 @@ export default function DestinationPage({
   return (
     <>
       <Header />
-      {lavelleLegalJsonLd ? (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(lavelleLegalJsonLd) }}
-        />
-      ) : null}
+      {/* Comprehensive Schema.org structured data for AI search engines */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(propertySchema) }}
+      />
       <main>
         <section
           ref={heroRef}

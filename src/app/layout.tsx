@@ -2,16 +2,18 @@ import type { Metadata } from "next";
 import { Montserrat, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import Preloader from "@/components/Preloader";
-import SmoothScroll from "@/components/SmoothScroll";
 import ScrollProgress from "@/components/ScrollProgress";
-import PageTransition from "@/components/PageTransition";
+import { SmoothScroll, PageTransition } from "@/components/ClientComponents";
 import { withSiteUrl } from "@/lib/site";
+import { generatePageSchemas } from "@/lib/schema";
 
+// Premium elegant serif font - use smaller subsets for faster loading
 const bodyFont = Montserrat({
   variable: "--font-body-family",
   subsets: ["latin"],
   weight: ["300", "400", "500"],
   display: "swap",
+  preload: true,
 });
 
 // Premium elegant serif font
@@ -21,6 +23,7 @@ const displayFont = Cormorant_Garamond({
   weight: ["300", "400", "500"],
   style: ["normal", "italic"],
   display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -96,25 +99,29 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const siteJsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        name: "The Pentouz",
-        url: withSiteUrl("/"),
-        logo: withSiteUrl("/logo-white.png"),
-      },
-      {
-        "@type": "WebSite",
-        name: "The Pentouz",
-        url: withSiteUrl("/"),
-      },
-    ],
-  };
+  // Generate comprehensive schema for homepage
+  const homepageSchema = generatePageSchemas({ type: "homepage" });
 
   return (
     <html lang="en">
+      <head>
+        {/* Preconnect to Google Fonts for faster font loading */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+        {/* Preload critical font subsets - reduce initial font payload */}
+        <link
+          rel="preload"
+          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap"
+          as="style"
+        />
+
+        {/* Comprehensive Schema.org structured data for AI search engines */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageSchema) }}
+        />
+      </head>
       <body
         className={`${bodyFont.variable} ${displayFont.variable} antialiased bg-white text-brand-ink`}
       >
@@ -128,15 +135,13 @@ export default function RootLayout({
 
         <div className="noise-overlay" aria-hidden="true" />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }}
-        />
         <Preloader />
+        <ScrollProgress />
         <SmoothScroll>
-          <ScrollProgress />
           <PageTransition>
-            {children}
+            <main id="main-content">
+              {children}
+            </main>
           </PageTransition>
         </SmoothScroll>
       </body>

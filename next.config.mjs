@@ -51,7 +51,23 @@ const nextConfig = {
   },
   // Experimental optimizations
   experimental: {
-    optimizePackageImports: ["gsap", "lucide-react"],
+    optimizePackageImports: ["gsap", "lucide-react", "@studio-freight/lenis"],
+    // Optimize CSS delivery
+    optimizeCss: true,
+  },
+  // Headers for performance
+  async headers() {
+    return [
+      {
+        source: "/:all*(svg|jpg|jpeg|png|webp|avif|ico|woff|woff2)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+    ];
   },
 };
 
