@@ -683,7 +683,7 @@ export const navLinks = [
 
 // Social media links
 export const socialLinks = [
-  { label: "Instagram", href: "https://www.instagram.com/pentouz" },
+  { label: "Instagram", href: "https://www.instagram.com/thepentouzofficial/" },
   { label: "Facebook", href: "https://www.facebook.com/pentouz" },
   { label: "WhatsApp", href: "https://wa.me/918884449930" },
 ];

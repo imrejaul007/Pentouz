@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     description:
       "Luxury residences and suites by The Pentouz across Bangalore, Chikmagalur, and Ooty.",
     images: [withSiteUrl("/og-image.jpg")],
-    creator: "@thepentouz",
+    creator: "@thepentouzofficial",
   },
   robots: {
     index: true,
