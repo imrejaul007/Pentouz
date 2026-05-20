@@ -6,7 +6,9 @@ import { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroSlider from "@/components/HeroSlider";
+import PropertyGallery from "@/components/PropertyGallery";
 import { destinations, contactInfo } from "@/data/content";
+import { lavelleImageSet } from "@/data/propertyImageSets";
 import { withSiteUrl } from "@/lib/site";
 
 const heroImages = [
@@ -43,6 +45,60 @@ const amenities = [
   "Covered Car Parking",
   "Lift Access",
   "24-Hour Front Desk",
+];
+
+// Categorize images
+function categorize(path: string): string {
+  const p = path.toLowerCase();
+  if (/bathroom|bath/i.test(p)) return "Bathroom";
+  if (/bedroom|suite|queen|king|superior/i.test(p)) return "Bedroom";
+  if (/terrace|patio/i.test(p)) return "Terrace & Outdoor";
+  if (/reception/i.test(p)) return "Common Areas";
+  if (/restaurant/i.test(p)) return "Restaurant";
+  if (/entrance|facade/i.test(p)) return "Common Areas";
+  if (/lift|staircase/i.test(p)) return "Common Areas";
+  if (/parking/i.test(p)) return "Common Areas";
+  return "Bedroom";
+}
+
+function makeTitle(path: string): string {
+  const file = path.split("/").pop()?.replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ").replace(/\d+\./g, "").trim() ?? "";
+  return file;
+}
+
+const galleryItems = lavelleImageSet.map((src) => ({
+  src,
+  title: makeTitle(src),
+  category: categorize(src),
+}));
+
+// Room-specific images
+const queenStudioImages = lavelleImageSet.filter((path) => /9041_|9043_/i.test(path));
+const kingStudioImages = lavelleImageSet.filter((path) => /9042_|9046_|9047_/i.test(path));
+const superiorStudioImages = lavelleImageSet.filter((path) => /9045_/i.test(path));
+const commonImages = lavelleImageSet.filter((path) => !/9041_|9043_|9042_|9046_|9047_|9045_/i.test(path));
+
+const rooms = [
+  {
+    name: "Queen Studio",
+    slug: "queen-studio",
+    images: queenStudioImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "King Studio",
+    slug: "king-studio",
+    images: kingStudioImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Superior Studio",
+    slug: "superior-studio",
+    images: superiorStudioImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Common Areas",
+    slug: "common-areas",
+    images: commonImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
 ];
 
 export default function LavelleRoadPage() {
@@ -150,44 +206,20 @@ export default function LavelleRoadPage() {
           </div>
         </section>
 
-        <section className="bg-white">
-          <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28">
-            <div className="text-center mb-12">
-              <p className="luxury-kicker text-brand-accent">Gallery</p>
-              <h2 className="luxury-section-title mt-5">A visual journey through The Pentouz Lavelle Road</h2>
-              <Link href="/destinations/lavelle-road/gallery" className="inline-flex items-center gap-2 mt-6 text-[11px] uppercase tracking-[0.18em] text-brand-accent hover:text-brand-gold transition-colors">
+        <section className="bg-[#15120f] text-white">
+          <div className="mx-auto max-w-[1480px] px-5 py-14 sm:px-8 lg:px-14 lg:py-20">
+            <div className="text-center mb-10">
+              <p className="text-[10px] uppercase tracking-[0.32em] text-brand-gold mb-4">Gallery</p>
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-white">
+                A visual journey through The Pentouz Lavelle Road
+              </h2>
+            </div>
+            <PropertyGallery items={galleryItems} propertyName="The Pentouz @ Lavelle Road" rooms={rooms} />
+            <div className="mt-10 text-center">
+              <Link href="/destinations/lavelle-road/gallery" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.18em] text-white hover:border-brand-gold hover:text-brand-gold transition-all duration-500">
                 View Full Gallery
                 <ArrowRight className="w-4 h-4" strokeWidth={1.4} />
               </Link>
-            </div>
-            <div className="grid gap-6 lg:grid-cols-3">
-              {[
-                { src: "/lavelle-road/all/reception_2.jpg", alt: "Reception area" },
-                { src: "/lavelle-road/all/restaurant_2.jpg", alt: "Restaurant" },
-                { src: "/lavelle-road/all/terrace_2.jpg", alt: "Rooftop terrace" },
-                { src: "/lavelle-road/all/9041_queen_suite_1.jpg", alt: "Queen Studio" },
-                { src: "/lavelle-road/all/9042_king_suite_1.jpg", alt: "King Studio" },
-                { src: "/lavelle-road/all/facade_2.jpg", alt: "Property exterior" },
-              ].map((image, index) => (
-                <Link
-                  key={image.src}
-                  href="/destinations/lavelle-road/gallery"
-                  className="group relative aspect-[4/5] overflow-hidden shadow-[0_24px_80px_rgba(18,15,12,0.06)]"
-                >
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    className="object-cover transition-transform duration-[1400ms] group-hover:scale-105"
-                    sizes="(max-width: 1024px) 100vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-500 flex items-center justify-center">
-                    <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-white text-[11px] uppercase tracking-[0.18em] bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
-                      View Gallery
-                    </span>
-                  </div>
-                </Link>
-              ))}
             </div>
           </div>
         </section>

@@ -6,8 +6,10 @@ import { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroSlider from "@/components/HeroSlider";
+import PropertyGallery from "@/components/PropertyGallery";
 import NearAttractions from "@/components/NearAttractions";
 import { destinations, contactInfo } from "@/data/content";
+import { fernhillImageSet } from "@/data/propertyImageSets";
 import { withSiteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -48,6 +50,74 @@ export const metadata: Metadata = {
     canonical: withSiteUrl("/destinations/pentouz-hillside"),
   },
 };
+
+// Categorize images
+function categorize(path: string): string {
+  const p = path.toLowerCase();
+  if (/bathroom/i.test(p)) return "Bathroom";
+  if (/bedroom|villa|cottage|four_bed|eight_bed|squad/i.test(p)) return "Bedroom";
+  if (/pool|swimming/i.test(p)) return "Swimming Pool";
+  if (/games_room/i.test(p)) return "Games Room";
+  if (/restaurant|dining/i.test(p)) return "Restaurant";
+  if (/tea_coffee/i.test(p)) return "Common Areas";
+  if (/exterior|facade|villa_exterior/i.test(p)) return "Exterior";
+  if (/view|top_view|night_view|front_view|side_view|gazebo|fireplace/i.test(p)) return "Views";
+  if (/play_area|kids/i.test(p)) return "Play Area";
+  if (/villa_living/i.test(p)) return "Living Room";
+  return "Terrace & Outdoor";
+}
+
+function makeTitle(path: string): string {
+  const file = path.split("/").pop()?.replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ").replace(/\d+\./g, "").trim() ?? "";
+  return file;
+}
+
+const galleryItems = fernhillImageSet.map((src) => ({
+  src,
+  title: makeTitle(src),
+  category: categorize(src),
+}));
+
+// Room-specific images
+const villaImages = fernhillImageSet.filter((path) => /villa/i.test(path));
+const cottageImages = fernhillImageSet.filter((path) => /cottage/i.test(path));
+const eleganceImages = fernhillImageSet.filter((path) => /elegance/i.test(path));
+const poolImages = fernhillImageSet.filter((path) => /swimming_pool|pool/i.test(path));
+const restaurantImages = fernhillImageSet.filter((path) => /restaurant|dining/i.test(path));
+const viewImages = fernhillImageSet.filter((path) => /view|top_view|front_view|side_view|gazebo|fireplace|night_view/i.test(path));
+
+const rooms = [
+  {
+    name: "Villa",
+    slug: "villa",
+    images: villaImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Garden Cottage",
+    slug: "garden-cottage",
+    images: cottageImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Elegance Rooms",
+    slug: "elegance-rooms",
+    images: eleganceImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Swimming Pool",
+    slug: "swimming-pool",
+    images: poolImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Restaurant",
+    slug: "restaurant",
+    images: restaurantImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Views & Gardens",
+    slug: "views-gardens",
+    images: viewImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+];
 
 const heroImages = [
   "/fernhill/all/59_property_top_view.jpg",
@@ -248,45 +318,20 @@ export default function PentouzHillsidePage() {
         </section>
 
         {/* Gallery */}
-        <section className="bg-white">
-          <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28">
-            <div className="text-center mb-12">
-              <p className="luxury-kicker text-brand-accent">Gallery</p>
-              <h2 className="luxury-section-title mt-5">A visual journey through The Pentouz Hillside</h2>
-              <Link href="/destinations/pentouz-hillside/gallery" className="inline-flex items-center gap-2 mt-6 text-[11px] uppercase tracking-[0.18em] text-brand-accent hover:text-brand-gold transition-colors">
+        <section className="bg-[#15120f] text-white">
+          <div className="mx-auto max-w-[1480px] px-5 py-14 sm:px-8 lg:px-14 lg:py-20">
+            <div className="text-center mb-10">
+              <p className="text-[10px] uppercase tracking-[0.32em] text-brand-gold mb-4">Gallery</p>
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-white">
+                A visual journey through The Pentouz Hillside
+              </h2>
+            </div>
+            <PropertyGallery items={galleryItems} propertyName="The Pentouz Hillside Chikmagalur" rooms={rooms} />
+            <div className="mt-10 text-center">
+              <Link href="/destinations/pentouz-hillside/gallery" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.18em] text-white hover:border-brand-gold hover:text-brand-gold transition-all duration-500">
                 View Full Gallery
                 <ArrowRight className="w-4 h-4" strokeWidth={1.4} />
               </Link>
-            </div>
-            <div className="grid gap-6 lg:grid-cols-3">
-              {[
-                { src: "/fernhill/all/63_overview.jpg", alt: "Property Overview" },
-                { src: "/fernhill/all/44_swimming_pool.jpg", alt: "Swimming Pool" },
-                { src: "/fernhill/all/54_dining.jpg", alt: "Dining Area" },
-                { src: "/fernhill/all/09_villa_living_room.jpg", alt: "Villa Living Room" },
-                { src: "/fernhill/all/55_fireplace.jpg", alt: "Fireplace" },
-                { src: "/fernhill/all/50_top_view.jpg", alt: "Top View" },
-              ].map((image, index) => (
-                <Link
-                  key={image.src}
-                  href="/destinations/pentouz-hillside/gallery"
-                  className="group relative aspect-[4/5] overflow-hidden shadow-[0_24px_80px_rgba(18,15,12,0.06)]"
-                >
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    priority={index === 0}
-                    className="object-cover transition-transform duration-[1400ms] group-hover:scale-105"
-                    sizes="(max-width: 1024px) 100vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-500 flex items-center justify-center">
-                    <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-white text-[11px] uppercase tracking-[0.18em] bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
-                      View Gallery
-                    </span>
-                  </div>
-                </Link>
-              ))}
             </div>
           </div>
         </section>

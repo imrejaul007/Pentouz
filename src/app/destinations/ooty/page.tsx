@@ -6,7 +6,9 @@ import { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroSlider from "@/components/HeroSlider";
+import PropertyGallery from "@/components/PropertyGallery";
 import { destinations, contactInfo } from "@/data/content";
+import { ootyImageSet } from "@/data/propertyImageSets";
 import { withSiteUrl } from "@/lib/site";
 
 const heroImages = [
@@ -38,8 +40,78 @@ const amenities = [
   "Fireplace",
   "Garden Views",
   "Heating",
-  "Tea-Garden Atmosphere",
-  "Scenic Outlooks",
+  "Laundry Service",
+  "Bonfire",
+  "Nature Walks",
+  "Sightseeing Assistance",
+  "Airport Transfer",
+  "Doctor on Call",
+];
+
+// Categorize images
+function categorize(path: string): string {
+  const p = path.toLowerCase();
+  if (/bathroom/i.test(p)) return "Bathroom";
+  if (/bedroom/i.test(p)) return "Bedroom";
+  if (/lawn/i.test(p)) return "Lawn & Gardens";
+  if (/view/i.test(p)) return "Views";
+  if (/reception/i.test(p)) return "Common Areas";
+  if (/restaurant/i.test(p)) return "Restaurant";
+  if (/facade/i.test(p)) return "Exterior";
+  if (/lift|corridor|parking/i.test(p)) return "Common Areas";
+  return "Views";
+}
+
+function makeTitle(path: string): string {
+  const file = path.split("/").pop()?.replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ").replace(/\d+\./g, "").trim() ?? "";
+  return file;
+}
+
+const galleryItems = ootyImageSet.map((src) => ({
+  src,
+  title: makeTitle(src),
+  category: categorize(src),
+}));
+
+// Room-specific images
+const bedroomImages = ootyImageSet.filter((path) => /bedroom/i.test(path));
+const bathroomImages = ootyImageSet.filter((path) => /bathroom/i.test(path));
+const restaurantImages = ootyImageSet.filter((path) => /restaurant/i.test(path));
+const lawnImages = ootyImageSet.filter((path) => /lawn/i.test(path));
+const viewImages = ootyImageSet.filter((path) => /view/i.test(path));
+const commonImages = ootyImageSet.filter((path) => /facade|reception|lift|corridor|parking/i.test(path));
+
+const rooms = [
+  {
+    name: "Bedrooms",
+    slug: "bedrooms",
+    images: bedroomImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Bathrooms",
+    slug: "bathrooms",
+    images: bathroomImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Restaurant",
+    slug: "restaurant",
+    images: restaurantImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Lawn & Gardens",
+    slug: "lawn-gardens",
+    images: lawnImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Views",
+    slug: "views",
+    images: viewImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Common Areas",
+    slug: "common-areas",
+    images: commonImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
 ];
 
 export default function OotyPage() {
@@ -149,44 +221,20 @@ export default function OotyPage() {
           </div>
         </section>
 
-        <section className="bg-white">
-          <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28">
-            <div className="text-center mb-12">
-              <p className="luxury-kicker text-brand-accent">Gallery</p>
-              <h2 className="luxury-section-title mt-5">A visual journey through The Pentouz Windsor Heights Ooty</h2>
-              <Link href="/destinations/ooty/gallery" className="inline-flex items-center gap-2 mt-6 text-[11px] uppercase tracking-[0.18em] text-brand-accent hover:text-brand-gold transition-colors">
+        <section className="bg-[#15120f] text-white">
+          <div className="mx-auto max-w-[1480px] px-5 py-14 sm:px-8 lg:px-14 lg:py-20">
+            <div className="text-center mb-10">
+              <p className="text-[10px] uppercase tracking-[0.32em] text-brand-gold mb-4">Gallery</p>
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-white">
+                A visual journey through The Pentouz Windsor Heights Ooty
+              </h2>
+            </div>
+            <PropertyGallery items={galleryItems} propertyName="The Pentouz @ Windsor Heights Ooty" rooms={rooms} />
+            <div className="mt-10 text-center">
+              <Link href="/destinations/ooty/gallery" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.18em] text-white hover:border-brand-gold hover:text-brand-gold transition-all duration-500">
                 View Full Gallery
                 <ArrowRight className="w-4 h-4" strokeWidth={1.4} />
               </Link>
-            </div>
-            <div className="grid gap-6 lg:grid-cols-3">
-              {[
-                { src: "/ooty/all/24._view.jpeg", alt: "Mountain Views" },
-                { src: "/ooty/all/22._lawn.jpeg", alt: "Lawn Area" },
-                { src: "/ooty/all/10._bedroom.jpeg", alt: "Bedroom" },
-                { src: "/ooty/all/3._facade.jpeg", alt: "Property Facade" },
-                { src: "/ooty/all/21._restaurant.jpeg", alt: "Restaurant" },
-                { src: "/ooty/all/11._bedroom.jpeg", alt: "Bedroom Interior" },
-              ].map((image) => (
-                <Link
-                  key={image.src}
-                  href="/destinations/ooty/gallery"
-                  className="group relative aspect-[4/5] overflow-hidden shadow-[0_24px_80px_rgba(18,15,12,0.06)]"
-                >
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    className="object-cover transition-transform duration-[1400ms] group-hover:scale-105"
-                    sizes="(max-width: 1024px) 100vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-500 flex items-center justify-center">
-                    <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-white text-[11px] uppercase tracking-[0.18em] bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
-                      View Gallery
-                    </span>
-                  </div>
-                </Link>
-              ))}
             </div>
           </div>
         </section>
