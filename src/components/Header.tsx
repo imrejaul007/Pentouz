@@ -181,11 +181,16 @@ export default function Header() {
         ) : null}
       </header>
 
+      {/* Mobile Menu Overlay */}
       <div
         className={cn(
-          "fixed inset-0 z-[100] transition-all duration-500 ease-out overflow-hidden",
-          isMenuOpen ? "opacity-100 visible bg-[#1a1815]" : "opacity-0 invisible pointer-events-none bg-transparent"
+          "fixed inset-0 z-[100] overflow-hidden",
+          isMenuOpen ? "bg-[#1a1815]" : "bg-transparent pointer-events-none"
         )}
+        style={{
+          visibility: isMenuOpen ? "visible" : "hidden",
+          transition: "background-color 0.3s ease",
+        }}
       >
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-24 left-6 h-32 w-32 rounded-full bg-brand-gold/5" />
@@ -207,7 +212,7 @@ export default function Header() {
 
             <button
               onClick={() => setIsMenuOpen(false)}
-              className="flex items-center gap-3 text-white/90 hover:text-brand-gold transition-colors"
+              className="flex items-center gap-3 text-white hover:text-brand-gold transition-colors"
               aria-label="Close menu"
             >
               <X className="w-6 h-6" strokeWidth={1.5} />
@@ -226,7 +231,7 @@ export default function Header() {
                 </p>
 
                 <div className="space-y-2">
-                  {[{ label: "Home", href: "/" }, ...primaryNav].map((link, i) => (
+                  {[{ label: "Home", href: "/" }, ...primaryNav].map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}
@@ -235,13 +240,8 @@ export default function Header() {
                         "flex items-center justify-between py-4 border-b transition-all duration-300",
                         isActive(link.href) ? "border-brand-gold/50" : "border-white/10 hover:border-brand-gold/25"
                       )}
-                      style={{
-                        opacity: isMenuOpen ? 1 : 0,
-                        transform: isMenuOpen ? "translateY(0)" : "translateY(20px)",
-                        transition: `all 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.06}s`,
-                      }}
                     >
-                      <span className={cn("text-3xl sm:text-4xl font-display font-light transition-colors duration-300", isActive(link.href) ? "text-brand-gold" : "text-white/92")}>
+                      <span className={cn("text-3xl sm:text-4xl font-display font-light transition-colors duration-300", isActive(link.href) ? "text-brand-gold" : "text-white")}>
                         {link.label}
                       </span>
                       <ArrowRight className="w-5 h-5 text-white/40" strokeWidth={1.3} />
@@ -262,7 +262,7 @@ export default function Header() {
                   <a
                     href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
                     onClick={() => setIsMenuOpen(false)}
-                    className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-[11px] uppercase tracking-[0.18em] text-white/85"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-[11px] uppercase tracking-[0.18em] text-white"
                   >
                     Call Concierge
                   </a>
@@ -274,17 +274,12 @@ export default function Header() {
                   Residences
                 </p>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-4">
-                  {destinations.map((dest, index) => (
+                  {destinations.map((dest) => (
                     <Link
                       key={dest.slug}
                       href={`/destinations/${dest.slug}`}
                       onClick={() => setIsMenuOpen(false)}
                       className="group grid grid-cols-[80px_1fr] sm:grid-cols-[92px_1fr] gap-3 sm:gap-4 items-center border border-white/10 bg-white/[0.03] p-2.5 sm:p-3 hover:border-brand-gold/35 transition-colors"
-                      style={{
-                        opacity: isMenuOpen ? 1 : 0,
-                        transform: isMenuOpen ? "translateY(0)" : "translateY(20px)",
-                        transition: `all 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${0.28 + index * 0.06}s`,
-                      }}
                     >
                       <div className="relative h-16 sm:h-24 overflow-hidden">
                         <Image
