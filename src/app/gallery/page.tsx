@@ -56,7 +56,7 @@ export default function GalleryPage() {
   return (
     <>
       <Header />
-      <main className="bg-[#f7f1e7] text-brand-ink">
+      <main className="bg-[#15120f] text-white">
         {/* Hero */}
         <section className="relative isolate overflow-hidden bg-[#17120e] text-white">
           <HeroSlider images={heroImages} alt="The Pentouz Gallery" />

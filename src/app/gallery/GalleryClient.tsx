@@ -110,7 +110,7 @@ export default function GalleryClient() {
 
   return (
     <>
-      <section className="bg-[#fbf7f0]">
+      <section className="bg-[#15120f] text-white">
         <div className="mx-auto max-w-[1480px] px-5 py-14 sm:px-8 lg:px-14 lg:py-20">
           {/* Properties overview */}
           <div className="mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -143,7 +143,7 @@ export default function GalleryClient() {
           </div>
 
           {/* Count */}
-          <p className="mb-8 text-[11px] uppercase tracking-[0.18em] text-brand-muted">
+          <p className="mb-8 text-[11px] uppercase tracking-[0.18em] text-white/50">
             {allItems.length} images across all properties
           </p>
 
@@ -152,7 +152,7 @@ export default function GalleryClient() {
             {paginated.map((item, i) => (
               <div
                 key={`${item.src}-${i}`}
-                className="group relative break-inside-avoid overflow-hidden bg-white cursor-pointer"
+                className="group relative break-inside-avoid overflow-hidden cursor-pointer"
                 onClick={() => openLightbox(i)}
               >
                 <div className="relative aspect-[4/3] overflow-hidden">
@@ -190,11 +190,11 @@ export default function GalleryClient() {
       {/* Lightbox */}
       {selectedItem && (
         <div
-          className="fixed inset-0 z-[99999] bg-black/95 flex items-center justify-center"
+          className="fixed inset-0 z-[99999] bg-black/98 flex items-center justify-center"
           onClick={closeLightbox}
         >
           <button
-            className="absolute top-4 right-4 p-2 text-white/70 hover:text-white transition-colors"
+            className="absolute top-4 right-4 p-2 text-white/70 hover:text-white transition-colors z-10"
             onClick={closeLightbox}
             aria-label="Close"
           >
@@ -202,7 +202,7 @@ export default function GalleryClient() {
           </button>
 
           <button
-            className="absolute left-4 p-2 text-white/70 hover:text-white transition-colors"
+            className="absolute left-4 p-2 text-white/70 hover:text-white transition-colors z-10"
             onClick={(e) => { e.stopPropagation(); goToPrevious(); }}
             aria-label="Previous"
           >
@@ -224,14 +224,14 @@ export default function GalleryClient() {
           </div>
 
           <button
-            className="absolute right-4 p-2 text-white/70 hover:text-white transition-colors"
+            className="absolute right-4 p-2 text-white/70 hover:text-white transition-colors z-10"
             onClick={(e) => { e.stopPropagation(); goToNext(); }}
             aria-label="Next"
           >
             <ChevronRight className="w-10 h-10" />
           </button>
 
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center text-white">
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center text-white z-10">
             <p className="text-[10px] uppercase tracking-[0.22em] text-brand-gold">{selectedItem.location}</p>
             <p className="text-xs text-white/70 mt-1">{selectedItem.alt}</p>
             <p className="text-[10px] text-white/50 mt-2">
