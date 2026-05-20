@@ -92,8 +92,8 @@ export default function Header() {
         {/* Main nav */}
         <div className="max-w-[1600px] mx-auto px-5 sm:px-8 lg:px-10">
           <div className="h-20 lg:h-24 flex items-center justify-between">
-            {/* Logo */}
-            <div className="flex items-center gap-12 xl:gap-16">
+            {/* Logo - hidden when menu is open */}
+            <div className={cn("flex items-center gap-12 xl:gap-16", isMenuOpen && "hidden xl:flex")}>
               <Link href="/" className="block flex-shrink-0">
                 <Image
                   src="/logo-white.png"
@@ -183,17 +183,7 @@ export default function Header() {
 
         <div className="relative z-10 h-full flex flex-col">
           {/* Menu header */}
-          <div className="flex justify-between items-center px-5 sm:px-8 lg:px-10 py-5 sm:py-6 border-b border-white/[0.05]">
-            <Link href="/" className="flex-shrink-0">
-              <Image
-                src="/logo-white.png"
-                alt="The Pentouz"
-                width={115}
-                height={33}
-                className="h-8 w-auto"
-                priority
-              />
-            </Link>
+          <div className="flex justify-end items-center px-5 sm:px-8 lg:px-10 py-5 sm:py-6 border-b border-white/[0.05]">
             <button
               onClick={() => setIsMenuOpen(false)}
               className="flex items-center gap-2 font-['Inter',sans-serif] text-[10px] uppercase tracking-[0.15em] text-white/50 hover:text-white transition-colors duration-300 min-h-[44px] min-w-[44px] justify-center -mr-2"
