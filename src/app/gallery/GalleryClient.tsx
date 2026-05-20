@@ -149,7 +149,7 @@ export default function GalleryClient() {
                 className="group relative break-inside-avoid overflow-hidden bg-white cursor-pointer"
                 onClick={() => openLightbox(i)}
               >
-                <div className="relative w-full overflow-hidden">
+                <div className="relative aspect-[4/3] overflow-hidden">
                   <Image
                     src={item.src}
                     alt={item.alt}
@@ -182,7 +182,7 @@ export default function GalleryClient() {
       {/* Lightbox */}
       {selectedItem && (
         <div
-          className="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center"
+          className="fixed inset-0 z-[99999] bg-black/95 flex items-center justify-center"
           onClick={closeLightbox}
         >
           <button
