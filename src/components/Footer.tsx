@@ -26,20 +26,20 @@ export default function Footer() {
       {/* Gold accent line */}
       <div className="h-[1px] bg-gradient-to-r from-transparent via-[#c3a061]/40 to-transparent" />
 
-      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-16 pt-14 sm:pt-16 lg:pt-24 pb-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr] gap-10 sm:gap-12 lg:gap-16">
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-16 pt-12 sm:pt-14 lg:pt-20 pb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr] gap-8 sm:gap-10 lg:gap-14">
           {/* Brand */}
           <div>
-            <Link href="/" className="inline-block mb-5 sm:mb-6">
+            <Link href="/" className="inline-block mb-5">
               <Image
                 src="/logo-white.png"
                 alt="The Pentouz"
                 width={170}
                 height={49}
-                className="h-9 sm:h-10 w-auto"
+                className="h-8 sm:h-9 w-auto"
               />
             </Link>
-            <p className="font-['Cormorant_Garamond',serif] text-lg sm:text-xl font-light text-white/80 leading-relaxed max-w-sm mb-6 sm:mb-8">
+            <p className="font-['Cormorant_Garamond',serif] text-base sm:text-lg font-light text-white/80 leading-relaxed max-w-sm mb-5 sm:mb-6">
               Distinct stays shaped around privacy, comfort, and a finer pace of travel.
             </p>
 
@@ -65,15 +65,15 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#c3a061] mb-4 sm:mb-6 font-medium">
+            <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#c3a061] mb-3 sm:mb-4 font-medium">
               Navigate
             </p>
-            <nav className="space-y-2 sm:space-y-3">
+            <nav className="space-y-2">
               {footerLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="block font-['Inter',sans-serif] text-[11px] uppercase tracking-[0.12em] text-white/60 hover:text-[#c3a061] transition-colors duration-300 py-1"
+                  className="block font-['Inter',sans-serif] text-[11px] uppercase tracking-[0.12em] text-white/60 hover:text-[#c3a061] transition-colors duration-300 py-1 min-h-[32px] flex items-center"
                 >
                   {link.label}
                 </Link>
@@ -83,15 +83,15 @@ export default function Footer() {
 
           {/* Properties */}
           <div>
-            <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#c3a061] mb-4 sm:mb-6 font-medium">
+            <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#c3a061] mb-3 sm:mb-4 font-medium">
               Properties
             </p>
-            <div className="space-y-2 sm:space-y-3">
+            <div className="space-y-2">
               {destinations.map((dest) => (
                 <Link
                   key={dest.slug}
                   href={`/destinations/${dest.slug}`}
-                  className="block font-['Cormorant_Garamond',serif] text-base sm:text-lg text-white/70 hover:text-[#c3a061] transition-colors duration-300 py-1"
+                  className="block font-['Cormorant_Garamond',serif] text-base sm:text-lg text-white/70 hover:text-[#c3a061] transition-colors duration-300 py-1 min-h-[36px] flex items-center"
                 >
                   {dest.shortTitle}
                 </Link>
@@ -101,10 +101,10 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#c3a061] mb-4 sm:mb-6 font-medium">
+            <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#c3a061] mb-3 sm:mb-4 font-medium">
               Contact
             </p>
-            <div className="space-y-2 sm:space-y-3 font-['Lora',serif] text-xs sm:text-sm text-white/60">
+            <div className="space-y-2 font-['Lora',serif] text-sm text-white/60">
               <p>{contactInfo.address}</p>
               <p>{contactInfo.city}</p>
               <div className="pt-2 space-y-2">
@@ -126,7 +126,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="mt-16 pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="mt-12 pt-6 border-t border-white/[0.06] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-white/35">
             © {new Date().getFullYear()} The Pentouz. All rights reserved.
           </p>

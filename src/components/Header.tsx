@@ -208,8 +208,8 @@ export default function Header() {
           <div className="flex-1 overflow-auto">
             <div className="grid lg:grid-cols-[1.2fr_0.8fr] min-h-full">
               {/* Navigation */}
-              <nav className="px-5 sm:px-8 lg:px-12 py-8 sm:py-10 lg:py-14 border-b lg:border-b-0 lg:border-r border-white/[0.05]">
-                <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.25em] text-[#c3a061] mb-6 sm:mb-8 font-medium">
+              <nav className="px-5 sm:px-8 lg:px-12 py-6 sm:py-8 border-b lg:border-b-0 lg:border-r border-white/[0.05]">
+                <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.25em] text-[#c3a061] mb-5 sm:mb-6 font-medium">
                   Navigate
                 </p>
 
@@ -220,7 +220,7 @@ export default function Header() {
                       href={link.href}
                       onClick={() => setIsMenuOpen(false)}
                       className={cn(
-                        "flex items-center justify-between py-4 sm:py-5 border-b min-h-[56px] transition-all duration-300",
+                        "flex items-center justify-between py-4 border-b min-h-[52px] transition-all duration-300",
                         isActive(link.href) ? "border-[#c3a061]/40" : "border-white/[0.05] hover:border-white/[0.1]"
                       )}
                     >
@@ -235,20 +235,20 @@ export default function Header() {
                   ))}
                 </div>
 
-                <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3">
+                <div className="mt-6 sm:mt-8 flex flex-col gap-3">
                   <a
                     href={bookingUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setIsMenuOpen(false)}
-                    className="w-full sm:w-auto flex items-center justify-center gap-2 font-['Inter',sans-serif] text-[10px] sm:text-[11px] uppercase tracking-[0.15em] font-medium bg-white text-[#0f0e0c] px-6 py-3.5 transition-all duration-500 hover:bg-[#c3a061] hover:text-white"
+                    className="w-full flex items-center justify-center gap-2 font-['Inter',sans-serif] text-[10px] uppercase tracking-[0.15em] font-medium bg-white text-[#0f0e0c] px-6 py-3.5 min-h-[48px] transition-all duration-500 hover:bg-[#c3a061] hover:text-white"
                   >
                     Book Now
                   </a>
                   <a
                     href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
                     onClick={() => setIsMenuOpen(false)}
-                    className="w-full sm:w-auto flex items-center justify-center gap-2 font-['Inter',sans-serif] text-[10px] sm:text-[11px] uppercase tracking-[0.15em] border border-white/15 text-white/70 px-6 py-3.5 transition-all duration-500 hover:border-white/30 hover:text-white"
+                    className="w-full flex items-center justify-center gap-2 font-['Inter',sans-serif] text-[10px] uppercase tracking-[0.15em] border border-white/15 text-white/70 px-6 py-3.5 min-h-[48px] transition-all duration-500 hover:border-white/30 hover:text-white"
                   >
                     Call Concierge
                   </a>
@@ -256,33 +256,33 @@ export default function Header() {
               </nav>
 
               {/* Residences */}
-              <div className="px-5 sm:px-8 lg:px-12 py-8 sm:py-10 lg:py-14">
-                <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.25em] text-[#c3a061] mb-6 sm:mb-8 font-medium">
+              <div className="px-5 sm:px-8 lg:px-12 py-6 sm:py-8">
+                <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.25em] text-[#c3a061] mb-5 sm:mb-6 font-medium">
                   Properties
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2">
                   {destinations.map((dest) => (
                     <Link
                       key={dest.slug}
                       href={`/destinations/${dest.slug}`}
                       onClick={() => setIsMenuOpen(false)}
-                      className="group grid grid-cols-[72px_1fr] gap-3 items-center border border-white/[0.05] bg-white/[0.02] p-2 min-h-[72px] transition-all duration-500 hover:border-[#c3a061]/30 hover:bg-white/[0.04]"
+                      className="group grid grid-cols-[64px_1fr] gap-3 items-center border border-white/[0.05] bg-white/[0.02] p-2 min-h-[64px] transition-all duration-500 hover:border-[#c3a061]/30 hover:bg-white/[0.04]"
                     >
-                      <div className="relative h-16 overflow-hidden">
+                      <div className="relative h-14 overflow-hidden">
                         <Image
                           src={dest.heroImage || dest.image}
                           alt={dest.title}
                           fill
                           className="object-cover transition-transform duration-700 group-hover:scale-105"
-                          sizes="72px"
+                          sizes="64px"
                         />
                       </div>
                       <div>
-                        <p className="text-[9px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-white/40 mb-1">
+                        <p className="text-[9px] font-['Inter',sans-serif] uppercase tracking-[0.12em] text-white/40 mb-1">
                           {dest.subtitle}
                         </p>
-                        <p className="font-['Cormorant_Garamond',serif] text-lg font-light text-white group-hover:text-[#c3a061] transition-colors duration-300">
-                          {dest.title}
+                        <p className="font-['Cormorant_Garamond',serif] text-base sm:text-lg font-light text-white group-hover:text-[#c3a061] transition-colors duration-300">
+                          {dest.shortTitle}
                         </p>
                       </div>
                     </Link>
