@@ -5,6 +5,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroSlider from "@/components/HeroSlider";
 import { destinations } from "@/data/content";
+import type { Metadata } from "next";
+import { withSiteUrl } from "@/lib/site";
 
 const heroImages = [
   "/lavelle-road/all/terrace_1.jpg",
@@ -15,9 +17,6 @@ const heroImages = [
   "/ooty/all/24._view.jpeg",
   "/ooty/all/22._lawn.jpeg",
 ];
-
-import type { Metadata } from "next";
-import { withSiteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Destinations | The Pentouz Collection",
@@ -87,26 +86,28 @@ export default function DestinationsPage() {
   return (
     <>
       <Header />
-      <main className="bg-[#f7f1e7] text-brand-ink">
+      <main className="bg-brand-cream text-brand-ink">
+        {/* Hero Section */}
         <HeroSlider images={heroImages} alt="The Pentouz collection">
           <div className="mx-auto flex min-h-[100svh] max-w-[1480px] flex-col justify-end px-5 pb-24 pt-48 sm:px-8 lg:px-14">
-            <div className="grid gap-8 xl:grid-cols-[1.02fr_0.98fr] xl:items-end">
+            <div className="grid gap-10 xl:grid-cols-[1.02fr_0.98fr] xl:items-end">
               <div className="max-w-5xl">
-                <p className="text-[10px] uppercase tracking-[0.32em] text-brand-gold mb-4 animate-fade-in-up">The Pentouz Collection</p>
-                <h1 className="font-display text-[2rem] font-light leading-[1] sm:text-[3rem] md:text-[4rem] lg:text-[5rem] text-white animate-fade-in-up [animation-delay:120ms]">
+                <p className="text-[10px] font-ui uppercase tracking-[0.3em] text-brand-gold mb-6 animate-fade-in-up">The Pentouz Collection</p>
+                <h1 className="font-display font-light leading-[1.05] text-white animate-fade-in-up [animation-delay:120ms]" style={{ fontSize: 'clamp(2.2rem, 5vw, 4.5rem)', letterSpacing: '-0.025em' }}>
                   Stays with their own mood, their own setting, and their own reason to choose them.
                 </h1>
-                <p className="mt-6 text-base leading-7 text-white/76 max-w-2xl animate-fade-in-up [animation-delay:220ms]">
+                <p className="mt-6 font-body text-base sm:text-lg leading-relaxed text-white/70 max-w-2xl animate-fade-in-up [animation-delay:220ms]">
                   The collection is intentionally small. Each property is meant to feel distinct, from boutique city stay to private penthouse to quieter hillside retreat.
                 </p>
               </div>
 
-              <div className="xl:justify-self-end xl:max-w-[400px] animate-fade-in-up [animation-delay:320ms]">
-                <div className="border border-white/15 bg-white/[0.08] text-white p-6 backdrop-blur-md">
-                  <p className="text-[10px] uppercase tracking-[0.22em] text-brand-gold">Collection Notes</p>
-                  <div className="mt-6 space-y-4">
-                    {collectionNotes.map((note) => (
-                      <p key={note} className="border-b border-white/10 pb-4 text-sm leading-6 text-white/72 last:border-b-0 last:pb-0 last:mb-0">
+              {/* Collection Notes Card */}
+              <div className="xl:justify-self-end xl:max-w-[380px] animate-fade-in-up [animation-delay:320ms]">
+                <div className="border border-white/10 bg-white/[0.05] backdrop-blur-md text-white p-6">
+                  <p className="text-[10px] font-ui uppercase tracking-[0.2em] text-brand-gold font-medium">Collection Notes</p>
+                  <div className="mt-5 space-y-4">
+                    {collectionNotes.map((note, i) => (
+                      <p key={i} className="border-b border-white/[0.08] pb-4 font-body text-sm leading-relaxed text-white/65 last:border-b-0 last:pb-0 last:mb-0 last:mt-0">
                         {note}
                       </p>
                     ))}
@@ -117,58 +118,66 @@ export default function DestinationsPage() {
           </div>
         </HeroSlider>
 
-        <section className="bg-[#fbf7f0]">
-          <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28 space-y-20 lg:space-y-24">
+        {/* Property Listings */}
+        <section className="bg-brand-linen">
+          <div className="mx-auto max-w-[1480px] px-5 py-24 sm:px-8 lg:px-14 lg:py-36 space-y-20 lg:space-y-32">
             {destinations.map((destination, index) => (
               <article
                 key={destination.slug}
                 className={`grid gap-8 lg:gap-14 items-center ${index % 2 === 1 ? "lg:grid-cols-[0.9fr_1.1fr]" : "lg:grid-cols-[1.1fr_0.9fr]"}`}
               >
+                {/* Image */}
                 <Link
                   href={`/destinations/${destination.slug}`}
                   className={index % 2 === 1 ? "lg:order-2" : ""}
                 >
-                  <div className="group relative overflow-hidden bg-[#11100f] shadow-[0_30px_90px_rgba(18,15,12,0.12)]">
-                    <div className="relative aspect-[16/11] overflow-hidden lg:aspect-[5/4]">
+                  <div className="group relative overflow-hidden shadow-card transition-all duration-700 ease-luxury hover:shadow-card-hover">
+                    <div className="relative aspect-[4/3] lg:aspect-[5/4] overflow-hidden">
                       <Image
                         src={destination.heroImage || destination.image}
                         alt={destination.title}
                         fill
                         priority={index === 0}
-                        className="object-cover transition-transform duration-[1400ms] group-hover:scale-[1.04]"
+                        className="object-cover transition-transform duration-700 ease-luxury group-hover:scale-105"
                         sizes="(max-width: 1024px) 100vw, 55vw"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+                      {/* Subtle overlay */}
+                      <div className="absolute inset-0 overlay-gradient-subtle" />
                     </div>
                   </div>
                 </Link>
 
+                {/* Content */}
                 <div className={index % 2 === 1 ? "lg:order-1" : ""}>
-                  <p className="luxury-kicker text-brand-accent">{destination.subtitle}</p>
-                  <h2 className="mt-5 font-display text-4xl font-light leading-tight text-brand-ink sm:text-5xl lg:text-6xl">
+                  <p className="editorial-overline text-brand-accent">{destination.subtitle}</p>
+                  <h2 className="mt-5 font-display font-light leading-tight text-brand-ink sm:text-5xl lg:text-6xl" style={{ letterSpacing: '-0.02em' }}>
                     {destination.title}
                   </h2>
-                  <p className="mt-6 max-w-xl text-base leading-8 text-brand-body sm:text-lg">
+                  <p className="mt-6 max-w-xl font-body text-base sm:text-lg leading-[1.8] text-brand-body">
                     {destination.copy}
                   </p>
-                  <div className="mt-8 flex flex-wrap gap-3">
+
+                  {/* Features */}
+                  <div className="mt-6 flex flex-wrap gap-3">
                     {destination.features.slice(0, 3).map((feature) => (
-                      <span key={feature} className="rounded-full border border-brand-border px-4 py-2 text-[10px] uppercase tracking-[0.14em] text-brand-muted">
+                      <span key={feature} className="border border-brand-border/50 px-4 py-2 font-ui text-[10px] uppercase tracking-[0.12em] text-brand-muted">
                         {feature}
                       </span>
                     ))}
                   </div>
-                  <div className="mt-10 flex flex-wrap gap-4">
+
+                  {/* CTAs */}
+                  <div className="mt-10 flex flex-wrap items-center gap-4">
                     <Link
                       href={`/destinations/${destination.slug}`}
-                      className="inline-flex items-center gap-2 rounded-full bg-brand-ink px-7 py-4 text-[11px] uppercase tracking-[0.2em] text-white transition-all duration-500 hover:-translate-y-0.5 hover:bg-black"
+                      className="btn-luxury"
                     >
                       Explore Property
-                      <ArrowRight className="w-4 h-4" strokeWidth={1.4} />
+                      <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
                     </Link>
                     <Link
                       href={`/destinations/${destination.slug}/living`}
-                      className="inline-flex items-center gap-2 rounded-full border border-brand-ink px-7 py-4 text-[11px] uppercase tracking-[0.2em] text-brand-ink transition-all duration-500 hover:-translate-y-0.5 hover:bg-brand-ink hover:text-white"
+                      className="btn-outline"
                     >
                       View Living
                     </Link>
@@ -179,18 +188,19 @@ export default function DestinationsPage() {
           </div>
         </section>
 
-        <section className="bg-[#17120e] text-white">
-          <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-24">
+        {/* Collection Links */}
+        <section className="bg-brand-dark text-white">
+          <div className="mx-auto max-w-[1480px] px-5 py-24 sm:px-8 lg:px-14 lg:py-32">
             <div className="grid gap-5 md:grid-cols-3">
               {collectionLinks.map((item, index) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="border border-white/10 bg-white/[0.04] p-6 transition-all duration-500 hover:-translate-y-1 hover:border-brand-gold/40 animate-fade-in-up"
+                  className="group border border-white/[0.08] bg-white/[0.02] p-6 sm:p-8 transition-all duration-500 ease-luxury hover:-translate-y-1 hover:border-brand-gold/30 hover:bg-white/[0.04] animate-fade-in-up"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  <p className="font-display text-3xl font-light text-white">{item.title}</p>
-                  <p className="mt-4 text-sm leading-7 text-white/70">{item.text}</p>
+                  <p className="font-display text-2xl sm:text-3xl font-light text-white group-hover:text-brand-gold transition-colors duration-300">{item.title}</p>
+                  <p className="mt-4 font-body text-sm leading-relaxed text-white/60">{item.text}</p>
                 </Link>
               ))}
             </div>

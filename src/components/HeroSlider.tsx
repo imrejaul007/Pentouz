@@ -49,7 +49,7 @@ export default function HeroSlider({
   if (images.length === 0) return null;
 
   return (
-    <div className="relative isolate min-h-[100svh] overflow-hidden bg-[#15120f]">
+    <div className="relative isolate min-h-[100svh] overflow-hidden bg-brand-dark">
       {images.map((image, index) => {
         const isFirst = index === 0;
         const shouldPreload = isFirst;
@@ -57,7 +57,7 @@ export default function HeroSlider({
         return (
           <div
             key={image}
-            className={`absolute inset-0 transition-opacity duration-[1500ms] ${
+            className={`absolute inset-0 transition-opacity duration-[1200ms] ease-luxury ${
               index === currentIndex ? "opacity-100" : "opacity-0"
             }`}
           >
@@ -71,31 +71,35 @@ export default function HeroSlider({
               className="object-cover"
               fetchPriority={isFirst ? "high" : "low"}
               loading={isFirst ? "eager" : "lazy"}
-              placeholder={isFirst ? "blur" : undefined}
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAYH/8QAIhAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBRIhMRNBUWH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAMBAQEAAAAAAAAAAAAAAAECAwAREv/aAAwDAQACEQMRAD8AzfS+o6Lp2g6fbR3NrFeXUjS3DSR8nkLHgcD4AA6xnP8pqVvU+katdS2+lQ6fLaxM0ckkUZDOVOCcHyB1nWvW9N02O9uHSxtkdpXZlES4BJPgY1p0rT7P+MWf0j/ZPtsmf/9k="
             />
           </div>
         );
       })}
 
+      {/* Layered overlay gradients - refined for premium feel */}
       <div
-        className={`absolute inset-0 bg-[linear-gradient(90deg,rgba(10,8,6,0.88)_0%,rgba(10,8,6,0.44)_38%,rgba(10,8,6,0.14)_70%,rgba(10,8,6,0.72)_100%)] ${overlayClassName}`}
+        className={`absolute inset-0 bg-gradient-to-r from-brand-dark/85 via-brand-dark/40 to-brand-dark/15 ${overlayClassName}`}
       />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(196,160,97,0.1),transparent_28%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,8,6,0.08)_0%,rgba(10,8,6,0)_28%,rgba(10,8,6,0.7)_100%)]" />
+      <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-brand-dark/20" />
+      <div className="absolute inset-0 bg-gradient-to-b from-brand-dark/30 via-transparent to-transparent" />
 
+      {/* Subtle gold accent */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(195,160,97,0.08),transparent_40%)]" />
+
+      {/* Content */}
       <div className="relative z-10">{children}</div>
 
+      {/* Navigation dots - refined styling */}
       {images.length > 1 && (
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2.5">
           {images.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
+              className={`h-[3px] rounded-full transition-all duration-500 ease-luxury ${
                 index === currentIndex
                   ? "w-8 bg-brand-gold"
-                  : "w-4 bg-white/40 hover:bg-white/60"
+                  : "w-3 bg-white/30 hover:bg-white/50"
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />

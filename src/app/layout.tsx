@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Montserrat, Cormorant_Garamond } from "next/font/google";
+import { Lora, Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 import Preloader from "@/components/Preloader";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -7,23 +7,33 @@ import { SmoothScroll, PageTransition } from "@/components/ClientComponents";
 import { withSiteUrl } from "@/lib/site";
 import { generatePageSchemas } from "@/lib/schema";
 
-// Premium elegant serif font - use smaller subsets for faster loading
-const bodyFont = Montserrat({
+// Premium body font - elegant serif for warmth
+const bodyFont = Lora({
   variable: "--font-body-family",
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
   display: "swap",
   preload: true,
 });
 
-// Premium elegant serif font
+// Premium display font - refined serif for headlines
 const displayFont = Cormorant_Garamond({
   variable: "--font-display-family",
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
+  weight: ["300", "400", "500", "600"],
   style: ["normal", "italic"],
   display: "swap",
   preload: true,
+});
+
+// UI/Label font - clean sans-serif for interface elements
+const uiFont = Inter({
+  variable: "--font-ui-family",
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -123,7 +133,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${bodyFont.variable} ${displayFont.variable} antialiased bg-white text-brand-ink`}
+        className={`${bodyFont.variable} ${displayFont.variable} ${uiFont.variable} antialiased bg-brand-cream text-brand-ink`}
       >
         {/* Skip to main content for keyboard users */}
         <a
