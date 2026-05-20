@@ -151,15 +151,41 @@ export default function OotyPage() {
 
         <section className="bg-white">
           <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28">
+            <div className="text-center mb-12">
+              <p className="luxury-kicker text-brand-accent">Gallery</p>
+              <h2 className="luxury-section-title mt-5">A visual journey through The Pentouz Windsor Heights Ooty</h2>
+              <Link href="/destinations/ooty/gallery" className="inline-flex items-center gap-2 mt-6 text-[11px] uppercase tracking-[0.18em] text-brand-accent hover:text-brand-gold transition-colors">
+                View Full Gallery
+                <ArrowRight className="w-4 h-4" strokeWidth={1.4} />
+              </Link>
+            </div>
             <div className="grid gap-6 lg:grid-cols-3">
               {[
-                "/ooty/all/3._facade.jpeg",
-                "/ooty/all/21._restaurant.jpeg",
-                "/ooty/all/22._lawn.jpeg",
-              ].map((image, index) => (
-                <div key={image} className="relative aspect-[4/5] overflow-hidden shadow-[0_24px_80px_rgba(18,15,12,0.06)]">
-                  <Image src={image} alt={`Ooty view ${index + 1}`} fill className="object-cover transition-transform duration-[1400ms] hover:scale-105" sizes="(max-width: 1024px) 100vw, 33vw" />
-                </div>
+                { src: "/ooty/all/24._view.jpeg", alt: "Mountain Views" },
+                { src: "/ooty/all/22._lawn.jpeg", alt: "Lawn Area" },
+                { src: "/ooty/all/10._bedroom.jpeg", alt: "Bedroom" },
+                { src: "/ooty/all/3._facade.jpeg", alt: "Property Facade" },
+                { src: "/ooty/all/21._restaurant.jpeg", alt: "Restaurant" },
+                { src: "/ooty/all/11._bedroom.jpeg", alt: "Bedroom Interior" },
+              ].map((image) => (
+                <Link
+                  key={image.src}
+                  href="/destinations/ooty/gallery"
+                  className="group relative aspect-[4/5] overflow-hidden shadow-[0_24px_80px_rgba(18,15,12,0.06)]"
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover transition-transform duration-[1400ms] group-hover:scale-105"
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-500 flex items-center justify-center">
+                    <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-white text-[11px] uppercase tracking-[0.18em] bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
+                      View Gallery
+                    </span>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>

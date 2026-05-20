@@ -250,29 +250,42 @@ export default function PentouzHillsidePage() {
         {/* Gallery */}
         <section className="bg-white">
           <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28">
-            <div className="mb-10 animate-fade-in-up">
+            <div className="text-center mb-12">
               <p className="luxury-kicker text-brand-accent">Gallery</p>
-              <h2 className="luxury-section-title mt-5">Life at Pentouz Hillside.</h2>
+              <h2 className="luxury-section-title mt-5">A visual journey through The Pentouz Hillside</h2>
+              <Link href="/destinations/pentouz-hillside/gallery" className="inline-flex items-center gap-2 mt-6 text-[11px] uppercase tracking-[0.18em] text-brand-accent hover:text-brand-gold transition-colors">
+                View Full Gallery
+                <ArrowRight className="w-4 h-4" strokeWidth={1.4} />
+              </Link>
             </div>
             <div className="grid gap-6 lg:grid-cols-3">
               {[
-                "/fernhill/all/44_swimming_pool.jpg",
-                "/fernhill/all/54_dining.jpg",
-                "/fernhill/all/60_night_view.jpg",
-                "/fernhill/all/55_fireplace.jpg",
-                "/fernhill/all/62_kids_play_area.jpg",
-                "/fernhill/all/50_top_view.jpg",
+                { src: "/fernhill/all/63_overview.jpg", alt: "Property Overview" },
+                { src: "/fernhill/all/44_swimming_pool.jpg", alt: "Swimming Pool" },
+                { src: "/fernhill/all/54_dining.jpg", alt: "Dining Area" },
+                { src: "/fernhill/all/09_villa_living_room.jpg", alt: "Villa Living Room" },
+                { src: "/fernhill/all/55_fireplace.jpg", alt: "Fireplace" },
+                { src: "/fernhill/all/50_top_view.jpg", alt: "Top View" },
               ].map((image, index) => (
-                <div key={image} className="relative aspect-[4/5] overflow-hidden shadow-[0_24px_80px_rgba(18,15,12,0.06)]">
+                <Link
+                  key={image.src}
+                  href="/destinations/pentouz-hillside/gallery"
+                  className="group relative aspect-[4/5] overflow-hidden shadow-[0_24px_80px_rgba(18,15,12,0.06)]"
+                >
                   <Image
-                    src={image}
-                    alt={`The Pentouz Hillside ${index + 1}`}
+                    src={image.src}
+                    alt={image.alt}
                     fill
                     priority={index === 0}
-                    className="object-cover transition-transform duration-[1400ms] hover:scale-105"
+                    className="object-cover transition-transform duration-[1400ms] group-hover:scale-105"
                     sizes="(max-width: 1024px) 100vw, 33vw"
                   />
-                </div>
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-500 flex items-center justify-center">
+                    <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-white text-[11px] uppercase tracking-[0.18em] bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
+                      View Gallery
+                    </span>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>

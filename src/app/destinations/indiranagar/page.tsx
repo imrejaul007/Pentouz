@@ -155,15 +155,41 @@ export default function IndiranagarPage() {
 
         <section className="bg-white">
           <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28">
+            <div className="text-center mb-12">
+              <p className="luxury-kicker text-brand-accent">Gallery</p>
+              <h2 className="luxury-section-title mt-5">A visual journey through The Pentouz Indiranagar</h2>
+              <Link href="/destinations/indiranagar/gallery" className="inline-flex items-center gap-2 mt-6 text-[11px] uppercase tracking-[0.18em] text-brand-accent hover:text-brand-gold transition-colors">
+                View Full Gallery
+                <ArrowRight className="w-4 h-4" strokeWidth={1.4} />
+              </Link>
+            </div>
             <div className="grid gap-6 lg:grid-cols-3">
               {[
-                "/indiranagar/all/02._the_skyline_suite_03._the_skyline_suite_bedroom.jpg",
-                "/indiranagar/all/05._dining_-_kitchen_04._dining_room.jpg",
-                "/indiranagar/all/06._terrace_01._terrace.jpg",
-              ].map((image, index) => (
-                <div key={image} className="relative aspect-[4/5] overflow-hidden shadow-[0_24px_80px_rgba(18,15,12,0.06)]">
-                  <Image src={image} alt={`Indiranagar view ${index + 1}`} fill className="object-cover transition-transform duration-[1400ms] hover:scale-105" sizes="(max-width: 1024px) 100vw, 33vw" />
-                </div>
+                { src: "/indiranagar/all/04._living_room_01._living_room.jpg", alt: "Living Room" },
+                { src: "/indiranagar/all/06._terrace_01._terrace.jpg", alt: "Rooftop Terrace" },
+                { src: "/indiranagar/all/02._the_skyline_suite_01._the_skyline_suite_bedroom.jpg", alt: "Skyline Suite" },
+                { src: "/indiranagar/all/01._the_terrace_haven_01._the_terrace_haven_bedroom.jpg", alt: "Terrace Haven" },
+                { src: "/indiranagar/all/05._dining_-_kitchen_04._dining_room.jpg", alt: "Dining Area" },
+                { src: "/indiranagar/all/03._the_vista_room_01._the_vista_room_bedroom.jpg", alt: "Vista Room" },
+              ].map((image) => (
+                <Link
+                  key={image.src}
+                  href="/destinations/indiranagar/gallery"
+                  className="group relative aspect-[4/5] overflow-hidden shadow-[0_24px_80px_rgba(18,15,12,0.06)]"
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover transition-transform duration-[1400ms] group-hover:scale-105"
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-500 flex items-center justify-center">
+                    <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-white text-[11px] uppercase tracking-[0.18em] bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
+                      View Gallery
+                    </span>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>
