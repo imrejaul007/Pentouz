@@ -88,9 +88,9 @@ export default function RoomGallery({
                 <Image
                   src={
                     room.image ||
-                    gallery?.[index] ||
+                    (gallery && gallery[index]) ||
                     fallbackImage ||
-                    ""
+                    "/lavelle-road/all/reception_1.jpg"
                   }
                   alt={room.name}
                   fill

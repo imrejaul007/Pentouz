@@ -118,7 +118,7 @@ export default function GalleryClient() {
               { name: "Indiranagar", count: indiranagarItems.length, image: indiranagarItems[0]?.src },
               { name: "Chikmagalur", count: fernhillItems.length, image: fernhillItems[0]?.src },
               { name: "Ooty", count: ootyItems.length, image: ootyItems[0]?.src },
-            ].map((property) => (
+            ].map((property, index) => (
               <div key={property.name} className="relative aspect-[4/3] overflow-hidden group">
                 <Image
                   src={property.image}
@@ -126,6 +126,7 @@ export default function GalleryClient() {
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 768px) 50vw, 25vw"
+                  priority={index < 2}
                 />
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors" />
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
@@ -156,6 +157,8 @@ export default function GalleryClient() {
                     fill
                     className="object-cover transition-transform duration-[1200ms] group-hover:scale-[1.04]"
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    loading={i < 8 ? "eager" : "lazy"}
+                    priority={i < 4}
                   />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4">

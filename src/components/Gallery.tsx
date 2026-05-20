@@ -1,36 +1,90 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { galleryItems, galleryCategories } from "@/data/content";
+import {
+  indiranagarImageSet,
+  lavelleImageSet,
+  ootyImageSet,
+  fernhillImageSet,
+} from "@/data/propertyImageSets";
 
-// Photographer credits for each image
-const photographers: Record<string, string> = {
-  "The Grand Living": "Priya Sharma",
-  "Master Suite": "Arjun Mehta",
-  "Poolside Serenity": "Kavitha Nair",
-  "Evening Ambiance": "Rohan Verma",
-  "Garden Retreat": "Anita Desai",
-  "Dining Experience": "Vikram Singh",
+// Types
+type GalleryItem = {
+  src: string;
+  title: string;
+  category: string;
+  location: string;
 };
+
+// Categorize images based on path
+function categorize(path: string): string {
+  const p = path.toLowerCase();
+  if (/bathroom|bath/i.test(p)) return "Bathroom";
+  if (/bedroom|suite|king|queen|superior|cottage|villa|four_bed|eight_bed|squad/i.test(p)) return "Bedroom";
+  if (/terrace|balcony|patio|lawn|courtyard/i.test(p)) return "Terrace";
+  if (/living_room|living/i.test(p)) return "Living Room";
+  if (/kitchen|dining/i.test(p)) return "Kitchen & Dining";
+  if (/restaurant/i.test(p)) return "Restaurant";
+  if (/reception|entrance|facade|exterior|front_view|side_view/i.test(p)) return "Common Areas";
+  if (/view|top_view|night/i.test(p)) return "Views";
+  if (/games_room|swimming_pool|pool|play_area|kids|garden|fireplace|gazebo|tea_coffee|elevator|lift|corridor|parking/i.test(p)) return "Common Areas";
+  return "Lifestyle";
+}
+
+function makeTitle(path: string, location: string): string {
+  const file = path.split("/").pop()?.replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ").replace(/\d+\./g, "").trim() ?? "";
+  return `${location} — ${file}`;
+}
+
+// Build gallery items from property images
+const allImages: GalleryItem[] = [
+  ...indiranagarImageSet.map((src) => ({
+    src,
+    title: makeTitle(src, "Indiranagar"),
+    category: categorize(src),
+    location: "Indiranagar",
+  })),
+  ...lavelleImageSet.map((src) => ({
+    src,
+    title: makeTitle(src, "Lavelle Road"),
+    category: categorize(src),
+    location: "Lavelle Road",
+  })),
+  ...ootyImageSet.map((src) => ({
+    src,
+    title: makeTitle(src, "Ooty"),
+    category: categorize(src),
+    location: "Ooty",
+  })),
+  ...fernhillImageSet.map((src) => ({
+    src,
+    title: makeTitle(src, "Chikmagalur"),
+    category: categorize(src),
+    location: "Chikmagalur",
+  })),
+];
+
+const categories = ["All", "Bedroom", "Terrace", "Living Room", "Common Areas", "Views"];
 
 export default function Gallery() {
   const [filter, setFilter] = useState("All");
-  const [lightbox, setLightbox] = useState<(typeof galleryItems)[0] | null>(null);
+  const [lightbox, setLightbox] = useState<GalleryItem | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const lightboxRef = useRef<HTMLDivElement>(null);
 
-  const filteredGallery =
-    filter === "All"
-      ? galleryItems
-      : galleryItems.filter((item) => item.category === filter);
+  const filteredGallery = useMemo(
+    () => (filter === "All" ? allImages : allImages.filter((item) => item.category === filter)),
+    [filter]
+  );
 
   const currentIndex = lightbox
-    ? filteredGallery.findIndex((item) => item.title === lightbox.title)
+    ? filteredGallery.findIndex((item) => item.src === lightbox.src)
     : -1;
 
   // Intersection Observer for visibility
@@ -147,12 +201,12 @@ export default function Gallery() {
 
         {/* Filter Tabs */}
         <div
-          className={`flex justify-start sm:justify-center gap-6 sm:gap-10 lg:gap-14 mb-10 sm:mb-14 lg:mb-16 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide transition-all duration-1000 ease-out ${
+          className={`flex justify-start sm:justify-center gap-4 sm:gap-6 lg:gap-10 mb-10 sm:mb-14 lg:mb-16 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide transition-all duration-1000 ease-out ${
             isVisible ? "opacity-100" : "opacity-0"
           }`}
           style={{ transitionDelay: "300ms" }}
         >
-          {galleryCategories.map((cat) => (
+          {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setFilter(cat)}
@@ -176,9 +230,9 @@ export default function Gallery() {
 
         {/* Masonry Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5 auto-rows-[150px] sm:auto-rows-[180px] lg:auto-rows-[200px]">
-          {filteredGallery.map((item, i) => (
+          {filteredGallery.slice(0, 16).map((item, i) => (
             <button
-              key={item.title}
+              key={item.src}
               onClick={() => setLightbox(item)}
               className={cn(
                 "relative group overflow-hidden",
@@ -190,12 +244,12 @@ export default function Gallery() {
               style={{ transitionDelay: `${400 + i * 80}ms` }}
             >
               <Image
-                src={item.image}
+                src={item.src}
                 alt={item.title}
                 fill
                 className="object-cover transition-transform duration-1000 group-hover:scale-110"
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                loading="lazy"
+                loading={i < 4 ? "eager" : "lazy"}
                 quality={80}
               />
 
@@ -203,30 +257,35 @@ export default function Gallery() {
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors duration-500 flex flex-col items-start justify-end p-4 sm:p-5 lg:p-6">
                 <div className="translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
                   <p className="text-white font-display text-base sm:text-lg lg:text-xl font-light mb-1">
-                    {item.title}
+                    {item.location}
                   </p>
-                  <p className="text-white/70 text-[9px] sm:text-[10px] uppercase tracking-[0.15em] mb-2">
+                  <p className="text-brand-gold text-[9px] sm:text-[10px] uppercase tracking-[0.15em] mb-1">
                     {item.category}
                   </p>
-                  {photographers[item.title] && (
-                    <p className="text-brand-gold text-[8px] sm:text-[9px] uppercase tracking-[0.2em]">
-                      Photo by {photographers[item.title]}
-                    </p>
-                  )}
                 </div>
               </div>
             </button>
           ))}
         </div>
 
+        {/* View All Gallery Link */}
+        <div className="text-center mt-12 sm:mt-16">
+          <Link
+            href="/gallery"
+            className="inline-flex items-center gap-3 border border-brand-ink px-8 sm:px-10 py-3 sm:py-4 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-brand-ink hover:bg-brand-ink hover:text-white transition-all duration-500"
+          >
+            <span>View All {filteredGallery.length} Photos</span>
+          </Link>
+        </div>
+
         {/* Photo Credit */}
         <p
-          className={`text-center mt-12 sm:mt-16 photo-credit transition-all duration-1000 ease-out ${
+          className={`text-center mt-8 sm:mt-10 text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-brand-muted transition-all duration-1000 ease-out ${
             isVisible ? "opacity-100" : "opacity-0"
           }`}
           style={{ transitionDelay: "800ms" }}
         >
-          Captured by The Pentouz Lens
+          {filteredGallery.length} photographs across all properties
         </p>
       </div>
 
@@ -283,7 +342,7 @@ export default function Gallery() {
             onClick={(e) => e.stopPropagation()}
           >
             <Image
-              src={lightbox.image}
+              src={lightbox.src}
               alt={lightbox.title}
               width={1400}
               height={900}
@@ -298,16 +357,11 @@ export default function Gallery() {
           {/* Caption */}
           <div className="absolute bottom-16 sm:bottom-12 left-1/2 -translate-x-1/2 text-center text-white px-4 w-full">
             <p className="font-display text-lg sm:text-xl lg:text-2xl font-light mb-1 sm:mb-2">
-              {lightbox.title}
+              {lightbox.location}
             </p>
-            <p className="text-[9px] sm:text-[10px] text-white/70 uppercase tracking-[0.2em] mb-1">
+            <p className="text-brand-gold text-[9px] sm:text-[10px] uppercase tracking-[0.2em] mb-1">
               {lightbox.category}
             </p>
-            {photographers[lightbox.title] && (
-              <p className="text-brand-gold text-[8px] sm:text-[9px] uppercase tracking-[0.15em]">
-                Photography by {photographers[lightbox.title]}
-              </p>
-            )}
           </div>
 
           {/* Counter */}
