@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useMemo, useEffect } from "react";
 import { lavelleImageSet, indiranagarImageSet, ootyImageSet, fernhillImageSet } from "@/data/propertyImageSets";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
@@ -114,12 +115,16 @@ export default function GalleryClient() {
           {/* Properties overview */}
           <div className="mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { name: "Lavelle Road", count: lavelleItems.length, image: lavelleItems[0]?.src },
-              { name: "Indiranagar", count: indiranagarItems.length, image: indiranagarItems[0]?.src },
-              { name: "Chikmagalur", count: fernhillItems.length, image: fernhillItems[0]?.src },
-              { name: "Ooty", count: ootyItems.length, image: ootyItems[0]?.src },
+              { name: "Lavelle Road", count: lavelleItems.length, image: lavelleItems[0]?.src, href: "/destinations/lavelle-road/gallery" },
+              { name: "Indiranagar", count: indiranagarItems.length, image: indiranagarItems[0]?.src, href: "/destinations/indiranagar/gallery" },
+              { name: "Chikmagalur", count: fernhillItems.length, image: fernhillItems[0]?.src, href: "/destinations/pentouz-hillside/gallery" },
+              { name: "Ooty", count: ootyItems.length, image: ootyItems[0]?.src, href: "/destinations/ooty/gallery" },
             ].map((property, index) => (
-              <div key={property.name} className="relative aspect-[4/3] overflow-hidden group">
+              <Link
+                key={property.name}
+                href={property.href}
+                className="relative aspect-[4/3] overflow-hidden group cursor-pointer"
+              >
                 <Image
                   src={property.image}
                   alt={property.name}
@@ -133,7 +138,7 @@ export default function GalleryClient() {
                   <p className="text-xs uppercase tracking-[0.2em] text-white/70">{property.count} photos</p>
                   <p className="mt-1 font-display text-xl font-light">{property.name}</p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 
