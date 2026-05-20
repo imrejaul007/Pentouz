@@ -285,19 +285,22 @@ export default function PentouzHillsidePage() {
 
         {/* Amenities */}
         <section className="bg-[#0f0e0c] text-white">
-          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-16 sm:py-24 lg:py-36">
-            <div className="max-w-2xl mb-10 sm:mb-16">
-              <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#c3a061] font-medium mb-3 sm:mb-4">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-12 sm:py-16 lg:py-24">
+            <div className="mb-8 sm:mb-10">
+              <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] text-[#c3a061] font-medium mb-2 sm:mb-3">
                 Amenities
               </p>
-              <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+              <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', letterSpacing: '-0.015em' }}>
                 Everything you need for a memorable stay in the hills.
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
+            <div className="flex flex-wrap gap-2 sm:gap-3">
               {amenities.map((amenity) => (
-                <div key={amenity} className="border border-white/10 bg-white/[0.02] px-4 sm:px-5 py-3 sm:py-4 text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.12em] sm:tracking-[0.15em] text-white/70">
+                <div key={amenity} className="flex items-center gap-2 border border-white/10 bg-white/[0.02] px-4 py-2.5 sm:py-3 text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.1em] text-white/70">
+                  <svg className="w-3 h-3 text-[#c3a061] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
                   {amenity}
                 </div>
               ))}
