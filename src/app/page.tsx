@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, MapPin, Phone } from "lucide-react";
+import { ArrowRight, MapPin, Phone, Star } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroSlider from "@/components/HeroSlider";
@@ -23,223 +23,70 @@ const heroImages = [
   "/ooty/all/22._lawn.jpeg",
 ];
 
-const cityMoments = [
-  {
-    eyebrow: "Arts & Culture",
-    title: "Exhibitions & Museum",
-    description:
-      "Spend your day between galleries, museum collections, and cultural spaces that keep Bengaluru creative, layered, and alive.",
-    image: "/lavelle-road/all/reception_3.jpg",
-    href: "/stories",
-  },
-  {
-    eyebrow: "Nature",
-    title: "Nearby Parks",
-    description:
-      "From Cubbon Park to slower green pockets across the city, nature is never far from the Pentouz experience.",
-    image: "/ooty/all/22._lawn.jpeg",
-    href: "/travel/guides/luxury-evening-walks-near-lavelle-road",
-  },
-  {
-    eyebrow: "Dining Experiences",
-    title: "Local Food Tour",
-    description:
-      "Explore Bengaluru through its dining rooms, coffee culture, and late-evening addresses around UB City, MG Road, and Indiranagar.",
-    image: "/lavelle-road/all/restaurant_4.jpg",
-    href: "/experiences",
-  },
-];
-
 export default function HomePage() {
-  const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
-  const setSectionRef = (id: string) => (element: HTMLElement | null) => {
-    sectionRefs.current[id] = element;
-  };
   const lavelle = destinations.find((destination) => destination.slug === "lavelle-road") || destinations[0];
 
   return (
     <>
       <Header />
-      <main className="bg-brand-cream text-brand-ink">
+      <main className="bg-[#faf7f2] text-[#1a1814]">
         {/* Hero Section */}
         <HeroSlider images={heroImages} alt="The Pentouz luxury residences">
-          <div className="mx-auto flex min-h-[100svh] max-w-[1480px] flex-col justify-end px-5 pb-24 pt-48 sm:px-8 lg:px-14">
-            <div className="grid gap-10 lg:grid-cols-[1fr_0.7fr] lg:items-end">
-              <div className="max-w-5xl">
-                <p className="text-[10px] font-ui uppercase tracking-[0.3em] text-brand-gold mb-6 animate-fade-in-up">The Pentouz</p>
-                <h1 className="font-display font-light leading-[1.05] text-white animate-fade-in-up [animation-delay:120ms]" style={{ fontSize: 'clamp(2.2rem, 5vw, 4.5rem)', letterSpacing: '-0.025em' }}>
-                  Distinct stays for guests who want privacy, space, and a quieter kind of luxury.
-                </h1>
-                <p className="mt-6 font-body text-base sm:text-lg leading-relaxed text-white/70 max-w-2xl animate-fade-in-up [animation-delay:220ms]">
-                  Boutique city rooms on Lavelle Road, a private penthouse in Indiranagar, The Pentouz Hillside Chikmagalur, and a slower retreat in Ooty.
-                </p>
-                <div className="mt-10 flex flex-col gap-4 sm:flex-row animate-fade-in-up [animation-delay:320ms]">
-                  <Link
-                    href="/destinations"
-                    className="inline-flex items-center justify-center gap-3 bg-white px-8 py-4 font-ui text-[11px] uppercase tracking-[0.2em] font-medium text-brand-ink transition-all duration-500 ease-luxury hover:bg-brand-gold hover:text-white"
-                  >
-                    Explore Destinations
-                    <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-                  </Link>
-                  <a
-                    href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
-                    className="inline-flex items-center justify-center gap-3 font-ui text-[11px] uppercase tracking-[0.2em] border border-white/20 px-8 py-4 text-white/80 transition-all duration-500 ease-luxury hover:border-brand-gold hover:text-brand-gold"
-                  >
-                    Speak to Concierge
-                  </a>
-                </div>
-              </div>
-
-              {/* Featured Property Card */}
-              <div className="animate-fade-in-up [animation-delay:420ms] xl:justify-self-end xl:max-w-[380px]">
-                <div className="border-t border-white/15 pt-6 text-white">
-                  <p className="text-[10px] font-ui uppercase tracking-[0.2em] text-brand-gold font-medium">Featured Property</p>
-                  <h2 className="mt-3 font-display text-2xl sm:text-3xl font-light leading-tight text-white">
-                    {lavelle.title}
-                  </h2>
-                  <p className="mt-4 font-body text-sm leading-relaxed text-white/65">{lavelle.copy}</p>
-                  <div className="mt-6 grid grid-cols-3 gap-4">
-                    <div>
-                      <p className="text-[9px] font-ui uppercase tracking-[0.15em] text-brand-gold/80">Location</p>
-                      <p className="mt-1 font-body text-xs text-white/75">Lavelle Road</p>
-                    </div>
-                    <div>
-                      <p className="text-[9px] font-ui uppercase tracking-[0.15em] text-brand-gold/80">Setting</p>
-                      <p className="mt-1 font-body text-xs text-white/75">Boutique hotel</p>
-                    </div>
-                    <div>
-                      <p className="text-[9px] font-ui uppercase tracking-[0.15em] text-brand-gold/80">Nearby</p>
-                      <p className="mt-1 font-body text-xs text-white/75">UB City</p>
-                    </div>
-                  </div>
-                  <div className="mt-6">
-                    <Link href="/destinations/lavelle-road" className="link-arrow">
-                      View Property
-                      <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-                    </Link>
-                  </div>
-                </div>
+          <div className="mx-auto flex min-h-[100svh] max-w-[1600px] flex-col justify-end px-6 sm:px-10 lg:px-16 pb-20 lg:pb-28 pt-32">
+            <div className="max-w-3xl">
+              <p className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.25em] text-[#c3a061] mb-6 animate-fade-in-up">
+                The Pentouz Collection
+              </p>
+              <h1 className="font-['Cormorant_Garamond',serif] text-white font-light leading-[1.1] animate-fade-in-up [animation-delay:100ms]" style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', letterSpacing: '-0.02em' }}>
+                Distinct stays for guests who want privacy, space, and a quieter kind of luxury.
+              </h1>
+              <p className="mt-8 font-['Lora',serif] text-base sm:text-lg leading-relaxed text-white/75 max-w-xl animate-fade-in-up [animation-delay:200ms]">
+                Boutique city rooms on Lavelle Road, a private penthouse in Indiranagar, The Pentouz Hillside Chikmagalur, and a slower retreat in Ooty.
+              </p>
+              <div className="mt-12 flex flex-wrap items-center gap-5 animate-fade-in-up [animation-delay:300ms]">
+                <Link
+                  href="/destinations"
+                  className="inline-flex items-center gap-3 bg-white text-[#1a1814] px-10 py-4 font-['Inter',sans-serif] text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-500 hover:bg-[#c3a061] hover:text-white"
+                >
+                  Explore Properties
+                  <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+                </Link>
+                <a
+                  href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
+                  className="inline-flex items-center gap-3 font-['Inter',sans-serif] text-[11px] uppercase tracking-[0.2em] text-white/90 border border-white/30 px-10 py-4 transition-all duration-500 hover:border-[#c3a061] hover:text-[#c3a061]"
+                >
+                  Contact Concierge
+                </a>
               </div>
             </div>
           </div>
         </HeroSlider>
 
-        {/* Intro Section */}
-        <section
-          ref={setSectionRef("intro")}
-          data-section-id="intro"
-          className="relative border-t border-brand-border/50 bg-brand-cream"
-        >
-          <span aria-hidden="true" className="absolute -top-8 left-0 hidden sm:block text-[6rem] sm:text-[10rem] lg:text-[14rem] font-display font-light text-brand-gold/[0.03] select-none pointer-events-none leading-none">01</span>
-          <div className="mx-auto grid max-w-[1480px] gap-12 px-5 py-24 sm:px-8 lg:grid-cols-[1fr_1fr] lg:gap-0 lg:px-14 lg:py-36">
-            <div className="relative lg:pr-16">
-              <div className="editorial-divider-left mb-6" />
-              <p className="editorial-overline">A Pentouz Stay</p>
-              <h2 className="luxury-section-title mt-6 max-w-xl">
-                A more private, more personal way to stay in Bangalore, Chikmagalur, and Ooty.
-              </h2>
-            </div>
-            <div className="relative hidden lg:block">
-              <div className="absolute inset-y-0 left-0 w-px bg-brand-gold/15" />
-            </div>
-            <div className="lg:pl-16 space-y-6 font-body text-base sm:text-lg leading-[1.8] text-brand-body">
-              <p>
-                The Pentouz, where luxury meets exclusivity. Situated in prime locations across Bangalore and beyond, our boutique accommodations offer the perfect blend of elegance, privacy, and convenience.
-              </p>
-              <p>
-                Each room and suite is thoughtfully designed with timeless decor and modern comforts, creating a tranquil retreat in the heart of vibrant urban settings. Whether for business or leisure, our spaces promise sophistication and serenity.
-              </p>
-              <p>
-                What sets us apart is our commitment to personalized service. At The Pentouz, every detail is tailored to ensure your stay is nothing short of exceptional.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Collection Section */}
-        <section
-          ref={setSectionRef("collection")}
-          data-section-id="collection"
-          className="relative bg-brand-linen"
-        >
-          <span aria-hidden="true" className="absolute -top-8 left-0 hidden sm:block text-[6rem] sm:text-[10rem] lg:text-[14rem] font-display font-light text-brand-gold/[0.03] select-none pointer-events-none leading-none">02</span>
-          <div className="mx-auto max-w-[1480px] px-5 py-24 sm:px-8 lg:px-14 lg:py-36">
-            <div className="relative max-w-3xl">
-              <div className="absolute -inset-8 -z-10 bg-[radial-gradient(ellipse_at_top_left,rgba(195,160,97,0.05),transparent_50%)]" />
-              <p className="editorial-overline text-brand-accent">Extraordinary Accommodations</p>
-              <h2 className="luxury-section-title mt-6">Our properties</h2>
-            </div>
-
-            {/* Property Cards Grid */}
-            <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-              {destinations.map((destination, index) => (
-                <Link
-                  key={destination.slug}
-                  href={`/destinations/${destination.slug}`}
-                  className="group relative overflow-hidden bg-white border border-brand-borderLight shadow-card transition-all duration-700 ease-luxury hover:shadow-card-hover hover:-translate-y-2"
-                >
-                  <div className="relative aspect-[4/5] overflow-hidden">
-                    <Image
-                      src={destination.heroImage || destination.image}
-                      alt={destination.title}
-                      fill
-                      priority={index < 2}
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                      className="object-cover transition-transform duration-700 ease-luxury group-hover:scale-105"
-                      loading={index < 2 ? "eager" : "lazy"}
-                    />
-                    {/* Overlay */}
-                    <div className="absolute inset-0 overlay-gradient-subtle" />
-                    {/* Hover reveal */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-500 ease-luxury group-hover:opacity-100">
-                      <span className="font-ui text-[10px] uppercase tracking-[0.2em] text-white border border-white/30 px-5 py-2.5">View Property</span>
-                    </div>
-                    {/* Bottom info */}
-                    <div className="absolute inset-x-0 bottom-0 p-6">
-                      <p className="text-[9px] font-ui uppercase tracking-[0.2em] text-brand-gold">{destination.subtitle}</p>
-                      <h3 className="mt-2 font-display text-2xl sm:text-3xl font-light leading-tight text-white">{destination.shortTitle}</h3>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-
-              {/* Collection Promo Card */}
-              <div className="group relative overflow-hidden border border-brand-border bg-brand-sand p-8 transition-all duration-700 ease-luxury hover:-translate-y-1 hover:shadow-card-hover">
-                <p className="text-[10px] font-ui uppercase tracking-[0.2em] text-brand-accent font-medium">The Collection</p>
-                <h3 className="mt-4 font-display text-2xl sm:text-3xl lg:text-4xl font-light leading-tight text-brand-ink">Choose the stay that matches your trip.</h3>
-                <p className="mt-4 font-body text-sm leading-relaxed text-brand-body">
-                  Some guests need central access, some need a private residence, and some need a quieter retreat. Pentouz is built around that difference.
+        {/* Introduction */}
+        <section className="bg-white">
+          <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-16 py-24 lg:py-36">
+            <div className="grid lg:grid-cols-[1.2fr_1fr] gap-16 lg:gap-24 items-start">
+              <div>
+                <div className="w-12 h-[1px] bg-[#c3a061] mb-8" />
+                <p className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#8b7355] font-medium mb-6">
+                  A Pentouz Stay
                 </p>
+                <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814]" style={{ fontSize: 'clamp(2rem, 4vw, 3.25rem)', letterSpacing: '-0.015em' }}>
+                  A more private, more personal way to stay.
+                </h2>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Experiences Section */}
-        <section
-          ref={setSectionRef("experiences")}
-          data-section-id="experiences"
-          className="relative bg-brand-dark text-white"
-        >
-          <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-brand-gold/[0.04] blur-3xl animate-pulse pointer-events-none" />
-          <span aria-hidden="true" className="absolute -top-8 left-0 hidden sm:block text-[6rem] sm:text-[10rem] lg:text-[14rem] font-display font-light text-brand-gold/[0.03] select-none pointer-events-none leading-none">03</span>
-          <div className="mx-auto grid max-w-[1480px] gap-10 px-5 py-24 sm:px-8 lg:grid-cols-[0.75fr_1.25fr] lg:px-14 lg:py-36">
-            <div className="relative py-10">
-              <p className="editorial-overline text-brand-gold">Enjoy the best moments of life</p>
-              <h2 className="mt-6 font-display font-light leading-[1.1] text-white" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', letterSpacing: '-0.02em' }}>
-                Experience the luxury
-              </h2>
-            </div>
-            <div>
-              <p className="font-body text-base sm:text-lg leading-[1.8] text-white/65">
-                The Pentouz offers a mix of urban excitement and serene escapades, making it a perfect blend of experiences. In the vibrant hubs of UB City and Indiranagar in Bangalore, indulge in world-class dining, high-end shopping, and buzzing nightlife. Explore art galleries, attend cultural events, or unwind at chic rooftop lounges with stunning city views.
-              </p>
-              <p className="mt-6 font-body text-base sm:text-lg leading-[1.8] text-white/65">
-                For a serene retreat, head to Ooty, where lush tea gardens, misty hills, and tranquil lakes await. Enjoy scenic drives, nature trails, and cozy stays in charming surroundings. Whether you crave the energy of the city or the calm of the hills, The Pentouz promises unforgettable moments.
-              </p>
-              <div className="mt-10">
-                <Link href="/experiences" className="btn-ghost-light gold-shimmer inline-flex items-center gap-3 px-8 py-4">
-                  Start Exploring
+              <div className="space-y-6 pt-4">
+                <p className="font-['Lora',serif] text-base leading-[1.85] text-[#4a4a44]">
+                  The Pentouz offers the perfect blend of elegance, privacy, and convenience. Each room and suite is thoughtfully designed with timeless decor and modern comforts, creating a tranquil retreat in the heart of vibrant urban settings.
+                </p>
+                <p className="font-['Lora',serif] text-base leading-[1.85] text-[#4a4a44]">
+                  What sets us apart is our commitment to personalized service. At The Pentouz, every detail is tailored to ensure your stay is nothing short of exceptional.
+                </p>
+                <Link
+                  href="/about"
+                  className="inline-flex items-center gap-3 mt-4 text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#c3a061] font-medium hover:gap-5 transition-all duration-300"
+                >
+                  Discover Our Story
                   <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
                 </Link>
               </div>
@@ -247,105 +94,60 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Gatherings/Testimonials Section */}
-        <section
-          ref={setSectionRef("gatherings")}
-          data-section-id="gatherings"
-          className="relative bg-brand-sand"
-        >
-          <span aria-hidden="true" className="absolute -top-8 left-0 hidden sm:block text-[6rem] sm:text-[10rem] lg:text-[14rem] font-display font-light text-brand-gold/[0.03] select-none pointer-events-none leading-none">04</span>
-          <div className="mx-auto max-w-[1480px] px-5 py-24 sm:px-8 lg:px-14 lg:py-36">
-            <div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:items-start">
+        {/* Properties */}
+        <section className="bg-[#f5f0e8]">
+          <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-16 py-24 lg:py-36">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-16">
               <div>
-                <p className="editorial-overline text-brand-accent">High standards of hospitality</p>
-                <h2 className="luxury-section-title mt-6">
-                  Make your memorable get-togethers a reality.
-                </h2>
-                <p className="mt-6 font-body text-base sm:text-lg leading-[1.8] text-brand-body max-w-lg">
-                  Turn your celebrations into an unforgettable experience at our stunning destinations. Whether you&apos;re looking for a private space with beautiful views or a vast terrace for intimate parties, we have the perfect setting.
+                <p className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#8b7355] font-medium mb-4">
+                  Our Properties
                 </p>
+                <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814]" style={{ fontSize: 'clamp(2rem, 4vw, 3.25rem)', letterSpacing: '-0.015em' }}>
+                  Extraordinary accommodations
+                </h2>
               </div>
-
-              {/* Testimonial Cards */}
-              <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-                {testimonials.map((testimonial, index) => (
-                  <article
-                    key={`${testimonial.name}-${index}`}
-                    className="group relative bg-white border border-brand-border/50 p-6 transition-all duration-500 ease-luxury hover:-translate-y-1 hover:shadow-card"
-                    style={{ transitionDelay: `${index * 75}ms` }}
-                  >
-                    {/* Quote mark */}
-                    <div className="absolute top-4 left-4 text-5xl font-display text-brand-gold/15 leading-none select-none">&ldquo;</div>
-
-                    <p className="mt-8 font-body text-base leading-relaxed italic text-brand-body relative z-10">{testimonial.quote}</p>
-
-                    <div className="mt-6 pt-5 border-t border-brand-border/50">
-                      <p className="font-display text-xl font-light text-brand-ink">{testimonial.name}</p>
-                      {testimonial.location && (
-                        <p className="mt-1 text-[10px] font-ui uppercase tracking-[0.12em] text-brand-muted">{testimonial.location}</p>
-                      )}
-                      {testimonial.sourceUrl ? (
-                        <a
-                          href={testimonial.sourceUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="mt-2 inline-block font-ui text-[10px] uppercase tracking-[0.15em] text-brand-accent hover:text-brand-gold transition-colors duration-300"
-                        >
-                          {testimonial.source} →
-                        </a>
-                      ) : (
-                        <p className="mt-2 font-ui text-[10px] uppercase tracking-[0.15em] text-brand-muted">{testimonial.source}</p>
-                      )}
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* City Discovery Section */}
-        <section
-          ref={setSectionRef("city")}
-          data-section-id="city"
-          className="relative bg-white"
-        >
-          <span aria-hidden="true" className="absolute -top-8 left-0 hidden sm:block text-[6rem] sm:text-[10rem] lg:text-[14rem] font-display font-light text-brand-gold/[0.03] select-none pointer-events-none leading-none">05</span>
-          <div className="mx-auto max-w-[1480px] px-5 py-24 sm:px-8 lg:px-14 lg:py-36">
-            <div className="max-w-3xl">
-              <p className="editorial-overline text-brand-accent">Local Tours & Activities</p>
-              <h2 className="luxury-section-title mt-6">Discover the city</h2>
-              <p className="mt-6 font-body text-base sm:text-lg leading-[1.8] text-brand-body max-w-2xl">
-                You are in a city where people are never bored. Immerse yourself in local art exhibitions, neighborhood events, seasonal activities, parks, dining rooms, and cultural spaces.
-              </p>
+              <Link
+                href="/destinations"
+                className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#4a4a44] hover:text-[#c3a061] transition-colors duration-300"
+              >
+                View All Properties →
+              </Link>
             </div>
 
-            {/* City Cards */}
-            <div className="mt-14 grid gap-6 md:grid-cols-3">
-              {cityMoments.map((moment, index) => (
+            {/* Property Grid */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {destinations.map((destination, index) => (
                 <Link
-                  key={moment.title}
-                  href={moment.href}
-                  className="group overflow-hidden bg-brand-cream border border-brand-border/30 shadow-subtle transition-all duration-700 ease-luxury hover:-translate-y-2 hover:shadow-card"
+                  key={destination.slug}
+                  href={`/destinations/${destination.slug}`}
+                  className="group block"
                 >
-                  <div className="relative aspect-[4/3] overflow-hidden">
+                  <div className="relative overflow-hidden aspect-[3/4] mb-5">
                     <Image
-                      src={moment.image}
-                      alt={moment.title}
+                      src={destination.heroImage || destination.image}
+                      alt={destination.title}
                       fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-700 ease-luxury group-hover:scale-105"
-                      loading="lazy"
+                      priority={index < 2}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading={index < 2 ? "eager" : "lazy"}
                     />
-                  </div>
-                  <div className="p-6">
-                    <p className="text-[10px] font-ui uppercase tracking-[0.2em] text-brand-accent font-medium">{moment.eyebrow}</p>
-                    <h3 className="city-card-title mt-3 font-display text-2xl sm:text-3xl font-light text-brand-ink">{moment.title}</h3>
-                    <p className="mt-3 font-body text-sm leading-relaxed text-brand-body">{moment.description}</p>
-                    <div className="city-discover-link mt-5 inline-flex items-center gap-2 font-ui text-[10px] uppercase tracking-[0.2em] text-brand-ink transition-all duration-500 group-hover:gap-3 group-hover:text-brand-gold">
-                      Discover More
-                      <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <p className="text-[9px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#c3a061] mb-2">
+                        {destination.subtitle}
+                      </p>
+                      <h3 className="font-['Cormorant_Garamond',serif] text-2xl font-light text-white leading-tight">
+                        {destination.shortTitle}
+                      </h3>
                     </div>
+                  </div>
+                  <p className="font-['Lora',serif] text-sm leading-relaxed text-[#6b6358] line-clamp-2">
+                    {destination.copy}
+                  </p>
+                  <div className="mt-4 flex items-center gap-2 text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-[#8b7355]">
+                    <span>Explore</span>
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />
                   </div>
                 </Link>
               ))}
@@ -353,53 +155,189 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Corporate Office Section */}
-        <section className="bg-brand-dark text-white">
-          <div className="mx-auto grid max-w-[1480px] gap-12 px-5 py-24 sm:px-8 lg:grid-cols-[0.75fr_1.25fr] lg:px-14 lg:py-36">
-            <div>
-              <p className="editorial-overline text-brand-gold">Getting Here</p>
-              <h2 className="mt-6 font-display font-light leading-[1.1] text-white" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', letterSpacing: '-0.02em' }}>
-                Our corporate office
-              </h2>
-              <div className="mt-8 flex items-start gap-4 font-body text-sm text-white/65">
-                <MapPin className="mt-1 h-5 w-5 text-brand-gold flex-shrink-0" />
-                <div>
-                  <p>{contactInfo.address}</p>
-                  <p className="mt-1">{contactInfo.city}</p>
-                  <p className="mt-3">Email: {contactInfo.email}</p>
+        {/* Experience Section */}
+        <section className="bg-[#0f0e0c] text-white">
+          <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-16 py-24 lg:py-40">
+            <div className="grid lg:grid-cols-[1fr_1.4fr] gap-16 lg:gap-24 items-center">
+              <div>
+                <p className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#c3a061] font-medium mb-6">
+                  The Experience
+                </p>
+                <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-white" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', letterSpacing: '-0.015em' }}>
+                  Experience the luxury
+                </h2>
+                <div className="mt-4 w-12 h-[1px] bg-[#c3a061]" />
+              </div>
+              <div className="space-y-6">
+                <p className="font-['Lora',serif] text-base leading-[1.85] text-white/70">
+                  The Pentouz offers a mix of urban excitement and serene escapades. In the vibrant hubs of UB City and Indiranagar in Bangalore, indulge in world-class dining, high-end shopping, and buzzing nightlife. Explore art galleries, attend cultural events, or unwind at chic rooftop lounges.
+                </p>
+                <p className="font-['Lora',serif] text-base leading-[1.85] text-white/70">
+                  For a serene retreat, head to Ooty, where lush tea gardens, misty hills, and tranquil lakes await. Whether you crave the energy of the city or the calm of the hills, The Pentouz promises unforgettable moments.
+                </p>
+                <div className="pt-4">
+                  <Link
+                    href="/experiences"
+                    className="inline-flex items-center gap-3 border border-white/30 text-white px-10 py-4 font-['Inter',sans-serif] text-[11px] uppercase tracking-[0.2em] transition-all duration-500 hover:border-[#c3a061] hover:text-[#c3a061]"
+                  >
+                    Explore Experiences
+                    <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+                  </Link>
                 </div>
               </div>
             </div>
+          </div>
+        </section>
 
-            {/* Contact Card */}
-            <div className="border border-white/10 bg-white/[0.03] p-8 lg:p-10">
-              <p className="editorial-overline text-brand-gold">Spend Your Time With Us</p>
-              <h3 className="mt-5 font-display text-3xl sm:text-4xl font-light leading-tight text-white">
-                Book a room
-              </h3>
-              <p className="mt-5 font-body text-base sm:text-lg leading-relaxed text-white/60">
-                Everything at Pentouz is designed to make your stay unforgettable.
+        {/* Testimonials */}
+        <section className="bg-white">
+          <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-16 py-24 lg:py-36">
+            <div className="text-center mb-16">
+              <p className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#8b7355] font-medium mb-4">
+                Guest Reviews
               </p>
-              <div className="mt-6 space-y-3 font-body text-sm text-white/70">
-                <a href={`tel:${contactInfo.phones[1].replace(/\s/g, "")}`} className="flex items-center gap-3 transition-colors duration-300 hover:text-brand-gold">
-                  <Phone className="h-4 w-4 text-brand-gold" />
-                  {contactInfo.phones[1]}
-                </a>
-                <a href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`} className="flex items-center gap-3 transition-colors duration-300 hover:text-brand-gold">
-                  <Phone className="h-4 w-4 text-brand-gold" />
-                  {contactInfo.phones[0]}
-                </a>
-                <a href={`mailto:${contactInfo.email}`} className="block transition-colors duration-300 hover:text-brand-gold">
-                  {contactInfo.email}
-                </a>
+              <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814]" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.015em' }}>
+                What our guests say
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {testimonials.map((testimonial, index) => (
+                <div
+                  key={`${testimonial.name}-${index}`}
+                  className="border border-[#e5dfd6] p-8 lg:p-10 bg-[#faf7f2]"
+                >
+                  <div className="flex gap-1 mb-6">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-[#c3a061] text-[#c3a061]" strokeWidth={1.5} />
+                    ))}
+                  </div>
+                  <p className="font-['Lora',serif] text-base leading-relaxed italic text-[#4a4a44] mb-8">
+                    &ldquo;{testimonial.quote}&rdquo;
+                  </p>
+                  <div className="pt-6 border-t border-[#e5dfd6]">
+                    <p className="font-['Cormorant_Garamond',serif] text-lg text-[#1a1814]">
+                      {testimonial.name}
+                    </p>
+                    {testimonial.location && (
+                      <p className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.1em] text-[#8b7355] mt-1">
+                        {testimonial.location}
+                      </p>
+                    )}
+                    <p className="text-[10px] font-['Inter',sans-serif] text-[#8b7355] mt-2">
+                      via {testimonial.source}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Gallery Preview */}
+        <section className="bg-[#0f0e0c]">
+          <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-16 py-16 lg:py-24">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
+              <div>
+                <p className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#c3a061] font-medium mb-4">
+                  Gallery
+                </p>
+                <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-white" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.015em' }}>
+                  A visual journey
+                </h2>
               </div>
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <Link href="/destinations" className="inline-flex items-center justify-center gap-3 bg-white px-8 py-4 font-ui text-[11px] uppercase tracking-[0.2em] font-medium text-brand-ink transition-all duration-500 ease-luxury hover:bg-brand-gold hover:text-white">
-                  Reserve Your Stay
+              <Link
+                href="/gallery"
+                className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-white/60 hover:text-[#c3a061] transition-colors duration-300"
+              >
+                View Full Gallery →
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {[
+                "/lavelle-road/all/terrace_1.jpg",
+                "/lavelle-road/all/patio_1.jpg",
+                "/indiranagar/all/04._living_room_03._living_room.jpg",
+                "/fernhill/all/44_swimming_pool.jpg",
+              ].map((src, i) => (
+                <Link key={i} href="/gallery" className="relative aspect-square overflow-hidden group">
+                  <Image
+                    src={src}
+                    alt={`Gallery image ${i + 1}`}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
                 </Link>
-                <Link href="/contact" className="btn-ghost-light inline-flex items-center justify-center gap-3 px-8 py-4">
-                  Contact Us
-                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section className="bg-[#f5f0e8]">
+          <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-16 py-24 lg:py-36">
+            <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+              <div>
+                <p className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#8b7355] font-medium mb-6">
+                  Get in Touch
+                </p>
+                <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814] mb-8" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.015em' }}>
+                  Reserve your stay
+                </h2>
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <MapPin className="w-5 h-5 text-[#c3a061] mt-1 flex-shrink-0" strokeWidth={1.5} />
+                    <div className="font-['Lora',serif] text-sm leading-relaxed text-[#4a4a44]">
+                      <p>{contactInfo.address}</p>
+                      <p>{contactInfo.city}</p>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-x-8 gap-y-3">
+                    {contactInfo.phones.map((phone) => (
+                      <a
+                        key={phone}
+                        href={`tel:${phone.replace(/\s/g, "")}`}
+                        className="flex items-center gap-3 font-['Inter',sans-serif] text-sm text-[#4a4a44] hover:text-[#c3a061] transition-colors duration-300"
+                      >
+                        <Phone className="w-4 h-4 text-[#c3a061]" strokeWidth={1.5} />
+                        {phone}
+                      </a>
+                    ))}
+                  </div>
+                  <a
+                    href={`mailto:${contactInfo.email}`}
+                    className="block font-['Inter',sans-serif] text-sm text-[#4a4a44] hover:text-[#c3a061] transition-colors duration-300"
+                  >
+                    {contactInfo.email}
+                  </a>
+                </div>
+              </div>
+
+              <div className="bg-white border border-[#e5dfd6] p-8 lg:p-12">
+                <h3 className="font-['Cormorant_Garamond',serif] text-2xl font-light text-[#1a1814] mb-4">
+                  Book Direct
+                </h3>
+                <p className="font-['Lora',serif] text-sm leading-relaxed text-[#4a4a44] mb-8">
+                  Enjoy the best rates and exclusive benefits when you book directly with us.
+                </p>
+                <div className="space-y-4">
+                  <Link
+                    href="/destinations"
+                    className="flex items-center justify-center gap-3 bg-[#0f0e0c] text-white px-8 py-4 font-['Inter',sans-serif] text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-500 hover:bg-[#c3a061]"
+                  >
+                    Browse Properties
+                    <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="flex items-center justify-center gap-3 border border-[#0f0e0c] text-[#0f0e0c] px-8 py-4 font-['Inter',sans-serif] text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-500 hover:bg-[#0f0e0c] hover:text-white"
+                  >
+                    Contact Us
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

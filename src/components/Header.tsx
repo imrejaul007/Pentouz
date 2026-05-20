@@ -33,34 +33,19 @@ export default function Header() {
   const bookingUrl = getBookingUrl();
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 40);
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
+    return () => { document.body.style.overflow = ""; };
   }, [isMenuOpen]);
 
   useEffect(() => {
     setIsMenuOpen(false);
   }, [pathname]);
-
-  useEffect(() => {
-    if (!isMenuOpen) return;
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsMenuOpen(false);
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isMenuOpen]);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
@@ -68,68 +53,69 @@ export default function Header() {
   return (
     <>
       {/* Gold accent line */}
-      <div className="fixed top-0 left-0 right-0 z-[60] h-[1px] bg-gradient-to-r from-transparent via-brand-gold/60 to-transparent" />
+      <div className="fixed top-0 left-0 right-0 z-[60] h-[2px] bg-gradient-to-r from-transparent via-[#c3a061]/50 to-transparent" />
 
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-luxury",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
           isScrolled
-            ? "bg-brand-dark/98 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_8px_40px_rgba(15,14,12,0.15)]"
-            : "bg-brand-dark/95"
+            ? "bg-[#0f0e0c]/98 backdrop-blur-xl border-b border-white/[0.05]"
+            : "bg-[#0f0e0c]/95"
         )}
       >
         {/* Top bar */}
-        <div className="hidden xl:block border-b border-white/[0.05]">
-          <div className="max-w-container-2xl mx-auto px-6 lg:px-16 h-9 flex items-center justify-between">
-            <p className="text-[10px] font-ui uppercase tracking-[0.18em] text-white/60">
-              Bengaluru, Chikmagalur and Ooty
+        <div className="hidden xl:block border-b border-white/[0.04]">
+          <div className="max-w-[1600px] mx-auto px-6 lg:px-10 h-10 flex items-center justify-between">
+            <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-white/50">
+              Bengaluru, Chikmagalur & Ooty
             </p>
-            <a
-              href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
-              className="text-[10px] font-ui uppercase tracking-[0.18em] transition-colors duration-300 text-white/60 hover:text-brand-gold"
-            >
-              {contactInfo.phones[0]}
-            </a>
-            <a
-              href={contactInfo.whatsapp ? `https://wa.me/${contactInfo.whatsapp.replace(/\+/g, "")}` : "https://wa.me/918884449930"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[10px] font-ui uppercase tracking-[0.18em] transition-colors duration-300 flex items-center gap-1.5 text-white/60 hover:text-green-400"
-            >
-              <MessageCircle className="w-3 h-3" strokeWidth={1.5} />
-              WhatsApp
-            </a>
+            <div className="flex items-center gap-8">
+              <a
+                href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
+                className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-white/50 hover:text-[#c3a061] transition-colors duration-300"
+              >
+                {contactInfo.phones[0]}
+              </a>
+              <a
+                href={contactInfo.whatsapp ? `https://wa.me/${contactInfo.whatsapp.replace(/\+/g, "")}` : "https://wa.me/918884449930"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-white/50 hover:text-green-400 transition-colors duration-300 flex items-center gap-2"
+              >
+                <MessageCircle className="w-3.5 h-3.5" strokeWidth={1.5} />
+                WhatsApp
+              </a>
+            </div>
           </div>
         </div>
 
         {/* Main nav */}
-        <div className="max-w-container-2xl mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="h-20 sm:h-24 lg:h-[5.5rem] flex items-center justify-between">
+        <div className="max-w-[1600px] mx-auto px-5 sm:px-8 lg:px-10">
+          <div className="h-20 lg:h-24 flex items-center justify-between">
             {/* Logo */}
-            <div className="hidden lg:flex items-center gap-10 xl:gap-14">
-              <Link href="/" className="block flex-shrink-0" suppressHydrationWarning>
+            <div className="flex items-center gap-12 xl:gap-16">
+              <Link href="/" className="block flex-shrink-0">
                 <Image
                   src="/logo-white.png"
                   alt="The Pentouz"
-                  width={160}
-                  height={46}
-                  className="h-10 w-auto"
+                  width={155}
+                  height={44}
+                  className="h-9 w-auto"
                   priority
                 />
               </Link>
 
               {/* Navigation */}
-              <nav className="flex items-center gap-1">
+              <nav className="hidden xl:flex items-center gap-1">
                 {primaryNav.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    suppressHydrationWarning
                     className={cn(
-                      "px-4 py-2 font-ui text-[10px] uppercase tracking-[0.2em] transition-all duration-300 ease-luxury",
+                      "px-4 py-2 font-['Inter',sans-serif] text-[11px] uppercase tracking-[0.15em] transition-all duration-300",
                       isActive(link.href)
-                        ? "text-brand-gold"
-                        : "text-white/75 hover:text-white"
+                        ? "text-[#c3a061]"
+                        : "text-white/70 hover:text-white"
                     )}
                   >
                     {link.label}
@@ -139,11 +125,11 @@ export default function Header() {
             </div>
 
             {/* Mobile logo */}
-            <Link href="/" className="flex lg:hidden items-center flex-shrink-0" suppressHydrationWarning>
+            <Link href="/" className="flex xl:hidden items-center">
               <Image
                 src="/logo-white.png"
                 alt="The Pentouz"
-                width={118}
+                width={120}
                 height={34}
                 className="h-8 w-auto"
                 priority
@@ -151,31 +137,27 @@ export default function Header() {
             </Link>
 
             {/* Actions */}
-            <div className="flex items-center gap-3 sm:gap-4">
-              {/* Phone */}
+            <div className="flex items-center gap-4">
               <a
                 href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
-                className="hidden md:inline-flex items-center gap-2 font-ui text-[10px] uppercase tracking-[0.2em] transition-colors duration-300 text-white/75 hover:text-brand-gold"
+                className="hidden md:flex items-center gap-2 text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-white/60 hover:text-[#c3a061] transition-colors duration-300"
               >
                 <Phone className="w-4 h-4" strokeWidth={1.5} />
                 Concierge
               </a>
 
-              {/* Book button */}
               <a
                 href={bookingUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden lg:inline-flex items-center gap-2 font-ui text-[10px] uppercase tracking-[0.2em] font-medium border border-white/25 text-white px-5 py-2.5 transition-all duration-500 hover:border-brand-gold hover:text-brand-gold"
+                className="hidden lg:flex items-center gap-2 font-['Inter',sans-serif] text-[10px] uppercase tracking-[0.15em] font-medium border border-white/20 text-white px-6 py-2.5 transition-all duration-500 hover:border-[#c3a061] hover:text-[#c3a061]"
               >
                 Book Now
-                <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.5} />
               </a>
 
-              {/* Menu button */}
               <button
                 onClick={() => setIsMenuOpen((open) => !open)}
-                className="inline-flex items-center gap-2.5 font-ui text-[10px] uppercase tracking-[0.18em] border border-white/15 text-white/80 px-4 py-2.5 transition-all duration-500 hover:border-white/30 hover:text-white"
+                className="flex items-center gap-2 font-['Inter',sans-serif] text-[10px] uppercase tracking-[0.15em] border border-white/15 text-white/70 px-4 py-2.5 transition-all duration-500 hover:border-white/30 hover:text-white xl:hidden"
                 aria-label="Toggle menu"
               >
                 <Menu className="w-4 h-4" strokeWidth={1.5} />
@@ -184,47 +166,37 @@ export default function Header() {
             </div>
           </div>
         </div>
-
-        {/* Bottom accent line when scrolled */}
-        {isScrolled && (
-          <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-brand-gold/20 to-transparent" />
-        )}
       </header>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu */}
       <div
         className={cn(
           "fixed inset-0 z-[100] overflow-hidden",
-          isMenuOpen ? "bg-brand-dark" : "bg-transparent pointer-events-none"
+          isMenuOpen ? "bg-[#0f0e0c]" : "bg-transparent pointer-events-none"
         )}
-        style={{
-          visibility: isMenuOpen ? "visible" : "hidden",
-          transition: "background-color 0.4s ease",
-        }}
+        style={{ visibility: isMenuOpen ? "visible" : "hidden", transition: "background-color 0.4s ease" }}
       >
-        {/* Decorative elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-28 left-8 h-40 w-40 rounded-full bg-brand-gold/[0.03]" />
-          <div className="absolute bottom-32 right-8 h-52 w-52 rounded-full bg-brand-accent/[0.04]" />
+          <div className="absolute top-32 left-8 h-48 w-48 rounded-full bg-[#c3a061]/[0.03]" />
+          <div className="absolute bottom-40 right-8 h-64 w-64 rounded-full bg-[#8b7355]/[0.03]" />
         </div>
 
         <div className="relative z-10 h-full flex flex-col">
           {/* Menu header */}
-          <div className="flex justify-between items-center px-6 py-6 border-b border-white/[0.06]">
-            <Link href="/" className="flex-shrink-0" suppressHydrationWarning>
+          <div className="flex justify-between items-center px-6 py-6 border-b border-white/[0.05]">
+            <Link href="/" className="flex-shrink-0">
               <Image
                 src="/logo-white.png"
                 alt="The Pentouz"
-                width={118}
-                height={34}
+                width={115}
+                height={33}
                 className="h-8 w-auto"
                 priority
               />
             </Link>
-
             <button
               onClick={() => setIsMenuOpen(false)}
-              className="flex items-center gap-2 font-ui text-[10px] uppercase tracking-[0.18em] text-white/60 hover:text-white transition-colors duration-300"
+              className="flex items-center gap-2 font-['Inter',sans-serif] text-[10px] uppercase tracking-[0.15em] text-white/50 hover:text-white transition-colors duration-300"
               aria-label="Close menu"
             >
               <span>Close</span>
@@ -234,14 +206,11 @@ export default function Header() {
 
           {/* Menu content */}
           <div className="flex-1 overflow-auto">
-            <div className="grid lg:grid-cols-[1.1fr_0.9fr] min-h-full">
+            <div className="grid lg:grid-cols-[1.2fr_0.8fr] min-h-full">
               {/* Navigation */}
-              <nav className="px-6 py-8 lg:px-12 lg:py-14 border-b lg:border-b-0 lg:border-r border-white/[0.06]">
-                <p className="text-[10px] font-ui uppercase tracking-[0.3em] text-brand-gold mb-8 font-medium">
+              <nav className="px-6 py-10 lg:px-12 lg:py-14 border-b lg:border-b-0 lg:border-r border-white/[0.05]">
+                <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.25em] text-[#c3a061] mb-8 font-medium">
                   Navigate
-                </p>
-                <p className="max-w-md font-body text-sm text-white/55 leading-relaxed mb-10">
-                  A quieter route through each residence, our city guide, and the Pentouz collection.
                 </p>
 
                 <div className="space-y-1">
@@ -252,12 +221,12 @@ export default function Header() {
                       onClick={() => setIsMenuOpen(false)}
                       className={cn(
                         "flex items-center justify-between py-4 border-b transition-all duration-300",
-                        isActive(link.href) ? "border-brand-gold/40" : "border-white/[0.06] hover:border-white/[0.12]"
+                        isActive(link.href) ? "border-[#c3a061]/40" : "border-white/[0.05] hover:border-white/[0.1]"
                       )}
                     >
                       <span className={cn(
-                        "font-display text-3xl sm:text-4xl font-light transition-colors duration-300",
-                        isActive(link.href) ? "text-brand-gold" : "text-white"
+                        "font-['Cormorant_Garamond',serif] text-3xl sm:text-4xl font-light transition-colors duration-300",
+                        isActive(link.href) ? "text-[#c3a061]" : "text-white"
                       )}>
                         {link.label}
                       </span>
@@ -266,21 +235,20 @@ export default function Header() {
                   ))}
                 </div>
 
-                {/* Quick actions */}
                 <div className="mt-10 flex flex-wrap gap-3">
                   <a
                     href={bookingUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setIsMenuOpen(false)}
-                    className="inline-flex items-center gap-2 font-ui text-[10px] uppercase tracking-[0.18em] font-medium bg-white text-brand-ink px-6 py-3 transition-all duration-500 hover:bg-brand-gold hover:text-white"
+                    className="inline-flex items-center gap-2 font-['Inter',sans-serif] text-[10px] uppercase tracking-[0.15em] font-medium bg-white text-[#0f0e0c] px-6 py-3 transition-all duration-500 hover:bg-[#c3a061] hover:text-white"
                   >
                     Book Now
                   </a>
                   <a
                     href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
                     onClick={() => setIsMenuOpen(false)}
-                    className="inline-flex items-center gap-2 font-ui text-[10px] uppercase tracking-[0.18em] border border-white/15 text-white/80 px-6 py-3 transition-all duration-500 hover:border-white/30 hover:text-white"
+                    className="inline-flex items-center gap-2 font-['Inter',sans-serif] text-[10px] uppercase tracking-[0.15em] border border-white/15 text-white/70 px-6 py-3 transition-all duration-500 hover:border-white/30 hover:text-white"
                   >
                     Call Concierge
                   </a>
@@ -288,9 +256,9 @@ export default function Header() {
               </nav>
 
               {/* Residences */}
-              <div className="px-6 py-8 lg:px-12 lg:py-14">
-                <p className="text-[10px] font-ui uppercase tracking-[0.3em] text-brand-gold mb-8 font-medium">
-                  Residences
+              <div className="px-6 py-10 lg:px-12 lg:py-14">
+                <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.25em] text-[#c3a061] mb-8 font-medium">
+                  Properties
                 </p>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-3">
                   {destinations.map((dest) => (
@@ -298,26 +266,23 @@ export default function Header() {
                       key={dest.slug}
                       href={`/destinations/${dest.slug}`}
                       onClick={() => setIsMenuOpen(false)}
-                      className="group grid grid-cols-[80px_1fr] sm:grid-cols-[88px_1fr] gap-3 items-center border border-white/[0.06] bg-white/[0.02] p-2.5 transition-all duration-500 hover:border-brand-gold/30 hover:bg-white/[0.04]"
+                      className="group grid grid-cols-[72px_1fr] gap-3 items-center border border-white/[0.05] bg-white/[0.02] p-2 transition-all duration-500 hover:border-[#c3a061]/30 hover:bg-white/[0.04]"
                     >
-                      <div className="relative h-16 sm:h-20 overflow-hidden">
+                      <div className="relative h-16 overflow-hidden">
                         <Image
                           src={dest.heroImage || dest.image}
                           alt={dest.title}
                           fill
                           className="object-cover transition-transform duration-700 group-hover:scale-105"
-                          sizes="(min-width: 640px) 88px, 80px"
+                          sizes="72px"
                         />
                       </div>
                       <div>
-                        <p className="text-[9px] sm:text-[10px] font-ui uppercase tracking-[0.15em] sm:tracking-[0.2em] text-white/45 mb-1">
+                        <p className="text-[9px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-white/40 mb-1">
                           {dest.subtitle}
                         </p>
-                        <p className="font-display text-lg sm:text-xl font-light text-white mb-1 group-hover:text-brand-gold transition-colors duration-300">
+                        <p className="font-['Cormorant_Garamond',serif] text-lg font-light text-white group-hover:text-[#c3a061] transition-colors duration-300">
                           {dest.title}
-                        </p>
-                        <p className="text-xs sm:text-sm font-body text-white/50 line-clamp-2 hidden sm:block">
-                          {dest.copy}
                         </p>
                       </div>
                     </Link>

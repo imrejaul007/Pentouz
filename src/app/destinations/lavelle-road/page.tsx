@@ -47,7 +47,6 @@ const amenities = [
   "24-Hour Front Desk",
 ];
 
-// Categorize images
 function categorize(path: string): string {
   const p = path.toLowerCase();
   if (/bathroom|bath/i.test(p)) return "Bathroom";
@@ -72,33 +71,16 @@ const galleryItems = lavelleImageSet.map((src) => ({
   category: categorize(src),
 }));
 
-// Room-specific images
 const queenStudioImages = lavelleImageSet.filter((path) => /9041_|9043_/i.test(path));
 const kingStudioImages = lavelleImageSet.filter((path) => /9042_|9046_|9047_/i.test(path));
 const superiorStudioImages = lavelleImageSet.filter((path) => /9045_/i.test(path));
 const commonImages = lavelleImageSet.filter((path) => !/9041_|9043_|9042_|9046_|9047_|9045_/i.test(path));
 
 const rooms = [
-  {
-    name: "Queen Studio",
-    slug: "queen-studio",
-    images: queenStudioImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
-  },
-  {
-    name: "King Studio",
-    slug: "king-studio",
-    images: kingStudioImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
-  },
-  {
-    name: "Superior Studio",
-    slug: "superior-studio",
-    images: superiorStudioImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
-  },
-  {
-    name: "Common Areas",
-    slug: "common-areas",
-    images: commonImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
-  },
+  { name: "Queen Studio", slug: "queen-studio", images: queenStudioImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })) },
+  { name: "King Studio", slug: "king-studio", images: kingStudioImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })) },
+  { name: "Superior Studio", slug: "superior-studio", images: superiorStudioImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })) },
+  { name: "Common Areas", slug: "common-areas", images: commonImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })) },
 ];
 
 export default function LavelleRoadPage() {
@@ -108,23 +90,26 @@ export default function LavelleRoadPage() {
   return (
     <>
       <Header />
-      <main className="bg-[#f7f0e5] text-brand-ink overflow-hidden">
+      <main className="bg-[#faf7f2] text-[#1a1814]">
+        {/* Hero */}
         <HeroSlider images={heroImages} alt={property.title}>
-          <div className="mx-auto flex min-h-[100svh] max-w-[1480px] flex-col justify-end px-5 pb-24 pt-48 text-white sm:px-8 lg:px-14">
-            <div className="max-w-5xl">
-              <p className="text-[10px] uppercase tracking-[0.32em] text-brand-gold mb-4 animate-fade-in-up">Lavelle Road, Bangalore</p>
-              <h1 className="font-display text-[2rem] font-light leading-[1] text-white animate-fade-in-up sm:text-[3rem] md:text-[4rem] lg:text-[5rem] [animation-delay:120ms]">
-                Boutique luxury in one of Bengaluru&apos;s most <em className="italic text-brand-gold">prestigious</em> neighborhoods.
-              </h1>
-              <p className="mt-6 text-base leading-7 text-white/78 max-w-2xl animate-fade-in-up [animation-delay:220ms]">
-                Perched in the heart of Bangalore&apos;s prestigious Lavelle Road, The Pentouz offers an unparalleled blend of tranquility and sophistication. Nestled amidst one of the city&apos;s most coveted neighborhoods, it provides an oasis of peace while keeping you connected to the vibrancy of urban life.
+          <div className="mx-auto flex min-h-[100svh] max-w-[1600px] flex-col justify-end px-6 sm:px-10 lg:px-16 pb-20 lg:pb-28 pt-32">
+            <div className="max-w-3xl">
+              <p className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.25em] text-[#c3a061] mb-6 animate-fade-in-up">
+                Lavelle Road, Bangalore
               </p>
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row animate-fade-in-up [animation-delay:320ms]">
-                <a href={property.bookingUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-brand-ink transition-all duration-500 hover:-translate-y-0.5 hover:bg-brand-gold hover:text-white">
-                  <Calendar className="h-4 w-4" strokeWidth={1.4} />
+              <h1 className="font-['Cormorant_Garamond',serif] text-white font-light leading-[1.1] animate-fade-in-up [animation-delay:100ms]" style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', letterSpacing: '-0.02em' }}>
+                Boutique luxury in one of Bengaluru&apos;s most prestigious neighborhoods.
+              </h1>
+              <p className="mt-8 font-['Lora',serif] text-base sm:text-lg leading-relaxed text-white/75 max-w-xl animate-fade-in-up [animation-delay:200ms]">
+                Perched in the heart of Bangalore&apos;s prestigious Lavelle Road, The Pentouz offers an unparalleled blend of tranquility and sophistication.
+              </p>
+              <div className="mt-12 flex flex-wrap items-center gap-5 animate-fade-in-up [animation-delay:300ms]">
+                <a href={property.bookingUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 bg-white text-[#1a1814] px-10 py-4 font-['Inter',sans-serif] text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-500 hover:bg-[#c3a061] hover:text-white">
+                  <Calendar className="h-4 w-4" strokeWidth={1.5} />
                   Book Now
                 </a>
-                <Link href="/destinations/lavelle-road/living" className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-white transition-all duration-500 hover:-translate-y-0.5 hover:border-brand-gold hover:text-brand-gold">
+                <Link href="/destinations/lavelle-road/living" className="inline-flex items-center gap-2 font-['Inter',sans-serif] text-[11px] uppercase tracking-[0.2em] text-white/90 border border-white/30 px-10 py-4 transition-all duration-500 hover:border-[#c3a061] hover:text-[#c3a061]">
                   Explore Living
                 </Link>
               </div>
@@ -132,120 +117,136 @@ export default function LavelleRoadPage() {
           </div>
         </HeroSlider>
 
-        <section className="bg-white border-t border-[#e5d9c9]">
-          <div className="mx-auto grid max-w-[1480px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:px-14 lg:py-28 lg:items-center">
-            <div className="animate-fade-in-up">
-              <div className="relative aspect-[4/5] overflow-hidden shadow-[0_24px_80px_rgba(18,15,12,0.08)]">
-                <Image src="/lavelle-road/all/9042_king_suite_4.jpg" alt="Lavelle Road living" fill className="object-cover transition-transform duration-[1400ms] hover:scale-105" sizes="(max-width: 1024px) 100vw, 44vw" />
+        {/* Living Section */}
+        <section className="bg-white">
+          <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-16 py-24 lg:py-36">
+            <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-12 lg:gap-20 items-center">
+              <div className="relative overflow-hidden aspect-[4/5]">
+                <Image src="/lavelle-road/all/9042_king_suite_4.jpg" alt="Lavelle Road living" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 45vw" />
               </div>
-            </div>
-            <div className="animate-fade-in-up animate-delay-200">
-              <p className="luxury-kicker text-brand-accent">Living</p>
-              <h2 className="luxury-section-title mt-5">Beautifully designed studio rooms with panoramic city views.</h2>
-              <p className="mt-6 text-base leading-8 text-brand-body sm:text-lg">
-                The Pentouz Lavelle Road boasts exquisitely designed, spacious studio rooms located on the top floor, each offering stunning panoramic views of the cityscape. These well-appointed studios are thoughtfully curated to cater to the discerning traveler, combining elegance with modern comforts.
-              </p>
-              <p className="mt-5 text-base leading-8 text-brand-body sm:text-lg">
-                Whether you&apos;re in Bangalore for business or leisure, you&apos;ll find every detail tailored to enhance your stay.
-              </p>
-              <div className="mt-8">
-                <Link href="/destinations/lavelle-road/living" className="inline-flex items-center gap-2 rounded-full border border-brand-ink px-6 py-3 text-[11px] uppercase tracking-[0.2em] text-brand-ink transition-all duration-500 hover:bg-brand-ink hover:text-white">
-                  Explore Living
-                  <ArrowRight className="h-4 w-4" strokeWidth={1.4} />
-                </Link>
+              <div>
+                <p className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#8b7355] font-medium mb-4">
+                  The Living
+                </p>
+                <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814] mb-6" style={{ fontSize: 'clamp(1.75rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+                  Beautifully designed studio rooms with panoramic city views.
+                </h2>
+                <p className="font-['Lora',serif] text-base leading-[1.85] text-[#4a4a44] mb-6">
+                  The Pentouz Lavelle Road boasts exquisitely designed, spacious studio rooms located on the top floor, each offering stunning panoramic views of the cityscape. These well-appointed studios are thoughtfully curated to cater to the discerning traveler, combining elegance with modern comforts.
+                </p>
+                <p className="font-['Lora',serif] text-base leading-[1.85] text-[#4a4a44]">
+                  Whether you&apos;re in Bangalore for business or leisure, you&apos;ll find every detail tailored to enhance your stay.
+                </p>
+                <div className="mt-8">
+                  <Link href="/destinations/lavelle-road/living" className="inline-flex items-center gap-3 bg-[#0f0e0c] text-white px-8 py-4 font-['Inter',sans-serif] text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-500 hover:bg-[#c3a061]">
+                    Explore Living
+                    <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="bg-[#f7f0e5]">
-          <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28">
-            <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
-              <div className="animate-fade-in-up">
-                <p className="luxury-kicker text-brand-accent">The Neighborhood</p>
-                <h2 className="luxury-section-title mt-5">An address surrounded by culture, commerce, and quiet prestige.</h2>
-              </div>
-              <div className="space-y-6 text-base leading-8 text-brand-body sm:text-lg animate-fade-in-up animate-delay-200">
-                <p>
-                  The Pentouz Lavelle Road is nestled in one of Bangalore&apos;s most coveted and sophisticated neighborhoods, offering the perfect blend of urban vibrancy and serene green spaces. Located in the heart of the city, Lavelle Road is a hub for the elite, known for its upscale lifestyle, vibrant culture, and proximity to some of Bangalore&apos;s most iconic landmarks.
-                </p>
-                <p>
-                  Just a short stroll away lies the luxurious UB City, a destination for high-end shopping, gourmet dining, and exclusive experiences.
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-14 grid gap-6 md:grid-cols-3">
-              {travelStats.map((item, index) => (
-                <article key={item.title} className="luxury-panel bg-white animate-fade-in-up transition-transform duration-700 hover:-translate-y-1" style={{ transitionDelay: `${index * 100}ms` }}>
-                  <p className="text-[10px] uppercase tracking-[0.22em] text-brand-gold">Approximate Travel Time</p>
-                  <h3 className="mt-4 font-display text-3xl font-light leading-tight text-brand-ink">{item.title}</h3>
-                  <p className="mt-5 text-sm uppercase tracking-[0.2em] text-brand-muted">Distance {item.distance}</p>
-                  <p className="mt-4 text-3xl font-display font-light text-brand-ink">{item.time}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-[#15120f] text-white">
-          <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28">
-            <div className="max-w-3xl animate-fade-in-up">
-              <p className="luxury-kicker text-brand-gold">The Essential In-Room Amenities</p>
-              <h2 className="mt-5 font-display text-4xl font-light leading-tight text-white sm:text-5xl lg:text-6xl">
-                Everything you need for a polished city stay.
+        {/* Location Section */}
+        <section className="bg-[#f5f0e8]">
+          <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-16 py-24 lg:py-36">
+            <div className="max-w-2xl mb-16">
+              <p className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#8b7355] font-medium mb-4">
+                The Location
+              </p>
+              <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814]" style={{ fontSize: 'clamp(1.75rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+                An address surrounded by culture, commerce, and quiet prestige.
               </h2>
             </div>
-            <div className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {amenities.map((item, index) => (
-                <div key={item} className="border border-white/10 bg-white/[0.03] px-4 py-4 text-[11px] uppercase tracking-[0.18em] text-white/76 animate-fade-in-up" style={{ transitionDelay: `${index * 45}ms` }}>
-                  {item}
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {travelStats.map((stat) => (
+                <div key={stat.title} className="border border-[#e5dfd6] bg-white p-8">
+                  <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-[#8b7355] mb-3">
+                    {stat.title}
+                  </p>
+                  <p className="font-['Cormorant_Garamond',serif] text-4xl font-light text-[#1a1814]">
+                    {stat.time}
+                  </p>
+                  <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.12em] text-[#6b6358] mt-2">
+                    {stat.distance}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="bg-[#15120f] text-white">
-          <div className="mx-auto max-w-[1480px] px-5 py-14 sm:px-8 lg:px-14 lg:py-20">
-            <div className="text-center mb-10">
-              <p className="text-[10px] uppercase tracking-[0.32em] text-brand-gold mb-4">Gallery</p>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-white">
-                A visual journey through The Pentouz Lavelle Road
+        {/* Amenities */}
+        <section className="bg-[#0f0e0c] text-white">
+          <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-16 py-24 lg:py-36">
+            <div className="max-w-2xl mb-16">
+              <p className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#c3a061] font-medium mb-4">
+                Amenities
+              </p>
+              <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-white" style={{ fontSize: 'clamp(1.75rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+                Everything you need for a refined stay.
               </h2>
             </div>
-            <PropertyGallery items={galleryItems} propertyName="The Pentouz @ Lavelle Road" rooms={rooms} />
-            <div className="mt-10 text-center">
-              <Link href="/destinations/lavelle-road/gallery" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.18em] text-white hover:border-brand-gold hover:text-brand-gold transition-all duration-500">
-                View Full Gallery
-                <ArrowRight className="w-4 h-4" strokeWidth={1.4} />
-              </Link>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              {amenities.map((amenity) => (
+                <div key={amenity} className="border border-white/10 bg-white/[0.02] px-5 py-4 text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-white/70">
+                  {amenity}
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        <section className="bg-[#161310] text-white">
-          <div className="mx-auto grid max-w-[1480px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[0.78fr_1.22fr] lg:px-14 lg:py-28">
-            <div>
-              <p className="luxury-kicker text-brand-gold">Book A Room</p>
-              <h2 className="mt-5 font-display text-4xl font-light leading-tight text-white sm:text-5xl lg:text-6xl">
-                Everything at Pentouz is designed to make your stay unforgettable.
-              </h2>
-            </div>
-            <div className="luxury-panel border-white/12 bg-white/[0.05] text-white">
-              <p className="text-sm leading-7 text-white/72">The Pentouz @ Lavelle Road<br />46, 6th Cross, Lavelle Road, Bangalore – 560001. India.</p>
-              <p className="mt-6 text-sm leading-7 text-white/82">Email: {contactInfo.email}</p>
-              <div className="mt-6 space-y-2 text-sm text-white/82">
-                <a href={`tel:${contactInfo.phones[1].replace(/\s/g, "")}`} className="block transition-colors hover:text-brand-gold">{contactInfo.phones[1]}</a>
-                <a href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`} className="block transition-colors hover:text-brand-gold">{contactInfo.phones[0]}</a>
+        {/* Gallery */}
+        <section className="bg-white">
+          <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-16 py-24 lg:py-32">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
+              <div>
+                <p className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#8b7355] font-medium mb-3">
+                  Gallery
+                </p>
+                <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814]" style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)', letterSpacing: '-0.015em' }}>
+                  A visual journey
+                </h2>
               </div>
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-                <a href={property.bookingUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-brand-ink transition-all duration-500 hover:bg-brand-gold hover:text-white">
-                  Reserve Your Stay
-                </a>
-                <a href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`} className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-white transition-all duration-500 hover:border-brand-gold hover:text-brand-gold">
-                  Call Concierge
-                </a>
+              <Link href="/destinations/lavelle-road/gallery" className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-[#4a4a44] hover:text-[#c3a061] transition-colors duration-300">
+                View Full Gallery →
+              </Link>
+            </div>
+            <PropertyGallery items={galleryItems} propertyName="The Pentouz @ Lavelle Road" rooms={rooms} />
+          </div>
+        </section>
+
+        {/* Contact */}
+        <section className="bg-[#f5f0e8]">
+          <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-16 py-24 lg:py-36">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div>
+                <p className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#8b7355] font-medium mb-4">
+                  Book Your Stay
+                </p>
+                <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814] mb-6" style={{ fontSize: 'clamp(1.75rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+                  Experience boutique luxury on Lavelle Road.
+                </h2>
+                <p className="font-['Lora',serif] text-sm leading-relaxed text-[#4a4a44]">
+                  46, 6th Cross, Lavelle Road, Bangalore – 560001. India.
+                </p>
+              </div>
+              <div className="bg-white border border-[#e5dfd6] p-8 lg:p-10">
+                <p className="font-['Lora',serif] text-sm text-[#4a4a44] mb-6">
+                  For reservations and inquiries
+                </p>
+                <div className="space-y-4">
+                  <a href={property.bookingUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 bg-[#0f0e0c] text-white px-8 py-4 font-['Inter',sans-serif] text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-500 hover:bg-[#c3a061]">
+                    Reserve Your Stay
+                  </a>
+                  <a href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`} className="flex items-center justify-center gap-3 border border-[#0f0e0c] text-[#0f0e0c] px-8 py-4 font-['Inter',sans-serif] text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-500 hover:bg-[#0f0e0c] hover:text-white">
+                    Call Concierge
+                  </a>
+                </div>
               </div>
             </div>
           </div>
