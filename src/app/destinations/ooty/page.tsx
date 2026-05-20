@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Phone } from "lucide-react";
+import { ArrowRight, Phone, Plane, Train, MapPin } from "lucide-react";
 import { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -28,9 +28,27 @@ export const metadata: Metadata = {
 };
 
 const travelStats = [
-  { title: "Coimbatore International Airport", distance: "84 kms", time: "3 hrs" },
-  { title: "Udhagamandalam Railway Junction", distance: "10 kms", time: "25 min" },
-  { title: "Ooty Lake", distance: "3 kms", time: "15 min" },
+  {
+    title: "Coimbatore International Airport",
+    distance: "84 kms",
+    time: "3 hrs",
+    icon: Plane,
+    highlight: "Nearest airport"
+  },
+  {
+    title: "Udhagamandalam Railway",
+    distance: "10 kms",
+    time: "25 min",
+    icon: Train,
+    highlight: "Scenic rail journey"
+  },
+  {
+    title: "Ooty Lake",
+    distance: "3 kms",
+    time: "15 min",
+    icon: MapPin,
+    highlight: "Local attraction"
+  },
 ];
 
 const amenities = [
@@ -155,39 +173,59 @@ export default function OotyPage() {
 
         {/* Surroundings Section */}
         <section className="bg-[#f5f0e8]">
-          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-16 sm:py-24 lg:py-36">
-            <div className="max-w-2xl mb-10 sm:mb-16">
-              <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#8b7355] font-medium mb-3 sm:mb-4">
-                The Surroundings
-              </p>
-              <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814]" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
-                Tea gardens, viewpoints, and the softer mood of the hills.
-              </h2>
-            </div>
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-14 sm:py-20 lg:py-28">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-8 lg:gap-16 items-center">
+              <div>
+                <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.18em] text-[#8b7355] font-medium mb-3">
+                  The Surroundings
+                </p>
+                <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814] mb-4" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', letterSpacing: '-0.015em' }}>
+                  Tea gardens, viewpoints, and the softer mood of the hills.
+                </h2>
+                <p className="font-['Lora',serif] text-sm text-[#4a4a44] leading-relaxed">
+                  Set on Elk Hill in Ooty, the atmosphere is defined by mist-covered mornings, tea gardens, and a slower pace of travel.
+                </p>
+              </div>
 
-            <div className="space-y-5 sm:space-y-6 mb-10 sm:mb-16">
-              <p className="font-['Lora',serif] text-sm sm:text-base leading-[1.8] text-[#4a4a44]">
-                The Pentouz Windsor Heights is set on Elk Hill in Ooty, where the atmosphere is defined by mist-covered mornings, tea gardens, cooler weather, and a slower pace of travel. The location balances quiet retreat value with easy access to Ooty&apos;s most loved attractions.
-              </p>
-              <p className="font-['Lora',serif] text-sm sm:text-base leading-[1.8] text-[#4a4a44]">
-                From viewpoints and botanical gardens to Ooty Lake and the town center, the property gives guests the freedom to explore without giving up the calm that makes a hill stay worthwhile.
-              </p>
-            </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                {travelStats.map((stat) => {
+                  const Icon = stat.icon;
+                  return (
+                    <div
+                      key={stat.title}
+                      className="relative group bg-white border border-[#e5dfd6] p-5 sm:p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(18,15,12,0.08)] hover:border-[#c3a061]/30"
+                    >
+                      {/* Gold accent line */}
+                      <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#c3a061] to-[#c3a061]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 lg:gap-8">
-              {travelStats.map((stat) => (
-                <div key={stat.title} className="border border-[#e5dfd6] bg-white p-6 sm:p-8">
-                  <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-[#8b7355] mb-2 sm:mb-3">
-                    {stat.title}
-                  </p>
-                  <p className="font-['Cormorant_Garamond',serif] text-3xl sm:text-4xl font-light text-[#1a1814]">
-                    {stat.time}
-                  </p>
-                  <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.12em] text-[#6b6358] mt-2">
-                    {stat.distance}
-                  </p>
-                </div>
-              ))}
+                      {/* Icon */}
+                      <div className="w-10 h-10 rounded-full bg-[#f5f0e8] flex items-center justify-center mb-4">
+                        <Icon className="w-5 h-5 text-[#c3a061]" strokeWidth={1.5} />
+                      </div>
+
+                      {/* Highlight tag */}
+                      <p className="text-[9px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-[#c3a061] mb-2">
+                        {stat.highlight}
+                      </p>
+
+                      {/* Title */}
+                      <p className="font-['Cormorant_Garamond',serif] text-base sm:text-lg font-light text-[#1a1814] leading-tight mb-3">
+                        {stat.title}
+                      </p>
+
+                      {/* Stats */}
+                      <div className="flex items-baseline gap-3">
+                        <p className="font-['Cormorant_Garamond',serif] text-2xl sm:text-3xl font-light text-[#1a1814]">
+                          {stat.time}
+                        </p>
+                        <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.1em] text-[#8b7355]">
+                          {stat.distance}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </section>
