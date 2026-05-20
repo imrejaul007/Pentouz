@@ -88,36 +88,37 @@ export default function PropertyGallery({ items, propertyName, rooms }: Property
 
   return (
     <>
-      {/* Room Tabs */}
+      {/* Room Tabs - Single line horizontal scroll */}
       {rooms && rooms.length > 0 && (
-        <div className="mb-10">
-          <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#8b7355] mb-4">Browse by Room</p>
-          <div className="flex flex-wrap gap-3">
-            {rooms.map((room) => (
-              <button
-                key={room.slug}
-                onClick={() => handleRoomChange(room.slug)}
-                className={cn(
-                  "px-5 py-2.5 text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.15em] transition-all duration-300 border",
-                  activeRoom === room.slug
-                    ? "bg-[#c3a061] text-[#0f0e0c] border-[#c3a061]"
-                    : "border-[#e5dfd6] text-[#6b6358] hover:border-[#c3a061] hover:text-[#c3a061]"
-                )}
-              >
-                {room.name}
-                <span className="ml-2 text-[#8b7355]">({room.images.length})</span>
-              </button>
-            ))}
+        <div className="mb-8">
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-2 -mx-5 px-5 sm:mx-0 sm:px-0 scrollbar-hide">
+            {rooms.map((room) => {
+              const firstWord = room.name.split(" ")[0];
+              return (
+                <button
+                  key={room.slug}
+                  onClick={() => handleRoomChange(room.slug)}
+                  className={cn(
+                    "flex-shrink-0 px-3 py-1.5 text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.1em] transition-all duration-300 border whitespace-nowrap",
+                    activeRoom === room.slug
+                      ? "bg-[#c3a061] text-[#0f0e0c] border-[#c3a061]"
+                      : "border-[#e5dfd6] text-[#6b6358] hover:border-[#c3a061] hover:text-[#c3a061]"
+                  )}
+                >
+                  {firstWord}
+                </button>
+              );
+            })}
             <button
               onClick={() => { setActiveRoom(null); setFilter("All"); }}
               className={cn(
-                "px-5 py-2.5 text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.15em] transition-all duration-300 border",
+                "flex-shrink-0 px-3 py-1.5 text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.1em] transition-all duration-300 border whitespace-nowrap",
                 activeRoom === null
                   ? "bg-[#1a1814] text-white border-[#1a1814]"
                   : "border-[#e5dfd6] text-[#6b6358] hover:border-[#c3a061] hover:text-[#c3a061]"
               )}
             >
-              All Images ({items.length})
+              All ({items.length})
             </button>
           </div>
         </div>
