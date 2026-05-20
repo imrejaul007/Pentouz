@@ -23,96 +23,102 @@ export default function TravelHubPage() {
   return (
     <>
       <Header />
-      <main className="bg-[#f7f1e7] min-h-screen text-brand-ink">
-        <section className="relative isolate overflow-hidden bg-[#17120e] text-white">
+      <main className="bg-[#faf7f2] min-h-screen text-[#1a1814]">
+        <section className="relative overflow-hidden bg-[#0f0e0c] text-white">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(196,160,97,0.12),transparent_28%)]" />
-          <div className="luxury-shell-section relative pb-20 pt-36 sm:pb-24 lg:pb-28 lg:pt-44">
-            <div className="max-w-4xl animate-fade-in-up">
-              <p className="luxury-kicker text-white/70">Bangalore Notes</p>
-              <h1 className="luxury-hero-title mt-6 text-white">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 pb-16 sm:pb-20 lg:pb-24 pt-28 sm:pt-32 lg:pt-40">
+            <div className="max-w-3xl animate-fade-in-up">
+              <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.25em] text-[#c3a061]">Bangalore Notes</p>
+              <h1 className="font-['Cormorant_Garamond',serif] font-light leading-[1.1] text-white mt-4" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', letterSpacing: '-0.02em' }}>
                 A calmer guide to the city around Lavelle Road.
               </h1>
-              <p className="luxury-copy mt-8 max-w-2xl text-white/76">
+              <p className="font-['Lora',serif] text-base sm:text-lg leading-relaxed text-white/75 mt-6 sm:mt-8 max-w-xl">
                 Useful pages for guests who want to understand the neighborhoods, landmarks, and nearby addresses around The Pentouz Lavelle Road before they arrive.
               </p>
             </div>
           </div>
         </section>
 
-        <section className="bg-[#fbf7f0]">
-          <div className="luxury-shell-section py-20 lg:py-28">
-            <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
-              <div className="animate-fade-in-up">
-                <p className="luxury-kicker text-brand-accent">Start here</p>
-                <h2 className="luxury-section-title mt-5">Three simple ways to explore the area.</h2>
+        <section className="bg-white">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-12 sm:py-16 lg:py-24">
+            <div className="grid grid-cols-1 lg:grid-cols-[0.75fr_1.25fr] gap-8 lg:gap-16 items-start">
+              <div>
+                <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#8b7355] font-medium mb-3 sm:mb-4">Start here</p>
+                <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814]" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+                  Three simple ways to explore the area.
+                </h2>
               </div>
-              <div className="grid gap-6 md:grid-cols-3">
-                <Link href="/destinations/lavelle-road" className="luxury-panel bg-white transition-all duration-500 hover:-translate-y-1 animate-fade-in-up">
-                  <p className="luxury-subtitle">Stay</p>
-                  <h3 className="mt-4 font-display text-2xl font-light text-brand-ink">Lavelle Road</h3>
-                  <p className="mt-4 text-sm leading-7 text-brand-body">See the property, room types, and booking options.</p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
+                <Link href="/destinations/lavelle-road" className="border border-[#e5dfd6] bg-[#faf7f2] p-5 sm:p-6 transition-all duration-500 hover:-translate-y-1">
+                  <p className="text-[9px] sm:text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-[#8b7355] mb-2">Stay</p>
+                  <h3 className="font-['Cormorant_Garamond',serif] text-lg sm:text-xl lg:text-2xl font-light text-[#1a1814]">Lavelle Road</h3>
+                  <p className="mt-3 sm:mt-4 font-['Lora',serif] text-xs sm:text-sm leading-[1.7] text-[#4a4a44]">See the property, room types, and booking options.</p>
                 </Link>
-                <Link href="/destinations/lavelle-road/near" className="luxury-panel bg-white transition-all duration-500 hover:-translate-y-1 animate-fade-in-up [animation-delay:120ms]">
-                  <p className="luxury-subtitle">Nearby</p>
-                  <h3 className="mt-4 font-display text-2xl font-light text-brand-ink">Places Around You</h3>
-                  <p className="mt-4 text-sm leading-7 text-brand-body">Browse nearby offices, landmarks, courts, and key addresses.</p>
+                <Link href="/destinations/lavelle-road/near" className="border border-[#e5dfd6] bg-[#faf7f2] p-5 sm:p-6 transition-all duration-500 hover:-translate-y-1">
+                  <p className="text-[9px] sm:text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-[#8b7355] mb-2">Nearby</p>
+                  <h3 className="font-['Cormorant_Garamond',serif] text-lg sm:text-xl lg:text-2xl font-light text-[#1a1814]">Places Around You</h3>
+                  <p className="mt-3 sm:mt-4 font-['Lora',serif] text-xs sm:text-sm leading-[1.7] text-[#4a4a44]">Browse nearby offices, landmarks, courts, and key addresses.</p>
                 </Link>
-                <Link href="/travel/guides/best-things-to-do-in-mg-road-bangalore" className="luxury-panel bg-white transition-all duration-500 hover:-translate-y-1 animate-fade-in-up [animation-delay:240ms]">
-                  <p className="luxury-subtitle">City</p>
-                  <h3 className="mt-4 font-display text-2xl font-light text-brand-ink">Bangalore Guides</h3>
-                  <p className="mt-4 text-sm leading-7 text-brand-body">Read a few calm, practical notes for the city around your stay.</p>
+                <Link href="/travel/guides/best-things-to-do-in-mg-road-bangalore" className="border border-[#e5dfd6] bg-[#faf7f2] p-5 sm:p-6 transition-all duration-500 hover:-translate-y-1">
+                  <p className="text-[9px] sm:text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-[#8b7355] mb-2">City</p>
+                  <h3 className="font-['Cormorant_Garamond',serif] text-lg sm:text-xl lg:text-2xl font-light text-[#1a1814]">Bangalore Guides</h3>
+                  <p className="mt-3 sm:mt-4 font-['Lora',serif] text-xs sm:text-sm leading-[1.7] text-[#4a4a44]">Read a few calm, practical notes for the city around your stay.</p>
                 </Link>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="bg-[#f3eadf]">
-          <div className="luxury-shell-section py-20 lg:py-28">
-            <div className="max-w-3xl animate-fade-in-up">
-              <p className="luxury-kicker text-brand-accent">Nearby addresses</p>
-              <h2 className="luxury-section-title mt-5">Useful location pages near Lavelle Road.</h2>
+        <section className="bg-[#f5f0e8]">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-12 sm:py-16 lg:py-24">
+            <div className="max-w-2xl mb-10 sm:mb-14">
+              <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#8b7355] font-medium mb-3 sm:mb-4">Nearby addresses</p>
+              <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814]" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+                Useful location pages near Lavelle Road.
+              </h2>
             </div>
-            <div className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {featuredLocations.map((page, index) => (
                 <Link
                   key={page.slug}
                   href={`/destinations/lavelle-road/near/${page.slug}`}
-                  className="luxury-panel bg-white transition-all duration-500 hover:-translate-y-1 animate-fade-in-up"
+                  className="border border-[#e5dfd6] bg-white p-5 sm:p-6 transition-all duration-500 hover:-translate-y-1"
                   style={{ animationDelay: `${index * 90}ms` }}
                 >
-                  <p className="luxury-subtitle">{page.category}</p>
-                  <h3 className="mt-4 font-display text-3xl font-light leading-tight text-brand-ink">{page.place}</h3>
-                  <p className="mt-4 text-sm leading-7 text-brand-body">{page.keyword}</p>
+                  <p className="text-[9px] sm:text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-[#8b7355] mb-2">{page.category}</p>
+                  <h3 className="font-['Cormorant_Garamond',serif] text-lg sm:text-xl lg:text-2xl font-light text-[#1a1814] leading-tight">{page.place}</h3>
+                  <p className="mt-3 sm:mt-4 font-['Lora',serif] text-xs sm:text-sm leading-[1.7] text-[#4a4a44]">{page.keyword}</p>
                 </Link>
               ))}
             </div>
             <div className="mt-8">
-              <Link href="/destinations/lavelle-road/near" className="inline-flex items-center justify-center rounded-full border border-brand-border px-7 py-4 text-[11px] uppercase tracking-[0.22em] text-brand-ink transition-all duration-500 hover:-translate-y-0.5 hover:border-brand-gold hover:text-brand-gold">
+              <Link href="/destinations/lavelle-road/near" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-[#e5dfd6] text-[#1a1814] px-6 sm:px-8 py-3.5 sm:py-4 font-['Inter',sans-serif] text-[10px] sm:text-[11px] uppercase tracking-[0.18em] font-medium transition-all duration-500 hover:border-[#c3a061] hover:text-[#c3a061]">
                 View All Nearby Pages
               </Link>
             </div>
           </div>
         </section>
 
-        <section className="bg-[#fbf7f0]">
-          <div className="luxury-shell-section py-20 lg:py-28">
-            <div className="grid gap-10 lg:grid-cols-[0.74fr_1.26fr] lg:items-start">
-              <div className="animate-fade-in-up">
-                <p className="luxury-kicker text-brand-accent">By interest</p>
-                <h2 className="luxury-section-title mt-5">Browse the city in a more natural way.</h2>
+        <section className="bg-white">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-12 sm:py-16 lg:py-24">
+            <div className="grid grid-cols-1 lg:grid-cols-[0.74fr_1.26fr] gap-8 lg:gap-16 items-start">
+              <div>
+                <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#8b7355] font-medium mb-3 sm:mb-4">By interest</p>
+                <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814]" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+                  Browse the city in a more natural way.
+                </h2>
               </div>
-              <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
                 {lavelleSeoClusters.map((cluster, index) => (
                   <Link
                     key={cluster.slug}
                     href={`/travel/clusters/${cluster.slug}`}
-                    className="luxury-panel bg-white transition-all duration-500 hover:-translate-y-1 animate-fade-in-up"
+                    className="border border-[#e5dfd6] bg-[#faf7f2] p-5 sm:p-6 transition-all duration-500 hover:-translate-y-1"
                     style={{ animationDelay: `${index * 70}ms` }}
                   >
-                    <p className="luxury-subtitle">{cluster.category}</p>
-                    <h3 className="mt-4 font-display text-2xl font-light text-brand-ink">{cluster.title}</h3>
-                    <p className="mt-4 text-sm leading-7 text-brand-body">{cluster.description}</p>
+                    <p className="text-[9px] sm:text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-[#8b7355] mb-2">{cluster.category}</p>
+                    <h3 className="font-['Cormorant_Garamond',serif] text-lg sm:text-xl lg:text-2xl font-light text-[#1a1814]">{cluster.title}</h3>
+                    <p className="mt-3 sm:mt-4 font-['Lora',serif] text-xs sm:text-sm leading-[1.7] text-[#4a4a44]">{cluster.description}</p>
                   </Link>
                 ))}
               </div>
@@ -120,25 +126,25 @@ export default function TravelHubPage() {
           </div>
         </section>
 
-        <section className="bg-[#17120e] text-white">
-          <div className="luxury-shell-section py-20 lg:py-28">
-            <div className="max-w-3xl animate-fade-in-up">
-              <p className="luxury-kicker text-brand-gold">Around the city</p>
-              <h2 className="mt-5 font-display text-4xl font-light leading-tight text-white sm:text-5xl lg:text-6xl">
+        <section className="bg-[#0f0e0c] text-white">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-12 sm:py-16 lg:py-24">
+            <div className="max-w-2xl mb-10 sm:mb-14">
+              <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#c3a061] font-medium mb-3 sm:mb-4">Around the city</p>
+              <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
                 Notes on neighborhoods, walks, dining, and nearby experiences.
               </h2>
             </div>
-            <div className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {featuredGuides.map((guide, index) => (
                 <Link
                   key={guide.slug}
                   href={`/travel/guides/${guide.slug}`}
-                  className="border border-white/10 bg-white/[0.04] p-6 transition-all duration-500 hover:-translate-y-1 hover:border-brand-gold/40 animate-fade-in-up"
+                  className="border border-white/10 bg-white/[0.02] p-5 sm:p-6 transition-all duration-500 hover:-translate-y-1 hover:border-[#c3a061]/30"
                   style={{ animationDelay: `${index * 90}ms` }}
                 >
-                  <p className="text-[10px] uppercase tracking-[0.22em] text-brand-gold">{guide.focusArea}</p>
-                  <h3 className="mt-4 font-display text-3xl font-light leading-tight text-white">{guide.title}</h3>
-                  <p className="mt-4 text-sm leading-7 text-white/70">{guide.subtitle}</p>
+                  <p className="text-[9px] sm:text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-[#c3a061] mb-2">{guide.focusArea}</p>
+                  <h3 className="font-['Cormorant_Garamond',serif] text-lg sm:text-xl lg:text-2xl font-light text-white leading-tight">{guide.title}</h3>
+                  <p className="mt-3 sm:mt-4 font-['Lora',serif] text-xs sm:text-sm leading-[1.7] text-white/65">{guide.subtitle}</p>
                 </Link>
               ))}
             </div>
