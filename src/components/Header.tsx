@@ -124,8 +124,8 @@ export default function Header() {
               </nav>
             </div>
 
-            {/* Mobile logo */}
-            <Link href="/" className="flex xl:hidden items-center">
+            {/* Mobile logo - hidden when menu open */}
+            <Link href="/" className={cn("flex xl:hidden items-center", isMenuOpen && "hidden")}>
               <Image
                 src="/logo-white.png"
                 alt="The Pentouz"
