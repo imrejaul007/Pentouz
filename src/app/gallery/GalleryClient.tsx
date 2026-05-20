@@ -202,7 +202,7 @@ export default function GalleryClient() {
           </button>
 
           <div
-            className="relative max-w-[90vw] max-h-[85vh] w-full h-full flex items-center justify-center"
+            className="relative w-[90vw] h-[85vh] flex items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
             <Image
