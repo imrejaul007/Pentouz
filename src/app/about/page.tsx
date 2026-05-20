@@ -20,36 +20,6 @@ export const metadata: Metadata = {
   title: "About | The Pentouz",
   description:
     "The Pentouz brand story: boutique luxury hospitality shaped around how guests actually travel. Properties include The Pentouz Lavelle Road, Indiranagar, Hillside Chikmagalur, and Windsor Heights Ooty.",
-  keywords: [
-    "about The Pentouz",
-    "The Pentouz brand story",
-    "boutique luxury hospitality",
-    "luxury accommodation brand",
-    "The Pentouz properties",
-    "pentouz history",
-  ],
-  openGraph: {
-    title: "About | The Pentouz",
-    description:
-      "The Pentouz brand story: boutique luxury hospitality shaped around how guests actually travel.",
-    url: withSiteUrl("/about"),
-    siteName: "The Pentouz",
-    images: [
-      {
-        url: withSiteUrl("/og-image.jpg"),
-        width: 1200,
-        height: 630,
-        alt: "About The Pentouz - Brand Story",
-      },
-    ],
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "About | The Pentouz",
-    description:
-      "The Pentouz brand story: boutique luxury hospitality.",
-  },
   alternates: {
     canonical: withSiteUrl("/about"),
   },
@@ -102,93 +72,96 @@ const brandNotes = [
 ];
 
 export default function AboutPage() {
-  // Generate About page schema for AI search engines
   const aboutSchema = generatePageSchemas({ type: "about" });
 
   return (
     <>
       <Header />
-      {/* Schema.org structured data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }}
-      />
-      <main className="bg-[#f8f2e8] text-brand-ink">
-        <section className="relative isolate overflow-hidden text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }} />
+      <main className="bg-[#faf7f2] text-[#1a1814]">
+        <section className="relative overflow-hidden text-white">
           <HeroSlider images={heroImages} alt="About Pentouz" />
 
-          <div className="relative mx-auto max-w-[1440px] px-5 pb-24 pt-48 sm:px-8 lg:px-14">
-            <div className="max-w-4xl">
-              <p className="text-[10px] uppercase tracking-[0.32em] text-brand-gold mb-4">About Pentouz</p>
-              <h1 className="font-display text-[2rem] font-light leading-[1] text-white sm:text-[3rem] md:text-[4rem] lg:text-[5rem]">
-                Pentouz was built to feel more personal than a hotel, and more polished than a rental.
-              </h1>
-              <p className="mt-6 text-base leading-7 text-white/78 max-w-2xl">
-                The brand sits in the space between private residence and premium hospitality. That is why the strongest Pentouz stays rely on room scale, calm atmosphere, and strong city or landscape positioning rather than generic luxury promises.
-              </p>
+          <div className="absolute inset-0 flex items-end">
+            <div className="mx-auto max-w-[1400px] w-full px-5 sm:px-8 lg:px-16 pb-20 lg:pb-28 pt-32">
+              <div className="max-w-3xl">
+                <p className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.25em] text-[#c3a061] mb-6 animate-fade-in-up">About Pentouz</p>
+                <h1 className="font-['Cormorant_Garamond',serif] text-white font-light leading-[1.1] animate-fade-in-up [animation-delay:100ms]" style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', letterSpacing: '-0.02em' }}>
+                  Pentouz was built to feel more personal than a hotel, and more polished than a rental.
+                </h1>
+                <p className="mt-8 font-['Lora',serif] text-base sm:text-lg leading-relaxed text-white/75 max-w-xl animate-fade-in-up [animation-delay:200ms]">
+                  The brand sits in the space between private residence and premium hospitality. That is why the strongest Pentouz stays rely on room scale, calm atmosphere, and strong city or landscape positioning.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="border-b border-black/5 bg-[#fdf9f3]">
-          <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-18 sm:px-8 lg:grid-cols-[0.78fr_1.22fr] lg:px-14 lg:py-24">
-            <div>
-              <p className="luxury-kicker text-brand-accent">Brand Story</p>
-              <h2 className="luxury-section-title mt-5 max-w-xl">
-                A boutique hospitality brand shaped around how guests actually travel.
+        <section className="bg-white">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-16 sm:py-24 lg:py-36">
+            <div className="grid grid-cols-1 lg:grid-cols-[0.78fr_1.22fr] gap-8 lg:gap-20 items-start">
+              <div>
+                <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#8b7355] font-medium mb-3 sm:mb-4">Brand Story</p>
+                <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814]" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+                  A boutique hospitality brand shaped around how guests actually travel.
+                </h2>
+              </div>
+              <div className="space-y-5 sm:space-y-6">
+                <p className="font-['Lora',serif] text-sm sm:text-base leading-[1.8] text-[#4a4a44]">
+                  Pentouz began with the idea that premium accommodation should not be loud to feel luxurious. A well-positioned address, thoughtful interiors, clean service, and a more residential sense of privacy often create a stronger impression than excess styling ever could.
+                </p>
+                <p className="font-['Lora',serif] text-sm sm:text-base leading-[1.8] text-[#4a4a44]">
+                  That philosophy now informs every part of the collection. Lavelle Road serves business and court-related stays with a calmer boutique tone. Indiranagar offers rare penthouse scale in one of Bangalore&apos;s most social neighborhoods. The Pentouz Hillside Chikmagalur anchors the collection with warmth and natural beauty in coffee country. Ooty softens the experience into a retreat built around air, view, and slower time.
+                </p>
+                <p className="font-['Lora',serif] text-sm sm:text-base leading-[1.8] text-[#4a4a44]">
+                  The result is a brand that should feel refined, useful, and specific to place. Pentouz is strongest when the guest immediately understands why this stay belongs in this location.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#f5f0e8]">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-16 sm:py-24 lg:py-36">
+            <div className="max-w-2xl mb-10 sm:mb-16">
+              <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#8b7355] font-medium mb-3 sm:mb-4">What Matters</p>
+              <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814]" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+                The principles that make the brand feel premium.
               </h2>
             </div>
-            <div className="space-y-6 text-base leading-8 text-brand-body sm:text-lg">
-              <p>
-                Pentouz began with the idea that premium accommodation should not be loud to feel luxurious. A well-positioned address, thoughtful interiors, clean service, and a more residential sense of privacy often create a stronger impression than excess styling ever could.
-              </p>
-              <p>
-                That philosophy now informs every part of the collection. Lavelle Road serves business and court-related stays with a calmer boutique tone. Indiranagar offers rare penthouse scale in one of Bangalore&apos;s most social neighborhoods. The Pentouz Hillside Chikmagalur anchors the collection with warmth and natural beauty in coffee country. Ooty softens the experience into a retreat built around air, view, and slower time.
-              </p>
-              <p>
-                The result is a brand that should feel refined, useful, and specific to place. Pentouz is strongest when the guest immediately understands why this stay belongs in this location and why it fits the way they want to travel.
-              </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+              {principles.map((principle) => (
+                <article key={principle.title} className="border border-[#e5dfd6] bg-white p-6 sm:p-8">
+                  <p className="text-[9px] sm:text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.2em] sm:tracking-[0.24em] text-[#8b7355]">Pentouz Standard</p>
+                  <h3 className="mt-3 sm:mt-4 font-['Cormorant_Garamond',serif] text-xl sm:text-2xl lg:text-3xl font-light text-[#1a1814] leading-tight">{principle.title}</h3>
+                  <p className="mt-4 sm:mt-5 font-['Lora',serif] text-xs sm:text-sm leading-[1.7] text-[#4a4a44]">{principle.description}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
 
-        <section className="mx-auto max-w-[1440px] px-5 py-18 sm:px-8 lg:px-14 lg:py-24">
-          <div className="max-w-3xl">
-            <p className="luxury-kicker text-brand-accent">What Matters</p>
-            <h2 className="luxury-section-title mt-5">The principles that make the brand feel premium.</h2>
-          </div>
-
-          <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {principles.map((principle) => (
-              <article key={principle.title} className="luxury-panel bg-white/80">
-                <p className="text-[10px] uppercase tracking-[0.24em] text-brand-accent">Pentouz Standard</p>
-                <h3 className="mt-4 font-display text-3xl font-light leading-tight text-brand-ink">{principle.title}</h3>
-                <p className="mt-5 text-sm leading-7 text-brand-body">{principle.description}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="bg-[#161310] text-white">
-          <div className="mx-auto max-w-[1440px] px-5 py-18 sm:px-8 lg:px-14 lg:py-24">
-            <div className="max-w-3xl">
-              <p className="luxury-kicker text-brand-gold">Property Character</p>
-              <h2 className="mt-5 font-display text-4xl font-light leading-tight text-white sm:text-5xl lg:text-6xl">
+        <section className="bg-[#0f0e0c] text-white">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-16 sm:py-24 lg:py-36">
+            <div className="max-w-2xl mb-10 sm:mb-16">
+              <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#c3a061] font-medium mb-3 sm:mb-4">Property Character</p>
+              <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
                 One brand, four clearly different hospitality moods.
               </h2>
             </div>
 
-            <div className="mt-14 grid gap-8 lg:grid-cols-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 lg:gap-8">
               {brandNotes.map((note) => (
-                <article key={note.title} className="overflow-hidden border border-white/10 bg-white/[0.03]">
+                <article key={note.title} className="border border-white/10 overflow-hidden bg-white/[0.02]">
                   <div className="relative aspect-[4/5] overflow-hidden">
-                    <Image src={note.image} alt={note.title} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 33vw" />
+                    <Image src={note.image} alt={note.title} fill className="object-cover" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                   </div>
-                  <div className="px-6 py-6">
-                    <p className="text-[10px] uppercase tracking-[0.22em] text-brand-gold">Signature Mood</p>
-                    <h3 className="mt-4 font-display text-3xl font-light text-white">{note.title}</h3>
-                    <p className="mt-4 text-sm leading-7 text-white/68">{note.body}</p>
+                  <div className="p-5 sm:p-6">
+                    <p className="text-[9px] sm:text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.22em] text-[#c3a061]">Signature Mood</p>
+                    <h3 className="mt-3 sm:mt-4 font-['Cormorant_Garamond',serif] text-xl sm:text-2xl lg:text-3xl font-light text-white leading-tight">{note.title}</h3>
+                    <p className="mt-3 sm:mt-4 font-['Lora',serif] text-xs sm:text-sm leading-[1.7] text-white/65">{note.body}</p>
                   </div>
                 </article>
               ))}
@@ -196,47 +169,46 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="bg-[#ede2d1]">
-          <div className="mx-auto max-w-5xl px-5 py-18 text-center sm:px-8 lg:px-14 lg:py-24">
-            <p className="luxury-kicker text-brand-accent">Stay With Pentouz</p>
-            <h2 className="luxury-section-title mt-5">See how the brand translates across the collection.</h2>
-            <p className="mt-6 text-base leading-8 text-brand-body sm:text-lg">
-              The clearest way to understand Pentouz is to move through the properties themselves. Each one now carries its own story, booking path, and visual tone.
-            </p>
-            <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
-              <Link href="/destinations" className="inline-flex items-center justify-center rounded-full bg-brand-ink px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-white transition-colors hover:bg-black">
-                Explore Properties
-              </Link>
-              <Link href="/contact" className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-ink px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-brand-ink transition-colors hover:bg-brand-ink hover:text-white">
-                Contact Concierge
-                <ArrowRight className="h-4 w-4" strokeWidth={1.4} />
-              </Link>
+        <section className="bg-white">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-16 sm:py-24 lg:py-36">
+            <div className="max-w-2xl mx-auto text-center">
+              <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#8b7355] font-medium mb-3 sm:mb-4">Stay With Pentouz</p>
+              <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814] mb-5 sm:mb-6" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+                See how the brand translates across the collection.
+              </h2>
+              <p className="font-['Lora',serif] text-sm sm:text-base leading-[1.8] text-[#4a4a44] mb-8 sm:mb-10">
+                The clearest way to understand Pentouz is to move through the properties themselves. Each one carries its own story, booking path, and visual tone.
+              </p>
+              <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+                <Link href="/destinations" className="w-full sm:w-auto flex items-center justify-center gap-2 sm:gap-3 bg-[#0f0e0c] text-white px-8 sm:px-10 py-4 font-['Inter',sans-serif] text-[10px] sm:text-[11px] uppercase tracking-[0.18em] font-medium transition-all duration-500 hover:bg-[#c3a061]">
+                  Explore Properties
+                </Link>
+                <Link href="/contact" className="w-full sm:w-auto flex items-center justify-center gap-2 sm:gap-3 border border-[#0f0e0c] text-[#0f0e0c] px-8 sm:px-10 py-4 font-['Inter',sans-serif] text-[10px] sm:text-[11px] uppercase tracking-[0.18em] font-medium transition-all duration-500 hover:bg-[#0f0e0c] hover:text-white">
+                  Contact Concierge
+                  <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+                </Link>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* FAQ Section - AI Search Optimized */}
         <FAQ
           items={[
             {
               question: "What is The Pentouz brand philosophy?",
-              answer:
-                "The Pentouz was built on the idea that premium accommodation should not be loud to feel luxurious. A well-positioned address, thoughtful interiors, clean service, and a more residential sense of privacy create a stronger impression than excess styling.",
+              answer: "The Pentouz was built on the idea that premium accommodation should not be loud to feel luxurious. A well-positioned address, thoughtful interiors, clean service, and a more residential sense of privacy create a stronger impression than excess styling.",
             },
             {
               question: "How many properties does The Pentouz have?",
-              answer:
-                "The Pentouz currently operates four properties: The Pentouz Lavelle Road (Bangalore city center), The Pentouz Indiranagar (Bangalore's vibrant neighborhood), The Pentouz Hillside Chikmagalur (coffee country retreat), and The Pentouz Windsor Heights Ooty (mountain escape).",
+              answer: "The Pentouz currently operates four properties: The Pentouz Lavelle Road (Bangalore city center), The Pentouz Indiranagar (Bangalore's vibrant neighborhood), The Pentouz Hillside Chikmagalur (coffee country retreat), and The Pentouz Windsor Heights Ooty (mountain escape).",
             },
             {
               question: "What makes each Pentouz property unique?",
-              answer:
-                "Each Pentouz property has a distinct character. Lavelle Road serves business and court-related stays. Indiranagar offers rare penthouse scale. Hillside Chikmagalur anchors the collection with warmth and natural beauty. Ooty provides a softer, slower retreat experience.",
+              answer: "Each Pentouz property has a distinct character. Lavelle Road serves business and court-related stays. Indiranagar offers rare penthouse scale. Hillside Chikmagalur anchors the collection with warmth and natural beauty. Ooty provides a softer, slower retreat experience.",
             },
             {
               question: "Does The Pentouz offer direct booking benefits?",
-              answer:
-                "Direct booking through the website or concierge team typically offers the best rates, personalized service, and flexibility for special requests. The Privé Club membership provides additional benefits including priority reservations and exclusive offers.",
+              answer: "Direct booking through the website or concierge team typically offers the best rates, personalized service, and flexibility for special requests. The Privé Club membership provides additional benefits including priority reservations and exclusive offers.",
             },
           ]}
           title="About The Pentouz"

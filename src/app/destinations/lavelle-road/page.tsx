@@ -119,26 +119,26 @@ export default function LavelleRoadPage() {
 
         {/* Living Section */}
         <section className="bg-white">
-          <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-16 py-24 lg:py-36">
-            <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-12 lg:gap-20 items-center">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-16 sm:py-24 lg:py-36">
+            <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-8 sm:gap-12 lg:gap-20 items-center">
               <div className="relative overflow-hidden aspect-[4/5]">
                 <Image src="/lavelle-road/all/9042_king_suite_4.jpg" alt="Lavelle Road living" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 45vw" />
               </div>
               <div>
-                <p className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#8b7355] font-medium mb-4">
+                <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#8b7355] font-medium mb-3 sm:mb-4">
                   The Living
                 </p>
-                <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814] mb-6" style={{ fontSize: 'clamp(1.75rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+                <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814] mb-5 sm:mb-6" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
                   Beautifully designed studio rooms with panoramic city views.
                 </h2>
-                <p className="font-['Lora',serif] text-base leading-[1.85] text-[#4a4a44] mb-6">
+                <p className="font-['Lora',serif] text-sm sm:text-base leading-[1.8] text-[#4a4a44] mb-5 sm:mb-6">
                   The Pentouz Lavelle Road boasts exquisitely designed, spacious studio rooms located on the top floor, each offering stunning panoramic views of the cityscape. These well-appointed studios are thoughtfully curated to cater to the discerning traveler, combining elegance with modern comforts.
                 </p>
-                <p className="font-['Lora',serif] text-base leading-[1.85] text-[#4a4a44]">
+                <p className="font-['Lora',serif] text-sm sm:text-base leading-[1.8] text-[#4a4a44]">
                   Whether you&apos;re in Bangalore for business or leisure, you&apos;ll find every detail tailored to enhance your stay.
                 </p>
-                <div className="mt-8">
-                  <Link href="/destinations/lavelle-road/living" className="inline-flex items-center gap-3 bg-[#0f0e0c] text-white px-8 py-4 font-['Inter',sans-serif] text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-500 hover:bg-[#c3a061]">
+                <div className="mt-6 sm:mt-8">
+                  <Link href="/destinations/lavelle-road/living" className="w-full sm:w-auto flex items-center justify-center gap-2 sm:gap-3 bg-[#0f0e0c] text-white px-6 sm:px-8 py-3.5 sm:py-4 font-['Inter',sans-serif] text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.2em] font-medium transition-all duration-500 hover:bg-[#c3a061]">
                     Explore Living
                     <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
                   </Link>
@@ -150,23 +150,23 @@ export default function LavelleRoadPage() {
 
         {/* Location Section */}
         <section className="bg-[#f5f0e8]">
-          <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-16 py-24 lg:py-36">
-            <div className="max-w-2xl mb-16">
-              <p className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#8b7355] font-medium mb-4">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-16 sm:py-24 lg:py-36">
+            <div className="max-w-2xl mb-10 sm:mb-16">
+              <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#8b7355] font-medium mb-3 sm:mb-4">
                 The Location
               </p>
-              <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814]" style={{ fontSize: 'clamp(1.75rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+              <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814]" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
                 An address surrounded by culture, commerce, and quiet prestige.
               </h2>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 lg:gap-8">
               {travelStats.map((stat) => (
-                <div key={stat.title} className="border border-[#e5dfd6] bg-white p-8">
-                  <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-[#8b7355] mb-3">
+                <div key={stat.title} className="border border-[#e5dfd6] bg-white p-6 sm:p-8">
+                  <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-[#8b7355] mb-2 sm:mb-3">
                     {stat.title}
                   </p>
-                  <p className="font-['Cormorant_Garamond',serif] text-4xl font-light text-[#1a1814]">
+                  <p className="font-['Cormorant_Garamond',serif] text-3xl sm:text-4xl font-light text-[#1a1814]">
                     {stat.time}
                   </p>
                   <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.12em] text-[#6b6358] mt-2">
@@ -180,19 +180,19 @@ export default function LavelleRoadPage() {
 
         {/* Amenities */}
         <section className="bg-[#0f0e0c] text-white">
-          <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-16 py-24 lg:py-36">
-            <div className="max-w-2xl mb-16">
-              <p className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#c3a061] font-medium mb-4">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-16 sm:py-24 lg:py-36">
+            <div className="max-w-2xl mb-10 sm:mb-16">
+              <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#c3a061] font-medium mb-3 sm:mb-4">
                 Amenities
               </p>
-              <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-white" style={{ fontSize: 'clamp(1.75rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+              <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
                 Everything you need for a refined stay.
               </h2>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
               {amenities.map((amenity) => (
-                <div key={amenity} className="border border-white/10 bg-white/[0.02] px-5 py-4 text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-white/70">
+                <div key={amenity} className="border border-white/10 bg-white/[0.02] px-4 sm:px-5 py-3 sm:py-4 text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.12em] sm:tracking-[0.15em] text-white/70">
                   {amenity}
                 </div>
               ))}
@@ -202,17 +202,17 @@ export default function LavelleRoadPage() {
 
         {/* Gallery */}
         <section className="bg-white">
-          <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-16 py-24 lg:py-32">
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-16 sm:py-24 lg:py-32">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 sm:mb-12">
               <div>
-                <p className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#8b7355] font-medium mb-3">
+                <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#8b7355] font-medium mb-2 sm:mb-3">
                   Gallery
                 </p>
-                <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814]" style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)', letterSpacing: '-0.015em' }}>
+                <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814]" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', letterSpacing: '-0.015em' }}>
                   A visual journey
                 </h2>
               </div>
-              <Link href="/destinations/lavelle-road/gallery" className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-[#4a4a44] hover:text-[#c3a061] transition-colors duration-300">
+              <Link href="/destinations/lavelle-road/gallery" className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-[#4a4a44] hover:text-[#c3a061] transition-colors duration-300">
                 View Full Gallery →
               </Link>
             </div>
@@ -222,28 +222,28 @@ export default function LavelleRoadPage() {
 
         {/* Contact */}
         <section className="bg-[#f5f0e8]">
-          <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-16 py-24 lg:py-36">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-16 sm:py-24 lg:py-36">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start lg:items-center">
               <div>
-                <p className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#8b7355] font-medium mb-4">
+                <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#8b7355] font-medium mb-3 sm:mb-4">
                   Book Your Stay
                 </p>
-                <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814] mb-6" style={{ fontSize: 'clamp(1.75rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+                <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814] mb-5 sm:mb-6" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
                   Experience boutique luxury on Lavelle Road.
                 </h2>
                 <p className="font-['Lora',serif] text-sm leading-relaxed text-[#4a4a44]">
                   46, 6th Cross, Lavelle Road, Bangalore – 560001. India.
                 </p>
               </div>
-              <div className="bg-white border border-[#e5dfd6] p-8 lg:p-10">
-                <p className="font-['Lora',serif] text-sm text-[#4a4a44] mb-6">
+              <div className="bg-white border border-[#e5dfd6] p-6 sm:p-8 lg:p-10 lg:mt-12">
+                <p className="font-['Lora',serif] text-sm text-[#4a4a44] mb-5 sm:mb-6">
                   For reservations and inquiries
                 </p>
-                <div className="space-y-4">
-                  <a href={property.bookingUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 bg-[#0f0e0c] text-white px-8 py-4 font-['Inter',sans-serif] text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-500 hover:bg-[#c3a061]">
+                <div className="space-y-3 sm:space-y-4">
+                  <a href={property.bookingUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 sm:gap-3 bg-[#0f0e0c] text-white px-6 sm:px-8 py-3.5 sm:py-4 font-['Inter',sans-serif] text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.2em] font-medium transition-all duration-500 hover:bg-[#c3a061]">
                     Reserve Your Stay
                   </a>
-                  <a href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`} className="flex items-center justify-center gap-3 border border-[#0f0e0c] text-[#0f0e0c] px-8 py-4 font-['Inter',sans-serif] text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-500 hover:bg-[#0f0e0c] hover:text-white">
+                  <a href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`} className="flex items-center justify-center gap-2 sm:gap-3 border border-[#0f0e0c] text-[#0f0e0c] px-6 sm:px-8 py-3.5 sm:py-4 font-['Inter',sans-serif] text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.2em] font-medium transition-all duration-500 hover:bg-[#0f0e0c] hover:text-white">
                     Call Concierge
                   </a>
                 </div>

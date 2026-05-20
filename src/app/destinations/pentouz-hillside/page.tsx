@@ -16,42 +16,11 @@ export const metadata: Metadata = {
   title: "The Pentouz Hillside Chikmagalur | Coffee Country Retreat",
   description:
     "Luxury homestay in Chikmagalur's coffee country. Pool, bonfire, plantations, and warm hospitality. Perfect for families and retreats.",
-  keywords: [
-    "The Pentouz Hillside Chikmagalur",
-    "luxury homestay Chikmagalur",
-    "coffee country accommodation",
-    "Chikmagalur swimming pool",
-    "boutique stay Karnataka",
-    "coffee plantation retreat",
-  ],
-  openGraph: {
-    title: "The Pentouz Hillside Chikmagalur | Coffee Country Retreat",
-    description:
-      "An intimate luxury homestay in Chikmagalur's coffee country. Surrounded by misty hills, lush plantations, swimming pool, bonfire, and warm hospitality.",
-    url: withSiteUrl("/destinations/pentouz-hillside"),
-    siteName: "The Pentouz",
-    images: [
-      {
-        url: withSiteUrl("/og-image.jpg"),
-        width: 1200,
-        height: 630,
-        alt: "The Pentouz Hillside Chikmagalur - Coffee Country Retreat",
-      },
-    ],
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "The Pentouz Hillside Chikmagalur | Coffee Country Retreat",
-    description:
-      "Luxury homestay in Chikmagalur's coffee country with pool, bonfire, and plantations.",
-  },
   alternates: {
     canonical: withSiteUrl("/destinations/pentouz-hillside"),
   },
 };
 
-// Categorize images
 function categorize(path: string): string {
   const p = path.toLowerCase();
   if (/bathroom/i.test(p)) return "Bathroom";
@@ -78,7 +47,6 @@ const galleryItems = fernhillImageSet.map((src) => ({
   category: categorize(src),
 }));
 
-// Room-specific images
 const villaImages = fernhillImageSet.filter((path) => /villa/i.test(path));
 const cottageImages = fernhillImageSet.filter((path) => /cottage/i.test(path));
 const eleganceImages = fernhillImageSet.filter((path) => /elegance/i.test(path));
@@ -87,36 +55,12 @@ const restaurantImages = fernhillImageSet.filter((path) => /restaurant|dining/i.
 const viewImages = fernhillImageSet.filter((path) => /view|top_view|front_view|side_view|gazebo|fireplace|night_view/i.test(path));
 
 const rooms = [
-  {
-    name: "Villa",
-    slug: "villa",
-    images: villaImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
-  },
-  {
-    name: "Garden Cottage",
-    slug: "garden-cottage",
-    images: cottageImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
-  },
-  {
-    name: "Elegance Rooms",
-    slug: "elegance-rooms",
-    images: eleganceImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
-  },
-  {
-    name: "Swimming Pool",
-    slug: "swimming-pool",
-    images: poolImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
-  },
-  {
-    name: "Restaurant",
-    slug: "restaurant",
-    images: restaurantImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
-  },
-  {
-    name: "Views & Gardens",
-    slug: "views-gardens",
-    images: viewImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
-  },
+  { name: "Villa", slug: "villa", images: villaImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })) },
+  { name: "Garden Cottage", slug: "garden-cottage", images: cottageImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })) },
+  { name: "Elegance Rooms", slug: "elegance-rooms", images: eleganceImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })) },
+  { name: "Swimming Pool", slug: "swimming-pool", images: poolImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })) },
+  { name: "Restaurant", slug: "restaurant", images: restaurantImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })) },
+  { name: "Views & Gardens", slug: "views-gardens", images: viewImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })) },
 ];
 
 const heroImages = [
@@ -164,24 +108,26 @@ export default function PentouzHillsidePage() {
   return (
     <>
       <Header />
-      <main className="bg-[#f5f0e8] text-brand-ink overflow-hidden">
+      <main className="bg-[#faf7f2] text-[#1a1814]">
         {/* Hero */}
         <HeroSlider images={heroImages} alt={property.title}>
-          <div className="mx-auto flex min-h-[100svh] max-w-[1480px] flex-col justify-end px-5 pb-24 pt-48 sm:px-8 lg:px-14">
-            <div className="max-w-4xl">
-              <p className="text-[10px] uppercase tracking-[0.32em] text-brand-gold mb-4 animate-fade-in-up">Chikmagalur, Karnataka</p>
-              <h1 className="font-display text-[2rem] font-light leading-[1] sm:text-[3rem] md:text-[4rem] lg:text-[5rem] text-white animate-fade-in-up [animation-delay:120ms]">
-                Wake up in Karnataka&apos;s <em className="italic text-brand-gold">coffee country</em>, wrapped in mist and green.
+          <div className="mx-auto flex min-h-[100svh] max-w-[1600px] flex-col justify-end px-5 sm:px-8 lg:px-16 pb-20 lg:pb-28 pt-32">
+            <div className="max-w-3xl">
+              <p className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.25em] text-[#c3a061] mb-6 animate-fade-in-up">
+                Chikmagalur, Karnataka
+              </p>
+              <h1 className="font-['Cormorant_Garamond',serif] text-white font-light leading-[1.1] animate-fade-in-up [animation-delay:100ms]" style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', letterSpacing: '-0.02em' }}>
+                Wake up in Karnataka&apos;s coffee country, wrapped in mist and green.
               </h1>
-              <p className="mt-6 text-base leading-7 text-white/78 max-w-2xl animate-fade-in-up [animation-delay:220ms]">
+              <p className="mt-8 font-['Lora',serif] text-base sm:text-lg leading-relaxed text-white/75 max-w-xl animate-fade-in-up [animation-delay:200ms]">
                 The Pentouz Hillside is an intimate retreat in the Western Ghats of Chikmagalur, surrounded by sprawling coffee plantations and misty hills.
               </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row animate-fade-in-up [animation-delay:320ms]">
-                <a href={property.bookingUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-[11px] uppercase tracking-[0.18em] text-brand-ink transition-all duration-500 hover:bg-brand-gold hover:text-white">
+              <div className="mt-12 flex flex-wrap items-center gap-5 animate-fade-in-up [animation-delay:300ms]">
+                <a href={property.bookingUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 bg-white text-[#1a1814] px-10 py-4 font-['Inter',sans-serif] text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-500 hover:bg-[#c3a061] hover:text-white">
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" strokeWidth={0}><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 5.99 4.388 10.954 10.125 11.854V24h3.75v-1.146C18.612 22.954 24 18 24 12c0-6.627-5.373-12-12-12zm0 19.25c-4.347 0-8-2.953-8-7.25 0-2.015.776-3.87 2.106-5.303L12 1.875l5.894 4.822A8.255 8.255 0 0 1 20 12.25c0 4.297-3.653 7.25-8 7.25z"/></svg>
                   Enquire on WhatsApp
                 </a>
-                <Link href="/destinations/pentouz-hillside/living" className="inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-3 text-[11px] uppercase tracking-[0.18em] text-white transition-all duration-500 hover:border-brand-gold hover:text-brand-gold">
+                <Link href="/destinations/pentouz-hillside/living" className="inline-flex items-center gap-2 font-['Inter',sans-serif] text-[11px] uppercase tracking-[0.2em] text-white/90 border border-white/30 px-10 py-4 transition-all duration-500 hover:border-[#c3a061] hover:text-[#c3a061]">
                   Explore Living
                 </Link>
               </div>
@@ -189,63 +135,67 @@ export default function PentouzHillsidePage() {
           </div>
         </HeroSlider>
 
-        {/* Living */}
-        <section className="bg-white border-t border-[#e0d6c8]">
-          <div className="mx-auto grid max-w-[1480px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:px-14 lg:py-28 lg:items-center">
-            <div className="animate-fade-in-up">
-              <div className="relative aspect-[4/5] overflow-hidden shadow-[0_24px_80px_rgba(18,15,12,0.08)]">
-                <Image src="/fernhill/all/50_top_view.jpg" alt="The Pentouz Hillside living" fill priority className="object-cover transition-transform duration-[1400ms] hover:scale-105" sizes="(max-width: 1024px) 100vw, 44vw" />
+        {/* Living Section */}
+        <section className="bg-white">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-16 sm:py-24 lg:py-36">
+            <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-8 sm:gap-12 lg:gap-20 items-center">
+              <div className="relative overflow-hidden aspect-[4/5]">
+                <Image src="/fernhill/all/50_top_view.jpg" alt="The Pentouz Hillside living" fill priority className="object-cover" sizes="(max-width: 1024px) 100vw, 45vw" />
               </div>
-            </div>
-            <div className="animate-fade-in-up animate-delay-200">
-              <p className="luxury-kicker text-brand-accent">Living</p>
-              <h2 className="luxury-section-title mt-5">Four distinct accommodations, each designed for comfort in the hills.</h2>
-              <p className="mt-6 text-base leading-8 text-brand-body sm:text-lg">
-                The Pentouz Hillside offers four thoughtfully designed accommodations, from an expansive four-bedroom villa to a cozy dorm-style cottage. Every unit balances rustic charm with modern comfort, featuring private sit-out areas, garden or hill views, and the unhurried rhythm of coffee country.
-              </p>
-              <p className="mt-5 text-base leading-8 text-brand-body sm:text-lg">
-                Spend mornings on your private balcony with freshly brewed coffee, afternoons by the swimming pool, and evenings around a bonfire under the stars. Pentouz Hillside is made for lingering.
-              </p>
-              <div className="mt-8">
-                <Link href="/destinations/pentouz-hillside/living" className="inline-flex items-center gap-2 rounded-full border border-brand-ink px-6 py-3 text-[11px] uppercase tracking-[0.2em] text-brand-ink transition-all duration-500 hover:bg-brand-ink hover:text-white">
-                  Explore Living
-                  <ArrowRight className="h-4 w-4" strokeWidth={1.4} />
-                </Link>
+              <div>
+                <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#8b7355] font-medium mb-3 sm:mb-4">
+                  The Living
+                </p>
+                <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814] mb-5 sm:mb-6" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+                  Four distinct accommodations, each designed for comfort in the hills.
+                </h2>
+                <p className="font-['Lora',serif] text-sm sm:text-base leading-[1.8] text-[#4a4a44] mb-5 sm:mb-6">
+                  The Pentouz Hillside offers four thoughtfully designed accommodations, from an expansive four-bedroom villa to a cozy dorm-style cottage. Every unit balances rustic charm with modern comfort, featuring private sit-out areas, garden or hill views, and the unhurried rhythm of coffee country.
+                </p>
+                <p className="font-['Lora',serif] text-sm sm:text-base leading-[1.8] text-[#4a4a44]">
+                  Spend mornings on your private balcony with freshly brewed coffee, afternoons by the swimming pool, and evenings around a bonfire under the stars.
+                </p>
+                <div className="mt-6 sm:mt-8">
+                  <Link href="/destinations/pentouz-hillside/living" className="w-full sm:w-auto flex items-center justify-center gap-2 sm:gap-3 bg-[#0f0e0c] text-white px-6 sm:px-8 py-3.5 sm:py-4 font-['Inter',sans-serif] text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.2em] font-medium transition-all duration-500 hover:bg-[#c3a061]">
+                    Explore Living
+                    <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Rooms */}
+        {/* Rooms Section */}
         <section className="bg-[#f5f0e8]">
-          <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28">
-            <div className="mb-14 animate-fade-in-up">
-              <p className="luxury-kicker text-brand-accent">Rooms & Rates</p>
-              <h2 className="luxury-section-title mt-5">Find your perfect space in the hills.</h2>
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-16 sm:py-24 lg:py-36">
+            <div className="mb-10 sm:mb-16">
+              <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#8b7355] font-medium mb-3 sm:mb-4">
+                Rooms & Rates
+              </p>
+              <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814]" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+                Find your perfect space in the hills.
+              </h2>
             </div>
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 lg:gap-8">
               {property.rooms.map((room, index) => (
-                <article
-                  key={room.name}
-                  className="luxury-panel bg-white animate-fade-in-up overflow-hidden transition-transform duration-700 hover:-translate-y-1"
-                  style={{ transitionDelay: `${index * 80}ms` }}
-                >
+                <article key={room.name} className="border border-[#e5dfd6] bg-white overflow-hidden">
                   <div className="relative aspect-[3/4] overflow-hidden">
                     <Image
                       src={room.image}
                       alt={room.name}
                       fill
                       priority={index === 0}
-                      className="object-cover transition-transform duration-[1400ms] hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      className="object-cover transition-transform duration-700 hover:scale-105"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     />
                   </div>
-                  <div className="p-6">
-                    <h3 className="font-display text-xl font-light leading-tight text-brand-ink">{room.name}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-brand-body">{room.description}</p>
-                    <div className="mt-5 flex items-baseline justify-between">
-                      <p className="text-sm uppercase tracking-[0.18em] text-brand-muted">Starting from</p>
-                      <p className="font-display text-xl font-light text-brand-ink">
+                  <div className="p-5 sm:p-6">
+                    <h3 className="font-['Cormorant_Garamond',serif] text-xl sm:text-2xl font-light text-[#1a1814]">{room.name}</h3>
+                    <p className="mt-2 font-['Lora',serif] text-xs sm:text-sm leading-relaxed text-[#4a4a44]">{room.description}</p>
+                    <div className="mt-4 sm:mt-5 flex items-baseline justify-between gap-2">
+                      <p className="text-[9px] sm:text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.15em] sm:tracking-[0.18em] text-[#6b6358]">Starting from</p>
+                      <p className="font-['Cormorant_Garamond',serif] text-lg sm:text-xl font-light text-[#1a1814]">
                         {roomPrices[room.name] ?? room.price}
                       </p>
                     </div>
@@ -256,61 +206,64 @@ export default function PentouzHillsidePage() {
           </div>
         </section>
 
-        {/* Getting Here */}
-        <section className="bg-[#eff1ea]">
-          <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28">
-            <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
-              <div className="animate-fade-in-up">
-                <p className="luxury-kicker text-brand-accent">Getting Here</p>
-                <h2 className="luxury-section-title mt-5">The journey to Pentouz Hillside is part of the experience.</h2>
-              </div>
-              <div className="space-y-6 text-base leading-8 text-brand-body sm:text-lg animate-fade-in-up animate-delay-200">
-                <p>
-                  Pentouz Hillside is nestled in the heart of Chikmagalur, Karnataka&apos;s beloved hill station and coffee capital. The drive up through the Western Ghats is a treat in itself — winding roads flanked by coffee plantations, spice estates, and misty valleys.
-                </p>
-                <p>
-                  The nearest railway station is Chikmagalur Railway Station, just 30 minutes from the property. Mangalore International Airport is approximately 3 hours away by road. Private car transfers can be arranged in advance.
-                </p>
-                <p>
-                  Once you arrive, the estate&apos;s private gardens, swimming pool, and walking trails invite you to slow down immediately.
-                </p>
-              </div>
+        {/* Getting Here Section */}
+        <section className="bg-white">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-16 sm:py-24 lg:py-36">
+            <div className="max-w-2xl mb-10 sm:mb-16">
+              <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#8b7355] font-medium mb-3 sm:mb-4">
+                Getting Here
+              </p>
+              <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814]" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+                The journey to Pentouz Hillside is part of the experience.
+              </h2>
             </div>
 
-            <div className="mt-14 grid gap-6 md:grid-cols-3">
-              {travelStats.map((item, index) => (
-                <article
-                  key={item.title}
-                  className="luxury-panel bg-white animate-fade-in-up transition-transform duration-700 hover:-translate-y-1"
-                  style={{ transitionDelay: `${index * 100}ms` }}
-                >
-                  <p className="text-[10px] uppercase tracking-[0.22em] text-brand-gold">Approximate Travel Time</p>
-                  <h3 className="mt-4 font-display text-3xl font-light leading-tight text-brand-ink">{item.title}</h3>
-                  <p className="mt-5 text-sm uppercase tracking-[0.2em] text-brand-muted">Distance {item.distance}</p>
-                  <p className="mt-4 text-3xl font-display font-light text-brand-ink">{item.time}</p>
-                </article>
+            <div className="space-y-5 sm:space-y-6 mb-10 sm:mb-16">
+              <p className="font-['Lora',serif] text-sm sm:text-base leading-[1.8] text-[#4a4a44]">
+                Pentouz Hillside is nestled in the heart of Chikmagalur, Karnataka&apos;s beloved hill station and coffee capital. The drive up through the Western Ghats is a treat in itself — winding roads flanked by coffee plantations, spice estates, and misty valleys.
+              </p>
+              <p className="font-['Lora',serif] text-sm sm:text-base leading-[1.8] text-[#4a4a44]">
+                The nearest railway station is Chikmagalur Railway Station, just 30 minutes from the property. Mangalore International Airport is approximately 3 hours away by road.
+              </p>
+              <p className="font-['Lora',serif] text-sm sm:text-base leading-[1.8] text-[#4a4a44]">
+                Once you arrive, the estate&apos;s private gardens, swimming pool, and walking trails invite you to slow down immediately.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 lg:gap-8">
+              {travelStats.map((stat) => (
+                <div key={stat.title} className="border border-[#e5dfd6] bg-[#f5f0e8] p-6 sm:p-8">
+                  <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-[#8b7355] mb-2 sm:mb-3">
+                    {stat.title}
+                  </p>
+                  <p className="font-['Cormorant_Garamond',serif] text-3xl sm:text-4xl font-light text-[#1a1814]">
+                    {stat.time}
+                  </p>
+                  <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.12em] text-[#6b6358] mt-2">
+                    {stat.distance}
+                  </p>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
         {/* Amenities */}
-        <section className="bg-[#1c241c] text-white">
-          <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28">
-            <div className="max-w-3xl animate-fade-in-up">
-              <p className="luxury-kicker text-brand-gold">Amenities</p>
-              <h2 className="mt-5 font-display text-4xl font-light leading-tight text-white sm:text-5xl lg:text-6xl">
+        <section className="bg-[#0f0e0c] text-white">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-16 sm:py-24 lg:py-36">
+            <div className="max-w-2xl mb-10 sm:mb-16">
+              <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#c3a061] font-medium mb-3 sm:mb-4">
+                Amenities
+              </p>
+              <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
                 Everything you need for a memorable stay in the hills.
               </h2>
             </div>
-            <div className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {amenities.map((item, index) => (
-                <div
-                  key={item}
-                  className="border border-white/10 bg-white/[0.03] px-4 py-4 text-[11px] uppercase tracking-[0.18em] text-white/76 animate-fade-in-up"
-                  style={{ transitionDelay: `${index * 45}ms` }}
-                >
-                  {item}
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
+              {amenities.map((amenity) => (
+                <div key={amenity} className="border border-white/10 bg-white/[0.02] px-4 sm:px-5 py-3 sm:py-4 text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.12em] sm:tracking-[0.15em] text-white/70">
+                  {amenity}
                 </div>
               ))}
             </div>
@@ -318,21 +271,22 @@ export default function PentouzHillsidePage() {
         </section>
 
         {/* Gallery */}
-        <section className="bg-[#15120f] text-white">
-          <div className="mx-auto max-w-[1480px] px-5 py-14 sm:px-8 lg:px-14 lg:py-20">
-            <div className="text-center mb-10">
-              <p className="text-[10px] uppercase tracking-[0.32em] text-brand-gold mb-4">Gallery</p>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-white">
-                A visual journey through The Pentouz Hillside
-              </h2>
-            </div>
-            <PropertyGallery items={galleryItems} propertyName="The Pentouz Hillside Chikmagalur" rooms={rooms} />
-            <div className="mt-10 text-center">
-              <Link href="/destinations/pentouz-hillside/gallery" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.18em] text-white hover:border-brand-gold hover:text-brand-gold transition-all duration-500">
-                View Full Gallery
-                <ArrowRight className="w-4 h-4" strokeWidth={1.4} />
+        <section className="bg-white">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-12 sm:py-16 lg:py-24">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 sm:mb-12">
+              <div>
+                <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#8b7355] font-medium mb-2 sm:mb-3">
+                  Gallery
+                </p>
+                <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814]" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', letterSpacing: '-0.015em' }}>
+                  A visual journey
+                </h2>
+              </div>
+              <Link href="/destinations/pentouz-hillside/gallery" className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-[#4a4a44] hover:text-[#c3a061] transition-colors duration-300">
+                View Full Gallery →
               </Link>
             </div>
+            <PropertyGallery items={galleryItems} propertyName="The Pentouz Hillside Chikmagalur" rooms={rooms} />
           </div>
         </section>
 
@@ -344,45 +298,51 @@ export default function PentouzHillsidePage() {
           showFilter={true}
         />
 
-        {/* Booking */}
-        <section className="bg-[#1c241c] text-white">
-          <div className="mx-auto grid max-w-[1480px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[0.78fr_1.22fr] lg:px-14 lg:py-28">
-            <div>
-              <p className="luxury-kicker text-brand-gold">Plan Your Stay</p>
-              <h2 className="mt-5 font-display text-4xl font-light leading-tight text-white sm:text-5xl lg:text-6xl">
-                Coffee-scented mornings and star-lit evenings await.
-              </h2>
-            </div>
-            <div className="luxury-panel border-white/12 bg-white/[0.05] text-white">
-              <p className="text-sm leading-7 text-white/72">
-                The Pentouz Hillside Estate<br />
-                Chikmagalur, Karnataka, India
-              </p>
-              <p className="mt-6 text-sm leading-7 text-white/82">Email: {contactInfo.email}</p>
-              <div className="mt-6 space-y-2 text-sm text-white/82">
-                <a href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`} className="block transition-colors hover:text-brand-gold">
-                  {contactInfo.phones[0]}
-                </a>
-                <a href={`tel:${contactInfo.phones[1].replace(/\s/g, "")}`} className="block transition-colors hover:text-brand-gold">
-                  {contactInfo.phones[1]}
-                </a>
+        {/* Booking Section */}
+        <section className="bg-[#0f0e0c] text-white">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-16 sm:py-24 lg:py-36">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start lg:items-center">
+              <div>
+                <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#c3a061] font-medium mb-3 sm:mb-4">
+                  Plan Your Stay
+                </p>
+                <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-white mb-5 sm:mb-6" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+                  Coffee-scented mornings and star-lit evenings await.
+                </h2>
+                <p className="font-['Lora',serif] text-sm leading-relaxed text-white/60">
+                  The Pentouz Hillside Estate<br />
+                  Chikmagalur, Karnataka, India
+                </p>
+                <p className="mt-4 font-['Lora',serif] text-sm leading-relaxed text-white/60">
+                  {contactInfo.email}
+                </p>
+                <div className="mt-4 space-y-2 font-['Lora',serif] text-sm text-white/60">
+                  <a href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`} className="block hover:text-[#c3a061] transition-colors">
+                    {contactInfo.phones[0]}
+                  </a>
+                  <a href={`tel:${contactInfo.phones[1].replace(/\s/g, "")}`} className="block hover:text-[#c3a061] transition-colors">
+                    {contactInfo.phones[1]}
+                  </a>
+                </div>
               </div>
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-                <a
-                  href={property.bookingUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-brand-ink transition-all duration-500 hover:bg-brand-gold hover:text-white"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" strokeWidth={0}><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 5.99 4.388 10.954 10.125 11.854V24h3.75v-1.146C18.612 22.954 24 18 24 12c0-6.627-5.373-12-12-12zm0 19.25c-4.347 0-8-2.953-8-7.25 0-2.015.776-3.87 2.106-5.303L12 1.875l5.894 4.822A8.255 8.255 0 0 1 20 12.25c0 4.297-3.653 7.25-8 7.25z"/></svg>
-                  Enquire on WhatsApp
-                </a>
-                <a
-                  href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
-                  className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-white transition-all duration-500 hover:border-brand-gold hover:text-brand-gold"
-                >
-                  Call Concierge
-                </a>
+              <div className="border border-white/10 bg-white/[0.03] p-6 sm:p-8 lg:p-10 lg:mt-12">
+                <div className="space-y-3 sm:space-y-4">
+                  <a
+                    href={property.bookingUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto flex items-center justify-center gap-2 sm:gap-3 bg-white text-[#0f0e0c] px-6 sm:px-8 py-3.5 sm:py-4 font-['Inter',sans-serif] text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.2em] font-medium transition-all duration-500 hover:bg-[#c3a061] hover:text-white"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" strokeWidth={0}><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 5.99 4.388 10.954 10.125 11.854V24h3.75v-1.146C18.612 22.954 24 18 24 12c0-6.627-5.373-12-12-12zm0 19.25c-4.347 0-8-2.953-8-7.25 0-2.015.776-3.87 2.106-5.303L12 1.875l5.894 4.822A8.255 8.255 0 0 1 20 12.25c0 4.297-3.653 7.25-8 7.25z"/></svg>
+                    Enquire on WhatsApp
+                  </a>
+                  <a
+                    href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
+                    className="w-full sm:w-auto flex items-center justify-center gap-2 sm:gap-3 border border-white/20 text-white px-6 sm:px-8 py-3.5 sm:py-4 font-['Inter',sans-serif] text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.2em] font-medium transition-all duration-500 hover:border-[#c3a061] hover:text-[#c3a061]"
+                  >
+                    Call Concierge
+                  </a>
+                </div>
               </div>
             </div>
           </div>

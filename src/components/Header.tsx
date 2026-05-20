@@ -183,7 +183,7 @@ export default function Header() {
 
         <div className="relative z-10 h-full flex flex-col">
           {/* Menu header */}
-          <div className="flex justify-between items-center px-6 py-6 border-b border-white/[0.05]">
+          <div className="flex justify-between items-center px-5 sm:px-8 lg:px-10 py-5 sm:py-6 border-b border-white/[0.05]">
             <Link href="/" className="flex-shrink-0">
               <Image
                 src="/logo-white.png"
@@ -196,10 +196,10 @@ export default function Header() {
             </Link>
             <button
               onClick={() => setIsMenuOpen(false)}
-              className="flex items-center gap-2 font-['Inter',sans-serif] text-[10px] uppercase tracking-[0.15em] text-white/50 hover:text-white transition-colors duration-300"
+              className="flex items-center gap-2 font-['Inter',sans-serif] text-[10px] uppercase tracking-[0.15em] text-white/50 hover:text-white transition-colors duration-300 min-h-[44px] min-w-[44px] justify-center -mr-2"
               aria-label="Close menu"
             >
-              <span>Close</span>
+              <span className="hidden sm:inline">Close</span>
               <X className="w-5 h-5" strokeWidth={1.5} />
             </button>
           </div>
@@ -208,47 +208,47 @@ export default function Header() {
           <div className="flex-1 overflow-auto">
             <div className="grid lg:grid-cols-[1.2fr_0.8fr] min-h-full">
               {/* Navigation */}
-              <nav className="px-6 py-10 lg:px-12 lg:py-14 border-b lg:border-b-0 lg:border-r border-white/[0.05]">
-                <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.25em] text-[#c3a061] mb-8 font-medium">
+              <nav className="px-5 sm:px-8 lg:px-12 py-8 sm:py-10 lg:py-14 border-b lg:border-b-0 lg:border-r border-white/[0.05]">
+                <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.25em] text-[#c3a061] mb-6 sm:mb-8 font-medium">
                   Navigate
                 </p>
 
-                <div className="space-y-1">
+                <div className="space-y-0">
                   {[{ label: "Home", href: "/" }, ...primaryNav].map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}
                       onClick={() => setIsMenuOpen(false)}
                       className={cn(
-                        "flex items-center justify-between py-4 border-b transition-all duration-300",
+                        "flex items-center justify-between py-4 sm:py-5 border-b min-h-[56px] transition-all duration-300",
                         isActive(link.href) ? "border-[#c3a061]/40" : "border-white/[0.05] hover:border-white/[0.1]"
                       )}
                     >
                       <span className={cn(
-                        "font-['Cormorant_Garamond',serif] text-3xl sm:text-4xl font-light transition-colors duration-300",
+                        "font-['Cormorant_Garamond',serif] text-2xl sm:text-3xl lg:text-4xl font-light transition-colors duration-300",
                         isActive(link.href) ? "text-[#c3a061]" : "text-white"
                       )}>
                         {link.label}
                       </span>
-                      <ArrowRight className="w-5 h-5 text-white/30" strokeWidth={1.3} />
+                      <ArrowRight className="w-5 h-5 text-white/30 flex-shrink-0" strokeWidth={1.3} />
                     </Link>
                   ))}
                 </div>
 
-                <div className="mt-10 flex flex-wrap gap-3">
+                <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3">
                   <a
                     href={bookingUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setIsMenuOpen(false)}
-                    className="inline-flex items-center gap-2 font-['Inter',sans-serif] text-[10px] uppercase tracking-[0.15em] font-medium bg-white text-[#0f0e0c] px-6 py-3 transition-all duration-500 hover:bg-[#c3a061] hover:text-white"
+                    className="w-full sm:w-auto flex items-center justify-center gap-2 font-['Inter',sans-serif] text-[10px] sm:text-[11px] uppercase tracking-[0.15em] font-medium bg-white text-[#0f0e0c] px-6 py-3.5 transition-all duration-500 hover:bg-[#c3a061] hover:text-white"
                   >
                     Book Now
                   </a>
                   <a
                     href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
                     onClick={() => setIsMenuOpen(false)}
-                    className="inline-flex items-center gap-2 font-['Inter',sans-serif] text-[10px] uppercase tracking-[0.15em] border border-white/15 text-white/70 px-6 py-3 transition-all duration-500 hover:border-white/30 hover:text-white"
+                    className="w-full sm:w-auto flex items-center justify-center gap-2 font-['Inter',sans-serif] text-[10px] sm:text-[11px] uppercase tracking-[0.15em] border border-white/15 text-white/70 px-6 py-3.5 transition-all duration-500 hover:border-white/30 hover:text-white"
                   >
                     Call Concierge
                   </a>
@@ -256,17 +256,17 @@ export default function Header() {
               </nav>
 
               {/* Residences */}
-              <div className="px-6 py-10 lg:px-12 lg:py-14">
-                <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.25em] text-[#c3a061] mb-8 font-medium">
+              <div className="px-5 sm:px-8 lg:px-12 py-8 sm:py-10 lg:py-14">
+                <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.25em] text-[#c3a061] mb-6 sm:mb-8 font-medium">
                   Properties
                 </p>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
                   {destinations.map((dest) => (
                     <Link
                       key={dest.slug}
                       href={`/destinations/${dest.slug}`}
                       onClick={() => setIsMenuOpen(false)}
-                      className="group grid grid-cols-[72px_1fr] gap-3 items-center border border-white/[0.05] bg-white/[0.02] p-2 transition-all duration-500 hover:border-[#c3a061]/30 hover:bg-white/[0.04]"
+                      className="group grid grid-cols-[72px_1fr] gap-3 items-center border border-white/[0.05] bg-white/[0.02] p-2 min-h-[72px] transition-all duration-500 hover:border-[#c3a061]/30 hover:bg-white/[0.04]"
                     >
                       <div className="relative h-16 overflow-hidden">
                         <Image

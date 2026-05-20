@@ -41,7 +41,6 @@ const amenities = [
   "Covered Car Parking",
 ];
 
-// Categorize images
 function categorize(path: string): string {
   const p = path.toLowerCase();
   if (/bathroom|bath/i.test(p)) return "Bathroom";
@@ -68,7 +67,6 @@ const galleryItems = indiranagarImageSet.map((src) => ({
   category: categorize(src),
 }));
 
-// Room-specific images
 const terraceHavenImages = indiranagarImageSet.filter((path) => /01\._the_terrace_haven/i.test(path));
 const skylineSuiteImages = indiranagarImageSet.filter((path) => /02\._the_skyline_suite/i.test(path));
 const vistaRoomImages = indiranagarImageSet.filter((path) => /03\._the_vista_room/i.test(path));
@@ -76,31 +74,11 @@ const livingDiningImages = indiranagarImageSet.filter((path) => /04\._living_roo
 const terraceImages = indiranagarImageSet.filter((path) => /06\._terrace/i.test(path));
 
 const rooms = [
-  {
-    name: "Terrace Haven",
-    slug: "terrace-haven",
-    images: terraceHavenImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
-  },
-  {
-    name: "Skyline Suite",
-    slug: "skyline-suite",
-    images: skylineSuiteImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
-  },
-  {
-    name: "Vista Room",
-    slug: "vista-room",
-    images: vistaRoomImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
-  },
-  {
-    name: "Living & Dining",
-    slug: "living-dining",
-    images: livingDiningImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
-  },
-  {
-    name: "Terrace & Views",
-    slug: "terrace-views",
-    images: terraceImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
-  },
+  { name: "Terrace Haven", slug: "terrace-haven", images: terraceHavenImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })) },
+  { name: "Skyline Suite", slug: "skyline-suite", images: skylineSuiteImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })) },
+  { name: "Vista Room", slug: "vista-room", images: vistaRoomImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })) },
+  { name: "Living & Dining", slug: "living-dining", images: livingDiningImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })) },
+  { name: "Terrace & Views", slug: "terrace-views", images: terraceImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })) },
 ];
 
 export default function IndiranagarPage() {
@@ -117,142 +95,175 @@ export default function IndiranagarPage() {
   return (
     <>
       <Header />
-      <main className="bg-[#f7f0e5] text-brand-ink overflow-hidden">
-        <section className="relative isolate min-h-[100svh] overflow-hidden bg-[#15120f] text-white">
-          <HeroSlider images={heroImages} alt={property.title}>
-            <div className="relative mx-auto flex min-h-[100svh] max-w-[1480px] flex-col justify-end px-5 pb-24 pt-48 sm:px-8 sm:pb-20 lg:px-14 lg:pb-24">
-              <div className="max-w-5xl">
-                <p className="text-[10px] uppercase tracking-[0.32em] text-brand-gold mb-4 animate-fade-in-up">100 Feet Road, Indiranagar</p>
-                <h1 className="font-display text-[2rem] font-light leading-[1] sm:text-[3rem] md:text-[4rem] lg:text-[5rem] mt-6 max-w-5xl text-white animate-fade-in-up [animation-delay:120ms]">
-                  A private <em className="italic text-brand-gold">three-bedroom penthouse</em> in one of Bengaluru&apos;s most vibrant neighborhoods.
-                </h1>
-                <p className="mt-6 text-base leading-7 text-white/78 max-w-2xl animate-fade-in-up [animation-delay:220ms]">
-                  The Pentouz Indiranagar, a luxurious 3-bedroom penthouse nestled in the heart of one of Bangalore&apos;s most upscale neighborhoods. This exclusive property offers an exquisite blend of comfort, elegance, and convenience, making it the ideal destination for families, groups, or business travelers seeking a premium experience.
-                </p>
-                <div className="mt-10 flex flex-col gap-4 sm:flex-row animate-fade-in-up [animation-delay:320ms]">
-                  <a href={property.bookingUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-brand-ink transition-all duration-500 hover:-translate-y-0.5 hover:bg-brand-gold hover:text-white">
-                    <Calendar className="h-4 w-4" strokeWidth={1.4} />
-                    Book Now
-                  </a>
-                  <Link href="/destinations/indiranagar/living" className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-white transition-all duration-500 hover:-translate-y-0.5 hover:border-brand-gold hover:text-brand-gold">
-                    Explore Living
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </HeroSlider>
-        </section>
-
-        <section className="bg-white border-t border-[#e5d9c9]">
-          <div className="mx-auto grid max-w-[1480px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:px-14 lg:py-28 lg:items-center">
-            <div className="animate-fade-in-up">
-              <div className="relative aspect-[4/5] overflow-hidden shadow-[0_24px_80px_rgba(18,15,12,0.08)]">
-                <Image src="/indiranagar/all/04._living_room_06._living_room.jpg" alt="Indiranagar living" fill className="object-cover transition-transform duration-[1400ms] hover:scale-105" sizes="(max-width: 1024px) 100vw, 44vw" />
-              </div>
-            </div>
-            <div className="animate-fade-in-up animate-delay-200">
-              <p className="luxury-kicker text-brand-accent">Living</p>
-              <h2 className="luxury-section-title mt-5">A penthouse designed around space, light, and private city views.</h2>
-              <p className="mt-6 text-base leading-8 text-brand-body sm:text-lg">
-                The centerpiece of The Pentouz Indiranagar is its spacious and thoughtfully designed penthouse. With three well-appointed bedrooms, each featuring a private balcony, guests can enjoy stunning views of the vibrant cityscape.
+      <main className="bg-[#faf7f2] text-[#1a1814]">
+        {/* Hero */}
+        <HeroSlider images={heroImages} alt={property.title}>
+          <div className="mx-auto flex min-h-[100svh] max-w-[1600px] flex-col justify-end px-5 sm:px-8 lg:px-16 pb-20 lg:pb-28 pt-32">
+            <div className="max-w-3xl">
+              <p className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.25em] text-[#c3a061] mb-6 animate-fade-in-up">
+                100 Feet Road, Indiranagar
               </p>
-              <p className="mt-5 text-base leading-8 text-brand-body sm:text-lg">
-                These rooms are furnished with plush bedding, ample storage, and tasteful decor to create a serene and inviting ambiance.
+              <h1 className="font-['Cormorant_Garamond',serif] text-white font-light leading-[1.1] animate-fade-in-up [animation-delay:100ms]" style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', letterSpacing: '-0.02em' }}>
+                A private three-bedroom penthouse in one of Bengaluru&apos;s most vibrant neighborhoods.
+              </h1>
+              <p className="mt-8 font-['Lora',serif] text-base sm:text-lg leading-relaxed text-white/75 max-w-xl animate-fade-in-up [animation-delay:200ms]">
+                The Pentouz Indiranagar, a luxurious 3-bedroom penthouse nestled in the heart of one of Bangalore&apos;s most upscale neighborhoods.
               </p>
-              <div className="mt-8">
-                <Link href="/destinations/indiranagar/living" className="inline-flex items-center gap-2 rounded-full border border-brand-ink px-6 py-3 text-[11px] uppercase tracking-[0.2em] text-brand-ink transition-all duration-500 hover:bg-brand-ink hover:text-white">
+              <div className="mt-12 flex flex-wrap items-center gap-5 animate-fade-in-up [animation-delay:300ms]">
+                <a href={property.bookingUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 bg-white text-[#1a1814] px-10 py-4 font-['Inter',sans-serif] text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-500 hover:bg-[#c3a061] hover:text-white">
+                  <Calendar className="h-4 w-4" strokeWidth={1.5} />
+                  Book Now
+                </a>
+                <Link href="/destinations/indiranagar/living" className="inline-flex items-center gap-2 font-['Inter',sans-serif] text-[11px] uppercase tracking-[0.2em] text-white/90 border border-white/30 px-10 py-4 transition-all duration-500 hover:border-[#c3a061] hover:text-[#c3a061]">
                   Explore Living
-                  <ArrowRight className="h-4 w-4" strokeWidth={1.4} />
                 </Link>
               </div>
             </div>
           </div>
-        </section>
+        </HeroSlider>
 
-        <section className="bg-[#f7f0e5]">
-          <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28">
-            <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
-              <div className="animate-fade-in-up">
-                <p className="luxury-kicker text-brand-accent">The Neighborhood</p>
-                <h2 className="luxury-section-title mt-5">At the center of Bengaluru&apos;s dining, shopping, and social life.</h2>
+        {/* Living Section */}
+        <section className="bg-white">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-16 sm:py-24 lg:py-36">
+            <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-8 sm:gap-12 lg:gap-20 items-center">
+              <div className="relative overflow-hidden aspect-[4/5]">
+                <Image src="/indiranagar/all/04._living_room_06._living_room.jpg" alt="Indiranagar living" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 45vw" />
               </div>
-              <div className="space-y-6 text-base leading-8 text-brand-body sm:text-lg animate-fade-in-up animate-delay-200">
-                <p>
-                  Located in the heart of one of Bangalore&apos;s most upscale and happening areas, The Pentouz Indiranagar offers guests the perfect base to experience the city&apos;s dynamic energy. Situated just off the iconic 100 Feet Road, this posh locality is renowned for its vibrant lifestyle, offering a mix of the finest dining, shopping, and entertainment options.
+              <div>
+                <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#8b7355] font-medium mb-3 sm:mb-4">
+                  The Living
                 </p>
-                <p>
-                  Indiranagar&apos;s 100 Feet Road is a culinary paradise, home to some of Bangalore&apos;s top-notch restaurants and cafes.
+                <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814] mb-5 sm:mb-6" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+                  A penthouse designed around space, light, and private city views.
+                </h2>
+                <p className="font-['Lora',serif] text-sm sm:text-base leading-[1.8] text-[#4a4a44] mb-5 sm:mb-6">
+                  The centerpiece of The Pentouz Indiranagar is its spacious and thoughtfully designed penthouse. With three well-appointed bedrooms, each featuring a private balcony, guests can enjoy stunning views of the vibrant cityscape.
                 </p>
+                <p className="font-['Lora',serif] text-sm sm:text-base leading-[1.8] text-[#4a4a44]">
+                  These rooms are furnished with plush bedding, ample storage, and tasteful decor to create a serene and inviting ambiance.
+                </p>
+                <div className="mt-6 sm:mt-8">
+                  <Link href="/destinations/indiranagar/living" className="w-full sm:w-auto flex items-center justify-center gap-2 sm:gap-3 bg-[#0f0e0c] text-white px-6 sm:px-8 py-3.5 sm:py-4 font-['Inter',sans-serif] text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.2em] font-medium transition-all duration-500 hover:bg-[#c3a061]">
+                    Explore Living
+                    <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+                  </Link>
+                </div>
               </div>
-            </div>
-
-            <div className="mt-14 grid gap-6 md:grid-cols-3">
-              {travelStats.map((item, index) => (
-                <article key={item.title} className="luxury-panel bg-white animate-fade-in-up transition-transform duration-700 hover:-translate-y-1" style={{ transitionDelay: `${index * 100}ms` }}>
-                  <p className="text-[10px] uppercase tracking-[0.22em] text-brand-gold">Approximate Travel Time</p>
-                  <h3 className="mt-4 font-display text-3xl font-light leading-tight text-brand-ink">{item.title}</h3>
-                  <p className="mt-5 text-sm uppercase tracking-[0.2em] text-brand-muted">Distance {item.distance}</p>
-                  <p className="mt-4 text-3xl font-display font-light text-brand-ink">{item.time}</p>
-                </article>
-              ))}
             </div>
           </div>
         </section>
 
-        <section className="bg-[#15120f] text-white">
-          <div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-14 lg:py-28">
-            <div className="max-w-3xl animate-fade-in-up">
-              <p className="luxury-kicker text-brand-gold">The Essential In-Room Amenities</p>
-              <h2 className="mt-5 font-display text-4xl font-light leading-tight text-white sm:text-5xl lg:text-6xl">
-                A penthouse stay with all the essentials you need.
+        {/* Location Section */}
+        <section className="bg-[#f5f0e8]">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-16 sm:py-24 lg:py-36">
+            <div className="max-w-2xl mb-10 sm:mb-16">
+              <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#8b7355] font-medium mb-3 sm:mb-4">
+                The Neighborhood
+              </p>
+              <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814]" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+                At the center of Bengaluru&apos;s dining, shopping, and social life.
               </h2>
             </div>
-            <div className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {amenities.map((item, index) => (
-                <div key={item} className="border border-white/10 bg-white/[0.03] px-4 py-4 text-[11px] uppercase tracking-[0.18em] text-white/76 animate-fade-in-up" style={{ transitionDelay: `${index * 45}ms` }}>
-                  {item}
+
+            <div className="space-y-5 sm:space-y-6 mb-10 sm:mb-16">
+              <p className="font-['Lora',serif] text-sm sm:text-base leading-[1.8] text-[#4a4a44]">
+                Located in the heart of one of Bangalore&apos;s most upscale and happening areas, The Pentouz Indiranagar offers guests the perfect base to experience the city&apos;s dynamic energy. Situated just off the iconic 100 Feet Road, this posh locality is renowned for its vibrant lifestyle, offering a mix of the finest dining, shopping, and entertainment options.
+              </p>
+              <p className="font-['Lora',serif] text-sm sm:text-base leading-[1.8] text-[#4a4a44]">
+                Indiranagar&apos;s 100 Feet Road is a culinary paradise, home to some of Bangalore&apos;s top-notch restaurants and cafes.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 lg:gap-8">
+              {travelStats.map((stat) => (
+                <div key={stat.title} className="border border-[#e5dfd6] bg-white p-6 sm:p-8">
+                  <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-[#8b7355] mb-2 sm:mb-3">
+                    {stat.title}
+                  </p>
+                  <p className="font-['Cormorant_Garamond',serif] text-3xl sm:text-4xl font-light text-[#1a1814]">
+                    {stat.time}
+                  </p>
+                  <p className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.12em] text-[#6b6358] mt-2">
+                    {stat.distance}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="bg-[#15120f] text-white">
-          <div className="mx-auto max-w-[1480px] px-5 py-14 sm:px-8 lg:px-14 lg:py-20">
-            <div className="text-center mb-10">
-              <p className="text-[10px] uppercase tracking-[0.32em] text-brand-gold mb-4">Gallery</p>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-white">
-                A visual journey through The Pentouz Indiranagar
+        {/* Amenities */}
+        <section className="bg-[#0f0e0c] text-white">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-16 sm:py-24 lg:py-36">
+            <div className="max-w-2xl mb-10 sm:mb-16">
+              <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#c3a061] font-medium mb-3 sm:mb-4">
+                Amenities
+              </p>
+              <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+                A penthouse stay with all the essentials you need.
               </h2>
             </div>
-            <PropertyGallery items={galleryItems} propertyName="The Pentouz @ Indiranagar" rooms={rooms} />
-            <div className="mt-10 text-center">
-              <Link href="/destinations/indiranagar/gallery" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.18em] text-white hover:border-brand-gold hover:text-brand-gold transition-all duration-500">
-                View Full Gallery
-                <ArrowRight className="w-4 h-4" strokeWidth={1.4} />
-              </Link>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
+              {amenities.map((amenity) => (
+                <div key={amenity} className="border border-white/10 bg-white/[0.02] px-4 sm:px-5 py-3 sm:py-4 text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.12em] sm:tracking-[0.15em] text-white/70">
+                  {amenity}
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        <section className="bg-[#161310] text-white">
-          <div className="mx-auto grid max-w-[1480px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[0.78fr_1.22fr] lg:px-14 lg:py-28">
-            <div>
-              <p className="luxury-kicker text-brand-gold">Book A Room</p>
-              <h2 className="mt-5 font-display text-4xl font-light leading-tight text-white sm:text-5xl lg:text-6xl">
-                Spacious penthouse living in one of the city&apos;s most desirable addresses.
-              </h2>
+        {/* Gallery */}
+        <section className="bg-white">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-12 sm:py-16 lg:py-24">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 sm:mb-12">
+              <div>
+                <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#8b7355] font-medium mb-2 sm:mb-3">
+                  Gallery
+                </p>
+                <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814]" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', letterSpacing: '-0.015em' }}>
+                  A visual journey
+                </h2>
+              </div>
+              <Link href="/destinations/indiranagar/gallery" className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-[#4a4a44] hover:text-[#c3a061] transition-colors duration-300">
+                View Full Gallery →
+              </Link>
             </div>
-            <div className="luxury-panel border-white/12 bg-white/[0.05] text-white">
-              <p className="text-sm leading-7 text-white/72">The Pentouz @ 100 Feet Road<br />2022, 100 Feet Road, Indiranagar, Bangalore – 560038. India.</p>
-              <p className="mt-6 text-sm leading-7 text-white/82">Email: {contactInfo.email}</p>
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-                <a href={property.bookingUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-brand-ink transition-all duration-500 hover:bg-brand-gold hover:text-white">
-                  Reserve Your Stay
-                </a>
-                <a href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`} className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-white transition-all duration-500 hover:border-brand-gold hover:text-brand-gold">
-                  Call Concierge
-                </a>
+            <PropertyGallery items={galleryItems} propertyName="The Pentouz @ Indiranagar" rooms={rooms} />
+          </div>
+        </section>
+
+        {/* Contact */}
+        <section className="bg-[#f5f0e8]">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-16 sm:py-24 lg:py-36">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start lg:items-center">
+              <div>
+                <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#8b7355] font-medium mb-3 sm:mb-4">
+                  Book Your Stay
+                </p>
+                <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814] mb-5 sm:mb-6" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+                  Spacious penthouse living in one of the city&apos;s most desirable addresses.
+                </h2>
+                <p className="font-['Lora',serif] text-sm leading-relaxed text-[#4a4a44]">
+                  2022, 100 Feet Road, Indiranagar, Bangalore – 560038. India.
+                </p>
+                <p className="font-['Lora',serif] text-sm leading-relaxed text-[#4a4a44] mt-2">
+                  {contactInfo.email}
+                </p>
+              </div>
+              <div className="bg-white border border-[#e5dfd6] p-6 sm:p-8 lg:p-10 lg:mt-12">
+                <p className="font-['Lora',serif] text-sm text-[#4a4a44] mb-5 sm:mb-6">
+                  For reservations and inquiries
+                </p>
+                <div className="space-y-3 sm:space-y-4">
+                  <a href={property.bookingUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 sm:gap-3 bg-[#0f0e0c] text-white px-6 sm:px-8 py-3.5 sm:py-4 font-['Inter',sans-serif] text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.2em] font-medium transition-all duration-500 hover:bg-[#c3a061]">
+                    Reserve Your Stay
+                  </a>
+                  <a href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`} className="flex items-center justify-center gap-2 sm:gap-3 border border-[#0f0e0c] text-[#0f0e0c] px-6 sm:px-8 py-3.5 sm:py-4 font-['Inter',sans-serif] text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.2em] font-medium transition-all duration-500 hover:bg-[#0f0e0c] hover:text-white">
+                    Call Concierge
+                  </a>
+                </div>
               </div>
             </div>
           </div>

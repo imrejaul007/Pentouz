@@ -60,13 +60,13 @@ export default function DestinationsPage() {
 
         {/* Properties */}
         <section className="bg-white">
-          <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-16 py-24 lg:py-40">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-16 sm:py-24 lg:py-40">
             {/* Property List */}
-            <div className="space-y-20 lg:space-y-32">
+            <div className="space-y-16 sm:space-y-20 lg:space-y-32">
               {destinations.map((destination, index) => (
                 <article
                   key={destination.slug}
-                  className={`grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-20 items-center ${index % 2 === 1 ? "lg:flex-row-reverse" : ""}`}
+                  className={`grid lg:grid-cols-[1.1fr_0.9fr] gap-8 sm:gap-10 lg:gap-20 items-center ${index % 2 === 1 ? "lg:flex-row-reverse" : ""}`}
                 >
                   {/* Image */}
                   <Link
@@ -87,37 +87,37 @@ export default function DestinationsPage() {
 
                   {/* Content */}
                   <div className={`${index % 2 === 1 ? "lg:order-1" : ""}`}>
-                    <p className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.2em] text-[#8b7355] font-medium mb-4">
+                    <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#8b7355] font-medium mb-3 sm:mb-4">
                       {destination.subtitle}
                     </p>
-                    <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814] mb-6" style={{ fontSize: 'clamp(1.75rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+                    <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814] mb-5 sm:mb-6" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
                       {destination.title}
                     </h2>
-                    <p className="font-['Lora',serif] text-base leading-[1.85] text-[#4a4a44] mb-6">
+                    <p className="font-['Lora',serif] text-sm sm:text-base leading-[1.8] text-[#4a4a44] mb-6 sm:mb-8">
                       {destination.copy}
                     </p>
 
                     {/* Features */}
-                    <div className="flex flex-wrap gap-3 mb-8">
+                    <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8">
                       {destination.features.slice(0, 3).map((feature) => (
-                        <span key={feature} className="border border-[#e5dfd6] px-4 py-2 text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.12em] text-[#6b6358]">
+                        <span key={feature} className="border border-[#e5dfd6] px-3 sm:px-4 py-2 text-[9px] sm:text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.1em] sm:tracking-[0.12em] text-[#6b6358]">
                           {feature}
                         </span>
                       ))}
                     </div>
 
                     {/* CTA */}
-                    <div className="flex flex-wrap items-center gap-5">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-5">
                       <Link
                         href={`/destinations/${destination.slug}`}
-                        className="inline-flex items-center gap-3 bg-[#0f0e0c] text-white px-8 py-4 font-['Inter',sans-serif] text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-500 hover:bg-[#c3a061]"
+                        className="w-full sm:w-auto flex items-center justify-center gap-2 sm:gap-3 bg-[#0f0e0c] text-white px-6 sm:px-8 py-3.5 sm:py-4 font-['Inter',sans-serif] text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.2em] font-medium transition-all duration-500 hover:bg-[#c3a061]"
                       >
                         Explore Property
                         <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
                       </Link>
                       <Link
                         href={`/destinations/${destination.slug}/living`}
-                        className="inline-flex items-center gap-2 font-['Inter',sans-serif] text-[11px] uppercase tracking-[0.2em] text-[#4a4a44] hover:text-[#c3a061] transition-colors duration-300"
+                        className="w-full sm:w-auto flex items-center justify-center gap-2 font-['Inter',sans-serif] text-[10px] sm:text-[11px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-[#4a4a44] hover:text-[#c3a061] transition-colors duration-300 py-3.5 sm:py-0"
                       >
                         View Living →
                       </Link>
@@ -131,29 +131,29 @@ export default function DestinationsPage() {
 
         {/* Quick Links */}
         <section className="bg-[#0f0e0c] text-white">
-          <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-16 py-16 lg:py-24">
-            <div className="grid sm:grid-cols-3 gap-6">
-              <Link href="/gallery" className="group border border-white/10 p-8 lg:p-10 transition-all duration-500 hover:border-[#c3a061] hover:bg-white/[0.03]">
-                <h3 className="font-['Cormorant_Garamond',serif] text-2xl lg:text-3xl font-light text-white group-hover:text-[#c3a061] transition-colors duration-300 mb-3">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-14 sm:py-16 lg:py-24">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
+              <Link href="/gallery" className="group border border-white/10 p-6 sm:p-8 lg:p-10 transition-all duration-500 hover:border-[#c3a061] hover:bg-white/[0.03]">
+                <h3 className="font-['Cormorant_Garamond',serif] text-xl sm:text-2xl lg:text-3xl font-light text-white group-hover:text-[#c3a061] transition-colors duration-300 mb-2 sm:mb-3">
                   Gallery
                 </h3>
-                <p className="font-['Lora',serif] text-sm text-white/60">
+                <p className="font-['Lora',serif] text-xs sm:text-sm text-white/60">
                   Browse our curated collection of property images.
                 </p>
               </Link>
-              <Link href="/experiences" className="group border border-white/10 p-8 lg:p-10 transition-all duration-500 hover:border-[#c3a061] hover:bg-white/[0.03]">
-                <h3 className="font-['Cormorant_Garamond',serif] text-2xl lg:text-3xl font-light text-white group-hover:text-[#c3a061] transition-colors duration-300 mb-3">
+              <Link href="/experiences" className="group border border-white/10 p-6 sm:p-8 lg:p-10 transition-all duration-500 hover:border-[#c3a061] hover:bg-white/[0.03]">
+                <h3 className="font-['Cormorant_Garamond',serif] text-xl sm:text-2xl lg:text-3xl font-light text-white group-hover:text-[#c3a061] transition-colors duration-300 mb-2 sm:mb-3">
                   Experiences
                 </h3>
-                <p className="font-['Lora',serif] text-sm text-white/60">
+                <p className="font-['Lora',serif] text-xs sm:text-sm text-white/60">
                   Discover what makes each destination unique.
                 </p>
               </Link>
-              <Link href="/contact" className="group border border-white/10 p-8 lg:p-10 transition-all duration-500 hover:border-[#c3a061] hover:bg-white/[0.03]">
-                <h3 className="font-['Cormorant_Garamond',serif] text-2xl lg:text-3xl font-light text-white group-hover:text-[#c3a061] transition-colors duration-300 mb-3">
+              <Link href="/contact" className="group border border-white/10 p-6 sm:p-8 lg:p-10 transition-all duration-500 hover:border-[#c3a061] hover:bg-white/[0.03]">
+                <h3 className="font-['Cormorant_Garamond',serif] text-xl sm:text-2xl lg:text-3xl font-light text-white group-hover:text-[#c3a061] transition-colors duration-300 mb-2 sm:mb-3">
                   Contact
                 </h3>
-                <p className="font-['Lora',serif] text-sm text-white/60">
+                <p className="font-['Lora',serif] text-xs sm:text-sm text-white/60">
                   Speak directly with our reservations team.
                 </p>
               </Link>

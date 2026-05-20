@@ -18,36 +18,6 @@ export const metadata: Metadata = {
   title: "Experiences | The Pentouz",
   description:
     "Discover curated experiences at each Pentouz property: city access at Lavelle Road, penthouse living in Indiranagar, coffee country in Chikmagalur, and scenic retreats in Ooty.",
-  keywords: [
-    "The Pentouz experiences",
-    "luxury travel experiences",
-    "Bangalore curated stays",
-    "Chikmagalur activities",
-    "Ooty travel experiences",
-    "penthouse living",
-  ],
-  openGraph: {
-    title: "Experiences | The Pentouz",
-    description:
-      "Discover curated experiences at each Pentouz property: city access, penthouse living, coffee country, and scenic retreats.",
-    url: withSiteUrl("/experiences"),
-    siteName: "The Pentouz",
-    images: [
-      {
-        url: withSiteUrl("/og-image.jpg"),
-        width: 1200,
-        height: 630,
-        alt: "The Pentouz - Curated Experiences",
-      },
-    ],
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Experiences | The Pentouz",
-    description:
-      "Discover curated experiences at each Pentouz property.",
-  },
   alternates: {
     canonical: withSiteUrl("/experiences"),
   },
@@ -107,87 +77,97 @@ export default function ExperiencesPage() {
   return (
     <>
       <Header />
-      <main className="bg-[#f8f2e8] text-brand-ink">
-        <section className="relative isolate overflow-hidden text-white">
+      <main className="bg-[#faf7f2] text-[#1a1814]">
+        <section className="relative overflow-hidden text-white">
           <HeroSlider images={heroImages} alt="Pentouz experiences" />
 
-          <div className="relative mx-auto max-w-[1440px] px-5 pb-24 pt-48 sm:px-8 lg:px-14">
-            <div className="max-w-4xl">
-              <p className="text-[10px] uppercase tracking-[0.32em] text-brand-gold mb-4">Experiences</p>
-              <h1 className="font-display text-[2rem] font-light leading-[1] text-white sm:text-[3rem] md:text-[4rem] lg:text-[5rem]">
-                The best Pentouz experiences begin with the stay itself, then open into the right version of the city or landscape.
-              </h1>
-              <p className="mt-6 text-base leading-7 text-white/78 max-w-2xl">
-                Each property offers a different rhythm: city ease at Lavelle Road, private penthouse living in Indiranagar, coffee country escapes in Chikmagalur, and scenic quiet in Ooty.
-              </p>
+          <div className="absolute inset-0 flex items-end">
+            <div className="mx-auto max-w-[1400px] w-full px-5 sm:px-8 lg:px-16 pb-20 lg:pb-28 pt-32">
+              <div className="max-w-3xl">
+                <p className="text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.25em] text-[#c3a061] mb-6 animate-fade-in-up">Experiences</p>
+                <h1 className="font-['Cormorant_Garamond',serif] text-white font-light leading-[1.1] animate-fade-in-up [animation-delay:100ms]" style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', letterSpacing: '-0.02em' }}>
+                  The best Pentouz experiences begin with the stay itself, then open into the right version of the city or landscape.
+                </h1>
+                <p className="mt-8 font-['Lora',serif] text-base sm:text-lg leading-relaxed text-white/75 max-w-xl animate-fade-in-up [animation-delay:200ms]">
+                  Each property offers a different rhythm: city ease at Lavelle Road, private penthouse living in Indiranagar, coffee country escapes in Chikmagalur, and scenic quiet in Ooty.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="border-b border-black/5 bg-[#fdf9f3]">
-          <div className="mx-auto grid max-w-[1440px] gap-8 px-5 py-18 sm:px-8 lg:grid-cols-3 lg:px-14 lg:py-24">
-            {standards.map((item) => (
-              <div key={item.title} className="border-l border-brand-gold/35 pl-5">
-                <h2 className="font-display text-3xl font-light leading-tight text-brand-ink">{item.title}</h2>
-                <p className="mt-4 text-base leading-8 text-brand-body">{item.description}</p>
-              </div>
-            ))}
+        <section className="bg-white">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-12 sm:py-16 lg:py-24">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+              {standards.map((item) => (
+                <div key={item.title} className="border-l-2 border-[#c3a061]/40 pl-5 sm:pl-6">
+                  <h2 className="font-['Cormorant_Garamond',serif] text-xl sm:text-2xl lg:text-3xl font-light text-[#1a1814] leading-tight">{item.title}</h2>
+                  <p className="mt-3 sm:mt-4 font-['Lora',serif] text-sm sm:text-base leading-[1.7] text-[#4a4a44]">{item.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
-        <section className="mx-auto max-w-[1440px] px-5 py-18 sm:px-8 lg:px-14 lg:py-24">
-          <div className="max-w-3xl">
-            <p className="luxury-kicker text-brand-accent">Property Experiences</p>
-            <h2 className="luxury-section-title mt-5">Four distinct stays, four unique ways to experience luxury.</h2>
-          </div>
+        <section className="bg-[#f5f0e8]">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-16 sm:py-24 lg:py-36">
+            <div className="max-w-2xl mb-10 sm:mb-16">
+              <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#8b7355] font-medium mb-3 sm:mb-4">Property Experiences</p>
+              <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-[#1a1814]" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+                Four distinct stays, four unique ways to experience luxury.
+              </h2>
+            </div>
 
-          <div className="mt-14 grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-10">
-            {experienceStories.map((story, index) => (
-              <article key={story.title} className="group flex flex-col">
-                <Link href={story.href} className="flex flex-col h-full">
-                  <div className="relative aspect-[16/10] overflow-hidden bg-[#e8e4de]">
-                    <Image
-                      src={story.image}
-                      alt={story.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                    <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6 text-white">
-                      <p className="text-[10px] uppercase tracking-[0.25em] text-brand-gold mb-2">{story.subtitle}</p>
-                      <h3 className="font-display text-xl sm:text-2xl font-light leading-tight">{story.title}</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8 lg:gap-10">
+              {experienceStories.map((story) => (
+                <article key={story.title} className="group flex flex-col bg-white border border-[#e5dfd6] overflow-hidden">
+                  <Link href={story.href} className="flex flex-col h-full">
+                    <div className="relative aspect-[16/10] overflow-hidden">
+                      <Image
+                        src={story.image}
+                        alt={story.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 50vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                      <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6 text-white">
+                        <p className="text-[9px] sm:text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#c3a061] mb-1 sm:mb-2">{story.subtitle}</p>
+                        <h3 className="font-['Cormorant_Garamond',serif] text-lg sm:text-xl lg:text-2xl font-light leading-tight">{story.title}</h3>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex-1 bg-white p-5 sm:p-6 flex flex-col justify-between min-h-[140px]">
-                    <p className="text-sm leading-relaxed text-brand-body line-clamp-3">{story.description}</p>
-                    <div className="mt-4 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-brand-ink transition-all duration-300 group-hover:gap-3 group-hover:text-brand-gold">
-                      View Experiences
-                      <ArrowRight className="h-4 w-4" strokeWidth={1.4} />
+                    <div className="flex-1 p-5 sm:p-6 flex flex-col justify-between min-h-[120px] sm:min-h-[140px]">
+                      <p className="font-['Lora',serif] text-xs sm:text-sm leading-[1.7] text-[#4a4a44] line-clamp-3">{story.description}</p>
+                      <div className="mt-4 flex items-center gap-2 text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-[#4a4a44] group-hover:gap-3 group-hover:text-[#c3a061] transition-all duration-300">
+                        View Experiences
+                        <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
+                      </div>
                     </div>
-                  </div>
+                  </Link>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#0f0e0c] text-white">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16 py-16 sm:py-24 lg:py-36">
+            <div className="max-w-2xl mx-auto text-center">
+              <p className="text-[10px] sm:text-[11px] font-['Inter',sans-serif] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#c3a061] font-medium mb-3 sm:mb-4">Reservations and Concierge</p>
+              <h2 className="font-['Cormorant_Garamond',serif] font-light leading-[1.15] text-white mb-5 sm:mb-6" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', letterSpacing: '-0.015em' }}>
+                Let the stay and the itinerary support each other.
+              </h2>
+              <p className="font-['Lora',serif] text-sm sm:text-base leading-[1.8] text-white/65 mb-8 sm:mb-10">
+                Move from browsing into a direct booking or concierge conversation without losing the calm tone of the brand.
+              </p>
+              <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+                <Link href="/destinations" className="w-full sm:w-auto flex items-center justify-center gap-2 sm:gap-3 bg-white text-[#0f0e0c] px-8 sm:px-10 py-4 font-['Inter',sans-serif] text-[10px] sm:text-[11px] uppercase tracking-[0.18em] font-medium transition-all duration-500 hover:bg-[#c3a061] hover:text-white">
+                  Explore Stays
                 </Link>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="bg-[#161310] text-white">
-          <div className="mx-auto max-w-5xl px-5 py-18 text-center sm:px-8 lg:px-14 lg:py-24">
-            <p className="luxury-kicker text-brand-gold">Reservations and Concierge</p>
-            <h2 className="mt-5 font-display text-4xl font-light leading-tight text-white sm:text-5xl lg:text-6xl">
-              Let the stay and the itinerary support each other.
-            </h2>
-            <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/68 sm:text-lg">
-              Move from browsing into a direct booking or concierge conversation without losing the calm tone of the brand.
-            </p>
-            <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
-              <Link href="/destinations" className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-brand-ink transition-colors hover:bg-brand-gold hover:text-white">
-                Explore Stays
-              </Link>
-              <Link href="/contact" className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-[11px] uppercase tracking-[0.22em] text-white transition-colors hover:border-brand-gold hover:text-brand-gold">
-                Contact Concierge
-              </Link>
+                <Link href="/contact" className="w-full sm:w-auto flex items-center justify-center gap-2 sm:gap-3 border border-white/20 text-white px-8 sm:px-10 py-4 font-['Inter',sans-serif] text-[10px] sm:text-[11px] uppercase tracking-[0.18em] font-medium transition-all duration-500 hover:border-[#c3a061] hover:text-[#c3a061]">
+                  Contact Concierge
+                </Link>
+              </div>
             </div>
           </div>
         </section>

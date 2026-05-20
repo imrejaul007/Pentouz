@@ -91,7 +91,7 @@ export default function RootLayout({
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" as="style" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageSchema) }} />
       </head>
-      <body className={`${lora.variable} ${cormorantGaramond.variable} ${inter.variable} antialiased`}>
+      <body className="antialiased">
         <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[99999] focus:bg-[#c3a061] focus:px-6 focus:py-3 focus:text-[11px] focus:uppercase focus:tracking-[0.18em] focus:text-white focus:shadow-lg focus:outline-none">
           Skip to main content
         </a>
