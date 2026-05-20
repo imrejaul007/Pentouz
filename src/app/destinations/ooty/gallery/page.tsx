@@ -27,7 +27,8 @@ function categorize(path: string): string {
   const p = path.toLowerCase();
   if (/bathroom/i.test(p)) return "Bathroom";
   if (/bedroom/i.test(p)) return "Bedroom";
-  if (/lawn|view/i.test(p)) return "Views";
+  if (/lawn/i.test(p)) return "Lawn & Gardens";
+  if (/view/i.test(p)) return "Views";
   if (/reception/i.test(p)) return "Common Areas";
   if (/restaurant/i.test(p)) return "Restaurant";
   if (/facade/i.test(p)) return "Common Areas";
@@ -45,6 +46,47 @@ const galleryItems = ootyImageSet.map((src) => ({
   title: makeTitle(src),
   category: categorize(src),
 }));
+
+// Room-specific image groupings for Ooty
+const bedroomImages = ootyImageSet.filter((path) => /bedroom/i.test(path));
+const bathroomImages = ootyImageSet.filter((path) => /bathroom/i.test(path));
+const restaurantImages = ootyImageSet.filter((path) => /restaurant/i.test(path));
+const lawnImages = ootyImageSet.filter((path) => /lawn/i.test(path));
+const viewImages = ootyImageSet.filter((path) => /view/i.test(path));
+const commonImages = ootyImageSet.filter((path) => /facade|reception|lift|corridor|parking/i.test(path));
+
+const rooms = [
+  {
+    name: "Bedrooms",
+    slug: "bedrooms",
+    images: bedroomImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Bathrooms",
+    slug: "bathrooms",
+    images: bathroomImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Restaurant",
+    slug: "restaurant",
+    images: restaurantImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Lawn & Gardens",
+    slug: "lawn-gardens",
+    images: lawnImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Views",
+    slug: "views",
+    images: viewImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Common Areas",
+    slug: "common-areas",
+    images: commonImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+];
 
 export default function Page() {
   return (
@@ -102,7 +144,7 @@ export default function Page() {
 
         {/* Gallery Section */}
         <section className="mx-auto max-w-[1480px] px-5 py-14 lg:px-14 lg:py-20">
-          <PropertyGallery items={galleryItems} propertyName="The Pentouz @ Windsor Heights Ooty" />
+          <PropertyGallery items={galleryItems} propertyName="The Pentouz @ Windsor Heights Ooty" rooms={rooms} />
         </section>
       </main>
       <Footer />

@@ -47,6 +47,51 @@ const galleryItems = lavelleImageSet.map((src) => ({
   category: categorize(src),
 }));
 
+// Room-specific images (extracted from lavelleImageSet)
+const queenStudioImages = lavelleImageSet.filter((path) => /9041_|9043_/i.test(path));
+const kingStudioImages = lavelleImageSet.filter((path) => /9042_|9046_|9047_/i.test(path));
+const superiorStudioImages = lavelleImageSet.filter((path) => /9045_/i.test(path));
+const threeBedroomImages = [...new Set([...queenStudioImages, ...kingStudioImages, ...superiorStudioImages])];
+
+const rooms = [
+  {
+    name: "Queen Studio",
+    slug: "queen-studio",
+    images: queenStudioImages.map((src) => ({
+      src,
+      title: makeTitle(src),
+      category: categorize(src),
+    })),
+  },
+  {
+    name: "King Studio",
+    slug: "king-studio",
+    images: kingStudioImages.map((src) => ({
+      src,
+      title: makeTitle(src),
+      category: categorize(src),
+    })),
+  },
+  {
+    name: "Superior Studio",
+    slug: "superior-studio",
+    images: superiorStudioImages.map((src) => ({
+      src,
+      title: makeTitle(src),
+      category: categorize(src),
+    })),
+  },
+  {
+    name: "Three Bedroom Unit",
+    slug: "three-bedroom-unit",
+    images: threeBedroomImages.map((src) => ({
+      src,
+      title: makeTitle(src),
+      category: categorize(src),
+    })),
+  },
+];
+
 export default function Page() {
   return (
     <>
@@ -103,7 +148,7 @@ export default function Page() {
 
         {/* Gallery Section */}
         <section className="mx-auto max-w-[1480px] px-5 py-14 lg:px-14 lg:py-20">
-          <PropertyGallery items={galleryItems} propertyName="The Pentouz @ Lavelle Road" />
+          <PropertyGallery items={galleryItems} propertyName="The Pentouz @ Lavelle Road" rooms={rooms} />
         </section>
       </main>
       <Footer />

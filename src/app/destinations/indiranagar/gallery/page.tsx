@@ -26,6 +26,9 @@ const heroImages = [
 function categorize(path: string): string {
   const p = path.toLowerCase();
   if (/bathroom|bath/i.test(p)) return "Bathroom";
+  if (/terrace_haven|terrace haven/i.test(p)) return "The Terrace Haven";
+  if (/skyline_suite|skyline suite/i.test(p)) return "The Skyline Suite";
+  if (/vista_room|vista room/i.test(p)) return "The Vista Room";
   if (/bedroom|suite/i.test(p)) return "Bedroom";
   if (/terrace|balcony/i.test(p)) return "Terrace & Outdoor";
   if (/living_room|living/i.test(p)) return "Living Room";
@@ -45,6 +48,42 @@ const galleryItems = indiranagarImageSet.map((src) => ({
   title: makeTitle(src),
   category: categorize(src),
 }));
+
+// Room-specific image groupings
+const terraceHavenImages = indiranagarImageSet.filter((path) => /01\._the_terrace_haven/i.test(path));
+const skylineSuiteImages = indiranagarImageSet.filter((path) => /02\._the_skyline_suite/i.test(path));
+const vistaRoomImages = indiranagarImageSet.filter((path) => /03\._the_vista_room/i.test(path));
+const livingRoomImages = indiranagarImageSet.filter((path) => /04\._living_room/i.test(path));
+const kitchenDiningImages = indiranagarImageSet.filter((path) => /05\._dining/i.test(path));
+const terraceImages = indiranagarImageSet.filter((path) => /06\._terrace/i.test(path));
+
+const rooms = [
+  {
+    name: "The Terrace Haven",
+    slug: "terrace-haven",
+    images: terraceHavenImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "The Skyline Suite",
+    slug: "skyline-suite",
+    images: skylineSuiteImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "The Vista Room",
+    slug: "vista-room",
+    images: vistaRoomImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Living & Dining",
+    slug: "living-dining",
+    images: [...livingRoomImages, ...kitchenDiningImages].map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Terrace & Views",
+    slug: "terrace-views",
+    images: terraceImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+];
 
 export default function Page() {
   return (
@@ -102,7 +141,7 @@ export default function Page() {
 
         {/* Gallery Section */}
         <section className="mx-auto max-w-[1480px] px-5 py-14 lg:px-14 lg:py-20">
-          <PropertyGallery items={galleryItems} propertyName="The Pentouz @ Indiranagar" />
+          <PropertyGallery items={galleryItems} propertyName="The Pentouz @ Indiranagar" rooms={rooms} />
         </section>
       </main>
       <Footer />

@@ -27,13 +27,13 @@ function categorize(path: string): string {
   const p = path.toLowerCase();
   if (/bathroom/i.test(p)) return "Bathroom";
   if (/bedroom|villa|cottage|four_bed|eight_bed|squad/i.test(p)) return "Bedroom";
-  if (/pool|swimming/i.test(p)) return "Common Areas";
-  if (/games_room/i.test(p)) return "Common Areas";
+  if (/pool|swimming/i.test(p)) return "Swimming Pool";
+  if (/games_room/i.test(p)) return "Games Room";
   if (/restaurant|dining/i.test(p)) return "Restaurant";
   if (/tea_coffee/i.test(p)) return "Common Areas";
-  if (/exterior|facade|villa_exterior/i.test(p)) return "Terrace & Outdoor";
+  if (/exterior|facade|villa_exterior/i.test(p)) return "Exterior";
   if (/view|top_view|night_view|front_view|side_view|gazebo|fireplace/i.test(p)) return "Views";
-  if (/play_area|kids/i.test(p)) return "Common Areas";
+  if (/play_area|kids/i.test(p)) return "Play Area";
   if (/villa_living/i.test(p)) return "Living Room";
   return "Terrace & Outdoor";
 }
@@ -48,6 +48,54 @@ const galleryItems = fernhillImageSet.map((src) => ({
   title: makeTitle(src),
   category: categorize(src),
 }));
+
+// Room-specific image groupings for Chikmagalur
+const villaImages = fernhillImageSet.filter((path) => /villa/i.test(path));
+const cottageImages = fernhillImageSet.filter((path) => /cottage/i.test(path));
+const gardenCottageImages = fernhillImageSet.filter((path) => /elegance/i.test(path));
+const eightBedImages = fernhillImageSet.filter((path) => /squad|eight_bed/i.test(path));
+const poolImages = fernhillImageSet.filter((path) => /swimming_pool|pool/i.test(path));
+const restaurantImages = fernhillImageSet.filter((path) => /restaurant|dining/i.test(path));
+const viewImages = fernhillImageSet.filter((path) => /view|top_view|front_view|side_view|gazebo|fireplace|night_view/i.test(path));
+const exteriorImages = fernhillImageSet.filter((path) => /exterior|facade|villa_exterior/i.test(path));
+
+const rooms = [
+  {
+    name: "Villa",
+    slug: "villa",
+    images: villaImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Garden Cottage",
+    slug: "garden-cottage",
+    images: cottageImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Elegance Rooms",
+    slug: "elegance-rooms",
+    images: gardenCottageImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Eight Bedded Room",
+    slug: "eight-bedded-room",
+    images: eightBedImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Swimming Pool",
+    slug: "swimming-pool",
+    images: poolImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Restaurant",
+    slug: "restaurant",
+    images: restaurantImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+  {
+    name: "Views & Gardens",
+    slug: "views-gardens",
+    images: viewImages.map((src) => ({ src, title: makeTitle(src), category: categorize(src) })),
+  },
+];
 
 export default function Page() {
   return (
@@ -105,7 +153,7 @@ export default function Page() {
 
         {/* Gallery Section */}
         <section className="mx-auto max-w-[1480px] px-5 py-14 lg:px-14 lg:py-20">
-          <PropertyGallery items={galleryItems} propertyName="The Pentouz Hillside Chikmagalur" />
+          <PropertyGallery items={galleryItems} propertyName="The Pentouz Hillside Chikmagalur" rooms={rooms} />
         </section>
       </main>
       <Footer />
