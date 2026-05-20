@@ -34,7 +34,7 @@ const nextConfig = {
     formats: ["image/webp", "image/avif"],
     minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
     // Device sizes optimized for site breakpoints (mobile, tablet, desktop, large desktop)
-    deviceSizes: [640, 750, 828, 1080, 1200, 1440, 1920, 2048],
+    deviceSizes: [320, 375, 414, 640, 750, 828, 960, 1080, 1200, 1440, 1536, 1920, 2048, 2560],
     // Image sizes for thumbnails and small containers
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     dangerouslyAllowSVG: false,
