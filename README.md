@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# The Pentouz Website
 
-## Getting Started
+A premium boutique hospitality website for The Pentouz luxury stays in India.
 
-First, run the development server:
+## Locations
+
+- **Lavelle Road, Bangalore** - Boutique studio suites near UB City
+- **Indiranagar, Bangalore** - Three-bedroom penthouse
+- **Ooty, Nilgiris** - Hillside retreat with tea garden views
+- **Chikmagalur** - Coffee country homestay
+
+## Quick Start
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Next.js 15 (App Router)
+- Tailwind CSS
+- Lucide React icons
+- Vercel deployment
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/           # Pages (destinations, gallery, contact, etc.)
+├── components/     # Header, Footer, HeroSlider, PropertyGallery
+├── data/          # Static content (destinations, images, travel guides)
+└── lib/           # Utilities (site config, leads API)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Key Pages
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Route | Description |
+|-------|-------------|
+| `/destinations` | Property listings |
+| `/destinations/lavelle-road` | Lavelle Road property |
+| `/gallery` | Photo gallery |
+| `/contact` | Contact form |
+| `/offers` | Special offers |
 
-## Deploy on Vercel
+## Design
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Mobile-first responsive design
+- Gold (#c3a061) accent color
+- Cormorant Garamond for headings
+- Inter for UI elements
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See `.claude/CLAUDE.md` for full documentation.
