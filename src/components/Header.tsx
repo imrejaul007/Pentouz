@@ -7,6 +7,7 @@ import { ArrowRight, Menu, Phone, X, MessageCircle } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { contactInfo, destinations } from "@/data/content";
+import BookingModal from "./BookingModal";
 
 const primaryNav = [
   { label: "Destinations", href: "/destinations" },
@@ -17,20 +18,11 @@ const primaryNav = [
   { label: "About", href: "/about" },
 ];
 
-function getBookingUrl() {
-  const fmt = (d: Date) => d.toISOString().split("T")[0];
-  const checkin = new Date();
-  checkin.setDate(checkin.getDate() + 1);
-  const checkout = new Date();
-  checkout.setDate(checkout.getDate() + 2);
-  return `https://bookmystay.io/rooms/37853/${fmt(checkin)}/${fmt(checkout)}/2/0?utm_source=brandWebsite`;
-}
-
 export default function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const bookingUrl = getBookingUrl();
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -146,14 +138,12 @@ export default function Header() {
                 Concierge
               </a>
 
-              <a
-                href={bookingUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => setIsBookingOpen(true)}
                 className="hidden lg:flex items-center gap-2 font-['Inter',sans-serif] text-[10px] uppercase tracking-[0.15em] font-medium border border-white/20 text-white px-6 py-2.5 transition-all duration-500 hover:border-[#c3a061] hover:text-[#c3a061]"
               >
                 Book Now
-              </a>
+              </button>
 
               <button
                 onClick={() => setIsMenuOpen((open) => !open)}
@@ -226,15 +216,12 @@ export default function Header() {
                 </div>
 
                 <div className="mt-6 sm:mt-8 flex flex-col gap-3">
-                  <a
-                    href={bookingUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => setIsMenuOpen(false)}
+                  <button
+                    onClick={() => { setIsMenuOpen(false); setIsBookingOpen(true); }}
                     className="w-full flex items-center justify-center gap-2 font-['Inter',sans-serif] text-[10px] uppercase tracking-[0.15em] font-medium bg-white text-[#0f0e0c] px-6 py-3.5 min-h-[48px] transition-all duration-500 hover:bg-[#c3a061] hover:text-white"
                   >
                     Book Now
-                  </a>
+                  </button>
                   <a
                     href={`tel:${contactInfo.phones[0].replace(/\s/g, "")}`}
                     onClick={() => setIsMenuOpen(false)}
@@ -283,6 +270,9 @@ export default function Header() {
           </div>
         </div>
       </div>
+
+      {/* Booking Modal */}
+      <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
     </>
   );
 }
