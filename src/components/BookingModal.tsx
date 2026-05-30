@@ -56,7 +56,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
     if (isOpen) {
       setIsVisible(true);
       document.body.style.overflow = "hidden";
-    } {
+    } else {
       const timer = setTimeout(() => setIsVisible(false), 300);
       document.body.style.overflow = "";
       return () => clearTimeout(timer);
