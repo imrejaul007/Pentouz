@@ -118,7 +118,7 @@ export default function RoomGallery({
                   <div className="flex items-center gap-2">
                     {destinationSlug === "pentouz-hillside" ? (
                       <a
-                        href="https://wa.me/918884449930"
+                        href="https://wa.me/916366770369"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] text-green-700 bg-green-50 border border-green-200 px-3 py-1.5 hover:bg-green-100 transition-colors"

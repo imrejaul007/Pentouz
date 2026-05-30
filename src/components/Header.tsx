@@ -77,7 +77,7 @@ export default function Header() {
                 {contactInfo.phones[0]}
               </a>
               <a
-                href={contactInfo.whatsapp ? `https://wa.me/${contactInfo.whatsapp.replace(/\+/g, "")}` : "https://wa.me/918884449930"}
+                href={contactInfo.whatsapp ? `https://wa.me/${contactInfo.whatsapp.replace(/\+/g, "")}` : "https://wa.me/916366770369"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[10px] font-['Inter',sans-serif] uppercase tracking-[0.15em] text-white/50 hover:text-green-400 transition-colors duration-300 flex items-center gap-2"

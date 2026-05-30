@@ -420,7 +420,7 @@ export const destinations = [
       }
     ],
     gallery: [...fernhillImageSet],
-    bookingUrl: "https://wa.me/918884449930",
+    bookingUrl: "https://wa.me/916366770369",
     coordinates: { lat: 13.3166, lng: 75.7720 },
     idealFor: ["Families", "Groups", "Couples", "Coffee Country Retreats", "Corporate Retreats"],
     location: {
@@ -685,16 +685,16 @@ export const navLinks = [
 export const socialLinks = [
   { label: "Instagram", href: "https://www.instagram.com/thepentouzofficial/" },
   { label: "Facebook", href: "https://www.facebook.com/pentouz" },
-  { label: "WhatsApp", href: "https://wa.me/918884449930" },
+  { label: "WhatsApp", href: "https://wa.me/916366770369" },
 ];
 
 // Contact info
 export const contactInfo = {
   address: "46, 6th Cross, Lavelle Road",
   city: "Bangalore - 560001, India",
-  phones: ["+91 888 444 9930", "+91 8970 298 300"],
+  phones: ["+91 636 677 0369", "+91 8970 298 300"],
   email: "sales@pentouz.com",
-  whatsapp: "+918884449930",
+  whatsapp: "+916366770369",
 };
 
 // Gallery categories

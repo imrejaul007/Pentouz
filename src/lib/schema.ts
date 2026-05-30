@@ -460,11 +460,11 @@ export function generateLocalBusinessSchema() {
     sameAs: [
       "https://www.instagram.com/pentouz",
       "https://www.facebook.com/pentouz",
-      "https://wa.me/918884449930",
+      "https://wa.me/916366770369",
     ],
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+91-888-444-9930",
+      telephone: "+91-636-677-0369",
       contactType: "reservations",
       availableLanguage: ["English", "Hindi", "Kannada"],
       hoursAvailable: {

@@ -348,7 +348,7 @@ export default function PentouzHillsideNearPage() {
             From our doorstep to misty peaks and cascading falls.
           </p>
           <Link
-            href={pentouzHillside?.bookingUrl || "https://wa.me/918884449930"}
+            href={pentouzHillside?.bookingUrl || "https://wa.me/916366770369"}
             className="group relative inline-flex items-center justify-center bg-white text-brand-primary px-14 py-6 text-[11px] uppercase tracking-[0.2em] hover:bg-brand-gold transition-all duration-700 font-light"
           >
             <span className="relative z-10">Book Your Stay</span>
