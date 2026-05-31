@@ -84,8 +84,8 @@ export default function Header() {
         {/* Main nav */}
         <div className="max-w-[1600px] mx-auto px-5 sm:px-8 lg:px-10">
           <div className="h-20 lg:h-24 flex items-center justify-between">
-            {/* Logo - hidden when menu is open */}
-            <div className={cn("flex items-center gap-12 xl:gap-16", isMenuOpen && "hidden xl:flex")}>
+            {/* Desktop Logo & Nav - hidden on mobile menu */}
+            <div className={cn("xl:flex items-center gap-12 xl:gap-16", !isMenuOpen ? "hidden xl:contents" : "hidden")}>
               <Link href="/" className="block flex-shrink-0">
                 <Image
                   src="/logo-white.png"
@@ -116,7 +116,7 @@ export default function Header() {
               </nav>
             </div>
 
-            {/* Mobile logo - hidden when menu open */}
+            {/* Mobile Logo - hidden when menu open or on desktop */}
             <Link href="/" className={cn("flex xl:hidden items-center", isMenuOpen && "hidden")}>
               <Image
                 src="/logo-white.png"
