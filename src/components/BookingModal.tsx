@@ -89,7 +89,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
       />
 
       {/* Modal */}
-      <div className="relative z-10 w-full max-w-lg bg-[#faf7f2] overflow-hidden pointer-events-auto">
+      <div className="relative z-10 w-full max-w-lg bg-[#faf7f2] overflow-hidden pointer-events-auto isolate">
         {/* Header */}
         <div className="flex items-center justify-between px-5 sm:px-6 py-4 sm:py-5 border-b border-[#e5dfd6]">
           <div>
@@ -110,14 +110,14 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
         </div>
 
         {/* Properties */}
-        <div className="p-4 sm:p-5 space-y-3 max-h-[60vh] overflow-auto">
+        <div className="p-4 sm:p-5 space-y-3 max-h-[60vh] overflow-y-auto">
           {properties.map((property) => (
             <a
               key={property.slug}
               href={property.bookingUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-4 bg-white border border-[#e5dfd6] p-3 sm:p-4 transition-all duration-300 hover:border-[#c3a061] hover:shadow-[0_4px_20px_rgba(18,15,12,0.08)] cursor-pointer"
+              className="group flex items-center gap-4 bg-white border border-[#e5dfd6] p-3 sm:p-4 transition-all duration-300 hover:border-[#c3a061] hover:shadow-[0_4px_20px_rgba(18,15,12,0.08)] cursor-pointer pointer-events-auto block"
             >
               {/* Image */}
               <div className="relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 overflow-hidden">
